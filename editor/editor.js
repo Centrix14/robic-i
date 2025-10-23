@@ -42,6 +42,14 @@ class Point {
 	    this.#y = y;
     }
 
+    get X() {
+        return this.#x;
+    }
+
+    get Y() {
+        return this.#y;
+    }
+
     serialize(element) {
 	    if (element instanceof SVGElement) {
 	        element.setAttribute('x', this.#x.toString());
@@ -52,6 +60,27 @@ class Point {
 	    else {
 	        return new Result('Point.serialize requires SVGElement as argument');
 	    }
+    }
+
+    sum(point) {
+        if (point instanceof Point) {
+            return new Point(this.#x + point.#x,
+                             this.#y + point.#y);
+        }
+        else {
+            return new Result('Point.sum requires Point as argument');
+        }
+    }
+
+    sub(point) {
+        if (point instanceof Point) {
+            point.#x = -point.#x;
+            point.#y = -point.#y;
+            return this.sum(point);
+        }
+        else {
+            return new Result('Point.sub requires Point as argument');
+        }
     }
 }
 
@@ -78,26 +107,76 @@ class Figure {
     }
 }
 
-
 class FigureManager {
     #repository = [];
     #index = 0;
     #selection = [];
     SVGTag = '';
 
-    create() {
-        return null;
-    }
-
     select(cursor) {
-        return null;
+        if (not (cursor instanceof Point)) {
+            return new Result('FigureManager.select requires Point as argument');
+        }
+
+        this.#repository.forEach((_, index) => this.#selection.push(index));
     }
 
     unselect(cursor) {
-        return null;
+        if (not (cursor instanceof Point)) {
+            return new Result('FigureManager.unselect requires Point as argument');
+        }
+
+        this.#repository.forEach((_, index) => this.#selection.splice(index, 1));
     }
 
     deleteSelected() {
-        return null;
+        this.#selection.forEach((_, index) => this.#repository.splice(index, 1));
+    }
+}
+
+class Rect extends Figure {
+    #start;
+    #end;
+
+    static createByPoints(id, start, end) {
+        if (start instanceof Point && end instanceof Point) {
+            let rect = new Rect(id);
+            rect.#start = start;
+            rect.#end = end;
+            return rect;
+        }
+    }
+
+    static createByMeasures(id, start, width=20, height=30) {
+        if (start instanceof Point) {
+            let rect = new Rect(id);
+            rect.#start = start;
+            rect.#end = start.sum(new Point(width, height));
+            return rect;
+        }
+    }
+
+    serialize(element) {
+        if (element instanceof SVGElement) {
+            element.setAttribute('x', this.#start.X.toString());
+            element.setAttribute('y', this.#start.Y.toString());
+
+            let measuresPoint = this.#end.sub(this.#start);
+            element.setAttribute('width', measuresPoint.X.toString());
+            element.setAttribute('height', measuresPoint.Y.toString());
+            
+            return new Result();
+        }
+        else {
+            return new Result('Rect.serialize requires SVGElement as argument');
+        }
+    }
+
+    isTouching(cursor) {
+        return false;
+    }
+
+    isCovers(cursor) {
+        return false;
     }
 }
