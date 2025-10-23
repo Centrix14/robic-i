@@ -4,6 +4,12 @@ class Result {
 	    TestError: 'just a test error'
     });
 
+    constructor(soleText = '') {
+        if ((typeof soleText === 'string') && soleText !== '') {
+            this.#errors.push(soleText);
+        }
+    }
+    
     addError(text) {
 	    if (this.#errors.includes(text)) {
 	        return false;
@@ -44,9 +50,7 @@ class Point {
 	        return new Result();
 	    }
 	    else {
-	        let r = new Result();
-	        r.addError('Point.serialize requires SVGElement as argument');
-	        return r;
+	        return new Result('Point.serialize requires SVGElement as argument');
 	    }
     }
 }
@@ -65,9 +69,7 @@ class Figure {
             return new Result();
         }
         else {
-            let r = new Result();
-            r.addError('Figure.setCaption requires string argument');
-            return r;
+            return new Result('Figure.setCaption requires string argument');
         }
     }
 
