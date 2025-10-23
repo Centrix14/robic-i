@@ -92,5 +92,35 @@ describe('Point', function() {
                           elm.getAttribute('y') === '10');
 	    });
     });
+
+});
+
+describe('Figure', function() {
+
+    describe('getCaption', function() {
+        let figure = new Figure(1);
+
+        it('returns strings', function() {
+            assert.typeOf(figure.getCaption(), 'string');
+        });
+
+        it('returns actual caption', function() {
+            figure.setCaption('cap');
+            
+            assert.equal(figure.getCaption(), 'cap');
+        })
+    });
+
+    describe('setCaption', function() {
+        let figure = new Figure(1);
+
+        it('takes strings', function() {
+            assert.isTrue(figure.setCaption('cap').isSuccess());
+        });
+
+        it('takes ONLY strings', function() {
+            assert.isFalse(figure.setCaption(123).isSuccess());
+        })
+    });
     
 });
