@@ -77,3 +77,27 @@ class Figure {
         return this.#caption;
     }
 }
+
+
+class FigureManager {
+    #repository = [];
+    #index = 0;
+    #selection = [];
+    SVGTag = '';
+
+    create() {
+        return null;
+    }
+
+    select(cursor) {
+        return null;
+    }
+
+    unselect(cursor) {
+        return null;
+    }
+
+    deleteSelected() {
+        return null;
+    }
+}
