@@ -108,9 +108,9 @@ class Figure {
 }
 
 class FigureManager {
-    #repository = [];
-    #index = 0;
-    #selection = [];
+    _repository = [];
+    _index = 0;
+    _selection = [];
     SVGTag = '';
 
     select(cursor) {
@@ -118,7 +118,7 @@ class FigureManager {
             return new Result('FigureManager.select requires Point as argument');
         }
 
-        this.#repository.forEach((_, index) => this.#selection.push(index));
+        this._repository.forEach((_, index) => this._selection.push(index));
     }
 
     unselect(cursor) {
@@ -126,11 +126,11 @@ class FigureManager {
             return new Result('FigureManager.unselect requires Point as argument');
         }
 
-        this.#repository.forEach((_, index) => this.#selection.splice(index, 1));
+        this._repository.forEach((_, index) => this._selection.splice(index, 1));
     }
 
     deleteSelected() {
-        this.#selection.forEach((_, index) => this.#repository.splice(index, 1));
+        this._selection.forEach((_, index) => this._repository.splice(index, 1));
     }
 }
 
@@ -147,7 +147,7 @@ class Rect extends Figure {
         }
     }
 
-    static createByMeasures(id, start, width=20, height=30) {
+    static createByMeasures(id, start, width, height) {
         if (start instanceof Point) {
             let rect = new Rect(id);
             rect.#start = start;
@@ -178,5 +178,23 @@ class Rect extends Figure {
 
     isCovers(cursor) {
         return false;
+    }
+}
+
+class RectManager extends FigureManager {
+    create(cursor, element) {
+        let id = this._index;
+        let newRect = Rect.createByMeasures(id, cursor, 20, 30);
+
+        if (newRect) {
+            newRect.serialize(element);
+            element.setAttribute('id', id.toString());
+            this._index++;
+
+            return new Result();
+        }
+        else {
+            return new Result('RectManager.create failed to create rectangle');
+        }
     }
 }
