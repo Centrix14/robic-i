@@ -184,7 +184,7 @@ class Rect extends Figure {
 class RectManager extends FigureManager {
     create(cursor, element) {
         let id = this._index;
-        let newRect = Rect.createByMeasures(id, cursor, 20, 30);
+        let newRect = Rect.createByMeasures(id, cursor, 30, 20);
 
         if (newRect) {
             newRect.serialize(element);
