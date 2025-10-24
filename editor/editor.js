@@ -198,3 +198,37 @@ class RectManager extends FigureManager {
         }
     }
 }
+
+class Editor {
+    #document = null;
+    #canvas = null;
+    #rectManager = null;
+
+    constructor(targetDocument, targetCanvas) {
+        if (targetDocument instanceof Document) {
+            if (targetCanvas instanceof SVGElement &&
+                targetCanvas.localName === 'svg') {
+                
+                this.#document = targetDocument;
+                this.#canvas = targetCanvas;
+                this.#rectManager = new RectManager();
+            }
+        }
+    }
+
+    createRect() {
+        let doc = this.#document;
+        let elm = doc.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+        let defaultCursor = new Point(1,1);
+        let result = this.#rectManager.create(defaultCursor, elm);
+        if (result.isSuccess()) {
+            this.#canvas.appendChild(elm);
+
+            return new Result();
+        }
+        else {
+            return result;
+        }
+    }
+}
