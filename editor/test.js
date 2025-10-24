@@ -218,3 +218,34 @@ describe('Rect', function() {
     });
 
 });
+
+describe('RectManager', function() {
+
+    describe('create', function() {
+        let manager = new RectManager();
+        
+        it('takes Point and SVGElement', function() {
+            let realPoint = new Point(1,1),
+                fakePoint = {x: 1, y: 1};
+            let svgElm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            let htmlElm = document.createElement('div');
+            
+            assert.isTrue(manager.create(realPoint, svgElm).isSuccess() &&
+                          manager.create(fakePoint, htmlElm).hasErrors());
+        });
+
+        it('sets `id`, coordinates and measures', function() {
+            let cursor = new Point(1,1);
+            let elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+            assert.isTrue(manager.create(cursor, elm).isSuccess(), 'rect not created');
+            assert.isTrue(elm.getAttribute('id') === '1' &&
+                          elm.getAttribute('x') === '1' &&
+                          elm.getAttribute('y') === '1' &&
+                          elm.getAttribute('width') === '20' &&
+                          elm.getAttribute('height') === '30',
+                         'failed to set attributes');
+        });
+    });
+    
+});
