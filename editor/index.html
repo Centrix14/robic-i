@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Робик-И</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="command-panel">
+      <button id="new-rect--btn">Прямоугольник</button>
+    </div>
+
+    <div id="work-area">
+      <svg id="work-area-canvas">
+      </svg>
+    </div>
+
+    <script src="editor.js"></script>
+    <script>
+      let canvas = document.getElementById('work-area-canvas');
+      let editor = new Editor(document, canvas);
+      
+      let newRectBtn = document.getElementById('new-rect--btn');
+      newRectBtn.addEventListener('click', () => editor.createRect());
+    </script>
+  </body>
+</html>
