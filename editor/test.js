@@ -247,5 +247,7 @@ describe('RectManager', function() {
                          'failed to set attributes');
         });
     });
-    
+
 });
+
+// писать ли тест на Editor?
