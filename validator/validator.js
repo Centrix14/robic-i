@@ -49,13 +49,25 @@ class Process extends Component {
     #elements = [];
 }
 
-// todo: сделать единый репозиторий, воспользоваться полиморфизмом и убрать switch
 class ComponentManager {
-    #processRepository = [];
-    #elementRepository = [];
-    #propertyRepository = [];
+    #repository = new Map();
 
-    // это не трогать, так быть и должно!
+    copyRepository(componentClass=Component) {
+        let copy = new Map();
+
+        for (let component of this.#repository) {
+            if (component[1] instanceof componentClass)
+                copy.set(component[0], structuredClone(component[1]));
+        }
+
+        return copy;
+    }
+
+    countComponents(componentClass=Component) {
+        return this.copyRepository(componentClass).size;
+    }
+    
+    // this ugly-looking switch is required
     static designate(componentClass, index) {
         switch (componentClass) {
         case Process:
@@ -68,70 +80,44 @@ class ComponentManager {
             return 'С ' + index.toString();
             break;
         default:
-            return "";
+            return index.toString();
         }
     }
 
-    countComponents(componentClass) {
-        switch (componentClass) {
-        case Process:
-            return this.#processRepository.length;
-            break;
-        case Element:
-            return this.#elementRepository.length;
-            break;
-        case Property:
-            return this.#propertyRepository.length;
-            break;
-        default:
-            return -1;
-        }
-    }
-    
     createProcess(parent=0, name="") {
-        let designation = ComponentManager.designate();
+        let number = this.countComponents(Process);
+        let designation = ComponentManager.designate(Process, number);
+
         let process = new Process(designation, name);
-        this.#processRepository.push(process);
+        this.#repository.set(designation, process);
         
-        return this.#processRepository.length - 1;
+        return designation;
     }
 
     createElement(parent=0, name="", elementType=Element.Type.Input) {
-        let designation = ComponentManager.designate();
-        let element = new Element(designation, name, elementType);
-        this.#elementRepository.push(element);
+        let number = this.countComponents(Element);
+        let designation = ComponentManager.designate(Element,number);
         
-        return this.#elementRepository.length - 1;
+        let element = new Element(designation, name, elementType);
+        this.#repository.set(designation, element);
+        
+        return designation;
     }
 
     createProperty(parent=0, name="") {
-        let designation = ComponentManager.designate();
+        let number = this.countComponents(Property);
+        let designation = ComponentManager.designate(Property, number);
+        
         let property = new Property(designation, name);
-        this.#propertyRepository.push(property);
+        this.#repository.set(designation, property);
         
-        return this.#propertyRepository.length - 1;
+        return designation;
     }
 
-    deleteComponent(componentClass, index) {
-        let repository = null;
-        
-        switch (componentClass) {
-        case Process:
-            repository = this.#processRepository;
-            break;
-        case Element:
-            repository = this.#elementRepository;
-            break;
-        case Property:
-            repository = this.#propertyRepository;
-            break;
-        default:
-            return false;
-        }
-
-        repository.splice(index, 1);
-        return true;
+    deleteComponent(designation) {
+        this.#repository.delete(designation);
     }
+
 }
 
 class Validator {
