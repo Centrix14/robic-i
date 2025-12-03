@@ -16,12 +16,42 @@ class Component {
 	    this._designation = designation;
         this._name = name;
     }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(newName) {
+        this._name = newName;
+    }
+
+    static copy(source, destination) {
+        for (let property in source) {
+            destination[property] = source[property];
+        }
+    }
+
+    clone() {
+        let destination = new Component(this._designation, this._name);
+        Component.copy(this, destination);
+        return destination;
+    }
 }
 
 class Property extends Component {
     #possibleValues = [];
     #referenceValue = null;
     #actualValue = null;
+
+    clone() {
+        let destination = new Property(this._designation, this._name);
+
+        destination.#possibleValues = this.#possibleValues;
+        destination.#referenceValue = this.#referenceValue;
+        destination.#actualValue = this.#actualValue;
+
+        return destination;
+    }
 }
 
 class Element extends Component {
@@ -40,6 +70,15 @@ class Element extends Component {
         super(designation, name);
         this.#elementType = elementType;
     }
+
+    clone() {
+        let destination = new Element(this._designation, this._name, this.#elementType);
+
+        destination.#properties = [];
+        for (property of this.#properties) {
+            destination.#properties.push(property.clone());
+        }
+    }
 }
 
 class Process extends Component {
@@ -47,26 +86,26 @@ class Process extends Component {
     #isHiding = 0;
     #subprocesses = [];
     #elements = [];
+
+    get iteration() {
+        return this.#iteration;
+    }
+
+    clone() {
+        let destination = new Process(this._designation, this._name);
+        
+        destination.#iteration = this.#iteration;
+        destination.#isHiding = this.#isHiding;
+        destination.#subprocesses = structuredClone(this.#subprocesses);
+        destination.#elements = structuredClone(this.#elements);
+
+        return destination;
+    }
 }
 
 class ComponentManager {
     #repository = new Map();
 
-    copyRepository(componentClass=Component) {
-        let copy = new Map();
-
-        for (let component of this.#repository) {
-            if (component[1] instanceof componentClass)
-                copy.set(component[0], structuredClone(component[1]));
-        }
-
-        return copy;
-    }
-
-    countComponents(componentClass=Component) {
-        return this.copyRepository(componentClass).size;
-    }
-    
     // this ugly-looking switch is required
     static designate(componentClass, index) {
         switch (componentClass) {
@@ -82,6 +121,29 @@ class ComponentManager {
         default:
             return index.toString();
         }
+    }
+
+    get(designation) {
+        return this.#repository.get(designation);
+    }
+
+    getByName(name) {
+        for (let component in this.#repository.values()) {
+            if (component.name === name)
+                return component;
+        }
+
+        return null;
+    }
+
+    countComponents(componentClass) {
+        let result = 0;
+        
+        for (let component of this.#repository.values()) {
+            if (component instanceof componentClass) result++;
+        }
+
+        return result;
     }
 
     createProcess(parent=0, name="") {
