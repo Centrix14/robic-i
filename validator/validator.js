@@ -6,6 +6,41 @@ class Relation {
     });
 }
 
+class ElementRole {
+    #roles = new Map();
+    #index = 0;
+
+    getId(name) {
+        for (let pair of this.#roles.entries()) {
+            if (pair[1] == name) return pair[0];
+        }
+
+        return null;
+    }
+
+    getName(id) {
+        return this.#roles.get(id);
+    }
+
+    getAll() {
+        return this.#roles.values();
+    }
+
+    create(name) {
+        if (this.getId(name)) {
+            return null;
+        }
+        else {
+            this.#roles.set(this.#index, name);
+            return this.#index++;
+        }
+    }
+
+    delete(id) {
+        this.#roles.delete(id);
+    }
+}
+
 class Component {
     _designation = "";
     _name = "";

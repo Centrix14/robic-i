@@ -2,23 +2,23 @@ let assert = chai.assert;
 
 describe('ElementRole', function(){
 
-    it('adds new roles', function(){
+    it('creates new roles', function(){
         let er = new ElementRole();
 
-        let r1 = er.new('r1');
-        let r2 = er.new('r2');
+        let r1 = er.create('r1');
+        let r2 = er.create('r2');
 
-        assert.isTrue(er.getName(r1) &&
-                      er.getName(r2));
+        assert.isDefined(er.getName(r1) &&
+                         er.getName(r2));
     });
 
     it('deletes roles', function(){
         let er = new ElementRole();
 
-        let r = er.new('r');
+        let r = er.create('r');
         er.delete(r);
 
-        assert.isFalse(er.getName(r));
+        assert.isUndefined(er.getName(r));
     });
     
 });
