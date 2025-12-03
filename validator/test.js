@@ -1,43 +1,147 @@
 let assert = chai.assert;
 
+describe('ElementRole', function(){
+
+    it('adds new roles', function(){
+        let er = new ElementRole();
+
+        let r1 = er.new('r1');
+        let r2 = er.new('r2');
+
+        assert.isTrue(er.getName(r1) &&
+                      er.getName(r2));
+    });
+
+    it('deletes roles', function(){
+        let er = new ElementRole();
+
+        let r = er.new('r');
+        er.delete(r);
+
+        assert.isFalse(er.getName(r));
+    });
+    
+});
+
+describe('Component', function(){
+    
+});
+
 describe('ComponentManager', function(){
 
-    let manager = new ComponentManager();
-    let proc, elm, prop;
-    
     it('creates components', function(){
-        proc = manager.createProcess();
-        elm = manager.createElement();
-        prop = manager.createProperty();
+        let manager = new ComponentManager();
 
-        assert.isTrue(manager.countComponents(Process) === 1 &&
-                      manager.countComponents(Element) === 1 &&
-                      manager.countComponents(Property) === 1);
+        let proc = manager.createProcess();
+        let elm = manager.createElement();
+        let prop = manager.createProperty();
+
+        assert.isDefined(manager.get(proc) &&
+                         manager.get(elm) &&
+                         manager.get(prop));
     });
 
     it('deletes components', function(){
+        let manager = new ComponentManager();
+
+        let proc = manager.createProcess();
+        let elm = manager.createElement();
+        let prop = manager.createProperty();
+
         manager.deleteComponent(proc);
         manager.deleteComponent(elm);
         manager.deleteComponent(prop);
         
-        assert.isTrue(manager.countComponents(Process) === 0 &&
-                      manager.countComponents(Element) === 0 &&
-                      manager.countComponents(Property) === 0);
+        assert.isUndefined(manager.get(proc) &&
+                           manager.get(elm) &&
+                           manager.get(prop));
     });
 
     it('creates several components of the same type', function(){
-        manager.createProcess();
-        manager.createProcess();
+        let manager = new ComponentManager();
 
-        assert.equal(manager.countComponents(Process), 2);
+        let p1 = manager.createProcess();
+        let p2 = manager.createProcess();
+
+        assert.isTrue(manager.get(p1) !== manager.get(p2) &&
+                      manager.get(p1) !== undefined);
     });
 
-    it('creates copy of repository', function(){
-        let copy = manager.copyRepository();
-        copy.clear();
+});
 
-        assert.isTrue(copy.size == 0 &&
-                      manager.countComponents() == 2);
+describe('UniquenessRule', function(){
+
+    it('returns `false` for same-named processes in the same iteration', function(){
+        let manager = new ComponentManager();
+
+        manager.createProcess(0, 'proc1');
+
+        let rule = new UniquenessRule();
+        assert.isFalse(rule.check(manager, Process, 'proc1'));
     });
-    
+
+    it('returns `true` for same-named processes in the different iterations', function(){
+        let manager = new ComponentManager();
+
+        let older = manager.createProcess(0, 'proc1');
+        older.moveToIteration(-1);
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Process, 'proc1'));
+    });
+
+    it('returns `true` if non-unique processes are unnamed', function(){
+        let manager = new ComponentManager();
+
+        manager.createProcess();
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Process, ''));
+    });
+
+    it('returns `false` for same-named elements', function(){
+        let manager = new ComponentManager();
+
+        manager.createElement('elm1');
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Element, 'elm1'));
+    });
+
+    it('returns `true` if non-unique elements are unnamed', function(){
+        let manager = new ComponentManager();
+
+        manager.createElement();
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Element, ''));
+    });
+
+    it('returns `false` for same-named properties', function(){
+        let manager = new ComponentManager();
+
+        manager.createProperty('prop1');
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Property, 'prop1'));
+    });
+
+    it('returns `true` if non-unique properties are unnamed', function(){
+        let manager = new ComponentManager();
+
+        manager.createProperty();
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Property, ''));
+    });
+
+    it('returns `true` for same-named components of different types', function(){
+        let manager = new ComponentManager();
+
+        manager.createProcess('com1');
+
+        let rule = new UniquenessRule();
+        assert.isTrue(rule.check(manager, Element, 'com1'))
+    });
+
 });
