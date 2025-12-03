@@ -46,6 +46,7 @@ class Component {
     _name = "";
     description = "";
     _relationType = Relation.Type.Independance;
+    _content = new Set();
 
     constructor(designation, name="") {
 	    this._designation = designation;
@@ -66,6 +67,18 @@ class Component {
 
     set relationType(newType) {
         this._relationType = newType;
+    }
+
+    getNested() {
+        return Array.from(this._content);
+    }
+
+    addNested(designation) {
+        this._content.add(designation);
+    }
+
+    deleteNested(designation) {
+        this._content.delete(designation);
     }
 }
 
