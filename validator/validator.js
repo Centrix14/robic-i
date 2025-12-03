@@ -15,7 +15,7 @@ class ElementRole {
             if (pair[1] == name) return pair[0];
         }
 
-        return null;
+        return undefined;
     }
 
     getName(id) {
@@ -70,18 +70,59 @@ class Component {
 }
 
 class Property extends Component {
-    #possibleValues = [];
-    #referenceValue = null;
-    #actualValue = null;
+    #possibleValues = new Map();
+    #index = 0;
+    #referenceValue = 0;
+    #actualValue = 0;
 
-    clone() {
-        let destination = new Property(this._designation, this._name);
+    getPossibleValue(id) {
+        return this.#possibleValues.get(id);
+    }
 
-        destination.#possibleValues = this.#possibleValues;
-        destination.#referenceValue = this.#referenceValue;
-        destination.#actualValue = this.#actualValue;
+    getPossibleValueByValue(value) {
+        for (let pair of this.#possibleValues.entries()) {
+            if (pair[1] === value) return pair[0];
+        }
 
-        return destination;
+        return undefined;
+    }
+
+    getPossibleValues() {
+        return this.#possibleValues.values();
+    }
+
+    get referenceValue() {
+        return this.#referenceValue;
+    }
+
+    set referenceValue(id) {
+        this.#referenceValue = id;
+    }
+
+    get actualValue() {
+        return this.#actualValue;
+    }
+
+    set actualValue(id) {
+        this.#actualValue = id;
+    }
+
+    addPossibleValue(value) {
+        if (this.getPossibleValueByValue(value)) {
+            return null;
+        }
+        else {
+            this.#possibleValues.set(this.#index, value);
+            return this.#index++;
+        }
+    }
+
+    deletePossibleValue(id) {
+        this.#possibleValues.delete(id);
+    }
+
+    isComplete() {
+        return this.#referenceValue === this.#actualValue;
     }
 }
 
