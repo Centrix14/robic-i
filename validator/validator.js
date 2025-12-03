@@ -44,7 +44,7 @@ class ElementRole {
 class Component {
     _designation = "";
     _name = "";
-    _description = "";
+    description = "";
     _relationType = Relation.Type.Independance;
 
     constructor(designation, name="") {
@@ -60,16 +60,12 @@ class Component {
         this._name = newName;
     }
 
-    static copy(source, destination) {
-        for (let property in source) {
-            destination[property] = source[property];
-        }
+    get relationType() {
+        this._relationType;
     }
 
-    clone() {
-        let destination = new Component(this._designation, this._name);
-        Component.copy(this, destination);
-        return destination;
+    set relationType(newType) {
+        this._relationType = newType;
     }
 }
 
