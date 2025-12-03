@@ -24,7 +24,31 @@ describe('ElementRole', function(){
 });
 
 describe('Component', function(){
-    
+
+    it('adds nested components', function(){
+        let c = new Component('c1');
+
+        c.addNested('c2');
+        c.addNested('c3');
+
+        let content = c.getNested();
+        
+        assert.isTrue(content[0] === 'c2');
+        assert.isTrue(content[1] === 'c3');
+    });
+
+    it('deletes nested components', function(){
+        let c = new Component('c1');
+
+        c.addNested('c2');
+        c.addNested('c3');
+
+        c.deleteNested('c2');
+        c.deleteNested('c3');
+
+        assert.isEmpty(c.getNested());
+    });
+
 });
 
 describe('Property', function(){
@@ -62,7 +86,7 @@ describe('Property', function(){
 
         assert.isFalse(prop.isComplete());
     });
-    
+
 });
 
 describe('ComponentManager', function(){
