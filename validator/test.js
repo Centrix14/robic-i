@@ -27,6 +27,44 @@ describe('Component', function(){
     
 });
 
+describe('Property', function(){
+
+    it('adds possible value', function(){
+        let prop = new Property();
+
+        let v1 = prop.addPossibleValue('1');
+        let v2 = prop.addPossibleValue('2');
+
+        assert.isDefined(prop.getPossibleValue(v1) && prop.getPossibleValue(v2));
+    });
+
+    it('deletes possible values', function(){
+        let prop = new Property();
+
+        let v1 = prop.addPossibleValue('1');
+        let v2 = prop.addPossibleValue('2');
+
+        prop.deletePossibleValue(v1);
+        prop.deletePossibleValue(v2);
+
+        assert.isUndefined(prop.getPossibleValue(v1) &&
+                           prop.getPossibleValue(v2));
+    });
+
+    it('sets reference and actual value', function(){
+        let prop = new Property();
+
+        let v1 = prop.addPossibleValue('1');
+        let v2 = prop.addPossibleValue('2');
+
+        prop.referenceValue = v1;
+        prop.actualValue = v2;
+
+        assert.isFalse(prop.isComplete());
+    });
+    
+});
+
 describe('ComponentManager', function(){
 
     it('creates components', function(){
