@@ -1,23 +1,20 @@
 class Rule {
     check() { return true; }
-    explainFailedRule() { return ""; }
+    explainError() { return ''; }
 }
 
-
 class UniquenessRule extends Rule {
-    check(componentManager, componentClass, newComponentName="") {
-        let repository = componentManager.copyRepository(componentClass);
+    check(componentManager, componentClass, componentName='') {
+        if (componentName === '') return true;
         
-        for (let component of repository.values()) {
-            
-            if (component.name === newComponentName && component.name !== '') {
-                if (componentClass === Process)
-                    return component.iteration !== 0;
-                return false;
-            }
-            
+        const duplicate = componentManager.getByName(componentName);
+        
+        if (duplicate === undefined)
+            return true;
+        else {
+            if (componentClass === Process)
+                return !(duplicate.iteration === 0);
+            return !(duplicate instanceof componentClass);
         }
-
-        return true;
     }
 }
