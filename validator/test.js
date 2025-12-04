@@ -175,9 +175,9 @@ describe('ComponentManager', function(){
     it('creates components', function(){
         let manager = new ComponentManager();
 
-        let proc = manager.createProcess();
-        let elm = manager.createElement();
-        let prop = manager.createProperty();
+        let proc = manager.createComponent(Process);
+        let elm = manager.createComponent(Element);
+        let prop = manager.createComponent(Property);
 
         assert.isDefined(manager.get(proc) &&
                          manager.get(elm) &&
@@ -187,9 +187,9 @@ describe('ComponentManager', function(){
     it('deletes components', function(){
         let manager = new ComponentManager();
 
-        let proc = manager.createProcess();
-        let elm = manager.createElement();
-        let prop = manager.createProperty();
+        let proc = manager.createComponent(Process);
+        let elm = manager.createComponent(Element);
+        let prop = manager.createComponent(Property);
 
         manager.deleteComponent(proc);
         manager.deleteComponent(elm);
@@ -203,8 +203,8 @@ describe('ComponentManager', function(){
     it('creates several components of the same type', function(){
         let manager = new ComponentManager();
 
-        let p1 = manager.createProcess();
-        let p2 = manager.createProcess();
+        let p1 = manager.createComponent(Process);
+        let p2 = manager.createComponent(Process);
 
         assert.isTrue(manager.get(p1) !== manager.get(p2) &&
                       manager.get(p1) !== undefined);
