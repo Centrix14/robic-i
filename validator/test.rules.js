@@ -76,3 +76,47 @@ describe('UniquenessRule', function(){
     });
 
 });
+
+describe('NestingRule', function(){
+
+    it('returns `true` for process-to-(process, element) nesting', function(){
+        
+    });
+
+    it('returns `true` for element-to-(element, property) nesting', function(){
+        
+    });
+
+    it('returns `true` for property-to-property nesting', function(){
+        
+    });
+
+    it('returns `false` for process-to-property nesting', function(){
+        
+    });
+
+    it('returns `false` for element-to-process nesting', function(){
+        
+    });
+
+    it('returns `false` for property-to-process nesting', function(){
+        
+    });
+    
+});
+
+describe('ElementRoleSettingRule', function(){
+
+    it('returns `true` for setting child of process as input, output, doer or mean', function(){
+        
+    });
+
+    it('returns `false` for setting child of process as none', function(){
+        
+    });
+
+    it('returns `false` for setting child of element as input, output, doer or mean', function(){
+        
+    });
+    
+});
