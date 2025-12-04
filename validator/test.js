@@ -20,33 +20,37 @@ describe('ElementRole', function(){
 
         assert.isUndefined(er.getName(r));
     });
-    
+
 });
 
 describe('Component', function(){
 
     it('adds nested components', function(){
-        let c = new Component('c1');
+        let parent = new Component('p');
+        let child1 = new Component('c1');
+        let child2 = new Component('c2');
 
-        c.addNested('c2');
-        c.addNested('c3');
+        parent.addNested(child1);
+        parent.addNested(child2);
 
-        let content = c.getNested();
-        
-        assert.isTrue(content[0] === 'c2');
-        assert.isTrue(content[1] === 'c3');
+        let content = parent.getNested();
+
+        assert.isTrue(content[0] === 'c1');
+        assert.isTrue(content[1] === 'c2');
     });
 
     it('deletes nested components', function(){
-        let c = new Component('c1');
+        let parent = new Component('p');
+        let child1 = new Component('c1');
+        let child2 = new Component('c2');
 
-        c.addNested('c2');
-        c.addNested('c3');
+        parent.addNested(child1);
+        parent.addNested(child2);
 
-        c.deleteNested('c2');
-        c.deleteNested('c3');
+        parent.deleteNested('c1');
+        parent.deleteNested('c2');
 
-        assert.isEmpty(c.getNested());
+        assert.isEmpty(parent.getNested());
     });
 
 });
@@ -89,6 +93,39 @@ describe('Property', function(){
 
 });
 
+describe('Element', function(){
+
+    it('adds contexts', function(){
+        let p = new Process('p1');
+        let e = new Element('e1');
+        let er = new ElementRole();
+
+        let role = er.create('test');
+
+        e.addContext(p, role);
+
+        assert.isDefined(e.getContextsByDesig(p));
+    });
+
+    it('deletes contexts', function(){
+        let p = new Process('p1');
+        let e = new Element('e1');
+        let er = new ElementRole();
+
+        let role = er.create('test');
+
+        e.addContext(p, role);
+        e.deleteContext(p, role);
+
+        assert.isUndefined(e.getContextsByDesig(p));
+    });
+
+});
+
+describe('Process', function(){
+
+});
+
 describe('ComponentManager', function(){
 
     it('creates components', function(){
@@ -113,7 +150,7 @@ describe('ComponentManager', function(){
         manager.deleteComponent(proc);
         manager.deleteComponent(elm);
         manager.deleteComponent(prop);
-        
+
         assert.isUndefined(manager.get(proc) &&
                            manager.get(elm) &&
                            manager.get(prop));
