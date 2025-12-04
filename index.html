@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Робик-И</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="icon" href="./favicon.ico" type="image/x-icon">-->
+  </head>
+  
+  <body>
+    
+    <main class="pure-g">
+
+      <!-- Navigation -->
+      <nav class="pure-u-1" id="navigation">
+        <div class="pure-menu pure-menu-horizontal">
+          <div class="pure-menu-heading pure-menu-link">
+            <img src="media/logo.png"
+                 alt="Logo"
+                 width="40" height="40">
+          </div>
+          
+          <ul class="pure-menu-list">
+            
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <a class="pure-menu-link">Файл</a>
+              <ul class="pure-menu-children">
+                <li class="pure-menu-item">
+                  <a class="pure-menu-link">Новый</a>
+                </li>
+                <li class="pure-menu-item">
+                  <a class="pure-menu-link">Открыть</a>
+                </li>
+                <li class="pure-menu-item">
+                  <a class="pure-menu-link">Сохранить</a>
+                </li>
+              </ul>
+            </li>
+            
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <a class="pure-menu-link">Помощь</a>
+              <ul class="pure-menu-children">
+                <li class="pure-menu-item">
+                  <a class="pure-menu-link">Справка</a>
+                </li>
+                <li class="pure-menu-item">
+                  <a class="pure-menu-link">О программе</a>
+                </li>
+              </ul>
+            </li>
+            
+          </ul>
+        </div>        
+      </nav>
+
+      <!-- Application area -->
+      <div class="pure-u-1" id="application-area">
+        
+        <div class="pure-g">
+
+          <!-- Workbench -->
+          <div class="pure-u-1-5" id="workbench">
+            <div class="pure-g" id="control-panel">
+              <div class="pure-u-1">
+                <div class="pure-g">
+
+                  <div class="pure-u-1">
+                    <div class="pure-button-group">
+                      <button class="pure-button">
+                        <img src="media/synthesis.png" alt="Синтез" width="16" height="16">
+                      </button> 
+
+                      <button class="pure-button">
+                        <img src="media/analysis.png" alt="Анализ" width="16" height="16">
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="pure-u-1">
+                    <div class="pure-button-group">
+                      <button class="pure-button">
+                        <img src="media/analysis.png" alt="Анализ" width="16" height="16">
+                      </button>
+
+                      <button class="pure-button">
+                        <img src="media/arrow.png" alt="Анализ" width="16" height="16">
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="pure-u-1">
+                    <div class="pure-button-group">
+                      <button class="pure-button">Независимость</button>
+
+                      <button class="pure-button">Совместность</button>
+
+                      <button class="pure-button">Несовместность</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="pure-u-1" id="structure-panel">
+                structure
+              </div>
+            </div>
+          </div>
+
+          <div class="pure-u-3-5" id="work-area">
+            workarea
+          </div>
+
+          <div class="pure-u-1-5" id="palette">
+            palette
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Status bar -->
+      <div class="pure-u-1" id="status-bar">
+        <p class="status-bar-text">Исток 1.0</p>
+      </div>
+      
+      <!--
+      <div class="pure-g">
+        <div class="pure-u-1-2">
+          <button class="pure-button">With shadow</button>
+        </div>
+        <div class="pure-u-1-2">
+          <button class="robic-button pure-button">Without shadow</button>
+        </div>
+      </div>
+      -->
+
+    </main>
+    
+  </body>
+  
+</html>
