@@ -81,8 +81,8 @@ class Component {
         this._content.add(component.designation);
     }
 
-    deleteNested(designation) {
-        this._content.delete(designation);
+    deleteNested(component) {
+        this._content.delete(component.designation);
     }
 }
 
@@ -182,22 +182,25 @@ class Element extends Component {
 class Process extends Component {
     #iteration = 0;
     #isHiding = 0;
-    #subprocesses = [];
-    #elements = [];
 
     get iteration() {
         return this.#iteration;
     }
 
-    clone() {
-        let destination = new Process(this._designation, this._name);
-        
-        destination.#iteration = this.#iteration;
-        destination.#isHiding = this.#isHiding;
-        destination.#subprocesses = structuredClone(this.#subprocesses);
-        destination.#elements = structuredClone(this.#elements);
+    set iteration(newValue) {
+        this.#iteration = newValue;
+    }
 
-        return destination;
+    addNested(component, role=null) {
+        if (component instanceof Element)
+            component.addContext(this.designation, role);
+        super.addNested(component);
+    }
+
+    deleteNested(component, role=null) {
+        if (component instanceof Element)
+            component.deleteContext(this.designation, role);
+        super.deleteNested(component);
     }
 }
 
