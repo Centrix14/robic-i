@@ -53,6 +53,10 @@ class Component {
         this._name = name;
     }
 
+    get designation() {
+        return this._designation;
+    }
+
     get name() {
         return this._name;
     }
@@ -73,8 +77,8 @@ class Component {
         return Array.from(this._content);
     }
 
-    addNested(designation) {
-        this._content.add(designation);
+    addNested(component) {
+        this._content.add(component.designation);
     }
 
     deleteNested(designation) {
@@ -140,28 +144,37 @@ class Property extends Component {
 }
 
 class Element extends Component {
-    static Type = Object.freeze({
-        Input: 'Input',
-        Output: 'Output',
-        Doer: 'Doer',
-        Mean: 'Mean'
-    });
-    
-    #subelements = [];
-    #properties = [];
-    #elementType = Element.Type.Input;
+    #context = new Set();
 
-    constructor(designation, name="", elementType=Element.Type.Input) {
-        super(designation, name);
-        this.#elementType = elementType;
+    getContexts() {
+        return Array.from(this.#context);
     }
 
-    clone() {
-        let destination = new Element(this._designation, this._name, this.#elementType);
+    getContextsByDesig(designation) {
+        for (let entry of this.#context.values()) {
+            if (entry[0] == designation) return entry;
+        }
 
-        destination.#properties = [];
-        for (property of this.#properties) {
-            destination.#properties.push(property.clone());
+        return undefined;
+    }
+
+    getContextsByRole(role) {
+        for (let entry of this.#context.values()) {
+            if (entry[1] == role) return entry;
+        }
+
+        return undefined;
+    }
+
+    addContext(designation, role) {
+        this.#context.add([designation, role]);
+    }
+
+    deleteContext(designation, role) {
+        // for because Map.delete() uses references, not values
+        for (let entry of this.#context.values()) {
+            if (entry[0] === designation && entry[1] === role)
+                this.#context.delete(entry);
         }
     }
 }
