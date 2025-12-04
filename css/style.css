@@ -1,0 +1,14 @@
+.robic-button {
+    
+}
+
+.robic-button-active,
+.robic-button:active {
+    box-shadow: none;
+}
+
+.robic-button-hover,
+.robic-button:hover,
+.robic-button:focus {
+    background-image: none;
+}
