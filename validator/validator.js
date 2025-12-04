@@ -229,12 +229,12 @@ class ComponentManager {
     }
 
     getByName(name) {
-        for (let component in this.#repository.values()) {
+        for (let component of this.#repository.values()) {
             if (component.name === name)
                 return component;
         }
 
-        return null;
+        return undefined;
     }
 
     countComponents(componentClass) {
