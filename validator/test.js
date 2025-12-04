@@ -47,8 +47,8 @@ describe('Component', function(){
         parent.addNested(child1);
         parent.addNested(child2);
 
-        parent.deleteNested('c1');
-        parent.deleteNested('c2');
+        parent.deleteNested(child1);
+        parent.deleteNested(child2);
 
         assert.isEmpty(parent.getNested());
     });
@@ -102,9 +102,9 @@ describe('Element', function(){
 
         let role = er.create('test');
 
-        e.addContext(p, role);
+        e.addContext(p.designation, role);
 
-        assert.isDefined(e.getContextsByDesig(p));
+        assert.isNotEmpty(e.getContextsByDesig(p.designation));
     });
 
     it('deletes contexts', function(){
@@ -114,15 +114,59 @@ describe('Element', function(){
 
         let role = er.create('test');
 
-        e.addContext(p, role);
-        e.deleteContext(p, role);
+        e.addContext(p.designation, role);
+        e.deleteContext(p.designation, role);
 
-        assert.isUndefined(e.getContextsByDesig(p));
+        assert.isUndefined(e.getContextsByDesig(p.designation));
     });
 
 });
 
 describe('Process', function(){
+
+    it('adds nested processes', function(){
+        let p1 = new Process('p1');
+        let p2 = new Process('p2');
+
+        p1.addNested(p2);
+
+        assert.deepEqual(p1.getNested(), ['p2']);
+    });
+
+    it('deletes nested processes', function(){
+        let p1 = new Process('p1');
+        let p2 = new Process('p2');
+
+        p1.addNested(p2);
+        p1.deleteNested(p2);
+
+        assert.isEmpty(p1.getNested());
+    });
+
+    it('adds nested elements in specific roles', function(){
+        let p = new Process('p');
+        let e = new Element('e');
+
+        let er = new ElementRole();
+        let role = er.create('test');
+        p.addNested(e, role);
+
+        assert.deepEqual(p.getNested(), ['e']);
+        assert.isNotEmpty(e.getContexts());
+    });
+
+    it('deletes nested elements in specific roles', function(){
+        let p = new Process('p');
+        let e = new Element('e');
+
+        let er = new ElementRole();
+        let role = er.create('test');
+        p.addNested(e, role);
+        p.deleteNested(e, role);
+
+        assert.isEmpty(p.getNested());
+        assert.isEmpty(e.getContexts());
+    });
 
 });
 
