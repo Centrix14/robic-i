@@ -247,32 +247,12 @@ class ComponentManager {
         return result;
     }
 
-    createProcess(parent=0, name="") {
-        let number = this.countComponents(Process);
-        let designation = ComponentManager.designate(Process, number);
+    createComponent(componentClass, parent='', name='') {
+        let number = this.countComponents(componentClass);
+        let designation = ComponentManager.designate(componentClass, number);
 
-        let process = new Process(designation, name);
+        let process = new componentClass(designation, name);
         this.#repository.set(designation, process);
-        
-        return designation;
-    }
-
-    createElement(parent=0, name="", elementType=Element.Type.Input) {
-        let number = this.countComponents(Element);
-        let designation = ComponentManager.designate(Element,number);
-        
-        let element = new Element(designation, name, elementType);
-        this.#repository.set(designation, element);
-        
-        return designation;
-    }
-
-    createProperty(parent=0, name="") {
-        let number = this.countComponents(Property);
-        let designation = ComponentManager.designate(Property, number);
-        
-        let property = new Property(designation, name);
-        this.#repository.set(designation, property);
         
         return designation;
     }
