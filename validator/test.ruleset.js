@@ -29,7 +29,6 @@ describe('RuleSet', function(){
         ]);
 
         const checkResult = set.check();
-//        assert.isTrue(checkResult.isFailed());
         assert.instanceOf(checkResult, UniquenessRule);
     });
     

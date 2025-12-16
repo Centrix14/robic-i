@@ -1,5 +1,6 @@
 class Rule {
     check() { return true; }
+    
     explainError() { return ''; }
 }
 
@@ -138,7 +139,6 @@ class RuleSet {
         for (let [ruleClass, caller] of this._definition) {
             const rule = new ruleClass();
 
-            console.log(caller(rule));
             if (!caller(rule))
                 return rule;
 
