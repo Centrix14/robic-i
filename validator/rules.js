@@ -44,3 +44,45 @@ class UniquenessRule extends Rule {
         return explanation;
     }
 }
+
+class NestingRule extends Rule {
+    #nestingErrorClass = undefined;
+
+    static _getPrecedenceFor(componentClass) {
+        const precedence = [Process, Element, Property];
+
+        for (let i = 0; i < precedence.length; i++) {
+            if (precedence[i] === componentClass)
+                return i;
+        }
+        return -1;
+    }
+    
+    check(parentClass, childClass) {
+        const parentPrecedence = NestingRule._getPrecedenceFor(parentClass);
+        const childPrecedence = NestingRule._getPrecedenceFor(childClass);
+
+        const parent_childGap = childPrecedence - parentPrecedence;
+        if (parent_childGap === 0 || parent_childGap === 1)
+            return true;
+        else {
+            this.#nestingErrorClass = parentClass;
+            return false;
+        }
+    }
+
+    explainError() {
+        let explanation = 'Ошибка правила декомпозиции: ';
+
+        switch (this.#nestingErrorClass) {
+        case Parent:
+            return explanation + 'процесс может быть декомпозирован только на процессы и элементы';
+
+        case Element:
+            return explanation + 'элемент может быть декомпозирован только на элементы и свойства';
+
+        case Property:
+            return explanation + 'свойство может быть декомпозировано только на свойства';
+        }
+    }
+}
