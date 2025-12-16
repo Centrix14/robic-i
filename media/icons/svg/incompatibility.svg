@@ -18,7 +18,14 @@
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
-     id="defs999" />
+     id="defs999">
+    <rect
+       x="70.059162"
+       y="106.30538"
+       width="386.95478"
+       height="370.49743"
+       id="rect834" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,8 +34,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6640625"
-     inkscape:cx="256"
-     inkscape:cy="256"
+     inkscape:cx="219.04225"
+     inkscape:cy="231.11629"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -54,24 +61,19 @@
      inkscape:label="Слой 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <g
-       id="g834"
-       transform="rotate(45,256,256)">
-      <rect
-         style="fill:#07beb8;fill-opacity:1;stroke:none;stroke-width:38.2931;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-         id="rect831"
-         width="80"
-         height="460"
-         x="216"
-         y="26" />
-      <rect
-         style="fill:#07beb8;fill-opacity:1;stroke:none;stroke-width:32.2046;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-         id="rect833"
-         width="460"
-         height="80"
-         x="-486"
-         y="-296"
-         transform="scale(-1)" />
-    </g>
+    <text
+       xml:space="preserve"
+       id="text832"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48px;line-height:1.25;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro Bold';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect834);fill:#495057;fill-opacity:1;stroke:none;stroke-opacity:1;"
+       transform="matrix(12.167547,0,0,10.256791,-774.2821,-1188.7882)"><tspan
+         x="70.058594"
+         y="149.87987"><tspan>X</tspan></tspan></text>
+    <rect
+       style="fill:#495057;fill-opacity:1;stroke-width:13.9886;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+       id="rect836"
+       width="500"
+       height="60"
+       x="6"
+       y="396.86322" />
   </g>
 </svg>

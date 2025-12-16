@@ -54,20 +54,43 @@
      inkscape:label="Слой 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="fill:#07beb8;fill-opacity:1;stroke:none;stroke-width:38.2931;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-       id="rect831"
-       width="80"
-       height="460"
-       x="216"
-       y="26" />
-    <rect
-       style="fill:#07beb8;fill-opacity:1;stroke:none;stroke-width:32.2046;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-       id="rect833"
-       width="460"
-       height="80"
-       x="-486"
-       y="-296"
-       transform="scale(-1)" />
+    <g
+       id="g892"
+       transform="translate(1.7434013,1.20478)">
+      <rect
+         style="fill:#495057;stroke-width:13.1853;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect832"
+         width="299.66284"
+         height="60"
+         x="11.268889"
+         y="134.22472" />
+      <rect
+         style="fill:#495057;stroke-width:11.1719;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect832-3"
+         width="215.13524"
+         height="60"
+         x="172.16241"
+         y="263.6694"
+         transform="rotate(-30)" />
+    </g>
+    <g
+       id="g892-3"
+       transform="rotate(180,255.1283,255.39761)">
+      <rect
+         style="fill:#495057;stroke-width:13.1853;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect832-5"
+         width="299.66284"
+         height="60"
+         x="11.268889"
+         y="134.22472" />
+      <rect
+         style="fill:#495057;stroke-width:11.1719;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect832-3-6"
+         width="215.13524"
+         height="60"
+         x="172.16241"
+         y="263.6694"
+         transform="rotate(-30)" />
+    </g>
   </g>
 </svg>

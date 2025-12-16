@@ -27,7 +27,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6640625"
-     inkscape:cx="256"
+     inkscape:cx="230.15962"
      inkscape:cy="256"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -54,28 +54,53 @@
      inkscape:label="Слой 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <g
+       id="g865"
+       transform="rotate(180,323.16355,318.06606)">
+      <rect
+         style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:45.2233;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect837"
+         width="40"
+         height="200"
+         x="334.62234"
+         y="-83.42334"
+         transform="rotate(45)" />
+      <rect
+         style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:45.2233;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+         id="rect837-3"
+         width="40"
+         height="200"
+         x="43.423336"
+         y="334.62234"
+         transform="rotate(-45)" />
+    </g>
     <rect
-       style="fill:#07beb8;stroke-width:57.9058;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-       id="rect1479"
+       style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:60.7072;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+       id="rect859"
        width="60"
-       height="460"
-       x="226"
-       y="26" />
+       height="470"
+       x="21"
+       y="21" />
     <rect
-       style="fill:#07beb8;stroke-width:50.51;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-       id="rect1479-6"
-       width="60"
-       height="350"
-       x="-47.278259"
-       y="183.88834"
-       transform="rotate(-30)" />
+       style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:54.403;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+       id="rect861"
+       width="470"
+       height="60"
+       x="21"
+       y="21" />
     <rect
-       style="fill:#07beb8;stroke-width:50.51;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
-       id="rect1479-6-7"
+       style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:31.742;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+       id="rect861-6"
+       width="160"
+       height="60"
+       x="21"
+       y="431" />
+    <rect
+       style="fill:#495057;fill-opacity:1;stroke:none;stroke-width:35.4202;stroke-linecap:square;stroke-miterlimit:50;stroke-dashoffset:4.21417"
+       id="rect859-7"
        width="60"
-       height="350"
-       x="430.68326"
-       y="-72.111671"
-       transform="rotate(30)" />
+       height="160"
+       x="431"
+       y="21" />
   </g>
 </svg>
