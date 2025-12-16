@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-  
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +11,22 @@
     <link rel="stylesheet" href="css/style.css">
     <!--<link rel="icon" href="./favicon.ico" type="image/x-icon">-->
   </head>
-  
+
   <body>
-    
+
     <main class="pure-g">
 
       <!-- Navigation -->
       <nav class="pure-u-1" id="navigation">
         <div class="pure-menu pure-menu-horizontal">
           <div class="pure-menu-heading pure-menu-link">
-            <img src="media/logo.png"
+            <img src="media/icons/png/logo.png"
                  alt="Logo"
-                 width="40" height="40">
+                 width="35" height="35">
           </div>
-          
+
           <ul class="pure-menu-list">
-            
+
             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <a class="pure-menu-link">Файл</a>
               <ul class="pure-menu-children">
@@ -41,7 +41,7 @@
                 </li>
               </ul>
             </li>
-            
+
             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <a class="pure-menu-link">Помощь</a>
               <ul class="pure-menu-children">
@@ -53,14 +53,14 @@
                 </li>
               </ul>
             </li>
-            
+
           </ul>
-        </div>        
+        </div>
       </nav>
 
       <!-- Application area -->
       <div class="pure-u-1" id="application-area">
-        
+
         <div class="pure-g">
 
           <!-- Workbench -->
@@ -70,36 +70,46 @@
                 <div class="pure-g">
 
                   <div class="pure-u-1">
-                    <div class="pure-button-group">
-                      <button class="pure-button">
-                        <img src="media/synthesis.png" alt="Синтез" width="16" height="16">
-                      </button> 
+                    <div class="pure-button-group robic-button-group">
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/composition.png" alt="Композиция" width="16" height="16">
+                      </button>
 
-                      <button class="pure-button">
-                        <img src="media/analysis.png" alt="Анализ" width="16" height="16">
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/decomposition.png" alt="Декомпозиция" width="16" height="16">
                       </button>
                     </div>
                   </div>
 
                   <div class="pure-u-1">
-                    <div class="pure-button-group">
-                      <button class="pure-button">
-                        <img src="media/analysis.png" alt="Анализ" width="16" height="16">
+                    <div class="robic-button-group pure-button-group">
+                      <button class="robic-button pure-button" id="new-process--btn">
+                        <img src="media/icons/png/process.png" alt="Процесс" width="16" height="16">
                       </button>
 
-                      <button class="pure-button">
-                        <img src="media/arrow.png" alt="Анализ" width="16" height="16">
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/element.png" alt="Элемент" width="16" height="16">
+                      </button>
+
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/property.png" alt="Свойство" width="16" height="16">
                       </button>
                     </div>
                   </div>
 
                   <div class="pure-u-1">
-                    <div class="pure-button-group">
-                      <button class="pure-button">Независимость</button>
+                    <div class="robic-button-group pure-button-group">
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/independance.png" alt="Независимость" width="16" height="16">
+                      </button>
 
-                      <button class="pure-button">Совместность</button>
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/compatibility.png" alt="Совместность" width="16" height="16">
+                      </button>
 
-                      <button class="pure-button">Несовместность</button>
+                      <button class="robic-button pure-button">
+                        <img src="media/icons/png/incompatibility.png" alt="Несовместность" width="16" height="16">
+                      </button>
                     </div>
                   </div>
 
@@ -113,34 +123,21 @@
           </div>
 
           <div class="pure-u-3-5" id="work-area">
-            workarea
+            <svg id="canvas" viewBox="0 0 800 600"></svg>
           </div>
 
           <div class="pure-u-1-5" id="palette">
             palette
           </div>
         </div>
-        
-      </div>
 
-      <!-- Status bar -->
-      <div class="pure-u-1" id="status-bar">
-        <p class="status-bar-text">Исток 1.0</p>
       </div>
-      
-      <!--
-      <div class="pure-g">
-        <div class="pure-u-1-2">
-          <button class="pure-button">With shadow</button>
-        </div>
-        <div class="pure-u-1-2">
-          <button class="robic-button pure-button">Without shadow</button>
-        </div>
-      </div>
-      -->
 
     </main>
-    
+
+    <script src="editor/editor.js"></script>
+    <script src="index.js"></script>
+
   </body>
-  
+
 </html>
