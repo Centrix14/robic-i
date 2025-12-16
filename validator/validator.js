@@ -206,6 +206,11 @@ class Process extends Component {
 
 class ComponentManager {
     #repository = new Map();
+    #roles = undefined;
+
+    costructor(roles) {
+        this.#roles = roles;
+    }
 
     // this ugly-looking switch is required
     static designate(componentClass, index) {
