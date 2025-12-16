@@ -80,27 +80,41 @@ describe('UniquenessRule', function(){
 describe('NestingRule', function(){
 
     it('returns `true` for process-to-(process, element) nesting', function(){
+        const rule = new NestingRule();
         
+        assert.isTrue(rule.check(Process, Process));
+        assert.isTrue(rule.check(Process, Element));
     });
 
     it('returns `true` for element-to-(element, property) nesting', function(){
-        
+        const rule = new NestingRule();
+
+        assert.isTrue(rule.check(Element, Element));
+        assert.isTrue(rule.check(Element, Property));
     });
 
     it('returns `true` for property-to-property nesting', function(){
-        
+        const rule = new NestingRule();
+
+        assert.isTrue(rule.check(Property, Property));
     });
 
     it('returns `false` for process-to-property nesting', function(){
-        
+        const rule = new NestingRule();
+
+        assert.isFalse(rule.check(Process, Property));
     });
 
     it('returns `false` for element-to-process nesting', function(){
-        
+        const rule = new NestingRule();
+
+        assert.isFalse(rule.check(Element, Process));
     });
 
     it('returns `false` for property-to-process nesting', function(){
-        
+        const rule = new NestingRule();
+
+        assert.isFalse(rule.check(Property, Process));
     });
     
 });
@@ -108,15 +122,42 @@ describe('NestingRule', function(){
 describe('ElementRoleSettingRule', function(){
 
     it('returns `true` for setting child of process as input, output, doer or mean', function(){
+        const roles = new ElementRole();
+        role.create('input');
+        role.create('output');
+        role.create('doer');
+        role.create('mean');
+
+        const rule = new ElementRoleSettingRule();
         
+        assert.isTrue(rule.check(roles, Process, role.getId('input')));
+        assert.isTrue(rule.check(roles, Process, role.getId('output')));
+        assert.isTrue(rule.check(roles, Process, role.getId('doer')));
+        assert.isTrue(rule.check(roles, Process, role.getId('mean')));
     });
 
     it('returns `false` for setting child of process as none', function(){
+        const roles = new ElementRole();
+        role.create('none');
+
+        const rule = new ElementRoleSettingRule();
         
+        assert.isTrue(rule.check(roles, Process, role.getId('none')));
     });
 
     it('returns `false` for setting child of element as input, output, doer or mean', function(){
+        const roles = new ElementRole();
+        role.create('input');
+        role.create('output');
+        role.create('doer');
+        role.create('mean');
+
+        const rule = new ElementRoleSettingRule();
         
+        assert.isFalse(rule.check(roles, Element, role.getId('input')));
+        assert.isFalse(rule.check(roles, Element, role.getId('output')));
+        assert.isFalse(rule.check(roles, Element, role.getId('doer')));
+        assert.isFalse(rule.check(roles, Element, role.getId('mean')));
     });
     
 });
