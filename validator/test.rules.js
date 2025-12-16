@@ -123,41 +123,41 @@ describe('ElementRoleSettingRule', function(){
 
     it('returns `true` for setting child of process as input, output, doer or mean', function(){
         const roles = new ElementRole();
-        role.create('input');
-        role.create('output');
-        role.create('doer');
-        role.create('mean');
+        roles.create('input');
+        roles.create('output');
+        roles.create('doer');
+        roles.create('mean');
 
         const rule = new ElementRoleSettingRule();
         
-        assert.isTrue(rule.check(roles, Process, role.getId('input')));
-        assert.isTrue(rule.check(roles, Process, role.getId('output')));
-        assert.isTrue(rule.check(roles, Process, role.getId('doer')));
-        assert.isTrue(rule.check(roles, Process, role.getId('mean')));
+        assert.isTrue(rule.check(roles, Process, roles.getId('input')));
+        assert.isTrue(rule.check(roles, Process, roles.getId('output')));
+        assert.isTrue(rule.check(roles, Process, roles.getId('doer')));
+        assert.isTrue(rule.check(roles, Process, roles.getId('mean')));
     });
 
     it('returns `false` for setting child of process as none', function(){
         const roles = new ElementRole();
-        role.create('none');
+        roles.create('none');
 
         const rule = new ElementRoleSettingRule();
         
-        assert.isTrue(rule.check(roles, Process, role.getId('none')));
+        assert.isFalse(rule.check(roles, Process, roles.getId('none')));
     });
 
     it('returns `false` for setting child of element as input, output, doer or mean', function(){
         const roles = new ElementRole();
-        role.create('input');
-        role.create('output');
-        role.create('doer');
-        role.create('mean');
+        roles.create('input');
+        roles.create('output');
+        roles.create('doer');
+        roles.create('mean');
 
         const rule = new ElementRoleSettingRule();
         
-        assert.isFalse(rule.check(roles, Element, role.getId('input')));
-        assert.isFalse(rule.check(roles, Element, role.getId('output')));
-        assert.isFalse(rule.check(roles, Element, role.getId('doer')));
-        assert.isFalse(rule.check(roles, Element, role.getId('mean')));
+        assert.isFalse(rule.check(roles, Element, roles.getId('input')));
+        assert.isFalse(rule.check(roles, Element, roles.getId('output')));
+        assert.isFalse(rule.check(roles, Element, roles.getId('doer')));
+        assert.isFalse(rule.check(roles, Element, roles.getId('mean')));
     });
     
 });
