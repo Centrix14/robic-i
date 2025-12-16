@@ -72,7 +72,7 @@ class NestingRule extends Rule {
     }
 
     explainError() {
-        let explanation = 'Ошибка правила декомпозиции: ';
+        const explanation = 'Ошибка правила декомпозиции: ';
 
         switch (this.#nestingErrorClass) {
         case Parent:
@@ -84,5 +84,43 @@ class NestingRule extends Rule {
         case Property:
             return explanation + 'свойство может быть декомпозировано только на свойства';
         }
+    }
+}
+
+class ElementRoleSettingRule extends Rule {
+    #processChildRoleError = false;
+    #elementChildRoleError = false;
+
+    check(roles, parentClass, childRole) {
+        const childRoleIsElementLike = (roles.getName(childRole) === 'none');
+
+        let childRoleIsProcessLike;
+        switch (roles.getName(childRole)) {
+            
+        case 'input':
+        case 'output':
+        case 'doer':
+        case 'mean':
+            childRoleIsProcessLike = true;
+            break;
+
+        default:
+            childRoleIsProcessLike = false;
+            break;
+        }
+
+        if (parentClass === Process)
+            return childRoleIsProcessLike;
+        else
+            return childRoleIsElementLike;
+    }
+
+    explainError() {
+        const explanation = 'Ошибка установки роли подчинённого компонента: ';
+
+        if (processChildRoleError)
+            return explanation + 'элемент процесса может быть только входом, выходом, исполнителем или средством';
+        else
+            return explanation + 'элемент элемента не может иметь роли';
     }
 }
