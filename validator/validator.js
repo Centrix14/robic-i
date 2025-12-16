@@ -242,6 +242,10 @@ class ComponentManager {
         return undefined;
     }
 
+    get roles() {
+        return this.#roles;
+    }
+
     countComponents(componentClass) {
         let result = 0;
         
