@@ -1,5 +1,12 @@
-.robic-button {
-    
+nav {
+    margin-bottom: 3px;
+}
+
+.robic-button-group .robic-button {
+    background-color: #edf2fb;
+    border-right: none;
+
+    margin: 2px;
 }
 
 .robic-button-active,
@@ -11,4 +18,5 @@
 .robic-button:hover,
 .robic-button:focus {
     background-image: none;
+    background-color: #e2eafc;
 }
