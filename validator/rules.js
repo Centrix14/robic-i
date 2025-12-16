@@ -124,3 +124,27 @@ class ElementRoleSettingRule extends Rule {
             return explanation + 'элемент элемента не может иметь роли';
     }
 }
+
+class RuleSet {
+    _definition = [];
+
+    constructor(definition) {
+        this._definition = definition ?? [];
+    }
+
+    check() {
+        let performed = undefined;
+        
+        for (let [ruleClass, caller] of this._definition) {
+            const rule = new ruleClass();
+
+            console.log(caller(rule));
+            if (!caller(rule))
+                return rule;
+
+            performed = true;
+        }
+        
+        return performed && true;
+    }
+}
