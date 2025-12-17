@@ -4,7 +4,7 @@ class Rule {
     explainError() { return ''; }
 }
 
-class UniquenessRule extends Rule {
+class DynamicUniquenessRule extends Rule {
     #sameIterationError = false;
     #sameTypeError = false;
     
@@ -35,7 +35,7 @@ class UniquenessRule extends Rule {
     }
 
     explainError() {
-        let explanation = 'Ошибка правила уникальности:';
+        let explanation = 'Ошибка правила динамической уникальности:';
 
         if (this.#sameIterationError)
             explanation += '\n- Процессы с одинаковыми названиями могут существовать только в разных итерациях';

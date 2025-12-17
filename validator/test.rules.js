@@ -1,11 +1,11 @@
-describe('UniquenessRule', function(){
+describe('DynamicUniquenessRule', function(){
 
     it('returns `false` for same-named processes in the same iteration', function(){
         let manager = new ComponentManager();
 
         manager.createComponent(Process, '', 'proc1');
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isFalse(rule.check(manager, Process, 'proc1'));
     });
 
@@ -17,7 +17,7 @@ describe('UniquenessRule', function(){
         let older = manager.getByName('proc1');
         older.iteration = -1;
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isTrue(rule.check(manager, Process, 'proc1'));
     });
 
@@ -26,7 +26,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Process);
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isTrue(rule.check(manager, Process, ''));
     });
 
@@ -35,7 +35,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Element, '', 'elm1');
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isFalse(rule.check(manager, Element, 'elm1'));
     });
 
@@ -44,7 +44,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Element);
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isTrue(rule.check(manager, Element, ''));
     });
 
@@ -53,7 +53,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Property, '', 'prop1');
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isFalse(rule.check(manager, Property, 'prop1'));
     });
 
@@ -62,7 +62,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Property);
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isTrue(rule.check(manager, Property, ''));
     });
 
@@ -71,7 +71,7 @@ describe('UniquenessRule', function(){
 
         manager.createComponent(Process, '', 'com1');
 
-        let rule = new UniquenessRule();
+        let rule = new DynamicUniquenessRule();
         assert.isTrue(rule.check(manager, Element, 'com1'))
     });
 
