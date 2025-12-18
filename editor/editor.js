@@ -234,3 +234,24 @@ class Editor {
         }
     }
 }
+
+class Spatia {
+    #gridStep = 0;
+    #precision = 0;
+
+    constructor(gridStep, precision) {
+        this.#gridStep = gridStep;
+        this.#precision = precision;
+    }
+
+    isReachable(target, cursor) {
+        const delta = cursor.sub(target);
+
+        return (Math.abs(delta.X) <= this.#precision) &&
+            (Math.abs(delta.Y) <= this.#precision);
+    }
+
+    snapPoint(point) {
+        
+    }
+}
