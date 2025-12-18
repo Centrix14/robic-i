@@ -1,5 +1,3 @@
-let assert = chai.assert;
-
 describe('Point', function() {
 
     describe('serialize', function() {
