@@ -95,7 +95,8 @@
 
                   <div class="pure-u-1">
                     <div class="robic-button-group pure-button-group">
-                      <button class="robic-button pure-button" id="new-process--btn">
+                      <button class="robic-button pure-button"
+                              onClick="app.createProcess()">
                         <img class="icon"
                              src="media/icons/png/process.png"
                              alt="Процесс">
@@ -147,7 +148,10 @@
           </div>
 
           <div class="pure-u-3-5" id="work-area">
-            <svg id="canvas" viewBox="0 0 800 600"></svg>
+            <svg id="canvas"
+                 viewBox="0 0 800 600"
+                 onClick="app.canvasSelect(event)">
+            </svg>
           </div>
 
           <div class="pure-u-1-5" id="palette">
@@ -160,7 +164,8 @@
     </main>
 
     <script src="editor/editor.js"></script>
-    <script src="index.js"></script>
+    <script src="diagram/diagram.js"></script>
+    <script src="app.js"></script>
 
   </body>
 
