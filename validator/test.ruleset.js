@@ -10,7 +10,7 @@ describe('RuleSet', function(){
         const manager = new ComponentManager();
         
         const set = new RuleSet([
-            [UniquenessRule, (r) => r.check(manager, Process, 'p1')],
+            [DynamicUniquenessRule, (r) => r.check(manager, Process, 'p1')],
             [NestingRule, (r) => r.check(Process, Element)]
         ]);
 
@@ -24,12 +24,12 @@ describe('RuleSet', function(){
         manager.createComponent(Process, '', 'p1');
 
         const set = new RuleSet([
-            [UniquenessRule, (r) => r.check(manager, Process, 'p1')],
+            [DynamicUniquenessRule, (r) => r.check(manager, Process, 'p1')],
             [NestingRule, (r) => r.check(Process, Element)]
         ]);
 
         const checkResult = set.check();
-        assert.instanceOf(checkResult, UniquenessRule);
+        assert.instanceOf(checkResult, DynamicUniquenessRule);
     });
     
 });
