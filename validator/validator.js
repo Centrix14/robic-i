@@ -84,6 +84,20 @@ class Component {
     deleteNested(component) {
         this._content.delete(component.designation);
     }
+
+    equalTo(target) {
+        if (this.designation === target.designation)
+            return true;
+
+        if (this.name === target.name) {
+            if (this.constructor !== target.constructor)
+                return false;
+            if (this.name === '')
+                return false;
+        }
+
+        return true;
+    }
 }
 
 class Property extends Component {
@@ -202,6 +216,12 @@ class Process extends Component {
             component.deleteContext(this.designation, role);
         super.deleteNested(component);
     }
+
+    equalTo(target) {
+        if (!super.equalTo(target))
+            return false;
+        return this.iteration === target.iteration;
+    }
 }
 
 class ComponentManager {
@@ -244,6 +264,10 @@ class ComponentManager {
 
     get roles() {
         return this.#roles;
+    }
+
+    get repository() {
+        return new Map(this.#repository);
     }
 
     countComponents(componentClass) {
