@@ -1,19 +1,42 @@
-const svg = document.getElementsByTagName("svg")[0];
-const pt = svg.createSVGPoint();
+class Application {
+    #editor = undefined;
+    #validator = undefined;
+    
+    #roles = undefined;
+    #diagram = undefined;
 
-let canvas = document.getElementById('canvas');
-let editor = new Editor(document, canvas);
+    #canvas = undefined;
+    #svgPoint = undefined;
 
-let newProcessBtn = document.getElementById('new-process--btn');
-newProcessBtn.addEventListener('click', () => editor.createRect());
+    constructor() {
+        this.#roles = new ElementRole();
+        this.#roles.create('none');
+        
+        this.#diagram = new ComponentManager(this.#roles);
 
-function clicked(evt){
-    pt.x = evt.clientX;
-    pt.y = evt.clientY;
+        this.#validator = new Validator();
 
-    // The cursor point, translated into svg coordinates
-    var cursorpt =  pt.matrixTransform(svg.getScreenCTM().inverse());
-    console.log("(" + cursorpt.x + ", " + cursorpt.y + ")");
+        this.#canvas = document.getElementById('canvas');
+        this.#editor = new Editor(document, this.#canvas);
+
+        this.#svgPoint = this.#canvas.createSVGPoint();
+    }
+
+    createProcess() {
+        const designation = this.#diagram.createComponent(Process);
+        this.#editor.createRect(designation);
+    }
+
+    canvasSelect(event) {
+        const point = this.#svgPoint;
+        const canvas = this.#canvas;
+        
+        point.x = event.clientX;
+        point.y = event.clientY;
+
+        var cursorpt = point.matrixTransform(canvas.getScreenCTM().inverse());
+        console.log("(" + cursorpt.x + ", " + cursorpt.y + ")");
+    }
 }
 
-canvas.addEventListener('click', () => clicked(event));
+const app = new Application();
