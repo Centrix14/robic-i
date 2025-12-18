@@ -156,8 +156,8 @@ describe('Figure', function() {
 describe('Rect', function() {
 
     describe('serialize', function() {
-        let rect1 = Rect.createByMeasures(2, new Point(1,1), 50, 50);
-        let rect2 = Rect.createByPoints(1, new Point(1,1), new Point(51,51));
+        let rect1 = Rect.createByMeasures(2, '', new Point(1,1), 50, 50);
+        let rect2 = Rect.createByPoints(1, '', new Point(1,1), new Point(51,51));
 
         it('takes only SVGElement', function() {
             let svgElm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -178,14 +178,14 @@ describe('Rect', function() {
     });
 
     describe('isTouching', function() {
-        let rect = Rect.createByMeasures(1, new Point(1,1), 50, 50);
+        let rect = Rect.createByMeasures(1, '', new Point(1,1), 50, 50);
 
         it('takes only Point', function() {
             let realPoint = new Point(1,1);
             let fakePoint = {x: 2, y: 2};
 
-            assert.isTrue(rect.isTouching(realPoint).isSuccess &&
-                          rect.isTouching(fakePoint).hasErrors);
+            assert.isTrue(rect.isTouching(realPoint).isSuccess() &&
+                          rect.isTouching(fakePoint).hasErrors());
         });
 
         it('returns bool', function() {
@@ -198,7 +198,7 @@ describe('Rect', function() {
     });
 
     describe('isCovers', function() {
-        let rect = Rect.createByMeasures(1, new Point(1,1), 50, 50);
+        let rect = Rect.createByMeasures(1, '', new Point(1,1), 50, 50);
 
         it('takes only Point', function() {
             let realPoint = new Point(1,1);
@@ -222,29 +222,31 @@ describe('Rect', function() {
 describe('RectManager', function() {
 
     describe('create', function() {
-        let manager = new RectManager();
         
         it('takes Point and SVGElement', function() {
+            let manager = new RectManager();
+            
             let realPoint = new Point(1,1),
                 fakePoint = {x: 1, y: 1};
             let svgElm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             let htmlElm = document.createElement('div');
             
-            assert.isTrue(manager.create(realPoint, svgElm).isSuccess() &&
-                          manager.create(fakePoint, htmlElm).hasErrors());
+            assert.isTrue(manager.create(realPoint, svgElm, '').isSuccess());
+            assert.isTrue(manager.create(fakePoint, htmlElm, '').hasErrors());
         });
 
         it('sets `id`, coordinates and measures', function() {
+            let manager = new RectManager();
+
             let cursor = new Point(1,1);
             let elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
-            assert.isTrue(manager.create(cursor, elm).isSuccess(), 'rect not created');
-            assert.isTrue(elm.getAttribute('id') === '1' &&
-                          elm.getAttribute('x') === '1' &&
-                          elm.getAttribute('y') === '1' &&
-                          elm.getAttribute('width') === '20' &&
-                          elm.getAttribute('height') === '30',
-                         'failed to set attributes');
+            assert.isTrue(manager.create(cursor, elm, '').isSuccess(), 'rect not created');
+            assert.isTrue(elm.getAttribute('id') === '0')
+            assert.isTrue(elm.getAttribute('x') === '1');
+            assert.isTrue(elm.getAttribute('y') === '1');
+            assert.isTrue(elm.getAttribute('width') === '30');
+            assert.isTrue(elm.getAttribute('height') === '20');
         });
     });
 
