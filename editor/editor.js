@@ -86,10 +86,12 @@ class Point {
 
 class Figure {
     #id = 0;
-    #caption = "";
+    #caption = '';
+    #designation = '';
 
-    constructor(id) {
+    constructor(id, designation='') {
         this.#id = id;
+        this.#designation = designation;
     }
 
     setCaption(newCaption) {
@@ -138,18 +140,18 @@ class Rect extends Figure {
     #start;
     #end;
 
-    static createByPoints(id, start, end) {
+    static createByPoints(id, designation, start, end) {
         if (start instanceof Point && end instanceof Point) {
-            let rect = new Rect(id);
+            let rect = new Rect(id, designation);
             rect.#start = start;
             rect.#end = end;
             return rect;
         }
     }
 
-    static createByMeasures(id, start, width, height) {
+    static createByMeasures(id, designation, start, width, height) {
         if (start instanceof Point) {
-            let rect = new Rect(id);
+            let rect = new Rect(id, designation);
             rect.#start = start;
             rect.#end = start.sum(new Point(width, height));
             return rect;
@@ -182,9 +184,9 @@ class Rect extends Figure {
 }
 
 class RectManager extends FigureManager {
-    create(cursor, element) {
+    create(cursor, element, designation='') {
         let id = this._index;
-        let newRect = Rect.createByMeasures(id, cursor, 30, 20);
+        let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
             newRect.serialize(element);
