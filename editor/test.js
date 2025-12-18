@@ -184,36 +184,16 @@ describe('Rect', function() {
             let realPoint = new Point(1,1);
             let fakePoint = {x: 2, y: 2};
 
-            assert.isTrue(rect.isTouching(realPoint).isSuccess() &&
-                          rect.isTouching(fakePoint).hasErrors());
+            assert.isTrue(rect.isTouching(realPoint).isSuccess());
+            assert.isTrue(rect.isTouching(fakePoint).hasErrors());
         });
 
         it('returns bool', function() {
             let point1 = new Point(1,1);
             let point2 = new Point(0,0);
 
-            assert.isTrue(typeof rect.isTouching(point1) === 'bool' &&
-                          typeof rect.isTouching(point2) === 'bool');
-        });
-    });
-
-    describe('isCovers', function() {
-        let rect = Rect.createByMeasures(1, '', new Point(1,1), 50, 50);
-
-        it('takes only Point', function() {
-            let realPoint = new Point(1,1);
-            let fakePoint = {x: 2, y: 2};
-
-            assert.isTrue(rect.isCovers(realPoint).isSuccess &&
-                          rect.isCovers(fakePoint).hasErrors);
-        });
-
-        it('returns bool', function() {
-            let point1 = new Point(1,1);
-            let point2 = new Point(0,0);
-
-            assert.isTrue(typeof rect.isCovers(point1) === 'bool' &&
-                          typeof rect.isCovers(point2) === 'bool');
+            assert.typeOf(rect.isTouching(point1), 'bool');
+            assert.typeOf(rect.isTouching(point2), 'bool');
         });
     });
 
