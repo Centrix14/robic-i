@@ -218,12 +218,12 @@ class Editor {
         }
     }
 
-    createRect() {
+    createRect(designation) {
         let doc = this.#document;
         let elm = doc.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
         let defaultCursor = new Point(1,1);
-        let result = this.#rectManager.create(defaultCursor, elm);
+        let result = this.#rectManager.create(defaultCursor, elm, designation);
         if (result.isSuccess()) {
             this.#canvas.appendChild(elm);
 
