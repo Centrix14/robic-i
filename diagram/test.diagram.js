@@ -1,5 +1,3 @@
-let assert = chai.assert;
-
 describe('ElementRole', function(){
 
     it('creates new roles', function(){
