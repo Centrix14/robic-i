@@ -15,23 +15,21 @@ class DynamicUniquenessRule extends Rule {
         
         if (duplicate === undefined)
             return true;
-        else {
-            if (componentClass === Process) {
-                if (duplicate.iteration === 0) {
-                    this.#sameIterationError = true;
-                    return false;
-                }
-                else
-                    return true;
-            }
-
-            if (duplicate instanceof componentClass) {
-                this.#sameTypeError = true;
+        if (componentClass === Process) {
+            if (duplicate.iteration === 0) {
+                this.#sameIterationError = true;
                 return false;
             }
             else
                 return true;
         }
+
+        if (duplicate instanceof componentClass) {
+            this.#sameTypeError = true;
+            return false;
+        }
+        else
+            return true;
     }
 
     explainError() {
@@ -43,6 +41,31 @@ class DynamicUniquenessRule extends Rule {
             explanation += '\n- Компоненты с одинаковыми названиями могут существовать, только если они разных типов';
 
         return explanation;
+    }
+}
+
+class StaticUniquenessRule extends Rule {
+    #duplicate = undefined;
+
+    check(componentManager, component) {
+        for (let entry of componentManager.repository.values()) {
+            if (entry === component)
+                continue;
+
+            if (component.equalTo(entry)) {
+                this.#duplicate = structuredClone(entry);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    explainError() {
+        if (this.#duplicate)
+            return 'Нарушение правила статической уникальности: обнаружена повторяющаяся запись ' + this.#duplicate.toString();
+        else
+            return '';
     }
 }
 
