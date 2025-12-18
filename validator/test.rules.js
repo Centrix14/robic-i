@@ -13,7 +13,7 @@ describe('DynamicUniquenessRule', function(){
         let manager = new ComponentManager();
 
         manager.createComponent(Process, '', 'proc1');
-        
+
         let older = manager.getByName('proc1');
         older.iteration = -1;
 
@@ -77,11 +77,103 @@ describe('DynamicUniquenessRule', function(){
 
 });
 
+describe('StaticUniquenessRule', function(){
+
+    it('returns `false` for same designations', function(){
+        const c1 = new Component('c1', 'c1');
+        const c2 = new Component('c2', 'c2');
+        const c3 = new Component('c1', 'c3');
+        
+        const repository = new Map();
+        repository.set('c1', c1);
+        repository.set('c2', c2);
+
+        const manager = {
+            repository
+        };
+
+        const rule = new StaticUniquenessRule();
+        assert.isFalse(rule.check(manager, c3));
+    });
+
+    it('returns `false` for same-named components', function(){
+        const c1 = new Component('c1', 'c1');
+        const c2 = new Component('c2', 'c1');
+
+        const repository = new Map();
+        repository.set('c1', c1);
+        
+        const manager = {
+            repository
+        };
+
+        let rule = new StaticUniquenessRule();
+        assert.isFalse(rule.check(manager, c2));
+    });
+
+    it('returns `true` if non-unique components are unnamed', function(){
+        const c1 = new Component('c1', '');
+        const c2 = new Component('c2', '');
+        
+        const repository = new Map();
+        repository.set('c1', c1);
+        
+        const manager = {
+            repository
+        };
+
+        let rule = new StaticUniquenessRule();
+        assert.isTrue(rule.check(manager, c2));
+    });
+
+    it('returns `true` for same-named components of different types', function(){
+        const manager = new ComponentManager();
+        manager.createComponent(Process, '', 'c1');
+        const target = manager.createComponent(Element, '', 'c1');
+
+        let rule = new StaticUniquenessRule();
+        assert.isTrue(rule.check(manager, manager.get(target)));
+    });
+
+    it('returns `false` for same-named processes in the same iteration', function(){
+        const p1 = new Process('p1', 'p1');
+        const p2 = new Process('p2', 'p1');
+
+        const repository = new Map();
+        repository.set('p1', p1);
+        
+        const manager = {
+            repository
+        };
+
+        let rule = new StaticUniquenessRule();
+        assert.isFalse(rule.check(manager, p2));
+    });
+
+    it('returns `true` for same-named processes in the different iterations', function(){
+        const p1 = new Process('p1', 'p1');
+        p1.iteration = 1;
+        
+        const p2 = new Process('p2', 'p1');
+        
+        const repository = new Map();
+        repository.set('p1', p1);
+        
+        const manager = {
+            repository
+        };
+
+        let rule = new StaticUniquenessRule();
+        assert.isTrue(rule.check(manager, p2));
+    });
+
+});
+
 describe('NestingRule', function(){
 
     it('returns `true` for process-to-(process, element) nesting', function(){
         const rule = new NestingRule();
-        
+
         assert.isTrue(rule.check(Process, Process));
         assert.isTrue(rule.check(Process, Element));
     });
@@ -116,7 +208,7 @@ describe('NestingRule', function(){
 
         assert.isFalse(rule.check(Property, Process));
     });
-    
+
 });
 
 describe('ElementRoleSettingRule', function(){
@@ -129,7 +221,7 @@ describe('ElementRoleSettingRule', function(){
         roles.create('mean');
 
         const rule = new ElementRoleSettingRule();
-        
+
         assert.isTrue(rule.check(roles, Process, roles.getId('input')));
         assert.isTrue(rule.check(roles, Process, roles.getId('output')));
         assert.isTrue(rule.check(roles, Process, roles.getId('doer')));
@@ -141,7 +233,7 @@ describe('ElementRoleSettingRule', function(){
         roles.create('none');
 
         const rule = new ElementRoleSettingRule();
-        
+
         assert.isFalse(rule.check(roles, Process, roles.getId('none')));
     });
 
@@ -153,11 +245,11 @@ describe('ElementRoleSettingRule', function(){
         roles.create('mean');
 
         const rule = new ElementRoleSettingRule();
-        
+
         assert.isFalse(rule.check(roles, Element, roles.getId('input')));
         assert.isFalse(rule.check(roles, Element, roles.getId('output')));
         assert.isFalse(rule.check(roles, Element, roles.getId('doer')));
         assert.isFalse(rule.check(roles, Element, roles.getId('mean')));
     });
-    
+
 });
