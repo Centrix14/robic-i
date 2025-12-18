@@ -33,7 +33,7 @@ class DynamicUniquenessRule extends Rule {
     }
 
     explainError() {
-        let explanation = 'Ошибка правила динамической уникальности:';
+        let explanation = 'Нарушение правила динамической уникальности:';
 
         if (this.#sameIterationError)
             explanation += '\n- Процессы с одинаковыми названиями могут существовать только в разных итерациях';
@@ -96,7 +96,7 @@ class NestingRule extends Rule {
     }
 
     explainError() {
-        const explanation = 'Ошибка правила декомпозиции: ';
+        const explanation = 'Нарушение правила декомпозиции: ';
 
         switch (this.#nestingErrorClass) {
         case Parent:
@@ -140,7 +140,7 @@ class ElementRoleSettingRule extends Rule {
     }
 
     explainError() {
-        const explanation = 'Ошибка установки роли подчинённого компонента: ';
+        const explanation = 'Нарушение правила установки роли подчинённого компонента: ';
 
         if (processChildRoleError)
             return explanation + 'элемент процесса может быть только входом, выходом, исполнителем или средством';
