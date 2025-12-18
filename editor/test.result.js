@@ -1,5 +1,3 @@
-let assert = chai.assert;
-
 describe('Result', function() {
 
     describe('addError', function() {
