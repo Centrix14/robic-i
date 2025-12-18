@@ -17,8 +17,14 @@
       mocha.checkLeaks();
     </script>
 
+    <script>
+      const assert = chai.assert;
+    </script>
+
     <script src="editor.js"></script>
-    <script src="test.js"></script>
+    <script src="test.result.js"></script>
+    <script src="test.primitives.js"></script>
+    <script src="test.spatia.js"></script>
 
     <script class="mocha-exec">
       mocha.run();
