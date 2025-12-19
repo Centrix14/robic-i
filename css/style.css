@@ -6,6 +6,11 @@ nav {
     margin-bottom: 3px;
 }
 
+#status-text {
+    font-size: 12px;
+    color: #6c757d;
+}
+
 .robic-button-group .robic-button {
     background-color: #f8f9fa;
     border-right: none;
