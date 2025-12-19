@@ -73,14 +73,10 @@ class Point {
     }
 
     sub(point) {
-        if (point instanceof Point) {
-            point.#x = -point.#x;
-            point.#y = -point.#y;
-            return this.sum(point);
-        }
-        else {
+        if (point instanceof Point)
+            return this.sum(new Point(-point.#x, -point.#y));
+        else
             return new Result('Point.sub requires Point as argument');
-        }
     }
 }
 
@@ -251,7 +247,52 @@ class Spatia {
             (Math.abs(delta.Y) <= this.#precision);
     }
 
+    _isSnapped(point) {
+        return (point.X % this.#gridStep === 0) && (point.Y % this.#gridStep === 0);
+    }
+
     snapPoint(point) {
-        
+        if (!this._isSnapped(point)) {
+            const ax = Math.trunc(point.X / this.#gridStep);
+            const ay = Math.trunc(point.Y / this.#gridStep);
+
+            let potentialVertices = [
+                new Point(ax, ay),
+                new Point(ax + this.#gridStep, ay),
+                new Point(ax, ay + this.#gridStep),
+                new Point(ax + this.#gridStep, ay + this.#gridStep),
+            ];
+
+            let distances = new Map();
+            for (let vertex of potentialVertices) {
+                if (this.isReachable(vertex, point)) {
+                    const distance = Math.sqrt((vertex.X - point.X)**2 + (vertex.Y - point.Y)**2);
+                    distances.set(vertex, distance);
+                }
+            }
+
+            switch (distances.size) {
+            case 0:
+                return point;
+                break;
+
+            case 1:
+                return distances.keys().next().value;
+                break;
+
+            case 2:
+                const candidates = distances.entries().toArray();
+                const d1 = candidates[0];
+                const d2 = candidates[1];
+
+                if (d1[1] === d2[1])
+                    return point;
+                else if (d1[1] < d2[1])
+                    return d1[0];
+                else
+                    return d2[0];
+                break;
+            }
+        }
     }
 }
