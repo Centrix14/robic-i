@@ -1,3 +1,15 @@
+class StatusBar {
+    #element = undefined;
+
+    constructor(element) {
+        this.#element = element;
+    }
+
+    print(message) {
+        this.#element.innerText = message;
+    }
+}
+
 class Application {
     #editor = undefined;
     #validator = undefined;
@@ -40,3 +52,4 @@ class Application {
 }
 
 const app = new Application();
+const statusBar = new StatusBar(document.getElementById('status-text'));
