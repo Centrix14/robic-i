@@ -121,8 +121,12 @@ class FigureManager {
         }
 
         this._repository.forEach(function(element){
-            if (element.isTouching(spatia, cursor))
-                this.push(element);
+            if (element.isTouching(spatia, cursor)) {
+                if (this.includes(element))
+                    this.splice(this.indexOf(element), 1);
+                else
+                    this.push(element);
+            }
         }, this._selection);
     }
 
@@ -203,7 +207,9 @@ class RectManager extends FigureManager {
 class Editor {
     #document = null;
     #canvas = null;
+
     #rectManager = null;
+    #spatia = null;
 
     constructor(targetDocument, targetCanvas) {
         if (targetDocument instanceof Document) {
@@ -212,7 +218,9 @@ class Editor {
                 
                 this.#document = targetDocument;
                 this.#canvas = targetCanvas;
+                
                 this.#rectManager = new RectManager();
+                this.#spatia = new Spatia();
             }
         }
     }
@@ -231,6 +239,13 @@ class Editor {
         else {
             return result;
         }
+    }
+
+    select(x, y) {
+        const cursor = new Point(x, y);
+
+        this.#rectManager.select(this.#spatia, cursor);
+        console.log(this.#rectManager.selected);
     }
 }
 
