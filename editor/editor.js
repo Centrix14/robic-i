@@ -170,12 +170,11 @@ class Rect extends Figure {
         }
     }
 
-    isTouching(cursor) {
-        return false;
-    }
-
-    isCovers(cursor) {
-        return false;
+    isTouching(spatia, cursor) {
+        return (spatia.isRighter(this.#start, cursor)) &&
+            (spatia.isLower(this.#start, cursor)) &&
+            (spatia.isLefter(this.#end, cursor)) &&
+            (spatia.isHigher(this.#end, cursor));
     }
 }
 
@@ -290,18 +289,18 @@ class Spatia {
     }
 
     isLefter(target, cursor) {
-        return cursor.X < target.X;
+        return cursor.X <= target.X;
     }
 
     isRighter(target, cursor) {
-        return cursor.X > target.X;
+        return cursor.X >= target.X;
     }
 
     isHigher(target, cursor) {
-        return cursor.Y < target.Y;
+        return cursor.Y <= target.Y;
     }
 
     isLower(target, cursor) {
-        return cursor.Y > target.Y;
+        return cursor.Y >= target.Y;
     }
 }
