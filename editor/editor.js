@@ -111,12 +111,19 @@ class FigureManager {
     _selection = [];
     SVGTag = '';
 
-    select(cursor) {
-        if (not (cursor instanceof Point)) {
+    get selected() {
+        return Array.from(this._selection);
+    }
+
+    select(spatia, cursor) {
+        if (!(cursor instanceof Point)) {
             return new Result('FigureManager.select requires Point as argument');
         }
 
-        this._repository.forEach((_, index) => this._selection.push(index));
+        this._repository.forEach(function(element){
+            if (element.isTouching(spatia, cursor))
+                this.push(element);
+        }, this._selection);
     }
 
     unselect(cursor) {
@@ -125,10 +132,6 @@ class FigureManager {
         }
 
         this._repository.forEach((_, index) => this._selection.splice(index, 1));
-    }
-
-    deleteSelected() {
-        this._selection.forEach((_, index) => this._repository.splice(index, 1));
     }
 }
 
@@ -186,6 +189,7 @@ class RectManager extends FigureManager {
         if (newRect) {
             newRect.serialize(element);
             element.setAttribute('id', id.toString());
+            this._repository.push(newRect);
             this._index++;
 
             return new Result();
