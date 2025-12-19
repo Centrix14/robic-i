@@ -256,7 +256,7 @@ class Spatia {
             const ax = Math.trunc(point.X / this.#gridStep);
             const ay = Math.trunc(point.Y / this.#gridStep);
 
-            let potentialVertices = [
+            let vertices = [
                 new Point(ax, ay),
                 new Point(ax + this.#gridStep, ay),
                 new Point(ax, ay + this.#gridStep),
@@ -264,7 +264,7 @@ class Spatia {
             ];
 
             let distances = new Map();
-            for (let vertex of potentialVertices) {
+            for (let vertex of vertices) {
                 if (this.isReachable(vertex, point)) {
                     const distance = Math.sqrt((vertex.X - point.X)**2 + (vertex.Y - point.Y)**2);
                     distances.set(vertex, distance);
@@ -272,14 +272,8 @@ class Spatia {
             }
 
             switch (distances.size) {
-            case 0:
-                return point;
-                break;
-
-            case 1:
-                return distances.keys().next().value;
-                break;
-
+            case 0: return point;
+            case 1: return distances.keys().next().value;
             case 2:
                 const candidates = distances.entries().toArray();
                 const d1 = candidates[0];
@@ -291,7 +285,6 @@ class Spatia {
                     return d1[0];
                 else
                     return d2[0];
-                break;
             }
         }
     }
