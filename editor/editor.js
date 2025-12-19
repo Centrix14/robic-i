@@ -245,7 +245,6 @@ class Editor {
         const cursor = new Point(x, y);
 
         this.#rectManager.select(this.#spatia, cursor);
-        console.log(this.#rectManager.selected);
     }
 }
 
