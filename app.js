@@ -34,8 +34,8 @@ class Application {
         point.x = event.clientX;
         point.y = event.clientY;
 
-        var cursorpt = point.matrixTransform(canvas.getScreenCTM().inverse());
-        console.log("(" + cursorpt.x + ", " + cursorpt.y + ")");
+        const cursor = point.matrixTransform(canvas.getScreenCTM().inverse());
+        this.#editor.select(cursor.x, cursor.y);
     }
 }
 
