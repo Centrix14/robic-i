@@ -107,22 +107,19 @@ describe('Rect', function() {
     });
 
     describe('isTouching', function() {
-        let rect = Rect.createByMeasures(1, '', new Point(1,1), 50, 50);
+        const spatia = new Spatia(1, 0.2);
+        const rect = Rect.createByMeasures(1, '', new Point(1, 1), 5, 5);
 
-        it('takes only Point', function() {
-            let realPoint = new Point(1,1);
-            let fakePoint = {x: 2, y: 2};
-
-            assert.isTrue(rect.isTouching(realPoint).isSuccess());
-            assert.isTrue(rect.isTouching(fakePoint).hasErrors());
+        it('returns `true` when cursor inside of a rect', function(){
+            assert.isTrue(rect.isTouching(spatia, new Point(2, 3)));
         });
 
-        it('returns bool', function() {
-            let point1 = new Point(1,1);
-            let point2 = new Point(0,0);
+        it('returns `true` when cursor on side of a rect', function(){
+            assert.isTrue(rect.isTouching(spatia, new Point(1, 2)));
+        });
 
-            assert.typeOf(rect.isTouching(point1), 'bool');
-            assert.typeOf(rect.isTouching(point2), 'bool');
+        it('returns `false` when cursor outside of a rect', function(){
+            assert.isFalse(rect.isTouching(spatia, new Point(7, 10)));
         });
     });
 
