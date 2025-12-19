@@ -156,4 +156,55 @@ describe('RectManager', function() {
         });
     });
 
+    describe('select', function(){
+        
+        it('selects when cursor touch sth', function(){
+            const manager = new RectManager();
+            const spatia = new Spatia(1, 0.2);
+
+            const elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            manager.create(new Point(1,1), elm);
+            manager.select(spatia, new Point(2,1));
+
+            assert.lengthOf(manager.selected, 1);
+        });
+
+        it('selects when cursor inside sth', function(){
+            const manager = new RectManager();
+            const spatia = new Spatia(1, 0.2);
+
+            const elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            manager.create(new Point(1,1), elm);
+            manager.select(spatia, new Point(2,2));
+
+            assert.lengthOf(manager.selected, 1);
+        });
+
+        it('selects multiple primitives', function(){
+            const manager = new RectManager();
+            const spatia = new Spatia(1, 0.2);
+
+            const elm1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            const elm2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            manager.create(new Point(0,0), elm1);
+            manager.create(new Point(1,1), elm2);
+            
+            manager.select(spatia, new Point(2,2));
+
+            assert.lengthOf(manager.selected, 2);
+        });
+
+        it('selects nothing when cursor in empty area', function(){
+            const manager = new RectManager();
+            const spatia = new Spatia(1, 0.2);
+
+            const elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            manager.create(new Point(1,1), elm);
+            manager.select(spatia, new Point(0,0));
+
+            assert.lengthOf(manager.selected, 0);
+        });
+        
+    });
+
 });
