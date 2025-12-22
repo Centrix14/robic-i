@@ -51,5 +51,80 @@ describe('Fill', function(){
 });
 
 describe('StyleSet', function(){
-    
+
+    it('adds styles', function(){
+        const basicSet = new StyleSet();
+
+        const passiveStyle = new SkeletonStyle('passive', new Stroke());
+        const activeStyle = new ShapeStyle('active', new Stroke('blue'), new Fill('gray'));
+
+        basicSet.add(passiveStyle);
+        basicSet.add(activeStyle);
+
+        assert.isDefined(basicSet.get('passive'));
+        assert.isDefined(basicSet.get('active'));
+    });
+
+    it('adds styles with blank names instead of `all` since it reserved name', function(){
+        const basicSet = new StyleSet();
+
+        const wrongStyle = new SkeletonStyle('all', new Stroke());
+
+        assert.isEmpty(basicSet.add(wrongStyle));
+    });
+
+    it('ejects styles', function(){
+        const basicSet = new StyleSet();
+
+        const passiveStyle = new SkeletonStyle('passive', new Stroke());
+        const activeStyle = new ShapeStyle('active', new Stroke('blue'), new Fill('gray'));
+
+        basicSet.add(passiveStyle);
+        basicSet.add(activeStyle);
+
+        assert.isDefined(basicSet.eject('passive'));
+        assert.isDefined(basicSet.eject('active'));
+        assert.lengthOf(basicSet.repository, 0);
+    });
+
+    it('properly sets specific style', function(){
+        const basicSet = new StyleSet();
+
+        const passiveStyle = new SkeletonStyle('passive', new Stroke());
+        const activeStyle = new ShapeStyle('active', new Stroke('blue'), new Fill('gray'));
+
+        basicSet.add(passiveStyle);
+        basicSet.add(activeStyle);
+
+        const elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        basicSet.useOn(elm, 'active');
+
+        assert.equal(elm.getAttribute('stroke'), 'blue');
+        assert.equal(elm.getAttribute('stroke-width'), '1');
+        assert.equal(elm.getAttribute('stroke-dasharray'), '');
+        assert.equal(elm.getAttribute('stroke-linejoin'), 'miter');
+        assert.equal(elm.getAttribute('fill'), 'gray');
+        assert.equal(elm.getAttribute('fill-opacity'), '0');
+    });
+
+    it('sets all styles sequently when tell useOn(, all)', function(){
+        const basicSet = new StyleSet();
+
+        const activeStyle = new ShapeStyle('active', new Stroke(), new Fill('gray'));
+        const passiveStyle = new SkeletonStyle('passive', new Stroke('red', '2'));
+
+        basicSet.add(activeStyle);
+        basicSet.add(passiveStyle);
+
+        const elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        basicSet.useOn(elm, 'all');
+
+        assert.equal(elm.getAttribute('stroke'), 'red');
+        assert.equal(elm.getAttribute('stroke-width'), '2');
+        assert.equal(elm.getAttribute('stroke-dasharray'), '');
+        assert.equal(elm.getAttribute('stroke-linejoin'), 'miter');
+        assert.equal(elm.getAttribute('fill'), 'gray');
+        assert.equal(elm.getAttribute('fill-opacity'), '0');
+    });
+
 });
