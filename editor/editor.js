@@ -374,3 +374,31 @@ class Style {
 
     useOn(element) {}
 }
+
+class SkeletonStyle extends Style {
+    #stroke = undefined;
+
+    constructor(stroke) {
+        this.#stroke = stroke;
+    }
+
+    useOn(element) {
+        return this.#stroke.useOn(element);
+    }
+}
+
+class ShapeStyle extends Style {
+    #stroke = undefined;
+    #fill = undefined;
+
+    constructor(stroke, fill) {
+        this.#stroke = stroke;
+        this.#fill = fill;
+    }
+
+    useOn(element) {
+        this.#stroke.useOn(element);
+        this.#fill.useOn(element);
+        return element;
+    }
+}
