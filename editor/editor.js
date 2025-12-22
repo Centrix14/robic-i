@@ -322,3 +322,55 @@ class Spatia {
         return cursor.Y >= target.Y;
     }
 }
+
+class Stroke {
+    #color = '';
+    #width = '';
+    #dasharray = '';
+    #linejoin = '';
+
+    constructor(color='black', width='1', dasharray='', linejoin='miter') {
+        this.#color = color;
+        this.#width = width;
+        this.#dasharray = dasharray;
+        this.#linejoin = linejoin;
+    }
+
+    useOn(element) {
+        element.setAttribute('stroke', this.#color);
+        element.setAttribute('stroke-width', this.#width);
+        element.setAttribute('stroke-dasharray', this.#dasharray);
+        element.setAttribute('stroke-linejoin', this.#linejoin);
+
+        return element;
+    }
+}
+
+class Fill {
+    #color = '';
+    #opacity = '';
+
+    constructor(color='white', opacity='0') {
+        this.#color = color;
+        this.#opacity = opacity;
+    }
+
+    useOn(element) {
+        element.setAttribute('fill', this.#color);
+        element.setAttribute('fill-opacity', this.#opacity);
+
+        return element;
+    }
+}
+
+class Style {
+    #name = '';
+
+    constructor(name) {
+        this.#name = name;
+    }
+
+    get name() { return name };
+
+    useOn(element) {}
+}
