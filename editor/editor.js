@@ -366,11 +366,13 @@ class Fill {
 class Style {
     #name = '';
 
-    constructor(name) {
+    constructor(name='') {
+        if (name === 'all')
+            name = '';
         this.#name = name;
     }
 
-    get name() { return name };
+    get name() { return this.#name };
 
     useOn(element) {}
 }
@@ -378,7 +380,8 @@ class Style {
 class SkeletonStyle extends Style {
     #stroke = undefined;
 
-    constructor(stroke) {
+    constructor(name, stroke) {
+        super(name);
         this.#stroke = stroke;
     }
 
@@ -391,7 +394,8 @@ class ShapeStyle extends Style {
     #stroke = undefined;
     #fill = undefined;
 
-    constructor(stroke, fill) {
+    constructor(name, stroke, fill) {
+        super(name);
         this.#stroke = stroke;
         this.#fill = fill;
     }
@@ -400,5 +404,37 @@ class ShapeStyle extends Style {
         this.#stroke.useOn(element);
         this.#fill.useOn(element);
         return element;
+    }
+}
+
+class StyleSet {
+    #repository = new Map();
+
+    get(name) {
+        return this.#repository.get(name);
+    }
+    
+    get repository() {
+        return new Map(this.#repository);
+    }
+
+    add(style) {
+        this.#repository.set(style.name, style);
+        return style.name;
+    }
+
+    eject(name) {
+        const style = this.get(name);
+        this.#repository.delete(name);
+        return style;
+    }
+
+    useOn(element, name='all') {
+        if (name === 'all') {
+            this.repository.forEach((style) => style.useOn(element));
+        }
+        else {
+            this.get(name).useOn(element);
+        }
     }
 }
