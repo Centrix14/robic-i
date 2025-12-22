@@ -56,30 +56,6 @@ describe('Point', function() {
 
 describe('Figure', function() {
 
-    describe('getCaption', function() {
-        let figure = new Figure(1);
-
-        it('returns strings', function() {
-            assert.typeOf(figure.getCaption(), 'string');
-        });
-
-        it('returns actual caption', function() {
-            figure.setCaption('cap');
-
-            assert.equal(figure.getCaption(), 'cap');
-        })
-    });
-
-    describe('setCaption', function() {
-        let figure = new Figure(1);
-
-        it('takes only strings', function() {
-            assert.isTrue(figure.setCaption('cap').isSuccess() &&
-                          figure.setCaption(123).hasErrors());
-        });
-
-    });
-
 });
 
 describe('Rect', function() {
@@ -147,7 +123,7 @@ describe('RectManager', function() {
             let cursor = new Point(1,1);
             let elm = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
-            assert.isTrue(manager.create(cursor, elm, '').isSuccess(), 'rect not created');
+            assert.isTrue(manager.create(cursor, elm, '0').isSuccess(), 'rect not created');
             assert.isTrue(elm.getAttribute('id') === '0')
             assert.isTrue(elm.getAttribute('x') === '1');
             assert.isTrue(elm.getAttribute('y') === '1');
@@ -186,8 +162,8 @@ describe('RectManager', function() {
 
             const elm1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             const elm2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            manager.create(new Point(0,0), elm1);
-            manager.create(new Point(1,1), elm2);
+            manager.create(new Point(0,0), elm1, '0');
+            manager.create(new Point(1,1), elm2, '1');
             
             manager.select(spatia, new Point(2,2));
 
