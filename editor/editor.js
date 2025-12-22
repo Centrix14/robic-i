@@ -82,7 +82,6 @@ class Point {
 
 class Figure {
     #id = 0;
-    #caption = '';
     #designation = '';
 
     constructor(id, designation='') {
@@ -90,23 +89,11 @@ class Figure {
         this.#designation = designation;
     }
 
-    setCaption(newCaption) {
-        if (typeof newCaption === 'string') {
-            this.#caption = newCaption;
-            return new Result();
-        }
-        else {
-            return new Result('Figure.setCaption requires string argument');
-        }
-    }
-
-    getCaption() {
-        return this.#caption;
-    }
+    get designation() { return this.#designation; }
 }
 
 class FigureManager {
-    _repository = [];
+    _repository = new Map();
     _index = 0;
     _selection = [];
     SVGTag = '';
@@ -128,14 +115,6 @@ class FigureManager {
                     this.push(element);
             }
         }, this._selection);
-    }
-
-    unselect(cursor) {
-        if (not (cursor instanceof Point)) {
-            return new Result('FigureManager.unselect requires Point as argument');
-        }
-
-        this._repository.forEach((_, index) => this._selection.splice(index, 1));
     }
 }
 
@@ -187,13 +166,13 @@ class Rect extends Figure {
 
 class RectManager extends FigureManager {
     create(cursor, element, designation='') {
-        let id = this._index;
+        const id = this._index;
         let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
             newRect.serialize(element);
             element.setAttribute('id', id.toString());
-            this._repository.push(newRect);
+            this._repository.set(id, newRect);
             this._index++;
 
             return new Result();
