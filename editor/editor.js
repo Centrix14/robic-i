@@ -81,21 +81,32 @@ class Point {
 }
 
 class Figure {
-    #id = 0;
-    #designation = '';
+    _id = 0;
+    _designation = '';
+    _styleSet = undefined;
 
     constructor(id, designation='') {
-        this.#id = id;
-        this.#designation = designation;
+        this._id = id;
+        this._designation = designation;
     }
 
-    get designation() { return this.#designation; }
+    get designation() { return this._designation; }
+
+    get styleSet() { return this._styleSet; }
+    set styleSet(newSet) {
+        this._styleSet = newSet;
+    }
+
+    useStyle(name, element) {
+        this._styleSet.useOn(element, name);
+    }
 }
 
 class FigureManager {
     _repository = new Map();
     _index = 0;
     _selection = [];
+    _styleSets = new Map();
     SVGTag = '';
 
     get selected() {
@@ -115,6 +126,31 @@ class FigureManager {
                     this.push(element);
             }
         }, this._selection);
+    }
+
+    get styleSets() { return new Map(this._styleSets); }
+
+    getStyleSet(name) {
+        const result = this._styleSets.get(name);
+        if (result)
+            return result;
+
+        const style = new SkeletonStyle(new Stroke());
+        const set = new StyleSet('');
+        set.add(style);
+        
+        return set;
+    }
+
+    addStyleSet(set) {
+        this._styleSets.set(set.name, set);
+        return set.name;
+    }
+
+    ejectStyleSet(name) {
+        const set = this.getStyleSet(name);
+        this._styleSets.delete(name);
+        return set;
     }
 }
 
@@ -148,6 +184,8 @@ class Rect extends Figure {
             let measuresPoint = this.#end.sub(this.#start);
             element.setAttribute('width', measuresPoint.X.toString());
             element.setAttribute('height', measuresPoint.Y.toString());
+
+            this._styleSet.useOn(element, 'main');
             
             return new Result();
         }
@@ -170,6 +208,8 @@ class RectManager extends FigureManager {
         let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
+            newRect.styleSet = this.getStyleSet('main');
+            
             newRect.serialize(element);
             element.setAttribute('id', id.toString());
             this._repository.set(id, newRect);
@@ -390,7 +430,11 @@ class StyleSet {
     #repository = new Map();
 
     get(name) {
-        return this.#repository.get(name);
+        const result = this.#repository.get(name);
+        if (result)
+            return result;
+
+        return new SkeletonStyle('', new Stroke());
     }
     
     get repository() {
