@@ -90,6 +90,7 @@ class Figure {
         this._designation = designation;
     }
 
+    get id() { return this._id; }
     get designation() { return this._designation; }
 
     get styleSet() { return this._styleSet; }
