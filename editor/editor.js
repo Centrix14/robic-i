@@ -119,16 +119,24 @@ class FigureManager {
             return new Result('FigureManager.select requires Point as argument');
         }
 
+        let unselected = [];
+        
         this._repository.forEach(function(element){
             if (element.isTouching(spatia, cursor)) {
-                if (this.includes(element))
+                if (this.includes(element)) {
+                    result.unselected.push(element);
                     this.splice(this.indexOf(element), 1);
+                }
                 else
                     this.push(element);
             }
         }, this._selection);
 
-        return this.selected;
+        let result = new Result();
+        result.selected = this.selected;
+        result.unselected = this.unselected;
+        
+        return result;
     }
 
     get styleSets() { return new Map(this._styleSets); }
