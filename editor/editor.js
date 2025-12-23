@@ -263,9 +263,15 @@ class Editor {
     }
 
     select(x, y) {
+        const doc = this.#document;
         const cursor = new Point(x, y);
 
-        this.#rectManager.select(this.#spatia, cursor);
+        const selectedRects = this.#rectManager.select(this.#spatia, cursor);
+        for (let rect of selectedRects) {
+            const element = doc.getElementById(rect.id.toString());
+            if (element)
+                rect.useStyle('selected', element);
+        }
     }
 }
 
