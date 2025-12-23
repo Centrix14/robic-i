@@ -211,7 +211,7 @@ class RectManager extends FigureManager {
         let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
-            newRect.styleSet = this.getStyleSet('main');
+            newRect.styleSet = this.getStyleSet('default');
             
             newRect.serialize(element);
             element.setAttribute('id', id.toString());
@@ -235,12 +235,12 @@ class Editor {
 
     static _defaultStyleSet() {
         const rmsStroke = new Stroke('#212529', '2');
-        const rectMainStyle = new SkeletonStyle('rect.main', rmsStroke);
+        const rectMainStyle = new SkeletonStyle('main', rmsStroke);
 
         const rssStroke = new Stroke('#023e8a', '3');
-        const rectSeletedStyle = new SkeletonStyle('rect.selected', rssStroke);
+        const rectSeletedStyle = new SkeletonStyle('selected', rssStroke);
 
-        const defaultSet = new StyleSet('default');
+        const defaultSet = new StyleSet('default.rect');
         defaultSet.add(rectMainStyle);
         defaultSet.add(rectSeletedStyle);
 
