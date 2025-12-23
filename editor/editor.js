@@ -235,10 +235,12 @@ class Editor {
 
     static _defaultStyleSet() {
         const rmsStroke = new Stroke('#212529', '2');
-        const rectMainStyle = new SkeletonStyle('main', rmsStroke);
+        const rmsFill = new Fill('white');
+        const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
 
-        const rssStroke = new Stroke('#023e8a', '3');
-        const rectSeletedStyle = new SkeletonStyle('selected', rssStroke);
+        const rssStroke = new Stroke('#00b4d8', '3');
+        const rssFill = new Fill('white');
+        const rectSeletedStyle = new ShapeStyle('selected', rssStroke, rssFill);
 
         const defaultSet = new StyleSet('default.rect');
         defaultSet.add(rectMainStyle);
