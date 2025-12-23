@@ -126,6 +126,8 @@ class FigureManager {
                     this.push(element);
             }
         }, this._selection);
+
+        return this.selected;
     }
 
     get styleSets() { return new Map(this._styleSets); }
@@ -459,5 +461,7 @@ class StyleSet {
         else {
             this.get(name).useOn(element);
         }
+
+        return element;
     }
 }
