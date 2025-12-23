@@ -233,6 +233,20 @@ class Editor {
     #rectManager = null;
     #spatia = null;
 
+    static _defaultStyleSet() {
+        const rmsStroke = new Stroke('#212529', '2');
+        const rectMainStyle = new SkeletonStyle('rect.main', rmsStroke);
+
+        const rssStroke = new Stroke('#023e8a', '3');
+        const rectSeletedStyle = new SkeletonStyle('rect.selected', rssStroke);
+
+        const defaultSet = new StyleSet('default');
+        defaultSet.add(rectMainStyle);
+        defaultSet.add(rectSeletedStyle);
+
+        return defaultSet;
+    }
+
     constructor(targetDocument, targetCanvas) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
@@ -241,8 +255,10 @@ class Editor {
                 this.#document = targetDocument;
                 this.#canvas = targetCanvas;
                 
-                this.#rectManager = new RectManager();
                 this.#spatia = new Spatia();
+                
+                this.#rectManager = new RectManager();
+                this.#rectManager.addStyleSet(Editor._defaultStyleSet());
             }
         }
     }
