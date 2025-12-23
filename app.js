@@ -1,3 +1,11 @@
+const canvas = document.getElementById('canvas');
+
+const _point = canvas.createSVGPoint();
+function canvasCoords(x, y) {
+    _point.x = x; _point.y = y;
+    return _point.matrixTransform(canvas.getScreenCTM().inverse());
+}
+
 class StatusBar {
     #element = undefined;
 
@@ -18,7 +26,6 @@ class Application {
     #diagram = undefined;
 
     #canvas = undefined;
-    #svgPoint = undefined;
 
     constructor() {
         this.#roles = new ElementRole();
@@ -30,8 +37,6 @@ class Application {
 
         this.#canvas = document.getElementById('canvas');
         this.#editor = new Editor(document, this.#canvas);
-
-        this.#svgPoint = this.#canvas.createSVGPoint();
     }
 
     createProcess() {
@@ -40,13 +45,7 @@ class Application {
     }
 
     canvasSelect(event) {
-        const point = this.#svgPoint;
-        const canvas = this.#canvas;
-        
-        point.x = event.clientX;
-        point.y = event.clientY;
-
-        const cursor = point.matrixTransform(canvas.getScreenCTM().inverse());
+        const cursor = canvasCoords(event.clientX, event.clientY);
         this.#editor.select(cursor.x, cursor.y);
     }
 }
@@ -54,5 +53,4 @@ class Application {
 const app = new Application();
 const statusBar = new StatusBar(document.getElementById('status-text'));
 
-const canvas = document.getElementById('canvas');
 canvas.addEventListener('click', (event) => app.canvasSelect(event));
