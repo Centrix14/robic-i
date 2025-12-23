@@ -211,7 +211,7 @@ class RectManager extends FigureManager {
         let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
-            newRect.styleSet = this.getStyleSet('default');
+            newRect.styleSet = this.getStyleSet('default.rect');
             
             newRect.serialize(element);
             element.setAttribute('id', id.toString());
@@ -452,10 +452,17 @@ class ShapeStyle extends Style {
 }
 
 class StyleSet {
+    #name = '';
     #repository = new Map();
 
-    get(name) {
-        const result = this.#repository.get(name);
+    constructor(name) {
+        this.#name = name;
+    }
+
+    get name() { return this.#name; }
+
+    get(styleName) {
+        const result = this.#repository.get(styleName);
         if (result)
             return result;
 
@@ -471,18 +478,18 @@ class StyleSet {
         return style.name;
     }
 
-    eject(name) {
-        const style = this.get(name);
-        this.#repository.delete(name);
+    eject(styleName) {
+        const style = this.get(styleName);
+        this.#repository.delete(styleName);
         return style;
     }
 
-    useOn(element, name='all') {
-        if (name === 'all') {
+    useOn(element, styleName='all') {
+        if (styleName === 'all') {
             this.repository.forEach((style) => style.useOn(element));
         }
         else {
-            this.get(name).useOn(element);
+            this.get(styleName).useOn(element);
         }
 
         return element;
