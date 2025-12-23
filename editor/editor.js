@@ -124,7 +124,7 @@ class FigureManager {
         this._repository.forEach(function(element){
             if (element.isTouching(spatia, cursor)) {
                 if (this.includes(element)) {
-                    result.unselected.push(element);
+                    unselected.push(element);
                     this.splice(this.indexOf(element), 1);
                 }
                 else
@@ -134,7 +134,7 @@ class FigureManager {
 
         let result = new Result();
         result.selected = this.selected;
-        result.unselected = this.unselected;
+        result.unselected = unselected;
         
         return result;
     }
@@ -293,11 +293,16 @@ class Editor {
         const doc = this.#document;
         const cursor = new Point(x, y);
 
-        const selectedRects = this.#rectManager.select(this.#spatia, cursor);
-        for (let rect of selectedRects) {
+        const rects = this.#rectManager.select(this.#spatia, cursor);
+        for (let rect of rects.selected) {
             const element = doc.getElementById(rect.id.toString());
             if (element)
                 rect.useStyle('selected', element);
+        }
+        for (let rect of rects.unselected) {
+            const element = doc.getElementById(rect.id.toString());
+            if (element)
+                rect.useStyle('main', element);
         }
     }
 }
