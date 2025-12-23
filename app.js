@@ -54,3 +54,6 @@ const app = new Application();
 const statusBar = new StatusBar(document.getElementById('status-text'));
 
 canvas.addEventListener('click', (event) => app.canvasSelect(event));
+canvas.addEventListener('mousemove', function(event) {
+    statusBar.print(event.movementX + ', ' + event.movementY);
+})
