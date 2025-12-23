@@ -53,3 +53,6 @@ class Application {
 
 const app = new Application();
 const statusBar = new StatusBar(document.getElementById('status-text'));
+
+const canvas = document.getElementById('canvas');
+canvas.addEventListener('click', (event) => app.canvasSelect(event));
