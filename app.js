@@ -22,10 +22,6 @@ function adhocKeyboardEvent(name, event) {
     };
 }
 
-function isEven(x) {
-    return !(x & 1);
-}
-
 class StatusBar {
     #element = undefined;
 
@@ -78,7 +74,8 @@ class Application {
     eventDispatch() {
         const events = this.#eventBuffer;
 
-        if (isEven(events.length)) {
+        console.log(events);
+        if (events.length >= 2) {
             const first = events.length - 2;
             const second = events.length - 1;
 
@@ -87,11 +84,6 @@ class Application {
                 this.#eventBuffer = [];
             }
             if (events[first].name === 'keyDown' && events[second].name === 'keyUp') {
-                switch (events[0].key) {
-                case 'Escape':
-                    break;
-                }
-                
                 this.#eventBuffer = [];
             }
         }
@@ -108,13 +100,21 @@ class Application {
     }
 
     keyDown(event) {
-        this.#eventBuffer.push(adhocKeyboardEvent('keyDown', event));
-        this.eventDispatch();
+        if (event.key === 'Escape')
+            this.#eventBuffer = [];
+        else {
+            this.#eventBuffer.push(adhocKeyboardEvent('keyDown', event));
+            this.eventDispatch();
+        }
     }
 
     keyUp(event) {
-        this.#eventBuffer.push(adhocKeyboardEvent('keyUp', event));
-        this.eventDispatch();
+        if (event.key === 'Escape')
+            this.#eventBuffer = [];
+        else {
+            this.#eventBuffer.push(adhocKeyboardEvent('keyUp', event));
+            this.eventDispatch();
+        }
     }
 }
 
