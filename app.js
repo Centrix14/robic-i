@@ -6,38 +6,6 @@ function canvasCoords(x, y) {
     return _point.matrixTransform(canvas.getScreenCTM().inverse());
 }
 
-function adhocEvent(event) {
-    switch (event.type) {
-    case 'mousedown':
-    case 'mouseup':
-    case 'mousemove':
-        return {
-            source: 'mouse',
-            type: event.type,
-            button: event.button,
-            x: event.x,
-            y: event.y
-        }
-        break;
-
-    case 'keydown':
-    case 'keyup':
-        return {
-            source: 'keyboard',
-            type: event.type,
-            key: event.key
-        }
-        break;
-
-    default:
-        return {
-            source: '',
-            type: ''
-        };
-        break;
-    }
-}
-
 class StatusBar {
     #element = undefined;
 
@@ -58,8 +26,6 @@ class Application {
     #diagram = undefined;
 
     #canvas = undefined;
-
-    #eventBuffer = [];
 
     constructor() {
         this.#roles = new ElementRole();
@@ -85,52 +51,6 @@ class Application {
 
     click(event) {
         this.canvasSelect(event);
-    }
-
-    eventDispatch() {
-        const events = this.#eventBuffer;
-
-        console.log(events);
-        if (events.length >= 2) {
-            const first = events.length - 2;
-            const second = events.length - 1;
-
-            if (events[first].name === 'mousedown' && events[second].name === 'mouseup') {
-                this.canvasClick(events[0]);
-                this.#eventBuffer = [];
-            }
-            if (events[first].name === 'keyDown' && events[second].name === 'keyUp') {
-                this.#eventBuffer = [];
-            }
-        }
-    }
-
-    mouseDown(event) {
-        this.#eventBuffer.push(adhocMouseEvent('mousedown', event));
-        this.eventDispatch();
-    }
-
-    mouseUp(event) {
-        this.#eventBuffer.push(adhocMouseEvent('mouseup', event));
-        this.eventDispatch();
-    }
-
-    keyDown(event) {
-        if (event.key === 'Escape')
-            this.#eventBuffer = [];
-        else {
-            this.#eventBuffer.push(adhocKeyboardEvent('keyDown', event));
-            this.eventDispatch();
-        }
-    }
-
-    keyUp(event) {
-        if (event.key === 'Escape')
-            this.#eventBuffer = [];
-        else {
-            this.#eventBuffer.push(adhocKeyboardEvent('keyUp', event));
-            this.eventDispatch();
-        }
     }
 }
 
@@ -168,11 +88,6 @@ class EventDispatcher {
 const app = new Application();
 const statusBar = new StatusBar(document.getElementById('status-text'));
 const dispatcher = new EventDispatcher(app);
-
-//canvas.addEventListener('click', (event) => app.canvasSelect(event));
-//canvas.addEventListener('click', function(event){
-//    statusBar.print('Click!');
-//});
 
 canvas.addEventListener('mousedown', function(event){
     dispatcher.readMouseEvent(event);
