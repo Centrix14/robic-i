@@ -144,6 +144,10 @@ class FigureManager {
         return result;
     }
 
+    resetSelection() {
+        this._selection = [];
+    }
+
     get styleSets() { return new Map(this._styleSets); }
 
     getStyleSet(name) {
@@ -329,6 +333,19 @@ class Editor {
                     figure.useStyle('selected', element);
                 }
             });
+    }
+
+    resetSelection() {
+        const doc = this.#document;
+        const selected = this.#rectManager.selected;
+
+        selected.forEach((figure) => {
+            const element = doc.getElementById(figure.id.toString());
+            if (element)
+                figure.useStyle('main', element);
+        });
+
+        this.#rectManager.resetSelection();
     }
 }
 
