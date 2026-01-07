@@ -54,7 +54,10 @@ class Application {
     }
 
     grab(startX, startY, endX, endY) {
+        const shiftX = canvasCoords(endX, endY).x - canvasCoords(startX, startY).x;
+        const shiftY = canvasCoords(endX, endY).y - canvasCoords(startX, startY).y;
         
+        this.#editor.grab(shiftX, shiftY);
     }
 }
 
@@ -83,8 +86,10 @@ class EventDispatcher {
             break;
 
         case 'mousemove':
-            if (last.type === 'mousedown')
+            if (last.type === 'mousedown' || last.type === 'mousemove') {
                 this.#app.grab(last.x, last.y, event.x, event.y);
+                this.#eventQueue.push(event);
+            }
             break;
 
         default:
