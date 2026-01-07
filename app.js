@@ -52,6 +52,10 @@ class Application {
     click(event) {
         this.canvasSelect(event);
     }
+
+    grab(startX, startY, endX, endY) {
+        
+    }
 }
 
 class EventDispatcher {
@@ -64,19 +68,23 @@ class EventDispatcher {
 
     readMouseEvent(event) {
         const queue = this.#eventQueue;
-        
+        const last = queue[queue.length - 1] ?? {type: ''};
+            
         switch (event.type) {
         case 'mousedown':
             queue.push(event);
             break;
 
         case 'mouseup':
-            const last = queue[queue.length - 1];
-            
-            if (last && last.type === 'mousedown')
+            if (last.type === 'mousedown')
                 this.#app.click(event);
 
             this.#eventQueue = [];
+            break;
+
+        case 'mousemove':
+            if (last.type === 'mousedown')
+                this.#app.grab(last.x, last.y, event.x, event.y);
             break;
 
         default:
@@ -98,7 +106,7 @@ canvas.addEventListener('mouseup', function(event){
 });
 
 canvas.addEventListener('mousemove', function(event) {
-    //statusBar.print(event.movementX + ', ' + event.movementY);
+    dispatcher.readMouseEvent(event);
 });
 
 const body = document.querySelector('body');
