@@ -6,20 +6,36 @@ function canvasCoords(x, y) {
     return _point.matrixTransform(canvas.getScreenCTM().inverse());
 }
 
-function adhocMouseEvent(name, event) {
-    return {
-        name,
-        button: event.button,
-        x: event.x,
-        y: event.y
-    };
-}
+function adhocEvent(event) {
+    switch (event.type) {
+    case 'mousedown':
+    case 'mouseup':
+    case 'mousemove':
+        return {
+            source: 'mouse',
+            type: event.type,
+            button: event.button,
+            x: event.x,
+            y: event.y
+        }
+        break;
 
-function adhocKeyboardEvent(name, event) {
-    return {
-        name,
-        key: event.key
-    };
+    case 'keydown':
+    case 'keyup':
+        return {
+            source: 'keyboard',
+            type: event.type,
+            key: event.key
+        }
+        break;
+
+    default:
+        return {
+            source: '',
+            type: ''
+        };
+        break;
+    }
 }
 
 class StatusBar {
@@ -67,7 +83,7 @@ class Application {
         this.#editor.select(cursor.x, cursor.y);
     }
 
-    canvasClick(event) {
+    click(event) {
         this.canvasSelect(event);
     }
 
@@ -118,22 +134,52 @@ class Application {
     }
 }
 
+class EventDispatcher {
+    #app = undefined;
+    #eventQueue = [];
+
+    constructor(app) {
+        this.#app = app;
+    }
+
+    readMouseEvent(event) {
+        const queue = this.#eventQueue;
+        
+        switch (event.type) {
+        case 'mousedown':
+            queue.push(event);
+            break;
+
+        case 'mouseup':
+            const last = queue[queue.length - 1];
+            
+            if (last && last.type === 'mousedown')
+                this.#app.click(event);
+
+            this.#eventQueue = [];
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
 const app = new Application();
 const statusBar = new StatusBar(document.getElementById('status-text'));
+const dispatcher = new EventDispatcher(app);
 
 //canvas.addEventListener('click', (event) => app.canvasSelect(event));
 //canvas.addEventListener('click', function(event){
 //    statusBar.print('Click!');
 //});
 
-canvas.addEventListener('pointerdown', function(event){
-    statusBar.print('Down');
-    app.mouseDown(event);
+canvas.addEventListener('mousedown', function(event){
+    dispatcher.readMouseEvent(event);
 });
 
-canvas.addEventListener('pointerup', function(event){
-    statusBar.print('Up');
-    app.mouseUp(event);
+canvas.addEventListener('mouseup', function(event){
+    dispatcher.readMouseEvent(event);
 });
 
 canvas.addEventListener('mousemove', function(event) {
@@ -143,9 +189,7 @@ canvas.addEventListener('mousemove', function(event) {
 const body = document.querySelector('body');
 
 body.addEventListener('keydown', function(event){
-    app.keyDown(event);
 });
 
 body.addEventListener('keyup', function(event){
-    app.keyUp(event);
 });
