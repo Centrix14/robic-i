@@ -78,6 +78,11 @@ class Point {
         else
             return new Result('Point.sub requires Point as argument');
     }
+
+    shift(shiftX, shiftY) {
+        this.#x += shiftX;
+        this.#y += shiftY;
+    }
 }
 
 class Figure {
@@ -211,6 +216,11 @@ class Rect extends Figure {
             (spatia.isLefter(this.#end, cursor)) &&
             (spatia.isHigher(this.#end, cursor));
     }
+
+    shift(shiftX, shiftY) {
+        this.#start.shift(shiftX, shiftY);
+        this.#end.shift(shiftX, shiftY);
+    }
 }
 
 class RectManager extends FigureManager {
@@ -304,6 +314,21 @@ class Editor {
             if (element)
                 rect.useStyle('main', element);
         }
+    }
+
+    grab(shiftX, shiftY) {
+        const doc = this.#document;
+        
+        this.#rectManager.selected.forEach(
+            (figure) => {
+                figure.shift(shiftX, shiftY)
+
+                const element = doc.getElementById(figure.id.toString());
+                if (element) {
+                    figure.serialize(element);
+                    figure.useStyle('selected', element);
+                }
+            });
     }
 }
 
