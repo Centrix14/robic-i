@@ -59,6 +59,11 @@ class Application {
         
         this.#editor.grab(shiftX, shiftY);
     }
+
+    keyboardHit(event) {
+        if (event.key === 'Escape')
+            this.#editor.resetSelection();
+    }
 }
 
 class EventDispatcher {
@@ -96,6 +101,24 @@ class EventDispatcher {
             break;
         }
     }
+
+    readKeyboardEvent(event) {
+        const queue = this.#eventQueue;
+        const last = queue[queue.length - 1] ?? {};
+
+        switch (event.type) {
+        case 'keydown':
+            queue.push(event);
+            break;
+
+        case 'keyup':
+            if (last.type === 'keydown')
+                this.#app.keyboardHit(event);
+
+            this.#eventQueue = [];
+            break;
+        }
+    }
 }
 
 const app = new Application();
@@ -117,7 +140,9 @@ canvas.addEventListener('mousemove', function(event) {
 const body = document.querySelector('body');
 
 body.addEventListener('keydown', function(event){
+    dispatcher.readKeyboardEvent(event);
 });
 
 body.addEventListener('keyup', function(event){
+    dispatcher.readKeyboardEvent(event);
 });
