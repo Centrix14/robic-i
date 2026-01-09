@@ -10,13 +10,6 @@ class StatusBar {
     }
 }
 
-const canvas = document.getElementById('canvas');
-const _point = canvas.createSVGPoint();
-function canvasCoords(x, y) {
-    _point.x = x; _point.y = y;
-    return _point.matrixTransform(canvas.getScreenCTM().inverse());
-}
-
 class Application {
     #editor = undefined;
     #validator = undefined;
@@ -25,17 +18,19 @@ class Application {
     #diagram = undefined;
 
     #canvas = undefined;
+    #palette = undefined;
 
-    constructor() {
+    constructor(canvas, palette) {
         this.#roles = new ElementRole();
         this.#roles.create('none');
         
         this.#diagram = new ComponentManager(this.#roles);
-
         this.#validator = new Validator();
 
-        this.#canvas = document.getElementById('canvas');
-        this.#editor = new Editor(document, this.#canvas);
+        this.#editor = new Editor(document, canvas);
+
+        this.#canvas = canvas;
+        this.#palette = palette;
     }
 
     createProcess() {
@@ -46,12 +41,12 @@ class Application {
     canvasSelect(event) {
         const editor = this.#editor;
         const diagram = this.#diagram;
-        const palette = document.getElementById('palette');
+        const palette = this.#palette;
         
         const cursor = canvasCoords(event.x, event.y);
-        const selected = editor.select(cursor.x, cursor.y).selected;
+        const selection = editor.select(cursor.x, cursor.y);
 
-        for (let figure of selected) {
+        for (let figure of selection.selected) {
             const map = diagram.get(figure.designation).serialize();
 
             let isNew = true;
@@ -66,6 +61,16 @@ class Application {
                 div.setAttribute('designation', map.get('designation'));
 
                 palette.appendChild(div);
+            }
+        }
+
+        for (let figure of selection.unselected) {
+            const map = diagram.get(figure.designation).serialize();
+
+            const childs = Array.from(palette.getElementsByTagName('div'));
+            for (let child of childs) {
+                if (child.getAttribute('designation') == map.get('designation'))
+                    child.remove();
             }
         }
     }
@@ -142,7 +147,16 @@ class EventDispatcher {
     }
 }
 
-const app = new Application();
+const palette = document.getElementById('palette');
+const canvas = document.getElementById('canvas');
+
+const _point = canvas.createSVGPoint();
+function canvasCoords(x, y) {
+    _point.x = x; _point.y = y;
+    return _point.matrixTransform(canvas.getScreenCTM().inverse());
+}
+
+const app = new Application(canvas, palette);
 const statusBar = new StatusBar(document.getElementById('status-text'));
 const dispatcher = new EventDispatcher(app);
 
