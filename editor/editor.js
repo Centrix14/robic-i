@@ -309,15 +309,17 @@ class Editor {
 
         const rects = this.#rectManager.select(this.#spatia, cursor);
         for (let rect of rects.selected) {
-            const element = doc.getElementById(rect.id.toString());
-            if (element)
-                rect.useStyle('selected', element);
+            const element = doc.getElementById(rect.id.toString())
+                  ?? {useStyle: (x, y) => {}};
+            rect.useStyle('selected', element);
         }
         for (let rect of rects.unselected) {
             const element = doc.getElementById(rect.id.toString());
             if (element)
                 rect.useStyle('main', element);
         }
+
+        return rects;
     }
 
     grab(shiftX, shiftY) {
