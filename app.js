@@ -12,6 +12,7 @@ class StatusBar {
 
 class PaletteManager {
     #palette = undefined;
+    #uuid = 0;
 
     constructor(palette) {
         this.#palette = palette ?? {};
@@ -40,6 +41,23 @@ class PaletteManager {
         if (!this.has(componentMap)) {
             const div = document.createElement('div');
             div.setAttribute('designation', componentMap.get('designation'));
+
+            for (let entry of componentMap.entries()) {
+                const input = document.createElement('input');
+                input.setAttribute('id', this.#uuid.toString());
+                input.setAttribute('type', 'text');
+                input.setAttribute('value', entry[1]);
+
+                const label = document.createElement('label');
+                label.setAttribute('for', this.#uuid.toString());
+                label.innerText = entry[0];
+
+                this.#uuid++;
+                
+                div.appendChild(input);
+                div.appendChild(label);
+            }
+            
             this.#palette.appendChild(div);
         }
     }
