@@ -98,6 +98,21 @@ class Component {
 
         return true;
     }
+
+    serialize() {
+        const map = new Map();
+
+        map.set('designation', this._designation);
+        map.set('name', this._name);
+        map.set('description', this.description);
+
+        return map;
+    }
+
+    deserialize(map) {
+        this._name = map.get('name');
+        this.description = map.get('description');
+    }
 }
 
 class Property extends Component {
@@ -155,6 +170,14 @@ class Property extends Component {
     isComplete() {
         return this.#referenceValue === this.#actualValue;
     }
+
+    serialize() {
+        
+    }
+
+    deserialize(map) {
+        
+    }
 }
 
 class Element extends Component {
@@ -185,17 +208,25 @@ class Element extends Component {
     }
 
     deleteContext(designation, role) {
-        // for because Map.delete() uses references, not values
+        // using for because Map.delete() uses references, not values
         for (let entry of this.#context.values()) {
             if (entry[0] === designation && entry[1] === role)
                 this.#context.delete(entry);
         }
     }
+
+    serialize() {
+        
+    }
+
+    deserialize(map) {
+        
+    }
 }
 
 class Process extends Component {
     #iteration = 0;
-    #isHiding = 0;
+    #isHiding = false;
 
     get iteration() {
         return this.#iteration;
@@ -221,6 +252,21 @@ class Process extends Component {
         if (!super.equalTo(target))
             return false;
         return this.iteration === target.iteration;
+    }
+
+    serialize() {
+        const map = super.serialize();
+
+        map.set('iteration', this.#iteration);
+        map.set('isHiding', this.#isHiding);
+
+        return map;
+    }
+
+    deserialize(map) {
+        super.deserialize(map);
+        this.#iteration = map.get('iteration');
+        this.#isHiding = map.get('isHiding');
     }
 }
 
