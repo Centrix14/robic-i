@@ -10,12 +10,53 @@ class StatusBar {
     }
 }
 
+class PaletteManager {
+    #palette = undefined;
+
+    constructor(palette) {
+        this.#palette = palette ?? {};
+    }
+
+    get(componentMap) {
+        const queried = componentMap.get('designation');
+        
+        const childs = Array.from(palette.getElementsByTagName('div'));
+        for (let child of childs) {
+            if (child.getAttribute('designation') === queried)
+                return child;
+        }
+
+        return {
+            tagName: null,
+            remove: () => {}
+        };
+    }
+
+    has(componentMap) {
+        return this.get(componentMap).tagName !== null;
+    }
+
+    addSection(componentMap) {
+        if (!this.has(componentMap)) {
+            const div = document.createElement('div');
+            div.setAttribute('designation', componentMap.get('designation'));
+            this.#palette.appendChild(div);
+        }
+    }
+
+    removeSection(componentMap) {
+        this.get(componentMap).remove();
+    }
+}
+
 class Application {
     #editor = undefined;
     #validator = undefined;
     
     #roles = undefined;
     #diagram = undefined;
+
+    #paletteManager = undefined;
 
     #canvas = undefined;
     #palette = undefined;
@@ -28,6 +69,8 @@ class Application {
         this.#validator = new Validator();
 
         this.#editor = new Editor(document, canvas);
+
+        this.#paletteManager = new PaletteManager(palette);
 
         this.#canvas = canvas;
         this.#palette = palette;
@@ -48,30 +91,12 @@ class Application {
 
         for (let figure of selection.selected) {
             const map = diagram.get(figure.designation).serialize();
-
-            let isNew = true;
-            const childs = Array.from(palette.getElementsByTagName('div'));
-            for (let child of childs) {
-                if (child.getAttribute('designation') == map.get('designation'))
-                    isNew = false;
-            }
-
-            if (isNew) {
-                const div = document.createElement('div');
-                div.setAttribute('designation', map.get('designation'));
-
-                palette.appendChild(div);
-            }
+            this.#paletteManager.addSection(map);
         }
 
         for (let figure of selection.unselected) {
             const map = diagram.get(figure.designation).serialize();
-
-            const childs = Array.from(palette.getElementsByTagName('div'));
-            for (let child of childs) {
-                if (child.getAttribute('designation') == map.get('designation'))
-                    child.remove();
-            }
+            this.#paletteManager.removeSection(map);
         }
     }
 
