@@ -1,11 +1,3 @@
-const canvas = document.getElementById('canvas');
-
-const _point = canvas.createSVGPoint();
-function canvasCoords(x, y) {
-    _point.x = x; _point.y = y;
-    return _point.matrixTransform(canvas.getScreenCTM().inverse());
-}
-
 class StatusBar {
     #element = undefined;
 
@@ -16,6 +8,13 @@ class StatusBar {
     print(message) {
         this.#element.innerText = message;
     }
+}
+
+const canvas = document.getElementById('canvas');
+const _point = canvas.createSVGPoint();
+function canvasCoords(x, y) {
+    _point.x = x; _point.y = y;
+    return _point.matrixTransform(canvas.getScreenCTM().inverse());
 }
 
 class Application {
@@ -45,8 +44,30 @@ class Application {
     }
 
     canvasSelect(event) {
+        const editor = this.#editor;
+        const diagram = this.#diagram;
+        const palette = document.getElementById('palette');
+        
         const cursor = canvasCoords(event.x, event.y);
-        this.#editor.select(cursor.x, cursor.y);
+        const selected = editor.select(cursor.x, cursor.y).selected;
+
+        for (let figure of selected) {
+            const map = diagram.get(figure.designation).serialize();
+
+            let isNew = true;
+            const childs = Array.from(palette.getElementsByTagName('div'));
+            for (let child of childs) {
+                if (child.getAttribute('designation') == map.get('designation'))
+                    isNew = false;
+            }
+
+            if (isNew) {
+                const div = document.createElement('div');
+                div.setAttribute('designation', map.get('designation'));
+
+                palette.appendChild(div);
+            }
+        }
     }
 
     click(event) {
