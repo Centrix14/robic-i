@@ -1,37 +1,56 @@
-main {
-    margin: 0.2%;
+/* Page layout */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 
-nav {
-    margin-bottom: 3px;
+.whole {
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-columns: 1fr 4fr 1.3fr;
+    grid-template-areas:
+        "header header header"
+        "toolbar canvas palette"
+        "tree canvas palette";
+
+    place-content: space-around;
+    gap: 10px;
 }
 
-#work-area {
-    border: 1px solid #dee2e6;
+.header {
+    grid-area: header;
 }
 
-#status-text {
-    font-size: 12px;
-    color: #6c757d;
+.panel {
+    padding: 5px;
 }
 
-.robic-button-group .robic-button {
-    background-color: #f8f9fa;
-    border-right: none;
-    margin: 0.2%;
+.toolbar {
+    grid-area: toolbar;
+
+    display: inline-grid;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 50px));
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 3px;
 }
 
-.robic-button-active,
-.robic-button:active {
-    box-shadow: none;
+.tree {
+    grid-area: tree;
 }
 
-.robic-button-hover,
-.robic-button:hover,
-.robic-button:focus {
-    background-image: none;
-    background-color: #dee2e6;
+.palette {
+    grid-area: palette;
 }
+
+.canvas-container {
+    grid-area: canvas;
+    overflow: auto;
+}
+
+/* Icons */
 
 .icon {
     width: 20px;
@@ -41,4 +60,14 @@ nav {
 .logo-icon {
     width: 30px;
     height: 30px;
+}
+
+/* Buttons */
+
+.panel-button {
+    background-color: #f8f9fa;
+    border: none;
+}
+.panel-button:hover {
+    background-color: #dee2e6;
 }
