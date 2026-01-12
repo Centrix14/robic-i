@@ -8,6 +8,7 @@ body {
 
 .whole {
     display: grid;
+
     grid-template-rows: auto 1fr 1fr;
     grid-template-columns: 0.8fr 4fr 1.3fr;
     grid-template-areas:
@@ -15,7 +16,6 @@ body {
         "toolbar canvas palette"
         "tree canvas palette";
 
-    place-content: space-around;
     gap: 10px;
 }
 
@@ -47,7 +47,12 @@ body {
 
 .canvas-container {
     grid-area: canvas;
+
     overflow: auto;
+}
+
+.canvas-container > svg {
+    border: 1px solid #ced4da;
 }
 
 /* Icons */
