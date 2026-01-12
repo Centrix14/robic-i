@@ -94,7 +94,7 @@ class Application {
         this.#palette = palette;
     }
 
-    createProcess() {
+    newProcess() {
         const designation = this.#diagram.createComponent(Process);
         this.#editor.createRect(designation);
     }
@@ -190,8 +190,8 @@ class EventDispatcher {
     }
 }
 
-const palette = document.getElementById('palette');
-const canvas = document.getElementById('canvas');
+const palette = document.querySelector('.palette');
+const canvas = document.querySelector('.canvas');
 
 const _point = canvas.createSVGPoint();
 function canvasCoords(x, y) {
@@ -200,7 +200,7 @@ function canvasCoords(x, y) {
 }
 
 const app = new Application(canvas, palette);
-const statusBar = new StatusBar(document.getElementById('status-text'));
+//const statusBar = new StatusBar(document.getElementById('status-text'));
 const dispatcher = new EventDispatcher(app);
 
 canvas.addEventListener('mousedown', function(event){
@@ -224,3 +224,6 @@ body.addEventListener('keydown', function(event){
 body.addEventListener('keyup', function(event){
     dispatcher.readKeyboardEvent(event);
 });
+
+const newProcessBtn = document.querySelector('#newProcessBtn');
+newProcessBtn.addEventListener('click', () => app.newProcess());
