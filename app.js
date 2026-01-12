@@ -227,3 +227,6 @@ body.addEventListener('keyup', function(event){
 
 const newProcessBtn = document.querySelector('#newProcessBtn');
 newProcessBtn.addEventListener('click', () => app.newProcess());
+
+const paletteIterationField = document.querySelector('#palette-iteration');
+paletteIterationField.value = 0;
