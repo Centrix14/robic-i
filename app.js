@@ -12,58 +12,31 @@ class StatusBar {
 
 class PaletteManager {
     #palette = undefined;
-    #uuid = 0;
 
-    constructor(palette) {
-        this.#palette = palette ?? {};
-    }
+    constructor(descriptor) {
+        this.#palette = new Map();
 
-    get(componentMap) {
-        const queried = componentMap.get('designation');
+        const palette = this.#palette;
         
-        const childs = Array.from(palette.getElementsByTagName('div'));
-        for (let child of childs) {
-            if (child.getAttribute('designation') === queried)
-                return child;
+        palette.set('designation', descriptor.designation);
+        palette.set('name', descriptor.name);
+        palette.set('description', descriptor.description);
+        palette.set('iteration', descriptor.iteration);
+        palette.set('isHiding', descriptor.isHiding);
+        palette.set('possibleValues', descriptor.possibleValues);
+        palette.set('referenceValue', descriptor.referenceValue);
+        palette.set('actualValue', descriptor.actualValue);
+    }
+
+    select(componentMap) {
+        const palette = this.#palette;
+
+        for (let [fieldName, fieldElement] of palette) {
+            const fieldValue = componentMap.get(fieldName);
+
+            if (fieldValue !== undefined)
+                fieldElement.setAttribute('value', fieldValue);
         }
-
-        return {
-            tagName: null,
-            remove: () => {}
-        };
-    }
-
-    has(componentMap) {
-        return this.get(componentMap).tagName !== null;
-    }
-
-    addSection(componentMap) {
-        if (!this.has(componentMap)) {
-            const div = document.createElement('div');
-            div.setAttribute('designation', componentMap.get('designation'));
-
-            for (let entry of componentMap.entries()) {
-                const input = document.createElement('input');
-                input.setAttribute('id', this.#uuid.toString());
-                input.setAttribute('type', 'text');
-                input.setAttribute('value', entry[1]);
-
-                const label = document.createElement('label');
-                label.setAttribute('for', this.#uuid.toString());
-                label.innerText = entry[0];
-
-                this.#uuid++;
-                
-                div.appendChild(input);
-                div.appendChild(label);
-            }
-            
-            this.#palette.appendChild(div);
-        }
-    }
-
-    removeSection(componentMap) {
-        this.get(componentMap).remove();
     }
 }
 
@@ -88,7 +61,16 @@ class Application {
 
         this.#editor = new Editor(document, canvas);
 
-        this.#paletteManager = new PaletteManager(palette);
+        this.#paletteManager = new PaletteManager({
+            designation: document.querySelector('#palette-designation'),
+            name: document.querySelector('#palette-name'),
+            description: document.querySelector('#palette-description'),
+            iteration: document.querySelector('#palette-iteration'),
+            isHiding: document.querySelector('#palette-isHiding'),
+            possibleValues: document.querySelector('#palette-possibleValues'),
+            referenceValue: document.querySelector('#palette-referenceValue'),
+            actualValue: document.querySelector('#palette-actualValue')
+        });
 
         this.#canvas = canvas;
         this.#palette = palette;
@@ -101,9 +83,19 @@ class Application {
 
     canvasSelect(event) {
         const editor = this.#editor;
+        const diagram = this.#diagram;
+        const paletteManager = this.#paletteManager;
         
         const cursor = canvasCoords(event.x, event.y);
-        const selection = editor.select(cursor.x, cursor.y);
+        const selection = editor.select(cursor.x, cursor.y).selected;
+
+        const selectedFigure = selection[selection.length - 1];
+        if (selectedFigure) {
+            const selectedComponent = diagram.get(selectedFigure.designation);
+            paletteManager.select(selectedComponent.serialize());
+        }
+        else
+            paletteManager.clear();
     }
 
     click(event) {
