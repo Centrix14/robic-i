@@ -9,8 +9,6 @@
 
     <title>Исток | Диаграммы МИСО</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-
     <link rel="stylesheet" href="css/style.css">
     
     <link rel="icon" type="image/x-icon" href="media/logo.png">
@@ -23,45 +21,27 @@
   <body class="whole">
 
     <div class="header">
-      <div class="pure-menu pure-menu-horizontal">
-        <div class="pure-menu-heading pure-menu-link">
-          <img class="logo-icon"
-               src="media/logo.png"
-               alt="Logo">
+      <div class="menu-item menu-banner">
+        <img class="logo-icon"
+             src="media/logo.png"
+             alt="Logo">
+      </div>
+
+      <div class="menu-item menu-dropdown">
+        <button class="menu-dropdown-button">Файл</button>
+        <div class="menu-dropdown-container">
+          <p class="menu-dropdown-item">Новый</p>
+          <p class="menu-dropdown-item">Открыть</p>
+          <p class="menu-dropdown-item">Сохранить</p>
         </div>
+      </div>
 
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            <a class="pure-menu-link">Файл</a>
-            <ul class="pure-menu-children">
-              <li class="pure-menu-item">
-                <a class="pure-menu-link">Новый</a>
-              </li>
-              <li class="pure-menu-item">
-                <a class="pure-menu-link">Открыть</a>
-              </li>
-              <li class="pure-menu-item">
-                <a class="pure-menu-link">Сохранить</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            <a class="pure-menu-link">Помощь</a>
-            <ul class="pure-menu-children">
-              <li class="pure-menu-item">
-                <a class="pure-menu-link">Справка</a>
-              </li>
-              <li class="pure-menu-item">
-                <a class="pure-menu-link">О программе</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="pure-menu-item pure-menu-disabled">
-            <p id="status-text"></p>
-          </li>
-        </ul>
+      <div class="menu-item menu-dropdown">
+        <button class="menu-dropdown-button">Помощь</button>
+        <div class="menu-dropdown-container">
+          <p class="menu-dropdown-item">Справка</p>
+          <p class="menu-dropdown-item">О программе</p>
+        </div>
       </div>
     </div>
 
@@ -129,6 +109,112 @@
     </div>
 
     <div class="panel palette">
+      <p class="palette-h1">
+        Свойства
+      </p>
+
+      <div class="palette-console">
+        <button class="panel-button palette-button"
+                id="palette-applyBtn">
+          Применить
+        </button>
+        <button class="panel-button palette-button"
+                id="palette-resetBtn">
+          Сбросить
+        </button>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Общие
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-designation">
+                Обозначение
+            </label></td>
+            <td><input id="palette-designation" type="text" disabled></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-name">
+                Имя
+            </label></td>
+            <td><input id="palette-name" type="text"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-description">
+                Описание
+            </label></td>
+            <td><input id="palette-description" type="text"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Процесс
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-iteration">
+                Итерация
+            </label></td>
+            <td><input id="palette-iteration" type="number"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-isHiding">
+                Скрывающий
+            </label></td>
+            <td><input id="palette-isHiding" type="checkbox"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Свойство
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-possibleValues">
+                Возможные значения
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-possibleValues">
+                Изменить
+            </button></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-referenceValue">
+                Эталонное значение
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-referenceValue">
+                Отсутствует
+            </button></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-actualValue">
+                Фактическое значение
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-actualValue">
+                Отсутствует
+            </button></td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <script src="editor/editor.js"></script>
