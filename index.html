@@ -20,150 +20,116 @@
     <link rel="icon" type="image/png" sizes="48x48" href="media/favicon/48.png">
   </head>
 
-  <body>
+  <body class="whole">
 
-    <main class="pure-g">
-
-      <!-- Navigation -->
-      <nav class="pure-u-1" id="navigation">
-        <div class="pure-menu pure-menu-horizontal">
-          <div class="pure-menu-heading pure-menu-link">
-            <img class="logo-icon"
-                 src="media/logo.png"
-                 alt="Logo">
-          </div>
-
-          <ul class="pure-menu-list">
-
-            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-              <a class="pure-menu-link">Файл</a>
-              <ul class="pure-menu-children">
-                <li class="pure-menu-item">
-                  <a class="pure-menu-link">Новый</a>
-                </li>
-                <li class="pure-menu-item">
-                  <a class="pure-menu-link">Открыть</a>
-                </li>
-                <li class="pure-menu-item">
-                  <a class="pure-menu-link">Сохранить</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-              <a class="pure-menu-link">Помощь</a>
-              <ul class="pure-menu-children">
-                <li class="pure-menu-item">
-                  <a class="pure-menu-link">Справка</a>
-                </li>
-                <li class="pure-menu-item">
-                  <a class="pure-menu-link">О программе</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="pure-menu-item pure-menu-disabled">
-              <p id="status-text"></p>
-            </li>
-
-          </ul>
-        </div>
-      </nav>
-
-      <!-- Application area -->
-      <div class="pure-u-1" id="application-area">
-
-        <div class="pure-g">
-
-          <!-- Workbench -->
-          <div class="pure-u-1-8" id="workbench">
-            <div class="pure-g" id="control-panel">
-              <div class="pure-u-1">
-                <div class="pure-g">
-
-                  <div class="pure-u-1">
-                    <div class="pure-button-group robic-button-group">
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/composition.png"
-                             alt="Композиция">
-                      </button>
-
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/decomposition.png"
-                             alt="Декомпозиция">
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="pure-u-1">
-                    <div class="robic-button-group pure-button-group">
-                      <button class="robic-button pure-button"
-                              onClick="app.createProcess()">
-                        <img class="icon"
-                             src="media/icons/png/process.png"
-                             alt="Процесс">
-                      </button>
-
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/element.png"
-                             alt="Элемент">
-                      </button>
-
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/property.png"
-                             alt="Свойство">
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="pure-u-1">
-                    <div class="robic-button-group pure-button-group">
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/independance.png"
-                             alt="Независимость">
-                      </button>
-
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/compatibility.png"
-                             alt="Совместность">
-                      </button>
-
-                      <button class="robic-button pure-button">
-                        <img class="icon"
-                             src="media/icons/png/incompatibility.png"
-                             alt="Несовместность">
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="pure-u-1" id="structure-panel">
-                structure
-              </div>
-            </div>
-          </div>
-
-          <div class="pure-u-16-24" id="work-area">
-            <svg id="canvas"
-                 viewBox="0 0 900 650">
-            </svg>
-          </div>
-
-          <div class="pure-u" id="palette">
-          </div>
+    <div class="header">
+      <div class="pure-menu pure-menu-horizontal">
+        <div class="pure-menu-heading pure-menu-link">
+          <img class="logo-icon"
+               src="media/logo.png"
+               alt="Logo">
         </div>
 
+        <ul class="pure-menu-list">
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a class="pure-menu-link">Файл</a>
+            <ul class="pure-menu-children">
+              <li class="pure-menu-item">
+                <a class="pure-menu-link">Новый</a>
+              </li>
+              <li class="pure-menu-item">
+                <a class="pure-menu-link">Открыть</a>
+              </li>
+              <li class="pure-menu-item">
+                <a class="pure-menu-link">Сохранить</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a class="pure-menu-link">Помощь</a>
+            <ul class="pure-menu-children">
+              <li class="pure-menu-item">
+                <a class="pure-menu-link">Справка</a>
+              </li>
+              <li class="pure-menu-item">
+                <a class="pure-menu-link">О программе</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="pure-menu-item pure-menu-disabled">
+            <p id="status-text"></p>
+          </li>
+        </ul>
       </div>
+    </div>
 
-    </main>
+    <div class="panel toolbar">
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/composition.png"
+             alt="Композиция">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/decomposition.png"
+             alt="Декомпозиция">
+      </button>
+
+      <button class="panel-button">
+      </button> 
+
+      <button class="panel-button"
+              id="newProcessBtn">
+        <img class="icon"
+             src="media/icons/png/process.png"
+             alt="Процесс">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/element.png"
+             alt="Элемент">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/property.png"
+             alt="Свойство">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/independance.png"
+             alt="Независимость">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/compatibility.png"
+             alt="Совместность">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/incompatibility.png"
+             alt="Несовместность">
+      </button>
+    </div>
+
+    <div class="panel tree">
+      tree
+    </div>
+
+    <div class="panel canvas-container">
+      <svg class="canvas" viewBox="0 0 1000 1000">
+      </svg>
+    </div>
+
+    <div class="panel palette">
+    </div>
 
     <script src="editor/editor.js"></script>
     <script src="diagram/diagram.js"></script>
