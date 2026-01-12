@@ -101,21 +101,9 @@ class Application {
 
     canvasSelect(event) {
         const editor = this.#editor;
-        const diagram = this.#diagram;
-        const palette = this.#palette;
         
         const cursor = canvasCoords(event.x, event.y);
         const selection = editor.select(cursor.x, cursor.y);
-
-        for (let figure of selection.selected) {
-            const map = diagram.get(figure.designation).serialize();
-            this.#paletteManager.addSection(map);
-        }
-
-        for (let figure of selection.unselected) {
-            const map = diagram.get(figure.designation).serialize();
-            this.#paletteManager.removeSection(map);
-        }
     }
 
     click(event) {
