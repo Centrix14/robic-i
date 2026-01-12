@@ -9,7 +9,7 @@ body {
 .whole {
     display: grid;
     grid-template-rows: auto 1fr 1fr;
-    grid-template-columns: 1fr 4fr 1.3fr;
+    grid-template-columns: 0.8fr 4fr 1.3fr;
     grid-template-areas:
         "header header header"
         "toolbar canvas palette"
