@@ -1,3 +1,8 @@
+/* Fundamental properties */
+html {
+    font-family: sans;
+}
+
 /* Page layout */
 
 body {
@@ -73,6 +78,8 @@ body {
 }
 
 .menu-dropdown-button {
+    font-size: 16px;
+    
     background-color: white;
     
     padding: 7px;
