@@ -21,6 +21,8 @@ body {
 
 .header {
     grid-area: header;
+
+    vertical-align: middle;
 }
 
 .panel {
@@ -55,6 +57,52 @@ body {
     border: 1px solid #ced4da;
 }
 
+/* Menu */
+
+.menu-item {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.menu-banner {
+    padding: 10px;
+}
+
+.menu-dropdown {
+    position: relative;
+}
+
+.menu-dropdown-button {
+    background-color: white;
+    
+    padding: 7px;
+
+    border: none;
+}
+.menu-dropdown-button:after {
+    content: "  \25BE";
+}
+.menu-dropdown:hover .menu-dropdown-button {
+    background-color: #dee2e6;
+}
+
+.menu-dropdown-container {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    left: 0%;
+    top: 100%;
+    min-width: 140px;
+    z-index: 3;
+}
+.menu-dropdown:hover .menu-dropdown-container {
+    display: block;
+}
+
+.menu-dropdown-item {
+    margin: 10px;
+}
+
 /* Icons */
 
 .icon {
@@ -75,4 +123,48 @@ body {
 }
 .panel-button:hover {
     background-color: #dee2e6;
+}
+
+.palette-button {
+    padding: 10px;
+}
+
+.link-button {
+    color: #495057;
+    background-color: white;
+    
+    border: none;
+    
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+.link-button:hover {
+    text-decoration: none;
+}
+
+/* Headers and text */
+
+.palette-h1 {
+    font-size: 20px;
+    font-weight: bold;
+
+    margin: 0 0 10px 0;
+}
+
+.palette-h2 {
+    font-size: 18px;
+    font-weight: normal;
+
+    line-height: 1.2;
+}
+
+.palette-input-label {
+    font-size: 15px;
+}
+
+/* Tables */
+
+.palette-section {
+    border-collapse: separate;
+    border-spacing: 8px 3px;
 }
