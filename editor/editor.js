@@ -249,7 +249,7 @@ class RectManager extends FigureManager {
 }
 
 class Text extends Figure {
-    value = '';
+    value = 'Текст';
     #position = undefined;
 
     constructor(id, position) {
@@ -262,6 +262,13 @@ class Text extends Figure {
     set position(newPosition) {
         this.#position = newPosition;
     }
+
+    serialize(element) {
+        this.#position.serialize(element);
+        element.textContent = this.value;
+
+        this._styleSet.useOn(element, 'main');
+    }
 }
 
 class TextManager extends FigureManager {
@@ -270,7 +277,7 @@ class TextManager extends FigureManager {
         const newText = new Text(id, cursor);
 
         if (newText) {
-            newText = this.getStyleSet('default.text');
+            newText.styleSet = this.getStyleSet('default.text');
 
             newText.serialize(element);
             element.setAttribute('id', id.toString());;
