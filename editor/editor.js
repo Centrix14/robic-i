@@ -546,6 +546,26 @@ class Fill {
     }
 }
 
+class Font {
+    #family = '';
+    #size = '';
+    #style = '';
+
+    constructor(family='sans', size='12px', style='normal') {
+        this.#family = family;
+        this.#size = size;
+        this.#style = style;
+    }
+
+    useOn(element) {
+        element.setAttribute('font-family', this.#family);
+        element.setAttribute('font-size', this.#size);
+        element.setAttribute('font-style', this.#style);
+
+        return element;
+    }
+}
+
 class Style {
     #name = '';
 
@@ -586,6 +606,23 @@ class ShapeStyle extends Style {
     useOn(element) {
         this.#stroke.useOn(element);
         this.#fill.useOn(element);
+        return element;
+    }
+}
+
+class TextStyle extends Style {
+    #fill = undefined;
+    #font = undefined;
+
+    constructor(name, fill, font) {
+        super(name);
+        this.#fill = fill;
+        this.#font = font;
+    }
+
+    useOn(element) {
+        this.#fill.useOn(element);
+        this.#font.useOn(element);
         return element;
     }
 }
