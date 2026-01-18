@@ -12,6 +12,7 @@ class StatusBar {
 
 class PaletteManager {
     #palette = undefined;
+    #selected = undefined;
 
     constructor(descriptor) {
         this.#palette = new Map();
@@ -28,25 +29,48 @@ class PaletteManager {
         palette.set('actualValue', descriptor.actualValue);
     }
 
-    select(componentMap) {
+    select(component) {
         const palette = this.#palette;
+
+        this.#selected = component;
+        const componentMap = component.serialize();
 
         for (let [fieldName, fieldElement] of palette) {
             const fieldValue = componentMap.get(fieldName) ?? '';
 
-            if (fieldValue !== undefined)
-                fieldElement['value'] = fieldValue;
+            if (fieldValue !== undefined) {
+                if (fieldElement.type == 'checkbox')
+                    fieldElement.checked = fieldValue;
+                else
+                    fieldElement.value = fieldValue;
+            }
         }
     }
 
     clear() {
         const palette = this.#palette;
 
-        palette.get('designation')['value'] = '';
-        palette.get('name')['value'] = '';
-        palette.get('description')['value'] = '';
-        palette.get('iteration')['value'] = 0;
-        palette.get('isHiding')['value'] = false;
+        palette.get('designation').value = '';
+        palette.get('name').value = '';
+        palette.get('description').value = '';
+        palette.get('iteration').value = 0;
+        palette.get('isHiding').checked = false;
+    }
+
+    apply() {
+        const palette = this.#palette;
+        const selected = this.#selected;
+        
+        const map = new Map();
+        
+        for (let [fieldName, fieldElement] of palette) {
+            if (fieldElement.type === 'checkbox')
+                map.set(fieldName, fieldElement.checked);
+            else
+                map.set(fieldName, fieldElement.value);
+        }
+
+        selected.deserialize(map);
     }
 }
 
@@ -91,6 +115,10 @@ class Application {
         this.#editor.createRect(designation);
     }
 
+    applyChanges() {
+        this.#paletteManager.apply();
+    }
+
     canvasSelect(event) {
         const editor = this.#editor;
         const diagram = this.#diagram;
@@ -102,7 +130,7 @@ class Application {
         const selectedFigure = selection[selection.length - 1];
         if (selectedFigure) {
             const selectedComponent = diagram.get(selectedFigure.designation);
-            paletteManager.select(selectedComponent.serialize());
+            paletteManager.select(selectedComponent);
         }
         else
             paletteManager.clear();
@@ -217,6 +245,9 @@ body.addEventListener('keyup', function(event){
 
 const newProcessBtn = document.querySelector('#newProcessBtn');
 newProcessBtn.addEventListener('click', () => app.newProcess());
+
+const applyChangesBtn = document.querySelector('#palette-applyBtn');
+applyChangesBtn.addEventListener('click', () => app.applyChanges());
 
 const paletteIterationField = document.querySelector('#palette-iteration');
 paletteIterationField.value = 0;
