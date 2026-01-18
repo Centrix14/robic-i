@@ -348,7 +348,7 @@ class Editor {
                 this.#document = targetDocument;
                 this.#canvas = targetCanvas;
                 
-                this.#spatia = new Spatia();
+                this.#spatia = new Spatia(1, 5);
                 
                 this.#rectManager = new RectManager(gid);
                 this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
@@ -449,10 +449,10 @@ class Editor {
 }
 
 class Spatia {
-    #gridStep = 0;
-    #precision = 0;
+    #gridStep = undefined;
+    #precision = undefined;
 
-    constructor(gridStep, precision) {
+    constructor(gridStep=0, precision=0) {
         this.#gridStep = gridStep;
         this.#precision = precision;
     }
