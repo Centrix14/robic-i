@@ -329,7 +329,7 @@ class Editor {
         const tmsFont = new Font();
         const textMainStyle = new TextStyle('main', tmsFill, tmsFont);
 
-        const tssFill = new Fill('#00b4d8');
+        const tssFill = new Fill('#00b4d8', '100');
         const tssFont = new Font();
         const textSeletedStyle = new ShapeStyle('selected', tssFill, tssFont);
 
@@ -396,7 +396,7 @@ class Editor {
         const cursor = new Point(x, y);
 
         let figures;
-        const managers = [this.#rectManager, this.#textManager];
+        const managers = [this.#rectManager];
         for (let manager of managers) {
             figures = manager.select(this.#spatia, cursor);
             if (figures.selected.length > 0 || figures.unselected.length > 0)
