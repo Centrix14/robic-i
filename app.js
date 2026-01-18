@@ -89,14 +89,14 @@ class Application {
     #canvas = undefined;
     #palette = undefined;
 
-    constructor(canvas, palette) {
+    constructor(canvas, palette, gid) {
         this.#roles = new ElementRole();
         this.#roles.create('none');
         
         this.#diagram = new ComponentManager(this.#roles);
         this.#validator = new Validator();
 
-        this.#editor = new Editor(document, canvas);
+        this.#editor = new Editor(document, canvas, gid);
 
         this.#paletteManager = new PaletteManager({
             designation: document.querySelector('#palette-designation'),
@@ -219,6 +219,14 @@ class EventDispatcher {
     }
 }
 
+const gid = {
+    index: 0,
+
+    next() {
+        return this.index++;
+    }
+};
+
 const palette = document.querySelector('.palette');
 const canvas = document.querySelector('.canvas');
 
@@ -228,7 +236,7 @@ function canvasCoords(x, y) {
     return _point.matrixTransform(canvas.getScreenCTM().inverse());
 }
 
-const app = new Application(canvas, palette);
+const app = new Application(canvas, palette, gid);
 //const statusBar = new StatusBar(document.getElementById('status-text'));
 const dispatcher = new EventDispatcher(app);
 
