@@ -293,7 +293,7 @@ class Editor {
     
     #spatia = null;
 
-    static _defaultStyleSet() {
+    static _defaultRectStyleSet() {
         const rmsStroke = new Stroke('#212529', '2');
         const rmsFill = new Fill('white');
         const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
@@ -309,6 +309,22 @@ class Editor {
         return defaultSet;
     }
 
+    static _defaultTextStyleSet() {
+        const tmsStroke = new Stroke('#000000', '0');
+        const tmsFill = new Fill('black');
+        const textMainStyle = new ShapeStyle('main', tmsStroke, tmsFill);
+
+        const tssStroke = new Stroke('#000000', '0');
+        const tssFill = new Fill('#00b4d8');
+        const textSeletedStyle = new ShapeStyle('selected', tssStroke, tssFill);
+
+        const defaultSet = new StyleSet('default.text');
+        defaultSet.add(textMainStyle);
+        defaultSet.add(textSeletedStyle);
+
+        return defaultSet;
+    }
+
     constructor(targetDocument, targetCanvas) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
@@ -320,10 +336,10 @@ class Editor {
                 this.#spatia = new Spatia();
                 
                 this.#rectManager = new RectManager();
-                this.#rectManager.addStyleSet(Editor._defaultStyleSet());
+                this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
 
                 this.#textManager = new TextManager();
-                this.#textManager.addStyleSet(Editor._defaultStyleSet());
+                this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
             }
         }
     }
