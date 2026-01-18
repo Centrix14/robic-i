@@ -317,7 +317,7 @@ class Editor {
     }
 
     static _defaultTextStyleSet() {
-        const tmsFill = new Fill('black');
+        const tmsFill = new Fill('black', '100');
         const tmsFont = new Font();
         const textMainStyle = new TextStyle('main', tmsFill, tmsFont);
 
