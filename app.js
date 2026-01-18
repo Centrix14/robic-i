@@ -50,7 +50,6 @@ class PaletteManager {
     clear() {
         const palette = this.#palette;
 
-        palette.get('designation').value = '';
         palette.get('name').value = '';
         palette.get('description').value = '';
         palette.get('iteration').value = 0;
@@ -71,6 +70,10 @@ class PaletteManager {
         }
 
         selected.deserialize(map);
+    }
+
+    reset() {
+        this.clear();
     }
 }
 
@@ -117,6 +120,10 @@ class Application {
 
     applyChanges() {
         this.#paletteManager.apply();
+    }
+
+    resetChanges() {
+        this.#paletteManager.reset();
     }
 
     canvasSelect(event) {
@@ -248,6 +255,9 @@ newProcessBtn.addEventListener('click', () => app.newProcess());
 
 const applyChangesBtn = document.querySelector('#palette-applyBtn');
 applyChangesBtn.addEventListener('click', () => app.applyChanges());
+
+const resetChangesBtn = document.querySelector('#palette-resetBtn');
+resetChangesBtn.addEventListener('click', () => app.resetChanges());
 
 const paletteIterationField = document.querySelector('#palette-iteration');
 paletteIterationField.value = 0;
