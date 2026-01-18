@@ -289,6 +289,8 @@ class Editor {
     #canvas = null;
 
     #rectManager = null;
+    #textManager = null;
+    
     #spatia = null;
 
     static _defaultStyleSet() {
@@ -319,6 +321,9 @@ class Editor {
                 
                 this.#rectManager = new RectManager();
                 this.#rectManager.addStyleSet(Editor._defaultStyleSet());
+
+                this.#textManager = new TextManager();
+                this.#textManager.addStyleSet(Editor._defaultStyleSet());
             }
         }
     }
@@ -329,6 +334,22 @@ class Editor {
 
         let defaultCursor = new Point(1,1);
         let result = this.#rectManager.create(defaultCursor, elm, designation);
+        if (result.isSuccess()) {
+            this.#canvas.appendChild(elm);
+
+            return new Result();
+        }
+        else {
+            return result;
+        }
+    }
+
+    createText() {
+        let doc = this.#document;
+        let elm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
+
+        let defaultCursor = new Point(1,1);
+        let result = this.#textManager.create(defaultCursor, elm);
         if (result.isSuccess()) {
             this.#canvas.appendChild(elm);
 
