@@ -118,6 +118,10 @@ class Application {
         this.#editor.createRect(designation);
     }
 
+    newText() {
+        this.#editor.createText();
+    }
+
     applyChanges() {
         this.#paletteManager.apply();
     }
@@ -252,6 +256,9 @@ body.addEventListener('keyup', function(event){
 
 const newProcessBtn = document.querySelector('#newProcessBtn');
 newProcessBtn.addEventListener('click', () => app.newProcess());
+
+const newTextBtn = document.querySelector('#newTextBtn');
+newTextBtn.addEventListener('click', () => app.newText());
 
 const applyChangesBtn = document.querySelector('#palette-applyBtn');
 applyChangesBtn.addEventListener('click', () => app.applyChanges());
