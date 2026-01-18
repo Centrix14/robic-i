@@ -248,6 +248,42 @@ class RectManager extends FigureManager {
     }
 }
 
+class Text extends Figure {
+    value = '';
+    #position = undefined;
+
+    constructor(id, position) {
+        super(id, '');
+        this.#position = position;
+    }
+
+    get position() { return this.#position; }
+    
+    set position(newPosition) {
+        this.#position = newPosition;
+    }
+}
+
+class TextManager extends FigureManager {
+    create(cursor, element) {
+        const id = this._index;
+        const newText = new Text(id, cursor);
+
+        if (newText) {
+            newText = this.getStyleSet('default.text');
+
+            newText.serialize(element);
+            element.setAttribute('id', id.toString());;
+            this._repository.set(id, newText);
+            this._index++;
+
+            return new Result();
+        }
+        else
+            return new Result('TextManager.create failed to create text');
+    }
+}
+
 class Editor {
     #document = null;
     #canvas = null;
