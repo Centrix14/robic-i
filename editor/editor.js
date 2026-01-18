@@ -317,13 +317,13 @@ class Editor {
     }
 
     static _defaultTextStyleSet() {
-        const tmsStroke = new Stroke('#000000', '0');
         const tmsFill = new Fill('black');
-        const textMainStyle = new ShapeStyle('main', tmsStroke, tmsFill);
+        const tmsFont = new Font();
+        const textMainStyle = new TextStyle('main', tmsFill, tmsFont);
 
-        const tssStroke = new Stroke('#000000', '0');
         const tssFill = new Fill('#00b4d8');
-        const textSeletedStyle = new ShapeStyle('selected', tssStroke, tssFill);
+        const tssFont = new Font();
+        const textSeletedStyle = new ShapeStyle('selected', tssFill, tssFont);
 
         const defaultSet = new StyleSet('default.text');
         defaultSet.add(textMainStyle);
