@@ -32,11 +32,21 @@ class PaletteManager {
         const palette = this.#palette;
 
         for (let [fieldName, fieldElement] of palette) {
-            const fieldValue = componentMap.get(fieldName);
+            const fieldValue = componentMap.get(fieldName) ?? '';
 
             if (fieldValue !== undefined)
-                fieldElement.setAttribute('value', fieldValue);
+                fieldElement['value'] = fieldValue;
         }
+    }
+
+    clear() {
+        const palette = this.#palette;
+
+        palette.get('designation')['value'] = '';
+        palette.get('name')['value'] = '';
+        palette.get('description')['value'] = '';
+        palette.get('iteration')['value'] = 0;
+        palette.get('isHiding')['value'] = false;
     }
 }
 
