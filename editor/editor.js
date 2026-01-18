@@ -273,6 +273,10 @@ class Text extends Figure {
 
         this._styleSet.useOn(element, 'main');
     }
+
+    isTouching(spatia, cursor) {
+        return spatia.isReachable(this.#position, cursor);
+    }
 }
 
 class TextManager extends FigureManager {
@@ -391,19 +395,28 @@ class Editor {
         const doc = this.#document;
         const cursor = new Point(x, y);
 
-        const rects = this.#rectManager.select(this.#spatia, cursor);
-        for (let rect of rects.selected) {
-            const element = doc.getElementById(rect.id.toString())
-                  ?? {useStyle: (x, y) => {}};
-            rect.useStyle('selected', element);
-        }
-        for (let rect of rects.unselected) {
-            const element = doc.getElementById(rect.id.toString());
-            if (element)
-                rect.useStyle('main', element);
+        let figures;
+        const managers = [this.#rectManager, this.#textManager];
+        for (let manager of managers) {
+            figures = manager.select(this.#spatia, cursor);
+            if (figures.selected.length > 0 || figures.unselected.length > 0)
+                break;
         }
 
-        return rects;
+        if (figures.selected.length > 0 || figures.unselected.length > 0) {
+            for (let figure of figures.selected) {
+                const element = doc.getElementById(figure.id.toString())
+                      ?? {useStyle: (x, y) => {}};
+                figure.useStyle('selected', element);
+            }
+            for (let figure of figures.unselected) {
+                const element = doc.getElementById(figure.id.toString());
+                if (element)
+                    figure.useStyle('main', element);
+            }
+        }
+
+        return figures;
     }
 
     grab(shiftX, shiftY) {
