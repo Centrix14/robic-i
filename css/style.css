@@ -175,3 +175,7 @@ body {
     border-collapse: separate;
     border-spacing: 8px 3px;
 }
+
+svg > text {
+    user-select: none;
+}
