@@ -110,10 +110,14 @@ class Figure {
 
 class FigureManager {
     _repository = new Map();
-    _index = 0;
+    _gid = undefined;
     _selection = [];
     _styleSets = new Map();
     SVGTag = '';
+
+    constructor(gid) {
+        this._gid = gid;
+    }
 
     get selected() {
         return Array.from(this._selection);
@@ -229,7 +233,7 @@ class Rect extends Figure {
 
 class RectManager extends FigureManager {
     create(cursor, element, designation='') {
-        const id = this._index;
+        const id = this._gid.next();
         let newRect = Rect.createByMeasures(id, designation, cursor, 30, 20);
 
         if (newRect) {
@@ -273,7 +277,7 @@ class Text extends Figure {
 
 class TextManager extends FigureManager {
     create(cursor, element) {
-        const id = this._index;
+        const id = this._gid.next();
         const newText = new Text(id, cursor);
 
         if (newText) {
@@ -332,7 +336,7 @@ class Editor {
         return defaultSet;
     }
 
-    constructor(targetDocument, targetCanvas) {
+    constructor(targetDocument, targetCanvas, gid) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
                 targetCanvas.localName === 'svg') {
@@ -342,10 +346,10 @@ class Editor {
                 
                 this.#spatia = new Spatia();
                 
-                this.#rectManager = new RectManager();
+                this.#rectManager = new RectManager(gid);
                 this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
 
-                this.#textManager = new TextManager();
+                this.#textManager = new TextManager(gid);
                 this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
             }
         }
@@ -371,7 +375,7 @@ class Editor {
         let doc = this.#document;
         let elm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
 
-        let defaultCursor = new Point(10,10);
+        let defaultCursor = new Point(20,20);
         let result = this.#textManager.create(defaultCursor, elm);
         if (result.isSuccess()) {
             this.#canvas.appendChild(elm);
