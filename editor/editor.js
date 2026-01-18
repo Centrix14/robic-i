@@ -371,7 +371,7 @@ class Editor {
         let doc = this.#document;
         let elm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
 
-        let defaultCursor = new Point(1,1);
+        let defaultCursor = new Point(10,10);
         let result = this.#textManager.create(defaultCursor, elm);
         if (result.isSuccess()) {
             this.#canvas.appendChild(elm);
