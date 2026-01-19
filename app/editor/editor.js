@@ -270,6 +270,8 @@ class Text extends Figure {
     serialize(element) {
         this.#position.serialize(element);
         element.textContent = this.value;
+        element.setAttribute('text-anchor', 'middle');
+        element.setAttribute('dominant-baseline', 'middle');
 
         this._styleSet.useOn(element, 'main');
     }
@@ -356,10 +358,12 @@ class ProcessGroupManager extends FigureManager {
         const shapeId = this._gid.next();
         const captionId = this._gid.next();
 
+        const width = 80; const height = 50;
         const newRect = Rect.createByMeasures(shapeId, '',
                                               new Point(cursor.X, cursor.Y),
-                                              80, 50);
-        const newText = new Text(captionId, new Point(cursor.X, cursor.Y));
+                                              width, height);
+        const newText = new Text(captionId, new Point(cursor.X + width/2,
+                                                      cursor.Y + height/2));
 
         if (newRect && newText) {
             const groupId = this._gid.next();
