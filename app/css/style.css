@@ -176,6 +176,6 @@ body {
     border-spacing: 8px 3px;
 }
 
-svg > text {
+svg > g > text {
     user-select: none;
 }
