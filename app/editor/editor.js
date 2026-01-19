@@ -371,7 +371,7 @@ class Editor {
     
     #spatia = null;
 
-    static _defaultRectStyleSet() {
+    static _defaultProcessShapeStyleSet() {
         const rmsStroke = new Stroke('#212529', '2');
         const rmsFill = new Fill('white');
         const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
@@ -380,41 +380,21 @@ class Editor {
         const rssFill = new Fill('white');
         const rectSeletedStyle = new ShapeStyle('selected', rssStroke, rssFill);
 
-        const defaultSet = new StyleSet('default.rect');
+        const defaultSet = new StyleSet('default.process.shape');
         defaultSet.add(rectMainStyle);
         defaultSet.add(rectSeletedStyle);
 
         return defaultSet;
     }
 
-    static _defaultTextStyleSet() {
+    static _defaultProcessCaptionStyleSet() {
         const tmsFill = new Fill('black', '100');
         const tmsFont = new Font();
         const textMainStyle = new TextStyle('main', tmsFill, tmsFont);
 
-        const tssFill = new Fill('#00b4d8', '100');
-        const tssFont = new Font();
-        const textSeletedStyle = new ShapeStyle('selected', tssFill, tssFont);
-
-        const defaultSet = new StyleSet('default.text');
+        const defaultSet = new StyleSet('default.process.caption');
         defaultSet.add(textMainStyle);
         defaultSet.add(textSeletedStyle);
-
-        return defaultSet;
-    }
-
-    static _defaultProcessStyleSet() {
-        const rmsStroke = new Stroke('#212529', '2');
-        const rmsFill = new Fill('white');
-        const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
-
-        const rssStroke = new Stroke('#00b4d8', '3');
-        const rssFill = new Fill('white');
-        const rectSeletedStyle = new ShapeStyle('selected', rssStroke, rssFill);
-
-        const defaultSet = new StyleSet('default.process');
-        defaultSet.add(rectMainStyle);
-        defaultSet.add(rectSeletedStyle);
 
         return defaultSet;
     }
@@ -430,14 +410,15 @@ class Editor {
                 this.#spatia = new Spatia(1, 5);
                 
                 this.#rectManager = new RectManager(gid);
-                this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
+//                this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
 
                 this.#textManager = new TextManager(gid);
-                this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
+//                this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
 
                 this.#processManager = new ProcessGroupManager(gid);
                 this.#processManager.addStyleSet(
-                    Editor._defaultProcessStyleSet()
+                    Editor._defaultProcessShapeStyleSet(),
+                    Editor._defaultProcessCaptionStyleSet()
                 );
             }
         }
