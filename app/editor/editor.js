@@ -329,6 +329,35 @@ class ProcessGroup extends Figure {
     }
 }
 
+class ProcessGroupManager extends FigureManager {
+    create(cursor, groupElement, shapeElement, captionElement, designation) {
+        const shapeId = this._gid.next();
+        const captionId = this._gid.next();
+
+        const newRect = Rect.createByMeasures(shapeId, '', cursor, 50, 40);
+        const newText = new Text(captionId, cursor);
+
+        if (newRect && newText) {
+            const groupId = this._gid.next();
+            const newProcess = new ProcessGroup(groupId, designation, newRect,
+                                                newText);
+
+            if (newProcess) {
+                newProcess.serialize(shapeElement, captionElement);
+                groupElement.setAttribute('id', groupId.toString());
+                shapeElement.setAttribute('id', shapeId.toString());
+                captionElement.setAttribute('id', captionId.toString());
+
+                this._repository.set(id, newProcess);
+
+                return new Result();
+            }
+        }
+        else
+            return new Result('ProcessGroupManager.create failed to create process group');
+    }
+}
+
 class Editor {
     #document = null;
     #canvas = null;
