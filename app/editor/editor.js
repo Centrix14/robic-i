@@ -378,11 +378,11 @@ class Editor {
 
         const rssStroke = new Stroke('#00b4d8', '3');
         const rssFill = new Fill('white');
-        const rectSeletedStyle = new ShapeStyle('selected', rssStroke, rssFill);
+        const rectSelectedStyle = new ShapeStyle('selected', rssStroke, rssFill);
 
         const defaultSet = new StyleSet('default.process.shape');
         defaultSet.add(rectMainStyle);
-        defaultSet.add(rectSeletedStyle);
+        defaultSet.add(rectSelectedStyle);
 
         return defaultSet;
     }
@@ -394,7 +394,6 @@ class Editor {
 
         const defaultSet = new StyleSet('default.process.caption');
         defaultSet.add(textMainStyle);
-        defaultSet.add(textSeletedStyle);
 
         return defaultSet;
     }
