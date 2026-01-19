@@ -400,6 +400,22 @@ class Editor {
         return defaultSet;
     }
 
+    static _defaultProcessStyleSet() {
+        const rmsStroke = new Stroke('#212529', '2');
+        const rmsFill = new Fill('white');
+        const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
+
+        const rssStroke = new Stroke('#00b4d8', '3');
+        const rssFill = new Fill('white');
+        const rectSeletedStyle = new ShapeStyle('selected', rssStroke, rssFill);
+
+        const defaultSet = new StyleSet('default.process');
+        defaultSet.add(rectMainStyle);
+        defaultSet.add(rectSeletedStyle);
+
+        return defaultSet;
+    }
+
     constructor(targetDocument, targetCanvas, gid) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
@@ -417,6 +433,9 @@ class Editor {
                 this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
 
                 this.#processManager = new ProcessGroupManager(gid);
+                this.#processManager.addStyleSet(
+                    Editor._defaultProcessStyleSet()
+                );
             }
         }
     }
