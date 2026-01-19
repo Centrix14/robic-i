@@ -561,7 +561,7 @@ class Editor {
 
     resetSelection() {
         const doc = this.#document;
-        const selected = this.#rectManager.selected;
+        const selected = this.#processManager.selected;
 
         selected.forEach((figure) => {
             const element = doc.getElementById(figure.id.toString());
@@ -569,7 +569,7 @@ class Editor {
                 figure.useStyle('main', element);
         });
 
-        this.#rectManager.resetSelection();
+        this.#processManager.resetSelection();
     }
 }
 
