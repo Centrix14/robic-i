@@ -323,9 +323,31 @@ class ProcessGroup extends Figure {
         this.#caption.shift(shiftX, shiftY);
     }
 
+    getShapeElement(groupElement) {
+        for (let child of groupElement.children) {
+            if (child.className.baseVal === 'shape')
+                return child;
+        }
+        return null;
+    }
+
+    getCaptionElement(groupElement) {
+        for (let child of groupElement.children) {
+            if (child.localName === 'text')
+                return child;
+        }
+        return null;
+    }
+    
     serialize(shapeElement, captionElement) {
         this.#shape.serialize(shapeElement);
+        shapeElement.setAttribute('class', 'shape');
+
         this.#caption.serialize(captionElement);
+    }
+
+    useStyle(name, groupElement) {
+        this.#shape.useStyle(name, this.getShapeElement(groupElement));
     }
 }
 
@@ -334,8 +356,10 @@ class ProcessGroupManager extends FigureManager {
         const shapeId = this._gid.next();
         const captionId = this._gid.next();
 
-        const newRect = Rect.createByMeasures(shapeId, '', cursor, 50, 40);
-        const newText = new Text(captionId, cursor);
+        const newRect = Rect.createByMeasures(shapeId, '',
+                                              new Point(cursor.X, cursor.Y),
+                                              80, 50);
+        const newText = new Text(captionId, new Point(cursor.X, cursor.Y));
 
         if (newRect && newText) {
             const groupId = this._gid.next();
@@ -485,7 +509,7 @@ class Editor {
         const cursor = new Point(x, y);
 
         let figures;
-        const managers = [this.#rectManager];
+        const managers = [this.#processManager];
         for (let manager of managers) {
             figures = manager.select(this.#spatia, cursor);
             if (figures.selected.length > 0 || figures.unselected.length > 0)
@@ -510,17 +534,21 @@ class Editor {
 
     grab(shiftX, shiftY) {
         const doc = this.#document;
-        
-        this.#rectManager.selected.forEach(
+
+        this.#processManager.selected.forEach(
             (figure) => {
                 figure.shift(shiftX, shiftY)
 
-                const element = doc.getElementById(figure.id.toString());
-                if (element) {
-                    figure.serialize(element);
-                    figure.useStyle('selected', element);
+                const groupElement = doc.getElementById(figure.id.toString());
+                if (groupElement) {
+                    const shapeElement = figure.getShapeElement(groupElement);
+                    const captionElement = figure.getCaptionElement(groupElement);
+
+                    figure.serialize(shapeElement, captionElement);
+                    figure.useStyle('selected', groupElement);
                 }
-            });
+            }
+        );
     }
 
     resetSelection() {
