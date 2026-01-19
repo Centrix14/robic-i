@@ -115,7 +115,7 @@ class Application {
 
     newProcess() {
         const designation = this.#diagram.createComponent(Process);
-        this.#editor.createRect(designation);
+        this.#editor.createProcess(designation);
     }
 
     newText() {
