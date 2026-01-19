@@ -277,6 +277,10 @@ class Text extends Figure {
     isTouching(spatia, cursor) {
         return spatia.isReachable(this.#position, cursor);
     }
+
+    shift(shiftX, shiftY) {
+        this.#position.shift(shiftX, shiftY);
+    }
 }
 
 class TextManager extends FigureManager {
