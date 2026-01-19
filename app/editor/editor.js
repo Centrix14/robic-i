@@ -348,6 +348,10 @@ class ProcessGroup extends Figure {
         this.#caption.serialize(captionElement);
     }
 
+    deserialize(map) {
+        this.#caption.value = map.get('name') ?? 'Текст';
+    }
+
     useStyle(name, groupElement) {
         this.#shape.useStyle(name, this.getShapeElement(groupElement));
     }
