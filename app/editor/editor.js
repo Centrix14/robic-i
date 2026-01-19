@@ -372,28 +372,28 @@ class Editor {
     #spatia = null;
 
     static _defaultProcessShapeStyleSet() {
-        const rmsStroke = new Stroke('#212529', '2');
-        const rmsFill = new Fill('white');
-        const rectMainStyle = new ShapeStyle('main', rmsStroke, rmsFill);
+        const smsStroke = new Stroke('#212529', '2');
+        const smsFill = new Fill('white');
+        const shapeMainStyle = new ShapeStyle('main', smsStroke, smsFill);
 
-        const rssStroke = new Stroke('#00b4d8', '3');
-        const rssFill = new Fill('white');
-        const rectSelectedStyle = new ShapeStyle('selected', rssStroke, rssFill);
+        const sssStroke = new Stroke('#00b4d8', '3');
+        const sssFill = new Fill('white');
+        const shapeSelectedStyle = new ShapeStyle('selected', sssStroke, sssFill);
 
         const defaultSet = new StyleSet('default.process.shape');
-        defaultSet.add(rectMainStyle);
-        defaultSet.add(rectSelectedStyle);
+        defaultSet.add(shapeMainStyle);
+        defaultSet.add(shapeSelectedStyle);
 
         return defaultSet;
     }
 
     static _defaultProcessCaptionStyleSet() {
-        const tmsFill = new Fill('black', '100');
-        const tmsFont = new Font();
-        const textMainStyle = new TextStyle('main', tmsFill, tmsFont);
+        const cmsFill = new Fill('black', '100');
+        const cmsFont = new Font();
+        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont);
 
         const defaultSet = new StyleSet('default.process.caption');
-        defaultSet.add(textMainStyle);
+        defaultSet.add(captionMainStyle);
 
         return defaultSet;
     }
