@@ -299,6 +299,32 @@ class TextManager extends FigureManager {
     }
 }
 
+class ProcessGroup extends Figure {
+    #shape = undefined;
+    #caption = undefined;
+
+    constructor(id, designation, shape, caption) {
+        super(id, designation);
+        this.#shape = shape;
+        this.#caption = caption;
+    }
+
+    isTouching(spatia, cursor) {
+        return this.#shape.isTouching(spatia, cursor)
+            || this.#caption.isTouching(spatia, cursor);
+    }
+
+    shift(shiftX, shiftY) {
+        this.#shape.shift(shiftX, shiftY);
+        this.#caption.shift(shiftX, shiftY);
+    }
+
+    serialize(shapeElement, captionElement) {
+        this.#shape.serialize(shapeElement);
+        this.#caption.serialize(captionElement);
+    }
+}
+
 class Editor {
     #document = null;
     #canvas = null;
