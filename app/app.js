@@ -12,7 +12,8 @@ class StatusBar {
 
 class PaletteManager {
     #palette = undefined;
-    #selected = undefined;
+    #selectedComponent = undefined;
+    #selectedFigure = undefined;
 
     constructor(descriptor) {
         this.#palette = new Map();
@@ -29,10 +30,11 @@ class PaletteManager {
         palette.set('actualValue', descriptor.actualValue);
     }
 
-    select(component) {
+    select(component, figure) {
         const palette = this.#palette;
 
-        this.#selected = component;
+        this.#selectedFigure = figure;
+        this.#selectedComponent = component;
         const componentMap = component.serialize();
 
         for (let [fieldName, fieldElement] of palette) {
@@ -58,7 +60,8 @@ class PaletteManager {
 
     apply() {
         const palette = this.#palette;
-        const selected = this.#selected;
+        const selectedComponent = this.#selectedComponent;
+        const selectedFigure = this.#selectedFigure;
         
         const map = new Map();
         
@@ -69,7 +72,10 @@ class PaletteManager {
                 map.set(fieldName, fieldElement.value);
         }
 
-        selected.deserialize(map);
+        selectedComponent.deserialize(map);
+        selectedFigure.deserialize(map);
+
+        return selectedFigure;
     }
 
     reset() {
@@ -123,7 +129,13 @@ class Application {
     }
 
     applyChanges() {
-        this.#paletteManager.apply();
+        const figure = this.#paletteManager.apply();
+        const groupElement = document.getElementById(figure.id);
+        const shapeElement = figure.getShapeElement(groupElement);
+        const captionElement = figure.getCaptionElement(groupElement);
+        
+        figure.serialize(shapeElement, captionElement);
+        figure.useStyle('selected', groupElement);
     }
 
     resetChanges() {
@@ -141,7 +153,7 @@ class Application {
         const selectedFigure = selection[selection.length - 1];
         if (selectedFigure) {
             const selectedComponent = diagram.get(selectedFigure.designation);
-            paletteManager.select(selectedComponent);
+            paletteManager.select(selectedComponent, selectedFigure);
         }
         else
             paletteManager.clear();
