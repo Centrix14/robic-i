@@ -209,7 +209,7 @@ class Rect extends Figure {
             element.setAttribute('width', measuresPoint.X.toString());
             element.setAttribute('height', measuresPoint.Y.toString());
 
-            this._styleSet.useOn(element, 'main');
+//            this._styleSet.useOn(element, 'main');
             
             return new Result();
         }
@@ -271,7 +271,7 @@ class Text extends Figure {
         this.#position.serialize(element);
         element.textContent = this.value;
 
-        this._styleSet.useOn(element, 'main');
+//        this._styleSet.useOn(element, 'main');
     }
 
     isTouching(spatia, cursor) {
@@ -348,7 +348,7 @@ class ProcessGroupManager extends FigureManager {
                 shapeElement.setAttribute('id', shapeId.toString());
                 captionElement.setAttribute('id', captionId.toString());
 
-                this._repository.set(id, newProcess);
+                this._repository.set(groupId, newProcess);
 
                 return new Result();
             }
