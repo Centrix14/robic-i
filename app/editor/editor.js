@@ -416,7 +416,9 @@ class Editor {
 
                 this.#processManager = new ProcessGroupManager(gid);
                 this.#processManager.addStyleSet(
-                    Editor._defaultProcessShapeStyleSet(),
+                    Editor._defaultProcessShapeStyleSet()
+                );
+                this.#processManager.addStyleSet(
                     Editor._defaultProcessCaptionStyleSet()
                 );
             }
