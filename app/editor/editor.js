@@ -364,6 +364,7 @@ class Editor {
 
     #rectManager = null;
     #textManager = null;
+    #processManager = null;
     
     #spatia = null;
 
@@ -414,6 +415,8 @@ class Editor {
 
                 this.#textManager = new TextManager(gid);
                 this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
+
+                this.#processManager = new ProcessGroupManager(gid);
             }
         }
     }
@@ -442,6 +445,29 @@ class Editor {
         let result = this.#textManager.create(defaultCursor, elm);
         if (result.isSuccess()) {
             this.#canvas.appendChild(elm);
+
+            return new Result();
+        }
+        else {
+            return result;
+        }
+    }
+
+    createProcess(designation) {
+        const doc = this.#document;
+        
+        const groupElm = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
+        const shapeElm = doc.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const captionElm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
+
+        const defaultCursor = new Point(20,20);
+        const result = this.#processManager.create(defaultCursor, groupElm,
+                                                   shapeElm, captionElm,
+                                                   designation);
+        if (result.isSuccess()) {
+            groupElm.appendChild(shapeElm);
+            groupElm.appendChild(captionElm);
+            this.#canvas.appendChild(groupElm);
 
             return new Result();
         }
