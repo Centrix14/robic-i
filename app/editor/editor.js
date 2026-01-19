@@ -343,6 +343,9 @@ class ProcessGroupManager extends FigureManager {
                                                 newText);
 
             if (newProcess) {
+                newRect.styleSet = this.getStyleSet('default.process.shape');
+                newText.styleSet = this.getStyleSet('default.process.caption');
+                
                 newProcess.serialize(shapeElement, captionElement);
                 groupElement.setAttribute('id', groupId.toString());
                 shapeElement.setAttribute('id', shapeId.toString());
