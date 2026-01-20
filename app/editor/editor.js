@@ -400,7 +400,7 @@ class ProcessGroupManager extends FigureManager {
                 captionFigure.styleSet =
                     this.getStyleSet('default.process.caption');
                 designationFigure.styleSet =
-                    this.getStyleSet('default.process.caption');
+                    this.getStyleSet('default.process.designation');
                 
                 processFigure.serialize(shapeElement, captionElement,
                                         designationElement);
@@ -456,6 +456,17 @@ class Editor {
         return defaultSet;
     }
 
+    static _defaultProcessDesignationStyleSet() {
+        const cmsFill = new Fill('black', '100');
+        const cmsFont = new Font('sans', '10', 'normal');
+        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont);
+
+        const defaultSet = new StyleSet('default.process.designation');
+        defaultSet.add(captionMainStyle);
+
+        return defaultSet;
+    }
+
     constructor(targetDocument, targetCanvas, gid) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
@@ -478,6 +489,9 @@ class Editor {
                 );
                 this.#processManager.addStyleSet(
                     Editor._defaultProcessCaptionStyleSet()
+                );
+                this.#processManager.addStyleSet(
+                    Editor._defaultProcessDesignationStyleSet()
                 );
             }
         }
