@@ -130,11 +130,13 @@ class Application {
 
     applyChanges() {
         const figure = this.#paletteManager.apply();
+        
         const groupElement = document.getElementById(figure.id);
         const shapeElement = figure.getShapeElement(groupElement);
         const captionElement = figure.getCaptionElement(groupElement);
+        const designationElement = figure.getDesignationElement(groupElement);
         
-        figure.serialize(shapeElement, captionElement);
+        figure.serialize(shapeElement, captionElement, designationElement);
         figure.useStyle('selected', groupElement);
     }
 
