@@ -308,11 +308,13 @@ class TextManager extends FigureManager {
 class ProcessGroup extends Figure {
     #shape = undefined;
     #caption = undefined;
+    #designationFigure = undefined;
 
-    constructor(id, designation, shape, caption) {
+    constructor(id, designation, shape, caption, designationFigure) {
         super(id, designation);
         this.#shape = shape;
         this.#caption = caption;
+        this.#designationFigure = designationFigure;
     }
 
     isTouching(spatia, cursor) {
@@ -362,29 +364,38 @@ class ProcessGroupManager extends FigureManager {
     create(cursor, groupElement, shapeElement, captionElement, designation) {
         const shapeId = this._gid.next();
         const captionId = this._gid.next();
+        const designationId = this._gid.next();
 
         const width = 80; const height = 50;
-        const newRect = Rect.createByMeasures(shapeId, '',
-                                              new Point(cursor.X, cursor.Y),
-                                              width, height);
-        const newText = new Text(captionId, new Point(cursor.X + width/2,
-                                                      cursor.Y + height/2));
+        const shapeFigure = Rect.createByMeasures(shapeId, '',
+                                                  new Point(cursor.X, cursor.Y),
+                                                  width, height);
+        const captionFigure = new Text(captionId,
+                                       new Point(cursor.X + width/2,
+                                                 cursor.Y + height/2));
+        const designationFigure = new Text(designationId,
+                                           new Point(cursor.X + width,
+                                                     cursor.Y + height));
 
-        if (newRect && newText) {
+        if (shapeFigure && captionFigure && designationFigure) {
             const groupId = this._gid.next();
-            const newProcess = new ProcessGroup(groupId, designation, newRect,
-                                                newText);
+            const processFigure = new ProcessGroup(groupId, designation,
+                                                   shapeFigure, captionFigure,
+                                                   designationFigure);
 
-            if (newProcess) {
-                newRect.styleSet = this.getStyleSet('default.process.shape');
-                newText.styleSet = this.getStyleSet('default.process.caption');
+            if (processFigure) {
+                shapeFigure.styleSet = this.getStyleSet('default.process.shape');
+                captionFigure.styleSet =
+                    this.getStyleSet('default.process.caption');
+                designationFigure.styleSet =
+                    this.getStyleSet('default.process.designation');
                 
-                newProcess.serialize(shapeElement, captionElement);
+                processFigure.serialize(shapeElement, captionElement);
                 groupElement.setAttribute('id', groupId.toString());
                 shapeElement.setAttribute('id', shapeId.toString());
                 captionElement.setAttribute('id', captionId.toString());
 
-                this._repository.set(groupId, newProcess);
+                this._repository.set(groupId, processFigure);
 
                 return new Result();
             }
