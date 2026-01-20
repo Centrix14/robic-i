@@ -304,25 +304,25 @@ class TextManager extends FigureManager {
 }
 
 class ProcessGroup extends Figure {
-    #shape = undefined;
-    #caption = undefined;
+    #shapeFigure = undefined;
+    #captionFigure = undefined;
     #designationFigure = undefined;
 
     constructor(id, designation, shape, caption, designationFigure) {
         super(id, designation);
-        this.#shape = shape;
-        this.#caption = caption;
+        this.#shapeFigure = shape;
+        this.#captionFigure = caption;
         this.#designationFigure = designationFigure;
     }
 
     isTouching(spatia, cursor) {
-        return this.#shape.isTouching(spatia, cursor)
-            || this.#caption.isTouching(spatia, cursor);
+        return this.#shapeFigure.isTouching(spatia, cursor)
+            || this.#captionFigure.isTouching(spatia, cursor);
     }
 
     shift(shiftX, shiftY) {
-        this.#shape.shift(shiftX, shiftY);
-        this.#caption.shift(shiftX, shiftY);
+        this.#shapeFigure.shift(shiftX, shiftY);
+        this.#captionFigure.shift(shiftX, shiftY);
         this.#designationFigure.shift(shiftX, shiftY);
     }
 
@@ -350,10 +350,10 @@ class ProcessGroup extends Figure {
     }
     
     serialize(shapeElement, captionElement, designationElement) {
-        this.#shape.serialize(shapeElement);
+        this.#shapeFigure.serialize(shapeElement);
         shapeElement.setAttribute('class', 'shape');
 
-        this.#caption.serialize(captionElement);
+        this.#captionFigure.serialize(captionElement);
         captionElement.setAttribute('class', 'caption');
 
         this.#designationFigure.serialize(designationElement);
@@ -361,11 +361,11 @@ class ProcessGroup extends Figure {
     }
 
     deserialize(map) {
-        this.#caption.value = map.get('name') ?? 'Текст';
+        this.#captionFigure.value = map.get('name') ?? 'Текст';
     }
 
     useStyle(name, groupElement) {
-        this.#shape.useStyle(name, this.getShapeElement(groupElement));
+        this.#shapeFigure.useStyle(name, this.getShapeElement(groupElement));
     }
 }
 
