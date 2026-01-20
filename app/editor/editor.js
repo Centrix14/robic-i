@@ -346,6 +346,7 @@ class ProcessGroup extends Figure {
         shapeElement.setAttribute('class', 'shape');
 
         this.#caption.serialize(captionElement);
+        captionElement.setAttribute('class', 'caption');
     }
 
     deserialize(map) {
