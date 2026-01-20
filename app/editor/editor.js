@@ -327,28 +327,27 @@ class ProcessGroup extends Figure {
         this.#caption.shift(shiftX, shiftY);
     }
 
-    getShapeElement(groupElement) {
+    _getChildElement(groupElement, condition) {
         for (let child of groupElement.children) {
-            if (child.className.baseVal === 'shape')
+            if (condition(child))
                 return child;
         }
         return null;
+    }
+
+    getShapeElement(groupElement) {
+        return this._getChildElement(groupElement, (elm) =>
+            (elm.className.baseVal === 'shape'));
     }
 
     getCaptionElement(groupElement) {
-        for (let child of groupElement.children) {
-            if (child.className.baseVal === 'caption')
-                return child;
-        }
-        return null;
+        return this._getChildElement(groupElement, (elm) =>
+            (elm.className.baseVal === 'caption'));
     }
 
     getDesignationElement(groupElement) {
-        for (let child of groupElement.children) {
-            if (child.className.baseVal === 'designation')
-                return child;
-        }
-        return null;
+        return this._getChildElement(groupElement, (elm) =>
+            (elm.className.baseVal === 'designation'));
     }
     
     serialize(shapeElement, captionElement) {
