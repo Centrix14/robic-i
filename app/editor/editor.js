@@ -270,8 +270,6 @@ class Text extends Figure {
     serialize(element) {
         this.#position.serialize(element);
         element.textContent = this.value;
-        element.setAttribute('text-anchor', 'middle');
-        element.setAttribute('dominant-baseline', 'middle');
 
         this._styleSet.useOn(element, 'main');
     }
@@ -448,7 +446,9 @@ class Editor {
     static _defaultProcessCaptionStyleSet() {
         const cmsFill = new Fill('black', '100');
         const cmsFont = new Font();
-        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont);
+        const cmsAlign = new TextAlign();
+        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont,
+                                               cmsAlign);
 
         const defaultSet = new StyleSet('default.process.caption');
         defaultSet.add(captionMainStyle);
@@ -459,7 +459,9 @@ class Editor {
     static _defaultProcessDesignationStyleSet() {
         const cmsFill = new Fill('black', '100');
         const cmsFont = new Font('sans', '10', 'normal');
-        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont);
+        const dmsAlign = new TextAlign('end', 'auto');
+        const captionMainStyle = new TextStyle('main', cmsFill, cmsFont,
+                                               dmsAlign);
 
         const defaultSet = new StyleSet('default.process.designation');
         defaultSet.add(captionMainStyle);
