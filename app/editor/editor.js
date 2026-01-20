@@ -325,6 +325,7 @@ class ProcessGroup extends Figure {
     shift(shiftX, shiftY) {
         this.#shape.shift(shiftX, shiftY);
         this.#caption.shift(shiftX, shiftY);
+        this.#designationFigure.shift(shiftX, shiftY);
     }
 
     _getChildElement(groupElement, condition) {
@@ -350,12 +351,15 @@ class ProcessGroup extends Figure {
             (elm.className.baseVal === 'designation'));
     }
     
-    serialize(shapeElement, captionElement) {
+    serialize(shapeElement, captionElement, designationElement) {
         this.#shape.serialize(shapeElement);
         shapeElement.setAttribute('class', 'shape');
 
         this.#caption.serialize(captionElement);
         captionElement.setAttribute('class', 'caption');
+
+        this.#designationFigure.serialize(designationElement);
+        designationElement.setAttribute('class', 'designation');
     }
 
     deserialize(map) {
@@ -368,7 +372,8 @@ class ProcessGroup extends Figure {
 }
 
 class ProcessGroupManager extends FigureManager {
-    create(cursor, groupElement, shapeElement, captionElement, designation) {
+    create(cursor, groupElement, shapeElement, captionElement, designation,
+           designationElement) {
         const shapeId = this._gid.next();
         const captionId = this._gid.next();
         const designationId = this._gid.next();
@@ -395,12 +400,14 @@ class ProcessGroupManager extends FigureManager {
                 captionFigure.styleSet =
                     this.getStyleSet('default.process.caption');
                 designationFigure.styleSet =
-                    this.getStyleSet('default.process.designation');
+                    this.getStyleSet('default.process.caption');
                 
-                processFigure.serialize(shapeElement, captionElement);
+                processFigure.serialize(shapeElement, captionElement,
+                                        designationElement);
                 groupElement.setAttribute('id', groupId.toString());
                 shapeElement.setAttribute('id', shapeId.toString());
                 captionElement.setAttribute('id', captionId.toString());
+                designationElement.setAttribute('id', designationId.toString());
 
                 this._repository.set(groupId, processFigure);
 
@@ -514,14 +521,17 @@ class Editor {
         const groupElm = doc.createElementNS('http://www.w3.org/2000/svg', 'g');
         const shapeElm = doc.createElementNS('http://www.w3.org/2000/svg', 'rect');
         const captionElm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
+        const designationElm = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
 
         const defaultCursor = new Point(20,20);
         const result = this.#processManager.create(defaultCursor, groupElm,
                                                    shapeElm, captionElm,
-                                                   designation);
+                                                   designation,
+                                                   designationElm);
         if (result.isSuccess()) {
             groupElm.appendChild(shapeElm);
             groupElm.appendChild(captionElm);
+            groupElm.appendChild(designationElm);
             this.#canvas.appendChild(groupElm);
 
             return new Result();
@@ -569,9 +579,13 @@ class Editor {
                 const groupElement = doc.getElementById(figure.id.toString());
                 if (groupElement) {
                     const shapeElement = figure.getShapeElement(groupElement);
-                    const captionElement = figure.getCaptionElement(groupElement);
+                    const captionElement =
+                          figure.getCaptionElement(groupElement);
+                    const designationElement =
+                          figure.getDesignationElement(groupElement);
 
-                    figure.serialize(shapeElement, captionElement);
+                    figure.serialize(shapeElement, captionElement,
+                                     designationElement);
                     figure.useStyle('selected', groupElement);
                 }
             }
