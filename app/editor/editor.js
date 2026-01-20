@@ -697,6 +697,24 @@ class Spatia {
     isLower(target, cursor) {
         return cursor.Y >= target.Y;
     }
+
+    snapToRectSide(rectStart, rectEnd, cursor) {
+        const abs = Math.abs;
+        const distances = [
+            [abs(rectStart.X - cursor.X), new Point(rectStart.X, cursor.Y)],
+            [abs(rectStart.Y - cursor.Y), new Point(cursor.X, rectStart.Y)],
+            [abs(rectEnd.X - cursor.X), new Point(rectEnd.X, cursor.Y)],
+            [abs(rectStart.Y - cursor.Y), new Point(cursor.X, rectEnd.Y)]
+        ];
+
+        let min = distances[0];
+        distances.forEach((pair) => {
+            if (pair[0] < min[0])
+                min = pair;
+        });
+
+        return min[1];
+    }
 }
 
 class Stroke {
