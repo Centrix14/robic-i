@@ -46,4 +46,16 @@ describe('Spatia', function(){
         assert.equal(snappedCusor.Y, 0);
     });
 
+    it('snaps point to the side of a rect', function(){
+        const spatia = new Spatia(1, 1);
+        const rect = Rect.createByPoints(0, '', new Point(0,0), new Point(10,10));
+        const cursor = new Point(1, 5);
+
+        const snappedCursor = spatia.snapToRectSide(rect.start, rect.end,
+                                                    cursor);
+
+        assert.equal(snappedCursor.X, 0);
+        assert.equal(snappedCursor.Y, 5);
+    });
+
 });
