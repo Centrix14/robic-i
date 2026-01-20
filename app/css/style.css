@@ -176,6 +176,6 @@ body {
     border-spacing: 8px 3px;
 }
 
-.caption {
+.caption, .designation {
     user-select: none;
 }
