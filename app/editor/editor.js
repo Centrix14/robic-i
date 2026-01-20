@@ -384,8 +384,10 @@ class ProcessGroupManager extends FigureManager {
                                        new Point(cursor.X + width/2,
                                                  cursor.Y + height/2));
         const designationFigure = new Text(designationId,
-                                           new Point(cursor.X + width,
-                                                     cursor.Y + height));
+                                           new Point(cursor.X + width-5,
+                                                     cursor.Y + height-5));
+        captionFigure.value = 'Процесс';
+        designationFigure.value = designation;
 
         if (shapeFigure && captionFigure && designationFigure) {
             const groupId = this._gid.next();
