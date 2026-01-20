@@ -337,7 +337,15 @@ class ProcessGroup extends Figure {
 
     getCaptionElement(groupElement) {
         for (let child of groupElement.children) {
-            if (child.localName === 'text')
+            if (child.className.baseVal === 'caption')
+                return child;
+        }
+        return null;
+    }
+
+    getDesignationElement(groupElement) {
+        for (let child of groupElement.children) {
+            if (child.className.baseVal === 'designation')
                 return child;
         }
         return null;
