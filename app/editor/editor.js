@@ -819,16 +819,20 @@ class ShapeStyle extends Style {
 class TextStyle extends Style {
     #fill = undefined;
     #font = undefined;
+    #align = undefined;
 
-    constructor(name, fill, font) {
+    constructor(name, fill, font, align) {
         super(name);
         this.#fill = fill;
         this.#font = font;
+        this.#align = align;
     }
 
     useOn(element) {
         this.#fill.useOn(element);
         this.#font.useOn(element);
+        this.#align.useOn(element);
+        
         return element;
     }
 }
