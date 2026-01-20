@@ -755,6 +755,23 @@ class Font {
     }
 }
 
+class TextAlign {
+    #anchor = '';
+    #baseline = '';
+
+    constructor(anchor='middle', baseline='middle') {
+        this.#anchor = anchor;
+        this.#baseline = baseline;
+    }
+
+    useOn(element) {
+        element.setAttribute('text-anchor', this.#anchor);
+        element.setAttribute('dominant-baseline', this.#baseline);
+        
+        return element;
+    }
+}
+
 class Style {
     #name = '';
 
