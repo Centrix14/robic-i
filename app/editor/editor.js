@@ -200,6 +200,10 @@ class Rect extends Figure {
         }
     }
 
+    get start() { return this.#start; }
+
+    get end() { return this.#end; }
+
     serialize(element) {
         if (element instanceof SVGElement) {
             element.setAttribute('x', this.#start.X.toString());
