@@ -95,6 +95,8 @@ class Application {
     #canvas = undefined;
     #palette = undefined;
 
+    #isNewElementCreating = false;
+
     constructor(canvas, palette, gid) {
         this.#roles = new ElementRole();
         this.#roles.create('none');
@@ -126,6 +128,11 @@ class Application {
 
     newText() {
         this.#editor.createText();
+    }
+
+    newElement() {
+        this.#isNewElementCreating = !this.#isNewElementCreating;
+        console.log(this.#isNewElementCreating);
     }
 
     applyChanges() {
@@ -278,6 +285,9 @@ body.addEventListener('keyup', function(event){
 
 const newProcessBtn = document.querySelector('#newProcessBtn');
 newProcessBtn.addEventListener('click', () => app.newProcess());
+
+const newElementBtn = document.querySelector('#newElementBtn');
+newElementBtn.addEventListener('click', () => app.newElement());
 
 const applyChangesBtn = document.querySelector('#palette-applyBtn');
 applyChangesBtn.addEventListener('click', () => app.applyChanges());
