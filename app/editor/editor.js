@@ -584,6 +584,15 @@ class Editor {
         }
     }
 
+    createArrowElement(designation, start, end) {
+        const doc = this.#document;
+
+        const lineElm = doc.createElementNS('http://www.w3.org/2000/svg', 'line');
+
+        this.#lineManager.create(start, end, lineElm, designation);
+        this.#canvas.appendChild(lineElm);
+    }
+
     select(x, y) {
         const doc = this.#document;
         const cursor = new Point(x, y);
