@@ -256,7 +256,7 @@ class RectManager extends FigureManager {
     }
 }
 
-class Arrow extends Figure {
+class Line extends Figure {
     #start;
     #end;
 
@@ -277,6 +277,21 @@ class Arrow extends Figure {
         element.setAttribute('y2', this.#end.Y.toString());
 
         this._styleSet.useOn(element, 'main');
+    }
+}
+
+class LineManager extends FigureManager {
+    create(start, end, element, designation='') {
+        const id = this._gid.next();
+        const newLine = new Line(id, designation, start, end);
+
+        if (newLine) {
+            newLine.styleSet = this.getStyleSet('default.arrow');
+
+            newLine.serialize(element);
+            element.setAttribute('id', id.toString());
+            this._repository.set(id, newLine);
+        }
     }
 }
 
@@ -452,6 +467,7 @@ class Editor {
     #canvas = null;
 
     #rectManager = null;
+    #lineManager = null;
     #textManager = null;
     #processManager = null;
     
@@ -512,6 +528,9 @@ class Editor {
                 this.#rectManager = new RectManager(gid);
 //                this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
 
+                this.#lineManager = new LineManager(gid);
+                this.#lineManager.addStyleSet();
+                
                 this.#textManager = new TextManager(gid);
 //                this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
 
