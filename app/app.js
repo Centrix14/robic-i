@@ -96,6 +96,7 @@ class Application {
     #palette = undefined;
 
     #isNewElementCreating = false;
+    #eventBuffer = [];
 
     constructor(canvas, palette, gid) {
         this.#roles = new ElementRole();
@@ -169,9 +170,18 @@ class Application {
             paletteManager.clear();
     }
 
+    elementCreation(event) {
+        this.#eventBuffer.push(event);
+
+        if (this.#eventBuffer.length == 2) {
+            this.newElement();
+            this.#eventBuffer = [];
+        }
+    }
+
     click(event) {
         if (this.#isNewElementCreating)
-            ;
+            this.elementCreation(event);
         else
             this.canvasSelect(event);
     }
