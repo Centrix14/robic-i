@@ -277,6 +277,8 @@ class Line extends Figure {
         element.setAttribute('y2', this.#end.Y.toString());
 
         this._styleSet.useOn(element, 'main');
+
+        element.setAttribute('marker-end', 'url(#element-line-marker)');
     }
 }
 
