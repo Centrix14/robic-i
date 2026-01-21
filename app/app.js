@@ -165,7 +165,10 @@ class Application {
     }
 
     click(event) {
-        this.canvasSelect(event);
+        if (this.#isNewElementCreating)
+            ;
+        else
+            this.canvasSelect(event);
     }
 
     grab(startX, startY, endX, endY) {
