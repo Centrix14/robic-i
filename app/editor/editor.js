@@ -286,7 +286,7 @@ class LineManager extends FigureManager {
         const newLine = new Line(id, designation, start, end);
 
         if (newLine) {
-            newLine.styleSet = this.getStyleSet('default.arrow');
+            newLine.styleSet = this.getStyleSet('default.element.line');
 
             newLine.serialize(element);
             element.setAttribute('id', id.toString());
