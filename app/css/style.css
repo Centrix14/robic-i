@@ -129,6 +129,9 @@ body {
     border: none;
 }
 .panel-button:hover {
+    background-color: #e9ecef;
+}
+.panel-button:active, .panel-button-active {
     background-color: #dee2e6;
 }
 
@@ -175,6 +178,8 @@ body {
     border-collapse: separate;
     border-spacing: 8px 3px;
 }
+
+/* SVG elements styles */
 
 .caption, .designation {
     user-select: none;
