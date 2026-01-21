@@ -174,6 +174,16 @@ class Application {
         this.#eventBuffer.push(event);
 
         if (this.#eventBuffer.length == 2) {
+            const designation = this.#diagram.createComponent(Element);
+
+            const eventBuffer = this.#eventBuffer;
+            const startCoords = canvasCoords(eventBuffer[0].x, eventBuffer[0].y);
+            const endCoords = canvasCoords(eventBuffer[1].x, eventBuffer[1].y);
+            const startPoint = new Point(startCoords.x, startCoords.y);
+            const endPoint = new Point(endCoords.x, endCoords.y);
+            
+            this.#editor.createArrowElement(designation,
+                                            startPoint, endPoint);
             this.newElement();
             this.#eventBuffer = [];
         }
