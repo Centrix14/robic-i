@@ -126,10 +126,6 @@ class Application {
         this.#editor.createProcess(designation);
     }
 
-    newText() {
-        this.#editor.createText();
-    }
-
     newElement() {
         this.#isNewElementCreating = !this.#isNewElementCreating;
         console.log(this.#isNewElementCreating);
