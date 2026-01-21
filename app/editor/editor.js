@@ -517,7 +517,7 @@ class Editor {
 
     static _defaultElementStyleSet() {
         const emsStroke = new Stroke();
-        elementMainStyle = new SkeletonStyle('main', emsStroke);
+        const elementMainStyle = new SkeletonStyle('main', emsStroke);
 
         const defaultSet = new StyleSet('default.element.line');
         defaultSet.add(elementMainStyle);
