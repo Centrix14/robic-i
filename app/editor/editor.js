@@ -515,6 +515,16 @@ class Editor {
         return defaultSet;
     }
 
+    static _defaultElementStyleSet() {
+        const emsStroke = new Stroke();
+        elementMainStyle = new SkeletonStyle('main', emsStroke);
+
+        const defaultSet = new StyleSet('default.element.line');
+        defaultSet.add(elementMainStyle);
+
+        return defaultSet;
+    }
+
     constructor(targetDocument, targetCanvas, gid) {
         if (targetDocument instanceof Document) {
             if (targetCanvas instanceof SVGElement &&
@@ -529,7 +539,7 @@ class Editor {
 //                this.#rectManager.addStyleSet(Editor._defaultRectStyleSet());
 
                 this.#lineManager = new LineManager(gid);
-                this.#lineManager.addStyleSet();
+                this.#lineManager.addStyleSet(Editor._defaultElementStyleSet());
                 
                 this.#textManager = new TextManager(gid);
 //                this.#textManager.addStyleSet(Editor._defaultTextStyleSet());
