@@ -128,7 +128,12 @@ class Application {
 
     newElement() {
         this.#isNewElementCreating = !this.#isNewElementCreating;
-        console.log(this.#isNewElementCreating);
+
+        const elementBtn = document.querySelector('#newElementBtn');
+        elementBtn.setAttribute('class',
+                                this.#isNewElementCreating
+                                ? 'panel-button panel-button-active'
+                                : 'panel-button');
     }
 
     applyChanges() {
