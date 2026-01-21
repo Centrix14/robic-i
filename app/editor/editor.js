@@ -256,6 +256,30 @@ class RectManager extends FigureManager {
     }
 }
 
+class Arrow extends Figure {
+    #start;
+    #end;
+
+    constructor(id, designation, start, end) {
+        super(id, designation);
+        this.#start = start;
+        this.#end = end;
+    }
+
+    get start() { return this.#start; }
+
+    get end() { return this.#end; }
+
+    serialize(element) {
+        element.setAttribute('x1', this.#start.X.toString());
+        element.setAttribute('y1', this.#start.Y.toString());
+        element.setAttribute('x2', this.#end.X.toString());
+        element.setAttribute('y2', this.#end.Y.toString());
+
+        this._styleSet.useOn(element, 'main');
+    }
+}
+
 class Text extends Figure {
     value = 'Текст';
     #position = undefined;
