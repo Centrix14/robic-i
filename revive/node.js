@@ -79,8 +79,20 @@ class Node {
     }
 
     getSubnode(condition, recursive) {
-        const firstOne = this.selectSubnodes(condition, recursive)[0];
-        return firstOne ?? new EmptyNode();
+        for (let subnode of this._subnodes.values()) {
+            if (condition(subnode))
+                return subnode;
+        }
+
+        if (recursive) {
+            for (let subnode of this._subnodes.values()) {
+                const result = subnode.getSubnode(condition, recursive);
+                if (result)
+                    return result;
+            }
+        }
+
+        return new EmptyNode();
     }
 
     getSubnodeById(id, recursive) {
