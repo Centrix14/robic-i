@@ -4,78 +4,83 @@ const IDENTIFIER = {
 };
 
 describe('Node', function(){
-    it('selects instant subnodes', function(){
-        const subnodes = new Map([
-            [0,0], [1,1], [2,2], [3,3], [4,4]
-        ]);
-        const root = new Node(0, { subnodes });
 
-        const array = root.selectSubnodes((n) => (n % 2 === 0), false);
-        assert.deepEqual(array, [0, 2, 4]);
+    describe('selectSubnodes', function(){
+        it('selects instant subnodes', function(){
+            const subnodes = new Map([
+                [0,0], [1,1], [2,2], [3,3], [4,4]
+            ]);
+            const root = new Node(0, { subnodes });
+
+            const array = root.selectSubnodes((n) => (n % 2 === 0), false);
+            assert.deepEqual(array, [0, 2, 4]);
+        });
+
+        it('selects subnodes recursively', function(){
+            const rootId = 0;
+            const subnodes = new Map([
+                [1,
+                 {
+                     selectSubnodes: (a, b) => [1, 2, 3]
+                 }]
+            ]);
+            const root = new Node(rootId, {subnodes});
+
+            const array = root.selectSubnodes((n) => false, true);
+            assert.deepEqual(array, [1, 2, 3]);
+        });
     });
 
-    it('selects subnodes recursively', function(){
-        const rootId = 0;
-        const subnodes = new Map([
-            [1,
-             {
-                 selectSubnodes: (a, b) => [1, 2, 3]
-             }]
-        ]);
-        const root = new Node(rootId, {subnodes});
+    describe('createSubnode', function(){
+        it('creates instant subnodes', function(){
+            const rootId = 0;
+            const subnodes = new Map();
+            const root = new Node(rootId,
+                                  {
+                                      subnodes
+                                  });
 
-        const array = root.selectSubnodes((n) => false, true);
-        assert.deepEqual(array, [1, 2, 3]);
-    });
+            const res = root.createSubnode(rootId);
 
-    it('creates instant subnodes', function(){
-        const rootId = 0;
-        const subnodes = new Map();
-        const root = new Node(rootId,
-                              {
-                                  subnodes
-                              });
+            assert.isTrue(res.isOk());
+            assert.equal(subnodes.size, 1);
+        });
 
-        const res = root.createSubnode(rootId);
+        it('creates subnodes in subnodes', function(){
+            const parentId = 123;
+            const storage = new Map();
+            const subnodes = new Map([
+                [parentId, {
+                    _id: parentId,
+                    _subnodes: storage,
+                    isEmpty: () => false,
+                    selectSubnodes: (a, b) => []
+                }]
+            ]);
+            const root = new Node(0, { subnodes });
 
-        assert.isTrue(res.isOk());
-        assert.equal(subnodes.size, 1);
-    });
+            const res = root.createSubnode(parentId);
 
-    it('creates subnodes in subnodes', function(){
-        const parentId = 123;
-        const storage = new Map();
-        const subnodes = new Map([
-            [parentId, {
-                _id: parentId,
-                _subnodes: storage,
-                isEmpty: () => false,
-                selectSubnodes: (a, b) => []
-            }]
-        ]);
-        const root = new Node(0, { subnodes });
+            assert.isTrue(res.isOk());
+            assert.equal(storage.size, 1);
+        });
 
-        const res = root.createSubnode(parentId);
+        it('may return SubnodeNotFound error', function(){
+            const root = new Node(0);
 
-        assert.isTrue(res.isOk());
-        assert.equal(storage.size, 1);
-    });
+            const res = root.createSubnode(404);
 
-    it('createSubnode may return SubnodeNotFound error', function(){
-        const root = new Node(0);
+            assert.isTrue(res.isFail());
+            assert.equal(res._type, ErrorType.SubnodeNotFound);
+        });
 
-        const res = root.createSubnode(404);
+        it('returns node with result', function(){
+            const root = new Node(0);
 
-        assert.isTrue(res.isFail());
-        assert.equal(res._type, ErrorType.SubnodeNotFound);
-    });
-
-    it('createSubnode returns node with result', function(){
-        const root = new Node(0);
-
-        const res = root.createSubnode(0);
-        assert.property(res, 'node');
-        assert.instanceOf(res.node, Node);
+            const res = root.createSubnode(0);
+            assert.property(res, 'node');
+            assert.instanceOf(res.node, Node);
+        });
     });
 
     it('removes instant subnodes', function(){
@@ -89,4 +94,5 @@ describe('Node', function(){
         assert.isTrue(result.isOk());
         assert.equal(subnodes.size, 0);
     });
+
 });
