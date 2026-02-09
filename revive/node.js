@@ -3,6 +3,7 @@
 class ErrorType {
     static Void = 'Void'
     static SubnodeNotFound = 'Subnode not found'
+    static InconsistentNodeTree = 'Inconsistent node tree'
 }
 
 class Result {
@@ -139,6 +140,34 @@ class Node {
         result.node = node;
         
         return result;
+    }
+
+    removeSubnode(id) {
+        let parent;
+
+        if (this.getSubnodeById(id, false))
+            parent = this;
+        else {
+            const parents = this.selectSubnodes(
+                (node) => (node._subnodes.has(id)),
+                true
+            );
+            
+            if (parents.length === 0) {
+                return new Result(ErrorType.SubnodeNotFound,
+                                  `At node id:${this._id} no subnode id:${id}`);
+            }
+            else if (parents.length > 1) {
+                return new Result(ErrorType.InconsistentNodeTree,
+                                  `Node id:${this._id} is inconsistent`);
+            }
+
+            parent = parents[0];
+        }
+
+        parent._subnodes.delete(id);
+
+        return new Result();
     }
 }
 
