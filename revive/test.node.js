@@ -61,7 +61,7 @@ describe('Node', function(){
         assert.equal(storage.size, 1);
     });
 
-    it('may return SubnodeNotFound error', function(){
+    it('createSubnode may return SubnodeNotFound error', function(){
         const root = new Node(0);
 
         const res = root.createSubnode(404);
@@ -76,5 +76,14 @@ describe('Node', function(){
         const res = root.createSubnode(0);
         assert.property(res, 'node');
         assert.instanceOf(res.node, Node);
+    });
+
+    it('removes instant subnodes', function(){
+        const rootId = 0;
+        const subnodes = new Map();
+        const root = new Node(rootId, { subnodes });
+
+        root.createSubnode(rootId);
+        root.removeSubnode();
     });
 });

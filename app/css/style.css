@@ -184,3 +184,8 @@ body {
 .caption, .designation {
     user-select: none;
 }
+
+textarea {
+    font-family: sans;
+    font-size: 10pt;
+}
