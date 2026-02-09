@@ -65,6 +65,7 @@ class Node {
     }
 
     isEmpty() { return false; }
+    isPresent() { return true; }
 
     selectSubnodes(condition, recursive) {
         const result = [];
@@ -145,7 +146,7 @@ class Node {
     removeSubnode(id) {
         let parent;
 
-        if (this.getSubnodeById(id, false))
+        if (this.getSubnodeById(id, false).isPresent())
             parent = this;
         else {
             const parents = this.selectSubnodes(
@@ -177,6 +178,7 @@ class EmptyNode {
     }
     
     isEmpty() { return true; }
+    isPresent() { return false; }
 }
 
 class SubnodeOwnership {
