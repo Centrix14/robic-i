@@ -1,8 +1,8 @@
 // Nothig about nodejs framework here!
 
 class ErrorType {
-    static Void = ''
-    static SubnodeNotFound = ''
+    static Void = 'Void'
+    static SubnodeNotFound = 'Subnode not found'
 }
 
 class Result {
