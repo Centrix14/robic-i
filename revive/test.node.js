@@ -69,4 +69,12 @@ describe('Node', function(){
         assert.isTrue(res.isFail());
         assert.equal(res._type, ErrorType.SubnodeNotFound);
     });
+
+    it('createSubnode returns node with result', function(){
+        const root = new Node(0);
+
+        const res = root.createSubnode(0);
+        assert.property(res, 'node');
+        assert.instanceOf(res.node, Node);
+    });
 });
