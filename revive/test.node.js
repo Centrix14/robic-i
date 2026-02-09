@@ -46,7 +46,7 @@ describe('Node', function(){
             assert.equal(subnodes.size, 1);
         });
 
-        it('creates subnodes in subnodes', function(){
+        it('creates subnodes in subnodes 1', function(){
             const parentId = 123;
             const storage = new Map();
             const subnodes = new Map([
@@ -63,6 +63,15 @@ describe('Node', function(){
 
             assert.isTrue(res.isOk());
             assert.equal(storage.size, 1);
+        });
+
+        it('creates subnodes in subnodes 2', function(){
+            const root = new Node(0);
+            const result1 = root.createSubnode(root._id);
+            const result2 = root.createSubnode(result1.node._id);
+
+            const result = root.removeSubnode(result2.node._id);
+            assert.isTrue(result.isOk(), result.description);
         });
 
         it('may return SubnodeNotFound error', function(){
@@ -98,14 +107,23 @@ describe('Node', function(){
 
         it('remove subnodes in subnodes', function(){
             const root = new Node(0);
-            const node1 = root.createSubnode(root._id);
-            const node2 = root.createSubnode(node1._id);
+            const result1 = root.createSubnode(root._id);
+            const result2 = root.createSubnode(result1.node._id);
 
-            const result = root.removeSubnode(node2._id);
+            const result = root.removeSubnode(result2.node._id);
             assert.isTrue(result.isOk());
 
-            const query = root.getSubnodeById(node2._id);
+            const query = root.getSubnodeById(result2.node._id);
             assert.isTrue(query.isEmpty());
+        });
+
+        it('may return SubnodeNotFound', function(){
+            const root = new Node(0);
+
+            const result = root.removeSubnode(0);
+
+            assert.isTrue(result.isFail());
+            assert.equal(result._type, ErrorType.SubnodeNotFound);
         });
     });
 
