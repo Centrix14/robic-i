@@ -83,7 +83,10 @@ describe('Node', function(){
         const subnodes = new Map();
         const root = new Node(rootId, { subnodes });
 
-        root.createSubnode(rootId);
-        root.removeSubnode();
+        const result = root.createSubnode(rootId);
+        root.removeSubnode(result.node._id);
+
+        assert.isTrue(result.isOk());
+        assert.equal(subnodes.size, 0);
     });
 });
