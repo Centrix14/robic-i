@@ -83,16 +83,30 @@ describe('Node', function(){
         });
     });
 
-    it('removes instant subnodes', function(){
-        const rootId = 0;
-        const subnodes = new Map();
-        const root = new Node(rootId, { subnodes });
+    describe('removeSubnode', function(){
+        it('removes instant subnodes', function(){
+            const rootId = 0;
+            const subnodes = new Map();
+            const root = new Node(rootId, { subnodes });
 
-        const result = root.createSubnode(rootId);
-        root.removeSubnode(result.node._id);
+            const result = root.createSubnode(rootId);
+            root.removeSubnode(result.node._id);
 
-        assert.isTrue(result.isOk());
-        assert.equal(subnodes.size, 0);
+            assert.isTrue(result.isOk());
+            assert.equal(subnodes.size, 0);
+        });
+
+        it('remove subnodes in subnodes', function(){
+            const root = new Node(0);
+            const node1 = root.createSubnode(root._id);
+            const node2 = root.createSubnode(node1._id);
+
+            const result = root.removeSubnode(node2._id);
+            assert.isTrue(result.isOk());
+
+            const query = root.getSubnodeById(node2._id);
+            assert.isTrue(query.isEmpty());
+        });
     });
 
 });
