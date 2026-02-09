@@ -134,7 +134,11 @@ class Node {
         }
         
         target._subnodes.set(nodeId, node);
-        return new Result();
+        
+        let result = new Result();
+        result.node = node;
+        
+        return result;
     }
 }
 
