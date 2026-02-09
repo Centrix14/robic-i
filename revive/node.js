@@ -84,7 +84,20 @@ class Node {
     }
 
     getSubnodeById(id, recursive) {
-        return this.getSubnode((node) => (node._id === id), recursive);
+        for (let [subnodeId, subnode] of this._subnodes) {
+            if (subnodeId === id)
+                return subnode;
+        }
+
+        if (recursive) {
+            for (let subnode of this._subnodes.values()) {
+                const result = subnode.getSubnodeById(id, recursive);
+                if (result)
+                    return result;
+            }
+        }
+
+        return new EmptyNode();
     }
 
     createSubnode(parentId, definition) {
