@@ -84,10 +84,9 @@ class Node {
     }
 
     getSubnodeById(id, recursive) {
-        for (let [subnodeId, subnode] of this._subnodes) {
-            if (subnodeId === id)
-                return subnode;
-        }
+        const result = this._subnodes.get(id);
+        if (result)
+            return result;
 
         if (recursive) {
             for (let subnode of this._subnodes.values()) {
