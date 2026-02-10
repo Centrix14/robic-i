@@ -175,11 +175,23 @@ class Node {
     }
 
     removeSubnode(id) {
-        const result = this.selectSubnodes(
-            (node, _) => (node._subnodes.has(id)),
-            1,
-            true
-        );
+        let parent;
+        
+        if (this._subnodes.has(id)) {
+            parent = this;
+        }
+        else {
+            const result = this.selectSubnodes(
+                (node, _) => (node._subnodes.has(id)),
+                1,
+                true
+            );
+
+            if (result.isOk())
+                parent = result.sample[0];
+            else
+                return result;
+        }
 
         /*if (this.getSubnodeById(id, false).isPresent())
             parent = this;
@@ -201,13 +213,8 @@ class Node {
             parent = parents[0];
         }*/
 
-        if (result.isOk()) {
-            const parent = result.sample[0];
-            parent._subnodes.delete(id);
-            return new Result();
-        }
-        else
-            return result;
+        parent._subnodes.delete(id);
+        return new Result();
     }
 }
 
