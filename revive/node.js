@@ -64,6 +64,8 @@ class Node {
         this._deviation = definition?.deviation ?? new Deviation();
     }
 
+    get id() { return this._id; }
+
     isEmpty() { return false; }
     isPresent() { return true; }
 
