@@ -70,11 +70,11 @@ class Node {
     isEmpty() { return false; }
     isPresent() { return true; }
 
-    selectSubnodes(condition, recursive) {
+    selectAllSubnodes(condition, recursive) {
         const result = [];
 
         this._subnodes.forEach(function(node) {
-            if (condition(node))
+            if (condition(this, node))
                 result.push(node);
             if (recursive)
                 result.push(...node.selectSubnodes(condition, recursive));

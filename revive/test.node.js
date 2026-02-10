@@ -5,14 +5,14 @@ const IDENTIFIER = {
 
 describe('Node', function(){
 
-    describe('selectSubnodes', function(){
+    describe('selectAllSubnodes', function(){
         it('selects instant subnodes', function(){
             const subnodes = new Map([
                 [0,0], [1,1], [2,2], [3,3], [4,4]
             ]);
             const root = new Node(0, { subnodes });
 
-            const array = root.selectSubnodes((n) => (n % 2 === 0), false);
+            const array = root.selectAllSubnodes((_, n) => (n % 2 === 0), false);
             assert.deepEqual(array, [0, 2, 4]);
         });
 
@@ -26,7 +26,7 @@ describe('Node', function(){
             ]);
             const root = new Node(rootId, {subnodes});
 
-            const array = root.selectSubnodes((n) => false, true);
+            const array = root.selectAllSubnodes((_, n) => false, true);
             assert.deepEqual(array, [1, 2, 3]);
         });
     });
