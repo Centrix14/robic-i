@@ -112,33 +112,16 @@ class Node {
         return result;
     }
 
-    getSubnode(condition, recursive) {
-        for (let subnode of this._subnodes.values()) {
-            if (condition(subnode))
-                return subnode;
-        }
-
-        if (recursive) {
-            for (let subnode of this._subnodes.values()) {
-                const result = subnode.getSubnode(condition, recursive);
-                if (result)
-                    return result;
-            }
-        }
-
-        return new EmptyNode();
-    }
-
     getSubnodeById(id, recursive) {
-        const result = this._subnodes.get(id);
-        if (result)
-            return result;
+        const node = this._subnodes.get(id);
+        if (node)
+            return node;
 
         if (recursive) {
             for (let subnode of this._subnodes.values()) {
-                const result = subnode.getSubnodeById(id, recursive);
-                if (result)
-                    return result;
+                const node = subnode.getSubnodeById(id, recursive);
+                if (node)
+                    return node;
             }
         }
 
