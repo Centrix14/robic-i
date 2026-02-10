@@ -25,6 +25,8 @@ Node(id:integer, definition:Object)
 &lt;&lt;get&gt;&gt; relation()
 &lt;&lt;set&gt;&gt; relation()
 
+&lt;&lt;get&gt;&gt; subnodes()
+
 toMap(): Map
 fromMap(map:Map, mb:MapBehaviour): Result
 
