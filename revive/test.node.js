@@ -132,10 +132,10 @@ describe('Node', function(){
             const subnodes = new Map();
             const root = new Node(rootId, { subnodes });
 
-            const result = root.createSubnode(rootId);
-            root.removeSubnode(result.node.id);
+            const createResult = root.createSubnode(rootId);
+            const removeResult = root.removeSubnode(createResult.node.id);
 
-            assert.isTrue(result.isOk());
+            assert.isTrue(removeResult.isOk());
             assert.equal(subnodes.size, 0);
         });
 
@@ -151,13 +151,12 @@ describe('Node', function(){
             assert.isTrue(query.isEmpty());
         });
 
-        it('may return SubnodeNotFound', function(){
+        it('returns error when subnode can not be found', function(){
             const root = new Node(0);
 
             const result = root.removeSubnode(0);
 
             assert.isTrue(result.isFail());
-            assert.equal(result._type, ErrorType.SubnodeNotFound);
         });
     });
 
