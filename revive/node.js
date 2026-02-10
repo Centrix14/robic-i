@@ -175,7 +175,7 @@ class Node {
     }
 
     removeSubnode(id) {
-        const sample = this.selectSubnodes(
+        const result = this.selectSubnodes(
             (node, _) => (node._subnodes.has(id)),
             1,
             true
@@ -201,9 +201,13 @@ class Node {
             parent = parents[0];
         }*/
 
-        parent._subnodes.delete(id);
-
-        return new Result();
+        if (result.isOk()) {
+            const parent = result.sample[0];
+            parent._subnodes.delete(id);
+            return new Result();
+        }
+        else
+            return result;
     }
 }
 
