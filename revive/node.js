@@ -4,6 +4,7 @@ class ErrorType {
     static Void = 'Void'
     static SubnodeNotFound = 'Subnode not found'
     static InconsistentNodeTree = 'Inconsistent node tree'
+    static ImpossibleSelectCondition = 'Impossible select condition'
 }
 
 class Result {
@@ -80,6 +81,34 @@ class Node {
                 result.push(...node.selectSubnodes(condition, recursive));
         });
 
+        return result;
+    }
+
+    selectSubnodes(condition, n, recursive) {
+        const sample = [];
+
+        for (let node of this._subnodes.values()) {
+            if (condition(this, node))
+                sample.push(node);
+            
+            if (sample.length === n)
+                return sample;
+        }
+
+        if (recursive) {
+            for (let node of this._subnodes.values()) {
+                let subnodeSample = node.selectSubnodes(condition, n, recursive);
+                if (Array.isArray(subnodeSample) && subnodeSample.length > 0)
+                    sample.push(...subnodeSample);
+
+                if (sample.length === n)
+                    return sample;
+            }
+        }
+
+        let result = new Result(ErrorType.ImpossibleSelectCondition,
+                                `Select condition is impossible to satisfy`);
+        result.sample = sample;
         return result;
     }
 
