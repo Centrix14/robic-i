@@ -1,12 +1,24 @@
+let namespace, __i;
+
+function __(message) {
+    return `[${namespace}${__i++}] — ${message}`;
+}
+
+function nit(name, fn) {
+    it(__(name), fn);
+}
+
 const IDENTIFIER = {
     i: 0,
     next: () => IDENTIFIER.i++
 };
 
+namespace='Node', __i=0;
+
 describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
-        it('selects instant subnodes', function(){
+        nit('selects instant subnodes', function(){
             const subnodes = new Map([
                 [0,0], [1,1], [2,2], [3,3], [4,4]
             ]);
@@ -16,7 +28,7 @@ describe('Node', function(){
             assert.deepEqual(result.sample, [0, 2, 4]);
         });
 
-        it('selects subnodes recursively', function(){
+        nit('selects subnodes recursively', function(){
             const rootId = 0;
             const subnodes = new Map([
                 [1,
@@ -36,7 +48,7 @@ describe('Node', function(){
     });
 
     describe('selectSubnodes', function(){
-        it('selects first N subnodes', function(){
+        nit('selects first N subnodes', function(){
             const subnodes = new Map([
                 [0,0], [1,1], [2,2], [3,3], [4,4]
             ]);
@@ -46,7 +58,7 @@ describe('Node', function(){
             assert.deepEqual(result.sample, [0, 2]);
         });
 
-        it('selects first N subnodes recursively', function(){
+        nit('selects first N subnodes recursively', function(){
             const rootId = 0;
             const subnodes = new Map([
                 [1,
@@ -66,7 +78,7 @@ describe('Node', function(){
     });
 
     describe('createSubnode', function(){
-        it('creates instant subnodes', function(){
+        nit('creates instant subnodes', function(){
             const rootId = 0;
             const subnodes = new Map();
             const root = new Node(rootId,
@@ -80,7 +92,7 @@ describe('Node', function(){
             assert.equal(subnodes.size, 1);
         });
 
-        it('creates subnodes in subnodes 1', function(){
+        nit('creates subnodes in subnodes 1', function(){
             const parentId = 123;
             const storage = new Map();
             const subnodes = new Map([
@@ -99,7 +111,7 @@ describe('Node', function(){
             assert.equal(storage.size, 1);
         });
 
-        it('creates subnodes in subnodes 2', function(){
+        nit('creates subnodes in subnodes 2', function(){
             const root = new Node(0);
             const result1 = root.createSubnode(root.id);
             const result2 = root.createSubnode(result1.node.id);
@@ -108,7 +120,7 @@ describe('Node', function(){
             assert.isTrue(result.isOk(), result.description);
         });
 
-        it('may return SubnodeNotFound error', function(){
+        nit('may return SubnodeNotFound error', function(){
             const root = new Node(0);
 
             const res = root.createSubnode(404);
@@ -117,7 +129,7 @@ describe('Node', function(){
             assert.equal(res._type, ErrorType.SubnodeNotFound);
         });
 
-        it('returns node with result', function(){
+        nit('returns node with result', function(){
             const root = new Node(0);
 
             const res = root.createSubnode(0);
@@ -127,7 +139,7 @@ describe('Node', function(){
     });
 
     describe('removeSubnode', function(){
-        it('removes instant subnodes', function(){
+        nit('removes instant subnodes', function(){
             const rootId = 0;
             const subnodes = new Map();
             const root = new Node(rootId, { subnodes });
@@ -139,7 +151,7 @@ describe('Node', function(){
             assert.equal(subnodes.size, 0);
         });
 
-        it('remove subnodes in subnodes', function(){
+        nit('remove subnodes in subnodes', function(){
             const root = new Node(0);
             const result1 = root.createSubnode(root.id);
             const result2 = root.createSubnode(result1.node.id);
@@ -151,7 +163,7 @@ describe('Node', function(){
             assert.isTrue(query.isFail());
         });
 
-        it('returns error when subnode can not be found', function(){
+        nit('returns error when subnode can not be found', function(){
             const root = new Node(0);
 
             const result = root.removeSubnode(0);
@@ -161,7 +173,7 @@ describe('Node', function(){
     });
 
     describe('injectNode', function(){
-        it('injects subnodes to root', function(){
+        nit('injects subnodes to root', function(){
             const subnodes = new Map();
             const root = new Node(0, { subnodes });
             const child = new Node(IDENTIFIER.next());
@@ -172,7 +184,7 @@ describe('Node', function(){
             assert.lengthOf(subnodes, 1);
         });
 
-        it('injects subnodes to hierarchy', function(){
+        nit('injects subnodes to hierarchy', function(){
             const root = new Node(0);
             
             const subnodes = new Map();
@@ -186,7 +198,7 @@ describe('Node', function(){
             assert.lengthOf(subnodes, 1);
         });
 
-        it('returns error when subnode can not be found', function(){
+        nit('returns error when subnode can not be found', function(){
             const root = new Node(0);
 
             const result = root.injectSubnode(-1, 'mock');
