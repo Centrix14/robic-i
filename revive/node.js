@@ -130,18 +130,25 @@ class Node {
 
     getSubnodeById(id, recursive) {
         const node = this._subnodes.get(id);
-        if (node)
-            return node;
+        if (node) {
+            const result = new Result();
+            result.node = node;
+            return result;
+        }
 
         if (recursive) {
             for (let subnode of this._subnodes.values()) {
                 const node = subnode.getSubnodeById(id, recursive);
-                if (node)
-                    return node;
+                if (node) {
+                    const result = new Result();
+                    result.node = node;
+                    return result;
+                }
             }
         }
 
-        return new EmptyNode();
+        return new Result(ErrorType.SubnodeNotFound,
+                          `Subnode id:${id} not found`);
     }
 
     injectSubnode(parentId, node) {
