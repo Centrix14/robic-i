@@ -100,18 +100,25 @@ class Node {
             if (condition(this, node))
                 sample.push(node);
             
-            if (sample.length === n)
-                return sample;
+            if (sample.length === n) {
+                const result = new Result();
+                result.sample = sample;
+                return result;
+            }
         }
 
         if (recursive) {
             for (let node of this._subnodes.values()) {
-                let subnodeSample = node.selectSubnodes(condition, n, recursive);
-                if (Array.isArray(subnodeSample) && subnodeSample.length > 0)
-                    sample.push(...subnodeSample);
+                let subnodeSelection =
+                    node.selectSubnodes(condition, n, recursive);
+                if (subnodeSelection.isOk())
+                    sample.push(...subnodeSelection.sample);
 
-                if (sample.length === n)
-                    return sample;
+                if (sample.length === n) {
+                    const result = new Result();
+                    result.sample = sample;
+                    return result;
+                }
             }
         }
 
