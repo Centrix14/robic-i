@@ -12,8 +12,8 @@ describe('Node', function(){
             ]);
             const root = new Node(0, { subnodes });
 
-            const array = root.selectAllSubnodes((_, n) => (n % 2 === 0), false);
-            assert.deepEqual(array, [0, 2, 4]);
+            const result = root.selectAllSubnodes((_, n) => (n % 2 === 0), false);
+            assert.deepEqual(result.sample, [0, 2, 4]);
         });
 
         it('selects subnodes recursively', function(){
@@ -21,13 +21,17 @@ describe('Node', function(){
             const subnodes = new Map([
                 [1,
                  {
-                     selectSubnodes: (a, b) => [1, 2, 3]
+                     selectAllSubnodes: function(_, _) {
+                         const result = new Result();
+                         result.sample = [1, 2, 3];
+                         return result;
+                     }
                  }]
             ]);
             const root = new Node(rootId, {subnodes});
 
-            const array = root.selectAllSubnodes((_, n) => false, true);
-            assert.deepEqual(array, [1, 2, 3]);
+            const result = root.selectAllSubnodes((a, b) => false, true);
+            assert.deepEqual(result.sample, [1, 2, 3]);
         });
     });
 
