@@ -144,6 +144,24 @@ class Node {
         return new EmptyNode();
     }
 
+    injectSubnode(parentId, node) {
+        let parent;
+
+        if (this.id === parentId)
+            parent = this;
+        else {
+            const result = this.getSubnodeById(parentId, true);
+            if (result.isOk())
+                parent = result.sample[0];
+            else
+                return result;
+        }
+
+        parent._subnodes.set(node.id, node);
+
+        return new Result();
+    }
+
     createSubnode(parentId, definition) {
         const nodeId = IDENTIFIER.next();
         const node = new Node(nodeId);
