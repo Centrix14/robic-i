@@ -183,12 +183,11 @@ class Node {
         if (parentId === this._id)
             target = this;
         else {
-            const parent = this.getSubnodeById(parentId, true);
-            if (parent.isEmpty())
-                return new Result(ErrorType.SubnodeNotFound,
-                                  `At node id:${this._id} no subnode id:${parentId}`);
+            const result = this.getSubnodeById(parentId, true);
+            if (result.isFail())
+                return result;
             else
-                target = parent;
+                target = result.node;
         }
         
         target._subnodes.set(nodeId, node);
