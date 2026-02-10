@@ -37,9 +37,9 @@ clone(): Node
 
 selectSubnodes(condition:(parent → node → boolean),
    n:integer,
-   recursive:boolean): Node [*] ! Result
+   recursive:boolean): Result
 selectAllSubnodes(condition:(parent → node → boolean),
-   recursive:boolean): Node [*] ! []
+   recursive:boolean): Result
 getSubnodeById(id:integer,
    recursive:boolean): Node ! EmptyNode
 
