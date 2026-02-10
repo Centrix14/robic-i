@@ -67,10 +67,10 @@ describe('Node', function(){
 
         it('creates subnodes in subnodes 2', function(){
             const root = new Node(0);
-            const result1 = root.createSubnode(root._id);
-            const result2 = root.createSubnode(result1.node._id);
+            const result1 = root.createSubnode(root.id);
+            const result2 = root.createSubnode(result1.node.id);
 
-            const result = root.removeSubnode(result2.node._id);
+            const result = root.removeSubnode(result2.node.id);
             assert.isTrue(result.isOk(), result.description);
         });
 
@@ -99,7 +99,7 @@ describe('Node', function(){
             const root = new Node(rootId, { subnodes });
 
             const result = root.createSubnode(rootId);
-            root.removeSubnode(result.node._id);
+            root.removeSubnode(result.node.id);
 
             assert.isTrue(result.isOk());
             assert.equal(subnodes.size, 0);
@@ -107,13 +107,13 @@ describe('Node', function(){
 
         it('remove subnodes in subnodes', function(){
             const root = new Node(0);
-            const result1 = root.createSubnode(root._id);
-            const result2 = root.createSubnode(result1.node._id);
+            const result1 = root.createSubnode(root.id);
+            const result2 = root.createSubnode(result1.node.id);
 
-            const result = root.removeSubnode(result2.node._id);
+            const result = root.removeSubnode(result2.node.id);
             assert.isTrue(result.isOk());
 
-            const query = root.getSubnodeById(result2.node._id);
+            const query = root.getSubnodeById(result2.node.id);
             assert.isTrue(query.isEmpty());
         });
 
