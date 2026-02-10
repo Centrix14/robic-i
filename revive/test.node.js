@@ -160,4 +160,17 @@ describe('Node', function(){
         });
     });
 
+    describe('injectNode', function(){
+        it('injects subnodes to root', function(){
+            const subnodes = new Map();
+            const root = new Node(0, { subnodes });
+            const child = new Node(IDENTIFIER.next());
+
+            const result = root.injectSubnode(0, child);
+
+            assert.isTrue(result.isOk());
+            assert.lengthOf(subnodes, 1);
+        });
+    });
+
 });
