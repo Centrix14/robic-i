@@ -41,8 +41,9 @@ selectSubnodes(condition:(parent → node → boolean),
 selectAllSubnodes(condition:(parent → node → boolean),
    recursive:boolean): Result
 getSubnodeById(id:integer,
-   recursive:boolean): Node ! EmptyNode
+   recursive:boolean): Result
 
+injectSubnode(parentId, node:Node):Result
 createSubnode(parentId:integer, definition:Object): Result
 removeSubnode(id:integer): Result</panel_attributes>
     <additional_attributes/>
