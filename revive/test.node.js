@@ -185,6 +185,14 @@ describe('Node', function(){
             assert.isTrue(result.isOk());
             assert.lengthOf(subnodes, 1);
         });
+
+        it('returns error when subnode can not be found', function(){
+            const root = new Node(0);
+
+            const result = root.injectSubnode(-1, 'mock');
+
+            assert.isTrue(result.isFail());
+        });
     });
 
 });
