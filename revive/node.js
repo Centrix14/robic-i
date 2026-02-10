@@ -72,15 +72,24 @@ class Node {
     isPresent() { return true; }
 
     selectAllSubnodes(condition, recursive) {
-        const result = [];
+        const parent = this;
+        const sample = [];
 
         this._subnodes.forEach(function(node) {
-            if (condition(this, node))
-                result.push(node);
-            if (recursive)
-                result.push(...node.selectSubnodes(condition, recursive));
+            if (condition(parent, node))
+                sample.push(node);
+            
+            if (recursive) {
+                const subnodeSelection = node.selectAllSubnodes(condition, recursive);
+                if (subnodeSelection.isOk())
+                    sample.push(...subnodeSelection.sample);
+                else
+                    return subnodeSelection;
+            }
         });
 
+        const result = new Result();
+        result.sample = sample;
         return result;
     }
 
@@ -159,13 +168,17 @@ class Node {
     }
 
     removeSubnode(id) {
-        let parent;
+        const sample = this.selectSubnodes(
+            (node, _) => (node._subnodes.has(id)),
+            1,
+            true
+        );
 
-        if (this.getSubnodeById(id, false).isPresent())
+        /*if (this.getSubnodeById(id, false).isPresent())
             parent = this;
         else {
-            const parents = this.selectSubnodes(
-                (node) => (node._subnodes.has(id)),
+            const parents = this.selectAllSubnodes(
+                (node, _) => (node._subnodes.has(id)),
                 true
             );
             
@@ -179,7 +192,7 @@ class Node {
             }
 
             parent = parents[0];
-        }
+        }*/
 
         parent._subnodes.delete(id);
 
