@@ -148,7 +148,7 @@ describe('Node', function(){
             assert.isTrue(result.isOk());
 
             const query = root.getSubnodeById(result2.node.id);
-            assert.isTrue(query.isEmpty());
+            assert.isTrue(query.isFail());
         });
 
         it('returns error when subnode can not be found', function(){
