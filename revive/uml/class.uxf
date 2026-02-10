@@ -35,10 +35,11 @@ isPresent(): boolean
 equals(other:Node): boolean
 clone(): Node
 
-selectSubnodes(condition:function,
-   recursive:boolean): Node [*]
-getSubnode(condition:function,
-   recursive:boolean): Node ? EmptyNode
+selectSubnodes(condition:(parent → node → boolean),
+   n:integer,
+   recursive:boolean): Node [*] ! Result
+selectAllSubnodes(condition:(parent → node → boolean),
+   recursive:boolean): Node [*] ! []
 getSubnodeById(id:integer,
    recursive:boolean): Node ? EmptyNode
 
@@ -276,7 +277,7 @@ NonuniqueId
 UnusedId
 SubnodeNotFound
 InconsistentNodeTree
-
+ImpossibleSelectCondition
 </panel_attributes>
     <additional_attributes/>
   </element>
