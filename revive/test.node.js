@@ -31,6 +31,32 @@ describe('Node', function(){
         });
     });
 
+    describe('selectSubnodes', function(){
+        it('selects first N subnodes', function(){
+            const subnodes = new Map([
+                [0,0], [1,1], [2,2], [3,3], [4,4]
+            ]);
+            const root = new Node(0, { subnodes });
+
+            const array = root.selectSubnodes((_, n) => (n % 2 === 0), 2, false);
+            assert.deepEqual(array, [0, 2]);
+        });
+
+        it('selects first N subnodes recursively', function(){
+            const rootId = 0;
+            const subnodes = new Map([
+                [1,
+                 {
+                     selectSubnodes: (a, b) => [1, 2]
+                 }]
+            ]);
+            const root = new Node(rootId, {subnodes});
+
+            const array = root.selectSubnodes((_, n) => false, 2, true);
+            assert.deepEqual(array, [1, 2]);
+        });
+    });
+
     describe('createSubnode', function(){
         it('creates instant subnodes', function(){
             const rootId = 0;
