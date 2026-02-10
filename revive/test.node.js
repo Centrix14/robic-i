@@ -171,6 +171,20 @@ describe('Node', function(){
             assert.isTrue(result.isOk());
             assert.lengthOf(subnodes, 1);
         });
+
+        it('injects subnodes to hierarchy', function(){
+            const root = new Node(0);
+            
+            const subnodes = new Map();
+            const child = new Node(IDENTIFIER.next(), { subnodes });
+            root.injectSubnode(0, child);
+
+            const rat = new Node(IDENTIFIER.next());
+            const result = root.injectSubnode(child.id, rat);
+
+            assert.isTrue(result.isOk());
+            assert.lengthOf(subnodes, 1);
+        });
     });
 
 });
