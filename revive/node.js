@@ -159,7 +159,7 @@ class Node {
         else {
             const result = this.getSubnodeById(parentId, true);
             if (result.isOk())
-                parent = result.sample[0];
+                parent = result.node;
             else
                 return result;
         }
