@@ -164,7 +164,14 @@ class Node {
                 return result;
         }
 
-        parent._subnodes.set(node.id, node);
+        const subnode = new Subnode(IDENTIFIER.next(), node,
+                                   {
+                                        logicalOwn: SubnodeOwnership.Here,
+                                        physicalOwn: SubnodeOwnership.Here,
+                                        role: SubnodeRole.Void
+                                   });
+        
+        parent._subnodes.set(subnode.id, subnode);
 
         return new Result();
     }
