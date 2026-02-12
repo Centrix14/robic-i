@@ -35,10 +35,12 @@ isPresent(): boolean
 equals(other:Node): boolean
 clone(): Node
 
-selectSubnodes(condition:(parent → node → boolean),
+selectSubnodes(
+   condition:(node → container → parent → boolean),
    n:integer,
    recursive:boolean): Result
-selectAllSubnodes(condition:(parent → node → boolean),
+selectAllSubnodes(
+   condition:(node → container → parent → boolean),
    recursive:boolean): Result
 getSubnodeById(id:integer,
    recursive:boolean): Result
@@ -117,7 +119,10 @@ clone() = cloned.fromMap(this.toMap()),
 -physicalOwn: SubnodeOwnership {d}
 -role: SubnodeRole {d}
 --
-Subnode(id:integer, node:Node, definition:Object)</panel_attributes>
+Subnode(id:integer, node:Node, definition:Object)
+
+&lt;&lt;get&gt;&gt; id()
+&lt;&lt;get&gt;&gt; node()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
