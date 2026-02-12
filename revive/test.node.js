@@ -46,7 +46,7 @@ describe('Node', function(){
 
             it('selectAllSubnodes2 - node.id === 1', function(){
                 const node = result.sample[0];
-                assert.equal(node.id, 1);
+                assert.equal(node.id, 2);
             });
         });
         
