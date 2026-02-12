@@ -6,6 +6,12 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
+                /*
+                  root
+                  - node1
+                  - node2
+                 */
+                
                 root = new Node(0);
                 
                 const node1 = new Node(1),
@@ -37,6 +43,13 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
+                /*
+                  root
+                  - node1
+                  -- node2
+                  -- node3
+                 */
+                
                 root = new Node(0);
 
                 const node1 = new Node(1),
