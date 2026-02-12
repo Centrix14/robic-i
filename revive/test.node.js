@@ -136,6 +136,42 @@ describe('Node', function(){
             });
         });
 
+        describe('select first N subnodes in hierarchy', function(){
+            let root, result;
+            
+            before(function(){
+                root = new Node(0);
+
+                const node1 = new Node(1),
+                      node2 = new Node(2),
+                      node3 = new Node(3);
+                const subnode1 = new Subnode(4, node1),
+                      subnode2 = new Subnode(5, node2),
+                      subnode3 = new Subnode(6, node3);
+
+                root._subnodes.set(node1.id, subnode1);
+                node1._subnodes.set(node2.id, subnode2);
+                node1._subnodes.set(node3.id, subnode3);
+            });
+
+            it('selectSubnodes4 - result.isOk()', function(){
+                result =
+                    root.selectSubnodes((_, n) => (n.id % 2), 2, true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectSubnodes2 - result.sample.length === 2', function(){
+                assert.lengthOf(result.sample, 2);
+            });
+
+            it('selectSubnodes3 - node.id = 1, 3', function(){
+                const node1 = result.sample[0],
+                      node2 = result.sample[1];
+                assert.equal(node1.id, 1);
+                assert.equal(node2.id, 3);
+            });
+        });
+
     });
 
     describe('createSubnode', function(){
