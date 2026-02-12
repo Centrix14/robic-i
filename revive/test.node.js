@@ -18,33 +18,38 @@ namespace='Node', __i=0;
 describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
-        nit('selects instant subnodes', function(){
-            const subnodes = new Map([
-                [0,0], [1,1], [2,2], [3,3], [4,4]
-            ]);
-            const root = new Node(0, { subnodes });
 
-            const result = root.selectAllSubnodes((_, n) => (n % 2 === 0), false);
-            assert.deepEqual(result.sample, [0, 2, 4]);
+        describe('select instant subnodes', function(){
+            let root, result;
+            
+            before(function(){
+                root = new Node(0);
+                
+                const node1 = new Node(1),
+                      node2 = new Node(2);
+                const subnode1 = new Subnode(3, node1),
+                      subnode2 = new Subnode(4, node2);
+
+                root._subnodes.set(node1.id, subnode1);
+                root._subnodes.set(node2.id, subnode2);
+            });
+
+            it('selectAllSubnodes1 - result.isOk()', function(){
+                result =
+                    root.selectAllSubnodes((_, n) => (n.id === 2), false);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectAllSubnodes3 - result.sample.length === 1', function(){
+                assert.lengthOf(result.sample, 1);
+            });
+
+            it('selectAllSubnodes2 - node.id === 1', function(){
+                const node = result.sample[0];
+                assert.equal(node.id, 1);
+            });
         });
-
-        nit('selects subnodes recursively', function(){
-            const rootId = 0;
-            const subnodes = new Map([
-                [1,
-                 {
-                     selectAllSubnodes: function(_, _) {
-                         const result = new Result();
-                         result.sample = [1, 2, 3];
-                         return result;
-                     }
-                 }]
-            ]);
-            const root = new Node(rootId, {subnodes});
-
-            const result = root.selectAllSubnodes((a, b) => false, true);
-            assert.deepEqual(result.sample, [1, 2, 3]);
-        });
+        
     });
 
     describe('selectSubnodes', function(){
