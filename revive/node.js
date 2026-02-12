@@ -98,7 +98,9 @@ class Node {
     selectSubnodes(condition, n, recursive) {
         const sample = [];
 
-        for (let node of this._subnodes.values()) {
+        for (let container of this._subnodes.values()) {
+            const node = container.node;
+            
             if (condition(this, node))
                 sample.push(node);
             
@@ -110,7 +112,9 @@ class Node {
         }
 
         if (recursive) {
-            for (let node of this._subnodes.values()) {
+            for (let container of this._subnodes.values()) {
+                const node = container.node;
+                
                 let subnodeSelection =
                     node.selectSubnodes(condition, n, recursive);
                 if (subnodeSelection.isOk())
