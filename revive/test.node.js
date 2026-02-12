@@ -25,7 +25,7 @@ describe('Node', function(){
 
             it('selectAllSubnodes1 - result.isOk()', function(){
                 result =
-                    root.selectAllSubnodes((_, n) => (n.id === 2), false);
+                    root.selectAllSubnodes((n) => (n.id === 2), false);
                 assert.isTrue(result.isOk());
             });
 
@@ -66,7 +66,7 @@ describe('Node', function(){
 
             it('selectAllSubnodes4 - result.isOk()', function(){
                 result =
-                      root.selectAllSubnodes((_, n) => (n.id === 3), true);
+                      root.selectAllSubnodes((n) => (n.id === 3), true);
                 assert.isTrue(result.isOk());
             });
 
@@ -100,7 +100,7 @@ describe('Node', function(){
 
             it('selectAllSubnodes7 - result.isOk()', function(){
                 result =
-                      root.selectAllSubnodes((_, n) => (n.id === 123), true);
+                      root.selectAllSubnodes((n) => (n.id === 123), true);
                 assert.isTrue(result.isOk());
             });
 
@@ -133,7 +133,7 @@ describe('Node', function(){
 
             it('selectSubnodes1 - result.isOk()', function(){
                 result =
-                    root.selectSubnodes((_, n) => (n.id % 2), 2, false);
+                    root.selectSubnodes((n) => (n.id % 2), 2, false);
                 assert.isTrue(result.isOk());
             });
 
@@ -169,7 +169,7 @@ describe('Node', function(){
 
             it('selectSubnodes4 - result.isOk()', function(){
                 result =
-                    root.selectSubnodes((_, n) => (n.id % 2), 2, true);
+                    root.selectSubnodes((n) => (n.id % 2), 2, true);
                 assert.isTrue(result.isOk());
             });
 
