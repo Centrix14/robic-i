@@ -40,11 +40,11 @@ describe('Node', function(){
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes3 - result.sample.length === 1', function(){
+            it('selectAllSubnodes2 - result.sample.length === 1', function(){
                 assert.lengthOf(result.sample, 1);
             });
 
-            it('selectAllSubnodes2 - node.id === 1', function(){
+            it('selectAllSubnodes3 - node.id === 1', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 2);
             });
