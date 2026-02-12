@@ -71,6 +71,7 @@ describe('Node', function(){
             it('selectAllSubnodes4 - result.isOk()', function(){
                 result =
                       root.selectAllSubnodes((_, n) => (n.id === 3), true);
+                assert.isTrue(result.isOk());
             });
 
             it('selectAllSubnodes5 - result.sample.length === 1', function(){
@@ -81,6 +82,35 @@ describe('Node', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 3);
             });
+        });
+
+        describe('returns empty array if nothing was found', function(){
+            let root, result;
+            
+            before(function(){
+                root = new Node(0);
+
+                const node1 = new Node(1),
+                      node2 = new Node(2),
+                      node3 = new Node(3);
+                const subnode1 = new Subnode(4, node1),
+                      subnode2 = new Subnode(5, node2),
+                      subnode3 = new Subnode(6, node3);
+
+                root._subnodes.set(node1.id, subnode1);
+                node1._subnodes.set(node2.id, subnode2);
+                node1._subnodes.set(node3.id, subnode3);
+            });
+
+            it('selectAllSubnodes7 - result.isOk()', function(){
+                result =
+                      root.selectAllSubnodes((_, n) => (n.id === 123), true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectAllSubnodes8 - result.sample is empty', function(){
+                assert.isEmpty(result.sample);
+            })
         });
         
     });
