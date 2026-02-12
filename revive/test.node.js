@@ -185,6 +185,32 @@ describe('Node', function(){
             });
         });
 
+        describe('returns error when nothing found', function(){
+            let root, result;
+            
+            before(function(){
+                root = new Node(0);
+                
+                const node1 = new Node(1),
+                      node2 = new Node(2);
+                const subnode1 = new Subnode(3, node1),
+                      subnode2 = new Subnode(4, node2);
+
+                root._subnodes.set(node1.id, subnode1);
+                root._subnodes.set(node2.id, subnode2);
+            });
+
+            it('selectSubnodes7 - result.isFail()', function(){
+                result =
+                    root.selectSubnodes((n) => (n.id === 3), 1, true);
+                assert.isTrue(result.isFail());
+            });
+
+            it('selectSubnodes8 - result.sample is empty', function(){
+                assert.isEmpty(result.sample);
+            });
+        });
+
     });
 
     describe('createSubnode', function(){
