@@ -78,7 +78,7 @@ class Node {
         this._subnodes.forEach(function(container) {
             const node = container.node;
             
-            if (condition(parent, node))
+            if (condition(node, container, parent))
                 sample.push(node);
             
             if (recursive) {
@@ -101,7 +101,7 @@ class Node {
         for (let container of this._subnodes.values()) {
             const node = container.node;
             
-            if (condition(this, node))
+            if (condition(node, container, this))
                 sample.push(node);
             
             if (sample.length === n) {
