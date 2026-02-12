@@ -247,5 +247,14 @@ class SubnodeRole {
 }
 
 class Subnode {
-    
+    constructor(id, node, definition) {
+        this._id = id;
+        this._node = node;
+
+        this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
+        this._physicalOwn = definition?.physicalOwn ?? SubnodeOwnership.Here;
+        this._role = definition?.role ?? SubnodeRole.Void;
+    }
+
+    get id() { return this._id; }
 }
