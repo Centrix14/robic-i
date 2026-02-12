@@ -75,7 +75,9 @@ class Node {
         const parent = this;
         const sample = [];
 
-        this._subnodes.forEach(function(node) {
+        this._subnodes.forEach(function(container) {
+            const node = container.node;
+            
             if (condition(parent, node))
                 sample.push(node);
             
@@ -257,4 +259,5 @@ class Subnode {
     }
 
     get id() { return this._id; }
+    get node() { return this._node; }
 }
