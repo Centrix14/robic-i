@@ -115,6 +115,42 @@ function complexTree2() {
     return root;
 }
 
+function complexTree3() {
+    /*
+      structure:
+      root
+      - node1
+      - node2
+      -- node3 (physical)
+      - node3 (logical)
+    */
+
+    const root = new Node(0);
+
+    const node1 = new Node(1),
+          node2 = new Node(2),
+          node3 = new Node(3);
+    const subnode1 = new Subnode(1, node1),
+          subnode2 = new Subnode(2, node2),
+          subnode3_root = new Subnode(3, null,
+                                      {
+                                          logicalOwn: SubnodeOwnership.Here,
+                                          physicalOwn: SubnodeOwnership.Supnode
+                                      }),
+          subnode3_2 = new Subnode(3, node3,
+                                   {
+                                       logicalOwn: SubnodeOwnership.Here,
+                                       physicalOwn: SubnodeOwnership.Here
+                                   });
+
+    root._subnodes.set(1, subnode1);
+    root._subnodes.set(2, subnode2);
+    root._subnodes.set(3, subnode3_root);
+    node2._subnodes.set(3, subnode3_2);
+
+    return root;
+}
+
 describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
