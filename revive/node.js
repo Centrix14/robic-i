@@ -72,23 +72,28 @@ class Node {
     isPresent() { return true; }
 
     selectNodesAll(condition, recursive) {
-        const parent = this;
-        const sample = [];
+        const result = this._selectNodesAll(condition, recursive);
 
         if (condition(this, null, null))
-            sample.push(this);
+            result.sample.unshift(this);
+
+        return result;
+    }
+
+    _selectNodesAll(condition, recursive) {
+        const sample = [];
 
         for (let container of this._subnodes.values()) {
             const node = container.node;
 
             if (!node) continue; // ignore inderect nodes
 
-            if (condition(node, container, parent))
+            if (condition(node, container, this))
                 sample.push(node);
             
             if (recursive) {
                 const subnodeSelection =
-                      node.selectNodesAll(condition, recursive);
+                      node._selectNodesAll(condition, recursive);
                 if (subnodeSelection.isOk())
                     sample.push(...subnodeSelection.sample);
                 else
