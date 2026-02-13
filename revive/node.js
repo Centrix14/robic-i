@@ -258,7 +258,7 @@ class SubnodeRole {
 
 class Subnode {
     constructor(id, node, definition) {
-        this._id = id;
+        this._id = id; // this is an id of node, not a special id for subnode
         this._node = node;
 
         this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
