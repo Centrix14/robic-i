@@ -155,7 +155,7 @@ describe('Node', function(){
 
             it('selectNodesAll1 - result.isOk()', function(){
                 result =
-                    root.selectNodesAll((n) => (n.id === 2), false);
+                    root.selectNodesAll((n) => (n.id % 2 === 0), false);
                 assert.isTrue(result.isOk());
             });
 
