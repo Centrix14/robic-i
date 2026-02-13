@@ -45,9 +45,7 @@ selectNodesAll(
 getSubnodeById(id:integer,
    recursive:boolean): Result
 
-injectSubnode(parentId, node:Node):Result
-createSubnode(parentId:integer, definition:Object): Result
-removeSubnode(id:integer): Result</panel_attributes>
+injectNode(parentId, node:Node):Result</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
