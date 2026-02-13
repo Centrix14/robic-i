@@ -267,30 +267,29 @@ describe('Node', function(){
         
     });
 
-    describe('selectSubnodes', function(){
+    describe('selectNodes', function(){
 
-        describe('select first N instant subnodes', function(){
+        describe('select first N subnodes and root', function(){
             let root, result;
 
             before(function(){
                 root = flatTree1a();
             });
 
-            it('selectSubnodes1 - result.isOk()', function(){
+            it('selectNodes1 - result.isOk()', function(){
                 result =
-                    root.selectSubnodes((n) => (n.id % 2), 2, false);
+                    root.selectNodes((n) => (n.id % 2 === 0), 2, false);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectSubnodes2 - result.sample.length === 2', function(){
+            it('selectNodes2 - result.sample.length === 2', function(){
                 assert.lengthOf(result.sample, 2);
             });
 
-            it('selectSubnodes3 - node.id = 1, 3', function(){
-                const node1 = result.sample[0],
-                      node2 = result.sample[1];
-                assert.equal(node1.id, 1);
-                assert.equal(node2.id, 3);
+            it('selectNodes3 - node.id = 0, 2', function(){
+                const node = [result.sample[0], result.sample[1]];
+                assert.equal(node[0].id, 0);
+                assert.equal(node[1].id, 2);
             });
         });
 
@@ -301,17 +300,17 @@ describe('Node', function(){
                 root = complexTree1();
             });
 
-            it('selectSubnodes4 - result.isOk()', function(){
+            it('selectNodes4 - result.isOk()', function(){
                 result =
-                    root.selectSubnodes((n) => (n.id % 2), 2, true);
+                    root.selectNodes((n) => (n.id % 2), 2, true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectSubnodes5 - result.sample.length === 2', function(){
+            it('selectNodes5 - result.sample.length === 2', function(){
                 assert.lengthOf(result.sample, 2);
             });
 
-            it('selectSubnodes6 - node.id = 1, 3', function(){
+            it('selectNodes6 - node.id = 1, 3', function(){
                 const node1 = result.sample[0],
                       node2 = result.sample[1];
                 assert.equal(node1.id, 1);
@@ -326,13 +325,13 @@ describe('Node', function(){
                 root = flatTree1();
             });
 
-            it('selectSubnodes7 - result.isFail()', function(){
+            it('selectNodes7 - result.isFail()', function(){
                 result =
-                    root.selectSubnodes((n) => (n.id === 3), 1, true);
+                    root.selectNodes((n) => (n.id === 3), 1, true);
                 assert.isTrue(result.isFail());
             });
 
-            it('selectSubnodes8 - result.sample is empty', function(){
+            it('selectNodes8 - result.sample is empty', function(){
                 assert.isEmpty(result.sample);
             });
         });
@@ -344,15 +343,15 @@ describe('Node', function(){
                 root = flatTree1();
             });
 
-            it('selectSubnodes9 - result.isFail()', function(){
+            it('selectNodes9 - result.isFail()', function(){
                 result =
-                    root.selectSubnodes((n) => (n.id % 2), 2, true);
+                    root.selectNodes((n) => (n.id % 2), 2, true);
                 assert.isTrue(result.isFail());
             });
 
-            // when nodes not enough, selectSubnodes will return all
+            // when nodes not enough, selectNodes will return all
             // relevant nodes
-            it('selectSubnodes10 - result.sample.length === 1', function(){
+            it('selectNodes10 - result.sample.length === 1', function(){
                 assert.lengthOf(result.sample, 1);
             });
         });
@@ -382,7 +381,7 @@ describe('Node', function(){
                     _id: parentId,
                     _subnodes: storage,
                     isEmpty: () => false,
-                    selectSubnodes: (a, b) => []
+                    selectNodes: (a, b) => []
                 }]
             ]);
             const root = new Node(0, { subnodes });
