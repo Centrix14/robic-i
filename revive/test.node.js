@@ -119,7 +119,7 @@ describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
 
-        describe('select instant subnodes', function(){
+        describe('select subnodes of root', function(){
             let root, result;
             
             before(function(){
@@ -162,6 +162,34 @@ describe('Node', function(){
             it('selectAllSubnodes6 - node.id === 3', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 3);
+            });
+        });
+
+        describe('select shared subnodes unaware of ownership', function(){
+            let root, result;
+
+            before(function(){
+                root = complexTree2();
+            });
+
+            it('selectAllSubnodes9 - result.isOk()', function(){
+                result =
+                    root.selectAllSubnodes((n, c, parent) => (parent === root),
+                                           true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectAllSubnodes10 - result.sample.length === 3', function(){
+                assert.lengthOf(result.sample, 3);
+            });
+
+            it('selectAllSubnodes11 - selected node.id === 1, 2, 3', function(){
+                const node1 = result.sample[0],
+                      node2 = result.sample[1],
+                      node3 = result.sample[2];
+                assert.isTrue(node1.id === 1 &&
+                              node2.id === 2 &&
+                              node3.id === 3);
             });
         });
 
