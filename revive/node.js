@@ -125,6 +125,7 @@ class Node {
 
         for (let container of this._subnodes.values()) {
             const node = container.node;
+            if (!node) continue;
             
             if (condition(node, container, this))
                 sample.push(node);
@@ -141,6 +142,7 @@ class Node {
             
             for (let container of this._subnodes.values()) {
                 const node = container.node;
+                if (!node) continue;
                 
                 let subnodeSelection =
                     node._selectNodes(condition, shortage, recursive);
