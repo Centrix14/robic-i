@@ -1,8 +1,5 @@
 function flatTree1() {
     /*
-      returns root with two childs (flat tree),
-      owned directly
-      structure:
       root
       - node1
       - node2
@@ -44,9 +41,6 @@ function flatTree1a() {
 
 function complexTree1() {
     /*
-      returns root with one child, which has it's own childs (complex tree);
-      all childs owned directly
-      structure:
       root
       - node1
       -- node2
@@ -71,9 +65,6 @@ function complexTree1() {
 
 function complexTree2() {
     /*
-      returns root with 2 direct childs (node1, node2) and 1 common
-      child (node3) that logically beyonds to node1 and node2,
-      but physically stored in root
       structure:
       root
       - node1
