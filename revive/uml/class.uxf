@@ -45,7 +45,11 @@ selectNodesAll(
 getSubnodeById(id:integer,
    recursive:boolean): Result
 
-injectNode(parentId, node:Node):Result</panel_attributes>
+injectNode(parentId, node:Node):Result
+ejectNode(id):Result
+
+connectNodes(id1, id2):Result
+disconnectNodes(id1, id2):Result</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
