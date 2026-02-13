@@ -1,3 +1,74 @@
+function flatTree1() {
+    /*
+      returns root with two childs (flat tree),
+      owned directly
+      structure:
+      root
+      - node1
+      - node2
+    */
+    
+    const root = new Node(0);
+    
+    const node1 = new Node(1),
+          node2 = new Node(2);
+    const subnode1 = new Subnode(3, node1),
+          subnode2 = new Subnode(4, node2);
+
+    root._subnodes.set(node1.id, subnode1);
+    root._subnodes.set(node2.id, subnode2);
+
+    return root;
+}
+
+function flatTree1a() {
+    /*
+      same to flatTree1, but root has 3 childs
+     */
+
+    const root = new Node(0);
+    
+    const node1 = new Node(1),
+          node2 = new Node(2),
+          node3 = new Node(3);
+    const subnode1 = new Subnode(4, node1),
+          subnode2 = new Subnode(5, node2),
+          subnode3 = new Subnode(6, node3);
+
+    root._subnodes.set(node1.id, subnode1);
+    root._subnodes.set(node2.id, subnode2);
+    root._subnodes.set(node3.id, subnode3);
+
+    return root;
+}
+
+function complexTree1() {
+    /*
+      returns root with one child, which has it's own childs (complex tree);
+      all childs owned directly
+      structure:
+      root
+      - node1
+      -- node2
+      -- node3
+    */
+    
+    const root = new Node(0);
+
+    const node1 = new Node(1),
+          node2 = new Node(2),
+          node3 = new Node(3);
+    const subnode1 = new Subnode(4, node1),
+          subnode2 = new Subnode(5, node2),
+          subnode3 = new Subnode(6, node3);
+
+    root._subnodes.set(node1.id, subnode1);
+    node1._subnodes.set(node2.id, subnode2);
+    node1._subnodes.set(node3.id, subnode3);
+
+    return root;
+}
+
 describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
@@ -6,21 +77,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                /*
-                  root
-                  - node1
-                  - node2
-                 */
-                
-                root = new Node(0);
-                
-                const node1 = new Node(1),
-                      node2 = new Node(2);
-                const subnode1 = new Subnode(3, node1),
-                      subnode2 = new Subnode(4, node2);
-
-                root._subnodes.set(node1.id, subnode1);
-                root._subnodes.set(node2.id, subnode2);
+                root = flatTree1();
             });
 
             it('selectAllSubnodes1 - result.isOk()', function(){
@@ -43,25 +100,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                /*
-                  root
-                  - node1
-                  -- node2
-                  -- node3
-                 */
-                
-                root = new Node(0);
-
-                const node1 = new Node(1),
-                      node2 = new Node(2),
-                      node3 = new Node(3);
-                const subnode1 = new Subnode(4, node1),
-                      subnode2 = new Subnode(5, node2),
-                      subnode3 = new Subnode(6, node3);
-
-                root._subnodes.set(node1.id, subnode1);
-                node1._subnodes.set(node2.id, subnode2);
-                node1._subnodes.set(node3.id, subnode3);
+                root = complexTree1();
             });
 
             it('selectAllSubnodes4 - result.isOk()', function(){
@@ -84,18 +123,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = new Node(0);
-
-                const node1 = new Node(1),
-                      node2 = new Node(2),
-                      node3 = new Node(3);
-                const subnode1 = new Subnode(4, node1),
-                      subnode2 = new Subnode(5, node2),
-                      subnode3 = new Subnode(6, node3);
-
-                root._subnodes.set(node1.id, subnode1);
-                node1._subnodes.set(node2.id, subnode2);
-                node1._subnodes.set(node3.id, subnode3);
+                root = complexTree1();
             });
 
             it('selectAllSubnodes7 - result.isOk()', function(){
@@ -117,18 +145,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = new Node(0);
-                
-                const node1 = new Node(1),
-                      node2 = new Node(2),
-                      node3 = new Node(3);
-                const subnode1 = new Subnode(4, node1),
-                      subnode2 = new Subnode(5, node2),
-                      subnode3 = new Subnode(6, node3);
-
-                root._subnodes.set(node1.id, subnode1);
-                root._subnodes.set(node2.id, subnode2);
-                root._subnodes.set(node3.id, subnode3);
+                root = flatTree1a();
             });
 
             it('selectSubnodes1 - result.isOk()', function(){
@@ -153,18 +170,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = new Node(0);
-
-                const node1 = new Node(1),
-                      node2 = new Node(2),
-                      node3 = new Node(3);
-                const subnode1 = new Subnode(4, node1),
-                      subnode2 = new Subnode(5, node2),
-                      subnode3 = new Subnode(6, node3);
-
-                root._subnodes.set(node1.id, subnode1);
-                node1._subnodes.set(node2.id, subnode2);
-                node1._subnodes.set(node3.id, subnode3);
+                root = complexTree1();
             });
 
             it('selectSubnodes4 - result.isOk()', function(){
@@ -189,15 +195,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = new Node(0);
-                
-                const node1 = new Node(1),
-                      node2 = new Node(2);
-                const subnode1 = new Subnode(3, node1),
-                      subnode2 = new Subnode(4, node2);
-
-                root._subnodes.set(node1.id, subnode1);
-                root._subnodes.set(node2.id, subnode2);
+                root = flatTree1();
             });
 
             it('selectSubnodes7 - result.isFail()', function(){
@@ -215,15 +213,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = new Node(0);
-                
-                const node1 = new Node(1),
-                      node2 = new Node(2);
-                const subnode1 = new Subnode(3, node1),
-                      subnode2 = new Subnode(4, node2);
-
-                root._subnodes.set(node1.id, subnode1);
-                root._subnodes.set(node2.id, subnode2);
+                root = flatTree1();
             });
 
             it('selectSubnodes9 - result.isFail()', function(){
