@@ -75,6 +75,9 @@ class Node {
         const parent = this;
         const sample = [];
 
+        if (condition(this, null, null))
+            sample.push(this);
+
         for (let container of this._subnodes.values()) {
             const node = container.node;
 
