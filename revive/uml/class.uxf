@@ -39,7 +39,7 @@ selectSubnodes(
    condition:(node → container → parent → boolean),
    n:integer,
    recursive:boolean): Result
-selectAllSubnodes(
+selectNodesAll(
    condition:(node → container → parent → boolean),
    recursive:boolean): Result
 getSubnodeById(id:integer,

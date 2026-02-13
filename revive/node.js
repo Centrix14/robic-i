@@ -71,7 +71,7 @@ class Node {
     isEmpty() { return false; }
     isPresent() { return true; }
 
-    selectAllSubnodes(condition, recursive) {
+    selectNodesAll(condition, recursive) {
         const parent = this;
         const sample = [];
 
@@ -85,7 +85,7 @@ class Node {
             
             if (recursive) {
                 const subnodeSelection =
-                      node.selectAllSubnodes(condition, recursive);
+                      node.selectNodesAll(condition, recursive);
                 if (subnodeSelection.isOk())
                     sample.push(...subnodeSelection.sample);
                 else

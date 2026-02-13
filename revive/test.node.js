@@ -144,7 +144,7 @@ function complexTree3() {
 
 describe('Node', function(){
 
-    describe('selectAllSubnodes', function(){
+    describe('selectNodesAll', function(){
 
         describe('select subnodes of root', function(){
             let root, result;
@@ -153,17 +153,17 @@ describe('Node', function(){
                 root = flatTree1();
             });
 
-            it('selectAllSubnodes1 - result.isOk()', function(){
+            it('selectNodesAll1 - result.isOk()', function(){
                 result =
-                    root.selectAllSubnodes((n) => (n.id === 2), false);
+                    root.selectNodesAll((n) => (n.id === 2), false);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes2 - result.sample.length === 1', function(){
+            it('selectNodesAll2 - result.sample.length === 1', function(){
                 assert.lengthOf(result.sample, 1);
             });
 
-            it('selectAllSubnodes3 - node.id === 1', function(){
+            it('selectNodesAll3 - node.id === 1', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 2);
             });
@@ -176,17 +176,17 @@ describe('Node', function(){
                 root = complexTree1();
             });
 
-            it('selectAllSubnodes4 - result.isOk()', function(){
+            it('selectNodesAll4 - result.isOk()', function(){
                 result =
-                      root.selectAllSubnodes((n) => (n.id === 3), true);
+                      root.selectNodesAll((n) => (n.id === 3), true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes5 - result.sample.length === 1', function(){
+            it('selectNodesAll5 - result.sample.length === 1', function(){
                 assert.lengthOf(result.sample, 1);
             });
 
-            it('selectAllSubnodes6 - node.id === 3', function(){
+            it('selectNodesAll6 - node.id === 3', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 3);
             });
@@ -199,18 +199,18 @@ describe('Node', function(){
                 root = complexTree2();
             });
 
-            it('selectAllSubnodes9 - result.isOk()', function(){
+            it('selectNodesAll9 - result.isOk()', function(){
                 result =
-                    root.selectAllSubnodes((n, c, parent) => (parent === root),
+                    root.selectNodesAll((n, c, parent) => (parent === root),
                                            true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes10 - result.sample.length === 3', function(){
+            it('selectNodesAll10 - result.sample.length === 3', function(){
                 assert.lengthOf(result.sample, 3);
             });
 
-            it('selectAllSubnodes11 - selected node.id === 1, 2, 3', function(){
+            it('selectNodesAll11 - selected node.id === 1, 2, 3', function(){
                 const node1 = result.sample[0],
                       node2 = result.sample[1],
                       node3 = result.sample[2];
@@ -227,18 +227,18 @@ describe('Node', function(){
                 root = complexTree3();
             });
 
-            it('selectAllSubnodes12 - result.isOk()', function(){
+            it('selectNodesAll12 - result.isOk()', function(){
                 result =
-                    root.selectAllSubnodes((n, c, parent) => (parent === root),
+                    root.selectNodesAll((n, c, parent) => (parent === root),
                                            true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes13 - result.sample.length === 2', function(){
+            it('selectNodesAll13 - result.sample.length === 2', function(){
                 assert.lengthOf(result.sample, 2);
             });
 
-            it('selectAllSubnodes14 - selected node.id === 1, 2', function(){
+            it('selectNodesAll14 - selected node.id === 1, 2', function(){
                 const node1 = result.sample[0],
                       node2 = result.sample[1];
                 assert.isTrue(node1.id === 1 &&
@@ -253,13 +253,13 @@ describe('Node', function(){
                 root = complexTree1();
             });
 
-            it('selectAllSubnodes7 - result.isOk()', function(){
+            it('selectNodesAll7 - result.isOk()', function(){
                 result =
-                      root.selectAllSubnodes((n) => (n.id === 123), true);
+                      root.selectNodesAll((n) => (n.id === 123), true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectAllSubnodes8 - result.sample is empty', function(){
+            it('selectNodesAll8 - result.sample is empty', function(){
                 assert.isEmpty(result.sample);
             })
         });
