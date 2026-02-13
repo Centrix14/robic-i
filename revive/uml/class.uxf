@@ -35,14 +35,14 @@ isPresent(): boolean
 equals(other:Node): boolean
 clone(): Node
 
-selectSubnodes(
+selectNodes(
    condition:(node → container → parent → boolean),
    n:integer,
    recursive:boolean): Result
 selectNodesAll(
    condition:(node → container → parent → boolean),
    recursive:boolean): Result
-getSubnodeById(id:integer,
+getNodeById(id:integer,
    recursive:boolean): Result
 
 injectNode(parentId, node:Node):Result
