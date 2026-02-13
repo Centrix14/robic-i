@@ -229,6 +229,32 @@ describe('Node', function(){
             });
         });
 
+        describe('select derived subnodes unaware of ownership', function(){
+            let root, result;
+
+            before(function(){
+                root = complexTree3();
+            });
+
+            it('selectAllSubnodes12 - result.isOk()', function(){
+                result =
+                    root.selectAllSubnodes((n, c, parent) => (parent === root),
+                                           true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectAllSubnodes13 - result.sample.length === 2', function(){
+                assert.lengthOf(result.sample, 2);
+            });
+
+            it('selectAllSubnodes14 - selected node.id === 1, 2', function(){
+                const node1 = result.sample[0],
+                      node2 = result.sample[1];
+                assert.isTrue(node1.id === 1 &&
+                              node2.id === 2);
+            });
+        });
+
         describe('returns empty array if nothing was found', function(){
             let root, result;
             
