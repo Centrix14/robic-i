@@ -75,20 +75,23 @@ class Node {
         const parent = this;
         const sample = [];
 
-        this._subnodes.forEach(function(container) {
+        for (let container of this._subnodes.values()) {
             const node = container.node;
-            
+
+            if (!node) continue; // ignore inderect nodes
+
             if (condition(node, container, parent))
                 sample.push(node);
             
             if (recursive) {
-                const subnodeSelection = node.selectAllSubnodes(condition, recursive);
+                const subnodeSelection =
+                      node.selectAllSubnodes(condition, recursive);
                 if (subnodeSelection.isOk())
                     sample.push(...subnodeSelection.sample);
                 else
                     return subnodeSelection;
             }
-        });
+        }
 
         const result = new Result();
         result.sample = sample;
