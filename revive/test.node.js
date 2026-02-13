@@ -318,6 +318,58 @@ describe('Node', function(){
             });
         });
 
+        describe('select N nodes unaware of sharing', function(){
+            let root, result;
+
+            before(function(){
+                root = complexTree2();
+            });
+
+            it('selectNodes11 - result.isOk()', function(){
+                result =
+                    root.selectNodes((n, c, parent) => (parent === root),
+                                     3, true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectNodes12 - result.sample.length === 3', function(){
+                assert.lengthOf(result.sample, 3);
+            });
+
+            it('selectNodes13 - selected node.id === 1, 2, 3', function(){
+                const node = [result.sample[0], result.sample[1],
+                              result.sample[2]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2 &&
+                              node[2].id === 3);
+            });
+        });
+
+        describe('select N nodes unaware of deriving', function(){
+            let root, result;
+
+            before(function(){
+                root = complexTree3();
+            });
+
+            it('selectNodes14 - result.isFail()', function(){
+                result =
+                    root.selectNodes((n, c, parent) => (parent === root),
+                                     3, true);
+                assert.isTrue(result.isFail());
+            });
+
+            it('selectNodes15 - result.sample.length === 2', function(){
+                assert.lengthOf(result.sample, 2);
+            });
+
+            it('selectNodes16 - selected node.id === 1, 2', function(){
+                const node = [result.sample[0], result.sample[1]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2);
+            });
+        });
+
         describe('returns error when nothing found', function(){
             let root, result;
             
