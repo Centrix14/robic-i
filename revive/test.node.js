@@ -69,6 +69,52 @@ function complexTree1() {
     return root;
 }
 
+function complexTree2() {
+    /*
+      returns root with 2 direct childs (node1, node2) and 1 common
+      child (node3) that logically beyonds to node1 and node2,
+      but physically stored in root
+      structure:
+      root
+      - node1
+      -- node3 (logical)
+      - node2
+      -- node3 (logical)
+      - node3 (physical)
+    */
+
+    const root = new Node(0);
+
+    const node1 = new Node(1),
+          node2 = new Node(2),
+          node3 = new Node(3);
+    const subnode1 = new Subnode(1, node1),
+          subnode2 = new Subnode(2, node2),
+          subnode3_root = new Subnode(3, node3,
+                                      {
+                                          logicalOwn: SubnodeOwnership.Subnode,
+                                          physicalOwn: SubnodeOwnership.Supnode
+                                      }),
+          subnode3_1 = new Subnode(3, null,
+                                   {
+                                       logicalOwn: SubnodeOwnership.Here,
+                                       physicalOwn: SubnodeOwnership.Supnode
+                                   }),
+          subnode3_2 = new Subnode(3, null,
+                                   {
+                                       logicalOwn: SubnodeOwnership.Here,
+                                       physicalOwn: SubnodeOwnership.Supnode
+                                   });
+
+    root._subnodes.set(node1.id, subnode1);
+    root._subnodes.set(node2.id, subnode2);
+    root._subnodes.set(node3.id, subnode3_root);
+    node1._subnodes.set(node3.id, subnode3_1);
+    node2._subnodes.set(node3.id, subnode3_2);
+
+    return root;
+}
+
 describe('Node', function(){
 
     describe('selectAllSubnodes', function(){
