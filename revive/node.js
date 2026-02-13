@@ -106,7 +106,21 @@ class Node {
         return result;
     }
 
-    selectSubnodes(condition, n, recursive) {
+    selectNodes(condition, n, recursive) {
+        let result;
+        
+        if (condition(this, null, null)) {
+            result = this._selectNodes(condition, n-1, recursive);
+            result.sample.unshift(this);
+        }
+        else {
+            result = this._selectNodes(condition, n, recursive);
+        }
+
+        return result;
+    }
+    
+    _selectNodes(condition, n, recursive) {
         const sample = [];
 
         for (let container of this._subnodes.values()) {
@@ -129,7 +143,7 @@ class Node {
                 const node = container.node;
                 
                 let subnodeSelection =
-                    node.selectSubnodes(condition, shortage, recursive);
+                    node._selectNodes(condition, shortage, recursive);
                 if (subnodeSelection.isOk()) {
                     sample.push(...subnodeSelection.sample);
                     shortage = n - sample.length;
