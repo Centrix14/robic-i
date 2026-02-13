@@ -146,7 +146,7 @@ describe('Node', function(){
 
     describe('selectNodesAll', function(){
 
-        describe('select subnodes of root', function(){
+        describe('select root and subnodes', function(){
             let root, result;
             
             before(function(){
@@ -159,13 +159,14 @@ describe('Node', function(){
                 assert.isTrue(result.isOk());
             });
 
-            it('selectNodesAll2 - result.sample.length === 1', function(){
-                assert.lengthOf(result.sample, 1);
+            it('selectNodesAll2 - result.sample.length === 2', function(){
+                assert.lengthOf(result.sample, 2);
             });
 
-            it('selectNodesAll3 - node.id === 1', function(){
-                const node = result.sample[0];
-                assert.equal(node.id, 2);
+            it('selectNodesAll3 - node.id === 0, 2', function(){
+                const node1 = result.sample[0],
+                      node2 = result.sample[1];
+                assert.isTrue(node1.id === 0 && node2.id === 2);
             });
         });
 
