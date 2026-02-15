@@ -170,9 +170,17 @@ class Node {
         return this.getNodes((n, c, p) => (node.id === id), 1, recursive);
     }
 
-    addSubnode(node, definition) {
-        const container = new Subnode(node.id, node, definition);
-        this._subnodes.set(node.id, container);
+    addSubnode(node, definition, id) {
+        const nodeId = node?.id ?? id;
+        if (!nodeId)
+            return new Result(ErrorType.InvalidArguments,
+                              `addSubnode requires presence of a node or id argument`);
+        
+        const container = new Subnode(nodeId, node, definition);
+        this._subnodes.set(nodeId, container);
+
+        const result = new Result();
+        result.id = nodeId;
     }
 
     removeSubnode(id) {
