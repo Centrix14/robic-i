@@ -170,7 +170,9 @@ class Node {
     }
 
     getNodeById(id, recursive) {
-        return this.getNodes((n, c, p) => (node.id === id), 1, recursive);
+        return this
+            .selectNodes((n, c, p) => (n.id === id), 1, recursive)
+            .sample[0];
     }
 
     addSubnode(node, definition, id) {
