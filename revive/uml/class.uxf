@@ -45,7 +45,7 @@ selectNodesAll(
 getNodeById(id:integer,
    recursive:boolean): Result
 
-addSubnode(node:Node): integer
+addSubnode(node:Node, definition:Object): integer
 removeSubnode(id:integer): Result
 
 injectNode(parentId, node:Node):Result
