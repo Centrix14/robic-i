@@ -379,7 +379,7 @@ describe('Node', function(){
             });
 
             it('subnodes1 - returns array', function(){
-                subnodes = root.subnodes;
+                subnodes = root.subnodes();
                 assert.isArray(subnodes);
             });
 
@@ -400,7 +400,7 @@ describe('Node', function(){
             });
 
             it('subnodes3 - returns array', function(){
-                subnodes = root.subnodes;
+                subnodes = root.subnodes();
                 assert.isArray(subnodes);
             });
 
@@ -419,7 +419,7 @@ describe('Node', function(){
             });
 
             it('subnodes5 - root has only 2 subnodes', function(){
-                rootSubnodes = root.subnodes;
+                rootSubnodes = root.subnodes();
                 assert.lengthOf(rootSubnodes, 2);
             });
 
@@ -429,7 +429,7 @@ describe('Node', function(){
             });
 
             it('subnodes7 - node1 has 1 subnode', function(){
-                node1Subnodes = node1.subnodes;
+                node1Subnodes = node1.subnodes();
                 assert.lengthOf(node1Subnodes, 1);
             });
 

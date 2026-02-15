@@ -68,7 +68,7 @@ class Node {
     }
 
     get id() { return this._id; }
-    get subnodes() {
+    subnodes() {
         let sample = [];
 
         for (let container of this._subnodes.values()) {
