@@ -7,13 +7,8 @@ function flatTree1() {
     
     const root = new Node(0);
     
-    const node1 = new Node(1),
-          node2 = new Node(2);
-    const subnode1 = new Subnode(1, node1),
-          subnode2 = new Subnode(2, node2);
-
-    root._subnodes.set(node1.id, subnode1);
-    root._subnodes.set(node2.id, subnode2);
+    root.addSubnode(new Node(1));
+    root.addSubnode(new Node(2));
 
     return root;
 }
@@ -25,16 +20,9 @@ function flatTree1a() {
 
     const root = new Node(0);
     
-    const node1 = new Node(1),
-          node2 = new Node(2),
-          node3 = new Node(3);
-    const subnode1 = new Subnode(1, node1),
-          subnode2 = new Subnode(2, node2),
-          subnode3 = new Subnode(3, node3);
-
-    root._subnodes.set(node1.id, subnode1);
-    root._subnodes.set(node2.id, subnode2);
-    root._subnodes.set(node3.id, subnode3);
+    root.addSubnode(new Node(1));
+    root.addSubnode(new Node(2));
+    root.addSubnode(new Node(3));
 
     return root;
 }
@@ -48,17 +36,11 @@ function complexTree1() {
     */
     
     const root = new Node(0);
+    const node1 = new Node(1);
 
-    const node1 = new Node(1),
-          node2 = new Node(2),
-          node3 = new Node(3);
-    const subnode1 = new Subnode(1, node1),
-          subnode2 = new Subnode(2, node2),
-          subnode3 = new Subnode(3, node3);
-
-    root._subnodes.set(node1.id, subnode1);
-    node1._subnodes.set(node2.id, subnode2);
-    node1._subnodes.set(node3.id, subnode3);
+    root.addSubnode(node1);
+    node1.addSubnode(new Node(2));
+    node1.addSubnode(new Node(3));
 
     return root;
 }
@@ -76,32 +58,21 @@ function complexTree2() {
 
     const root = new Node(0);
 
-    const node1 = new Node(1),
-          node2 = new Node(2),
-          node3 = new Node(3);
-    const subnode1 = new Subnode(1, node1),
-          subnode2 = new Subnode(2, node2),
-          subnode3_root = new Subnode(3, node3,
-                                      {
-                                          logicalOwn: SubnodeOwnership.Subnode,
-                                          physicalOwn: SubnodeOwnership.Supnode
-                                      }),
-          subnode3_1 = new Subnode(3, null,
-                                   {
-                                       logicalOwn: SubnodeOwnership.Here,
-                                       physicalOwn: SubnodeOwnership.Supnode
-                                   }),
-          subnode3_2 = new Subnode(3, null,
-                                   {
-                                       logicalOwn: SubnodeOwnership.Here,
-                                       physicalOwn: SubnodeOwnership.Supnode
-                                   });
+    const node = [new Node(1), new Node(2), new Node(3)];
+    const definition = {
+        logicalOwn: SubnodeOwnership.Here,
+        physicalOwn: SubnodeOwnership.Supnode
+    };
 
-    root._subnodes.set(node1.id, subnode1);
-    root._subnodes.set(node2.id, subnode2);
-    root._subnodes.set(node3.id, subnode3_root);
-    node1._subnodes.set(node3.id, subnode3_1);
-    node2._subnodes.set(node3.id, subnode3_2);
+    root.addSubnode(node[0]);
+    root.addSubnode(node[1]);
+    root.addSubnode(node[2], {
+        logicalOwn: SubnodeOwnership.Subnode,
+        physicalOwn: SubnodeOwnership.Supnode
+    });
+
+    node[0].addSubnode(node[2], definition);
+    node[1].addSubnode(node[2], definition);
 
     return root;
 }
@@ -117,27 +88,19 @@ function complexTree3() {
     */
 
     const root = new Node(0);
+    const node = [new Node(1), new Node(2), new Node(3)];
 
-    const node1 = new Node(1),
-          node2 = new Node(2),
-          node3 = new Node(3);
-    const subnode1 = new Subnode(1, node1),
-          subnode2 = new Subnode(2, node2),
-          subnode3_root = new Subnode(3, null,
-                                      {
-                                          logicalOwn: SubnodeOwnership.Here,
-                                          physicalOwn: SubnodeOwnership.Supnode
-                                      }),
-          subnode3_2 = new Subnode(3, node3,
-                                   {
-                                       logicalOwn: SubnodeOwnership.Here,
-                                       physicalOwn: SubnodeOwnership.Here
-                                   });
+    root.addSubnode(node[0]);
+    root.addSubnode(node[1]);
+    root.addSubnode(null, {
+        logicalOwn: SubnodeOwnership.Here,
+        physicalOwn: SubnodeOwnership.Supnode
+    }, node[2].id);
 
-    root._subnodes.set(1, subnode1);
-    root._subnodes.set(2, subnode2);
-    root._subnodes.set(3, subnode3_root);
-    node2._subnodes.set(3, subnode3_2);
+    node[1].addSubnode(node[2], {
+        logicalOwn: SubnodeOwnership.Here,
+        physicalOwn: SubnodeOwnership.Here
+    });
 
     return root;
 }
