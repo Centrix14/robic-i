@@ -69,7 +69,18 @@ class Node {
 
     get id() { return this._id; }
     get subnodes() {
-        return Array.from(this._subnodes.values());
+        let sample = [];
+
+        for (let container of this._subnodes.values()) {
+            const node = container.node;
+
+            if (container._logicalOwn === SubnodeOwnership.Here) {
+                if (container._physicalOwn === SubnodeOwnership.Here)
+                    sample.push(node);
+            }
+        }
+
+        return sample;
     }
 
     isEmpty() { return false; }
@@ -295,7 +306,9 @@ class EmptyNode {
 }
 
 class SubnodeOwnership {
-    static Here = ''
+    static Here = 'Here'
+    static Subnode = 'Subnode'
+    static Supnode = 'Supnode'
 }
 
 class SubnodeRole {
