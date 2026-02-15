@@ -169,6 +169,11 @@ class Node {
         return this.getNodes((n, c, p) => (node.id === id), 1, recursive);
     }
 
+    addSubnode(node, definition) {
+        const container = new Subnode(node.id, node, definition);
+        this._subnodes.set(node.id, container);
+    }
+
     injectSubnode(parentId, node) {
         let parent;
 
