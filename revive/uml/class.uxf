@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>910</x>
-      <y>430</y>
+      <y>320</y>
       <w>360</w>
       <h>620</h>
     </coordinates>
@@ -45,7 +45,7 @@ selectNodesAll(
 getNodeById(id:integer,
    recursive:boolean): Result
 
-addSubnode(node:Node, definition:Object): integer
+addSubnode(node:Node, definition:Object, id:integer): Result
 removeSubnode(id:integer): Result
 
 injectNode(parentId, node:Node):Result
@@ -59,7 +59,7 @@ disconnectNodes(id1, id2):Result</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>460</y>
+      <y>350</y>
       <w>280</w>
       <h>70</h>
     </coordinates>
@@ -72,7 +72,7 @@ calculate(Deviation [*]): Deviation</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>480</x>
-      <y>470</y>
+      <y>360</y>
       <w>450</w>
       <h>40</h>
     </coordinates>
@@ -85,7 +85,7 @@ m2=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1350</x>
-      <y>750</y>
+      <y>640</y>
       <w>440</w>
       <h>150</h>
     </coordinates>
@@ -101,7 +101,7 @@ clone() = cloned.fromMap(this.toMap()),
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>780</y>
+      <y>670</y>
       <w>110</w>
       <h>30</h>
     </coordinates>
@@ -112,7 +112,7 @@ clone() = cloned.fromMap(this.toMap()),
     <id>UMLClass</id>
     <coordinates>
       <x>1380</x>
-      <y>430</y>
+      <y>320</y>
       <w>350</w>
       <h>140</h>
     </coordinates>
@@ -134,7 +134,7 @@ Subnode(id:integer, node:Node, definition:Object)
     <id>UMLClass</id>
     <coordinates>
       <x>1380</x>
-      <y>590</y>
+      <y>480</y>
       <w>160</w>
       <h>100</h>
     </coordinates>
@@ -150,7 +150,7 @@ Supnode</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>470</y>
+      <y>360</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -163,7 +163,7 @@ m2=0..*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1450</x>
-      <y>560</y>
+      <y>450</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -175,7 +175,7 @@ m2=0..*</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1770</x>
-      <y>430</y>
+      <y>320</y>
       <w>180</w>
       <h>100</h>
     </coordinates>
@@ -189,7 +189,7 @@ m2=0..*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1720</x>
-      <y>450</y>
+      <y>340</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -200,7 +200,7 @@ m2=0..*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>490</y>
+      <y>380</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -213,7 +213,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>910</x>
-      <y>280</y>
+      <y>170</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -229,7 +229,7 @@ isFree(id:integer): boolean</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1210</x>
-      <y>280</y>
+      <y>170</y>
       <w>250</w>
       <h>100</h>
     </coordinates>
@@ -244,7 +244,7 @@ isUsed() и isFree() проверяют
     <id>Relation</id>
     <coordinates>
       <x>1120</x>
-      <y>310</y>
+      <y>200</y>
       <w>110</w>
       <h>30</h>
     </coordinates>
@@ -255,7 +255,7 @@ isUsed() и isFree() проверяют
     <id>UMLClass</id>
     <coordinates>
       <x>290</x>
-      <y>280</y>
+      <y>170</y>
       <w>330</w>
       <h>140</h>
     </coordinates>
@@ -274,7 +274,7 @@ isFail(): boolean</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>280</y>
+      <y>170</y>
       <w>180</w>
       <h>160</h>
     </coordinates>
@@ -290,6 +290,7 @@ SubnodeNotFound
 InconsistentNodeTree
 ImpossibleSelectCondition
 MapDeleteError
+InvalidArguments
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -297,7 +298,7 @@ MapDeleteError
     <id>Relation</id>
     <coordinates>
       <x>610</x>
-      <y>300</y>
+      <y>190</y>
       <w>80</w>
       <h>30</h>
     </coordinates>
@@ -308,7 +309,7 @@ MapDeleteError
     <id>UMLClass</id>
     <coordinates>
       <x>570</x>
-      <y>690</y>
+      <y>580</y>
       <w>250</w>
       <h>130</h>
     </coordinates>
@@ -327,7 +328,7 @@ fromMap(map:Map, mb: MapBehaviour): Result
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>590</y>
+      <y>480</y>
       <w>170</w>
       <h>100</h>
     </coordinates>
@@ -344,7 +345,7 @@ fromMap(map:Map, mb: MapBehaviour): Result
     <id>UMLClass</id>
     <coordinates>
       <x>1570</x>
-      <y>590</y>
+      <y>480</y>
       <w>160</w>
       <h>140</h>
     </coordinates>
@@ -364,7 +365,7 @@ Mean</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1640</x>
-      <y>560</y>
+      <y>450</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -376,7 +377,7 @@ Mean</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>340</x>
-      <y>700</y>
+      <y>590</y>
       <w>140</w>
       <h>50</h>
     </coordinates>
@@ -389,7 +390,7 @@ Mean</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>110</x>
-      <y>760</y>
+      <y>650</y>
       <w>370</w>
       <h>150</h>
     </coordinates>
@@ -408,7 +409,7 @@ removePossibleValue(id:integer): Result</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>640</y>
+      <y>530</y>
       <w>120</w>
       <h>110</h>
     </coordinates>
@@ -419,7 +420,7 @@ removePossibleValue(id:integer): Result</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>720</y>
+      <y>610</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -430,7 +431,7 @@ removePossibleValue(id:integer): Result</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>720</y>
+      <y>610</y>
       <w>120</w>
       <h>100</h>
     </coordinates>
@@ -441,7 +442,7 @@ removePossibleValue(id:integer): Result</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>810</x>
-      <y>720</y>
+      <y>610</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -454,7 +455,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>570</x>
-      <y>920</y>
+      <y>810</y>
       <w>200</w>
       <h>140</h>
     </coordinates>
@@ -472,7 +473,7 @@ Deviation()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>290</x>
-      <y>930</y>
+      <y>820</y>
       <w>190</w>
       <h>130</h>
     </coordinates>
@@ -488,7 +489,7 @@ PropertyDeviation()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>290</x>
-      <y>1080</y>
+      <y>970</y>
       <w>190</w>
       <h>130</h>
     </coordinates>
@@ -505,7 +506,7 @@ Risk()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
-      <y>960</y>
+      <y>850</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
@@ -518,7 +519,7 @@ m2=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1390</x>
-      <y>930</y>
+      <y>820</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -530,7 +531,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>940</y>
+      <y>830</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -543,7 +544,7 @@ m2=0..1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>290</x>
-      <y>110</y>
+      <y>0</y>
       <w>200</w>
       <h>70</h>
     </coordinates>
@@ -558,7 +559,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>520</x>
-      <y>110</y>
+      <y>0</y>
       <w>190</w>
       <h>90</h>
     </coordinates>
@@ -573,7 +574,7 @@ bg=red</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>750</x>
-      <y>110</y>
+      <y>0</y>
       <w>140</w>
       <h>100</h>
     </coordinates>
@@ -588,7 +589,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>700</x>
-      <y>110</y>
+      <y>0</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -599,7 +600,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>1000</y>
+      <y>890</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -610,7 +611,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>1000</y>
+      <y>890</y>
       <w>120</w>
       <h>160</h>
     </coordinates>
@@ -621,7 +622,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>440</y>
+      <y>330</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -632,7 +633,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>480</y>
+      <y>370</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -643,7 +644,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>520</y>
+      <y>410</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -654,7 +655,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>440</y>
+      <y>330</y>
       <w>100</w>
       <h>80</h>
     </coordinates>
@@ -665,7 +666,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>490</y>
+      <y>380</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -676,7 +677,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>490</y>
+      <y>380</y>
       <w>100</w>
       <h>70</h>
     </coordinates>
@@ -687,7 +688,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1390</x>
-      <y>1000</y>
+      <y>890</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -698,7 +699,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>1010</y>
+      <y>900</y>
       <w>150</w>
       <h>30</h>
     </coordinates>

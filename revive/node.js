@@ -6,6 +6,7 @@ class ErrorType {
     static InconsistentNodeTree = 'Inconsistent node tree'
     static ImpossibleSelectCondition = 'Impossible select condition'
     static MapDeleteError = 'Map delete error'
+    static InvalidArguments = 'Invalid arguments'
 }
 
 class Result {
