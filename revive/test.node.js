@@ -369,6 +369,45 @@ describe('Node', function(){
 
     });
 
+    describe('subnodes', function(){
+
+        describe('return array of direct subnodes', function(){
+            let root, subnodes;
+
+            before(function(){
+                root = flatTree1a();
+            });
+
+            it('subnodes1 - returns array', function(){
+                subnodes = root.subnodes;
+                assert.isArray(subnodes);
+            });
+
+            it('subnodes2 - subnodes.length === 3', function(){
+                assert.lengthOf(subnodes, 3);
+            });
+        });
+
+        describe('return empty array when no subnodes found', function(){
+            let root, subnodes;
+
+            before(function(){
+                root = new Node(0);
+            });
+
+            it('subnodes3 - returns array', function(){
+                subnodes = root.subnodes;
+                assert.isArray(subnodes);
+            });
+
+            it('subnodes4 - returns empty array', function(){
+                assert.isEmpty(subnodes);
+            });
+
+        });
+
+    });
+
     describe('injectNode', function(){
         it('injects subnodes to root', function(){
             const subnodes = new Map();
