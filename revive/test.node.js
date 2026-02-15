@@ -439,6 +439,25 @@ describe('Node', function(){
 
         });
 
+        describe('it aware of node deriving', function(){
+            let root, subnodes;
+
+            before(function(){
+                root = complexTree3();
+            });
+
+            it('subnodes10 - root has 3 subnodes', function(){
+                subnodes = root.subnodes();
+                assert.lengthOf(subnodes, 3);
+            });
+
+            it('subnodes11 - subnodes has id === 1, 2, 3', function(){
+                assert.equal(subnodes[0].id, 1);
+                assert.equal(subnodes[1].id, 2);
+                assert.equal(subnodes[2].id, 3);
+            });
+        });
+
     });
 
     describe('injectNode', function(){
