@@ -127,9 +127,8 @@ describe('Node', function(){
             });
 
             it('selectNodesAll3 - node.id === 0, 2', function(){
-                const node1 = result.sample[0],
-                      node2 = result.sample[1];
-                assert.isTrue(node1.id === 0 && node2.id === 2);
+                const node = [result.sample[0], result.sample[1]];
+                assert.isTrue(node[0].id === 0 && node[1].id === 2);
             });
         });
 
@@ -175,12 +174,11 @@ describe('Node', function(){
             });
 
             it('selectNodesAll11 - selected node.id === 1, 2, 3', function(){
-                const node1 = result.sample[0],
-                      node2 = result.sample[1],
-                      node3 = result.sample[2];
-                assert.isTrue(node1.id === 1 &&
-                              node2.id === 2 &&
-                              node3.id === 3);
+                const node = [result.sample[0], result.sample[1],
+                              result.sample[2]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2 &&
+                              node[2].id === 3);
             });
         });
 
@@ -203,10 +201,9 @@ describe('Node', function(){
             });
 
             it('selectNodesAll14 - selected node.id === 1, 2', function(){
-                const node1 = result.sample[0],
-                      node2 = result.sample[1];
-                assert.isTrue(node1.id === 1 &&
-                              node2.id === 2);
+                const node = [result.sample[0], result.sample[1]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2);
             });
         });
 
@@ -274,10 +271,9 @@ describe('Node', function(){
             });
 
             it('selectNodes6 - node.id = 1, 3', function(){
-                const node1 = result.sample[0],
-                      node2 = result.sample[1];
-                assert.equal(node1.id, 1);
-                assert.equal(node2.id, 3);
+                const node = [result.sample[0], result.sample[1]];
+                assert.equal(node[0].id, 1);
+                assert.equal(node[1].id, 3);
             });
         });
 
