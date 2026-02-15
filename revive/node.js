@@ -89,6 +89,12 @@ class Node {
                     break;
 
                 case SubnodeOwnership.Subnode:
+                    for (let element of sample) {
+                        if (element._subnodes.has(container.id)) {
+                            subnode = element._subnodes.get(container.id).node;
+                            break;
+                        }
+                    }
                     break;
                 }
 
