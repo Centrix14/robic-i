@@ -68,7 +68,9 @@ class Node {
     }
 
     get id() { return this._id; }
-    get subnodes() { return this._subnodes.values(); }
+    get subnodes() {
+        return Array.from(this._subnodes.values());
+    }
 
     isEmpty() { return false; }
     isPresent() { return true; }
