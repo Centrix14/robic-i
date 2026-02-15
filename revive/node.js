@@ -5,6 +5,7 @@ class ErrorType {
     static SubnodeNotFound = 'Subnode not found'
     static InconsistentNodeTree = 'Inconsistent node tree'
     static ImpossibleSelectCondition = 'Impossible select condition'
+    static MapDeleteError = 'Map delete error'
 }
 
 class Result {
@@ -172,6 +173,25 @@ class Node {
     addSubnode(node, definition) {
         const container = new Subnode(node.id, node, definition);
         this._subnodes.set(node.id, container);
+    }
+
+    removeSubnode(id) {
+        const container = this._subnodes.get(id);
+        
+        if (!container)
+            return new Result(ErrorType.SubnodeNotFound,
+                              `Subnode id:${id} not found`);
+
+        let result;
+        const removed = this._subnodes.delete(id);
+        if (removed)
+            result = new Result();
+        else
+            result = new Result(ErrorType.MapDeleteError,
+                                `Failed to delete entry id:${id}`);
+
+        result.node = container.node;
+        return result;
     }
 
     injectSubnode(parentId, node) {
