@@ -68,15 +68,31 @@ class Node {
     }
 
     get id() { return this._id; }
-    subnodes() {
+    subnodes(rootNode) {
+        const root = rootNode ?? this;
         let sample = [];
 
         for (let container of this._subnodes.values()) {
             const node = container.node;
 
             if (container._logicalOwn === SubnodeOwnership.Here) {
-                if (container._physicalOwn === SubnodeOwnership.Here)
-                    sample.push(node);
+                let subnode;
+                
+                switch (container._physicalOwn) {
+                case SubnodeOwnership.Here:
+                    subnode = node;
+                    break;
+
+                case SubnodeOwnership.Supnode:
+                    const subnodeContainer = root._subnodes.get(container.id);
+                    subnode = subnodeContainer.node;
+                    break;
+
+                case SubnodeOwnership.Subnode:
+                    break;
+                }
+
+                sample.push(subnode);
             }
         }
 
