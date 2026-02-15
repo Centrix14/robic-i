@@ -386,6 +386,10 @@ describe('Node', function(){
             it('subnodes2 - subnodes.length === 3', function(){
                 assert.lengthOf(subnodes, 3);
             });
+
+            it('subnodes9 - subnodes is an array of nodes', function(){
+                subnodes.forEach((elm) => assert.instanceOf(elm, Node));
+            });
         });
 
         describe('return empty array when no subnodes found', function(){
