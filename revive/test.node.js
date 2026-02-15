@@ -71,8 +71,8 @@ function complexTree2() {
         physicalOwn: SubnodeOwnership.Here
     });
 
-    node[0].addSubnode(node[2], definition);
-    node[1].addSubnode(node[2], definition);
+    node[0].addSubnode(null, definition, node[2].id);
+    node[1].addSubnode(null, definition, node[2].id);
 
     return root;
 }
@@ -429,7 +429,7 @@ describe('Node', function(){
             });
 
             it('subnodes7 - node1 has 1 subnode', function(){
-                node1Subnodes = node1.subnodes();
+                node1Subnodes = node1.subnodes(root);
                 assert.lengthOf(node1Subnodes, 1);
             });
 
