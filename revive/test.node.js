@@ -94,7 +94,7 @@ function complexTree3() {
     root.addSubnode(node[1]);
     root.addSubnode(null, {
         logicalOwn: SubnodeOwnership.Here,
-        physicalOwn: SubnodeOwnership.Supnode
+        physicalOwn: SubnodeOwnership.Subnode
     }, node[2].id);
 
     node[1].addSubnode(node[2], {
