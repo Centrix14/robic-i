@@ -403,6 +403,35 @@ describe('Node', function(){
             it('subnodes4 - returns empty array', function(){
                 assert.isEmpty(subnodes);
             });
+        });
+
+
+        describe('it aware of node sharing', function(){
+            let root, node1, rootSubnodes, node1Subnodes;
+
+            before(function(){
+                root = complexTree2();
+                node1 = root.getNodeById(1);
+            });
+
+            it('subnodes5 - root has only 2 subnodes', function(){
+                rootSubnodes = root.subnodes;
+                assert.lengthOf(rootSubnodes, 2);
+            });
+
+            it('subnodes6 - root subnodes has id === 1, 2', function(){
+                assert.equal(rootSubnodes[0].id, 1);
+                assert.equal(rootSubnodes[1].id, 2);
+            });
+
+            it('subnodes7 - node1 has 1 subnode', function(){
+                node1Subnodes = node1.subnodes;
+                assert.lengthOf(node1Subnodes, 1);
+            });
+
+            it('subnodes8 - node1 subnode has id === 3', function(){
+                assert.equal(node1Subnodes[0].id, 3);
+            });
 
         });
 
