@@ -103,6 +103,97 @@ function treeWithDeriving() {
 
 describe('Node', function(){
 
+    describe('selectSubnodesAll', function(){
+
+        describe('select only direct subnodes', function(){
+            let root, result;
+
+            before(function(){
+                root = simpleNestedTree();
+            });
+
+            it('selectSubnodesAll1 - result.isOk()', function(){
+                result = root.selectSubnodesAll((n, c) => true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectSubnodesAll2 - result.sample.length === 1', function(){
+                assert.lengthOf(result.sample, 1);
+            });
+
+            it('selectSubnodesAll3 - node.id === 1', function(){
+                const node = result.sample[0];
+                assert.equal(node.id, 1);
+            });
+        });
+
+        describe('select shared subnodes unaware of ownership', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWithSharing();
+            });
+
+            it('selectSubnodesAll4 - result.isOk()', function(){
+                result = root.selectSubnodesAll((n, c) => true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectSubnodesAll5 - result.sample.length === 3', function(){
+                assert.lengthOf(result.sample, 3);
+            });
+
+            it('selectSubnodesAll6 - selected node.id === 1, 2, 3', function(){
+                const node = [result.sample[0], result.sample[1],
+                              result.sample[2]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2 &&
+                              node[2].id === 3);
+            });
+        });
+
+        describe('select derived subnodes unaware of ownership', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWithDeriving();
+            });
+
+            it('selectSubnodesAll7 - result.isOk()', function(){
+                result = root.selectSubnodesAll((n, c) => true);
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectSubnodesAll8 - result.sample.length === 2', function(){
+                assert.lengthOf(result.sample, 2);
+            });
+
+            it('selectSubnodesAll9 - selected node.id === 1, 2', function(){
+                const node = [result.sample[0], result.sample[1]];
+                assert.isTrue(node[0].id === 1 &&
+                              node[1].id === 2);
+            });
+        });
+
+        describe('returns empty array if nothing was found', function(){
+            let root, result;
+            
+            before(function(){
+                root = treeWith3Childs();
+            });
+
+            it('selectSubnodesAll10 - result.isOk()', function(){
+                result = root.selectSubnodesAll((n) => (n.id === 0));
+                assert.isTrue(result.isOk());
+            });
+
+            it('selectSubnodesAll11 - result.sample is empty', function(){
+                assert.isEmpty(result.sample);
+            })
+        });
+
+    });
+
     describe('selectNodesAll', function(){
 
         describe('select root and subnodes', function(){
