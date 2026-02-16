@@ -67,8 +67,8 @@ function treeWithSharing() {
         physicalOwn: SubnodeOwnership.Here
     });
 
-    node[0].addSubnode(null, definition, node[2].id);
-    node[1].addSubnode(null, definition, node[2].id);
+    node[0].addSubnode(emptyNode, definition, node[2].id);
+    node[1].addSubnode(emptyNode, definition, node[2].id);
 
     return root;
 }
@@ -88,7 +88,7 @@ function treeWithDeriving() {
 
     root.addSubnode(node[0]);
     root.addSubnode(node[1]);
-    root.addSubnode(null, {
+    root.addSubnode(emptyNode, {
         logicalOwn: SubnodeOwnership.Here,
         physicalOwn: SubnodeOwnership.Subnode
     }, node[2].id);
