@@ -25,7 +25,7 @@ Node(id:integer, definition:Object)
 &lt;&lt;get&gt;&gt; relation()
 &lt;&lt;set&gt;&gt; relation()
 
-&lt;&lt;get&gt;&gt; subnodes(): Node [*]
+subnodes(rootNode): Node [*]
 
 toMap(): Map
 fromMap(map:Map, mb:MapBehaviour): Result
@@ -45,7 +45,8 @@ selectNodesAll(
 getNodeById(id:integer,
    recursive:boolean): Result
 
-addSubnode(node:Node, definition:Object, id:integer): Result
+addSubnode(node:Node, definition:Object,
+   id:integer): Result
 removeSubnode(id:integer): Result
 
 injectNode(parentId, node:Node):Result
