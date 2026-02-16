@@ -132,7 +132,7 @@ class Node {
 
         if (recursive) {
             for (let container of this._subnodes.values()) {
-                const node = container.node;
+                const node = container.node; // !!!
                 if (node) {
                     const inner = node.selectNodesAll(condition,
                                                       recursive,
@@ -148,7 +148,35 @@ class Node {
         return result;
     }
 
-    selectNodes(condition, n, recursive) {
+    selectNodes(condition, n, recursive, container=null, parent=null) {
+        const sample = [];
+
+        if (condition(this, container, parent))
+            sample.push(this);
+
+        for (let container of this._subnodes.values) {
+            if (sample.length === n) {
+                const result = new Result();
+                result.sample = sample;
+                return result;
+            }
+
+            const node = container.node;
+            if (node && condition(node, container, this))
+                sample.push(node);
+        }
+
+        if (sample.length === n) {
+            const result = new Result();
+            result.sample = sample;
+            return result;
+        }
+
+        if (recursive) {
+            // устал…
+        }
+
+/*
         let result;
         
         if (condition(this, null, null)) {
@@ -160,6 +188,7 @@ class Node {
         }
 
         return result;
+*/
     }
     
     _selectNodes(condition, n, recursive) {
