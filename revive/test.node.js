@@ -1,4 +1,4 @@
-function flatTree1() {
+function treeWith2Childs() {
     /*
       root
       - node1
@@ -13,11 +13,7 @@ function flatTree1() {
     return root;
 }
 
-function flatTree1a() {
-    /*
-      same to flatTree1, but root has 3 childs
-     */
-
+function treeWith3Childs() {
     const root = new Node(0);
     
     root.addSubnode(new Node(1));
@@ -27,7 +23,7 @@ function flatTree1a() {
     return root;
 }
 
-function complexTree1() {
+function simpleNestedTree() {
     /*
       root
       - node1
@@ -45,7 +41,7 @@ function complexTree1() {
     return root;
 }
 
-function complexTree2() {
+function treeWithSharing() {
     /*
       structure:
       root
@@ -77,7 +73,7 @@ function complexTree2() {
     return root;
 }
 
-function complexTree3() {
+function treeWithDeriving() {
     /*
       structure:
       root
@@ -113,7 +109,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = flatTree1();
+                root = treeWith2Childs();
             });
 
             it('selectNodesAll1 - result.isOk()', function(){
@@ -136,7 +132,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = complexTree1();
+                root = simpleNestedTree();
             });
 
             it('selectNodesAll4 - result.isOk()', function(){
@@ -159,7 +155,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = complexTree2();
+                root = treeWithSharing();
             });
 
             it('selectNodesAll9 - result.isOk()', function(){
@@ -186,7 +182,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = complexTree3();
+                root = treeWithDeriving();
             });
 
             it('selectNodesAll12 - result.isOk()', function(){
@@ -211,7 +207,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = complexTree1();
+                root = simpleNestedTree();
             });
 
             it('selectNodesAll7 - result.isOk()', function(){
@@ -233,7 +229,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = flatTree1a();
+                root = treeWith3Childs();
             });
 
             it('selectNodes1 - result.isOk()', function(){
@@ -257,7 +253,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = complexTree1();
+                root = simpleNestedTree();
             });
 
             it('selectNodes4 - result.isOk()', function(){
@@ -281,7 +277,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = complexTree2();
+                root = treeWithSharing();
             });
 
             it('selectNodes11 - result.isOk()', function(){
@@ -308,7 +304,7 @@ describe('Node', function(){
             let root, result;
 
             before(function(){
-                root = complexTree3();
+                root = treeWithDeriving();
             });
 
             it('selectNodes14 - result.isFail()', function(){
@@ -333,7 +329,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = flatTree1();
+                root = treeWith2Childs();
             });
 
             it('selectNodes7 - result.isFail()', function(){
@@ -351,7 +347,7 @@ describe('Node', function(){
             let root, result;
             
             before(function(){
-                root = flatTree1();
+                root = treeWith2Childs();
             });
 
             it('selectNodes9 - result.isFail()', function(){
@@ -375,7 +371,7 @@ describe('Node', function(){
             let root, subnodes;
 
             before(function(){
-                root = flatTree1a();
+                root = treeWith3Childs();
             });
 
             it('subnodes1 - returns array', function(){
@@ -414,7 +410,7 @@ describe('Node', function(){
             let root, node1, rootSubnodes, node1Subnodes;
 
             before(function(){
-                root = complexTree2();
+                root = treeWithSharing();
                 node1 = root.getNodeById(1);
             });
 
@@ -443,7 +439,7 @@ describe('Node', function(){
             let root, subnodes;
 
             before(function(){
-                root = complexTree3();
+                root = treeWithDeriving();
             });
 
             it('subnodes10 - root has 3 subnodes', function(){
