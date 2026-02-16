@@ -68,6 +68,10 @@ class Node {
     }
 
     get id() { return this._id; }
+
+    isEmpty() { return false; }
+    isPresent() { return true; }
+
     subnodes(rootNode) {
         const root = rootNode ?? this;
         let sample = [];
@@ -104,9 +108,6 @@ class Node {
 
         return sample;
     }
-
-    isEmpty() { return false; }
-    isPresent() { return true; }
 
     selectNodesAll(condition, recursive) {
         const result = this._selectNodesAll(condition, recursive);
