@@ -109,22 +109,7 @@ class Node {
         return sample;
     }
 
-    selectSubnodesAll(condition) {
-        const sample = [];
-
-        for (let container of this._subnodes.values()) {
-            const node = container.node;
-
-            if (node && condition(node, container))
-                sample.push(node);
-        }
-
-        const result = new Result();
-        result.sample = sample;
-        return result;
-    }
-
-    selectNodesAll(condition, recursive, container=null, parent=null) {
+    selectNodes(condition, recursive, container=null, parent=null) {
         const sample = [];
 
         if (condition(this, container, parent))
@@ -134,10 +119,10 @@ class Node {
             for (let container of this._subnodes.values()) {
                 const node = container.node; // !!!
                 if (node) {
-                    const inner = node.selectNodesAll(condition,
-                                                      recursive,
-                                                      container,
-                                                      this);
+                    const inner = node.selectNodes(condition,
+                                                   recursive,
+                                                   container,
+                                                   this);
                     sample.push(...inner.sample);
                 }
             }
@@ -148,97 +133,9 @@ class Node {
         return result;
     }
 
-    selectNodes(condition, n, recursive, container=null, parent=null) {
-        const sample = [];
-
-        if (condition(this, container, parent))
-            sample.push(this);
-
-        for (let container of this._subnodes.values) {
-            if (sample.length === n) {
-                const result = new Result();
-                result.sample = sample;
-                return result;
-            }
-
-            const node = container.node;
-            if (node && condition(node, container, this))
-                sample.push(node);
-        }
-
-        if (sample.length === n) {
-            const result = new Result();
-            result.sample = sample;
-            return result;
-        }
-
-        if (recursive) {
-            // устал…
-        }
-
-/*
-        let result;
-        
-        if (condition(this, null, null)) {
-            result = this._selectNodes(condition, n-1, recursive);
-            result.sample.unshift(this);
-        }
-        else {
-            result = this._selectNodes(condition, n, recursive);
-        }
-
-        return result;
-*/
-    }
-    
-    _selectNodes(condition, n, recursive) {
-        const sample = [];
-
-        for (let container of this._subnodes.values()) {
-            const node = container.node;
-            if (!node) continue;
-            
-            if (condition(node, container, this))
-                sample.push(node);
-            
-            if (sample.length === n) {
-                const result = new Result();
-                result.sample = sample;
-                return result;
-            }
-        }
-
-        if (recursive) {
-            let shortage = n - sample.length;
-            
-            for (let container of this._subnodes.values()) {
-                const node = container.node;
-                if (!node) continue;
-                
-                let subnodeSelection =
-                    node._selectNodes(condition, shortage, recursive);
-                if (subnodeSelection.isOk()) {
-                    sample.push(...subnodeSelection.sample);
-                    shortage = n - sample.length;
-                }
-
-                if (sample.length === n) {
-                    const result = new Result();
-                    result.sample = sample;
-                    return result;
-                }
-            }
-        }
-
-        let result = new Result(ErrorType.ImpossibleSelectCondition,
-                                `Select condition is impossible to satisfy`);
-        result.sample = sample;
-        return result;
-    }
-
-    getNodeById(id, recursive) {
+    getNodeById(id, recursive=true) {
         return this
-            .selectNodes((n, c, p) => (n.id === id), 1, recursive)
+            .selectNodes((n, c, p) => (n.id === id), recursive)
             .sample[0];
     }
 
