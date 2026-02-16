@@ -124,33 +124,22 @@ class Node {
         return result;
     }
 
-    selectNodesAll(condition, recursive) {
-        const result = this._selectNodesAll(condition, recursive);
-
-        if (condition(this, null, null))
-            result.sample.unshift(this);
-
-        return result;
-    }
-
-    _selectNodesAll(condition, recursive) {
+    selectNodesAll(condition, recursive, container=null, parent=null) {
         const sample = [];
 
-        for (let container of this._subnodes.values()) {
-            const node = container.node;
+        if (condition(this, container, parent))
+            sample.push(this);
 
-            if (!node) continue; // ignore inderect nodes
-
-            if (condition(node, container, this))
-                sample.push(node);
-            
-            if (recursive) {
-                const subnodeSelection =
-                      node._selectNodesAll(condition, recursive);
-                if (subnodeSelection.isOk())
-                    sample.push(...subnodeSelection.sample);
-                else
-                    return subnodeSelection;
+        if (recursive) {
+            for (let container of this._subnodes.values()) {
+                const node = container.node;
+                if (node) {
+                    const inner = node.selectNodesAll(condition,
+                                                      recursive,
+                                                      container,
+                                                      this);
+                    sample.push(...inner.sample);
+                }
             }
         }
 
