@@ -195,58 +195,6 @@ class Node {
 
         return new Result();
     }
-
-    createSubnode(parentId, definition) {
-        const nodeId = IDENTIFIER.next();
-        const node = new Node(nodeId);
-        const subnode = new Subnode(IDENTIFIER.next(), node,
-                                    {
-                                        logicalOwn: SubnodeOwnership.Here,
-                                        physicalOwn: SubnodeOwnership.Here,
-                                        role: SubnodeRole.Void
-                                    });
-
-        let target;
-        if (parentId === this._id)
-            target = this;
-        else {
-            const result = this.getSubnodeById(parentId, true);
-            if (result.isFail())
-                return result;
-            else
-                target = result.node;
-        }
-        
-        target._subnodes.set(nodeId, node);
-        
-        let result = new Result();
-        result.node = node;
-        
-        return result;
-    }
-
-    removeSubnode(id) {
-        let parent;
-        
-        if (this._subnodes.has(id)) {
-            parent = this;
-        }
-        else {
-            const result = this.selectSubnodes(
-                (node, _) => (node._subnodes.has(id)),
-                1,
-                true
-            );
-
-            if (result.isOk())
-                parent = result.sample[0];
-            else
-                return result;
-        }
-
-        parent._subnodes.delete(id);
-        return new Result();
-    }
 }
 
 class EmptyNode {
