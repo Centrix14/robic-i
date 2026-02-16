@@ -109,6 +109,21 @@ class Node {
         return sample;
     }
 
+    selectSubnodesAll(condition) {
+        const sample = [];
+
+        for (let container of this._subnodes.values()) {
+            const node = container.node;
+
+            if (node && condition(node, container))
+                sample.push(node);
+        }
+
+        const result = new Result();
+        result.sample = sample;
+        return result;
+    }
+
     selectNodesAll(condition, recursive) {
         const result = this._selectNodesAll(condition, recursive);
 
