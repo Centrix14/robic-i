@@ -117,7 +117,7 @@ class Node {
 
         if (recursive) {
             for (let container of this._subnodes.values()) {
-                const node = container.node ?? new EmptyNode();
+                const node = container.node;
                 const inner = node.selectNodes(condition, recursive,
                                                container, this);
                 sample.push(...inner.sample);
@@ -207,6 +207,8 @@ class EmptyNode {
         return result;
     }
 }
+
+const emptyNode = new EmptyNode();
 
 class SubnodeOwnership {
     static Here = 'Here'
