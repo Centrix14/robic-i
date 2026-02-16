@@ -117,14 +117,10 @@ class Node {
 
         if (recursive) {
             for (let container of this._subnodes.values()) {
-                const node = container.node; // !!!
-                if (node) {
-                    const inner = node.selectNodes(condition,
-                                                   recursive,
-                                                   container,
-                                                   this);
-                    sample.push(...inner.sample);
-                }
+                const node = container.node ?? new EmptyNode();
+                const inner = node.selectNodes(condition, recursive,
+                                               container, this);
+                sample.push(...inner.sample);
             }
         }
 
