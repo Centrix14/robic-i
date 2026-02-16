@@ -205,7 +205,7 @@ describe('Node', function(){
 
             it('selectNodesAll1 - result.isOk()', function(){
                 result =
-                    root.selectNodesAll((n) => (n.id % 2 === 0), false);
+                    root.selectNodesAll((n) => (n.id % 2 === 0), true);
                 assert.isTrue(result.isOk());
             });
 
