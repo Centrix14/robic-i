@@ -103,98 +103,7 @@ function treeWithDeriving() {
 
 describe('Node', function(){
 
-    describe('selectSubnodesAll', function(){
-
-        describe('select only direct subnodes', function(){
-            let root, result;
-
-            before(function(){
-                root = simpleNestedTree();
-            });
-
-            it('selectSubnodesAll1 - result.isOk()', function(){
-                result = root.selectSubnodesAll((n, c) => true);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectSubnodesAll2 - result.sample.length === 1', function(){
-                assert.lengthOf(result.sample, 1);
-            });
-
-            it('selectSubnodesAll3 - node.id === 1', function(){
-                const node = result.sample[0];
-                assert.equal(node.id, 1);
-            });
-        });
-
-        describe('select shared subnodes unaware of ownership', function(){
-            let root, result;
-
-            before(function(){
-                root = treeWithSharing();
-            });
-
-            it('selectSubnodesAll4 - result.isOk()', function(){
-                result = root.selectSubnodesAll((n, c) => true);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectSubnodesAll5 - result.sample.length === 3', function(){
-                assert.lengthOf(result.sample, 3);
-            });
-
-            it('selectSubnodesAll6 - selected node.id === 1, 2, 3', function(){
-                const node = [result.sample[0], result.sample[1],
-                              result.sample[2]];
-                assert.isTrue(node[0].id === 1 &&
-                              node[1].id === 2 &&
-                              node[2].id === 3);
-            });
-        });
-
-        describe('select derived subnodes unaware of ownership', function(){
-            let root, result;
-
-            before(function(){
-                root = treeWithDeriving();
-            });
-
-            it('selectSubnodesAll7 - result.isOk()', function(){
-                result = root.selectSubnodesAll((n, c) => true);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectSubnodesAll8 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
-            });
-
-            it('selectSubnodesAll9 - selected node.id === 1, 2', function(){
-                const node = [result.sample[0], result.sample[1]];
-                assert.isTrue(node[0].id === 1 &&
-                              node[1].id === 2);
-            });
-        });
-
-        describe('returns empty array if nothing was found', function(){
-            let root, result;
-            
-            before(function(){
-                root = treeWith3Childs();
-            });
-
-            it('selectSubnodesAll10 - result.isOk()', function(){
-                result = root.selectSubnodesAll((n) => (n.id === 0));
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectSubnodesAll11 - result.sample is empty', function(){
-                assert.isEmpty(result.sample);
-            })
-        });
-
-    });
-
-    describe('selectNodesAll', function(){
+    describe('selectNodes', function(){
 
         describe('select root and subnodes', function(){
             let root, result;
@@ -203,17 +112,17 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('selectNodesAll1 - result.isOk()', function(){
+            it('selectNodes1 - result.isOk()', function(){
                 result =
-                    root.selectNodesAll((n) => (n.id % 2 === 0), true);
+                    root.selectNodes((n) => (n.id % 2 === 0), true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectNodesAll2 - result.sample.length === 2', function(){
+            it('selectNodes2 - result.sample.length === 2', function(){
                 assert.lengthOf(result.sample, 2);
             });
 
-            it('selectNodesAll3 - node.id === 0, 2', function(){
+            it('selectNodes3 - node.id === 0, 2', function(){
                 const node = [result.sample[0], result.sample[1]];
                 assert.isTrue(node[0].id === 0 && node[1].id === 2);
             });
@@ -226,17 +135,17 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('selectNodesAll4 - result.isOk()', function(){
+            it('selectNodes4 - result.isOk()', function(){
                 result =
-                      root.selectNodesAll((n) => (n.id === 3), true);
+                      root.selectNodes((n) => (n.id === 3), true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectNodesAll5 - result.sample.length === 1', function(){
+            it('selectNodes5 - result.sample.length === 1', function(){
                 assert.lengthOf(result.sample, 1);
             });
 
-            it('selectNodesAll6 - node.id === 3', function(){
+            it('selectNodes6 - node.id === 3', function(){
                 const node = result.sample[0];
                 assert.equal(node.id, 3);
             });
@@ -249,18 +158,18 @@ describe('Node', function(){
                 root = treeWithSharing();
             });
 
-            it('selectNodesAll9 - result.isOk()', function(){
+            it('selectNodes9 - result.isOk()', function(){
                 result =
-                    root.selectNodesAll((n, c, parent) => (parent === root),
+                    root.selectNodes((n, c, parent) => (parent === root),
                                            true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectNodesAll10 - result.sample.length === 3', function(){
+            it('selectNodes10 - result.sample.length === 3', function(){
                 assert.lengthOf(result.sample, 3);
             });
 
-            it('selectNodesAll11 - selected node.id === 1, 2, 3', function(){
+            it('selectNodes11 - selected node.id === 1, 2, 3', function(){
                 const node = [result.sample[0], result.sample[1],
                               result.sample[2]];
                 assert.isTrue(node[0].id === 1 &&
@@ -276,18 +185,18 @@ describe('Node', function(){
                 root = treeWithDeriving();
             });
 
-            it('selectNodesAll12 - result.isOk()', function(){
+            it('selectNodes12 - result.isOk()', function(){
                 result =
-                    root.selectNodesAll((n, c, parent) => (parent === root),
+                    root.selectNodes((n, c, parent) => (parent === root),
                                            true);
                 assert.isTrue(result.isOk());
             });
 
-            it('selectNodesAll13 - result.sample.length === 2', function(){
+            it('selectNodes13 - result.sample.length === 2', function(){
                 assert.lengthOf(result.sample, 2);
             });
 
-            it('selectNodesAll14 - selected node.id === 1, 2', function(){
+            it('selectNodes14 - selected node.id === 1, 2', function(){
                 const node = [result.sample[0], result.sample[1]];
                 assert.isTrue(node[0].id === 1 &&
                               node[1].id === 2);
@@ -301,159 +210,17 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('selectNodesAll7 - result.isOk()', function(){
+            it('selectNodes7 - result.isOk()', function(){
                 result =
-                      root.selectNodesAll((n) => (n.id === 123), true);
+                      root.selectNodes((n) => (n.id === 123), true);
                 assert.isTrue(result.isOk());
-            });
-
-            it('selectNodesAll8 - result.sample is empty', function(){
-                assert.isEmpty(result.sample);
-            })
-        });
-        
-    });
-
-    describe('selectNodes', function(){
-
-        describe('select first N subnodes and root', function(){
-            let root, result;
-
-            before(function(){
-                root = treeWith3Childs();
-            });
-
-            it('selectNodes1 - result.isOk()', function(){
-                result =
-                    root.selectNodes((n) => (n.id % 2 === 0), 2, false);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectNodes2 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
-            });
-
-            it('selectNodes3 - node.id = 0, 2', function(){
-                const node = [result.sample[0], result.sample[1]];
-                assert.equal(node[0].id, 0);
-                assert.equal(node[1].id, 2);
-            });
-        });
-
-        describe('select first N subnodes in hierarchy', function(){
-            let root, result;
-            
-            before(function(){
-                root = simpleNestedTree();
-            });
-
-            it('selectNodes4 - result.isOk()', function(){
-                result =
-                    root.selectNodes((n) => (n.id % 2), 2, true);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectNodes5 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
-            });
-
-            it('selectNodes6 - node.id = 1, 3', function(){
-                const node = [result.sample[0], result.sample[1]];
-                assert.equal(node[0].id, 1);
-                assert.equal(node[1].id, 3);
-            });
-        });
-
-        describe('select N nodes unaware of sharing', function(){
-            let root, result;
-
-            before(function(){
-                root = treeWithSharing();
-            });
-
-            it('selectNodes11 - result.isOk()', function(){
-                result =
-                    root.selectNodes((n, c, parent) => (parent === root),
-                                     3, true);
-                assert.isTrue(result.isOk());
-            });
-
-            it('selectNodes12 - result.sample.length === 3', function(){
-                assert.lengthOf(result.sample, 3);
-            });
-
-            it('selectNodes13 - selected node.id === 1, 2, 3', function(){
-                const node = [result.sample[0], result.sample[1],
-                              result.sample[2]];
-                assert.isTrue(node[0].id === 1 &&
-                              node[1].id === 2 &&
-                              node[2].id === 3);
-            });
-        });
-
-        describe('select N nodes unaware of deriving', function(){
-            let root, result;
-
-            before(function(){
-                root = treeWithDeriving();
-            });
-
-            it('selectNodes14 - result.isFail()', function(){
-                result =
-                    root.selectNodes((n, c, parent) => (parent === root),
-                                     3, true);
-                assert.isTrue(result.isFail());
-            });
-
-            it('selectNodes15 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
-            });
-
-            it('selectNodes16 - selected node.id === 1, 2', function(){
-                const node = [result.sample[0], result.sample[1]];
-                assert.isTrue(node[0].id === 1 &&
-                              node[1].id === 2);
-            });
-        });
-
-        describe('returns error when nothing found', function(){
-            let root, result;
-            
-            before(function(){
-                root = treeWith2Childs();
-            });
-
-            it('selectNodes7 - result.isFail()', function(){
-                result =
-                    root.selectNodes((n) => (n.id === 3), 1, true);
-                assert.isTrue(result.isFail());
             });
 
             it('selectNodes8 - result.sample is empty', function(){
                 assert.isEmpty(result.sample);
-            });
+            })
         });
-
-        describe('returns error when found not enough nodes', function(){
-            let root, result;
-            
-            before(function(){
-                root = treeWith2Childs();
-            });
-
-            it('selectNodes9 - result.isFail()', function(){
-                result =
-                    root.selectNodes((n) => (n.id % 2), 2, true);
-                assert.isTrue(result.isFail());
-            });
-
-            // when nodes not enough, selectNodes will return all
-            // relevant nodes
-            it('selectNodes10 - result.sample.length === 1', function(){
-                assert.lengthOf(result.sample, 1);
-            });
-        });
-
+        
     });
 
     describe('subnodes', function(){
