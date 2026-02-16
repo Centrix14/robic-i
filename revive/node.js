@@ -204,6 +204,12 @@ class EmptyNode {
     
     isEmpty() { return true; }
     isPresent() { return false; }
+
+    selectNodes() {
+        const result = new Result();
+        result.sample = [];
+        return result;
+    }
 }
 
 class SubnodeOwnership {
