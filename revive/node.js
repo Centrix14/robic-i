@@ -72,9 +72,9 @@ class Node {
     isEmpty() { return false; }
     isPresent() { return true; }
 
-    forSubnodes(fun) {
+    forSubnodes(fun, thisArg) {
         for (let container of this._subnodes.values())
-            fun(container.node, container);
+            fun.call(thisArg, container.node, container);
     }
 
     get(id) {
@@ -120,7 +120,6 @@ class Node {
     }
 
     selectNodes(condition, recursive, container=null, parent=null) {
-        const self = this;
         const sample = [];
 
         if (condition(this, container, parent))
@@ -129,9 +128,9 @@ class Node {
         if (recursive) {
             this.forSubnodes(function(node, nodeContainer){
                 const inner = node.selectNodes(condition, recursive,
-                                               container, self);
+                                               container, this);
                 sample.push(...inner.sample);
-            });
+            }, this);
         }
 
         const result = new Result();
