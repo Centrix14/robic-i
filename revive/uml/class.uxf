@@ -45,8 +45,8 @@ addSubnode(node:Node, definition:Object,
    id:integer): Result
 removeSubnode(id:integer): Result
 
-injectNode(parentId, node:Node):Result
-ejectNode(id):Result
+injectNode(parentId:integer, node:Node):Result
+ejectNode(id:integer):Result
 
 connectNodes(id1, id2):Result
 disconnectNodes(id1, id2):Result
