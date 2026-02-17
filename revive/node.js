@@ -77,7 +77,7 @@ class Node {
             fun(container.node, container);
     }
 
-    getSubnode(id) {
+    get(id) {
         return this._subnodes.get(id).node;
     }
 
@@ -99,13 +99,13 @@ class Node {
                     break;
 
                 case SubnodeOwnership.Supnode:
-                    subnode = root.getSubnode(container.id);
+                    subnode = root.get(container.id);
                     break;
 
                 case SubnodeOwnership.Subnode:
                     for (let element of sample) {
                         if (element.has(container.id)) {
-                            subnode = element._subnodes.get(container.id).node;
+                            subnode = element.get(container.id);
                             break;
                         }
                     }
