@@ -81,6 +81,10 @@ class Node {
         return this._subnodes.get(id).node;
     }
 
+    has(id) {
+        return this._subnodes.has(id);
+    }
+
     subnodes(rootNode) {
         const root = rootNode ?? this;
         let sample = [];
@@ -100,7 +104,7 @@ class Node {
 
                 case SubnodeOwnership.Subnode:
                     for (let element of sample) {
-                        if (element._subnodes.has(container.id)) {
+                        if (element.has(container.id)) {
                             subnode = element._subnodes.get(container.id).node;
                             break;
                         }
