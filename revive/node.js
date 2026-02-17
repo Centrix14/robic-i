@@ -85,33 +85,31 @@ class Node {
         return this._subnodes.has(id);
     }
 
+    static _resolvePhysicalOwn(container, node, root) {
+        switch (container._physicalOwn) {
+        case SubnodeOwnership.Here:
+            return node;
+
+        case SubnodeOwnership.Supnode:
+            return root.get(container.id);
+            break;
+
+        case SubnodeOwnership.Subnode:
+            for (let subcontainer of root._subnodes.values()) {
+                const subnode = subcontainer.node;
+                if (subnode.has(container.id))
+                    return subnode.get(container.id);
+            }
+        }
+    }
+
     subnodes(rootNode) {
         const root = rootNode ?? this;
         let sample = [];
 
         this.forSubnodes(function(node, container) {
             if (container._logicalOwn === SubnodeOwnership.Here) {
-                let subnode;
-                
-                switch (container._physicalOwn) {
-                case SubnodeOwnership.Here:
-                    subnode = node;
-                    break;
-
-                case SubnodeOwnership.Supnode:
-                    subnode = root.get(container.id);
-                    break;
-
-                case SubnodeOwnership.Subnode:
-                    for (let element of sample) {
-                        if (element.has(container.id)) {
-                            subnode = element.get(container.id);
-                            break;
-                        }
-                    }
-                    break;
-                }
-
+                const subnode = Node._resolvePhysicalOwn(container, node, root);
                 sample.push(subnode);
             }
         });
@@ -209,6 +207,8 @@ class EmptyNode {
     
     isEmpty() { return true; }
     isPresent() { return false; }
+
+    has() { return false; }
 
     selectNodes() {
         const result = new Result();
