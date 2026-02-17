@@ -143,7 +143,7 @@ class Node {
     }
 
     addSubnode(node, definition, id) {
-        const nodeId = node?.id ?? id;
+        const nodeId = node.isPresent() ? node.id : id;
         if (!nodeId)
             return new Result(ErrorType.InvalidArguments,
                               `addSubnode requires presence of a node or id argument`);
