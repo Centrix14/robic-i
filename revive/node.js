@@ -175,27 +175,19 @@ class Node {
         return result;
     }
 
-    injectSubnode(parentId, node) {
-        let parent;
+    injectNode(parentId, node) {
+        const parent = this.getNodeById(parentId);
 
-        if (this.id === parentId)
-            parent = this;
-        else {
-            const result = this.getSubnodeById(parentId, true);
-            if (result.isOk())
-                parent = result.node;
-            else
-                return result;
+        if (parent.isEmpty()) {
+            return new Result(ErrorType.SubnodeNotFound,
+                              `Subnode id:${parentId} not found`);
         }
 
-        const subnode = new Subnode(IDENTIFIER.next(), node,
-                                   {
-                                        logicalOwn: SubnodeOwnership.Here,
-                                        physicalOwn: SubnodeOwnership.Here,
-                                        role: SubnodeRole.Void
-                                   });
-        
-        parent._subnodes.set(subnode.id, subnode);
+        parent.addSubnode(node, {
+            logicalOwn: SubnodeOwnership.Here,
+            physicalOwn: SubnodeOwnership.Here,
+            role: SubnodeRole.Void
+        });
 
         return new Result();
     }
