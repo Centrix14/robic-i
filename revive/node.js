@@ -86,7 +86,7 @@ class Node {
     }
 
     static _resolvePhysicalOwn(container, node, root) {
-        switch (container._physicalOwn) {
+        switch (container.physicalOwn) {
         case SubnodeOwnership.Here:
             return node;
 
@@ -108,7 +108,7 @@ class Node {
         let sample = [];
 
         this.forSubnodes(function(node, container) {
-            if (container._logicalOwn === SubnodeOwnership.Here) {
+            if (container.logicalOwn === SubnodeOwnership.Here) {
                 const subnode = Node._resolvePhysicalOwn(container, node, root);
                 sample.push(subnode);
             }
