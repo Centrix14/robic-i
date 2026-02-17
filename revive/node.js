@@ -192,6 +192,20 @@ class Node {
 
         return new Result();
     }
+
+    ejectNode(id) {
+        const selectResult = this.selectNodes((n, c, p) => (n.has(id)), true);
+        if (selectResult.isFail())
+            return selectResult;
+
+        const node = selectResult.sample[0] ?? emptyNode;
+        if (node.isEmpty()) {
+            return new Result(ErrorType.SubnodeNotFound,
+                              `Subnode id:${id} not found`);
+        }
+
+        return node.removeSubnode(id);
+    }
 }
 
 class EmptyNode {
