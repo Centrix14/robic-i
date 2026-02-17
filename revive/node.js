@@ -72,6 +72,9 @@ class Node {
 
     get id() { return this._id; }
 
+    get relation() { return this._relation; }
+    set relation(newRelation) { this._relation = newRelation; }
+
     get(id) {
         return this._subnodes.get(id).node ?? emptyNode;
     }
