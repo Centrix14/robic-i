@@ -384,4 +384,25 @@ describe('Node', function(){
         });
     });
 
+    describe('ejectNode', function(){
+
+        describe('eject nodes from root', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWith3Childs();
+            });
+
+            it('ejectNode1 - result.isOk()', function(){
+                result = root.ejectNode(1);
+                assert.isTrue(result.isOk());
+            });
+
+            it('ejectNode2 - returns ejected node', function(){
+                assert.equal(result.node.id, 1);
+            });
+        });
+
+    });
+
 });
