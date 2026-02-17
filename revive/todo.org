@@ -34,6 +34,7 @@
 - [X] реализовать subnodes
 - [X] выделить вспомогательные методы
 - [ ] переделать/написать тесты для методов inject/eject
+  - [ ] inject: дописать тест на выбрасывание ошибок
 - [ ] добавить inject- и ejectNode
 - [ ] написать тесты для connect-, disconnectNodes
 - [ ] реализовать connect-, disconnectNodes
