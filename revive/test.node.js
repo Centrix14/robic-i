@@ -341,7 +341,7 @@ describe('Node', function(){
         });
 
         describe('inject nodes in hierarchy', function(){
-            let root, subject, result, subnodes;
+            let root, subject, result, alice, puppets;
 
             before(function(){
                 root = treeWith3Childs(0); // => 0, 1, 2, 3
@@ -353,15 +353,20 @@ describe('Node', function(){
                 assert.isTrue(result.isOk());
             });
 
-            it('injectNode5 - node id:2 has 2 subnodes', function(){
+            it('injectNode5 - node id:2 has 1 subnode (alice)', function(){
                 const node2 = root.getNodeById(2);
-                subnodes = node2.subnodes();
-                assert.lengthOf(subnodes, 2);
+                alice = node2.subnodes();
+                assert.lengthOf(alice, 1);
             });
 
-            it('injectNode6 - subnodes has id === 4, 5', function(){
-                assert.equal(subnodes[0].id, 4);
-                assert.equal(subnodes[1].id, 5);
+            it('injectNode6 - alice has 2 subnodes (puppets)', function(){
+                puppets = alice[0].subnodes();
+                assert.lengthOf(puppets, 2);
+            });
+
+            it('injectNode7 - puppets ids are 5 and 6', function(){
+                assert.equal(puppets[0].id, 5);
+                assert.equal(puppets[1].id, 6);
             });
         });
 
