@@ -29,6 +29,7 @@ function simpleNestedTree(base=0) {
       - node1
       -- node2
       -- node3
+      - node4
     */
     
     const root = new Node(base);
@@ -37,6 +38,7 @@ function simpleNestedTree(base=0) {
     root.addSubnode(node1);
     node1.addSubnode(new Node(base+2));
     node1.addSubnode(new Node(base+3));
+    root.addSubnode(new Node(base+4));
 
     return root;
 }
@@ -428,6 +430,62 @@ describe('Node', function(){
                 assert.isTrue(result.isFail());
             });
         });
+    });
+
+    describe('connectNodes', function(){
+
+        describe('not connect root and its subnode', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWith2Childs();
+            });
+
+            it('connectNodes* - returns None', function(){
+                result = root.connectNodes(0, 1);
+                assert.equal(result, 'None');
+            });
+        });
+
+        describe('not connect neighbours', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWith2Childs();
+            });
+
+            it('connectNodes* - returns Node', function(){
+                result = root.connectNodes(1, 2);
+                assert.equal(result, 'None');
+            });
+        });
+
+        describe('share node', function(){
+            let root, result;
+
+            before(function(){
+                root = simpleNestedTree();
+            });
+
+            it('connectNodes* - returns Do', function(){
+                result = root.connectNodes(2, 4);
+                assert.equal(result, 'Do');
+            });
+        });
+
+        describe('derive node', function(){
+            let root, result;
+
+            before(function(){
+                root = simpleNestedTree();
+            });
+
+            it('connectNodes* - returns Do', function(){
+                result = root.connectNodes(0, 2);
+                assert.equal(result, 'Do');
+            });
+        });
+
     });
 
 });
