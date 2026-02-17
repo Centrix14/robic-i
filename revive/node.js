@@ -137,9 +137,10 @@ class Node {
     }
 
     getNodeById(id, recursive=true) {
-        return this
-            .selectNodes((n, c, p) => (n.id === id), recursive)
-            .sample[0];
+        const sample = this
+              .selectNodes((n, c, p) => (n.id === id), recursive)
+              .sample;
+        return (sample.length === 0) ? emptyNode : sample[0];
     }
 
     addSubnode(node, definition, id) {
@@ -176,7 +177,7 @@ class Node {
     }
 
     injectNode(parentId, node) {
-        const parent = this.getNodeById(parentId);
+        const parent = this.getNodeById(parentId, true);
 
         if (parent.isEmpty()) {
             return new Result(ErrorType.SubnodeNotFound,
