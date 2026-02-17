@@ -256,7 +256,7 @@ class SubnodeRole {
 
 class Subnode {
     constructor(id, node, definition) {
-        this._id = id; // this is an id of node, not a special id for subnode
+        this._id = id;
         this._node = node;
 
         this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
@@ -266,4 +266,7 @@ class Subnode {
 
     get id() { return this._id; }
     get node() { return this._node; }
+    get logicalOwn() { return this._logicalOwn; }
+    get physicalOwn() { return this._physicalOwn; }
+    get role() { return this._role; }
 }
