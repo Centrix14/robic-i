@@ -344,8 +344,8 @@ describe('Node', function(){
             let root, subject, result, subnodes;
 
             before(function(){
-                root = treeWith3Childs();
-                subject = treeWith2Childs(); // id повторяется!
+                root = treeWith3Childs(0); // => 0, 1, 2, 3
+                subject = treeWith2Childs(4); // => 4, 5, 6
             });
 
             it('injectNode4 - result.isOk()', function(){
