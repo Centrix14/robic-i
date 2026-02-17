@@ -340,18 +340,29 @@ describe('Node', function(){
             });
         });
 
-        it('injects subnodes to hierarchy', function(){
-            const root = new Node(0);
-            
-            const subnodes = new Map();
-            const child = new Node(IDENTIFIER.next(), { subnodes });
-            root.injectSubnode(0, child);
+        describe('inject nodes in hierarchy', function(){
+            let root, subject, result, subnodes;
 
-            const rat = new Node(IDENTIFIER.next());
-            const result = root.injectSubnode(child.id, rat);
+            before(function(){
+                root = treeWith3Childs();
+                subject = treeWith2Childs(); // id повторяется!
+            });
 
-            assert.isTrue(result.isOk());
-            assert.lengthOf(subnodes, 1);
+            it('injectNode4 - result.isOk()', function(){
+                result = root.injectNode(2, subject);
+                assert.isTrue(result.isOk());
+            });
+
+            it('injectNode5 - node id:2 has 2 subnodes', function(){
+                const node2 = root.getNodeById(2);
+                subnodes = node2.subnodes();
+                assert.lengthOf(subnodes, 2);
+            });
+
+            it('injectNode6 - subnodes has id === 4, 5', function(){
+                assert.equal(subnodes[0].id, 4);
+                assert.equal(subnodes[1].id, 5);
+            });
         });
 
         it('returns error when subnode can not be found', function(){
