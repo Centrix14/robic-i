@@ -72,13 +72,16 @@ class Node {
     isEmpty() { return false; }
     isPresent() { return true; }
 
+    forSubnodes(fun) {
+        for (let container of this._subnodes.values())
+            fun(container.node, container);
+    }
+
     subnodes(rootNode) {
         const root = rootNode ?? this;
         let sample = [];
 
-        for (let container of this._subnodes.values()) {
-            const node = container.node;
-
+        this.forSubnodes(function(node, container) {
             if (container._logicalOwn === SubnodeOwnership.Here) {
                 let subnode;
                 
@@ -104,24 +107,24 @@ class Node {
 
                 sample.push(subnode);
             }
-        }
+        });
 
         return sample;
     }
 
     selectNodes(condition, recursive, container=null, parent=null) {
+        const self = this;
         const sample = [];
 
         if (condition(this, container, parent))
             sample.push(this);
 
         if (recursive) {
-            for (let container of this._subnodes.values()) {
-                const node = container.node;
+            this.forSubnodes(function(node, nodeContainer){
                 const inner = node.selectNodes(condition, recursive,
-                                               container, this);
+                                               container, self);
                 sample.push(...inner.sample);
-            }
+            });
         }
 
         const result = new Result();
