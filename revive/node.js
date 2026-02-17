@@ -83,8 +83,8 @@ class Node {
         return this._subnodes.has(id);
     }
 
-    isNeighbours(node1, node2) {
-        return this.has(node1.id) && this.has(node2.id);
+    isNeighbours(id1, id2) {
+        return this.has(id1) && this.has(id2);
     }
 
     static isRelatives(node1, node2) {
