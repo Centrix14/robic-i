@@ -217,6 +217,18 @@ class Node {
 
         return node.removeSubnode(id);
     }
+
+    connectNodes(id1, id2) {
+        const node1 = this.getNodeById(id1, true),
+              node2 = this.getNodeById(id2, true);
+
+        if (this.isNeighbours(id1, id2))
+            return 'None';
+        else if (Node.isRelatives(node1, node2))
+            return 'None';
+        else
+            return 'Do';
+    }
 }
 
 class EmptyNode {
