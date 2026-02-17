@@ -317,7 +317,7 @@ describe('Node', function(){
     describe('injectNode', function(){
 
         describe('inject nodes to root', function(){
-            let root, injectResult, getResult;
+            let root, result;
 
             before(function(){
                 root = new Node(0);
