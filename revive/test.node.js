@@ -1,29 +1,29 @@
-function treeWith2Childs() {
+function treeWith2Childs(base=0) {
     /*
       root
       - node1
       - node2
     */
     
-    const root = new Node(0);
+    const root = new Node(base);
     
-    root.addSubnode(new Node(1));
-    root.addSubnode(new Node(2));
+    root.addSubnode(new Node(base+1));
+    root.addSubnode(new Node(base+2));
 
     return root;
 }
 
-function treeWith3Childs() {
+function treeWith3Childs(base=0) {
     const root = new Node(0);
     
-    root.addSubnode(new Node(1));
-    root.addSubnode(new Node(2));
-    root.addSubnode(new Node(3));
+    root.addSubnode(new Node(base+1));
+    root.addSubnode(new Node(base+2));
+    root.addSubnode(new Node(base+3));
 
     return root;
 }
 
-function simpleNestedTree() {
+function simpleNestedTree(base=0) {
     /*
       root
       - node1
@@ -31,17 +31,17 @@ function simpleNestedTree() {
       -- node3
     */
     
-    const root = new Node(0);
-    const node1 = new Node(1);
+    const root = new Node(base);
+    const node1 = new Node(base+1);
 
     root.addSubnode(node1);
-    node1.addSubnode(new Node(2));
-    node1.addSubnode(new Node(3));
+    node1.addSubnode(new Node(base+2));
+    node1.addSubnode(new Node(base+3));
 
     return root;
 }
 
-function treeWithSharing() {
+function treeWithSharing(base=0) {
     /*
       structure:
       root
@@ -52,9 +52,9 @@ function treeWithSharing() {
       - node3 (physical)
     */
 
-    const root = new Node(0);
+    const root = new Node(base);
 
-    const node = [new Node(1), new Node(2), new Node(3)];
+    const node = [new Node(base+1), new Node(base+2), new Node(base+3)];
     const definition = {
         logicalOwn: SubnodeOwnership.Here,
         physicalOwn: SubnodeOwnership.Supnode
@@ -73,7 +73,7 @@ function treeWithSharing() {
     return root;
 }
 
-function treeWithDeriving() {
+function treeWithDeriving(base=0) {
     /*
       structure:
       root
@@ -83,8 +83,8 @@ function treeWithDeriving() {
       - node3 (logical)
     */
 
-    const root = new Node(0);
-    const node = [new Node(1), new Node(2), new Node(3)];
+    const root = new Node(base);
+    const node = [new Node(base+1), new Node(base+2), new Node(base+3)];
 
     root.addSubnode(node[0]);
     root.addSubnode(node[1]);
