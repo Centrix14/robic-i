@@ -84,7 +84,11 @@ class Node {
     }
 
     isNeighbours(node1, node2) {
-        return this.has(node1) && this.has(node2);
+        return this.has(node1.id) && this.has(node2.id);
+    }
+
+    static isRelatives(node1, node2) {
+        return node1.has(node2.id) || node2.has(node1.id);
     }
 
     forSubnodes(fun, thisArg) {
