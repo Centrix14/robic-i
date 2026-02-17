@@ -67,22 +67,22 @@ class Node {
         this._deviation = definition?.deviation ?? new Deviation();
     }
 
-    get id() { return this._id; }
-
     isEmpty() { return false; }
     isPresent() { return true; }
 
-    forSubnodes(fun, thisArg) {
-        for (let container of this._subnodes.values())
-            fun.call(thisArg, container.node, container);
-    }
+    get id() { return this._id; }
 
     get(id) {
-        return this._subnodes.get(id).node;
+        return this._subnodes.get(id).node ?? emptyNode;
     }
 
     has(id) {
         return this._subnodes.has(id);
+    }
+
+    forSubnodes(fun, thisArg) {
+        for (let container of this._subnodes.values())
+            fun.call(thisArg, container.node, container);
     }
 
     static _resolvePhysicalOwn(container, node, root) {
