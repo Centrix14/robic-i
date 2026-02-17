@@ -20,26 +20,22 @@
 --
 Node(id:integer, definition:Object)
 
+isEmpty(): boolean
+isPresent(): boolean
+
 &lt;&lt;get&gt;&gt; id()
 
 &lt;&lt;get&gt;&gt; relation()
 &lt;&lt;set&gt;&gt; relation()
 
+get(id:integer): Node ? emptyNode
+has(id:integer): boolean
+
+forSubnodes(fun. thisArg)
+
 subnodes(rootNode): Node [*]
 
-toMap(): Map
-fromMap(map:Map, mb:MapBehaviour): Result
-
-isEmpty(): boolean
-isPresent(): boolean
-equals(other:Node): boolean
-clone(): Node
-
 selectNodes(
-   condition:(node → container → parent → boolean),
-   n:integer,
-   recursive:boolean): Result
-selectNodesAll(
    condition:(node → container → parent → boolean),
    recursive:boolean): Result
 getNodeById(id:integer,
@@ -53,7 +49,13 @@ injectNode(parentId, node:Node):Result
 ejectNode(id):Result
 
 connectNodes(id1, id2):Result
-disconnectNodes(id1, id2):Result</panel_attributes>
+disconnectNodes(id1, id2):Result
+
+toMap(): Map
+fromMap(map:Map, mb:MapBehaviour): Result
+
+equals(other:Node): boolean
+clone(): Node</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
