@@ -370,6 +370,19 @@ describe('Node', function(){
             });
         });
 
+        describe('returns error when node can not be found', function(){
+            let root;
+
+            before(function(){
+                root = treeWith2Childs();
+            });
+
+            it('injectNode8 - result.isFail()', function(){
+                let result = root.injectNode(123, new Node(1));
+                assert.isTrue(result.isFail());
+            });
+        });
+
         it('returns error when subnode can not be found', function(){
             const root = new Node(0);
 
