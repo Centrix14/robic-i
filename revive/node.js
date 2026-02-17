@@ -83,6 +83,10 @@ class Node {
         return this._subnodes.has(id);
     }
 
+    isNeighbours(node1, node2) {
+        return this.has(node1) && this.has(node2);
+    }
+
     forSubnodes(fun, thisArg) {
         for (let container of this._subnodes.values())
             fun.call(thisArg, container.node, container);
