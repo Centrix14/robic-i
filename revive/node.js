@@ -202,18 +202,42 @@ class Node {
 }
 
 class EmptyNode {
-    constructor(id, definition) {
+    constructor() {
         this._id = NaN;
     }
     
     isEmpty() { return true; }
     isPresent() { return false; }
 
+    get id() { return NaN; }
+
+    get(id) {
+        return new EmptyNode();
+    }
+
     has() { return false; }
+
+    forSubnodes() {}
+
+    subnodes() { return []; }
 
     selectNodes() {
         const result = new Result();
         result.sample = [];
+        return result;
+    }
+
+    getNodeById() { return new EmptyNode(); }
+
+    addSubnode() {
+        const result = new Result();
+        result.id = NaN;
+        return result;
+    }
+
+    removeSubnode() {
+        const result = new Result();
+        result.node = new EmptyNode();
         return result;
     }
 }
