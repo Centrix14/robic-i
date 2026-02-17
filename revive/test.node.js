@@ -315,15 +315,29 @@ describe('Node', function(){
     });
 
     describe('injectNode', function(){
-        it('injects subnodes to root', function(){
-            const subnodes = new Map();
-            const root = new Node(0, { subnodes });
-            const child = new Node(IDENTIFIER.next());
 
-            const result = root.injectSubnode(0, child);
+        describe('inject nodes to root', function(){
+            let root, injectResult, getResult;
 
-            assert.isTrue(result.isOk());
-            assert.lengthOf(subnodes, 1);
+            before(function(){
+                root = new Node(0);
+            });
+
+            it('injectNode1 - result.isOk()', function(){
+                const subject = new Node(1);
+                result = root.injectNode(0, subject);
+                assert.isTrue(result.isOk());
+            });
+
+            it('injectNode2 - root.subnodes.length === 1', function(){
+                const subnodes = root.subnodes();
+                assert.lengthOf(subnodes, 1);
+            });
+
+            it('injectNode3 - subnode has id === 1', function(){
+                const subnode = root.get(1);
+                assert.equal(subnode.id, 1);
+            });
         });
 
         it('injects subnodes to hierarchy', function(){
