@@ -153,6 +153,7 @@ class Node {
 
         const result = new Result();
         result.id = nodeId;
+        return result;
     }
 
     removeSubnode(id) {
