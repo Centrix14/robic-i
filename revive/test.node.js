@@ -403,6 +403,31 @@ describe('Node', function(){
             });
         });
 
+        describe('eject nodes from hierarchy', function(){
+            let root, result;
+
+            before(function(){
+                root = simpleNestedTree();
+            });
+
+            it('ejectNode3 - result.isOk()', function(){
+                result = root.ejectNode(3);
+                assert.isTrue(result.isOk());
+            });
+        });
+
+        describe('returns error when node can not be found', function(){
+            let root, result;
+
+            before(function(){
+                root = treeWith3Childs();
+            });
+
+            it('ejectNode4 - result.isFail()', function(){
+                result = root.ejectNode(123);
+                assert.isTrue(result.isFail());
+            });
+        });
     });
 
 });
