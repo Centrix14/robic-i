@@ -262,7 +262,7 @@ class Node {
             return 'Deriving';
 
         else
-            return 'Do';
+            return 'None';
     }
 }
 
