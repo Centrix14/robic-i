@@ -218,6 +218,20 @@ class Node {
         return node.removeSubnode(id);
     }
 
+    isSharingPossible(subject, supplicant) {
+        if (!this.has(supplicant.id))
+            return false;
+
+        const middleNode = this.selectNodes(
+            (node, _, parent) => (node.has(subject.id) && parent === this),
+            true
+        );
+        if (middleNode.sample.length === 0)
+            return false;
+
+        return middleNode.sample[0];
+    }
+
     connectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
@@ -226,6 +240,12 @@ class Node {
             return 'None';
         else if (Node.isRelatives(node1, node2))
             return 'None';
+
+        else if (this.isSharingPossible(node1, node2))
+            return 'Sharing';
+        else if (this.isSharingPossible(node2, node1))
+            return 'Sharing';
+
         else
             return 'Do';
     }
