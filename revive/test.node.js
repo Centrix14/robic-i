@@ -452,74 +452,82 @@ describe('Node', function(){
             });
         });
 
+        describe('not connect random nodes', function(){
+            let root;
+
+            before(function(){
+                // todo
+            });
+        });
+
         describe('not connect root and its subnode', function(){
-            let root, result;
+            let root;
 
             before(function(){
                 root = treeWith2Childs();
             });
 
             it('connectNodes* - returns None (direct order)', function(){
-                result = root.connectNodes(0, 1);
+                const result = root.connectNodes(0, 1);
                 assert.equal(result, 'None');
             });
 
             it('connectNodes* - returns None (inverse order)', function(){
-                result = root.connectNodes(1, 0);
+                const result = root.connectNodes(1, 0);
                 assert.equal(result, 'None');
             });
         });
 
         describe('not connect neighbours', function(){
-            let root, result;
+            let root;
 
             before(function(){
                 root = treeWith2Childs();
             });
 
             it('connectNodes* - returns Node (direct order)', function(){
-                result = root.connectNodes(1, 2);
+                const result = root.connectNodes(1, 2);
                 assert.equal(result, 'None');
             });
 
             it('connectNodes* - returns Node (inverse order)', function(){
-                result = root.connectNodes(2, 1);
+                const result = root.connectNodes(2, 1);
                 assert.equal(result, 'None');
             });
         });
 
         describe('share node', function(){
-            let root, result;
+            let root;
 
             before(function(){
                 root = simpleNestedTree();
             });
 
             it('connectNodes* - returns Share (direct order)', function(){
-                result = root.connectNodes(2, 4);
+                const result = root.connectNodes(2, 4);
                 assert.equal(result, 'Sharing');
             });
 
             it('connectNodes* - returns Share (inverse order)', function(){
-                result = root.connectNodes(4, 2);
+                const result = root.connectNodes(4, 2);
                 assert.equal(result, 'Sharing');
             });
         });
 
         describe('derive node', function(){
-            let root, result;
+            let root;
 
             before(function(){
                 root = simpleNestedTree();
             });
 
             it('connectNodes* - returns Deriving (direct order)', function(){
-                result = root.connectNodes(0, 2);
+                const result = root.connectNodes(0, 2);
                 assert.equal(result, 'Deriving');
             });
 
             it('connectNodes* - returns Deriving (inverse order)', function(){
-                result = root.connectNodes(2, 0);
+                const result = root.connectNodes(2, 0);
                 assert.equal(result, 'Deriving');
             });
         });
