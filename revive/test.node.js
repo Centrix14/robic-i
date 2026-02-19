@@ -434,6 +434,24 @@ describe('Node', function(){
 
     describe('connectNodes', function(){
 
+        describe('not connect nodes outside tree', function(){
+            let root;
+
+            before(function(){
+                root = treeWith2Childs();
+            });
+
+            it('connectNodes* - returns None if one node outside tree', function(){
+                const result = root.connectNodes(1, 8);
+                assert.equal(result, 'None');
+            });
+
+            it('connectNodes* - returns None if both nodes outside tree', function(){
+                const result = root.connectNodes(10, 8);
+                assert.equal(result, 'None');
+            });
+        });
+
         describe('not connect root and its subnode', function(){
             let root, result;
 
