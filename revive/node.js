@@ -232,6 +232,16 @@ class Node {
         return middleNode.sample[0];
     }
 
+    isDerivingPossible(subject, supplicant) {
+        const middleNode = this.selectNodes(
+            (node, _, parent) => (node.has(subject.id) && parent === supplicant),
+            true
+        );
+        if (middleNode.sample.length === 0)
+            return false;
+        return middleNode.sample[0];
+    }
+
     connectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
@@ -245,6 +255,11 @@ class Node {
             return 'Sharing';
         else if (this.isSharingPossible(node2, node1))
             return 'Sharing';
+
+        else if (this.isDerivingPossible(node1, node2))
+            return 'Deriving';
+        else if (this.isDerivingPossible(node2, node1))
+            return 'Deriving';
 
         else
             return 'Do';
