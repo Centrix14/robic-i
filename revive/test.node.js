@@ -441,8 +441,13 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('connectNodes* - returns None', function(){
+            it('connectNodes* - returns None (direct order)', function(){
                 result = root.connectNodes(0, 1);
+                assert.equal(result, 'None');
+            });
+
+            it('connectNodes* - returns None (inverse order)', function(){
+                result = root.connectNodes(1, 0);
                 assert.equal(result, 'None');
             });
         });
@@ -454,8 +459,13 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('connectNodes* - returns Node', function(){
+            it('connectNodes* - returns Node (direct order)', function(){
                 result = root.connectNodes(1, 2);
+                assert.equal(result, 'None');
+            });
+
+            it('connectNodes* - returns Node (inverse order)', function(){
+                result = root.connectNodes(2, 1);
                 assert.equal(result, 'None');
             });
         });
@@ -467,8 +477,13 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('connectNodes* - returns Share', function(){
+            it('connectNodes* - returns Share (direct order)', function(){
                 result = root.connectNodes(2, 4);
+                assert.equal(result, 'Sharing');
+            });
+
+            it('connectNodes* - returns Share (inverse order)', function(){
+                result = root.connectNodes(4, 2);
                 assert.equal(result, 'Sharing');
             });
         });
@@ -480,8 +495,13 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('connectNodes* - returns Deriving', function(){
+            it('connectNodes* - returns Deriving (direct order)', function(){
                 result = root.connectNodes(0, 2);
+                assert.equal(result, 'Deriving');
+            });
+
+            it('connectNodes* - returns Deriving (inverse order)', function(){
+                result = root.connectNodes(2, 0);
                 assert.equal(result, 'Deriving');
             });
         });
