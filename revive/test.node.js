@@ -467,9 +467,9 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('connectNodes* - returns Do', function(){
+            it('connectNodes* - returns Share', function(){
                 result = root.connectNodes(2, 4);
-                assert.equal(result, 'Do');
+                assert.equal(result, 'Sharing');
             });
         });
 
