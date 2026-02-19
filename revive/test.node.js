@@ -480,9 +480,9 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('connectNodes* - returns Do', function(){
+            it('connectNodes* - returns Deriving', function(){
                 result = root.connectNodes(0, 2);
-                assert.equal(result, 'Do');
+                assert.equal(result, 'Deriving');
             });
         });
 
