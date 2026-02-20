@@ -103,6 +103,23 @@ function treeWithDeriving(base=0) {
     return root;
 }
 
+function complexTree(base=0) {
+    const root = new Node(base);
+
+    const node1 = new Node(base+1);
+    root.addSubnode(node1);
+    root.addSubnode(new Node(base+2));
+
+    const node4 = new Node(base+4);
+    node1.addSubnode(new Node(base+3));
+    node1.addSubnode(node4);
+
+    node4.addSubnode(new Node(base+5));
+    node4.addSubnode(new Node(base+6));
+
+    return root;
+}
+
 describe('Node', function(){
 
     describe('selectNodes', function(){
@@ -456,7 +473,17 @@ describe('Node', function(){
             let root;
 
             before(function(){
-                // todo
+                root = complexTree();
+            });
+
+            it('connectNodes* - not connect root and leaf', function(){
+                const result = root.connectNodes(0, 6);
+                assert.equal(result, 'None');
+            });
+
+            it('connectNodes* - not connect subnode of root and leaf', function(){
+                const result = root.connectNodes(2, 5);
+                assert.equal(result, 'None');
             });
         });
 
