@@ -98,15 +98,13 @@ class Node {
             return false;
     }
 
-    static isRelatives(node1, node2) {
-        const relatives = Node._resolveRelatives(node1, node2);
-        if (!relatives) return false;
-
-        let n1 = relatives[0],
-            n2 = relatives[1];
-
-        const container = n1._subnodes.get(n2.id);
-        return container.logicalOwn === SubnodeOwnership.Here;
+    static isRelatives(parent, child) {
+        if (parent.has(child.id)) {
+            const container = parent._subnodes.get(child.id);
+            return container.logicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
     }
 
     static isPhysicalRelatives(node1, node2) {
@@ -277,7 +275,10 @@ class Node {
 
         if (this.isNeighbours(id1, id2))
             return 'None';
+
         else if (Node.isRelatives(node1, node2))
+            return 'None';
+        else if (Node.isRelatives(node2, node1))
             return 'None';
 
         else if (Node.isPhysicalRelatives(node1, node2))
