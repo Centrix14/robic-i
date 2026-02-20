@@ -107,15 +107,13 @@ class Node {
             return false;
     }
 
-    static isPhysicalRelatives(node1, node2) {
-        const relatives = Node._resolveRelatives(node1, node2);
-        if (!relatives) return false;
-
-        let n1 = relatives[0],
-            n2 = relatives[1];
-
-        const container = n1._subnodes.get(n2.id);
-        return container.physicalOwn === SubnodeOwnership.Here;
+    static isPhysicalRelatives(parent, child) {
+        if (parent.has(child.id)) {
+            const container = parent._subnodes.get(child.id);
+            return container.physicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
     }
 
     forSubnodes(fun, thisArg) {
@@ -282,6 +280,8 @@ class Node {
             return 'None';
 
         else if (Node.isPhysicalRelatives(node1, node2))
+            return 'Connect';
+        else if (Node.isPhysicalRelatives(node2, node1))
             return 'Connect';
 
         else if (this.isSharingPossible(node1, node2))
