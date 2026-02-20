@@ -550,6 +550,24 @@ describe('Node', function(){
             });
         });
 
+        describe('connect shared node and root', function(){
+            let root;
+
+            before(function(){
+                root = treeWithSharing();
+            });
+
+            it('connectNodes* - returns Connect (direct order)', function(){
+                const result = root.connectNodes(0, 3);
+                assert.equal(result, 'Connect');
+            });
+
+            it('connectNodes* - returns Connect (inverse order)', function(){
+                const result = root.connectNodes(3, 0);
+                assert.equal(result, 'Connect');
+            });
+        });
+
         describe('derive node', function(){
             let root;
 
