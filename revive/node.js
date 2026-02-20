@@ -91,6 +91,22 @@ class Node {
         return node1.has(node2.id) || node2.has(node1.id);
     }
 
+    static isPhysicalRelatives(node1, node2) {
+        let n1, n2;
+
+        if (node1.has(node2.id)) {
+            n1 = node1; n2 = node2;
+        }
+        else (node2.has(node1.id)) {
+            n1 = node2; n2 = node1;
+        }
+        else
+            return false;
+
+        const container = n1._subnodes.get(n2.id);
+        return container.physicalOwn === SubnodeOwnership.Here;
+    }
+
     forSubnodes(fun, thisArg) {
         for (let container of this._subnodes.values())
             fun.call(thisArg, container.node, container);
