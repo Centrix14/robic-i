@@ -97,7 +97,7 @@ class Node {
         if (node1.has(node2.id)) {
             n1 = node1; n2 = node2;
         }
-        else (node2.has(node1.id)) {
+        else if (node2.has(node1.id)) {
             n1 = node2; n2 = node1;
         }
         else
@@ -266,6 +266,9 @@ class Node {
             return 'None';
         else if (Node.isRelatives(node1, node2))
             return 'None';
+
+        else if (Node.isPhysicalRelatives(node1, node2))
+            return 'Connect';
 
         else if (this.isSharingPossible(node1, node2))
             return 'Sharing';
