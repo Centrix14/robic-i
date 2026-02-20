@@ -87,17 +87,6 @@ class Node {
         return this.has(id1) && this.has(id2);
     }
 
-    static _resolveRelatives(node1, node2) {
-        if (node1.has(node2.id)) {
-            return [node1, node2];
-        }
-        else if (node2.has(node1.id)) {
-            return [node2, node1];
-        }
-        else
-            return false;
-    }
-
     static isRelatives(parent, child) {
         if (parent.has(child.id)) {
             const container = parent._subnodes.get(child.id);
