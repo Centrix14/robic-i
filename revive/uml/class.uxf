@@ -32,7 +32,11 @@ get(id:integer): Node ? emptyNode
 has(id:integer): boolean
 
 isNeighbours(id1:integer, id2:integer): boolean
-_isRelatives(node1:Node, node2:Node)_
+_isRelatives(node1:Node, node2:Node): boolean_
+_isPhysicalRelatives(node1:Node, node2:Node): boolean_
+
+isSharingPossible(subject:Node, supplicant:Node): boolean
+isDerivingPossible(subject:Node, supplicant:Node): boolean
 
 forSubnodes(fun. thisArg)
 
