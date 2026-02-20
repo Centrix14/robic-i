@@ -87,21 +87,34 @@ class Node {
         return this.has(id1) && this.has(id2);
     }
 
-    static isRelatives(node1, node2) {
-        return node1.has(node2.id) || node2.has(node1.id);
-    }
-
-    static isPhysicalRelatives(node1, node2) {
-        let n1, n2;
-
+    static _resolveRelatives(node1, node2) {
         if (node1.has(node2.id)) {
-            n1 = node1; n2 = node2;
+            return [node1, node2];
         }
         else if (node2.has(node1.id)) {
-            n1 = node2; n2 = node1;
+            return [node2, node1];
         }
         else
             return false;
+    }
+
+    static isRelatives(node1, node2) {
+        const relatives = Node._resolveRelatives(node1, node2);
+        if (!relatives) return false;
+
+        let n1 = relatives[0],
+            n2 = relatives[1];
+
+        const container = n1._subnodes.get(n2.id);
+        return container.logicalOwn === SubnodeOwnership.Here;
+    }
+
+    static isPhysicalRelatives(node1, node2) {
+        const relatives = Node._resolveRelatives(node1, node2);
+        if (!relatives) return false;
+
+        let n1 = relatives[0],
+            n2 = relatives[1];
 
         const container = n1._subnodes.get(n2.id);
         return container.physicalOwn === SubnodeOwnership.Here;
