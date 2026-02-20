@@ -104,6 +104,15 @@ function treeWithDeriving(base=0) {
 }
 
 function complexTree(base=0) {
+    /*
+      root
+      - node1
+      -- node3
+      -- node4
+      --- node5
+      --- node6
+      - node2
+     */
     const root = new Node(base);
 
     const node1 = new Node(base+1);
