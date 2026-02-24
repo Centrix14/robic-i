@@ -326,7 +326,7 @@ class Node {
         else if (Node.isPhysicalRelatives(node1, node2))
             return this.connectPhysicalRelatives(node1, node2);
         else if (Node.isPhysicalRelatives(node2, node1))
-            return this.connectPhysicalRelatives(node1, node2);
+            return this.connectPhysicalRelatives(node2, node1);
 
         else if (this.isSharingPossible(node1, node2))
             return this.shareNode(node1, node2);
