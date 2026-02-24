@@ -578,7 +578,7 @@ describe('Node', function(){
             });
         });
 
-        describe('connect shared node and root', function(){
+        describe('connect shared node and root (direct order)', function(){
             let root;
 
             before(function(){
@@ -588,6 +588,14 @@ describe('Node', function(){
             it('connectNodes* - returns Connect (direct order)', function(){
                 const result = root.connectNodes(0, 3);
                 assert.equal(result, 'Connect');
+            });
+        });
+
+        describe('connect shared node and root (inverse order)', function(){
+            let root;
+
+            before(function(){
+                root = treeWithSharing();
             });
 
             it('connectNodes* - returns Connect (inverse order)', function(){
