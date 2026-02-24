@@ -652,4 +652,26 @@ describe('Node', function(){
 
     });
 
+    describe('disconnectNodes', function(){
+
+        describe('not disconnect nodes outside tree', function(){
+            let root;
+
+            before(function(){
+                root = treeWith2Childs();
+            });
+
+            it('disconnectNodes1 - returns error if one node outside tree', function(){
+                const result = root.disconnectNodes(1, 8);
+                assert.isTrue(result.isFail());
+            });
+
+            it('disconnectNodes2 - returns error if both nodes outside tree', function(){
+                const result = root.disconnectNodes(10, 8);
+                assert.isTrue(result.isFail());
+            });
+        });
+
+    });
+
 });
