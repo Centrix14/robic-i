@@ -615,7 +615,7 @@ describe('Node', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
                     const result = root.connectNodes.apply(root, args);
-                    assert.equal(result, 'Deriving');
+                    assert.isTrue(result.isOk());
                 });
             }
 
