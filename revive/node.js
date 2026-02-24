@@ -351,6 +351,10 @@ class Node {
         else
             return new Result(ErrorType.NOP);
     }
+
+    disconnectNodes(id1, id2) {
+        return new Result();
+    }
 }
 
 class EmptyNode {
