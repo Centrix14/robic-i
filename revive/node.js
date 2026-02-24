@@ -259,6 +259,46 @@ class Node {
         return middleNode.sample[0];
     }
 
+    shareNode(subject, supplicant) {
+        const root = this;
+        const subjectsParent =
+              this.selectNodes((n, c, p) => (n.has(subject.id)), true);
+
+        // 1) ejecting subject from it's parent and injecting it in root
+        let result1;
+
+        result1 = root.ejectNode(subject.id);
+        if (result1.isFail())
+            return result1;
+
+        result1 = root.injectNode(root.id, subject);
+        if (result1.isFail())
+            return result1;
+
+        // 2) change injected node logical ownership
+        const container = root._subnodes.get(subject.id);
+        container.logicalOwn = SubnodeOwnership.Subnode;
+
+        // 3) create container definition or shared subnode
+        const definition = {
+            logicalOwn: SubnodeOwnership.Here,
+            physicalOwn: SubnodeOwnership.Supnode
+        };
+
+        // 4) add link to shared node to subjects parent and supplicant
+        let result4;
+
+        result4 = subjectsParent.addSubnode(emptyNode, definition, subject.id);
+        if (result4.isFail())
+            return result4;
+
+        result4 = supplicant.addSubnode(emptyNode, definition, subject.id);
+        if (result4.isFail())
+            return result4;
+
+        return new Result();
+    }
+
     connectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
@@ -277,9 +317,9 @@ class Node {
             return 'Connect';
 
         else if (this.isSharingPossible(node1, node2))
-            return 'Sharing';
+            return this.shareNode(node1, node2);
         else if (this.isSharingPossible(node2, node1))
-            return 'Sharing';
+            return this.shareNode(node2, node1);
 
         else if (this.isDerivingPossible(node1, node2))
             return 'Deriving';
