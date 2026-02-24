@@ -589,6 +589,17 @@ describe('Node', function(){
                 const result = root.connectNodes(0, 3);
                 assert.isTrue(result.isOk());
             });
+
+            it('connectNodes16 - root has node id:3 logically', function(){
+                const here = SubnodeOwnership.Here;
+                const result = root.selectNodes(
+                    (n, c, _) => (n.id === 3 && c.logicalOwn === here),
+                    false
+                );
+
+                const node = result.sample[0];
+                assert.equal(node.id, 3);
+            });
         });
 
         describe('connect shared node and root (inverse order)', function(){
