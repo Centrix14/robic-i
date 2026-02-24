@@ -353,13 +353,26 @@ class Node {
     }
 
     disconnectNodes(id1, id2) {
-        const node1 = this.getNodeById(id1),
-              node2 = this.getNodeById(id2);
+        const node1 = this.getNodeById(id1, true),
+              node2 = this.getNodeById(id2, true);
 
         if (node1 === emptyNode || node2 === emptyNode)
             return new Result(ErrorType.SubnodeNotFound);
 
-        return new Result();
+        else if (this.isNeighbours(id1, id2))
+            return new Result(ErrorType.AttemptToConnectNeighbours);
+
+        else if (Node.isLogicalRelatives(node1, node2))
+            return new Result(ErrorType.AttemptToConnectRelatives);
+        else if (Node.isLogicalRelatives(node2, node1))
+            return new Result(ErrorType.AttemptToConnectRelatives);
+
+        else if (Node.isPhysicalRelatives(node1, node2))
+            return this._connectPhysicalRelatives(node1, node2);
+        else if (Node.isPhysicalRelatives(node2, node1))
+            return this._connectPhysicalRelatives(node2, node1);
+
+        return new Result(ErrorType.NOP);
     }
 }
 
