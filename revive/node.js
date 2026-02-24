@@ -7,6 +7,9 @@ class ErrorType {
     static ImpossibleSelectCondition = 'Impossible select condition'
     static MapDeleteError = 'Map delete error'
     static InvalidArguments = 'Invalid arguments'
+    static AttemptToConnectNeighbours = 'Attempt to connect neighbours'
+    static AttemptToConnectRelatives = 'Attempt to connect relatives'
+    static NOP = 'No operations performed'
 }
 
 class Result {
@@ -261,12 +264,12 @@ class Node {
               node2 = this.getNodeById(id2, true);
 
         if (this.isNeighbours(id1, id2))
-            return 'None';
+            return new Result(ErrorType.AttemptToConnectNeighbours);
 
         else if (Node.isRelatives(node1, node2))
-            return 'None';
+            return new Result(ErrorType.AttemptToConnectRelatives);
         else if (Node.isRelatives(node2, node1))
-            return 'None';
+            return new Result(ErrorType.AttemptToConnectRelatives);
 
         else if (Node.isPhysicalRelatives(node1, node2))
             return 'Connect';
@@ -284,7 +287,7 @@ class Node {
             return 'Deriving';
 
         else
-            return 'None';
+            return new Result(ErrorType.NOP);
     }
 }
 
