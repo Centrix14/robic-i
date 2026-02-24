@@ -218,7 +218,7 @@ class Node {
         return this.has(id1) && this.has(id2);
     }
 
-    static isRelatives(parent, child) {
+    static isLogicalRelatives(parent, child) {
         if (parent.has(child.id)) {
             const container = parent._subnodes.get(child.id);
             return container.logicalOwn === SubnodeOwnership.Here;
@@ -260,7 +260,7 @@ class Node {
         return middleNode.sample[0];
     }
 
-    shareNode(subject, supplicant) {
+    _shareNode(subject, supplicant) {
         const root = this;
 
         const selectResult =
@@ -305,13 +305,13 @@ class Node {
         return new Result();
     }
 
-    connectPhysicalRelatives(parent, child) {
+    _connectPhysicalRelatives(parent, child) {
         const container = parent._subnodes.get(child.id);
         container._logicalOwn = SubnodeOwnership.Here;
         return new Result();
     }
 
-    deriveNode(subject, supplicant) {
+    _deriveNode(subject, supplicant) {
         supplicant.addSubnode(emptyNode, {
             logicalOwn: SubnodeOwnership.Here,
             physicalOwn: SubnodeOwnership.Subnode,
@@ -328,25 +328,25 @@ class Node {
         if (this.isNeighbours(id1, id2))
             return new Result(ErrorType.AttemptToConnectNeighbours);
 
-        else if (Node.isRelatives(node1, node2))
+        else if (Node.isLogicalRelatives(node1, node2))
             return new Result(ErrorType.AttemptToConnectRelatives);
-        else if (Node.isRelatives(node2, node1))
+        else if (Node.isLogicalRelatives(node2, node1))
             return new Result(ErrorType.AttemptToConnectRelatives);
 
         else if (Node.isPhysicalRelatives(node1, node2))
-            return this.connectPhysicalRelatives(node1, node2);
+            return this._connectPhysicalRelatives(node1, node2);
         else if (Node.isPhysicalRelatives(node2, node1))
-            return this.connectPhysicalRelatives(node2, node1);
+            return this._connectPhysicalRelatives(node2, node1);
 
         else if (this.isSharingPossible(node1, node2))
-            return this.shareNode(node1, node2);
+            return this._shareNode(node1, node2);
         else if (this.isSharingPossible(node2, node1))
-            return this.shareNode(node2, node1);
+            return this._shareNode(node2, node1);
 
         else if (this.isDerivingPossible(node1, node2))
-            return this.deriveNode(node1, node2);
+            return this._deriveNode(node1, node2);
         else if (this.isDerivingPossible(node2, node1))
-            return this.deriveNode(node2, node1);
+            return this._deriveNode(node2, node1);
 
         else
             return new Result(ErrorType.NOP);
