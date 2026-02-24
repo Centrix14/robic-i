@@ -467,12 +467,12 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('connectNodes* - returns None if one node outside tree', function(){
+            it('connectNodes1 - returns None if one node outside tree', function(){
                 const result = root.connectNodes(1, 8);
                 assert.isTrue(result.isFail());
             });
 
-            it('connectNodes* - returns None if both nodes outside tree', function(){
+            it('connectNodes2 - returns None if both nodes outside tree', function(){
                 const result = root.connectNodes(10, 8);
                 assert.isTrue(result.isFail());
             });
@@ -485,12 +485,12 @@ describe('Node', function(){
                 root = complexTree();
             });
 
-            it('connectNodes* - not connect root and leaf', function(){
+            it('connectNodes3 - not connect root and leaf', function(){
                 const result = root.connectNodes(0, 6);
                 assert.isTrue(result.isFail());
             });
 
-            it('connectNodes* - not connect subnode of root and leaf', function(){
+            it('connectNodes4 - not connect subnode of root and leaf', function(){
                 const result = root.connectNodes(2, 5);
                 assert.isTrue(result.isFail());
             });
@@ -503,12 +503,12 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('connectNodes* - returns None (direct order)', function(){
+            it('connectNodes5 - returns None (direct order)', function(){
                 const result = root.connectNodes(0, 1);
                 assert.isTrue(result.isFail());
             });
 
-            it('connectNodes* - returns None (inverse order)', function(){
+            it('connectNodes6 - returns None (inverse order)', function(){
                 const result = root.connectNodes(1, 0);
                 assert.isTrue(result.isFail());
             });
@@ -521,12 +521,12 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('connectNodes* - returns Node (direct order)', function(){
+            it('connectNodes7 - returns Node (direct order)', function(){
                 const result = root.connectNodes(1, 2);
                 assert.isTrue(result.isFail());
             });
 
-            it('connectNodes* - returns Node (inverse order)', function(){
+            it('connectNodes8 - returns Node (inverse order)', function(){
                 const result = root.connectNodes(2, 1);
                 assert.isTrue(result.isFail());
             });
