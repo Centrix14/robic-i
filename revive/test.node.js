@@ -612,20 +612,27 @@ describe('Node', function(){
         });
 
         describe('derive node', function(){
-            let root;
+            function test(root, args, testNames) {
+                it(testNames[0], function(){
+                    const result = root.connectNodes.apply(root, args);
+                    assert.equal(result, 'Deriving');
+                });
+            }
 
-            before(function(){
-                root = simpleNestedTree();
+            describe('direct order', function(){
+                const root = simpleNestedTree();
+
+                test(root, [0, 2], [
+                    'connectNodes* - returns Deriving'
+                ]);
             });
 
-            it('connectNodes* - returns Deriving (direct order)', function(){
-                const result = root.connectNodes(0, 2);
-                assert.equal(result, 'Deriving');
-            });
+            describe('inverse order', function(){
+                const root = simpleNestedTree();
 
-            it('connectNodes* - returns Deriving (inverse order)', function(){
-                const result = root.connectNodes(2, 0);
-                assert.equal(result, 'Deriving');
+                test(root, [2, 0], [
+                    'connectNodes* - returns Deriving'
+                ]);
             });
         });
 
