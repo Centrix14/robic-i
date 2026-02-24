@@ -112,7 +112,7 @@ function complexTree(base=0) {
       --- node5
       --- node6
       - node2
-     */
+    */
     const root = new Node(base);
 
     const node1 = new Node(base+1);
@@ -165,7 +165,7 @@ describe('Node', function(){
 
             it('selectNodes4 - result.isOk()', function(){
                 result =
-                      root.selectNodes((n) => (n.id === 3), true);
+                    root.selectNodes((n) => (n.id === 3), true);
                 assert.isTrue(result.isOk());
             });
 
@@ -189,7 +189,7 @@ describe('Node', function(){
             it('selectNodes9 - result.isOk()', function(){
                 result =
                     root.selectNodes((n, c, parent) => (parent === root),
-                                           true);
+                                     true);
                 assert.isTrue(result.isOk());
             });
 
@@ -216,7 +216,7 @@ describe('Node', function(){
             it('selectNodes12 - result.isOk()', function(){
                 result =
                     root.selectNodes((n, c, parent) => (parent === root),
-                                           true);
+                                     true);
                 assert.isTrue(result.isOk());
             });
 
@@ -240,7 +240,7 @@ describe('Node', function(){
 
             it('selectNodes7 - result.isOk()', function(){
                 result =
-                      root.selectNodes((n) => (n.id === 123), true);
+                    root.selectNodes((n) => (n.id === 123), true);
                 assert.isTrue(result.isOk());
             });
 
@@ -689,93 +689,95 @@ describe('Node', function(){
                 assert.isTrue(result.isFail());
             });
 
-            describe('not disconnect root and its subnode', function(){
-                let root;
 
-                before(function(){
-                    root = treeWith2Childs();
+        });
+
+        describe('unshare node', function(){
+            function test(root, args, testNames) {
+                it(testNames[0], function(){
+                    const node1 = root.getNodeById(1, true);
+                    assert.isTrue(node1.has(3));
                 });
 
-                it('disconnectNodes5 - returns error (direct order)', function(){
-                    const result = root.disconnectNodes(0, 1);
-                    assert.isTrue(result.isFail());
+                it(testNames[1], function(){
+                    const result = root.disconnectNodes(args[0], args[1]);
+                    assert.isTrue(result.isOk());
                 });
 
-                it('disconnectNodes6 - returns error (inverse order)', function(){
-                    const result = root.disconnectNodes(1, 0);
-                    assert.isTrue(result.isFail());
+                it(testNames[2], function(){
+                    const node0 = root.getNodeById(0, true);
+                    assert.isFalse(node0.has(3));
                 });
+
+                it(testNames[3], function(){
+                    const node1 = root.getNodeById(1, true);
+                    assert.isFalse(node1.has(3));
+                });
+
+                it(testNames[4], function(){
+                    const node2 = root.getNodeById(2, true);
+                    assert.isTrue(node2.has(3));
+                });
+            }
+
+            describe('direct order', function(){
+                const root = treeWithSharing();
+                
+                test(root, [1, 3], [
+                    'disconnectNodes9 - node id:1 has node id:3',
+                    'disconnectNodes10 - result.isOk()',
+                    'disconnectNodes11 - node id:0 has not node id:3',
+                    'disconnectNodes12 - node id:1 has not node id:3',
+                    'disconnectNodes13 - node id:2 has node id:3'
+                ]);
             });
 
-            describe('not disconnect neighbours', function(){
-                let root;
+            describe('inverse order', function(){
+                const root = treeWithSharing();
 
-                before(function(){
-                    root = treeWith2Childs();
-                });
+                test(root, [3, 1], [
+                    'disconnectNodes14 - node id:1 has node id:3',
+                    'disconnectNodes15 - result.isOk()',
+                    'disconnectNodes16 - node id:0 has not node id:3',
+                    'disconnectNodes17 - node id:1 has not node id:3',
+                    'disconnectNodes18 - node id:2 has node id:3'
+                ]);
+            });
+        });
 
-                it('disconnectNodes7 - returns error (direct order)', function(){
-                    const result = root.disconnectNodes(1, 2);
-                    assert.isTrue(result.isFail());
-                });
+        describe('not disconnect root and its subnode', function(){
+            let root;
 
-                it('disconnectNodes8 - returns error (inverse order)', function(){
-                    const result = root.disconnectNodes(2, 1);
-                    assert.isTrue(result.isFail());
-                });
+            before(function(){
+                root = treeWith2Childs();
             });
 
-            describe('unshare node', function(){
-                function test(root, args, testNames) {
-                    it(testNames[0], function(){
-                        const node1 = root.getNodeById(1, true);
-                        assert.isTrue(node1.has(3));
-                    });
+            it('disconnectNodes5 - returns error (direct order)', function(){
+                const result = root.disconnectNodes(0, 1);
+                assert.isTrue(result.isFail());
+            });
 
-                    it(testNames[1], function(){
-                        const result = root.disconnectNodes(args[0], args[1]);
-                        assert.isTrue(result.isOk());
-                    });
+            it('disconnectNodes6 - returns error (inverse order)', function(){
+                const result = root.disconnectNodes(1, 0);
+                assert.isTrue(result.isFail());
+            });
+        });
 
-                    it(testNames[2], function(){
-                        const node0 = root.getNodeById(0, true);
-                        assert.isFalse(node0.has(3));
-                    });
+        describe('not disconnect neighbours', function(){
+            let root;
 
-                    it(testNames[3], function(){
-                        const node1 = root.getNodeById(1, true);
-                        assert.isFalse(node1.has(3));
-                    });
+            before(function(){
+                root = treeWith2Childs();
+            });
 
-                    it(testNames[4], function(){
-                        const node2 = root.getNodeById(2, true);
-                        assert.isTrue(node2.has(3));
-                    });
-                }
+            it('disconnectNodes7 - returns error (direct order)', function(){
+                const result = root.disconnectNodes(1, 2);
+                assert.isTrue(result.isFail());
+            });
 
-                describe('direct order', function(){
-                    const root = treeWithSharing();
-                    
-                    test(root, [1, 3], [
-                        'disconnectNodes9 - node id:1 has node id:3',
-                        'disconnectNodes10 - result.isOk()',
-                        'disconnectNodes11 - node id:0 has not node id:3',
-                        'disconnectNodes12 - node id:1 has not node id:3',
-                        'disconnectNodes13 - node id:2 has node id:3'
-                    ]);
-                });
-
-                describe('inverse order', function(){
-                    const root = treeWithSharing();
-
-                    test(root, [3, 1], [
-                        'disconnectNodes14 - node id:1 has node id:3',
-                        'disconnectNodes15 - result.isOk()',
-                        'disconnectNodes16 - node id:0 has not node id:3',
-                        'disconnectNodes17 - node id:1 has not node id:3',
-                        'disconnectNodes18 - node id:2 has node id:3'
-                    ]);
-                });
+            it('disconnectNodes8 - returns error (inverse order)', function(){
+                const result = root.disconnectNodes(2, 1);
+                assert.isTrue(result.isFail());
             });
         });
 
