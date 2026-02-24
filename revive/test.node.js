@@ -478,7 +478,7 @@ describe('Node', function(){
             });
         });
 
-        describe('not connect random nodes', function(){
+        describe('not connect unconnectable nodes', function(){
             let root;
 
             before(function(){
@@ -668,6 +668,24 @@ describe('Node', function(){
 
             it('disconnectNodes2 - returns error if both nodes outside tree', function(){
                 const result = root.disconnectNodes(10, 8);
+                assert.isTrue(result.isFail());
+            });
+        });
+
+        describe('not disconnect disconnected nodes', function(){
+            let root;
+
+            before(function(){
+                root = complexTree();
+            });
+
+            it('disconnectNodes3 - not connect root and leaf', function(){
+                const result = root.disconnectNodes(0, 6);
+                assert.isTrue(result.isFail());
+            });
+
+            it('disconnectNodes4 - not connect subnode of root and leaf', function(){
+                const result = root.disconnectNodes(2, 5);
                 assert.isTrue(result.isFail());
             });
         });
