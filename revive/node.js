@@ -204,7 +204,7 @@ class Node {
         return result;
     }
 
-    injectNode(parentId, node) {
+    injectNode(parentId, node, container=null) {
         const parent = this.getNodeById(parentId, true);
 
         if (parent.isEmpty()) {
@@ -212,11 +212,12 @@ class Node {
                               `Subnode id:${parentId} not found`);
         }
 
-        parent.addSubnode(node, {
+        const definition = container ?? {
             logicalOwn: SubnodeOwnership.Here,
             physicalOwn: SubnodeOwnership.Here,
             role: SubnodeRole.Void
-        });
+        };
+        parent.addSubnode(node, definition);
 
         return new Result();
     }
@@ -261,23 +262,27 @@ class Node {
 
     shareNode(subject, supplicant) {
         const root = this;
-        const subjectsParent =
+        const selectResult =
               this.selectNodes((n, c, p) => (n.has(subject.id)), true);
+        if (selectResult.isFail())
+            return selectResult;
+        const subjectsParent = selectResult.sample[0];
 
-        // 1) ejecting subject from it's parent and injecting it in root
+        // 1) ejecting subject from it's parent
         let result1;
 
         result1 = root.ejectNode(subject.id);
         if (result1.isFail())
             return result1;
 
-        result1 = root.injectNode(root.id, subject);
+        // 2) injecting subject to root with proper ownership
+        result1 = root.injectNode(root.id, subject, {
+            logicalOwn: SubnodeOwnership.Subnode,
+            physicalOwn: SubnodeOwnership.Here,
+            role: SubnodeRole.Void
+        });
         if (result1.isFail())
             return result1;
-
-        // 2) change injected node logical ownership
-        const container = root._subnodes.get(subject.id);
-        container.logicalOwn = SubnodeOwnership.Subnode;
 
         // 3) create container definition or shared subnode
         const definition = {
