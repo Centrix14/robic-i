@@ -336,43 +336,43 @@ class Node {
         return new Result();
     }
 
-    static _getOperandType(thisArg, node1, node2) {
+    static _getOperands(thisArg, node1, node2) {
         if (Node.isPhysicalRelatives(node1, node2)) {
             return {
                 type: 'physical relatives',
-                args: [node1, node2]
+                list: [node1, node2]
             };
         }
         else if (Node.isPhysicalRelatives(node2, node1)) {
             return {
                 type: 'physical relatives',
-                args: [node2, node1]
+                list: [node2, node1]
             };
         }
 
         else if (thisArg.isSharingPossible(node1, node2)) {
             return {
                 type: 'shared',
-                args: [node1, node2]
+                list: [node1, node2]
             };
         }
         else if (thisArg.isSharingPossible(node2, node1)) { 
             return {
                 type: 'shared',
-                args: [node2, node1]
+                list: [node2, node1]
             };
         }
 
         else if (thisArg.isDerivingPossible(node1, node2)) {
             return {
                 type: 'derived',
-                args: [node1, node2]
+                list: [node1, node2]
             };
         }
         else if (thisArg.isDerivingPossible(node2, node1)) {
             return {
                 type: 'derived',
-                args: [node2, node1]
+                list: [node2, node1]
             };
         }
 
@@ -387,17 +387,17 @@ class Node {
         if (result.isFail())
             return result;
 
-        const operandType = Node._getOperandType(this, node1, node2);
+        const operands = Node._getOperands(this, node1, node2);
 
-        switch (operandType.type) {
+        switch (operands.type) {
         case 'physical relatives':
-            return this._connectPhysicalRelatives.apply(this, operandType.args);
+            return this._connectPhysicalRelatives.apply(this, operands.list);
 
         case 'shared':
-            return this._shareNode.apply(this, operandType.args);
+            return this._shareNode.apply(this, operands.list);
 
         case 'derived':
-            return this._deriveNode.apply(this, operandType.args);
+            return this._deriveNode.apply(this, operands.list);
 
         case 'none':
             return new Result(ErrorType.NOP);
@@ -412,10 +412,16 @@ class Node {
         if (result.isFail())
             return result;
 
-        const operandType = Node._getOperandType(this, node1, node2);
+        const operands = Node._getOperands(this, node1, node2);
 
-        switch (operandType.type) {
+        switch (operands.type) {
         case 'physical relatives':
+            return '';
+
+        case 'shared':
+            return '';
+
+        case 'derived':
             return '';
 
         case 'none':
