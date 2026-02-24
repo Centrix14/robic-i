@@ -593,8 +593,10 @@ describe('Node', function(){
             it('connectNodes16 - root has node id:3 logically', function(){
                 const here = SubnodeOwnership.Here;
                 const result = root.selectNodes(
-                    (n, c, _) => (n.id === 3 && c.logicalOwn === here),
-                    false
+                    (n, c, p) => (n.id === 3
+                                  && c?.logicalOwn === here
+                                  && p === root),
+                    true
                 );
 
                 const node = result.sample[0];
