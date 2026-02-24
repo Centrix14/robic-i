@@ -321,11 +321,11 @@ class Node {
         return new Result();
     }
 
-    _checkConnectionEdgeCases(node1, node2) {
+    static _checkConnectionEdgeCases(thisArg, node1, node2) {
         if (node1 === emptyNode || node2 === emptyNode)
             return new Result(ErrorType.SubnodeNotFound);
 
-        else if (this.isNeighbours(node1.id, node2.id))
+        else if (thisArg.isNeighbours(node1.id, node2.id))
             return new Result(ErrorType.AttemptToConnectNeighbours);
 
         else if (Node.isLogicalRelatives(node1, node2))
@@ -383,7 +383,7 @@ class Node {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
 
-        const result = this._checkConnectionEdgeCases(node1, node2);
+        const result = Node._checkConnectionEdgeCases(this, node1, node2);
         if (result.isFail())
             return result;
 
@@ -408,7 +408,7 @@ class Node {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
 
-        const result = this._checkConnectionEdgeCases(node1, node2);
+        const result = Node._checkConnectionEdgeCases(this, node1, node2);
         if (result.isFail())
             return result;
 
