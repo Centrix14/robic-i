@@ -544,10 +544,14 @@ describe('Node', function(){
                 assert.isTrue(result.isOk());
             });
 
-            it('connectNodes10 - node id:2 stored in root', function(){
-                const result = root.selectNodes((n, c, p) => n.has(2), true);
-                const node = result.sample[0];
-                assert.equal(node.id, 0);
+            it('connectNodes10 - node id:1 has node id:2', function(){
+                const node1 = root.getNodeById(1, true);
+                assert.isTrue(node1.has(2));
+            });
+
+            it('connectNodes11 - node id:4 has node id:2', function(){
+                const node4 = root.getNodeById(4, true);
+                assert.isTrue(node4.has(2));
             });
         });
 
