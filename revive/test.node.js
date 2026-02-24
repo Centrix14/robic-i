@@ -585,9 +585,9 @@ describe('Node', function(){
                 root = treeWithSharing();
             });
 
-            it('connectNodes* - returns Connect (direct order)', function(){
+            it('connectNodes15 - result.isOk()', function(){
                 const result = root.connectNodes(0, 3);
-                assert.equal(result, 'Connect');
+                assert.isTrue(result.isOk());
             });
         });
 
