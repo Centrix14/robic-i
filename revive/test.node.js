@@ -535,7 +535,7 @@ describe('Node', function(){
         describe('share node', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
-                    const result = root.connectNodes.apply(root, args);
+                    const result = root.connectNodes(args[0], args[1]);
                     assert.isTrue(result.isOk());
                 });
 
@@ -575,7 +575,7 @@ describe('Node', function(){
         describe('connect shared node and root', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
-                    const result = root.connectNodes.apply(root, args);
+                    const result = root.connectNodes(args[0], args[1]);
                     assert.isTrue(result.isOk());
                 });
 
