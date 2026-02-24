@@ -572,42 +572,42 @@ describe('Node', function(){
         });
 
 
-        describe('connect shared node and root (direct order)', function(){
-            let root;
+        describe('connect shared node and root', function(){
+            function test(root, args, testNames) {
+                it(testNames[0], function(){
+                    const result = root.connectNodes.apply(root, args);
+                    assert.isTrue(result.isOk());
+                });
 
-            before(function(){
-                root = treeWithSharing();
+                it(testNames[1], function(){
+                    const result = root.selectNodes(
+                        (n, c, p) => (n.id === 3
+                                      && c?.logicalOwn === SubnodeOwnership.Here
+                                      && p === root),
+                        true
+                    );
+
+                    const node = result.sample[0];
+                    assert.equal(node.id, 3);
+                });
+            }
+
+            describe('direct order', function(){
+                const root = treeWithSharing();
+
+                test(root, [0, 3], [
+                    'connectNodes15 - result.isOk()',
+                    'connectNodes16 - root has node id:3 logically'
+                ]);
             });
 
-            it('connectNodes15 - result.isOk()', function(){
-                const result = root.connectNodes(0, 3);
-                assert.isTrue(result.isOk());
-            });
+            describe('inverse order', function(){
+                const root = treeWithSharing();
 
-            it('connectNodes16 - root has node id:3 logically', function(){
-                const here = SubnodeOwnership.Here;
-                const result = root.selectNodes(
-                    (n, c, p) => (n.id === 3
-                                  && c?.logicalOwn === here
-                                  && p === root),
-                    true
-                );
-
-                const node = result.sample[0];
-                assert.equal(node.id, 3);
-            });
-        });
-
-        describe('connect shared node and root (inverse order)', function(){
-            let root;
-
-            before(function(){
-                root = treeWithSharing();
-            });
-
-            it('connectNodes* - returns Connect (inverse order)', function(){
-                const result = root.connectNodes(3, 0);
-                assert.equal(result, 'Connect');
+                test(root, [3, 0], [
+                    'connectNodes17 - result.isOk()',
+                    'connectNodes18 - root has node id:3 logically'
+                ]);
             });
         });
 
