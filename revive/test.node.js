@@ -556,10 +556,25 @@ describe('Node', function(){
         });
 
         describe('share node (inverse order)', function(){
-            it('connectNodes10 - returns result.isOk() (inverse order)', function(){
-                const root = simpleNestedTree();
+            let root;
+
+            before(function(){
+                root = simpleNestedTree();
+            });
+
+            it('connectNodes12 - result.isOk()', function(){
                 const result = root.connectNodes(4, 2);
                 assert.isTrue(result.isOk());
+            });
+
+            it('connectNodes13 - node id:1 has node id:2', function(){
+                const node1 = root.getNodeById(1, true);
+                assert.isTrue(node1.has(2));
+            });
+
+            it('connectNodes14 - node id:4 has node id:2', function(){
+                const node4 = root.getNodeById(4, true);
+                assert.isTrue(node4.has(2));
             });
         });
 
