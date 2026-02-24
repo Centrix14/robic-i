@@ -688,6 +688,24 @@ describe('Node', function(){
                 const result = root.disconnectNodes(2, 5);
                 assert.isTrue(result.isFail());
             });
+
+            describe('not disconnect root and its subnode', function(){
+                let root;
+
+                before(function(){
+                    root = treeWith2Childs();
+                });
+
+                it('disconnectNodes5 - returns error (direct order)', function(){
+                    const result = root.connectNodes(0, 1);
+                    assert.isTrue(result.isFail());
+                });
+
+                it('disconnectNodes6 - returns error (inverse order)', function(){
+                    const result = root.connectNodes(1, 0);
+                    assert.isTrue(result.isFail());
+                });
+            });
         });
 
     });
