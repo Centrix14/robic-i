@@ -353,6 +353,12 @@ class Node {
     }
 
     disconnectNodes(id1, id2) {
+        const node1 = this.getNodeById(id1),
+              node2 = this.getNodeById(id2);
+
+        if (node1 === emptyNode || node2 === emptyNode)
+            return new Result(ErrorType.SubnodeNotFound);
+
         return new Result();
     }
 }
