@@ -697,12 +697,30 @@ describe('Node', function(){
                 });
 
                 it('disconnectNodes5 - returns error (direct order)', function(){
-                    const result = root.connectNodes(0, 1);
+                    const result = root.disconnectNodes(0, 1);
                     assert.isTrue(result.isFail());
                 });
 
                 it('disconnectNodes6 - returns error (inverse order)', function(){
-                    const result = root.connectNodes(1, 0);
+                    const result = root.disconnectNodes(1, 0);
+                    assert.isTrue(result.isFail());
+                });
+            });
+
+            describe('not disconnect neighbours', function(){
+                let root;
+
+                before(function(){
+                    root = treeWith2Childs();
+                });
+
+                it('disconnectNodes7 - returns error (direct order)', function(){
+                    const result = root.disconnectNodes(1, 2);
+                    assert.isTrue(result.isFail());
+                });
+
+                it('disconnectNodes8 - returns error (inverse order)', function(){
+                    const result = root.disconnectNodes(2, 1);
                     assert.isTrue(result.isFail());
                 });
             });
