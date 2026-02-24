@@ -305,6 +305,10 @@ class Node {
         return new Result();
     }
 
+    connectPhysicalRelatives(parent, child) {
+        return new Result();
+    }
+
     connectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
@@ -318,9 +322,9 @@ class Node {
             return new Result(ErrorType.AttemptToConnectRelatives);
 
         else if (Node.isPhysicalRelatives(node1, node2))
-            return 'Connect';
+            return this.connectPhysicalRelatives(node1, node2);
         else if (Node.isPhysicalRelatives(node2, node1))
-            return 'Connect';
+            return this.connectPhysicalRelatives(node1, node2);
 
         else if (this.isSharingPossible(node1, node2))
             return this.shareNode(node1, node2);
