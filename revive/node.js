@@ -412,12 +412,15 @@ class Node {
         if (result.isFail())
             return result;
 
-        if (Node.isPhysicalRelatives(node1, node2))
-            return this._connectPhysicalRelatives(node1, node2);
-        else if (Node.isPhysicalRelatives(node2, node1))
-            return this._connectPhysicalRelatives(node2, node1);
+        const operandType = Node._getOperandType(this, node1, node2);
 
-        return 
+        switch (operandType.type) {
+        case 'physical relatives':
+            return '';
+
+        case 'none':
+            return new Result(ErrorType.NOP);
+        }
     }
 }
 
