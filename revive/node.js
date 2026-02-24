@@ -311,7 +311,13 @@ class Node {
         return new Result();
     }
 
-    deriveNode() {
+    deriveNode(subject, supplicant) {
+        supplicant.addSubnode(emptyNode, {
+            logicalOwn: SubnodeOwnership.Here,
+            physicalOwn: SubnodeOwnership.Subnode,
+            role: SubnodeRole.Void
+        }, subject.id);
+
         return new Result();
     }
 
@@ -338,9 +344,9 @@ class Node {
             return this.shareNode(node2, node1);
 
         else if (this.isDerivingPossible(node1, node2))
-            return this.deriveNode();
+            return this.deriveNode(node1, node2);
         else if (this.isDerivingPossible(node2, node1))
-            return this.deriveNode();
+            return this.deriveNode(node2, node1);
 
         else
             return new Result(ErrorType.NOP);
