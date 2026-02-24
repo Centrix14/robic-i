@@ -612,26 +612,40 @@ describe('Node', function(){
         });
 
         describe('derive node', function(){
-            function test(root, args, testNames) {
+            function test(root, parent, child, testNames) {
                 it(testNames[0], function(){
-                    const result = root.connectNodes.apply(root, args);
+                    const result = root.has(child);
+                    assert.isFalse(result);
+                });
+
+                it(testNames[1], function(){
+                    const result = root.connectNodes(parent, child);
                     assert.isTrue(result.isOk());
+                });
+
+                it(testNames[2], function(){
+                    const result = root.has(child);
+                    assert.isTrue(result);
                 });
             }
 
             describe('direct order', function(){
                 const root = simpleNestedTree();
 
-                test(root, [0, 2], [
-                    'connectNodes* - returns Deriving'
+                test(root, 0, 2, [
+                    'connectNodes19 - root has not node id:2',
+                    'connectNodes20 - result.isOk()',
+                    'connectNodes21 - root has node id:2'
                 ]);
             });
 
             describe('inverse order', function(){
                 const root = simpleNestedTree();
 
-                test(root, [2, 0], [
-                    'connectNodes* - returns Deriving'
+                test(root, 2, 0, [
+                    'connectNodes22 - root has not node id:2',
+                    'connectNodes23 - result.isOk()',
+                    'connectNodes24 - root has node id:2'
                 ]);
             });
         });
