@@ -533,20 +533,16 @@ describe('Node', function(){
         });
 
         describe('share node', function(){
-            let root;
-
-            before(function(){
-                root = simpleNestedTree();
-            });
-
-            it('connectNodes* - returns Share (direct order)', function(){
+            it('connectNodes9 - returns result.isOk() (direct order)', function(){
+                const root = simpleNestedTree();
                 const result = root.connectNodes(2, 4);
-                assert.equal(result, 'Sharing');
+                assert.isTrue(result.isOk());
             });
 
-            it('connectNodes* - returns Share (inverse order)', function(){
+            it('connectNodes10 - returns result.isOk() (inverse order)', function(){
+                const root = simpleNestedTree();
                 const result = root.connectNodes(4, 2);
-                assert.equal(result, 'Sharing');
+                assert.isTrue(result.isOk());
             });
         });
 
