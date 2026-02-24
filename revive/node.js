@@ -154,7 +154,7 @@ class Node {
         if (recursive) {
             this.forSubnodes(function(node, nodeContainer){
                 const inner = node.selectNodes(condition, recursive,
-                                               container, this);
+                                               nodeContainer, this);
                 sample.push(...inner.sample);
             }, this);
         }
@@ -306,6 +306,8 @@ class Node {
     }
 
     connectPhysicalRelatives(parent, child) {
+        const container = parent._subnodes.get(child.id);
+        container._logicalOwn = SubnodeOwnership.Here;
         return new Result();
     }
 
