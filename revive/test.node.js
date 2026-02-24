@@ -728,6 +728,54 @@ describe('Node', function(){
             });
         });
 
+        // остановился тут. необходимо изменить граничные условия таким образом,
+        // чтобы разъединение общего узла и корня стало возможным.
+        // условие того — доказать, что в дереве кто-то ссылается на этот узел,
+        // как на разделяемый.
+        describe('disconnect shared node and root', function(){
+            function test(root, args, testNames) {
+                before(function(){
+                    root.connectNodes(args[0], args[1]);
+                });
+
+                it(testNames[0], function(){
+                    const result = root.disconnectNodes(args[0], args[1]);
+                    assert.isTrue(result.isOk());
+                });
+
+                it(testNames[1], function(){
+                    const subnode = SubnodeOwnership.Subnode;
+                    const result = root.selectNodes(
+                        (n, c, p) => (n.id === 3
+                                      && c?.logicalOwn === subnode
+                                      && p === root),
+                        true
+                    );
+
+                    const node = result.sample[0];
+                    assert.equal(node.id, 3);
+                });
+            }
+
+            describe('direct order', function(){
+                const root = treeWithSharing();
+
+                test(root, [0, 3], [
+                    'disconnectNodes15 - disconnect result.isOk()',
+                    'disconnectNodes* - root has not node id:3 logically'
+                ]);
+            });
+
+            describe('inverse order', function(){
+                const root = treeWithSharing();
+
+                test(root, [3, 0], [
+                    'disconnectNodes17 - result.isOk()',
+                    'disconnectNodes18 - root has node id:3 logically'
+                ]);
+            });
+        });
+
         describe('unshare node', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
