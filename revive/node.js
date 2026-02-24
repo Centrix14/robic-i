@@ -86,28 +86,6 @@ class Node {
         return this._subnodes.has(id);
     }
 
-    isNeighbours(id1, id2) {
-        return this.has(id1) && this.has(id2);
-    }
-
-    static isRelatives(parent, child) {
-        if (parent.has(child.id)) {
-            const container = parent._subnodes.get(child.id);
-            return container.logicalOwn === SubnodeOwnership.Here;
-        }
-        else
-            return false;
-    }
-
-    static isPhysicalRelatives(parent, child) {
-        if (parent.has(child.id)) {
-            const container = parent._subnodes.get(child.id);
-            return container.physicalOwn === SubnodeOwnership.Here;
-        }
-        else
-            return false;
-    }
-
     forSubnodes(fun, thisArg) {
         for (let container of this._subnodes.values())
             fun.call(thisArg, container.node, container);
@@ -234,6 +212,28 @@ class Node {
         }
 
         return node.removeSubnode(id);
+    }
+
+    isNeighbours(id1, id2) {
+        return this.has(id1) && this.has(id2);
+    }
+
+    static isRelatives(parent, child) {
+        if (parent.has(child.id)) {
+            const container = parent._subnodes.get(child.id);
+            return container.logicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
+    }
+
+    static isPhysicalRelatives(parent, child) {
+        if (parent.has(child.id)) {
+            const container = parent._subnodes.get(child.id);
+            return container.physicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
     }
 
     isSharingPossible(subject, supplicant) {
