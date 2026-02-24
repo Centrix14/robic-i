@@ -262,6 +262,7 @@ class Node {
 
     shareNode(subject, supplicant) {
         const root = this;
+
         const selectResult =
               this.selectNodes((n, c, p) => (n.has(subject.id)), true);
         if (selectResult.isFail())
