@@ -469,12 +469,12 @@ describe('Node', function(){
 
             it('connectNodes* - returns None if one node outside tree', function(){
                 const result = root.connectNodes(1, 8);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
 
             it('connectNodes* - returns None if both nodes outside tree', function(){
                 const result = root.connectNodes(10, 8);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
         });
 
@@ -487,12 +487,12 @@ describe('Node', function(){
 
             it('connectNodes* - not connect root and leaf', function(){
                 const result = root.connectNodes(0, 6);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
 
             it('connectNodes* - not connect subnode of root and leaf', function(){
                 const result = root.connectNodes(2, 5);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
         });
 
@@ -505,12 +505,12 @@ describe('Node', function(){
 
             it('connectNodes* - returns None (direct order)', function(){
                 const result = root.connectNodes(0, 1);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
 
             it('connectNodes* - returns None (inverse order)', function(){
                 const result = root.connectNodes(1, 0);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
         });
 
@@ -523,12 +523,12 @@ describe('Node', function(){
 
             it('connectNodes* - returns Node (direct order)', function(){
                 const result = root.connectNodes(1, 2);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
 
             it('connectNodes* - returns Node (inverse order)', function(){
                 const result = root.connectNodes(2, 1);
-                assert.equal(result, 'None');
+                assert.isTrue(result.isFail());
             });
         });
 
