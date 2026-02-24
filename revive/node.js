@@ -321,11 +321,11 @@ class Node {
         return new Result();
     }
 
-    connectNodes(id1, id2) {
-        const node1 = this.getNodeById(id1, true),
-              node2 = this.getNodeById(id2, true);
+    _checkConnectionEdgeCases(node1, node2) {
+        if (node1 === emptyNode || node2 === emptyNode)
+            return new Result(ErrorType.SubnodeNotFound);
 
-        if (this.isNeighbours(id1, id2))
+        else if (this.isNeighbours(node1.id, node2.id))
             return new Result(ErrorType.AttemptToConnectNeighbours);
 
         else if (Node.isLogicalRelatives(node1, node2))
@@ -333,46 +333,91 @@ class Node {
         else if (Node.isLogicalRelatives(node2, node1))
             return new Result(ErrorType.AttemptToConnectRelatives);
 
-        else if (Node.isPhysicalRelatives(node1, node2))
-            return this._connectPhysicalRelatives(node1, node2);
-        else if (Node.isPhysicalRelatives(node2, node1))
-            return this._connectPhysicalRelatives(node2, node1);
+        return new Result();
+    }
 
-        else if (this.isSharingPossible(node1, node2))
-            return this._shareNode(node1, node2);
-        else if (this.isSharingPossible(node2, node1))
-            return this._shareNode(node2, node1);
+    static _getOperandType(thisArg, node1, node2) {
+        if (Node.isPhysicalRelatives(node1, node2)) {
+            return {
+                type: 'physical relatives',
+                args: [node1, node2]
+            };
+        }
+        else if (Node.isPhysicalRelatives(node2, node1)) {
+            return {
+                type: 'physical relatives',
+                args: [node2, node1]
+            };
+        }
 
-        else if (this.isDerivingPossible(node1, node2))
-            return this._deriveNode(node1, node2);
-        else if (this.isDerivingPossible(node2, node1))
-            return this._deriveNode(node2, node1);
+        else if (thisArg.isSharingPossible(node1, node2)) {
+            return {
+                type: 'shared',
+                args: [node1, node2]
+            };
+        }
+        else if (thisArg.isSharingPossible(node2, node1)) { 
+            return {
+                type: 'shared',
+                args: [node2, node1]
+            };
+        }
 
-        else
+        else if (thisArg.isDerivingPossible(node1, node2)) {
+            return {
+                type: 'derived',
+                args: [node1, node2]
+            };
+        }
+        else if (thisArg.isDerivingPossible(node2, node1)) {
+            return {
+                type: 'derived',
+                args: [node2, node1]
+            };
+        }
+
+        return {type: 'none'};
+    }
+
+    connectNodes(id1, id2) {
+        const node1 = this.getNodeById(id1, true),
+              node2 = this.getNodeById(id2, true);
+
+        const result = this._checkConnectionEdgeCases(node1, node2);
+        if (result.isFail())
+            return result;
+
+        const operandType = Node._getOperandType(this, node1, node2);
+
+        switch (operandType.type) {
+        case 'physical relatives':
+            return this._connectPhysicalRelatives.apply(this, operandType.args);
+
+        case 'shared':
+            return this._shareNode.apply(this, operandType.args);
+
+        case 'derived':
+            return this._deriveNode.apply(this, operandType.args);
+
+        case 'none':
             return new Result(ErrorType.NOP);
+        }
     }
 
     disconnectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
 
-        if (node1 === emptyNode || node2 === emptyNode)
-            return new Result(ErrorType.SubnodeNotFound);
+        const result = this._checkConnectionEdgeCases(node1, node2);
+        if (result.isFail())
+            return result;
 
-        else if (this.isNeighbours(id1, id2))
-            return new Result(ErrorType.AttemptToConnectNeighbours);
-
-        else if (Node.isLogicalRelatives(node1, node2))
-            return new Result(ErrorType.AttemptToConnectRelatives);
-        else if (Node.isLogicalRelatives(node2, node1))
-            return new Result(ErrorType.AttemptToConnectRelatives);
-
-        else if (Node.isPhysicalRelatives(node1, node2))
+        if (Node.isPhysicalRelatives(node1, node2))
             return this._connectPhysicalRelatives(node1, node2);
         else if (Node.isPhysicalRelatives(node2, node1))
             return this._connectPhysicalRelatives(node2, node1);
 
-        return new Result(ErrorType.NOP);
+        return 
     }
 }
 
