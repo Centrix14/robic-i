@@ -532,51 +532,45 @@ describe('Node', function(){
             });
         });
 
-        describe('share node (direct order)', function(){
-            let root;
+        describe('share node', function(){
+            function test(root, args, testNames) {
+                it(testNames[0], function(){
+                    const result = root.connectNodes.apply(root, args);
+                    assert.isTrue(result.isOk());
+                });
 
-            before(function(){
-                root = simpleNestedTree();
+                it(testNames[1], function(){
+                    const node1 = root.getNodeById(1, true);
+                    assert.isTrue(node1.has(2));
+                });
+
+                it(testNames[2], function(){
+                    const node4 = root.getNodeById(4, true);
+                    assert.isTrue(node4.has(2));
+                });
+            }
+
+            describe('direct order', function(){
+                const root = simpleNestedTree();
+                
+                test(root, [2, 4], [
+                    'connectNodes9 - result.isOk()',
+                    'connectNodes10 - node id:1 has node id:2',
+                    'connectNodes11 - node id:4 has node id:2'
+                ]);
             });
 
-            it('connectNodes9 - result.isOk()', function(){
-                const result = root.connectNodes(2, 4);
-                assert.isTrue(result.isOk());
-            });
+            describe('inverse order', function(){
+                const root = simpleNestedTree();
 
-            it('connectNodes10 - node id:1 has node id:2', function(){
-                const node1 = root.getNodeById(1, true);
-                assert.isTrue(node1.has(2));
-            });
-
-            it('connectNodes11 - node id:4 has node id:2', function(){
-                const node4 = root.getNodeById(4, true);
-                assert.isTrue(node4.has(2));
-            });
-        });
-
-        describe('share node (inverse order)', function(){
-            let root;
-
-            before(function(){
-                root = simpleNestedTree();
-            });
-
-            it('connectNodes12 - result.isOk()', function(){
-                const result = root.connectNodes(4, 2);
-                assert.isTrue(result.isOk());
-            });
-
-            it('connectNodes13 - node id:1 has node id:2', function(){
-                const node1 = root.getNodeById(1, true);
-                assert.isTrue(node1.has(2));
-            });
-
-            it('connectNodes14 - node id:4 has node id:2', function(){
-                const node4 = root.getNodeById(4, true);
-                assert.isTrue(node4.has(2));
+                test(root, [4, 2], [
+                    'connectNodes12 - result.isOk()',
+                    'connectNodes13 - node id:1 has node id:2',
+                    'connectNodes14 - node id:4 has node id:2'
+                ]);
             });
         });
+
 
         describe('connect shared node and root (direct order)', function(){
             let root;
