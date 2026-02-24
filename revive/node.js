@@ -311,6 +311,10 @@ class Node {
         return new Result();
     }
 
+    deriveNode() {
+        return new Result();
+    }
+
     connectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
@@ -334,9 +338,9 @@ class Node {
             return this.shareNode(node2, node1);
 
         else if (this.isDerivingPossible(node1, node2))
-            return 'Deriving';
+            return this.deriveNode();
         else if (this.isDerivingPossible(node2, node1))
-            return 'Deriving';
+            return this.deriveNode();
 
         else
             return new Result(ErrorType.NOP);
