@@ -409,9 +409,9 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('injectNode8 - result.isFail()', function(){
+            it('injectNode8 - result.isFail', function(){
                 let result = root.injectNode(123, new Node(1));
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
     });
