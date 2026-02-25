@@ -4,15 +4,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1127</x>
-      <y>392</y>
+      <x>959</x>
+      <y>350</y>
       <w>252</w>
       <h>546</h>
     </coordinates>
     <panel_attributes>Node
 --
 -id: integer {const}
-+data: Any
++data: any
 --
 Node(id:integer, definition:Object)
 
@@ -62,8 +62,8 @@ clone(): Node</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>392</x>
-      <y>420</y>
+      <x>224</x>
+      <y>378</y>
       <w>196</w>
       <h>49</h>
     </coordinates>
@@ -75,8 +75,8 @@ calculate(Deviation [*]): Deviation</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1435</x>
-      <y>616</y>
+      <x>1267</x>
+      <y>574</y>
       <w>231</w>
       <h>49</h>
     </coordinates>
@@ -88,8 +88,8 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1372</x>
-      <y>637</y>
+      <x>1204</x>
+      <y>595</y>
       <w>77</w>
       <h>21</h>
     </coordinates>
@@ -99,8 +99,8 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1456</x>
-      <y>392</y>
+      <x>1288</x>
+      <y>350</y>
       <w>273</w>
       <h>175</h>
     </coordinates>
@@ -124,8 +124,8 @@ Subnode(id:integer, node:Node, definition:Object)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1792</x>
-      <y>581</y>
+      <x>1624</x>
+      <y>539</y>
       <w>112</w>
       <h>70</h>
     </coordinates>
@@ -140,8 +140,8 @@ Supnode</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1372</x>
-      <y>420</y>
+      <x>1204</x>
+      <y>378</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
@@ -153,8 +153,8 @@ m2=0..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1722</x>
-      <y>504</y>
+      <x>1554</x>
+      <y>462</y>
       <w>84</w>
       <h>105</h>
     </coordinates>
@@ -165,8 +165,8 @@ m2=0..*</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1778</x>
-      <y>392</y>
+      <x>1610</x>
+      <y>350</y>
       <w>126</w>
       <h>70</h>
     </coordinates>
@@ -179,8 +179,8 @@ m2=0..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1722</x>
-      <y>406</y>
+      <x>1554</x>
+      <y>364</y>
       <w>70</w>
       <h>21</h>
     </coordinates>
@@ -190,8 +190,8 @@ m2=0..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1372</x>
-      <y>434</y>
+      <x>1204</x>
+      <y>392</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
@@ -203,8 +203,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1127</x>
-      <y>287</y>
+      <x>959</x>
+      <y>245</y>
       <w>154</w>
       <h>70</h>
     </coordinates>
@@ -219,8 +219,8 @@ isFree(id:integer): boolean</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1337</x>
-      <y>287</y>
+      <x>1169</x>
+      <y>245</y>
       <w>175</w>
       <h>70</h>
     </coordinates>
@@ -234,8 +234,8 @@ isUsed() и isFree() проверяют
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1274</x>
-      <y>308</y>
+      <x>1106</x>
+      <y>266</y>
       <w>77</w>
       <h>21</h>
     </coordinates>
@@ -245,25 +245,31 @@ isUsed() и isFree() проверяют
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
-      <y>287</y>
+      <x>525</x>
+      <y>245</y>
       <w>231</w>
-      <h>98</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>Result
 --
+-store: &lt;string, any&gt;
 +note: string
 --
-Result(description:string="")
+Result(note:string="")
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = true
 &lt;&lt;get&gt;&gt; isOk(): boolean = false
-&lt;&lt;get&gt;&gt; isFail(): boolean = false</panel_attributes>
+&lt;&lt;get&gt;&gt; isFail(): boolean = false
+
+store(): [*]
+set(key:string, value:any)
+get(key:string): any</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>959</x>
-      <y>287</y>
+      <x>791</x>
+      <y>245</y>
       <w>126</w>
       <h>112</h>
     </coordinates>
@@ -286,8 +292,8 @@ InvalidArguments
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>917</x>
-      <y>301</y>
+      <x>749</x>
+      <y>259</y>
       <w>56</w>
       <h>21</h>
     </coordinates>
@@ -297,8 +303,8 @@ InvalidArguments
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>644</x>
-      <y>581</y>
+      <x>476</x>
+      <y>539</y>
       <w>175</w>
       <h>91</h>
     </coordinates>
@@ -316,8 +322,8 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
-      <y>511</y>
+      <x>294</x>
+      <y>469</y>
       <w>119</w>
       <h>70</h>
     </coordinates>
@@ -333,8 +339,8 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1792</x>
-      <y>469</y>
+      <x>1624</x>
+      <y>427</y>
       <w>112</w>
       <h>98</h>
     </coordinates>
@@ -353,8 +359,8 @@ Mean</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1722</x>
-      <y>469</y>
+      <x>1554</x>
+      <y>427</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -365,8 +371,8 @@ Mean</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>588</y>
+      <x>315</x>
+      <y>546</y>
       <w>98</w>
       <h>35</h>
     </coordinates>
@@ -378,8 +384,8 @@ Mean</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>322</x>
-      <y>630</y>
+      <x>154</x>
+      <y>588</y>
       <w>259</w>
       <h>105</h>
     </coordinates>
@@ -397,8 +403,8 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>546</y>
+      <x>406</x>
+      <y>504</y>
       <w>84</w>
       <h>77</h>
     </coordinates>
@@ -408,8 +414,8 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>602</y>
+      <x>406</x>
+      <y>560</y>
       <w>84</w>
       <h>21</h>
     </coordinates>
@@ -419,8 +425,8 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>602</y>
+      <x>406</x>
+      <y>560</y>
       <w>84</w>
       <h>70</h>
     </coordinates>
@@ -430,8 +436,8 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>644</x>
-      <y>742</y>
+      <x>476</x>
+      <y>700</y>
       <w>140</w>
       <h>98</h>
     </coordinates>
@@ -448,8 +454,8 @@ Deviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>749</y>
+      <x>280</x>
+      <y>707</y>
       <w>133</w>
       <h>91</h>
     </coordinates>
@@ -464,8 +470,8 @@ PropertyDeviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>854</y>
+      <x>280</x>
+      <y>812</y>
       <w>133</w>
       <h>91</h>
     </coordinates>
@@ -481,8 +487,8 @@ Risk()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>469</x>
-      <y>959</y>
+      <x>301</x>
+      <y>917</y>
       <w>112</w>
       <h>35</h>
     </coordinates>
@@ -493,8 +499,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>168</x>
-      <y>329</y>
+      <x>0</x>
+      <y>287</y>
       <w>140</w>
       <h>49</h>
     </coordinates>
@@ -508,8 +514,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>329</y>
+      <x>161</x>
+      <y>287</y>
       <w>133</w>
       <h>63</h>
     </coordinates>
@@ -523,8 +529,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>490</x>
-      <y>329</y>
+      <x>322</x>
+      <y>287</y>
       <w>98</w>
       <h>70</h>
     </coordinates>
@@ -538,8 +544,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>329</y>
+      <x>287</x>
+      <y>287</y>
       <w>49</w>
       <h>21</h>
     </coordinates>
@@ -549,8 +555,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>798</y>
+      <x>406</x>
+      <y>756</y>
       <w>84</w>
       <h>21</h>
     </coordinates>
@@ -560,8 +566,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>798</y>
+      <x>406</x>
+      <y>756</y>
       <w>84</w>
       <h>112</h>
     </coordinates>
@@ -571,8 +577,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
-      <y>406</y>
+      <x>77</x>
+      <y>364</y>
       <w>98</w>
       <h>21</h>
     </coordinates>
@@ -582,8 +588,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
-      <y>434</y>
+      <x>77</x>
+      <y>392</y>
       <w>98</w>
       <h>21</h>
     </coordinates>
@@ -593,8 +599,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
-      <y>462</y>
+      <x>77</x>
+      <y>420</y>
       <w>98</w>
       <h>21</h>
     </coordinates>
@@ -604,8 +610,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>406</y>
+      <x>168</x>
+      <y>364</y>
       <w>70</w>
       <h>56</h>
     </coordinates>
@@ -615,8 +621,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>441</y>
+      <x>168</x>
+      <y>399</y>
       <w>70</w>
       <h>21</h>
     </coordinates>
@@ -626,8 +632,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>441</y>
+      <x>168</x>
+      <y>399</y>
       <w>70</w>
       <h>49</h>
     </coordinates>
@@ -637,8 +643,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1463</x>
-      <y>791</y>
+      <x>1295</x>
+      <y>749</y>
       <w>70</w>
       <h>21</h>
     </coordinates>
@@ -648,8 +654,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1372</x>
-      <y>798</y>
+      <x>1204</x>
+      <y>756</y>
       <w>105</w>
       <h>21</h>
     </coordinates>
@@ -659,8 +665,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1421</x>
-      <y>833</y>
+      <x>1253</x>
+      <y>791</y>
       <w>154</w>
       <h>21</h>
     </coordinates>
@@ -670,8 +676,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1491</x>
-      <y>805</y>
+      <x>1323</x>
+      <y>763</y>
       <w>21</w>
       <h>42</h>
     </coordinates>
@@ -681,8 +687,8 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>854</x>
-      <y>658</y>
+      <x>686</x>
+      <y>616</y>
       <w>252</w>
       <h>84</h>
     </coordinates>
@@ -698,8 +704,8 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>812</x>
-      <y>609</y>
+      <x>644</x>
+      <y>567</y>
       <w>182</w>
       <h>70</h>
     </coordinates>
@@ -711,8 +717,8 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
-      <y>735</y>
+      <x>609</x>
+      <y>693</y>
       <w>182</w>
       <h>77</h>
     </coordinates>
@@ -724,8 +730,8 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
-      <y>735</y>
+      <x>406</x>
+      <y>693</y>
       <w>441</w>
       <h>259</h>
     </coordinates>
@@ -737,8 +743,8 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
-      <y>441</y>
+      <x>413</x>
+      <y>399</y>
       <w>448</w>
       <h>231</h>
     </coordinates>
@@ -750,8 +756,8 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>133</y>
+      <x>392</x>
+      <y>91</y>
       <w>231</w>
       <h>98</h>
     </coordinates>
@@ -760,6 +766,7 @@ m2=1</panel_attributes>
 -type: ErrorType
 --
 Result(type: ErrorType)
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = false
 &lt;&lt;get&gt;&gt; isOk(): boolean = false
 &lt;&lt;get&gt;&gt; isFail(): boolean = true
 &lt;&lt;get&gt;&gt; type(): ErrorType
@@ -769,14 +776,15 @@ Result(type: ErrorType)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>826</x>
-      <y>133</y>
+      <x>658</x>
+      <y>91</y>
       <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>Success
 --
 Result()
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = false
 &lt;&lt;get&gt;&gt; isOk(): boolean = true
 &lt;&lt;get&gt;&gt; isFail(): boolean = false</panel_attributes>
     <additional_attributes/>
@@ -784,8 +792,8 @@ Result()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>742</x>
-      <y>224</y>
+      <x>574</x>
+      <y>182</y>
       <w>21</w>
       <h>77</h>
     </coordinates>
@@ -795,8 +803,8 @@ Result()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>861</x>
-      <y>224</y>
+      <x>693</x>
+      <y>182</y>
       <w>21</w>
       <h>77</h>
     </coordinates>
