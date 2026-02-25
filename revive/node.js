@@ -208,10 +208,8 @@ class Node {
     injectNode(parentId, node, container=null) {
         const parent = this.getNodeById(parentId, true);
 
-        if (parent.isEmpty()) {
-            return new Result(ErrorType.SubnodeNotFound,
-                              `Subnode id:${parentId} not found`);
-        }
+        if (parent.isEmpty())
+            return new Fail(ErrorType.SubnodeNotFound);
 
         const definition = container ?? {
             logicalOwn: SubnodeOwnership.Here,
@@ -220,7 +218,7 @@ class Node {
         };
         parent.addSubnode(node, definition);
 
-        return new Result();
+        return new Success();
     }
 
     ejectNode(id) {
