@@ -140,18 +140,19 @@ describe('Node', function(){
                 root = treeWith2Childs();
             });
 
-            it('selectNodes1 - result.isOk()', function(){
+            it('selectNodes1 - result.isOk', function(){
                 result =
                     root.selectNodes((n) => (n.id % 2 === 0), true);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('selectNodes2 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
+                assert.lengthOf(result.get('sample'), 2);
             });
 
             it('selectNodes3 - node.id === 0, 2', function(){
-                const node = [result.sample[0], result.sample[1]];
+                const sample = result.get('sample');
+                const node = [sample[0], sample[1]];
                 assert.isTrue(node[0].id === 0 && node[1].id === 2);
             });
         });
@@ -163,18 +164,18 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('selectNodes4 - result.isOk()', function(){
+            it('selectNodes4 - result.isOk', function(){
                 result =
                     root.selectNodes((n) => (n.id === 3), true);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('selectNodes5 - result.sample.length === 1', function(){
-                assert.lengthOf(result.sample, 1);
+                assert.lengthOf(result.get('sample'), 1);
             });
 
             it('selectNodes6 - node.id === 3', function(){
-                const node = result.sample[0];
+                const node = result.get('sample')[0];
                 assert.equal(node.id, 3);
             });
         });
@@ -186,20 +187,21 @@ describe('Node', function(){
                 root = treeWithSharing();
             });
 
-            it('selectNodes9 - result.isOk()', function(){
-                result =
-                    root.selectNodes((n, c, parent) => (parent === root),
-                                     true);
-                assert.isTrue(result.isOk());
+            it('selectNodes9 - result.isOk', function(){
+                result = root.selectNodes(
+                    (n, c, parent) => (parent === root),
+                    true
+                );
+                assert.isTrue(result.isOk);
             });
 
             it('selectNodes10 - result.sample.length === 3', function(){
-                assert.lengthOf(result.sample, 3);
+                assert.lengthOf(result.get('sample'), 3);
             });
 
             it('selectNodes11 - selected node.id === 1, 2, 3', function(){
-                const node = [result.sample[0], result.sample[1],
-                              result.sample[2]];
+                const sample = result.get('sample');
+                const node = [sample[0], sample[1], sample[2]];
                 assert.isTrue(node[0].id === 1 &&
                               node[1].id === 2 &&
                               node[2].id === 3);
@@ -213,19 +215,21 @@ describe('Node', function(){
                 root = treeWithDeriving();
             });
 
-            it('selectNodes12 - result.isOk()', function(){
-                result =
-                    root.selectNodes((n, c, parent) => (parent === root),
-                                     true);
-                assert.isTrue(result.isOk());
+            it('selectNodes12 - result.isOk', function(){
+                result = root.selectNodes(
+                    (n, c, parent) => (parent === root),
+                    true
+                );
+                assert.isTrue(result.isOk);
             });
 
             it('selectNodes13 - result.sample.length === 2', function(){
-                assert.lengthOf(result.sample, 2);
+                assert.lengthOf(result.get('sample'), 2);
             });
 
             it('selectNodes14 - selected node.id === 1, 2', function(){
-                const node = [result.sample[0], result.sample[1]];
+                const sample = result.get('sample');
+                const node = [sample[0], sample[1]];
                 assert.isTrue(node[0].id === 1 &&
                               node[1].id === 2);
             });
@@ -238,14 +242,14 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('selectNodes7 - result.isOk()', function(){
+            it('selectNodes7 - result.isOk', function(){
                 result =
                     root.selectNodes((n) => (n.id === 123), true);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('selectNodes8 - result.sample is empty', function(){
-                assert.isEmpty(result.sample);
+                assert.isEmpty(result.get('sample'));
             })
         });
         
@@ -351,10 +355,10 @@ describe('Node', function(){
                 root = new Node(0);
             });
 
-            it('injectNode1 - result.isOk()', function(){
+            it('injectNode1 - result.isOk', function(){
                 const subject = new Node(1);
                 result = root.injectNode(0, subject);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('injectNode2 - root.subnodes.length === 1', function(){
@@ -376,9 +380,9 @@ describe('Node', function(){
                 subject = treeWith2Childs(4); // => 4, 5, 6
             });
 
-            it('injectNode4 - result.isOk()', function(){
+            it('injectNode4 - result.isOk', function(){
                 result = root.injectNode(2, subject);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('injectNode5 - node id:2 has 1 subnode (alice)', function(){
@@ -421,9 +425,9 @@ describe('Node', function(){
                 root = treeWith3Childs();
             });
 
-            it('ejectNode1 - result.isOk()', function(){
+            it('ejectNode1 - result.isOk', function(){
                 result = root.ejectNode(1);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
 
             it('ejectNode2 - returns ejected node', function(){
@@ -438,9 +442,9 @@ describe('Node', function(){
                 root = simpleNestedTree();
             });
 
-            it('ejectNode3 - result.isOk()', function(){
+            it('ejectNode3 - result.isOk', function(){
                 result = root.ejectNode(3);
-                assert.isTrue(result.isOk());
+                assert.isTrue(result.isOk);
             });
         });
 
@@ -536,7 +540,7 @@ describe('Node', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
                     const result = root.connectNodes(args[0], args[1]);
-                    assert.isTrue(result.isOk());
+                    assert.isTrue(result.isOk);
                 });
 
                 it(testNames[1], function(){
@@ -554,7 +558,7 @@ describe('Node', function(){
                 const root = simpleNestedTree();
                 
                 test(root, [2, 4], [
-                    'connectNodes9 - result.isOk()',
+                    'connectNodes9 - result.isOk',
                     'connectNodes10 - node id:1 has node id:2',
                     'connectNodes11 - node id:4 has node id:2'
                 ]);
@@ -564,7 +568,7 @@ describe('Node', function(){
                 const root = simpleNestedTree();
 
                 test(root, [4, 2], [
-                    'connectNodes12 - result.isOk()',
+                    'connectNodes12 - result.isOk',
                     'connectNodes13 - node id:1 has node id:2',
                     'connectNodes14 - node id:4 has node id:2'
                 ]);
@@ -576,7 +580,7 @@ describe('Node', function(){
             function test(root, args, testNames) {
                 it(testNames[0], function(){
                     const result = root.connectNodes(args[0], args[1]);
-                    assert.isTrue(result.isOk());
+                    assert.isTrue(result.isOk);
                 });
 
                 it(testNames[1], function(){
@@ -596,7 +600,7 @@ describe('Node', function(){
                 const root = treeWithSharing();
 
                 test(root, [0, 3], [
-                    'connectNodes15 - result.isOk()',
+                    'connectNodes15 - result.isOk',
                     'connectNodes16 - root has node id:3 logically'
                 ]);
             });
@@ -605,7 +609,7 @@ describe('Node', function(){
                 const root = treeWithSharing();
 
                 test(root, [3, 0], [
-                    'connectNodes17 - result.isOk()',
+                    'connectNodes17 - result.isOk',
                     'connectNodes18 - root has node id:3 logically'
                 ]);
             });
@@ -620,7 +624,7 @@ describe('Node', function(){
 
                 it(testNames[1], function(){
                     const result = root.connectNodes(args[0], args[1]);
-                    assert.isTrue(result.isOk());
+                    assert.isTrue(result.isOk);
                 });
 
                 it(testNames[2], function(){
@@ -634,7 +638,7 @@ describe('Node', function(){
 
                 test(root, [0, 2], [
                     'connectNodes19 - root has not node id:2',
-                    'connectNodes20 - result.isOk()',
+                    'connectNodes20 - result.isOk',
                     'connectNodes21 - root has node id:2'
                 ]);
             });
@@ -644,7 +648,7 @@ describe('Node', function(){
 
                 test(root, [2, 0], [
                     'connectNodes22 - root has not node id:2',
-                    'connectNodes23 - result.isOk()',
+                    'connectNodes23 - result.isOk',
                     'connectNodes24 - root has node id:2'
                 ]);
             });
@@ -740,7 +744,7 @@ describe('Node', function(){
 
                 it(testNames[0], function(){
                     const result = root.disconnectNodes(args[0], args[1]);
-                    assert.isTrue(result.isOk());
+                    assert.isTrue(result.isOk);
                 });
 
                 it(testNames[1], function(){
@@ -761,7 +765,7 @@ describe('Node', function(){
                 const root = treeWithSharing();
 
                 test(root, [0, 3], [
-                    'disconnectNodes15 - disconnect result.isOk()',
+                    'disconnectNodes15 - disconnect result.isOk',
                     'disconnectNodes* - root has not node id:3 logically'
                 ]);
             });
@@ -770,7 +774,7 @@ describe('Node', function(){
                 const root = treeWithSharing();
 
                 test(root, [3, 0], [
-                    'disconnectNodes17 - result.isOk()',
+                    'disconnectNodes17 - result.isOk',
                     'disconnectNodes18 - root has node id:3 logically'
                 ]);
             });
@@ -785,7 +789,7 @@ describe('Node', function(){
 
                 it(testNames[1], function(){
                     const result = root.disconnectNodes(args[0], args[1]);
-                    assert.isTrue(result.isOk());
+                    assert.isTrue(result.isOk);
                 });
 
                 it(testNames[2], function(){
@@ -809,7 +813,7 @@ describe('Node', function(){
                 
                 test(root, [1, 3], [
                     'disconnectNodes9 - node id:1 has node id:3',
-                    'disconnectNodes10 - result.isOk()',
+                    'disconnectNodes10 - result.isOk',
                     'disconnectNodes11 - node id:0 has not node id:3',
                     'disconnectNodes12 - node id:1 has not node id:3',
                     'disconnectNodes13 - node id:2 has node id:3'
@@ -821,7 +825,7 @@ describe('Node', function(){
 
                 test(root, [3, 1], [
                     'disconnectNodes14 - node id:1 has node id:3',
-                    'disconnectNodes15 - result.isOk()',
+                    'disconnectNodes15 - result.isOk',
                     'disconnectNodes16 - node id:0 has not node id:3',
                     'disconnectNodes17 - node id:1 has not node id:3',
                     'disconnectNodes18 - node id:2 has node id:3'
