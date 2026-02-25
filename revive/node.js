@@ -13,9 +13,9 @@ class ErrorType {
 }
 
 class Result {
-    constructor(note='') {
+    constructor(note='', content=[]) {
         this.note = note;
-        this._store = new Map();
+        this._store = new Map(content);
     }
 
     get isEmpty() { return true; }
@@ -36,8 +36,8 @@ class Result {
 }
 
 class Success extends Result {
-    constructor() {
-        super();
+    constructor(content=[]) {
+        super('', content);
     }
 
     get isEmpty() { return false; }
@@ -46,8 +46,8 @@ class Success extends Result {
 }
 
 class Fail extends Result {
-    constructor(errorType=ErrorType.Void) {
-        super(errorType);
+    constructor(errorType=ErrorType.Void, content=[]) {
+        super(errorType, content);
         this._type = errorType;
     }
 
