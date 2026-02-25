@@ -180,33 +180,28 @@ class Node {
     addSubnode(node, definition, id) {
         const nodeId = node.isPresent() ? node.id : id;
         if (!nodeId)
-            return new Result(ErrorType.InvalidArguments,
-                              `addSubnode requires presence of a node or id argument`);
+            return new Fail(ErrorType.InvalidArguments);
         
         const container = new Subnode(nodeId, node, definition);
         this._subnodes.set(nodeId, container);
 
-        const result = new Result();
-        result.id = nodeId;
-        return result;
+        return new Success([['id', nodeId]]);
     }
 
     removeSubnode(id) {
         const container = this._subnodes.get(id);
         
         if (!container)
-            return new Result(ErrorType.SubnodeNotFound,
-                              `Subnode id:${id} not found`);
+            return new Fail(ErrorType.SubnodeNotFound);
 
         let result;
         const removed = this._subnodes.delete(id);
         if (removed)
-            result = new Result();
+            result = new Success();
         else
-            result = new Result(ErrorType.MapDeleteError,
-                                `Failed to delete entry id:${id}`);
+            result = new Fail(ErrorType.MapDeleteError);
 
-        result.node = container.node;
+        result.set('node', container.node);
         return result;
     }
 
