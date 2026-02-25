@@ -332,6 +332,7 @@ class Node {
     _connectPhysicalRelatives(parent, child) {
         const container = parent._subnodes.get(child.id);
         container._logicalOwn = SubnodeOwnership.Here;
+
         return new Success();
     }
 
@@ -433,7 +434,7 @@ class Node {
               node2 = this.getNodeById(id2, true);
 
         const result = Node._checkConnectionEdgeCases(this, node1, node2);
-        if (result.isFail())
+        if (result.isFail)
             return result;
 
         const operands = Node._getOperands(this, node1, node2);
@@ -449,7 +450,7 @@ class Node {
             return '';
 
         case 'none':
-            return new Result(ErrorType.NOP);
+            return new Result();
         }
     }
 }
