@@ -491,12 +491,12 @@ describe('Node', function(){
 
             it('connectNodes3 - not connect root and leaf', function(){
                 const result = root.connectNodes(0, 6);
-                assert.isTrue(result.isFail);
+                assert.isTrue(result.isEmpty);
             });
 
             it('connectNodes4 - not connect subnode of root and leaf', function(){
                 const result = root.connectNodes(2, 5);
-                assert.isTrue(result.isFail);
+                assert.isTrue(result.isEmpty);
             });
         });
 
@@ -591,7 +591,7 @@ describe('Node', function(){
                         true
                     );
 
-                    const node = result.sample[0];
+                    const node = result.get('sample')[0];
                     assert.equal(node.id, 3);
                 });
             }
