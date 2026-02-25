@@ -173,7 +173,7 @@ class Node {
     getNodeById(id, recursive=true) {
         const sample = this
               .selectNodes((n, c, p) => (n.id === id), recursive)
-              .sample;
+              .get('sample');
         return (sample.length === 0) ? emptyNode : sample[0];
     }
 
