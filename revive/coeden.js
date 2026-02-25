@@ -1,6 +1,7 @@
 class Node {
     constructor(id, definition) {
         this._id = id;
+        this._subnodes = definition?.subnodes ?? new Map();
     }
 
     isEmpty() { return false; }
