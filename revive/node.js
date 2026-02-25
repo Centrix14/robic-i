@@ -260,24 +260,28 @@ class Node {
         if (!this.has(supplicant.id))
             return false;
 
-        const middleNode = this.selectNodes(
+        const result = this.selectNodes(
             (node, _, parent) => (node.has(subject.id) && parent === this),
             true
         );
-        if (middleNode.sample.length === 0)
+
+        const middleNode = result.get('sample');
+        if (middleNode.length === 0)
             return false;
 
-        return middleNode.sample[0];
+        return middleNode[0];
     }
 
     isDerivingPossible(subject, supplicant) {
-        const middleNode = this.selectNodes(
+        const result = this.selectNodes(
             (node, _, parent) => (node.has(subject.id) && parent === supplicant),
             true
         );
-        if (middleNode.sample.length === 0)
+
+        const middleNode = result.get('sample');
+        if (middleNode.length === 0)
             return false;
-        return middleNode.sample[0];
+        return middleNode[0];
     }
 
     _shareNode(subject, supplicant) {
@@ -285,15 +289,15 @@ class Node {
 
         const selectResult =
               this.selectNodes((n, c, p) => (n.has(subject.id)), true);
-        if (selectResult.isFail())
+        if (selectResult.isFail)
             return selectResult;
-        const subjectsParent = selectResult.sample[0];
+        const subjectsParent = selectResult.get('sample')[0];
 
         // 1) ejecting subject from it's parent
         let result1;
 
         result1 = root.ejectNode(subject.id);
-        if (result1.isFail())
+        if (result1.isFail)
             return result1;
 
         // 2) injecting subject to root with proper ownership
@@ -302,7 +306,7 @@ class Node {
             physicalOwn: SubnodeOwnership.Here,
             role: SubnodeRole.Void
         });
-        if (result1.isFail())
+        if (result1.isFail)
             return result1;
 
         // 3) create container definition or shared subnode
@@ -315,20 +319,20 @@ class Node {
         let result4;
 
         result4 = subjectsParent.addSubnode(emptyNode, definition, subject.id);
-        if (result4.isFail())
+        if (result4.isFail)
             return result4;
 
         result4 = supplicant.addSubnode(emptyNode, definition, subject.id);
-        if (result4.isFail())
+        if (result4.isFail)
             return result4;
 
-        return new Result();
+        return new Success();
     }
 
     _connectPhysicalRelatives(parent, child) {
         const container = parent._subnodes.get(child.id);
         container._logicalOwn = SubnodeOwnership.Here;
-        return new Result();
+        return new Success();
     }
 
     _deriveNode(subject, supplicant) {
@@ -338,22 +342,22 @@ class Node {
             role: SubnodeRole.Void
         }, subject.id);
 
-        return new Result();
+        return new Success();
     }
 
     static _checkConnectionEdgeCases(thisArg, node1, node2) {
         if (node1 === emptyNode || node2 === emptyNode)
-            return new Result(ErrorType.SubnodeNotFound);
+            return new Fail(ErrorType.SubnodeNotFound);
 
         else if (thisArg.isNeighbours(node1.id, node2.id))
-            return new Result(ErrorType.AttemptToConnectNeighbours);
+            return new Fail(ErrorType.AttemptToConnectNeighbours);
 
         else if (Node.isLogicalRelatives(node1, node2))
-            return new Result(ErrorType.AttemptToConnectRelatives);
+            return new Fail(ErrorType.AttemptToConnectRelatives);
         else if (Node.isLogicalRelatives(node2, node1))
-            return new Result(ErrorType.AttemptToConnectRelatives);
+            return new Fail(ErrorType.AttemptToConnectRelatives);
 
-        return new Result();
+        return new Success();
     }
 
     static _getOperands(thisArg, node1, node2) {
@@ -404,7 +408,7 @@ class Node {
               node2 = this.getNodeById(id2, true);
 
         const result = Node._checkConnectionEdgeCases(this, node1, node2);
-        if (result.isFail())
+        if (result.isFail)
             return result;
 
         const operands = Node._getOperands(this, node1, node2);
@@ -420,7 +424,7 @@ class Node {
             return this._deriveNode.apply(this, operands.list);
 
         case 'none':
-            return new Result(ErrorType.NOP);
+            return new Result();
         }
     }
 
