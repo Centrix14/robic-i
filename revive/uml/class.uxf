@@ -255,7 +255,7 @@ isUsed() и isFree() проверяют
 -store: &lt;string, any&gt;
 +note: string
 --
-Result(note:string="")
+Result(note:string="", content:any[*]=[])
 &lt;&lt;get&gt;&gt; isEmpty(): boolean = true
 &lt;&lt;get&gt;&gt; isOk(): boolean = false
 &lt;&lt;get&gt;&gt; isFail(): boolean = false
@@ -765,7 +765,7 @@ m2=1</panel_attributes>
 --
 -type: ErrorType
 --
-Result(type: ErrorType)
+Result(type: ErrorType, content:any[*]=[])
 &lt;&lt;get&gt;&gt; isEmpty(): boolean = false
 &lt;&lt;get&gt;&gt; isOk(): boolean = false
 &lt;&lt;get&gt;&gt; isFail(): boolean = true
@@ -783,7 +783,7 @@ Result(type: ErrorType)
     </coordinates>
     <panel_attributes>Success
 --
-Result()
+Result(content:any[*]=[])
 &lt;&lt;get&gt;&gt; isEmpty(): boolean = false
 &lt;&lt;get&gt;&gt; isOk(): boolean = true
 &lt;&lt;get&gt;&gt; isFail(): boolean = false</panel_attributes>
