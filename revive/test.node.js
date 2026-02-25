@@ -431,7 +431,7 @@ describe('Node', function(){
             });
 
             it('ejectNode2 - returns ejected node', function(){
-                assert.equal(result.node.id, 1);
+                assert.equal(result.get('node').id, 1);
             });
         });
 
@@ -455,9 +455,9 @@ describe('Node', function(){
                 root = treeWith3Childs();
             });
 
-            it('ejectNode4 - result.isFail()', function(){
+            it('ejectNode4 - result.isFail', function(){
                 result = root.ejectNode(123);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
     });
@@ -473,12 +473,12 @@ describe('Node', function(){
 
             it('connectNodes1 - returns error if one node outside tree', function(){
                 const result = root.connectNodes(1, 8);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('connectNodes2 - returns error if both nodes outside tree', function(){
                 const result = root.connectNodes(10, 8);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -491,12 +491,12 @@ describe('Node', function(){
 
             it('connectNodes3 - not connect root and leaf', function(){
                 const result = root.connectNodes(0, 6);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('connectNodes4 - not connect subnode of root and leaf', function(){
                 const result = root.connectNodes(2, 5);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -509,12 +509,12 @@ describe('Node', function(){
 
             it('connectNodes5 - returns error (direct order)', function(){
                 const result = root.connectNodes(0, 1);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('connectNodes6 - returns error (inverse order)', function(){
                 const result = root.connectNodes(1, 0);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -527,12 +527,12 @@ describe('Node', function(){
 
             it('connectNodes7 - returns error (direct order)', function(){
                 const result = root.connectNodes(1, 2);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('connectNodes8 - returns error (inverse order)', function(){
                 const result = root.connectNodes(2, 1);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -667,12 +667,12 @@ describe('Node', function(){
 
             it('disconnectNodes1 - returns error if one node outside tree', function(){
                 const result = root.disconnectNodes(1, 8);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('disconnectNodes2 - returns error if both nodes outside tree', function(){
                 const result = root.disconnectNodes(10, 8);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -685,12 +685,12 @@ describe('Node', function(){
 
             it('disconnectNodes3 - not connect root and leaf', function(){
                 const result = root.disconnectNodes(0, 6);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('disconnectNodes4 - not connect subnode of root and leaf', function(){
                 const result = root.disconnectNodes(2, 5);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
 
@@ -705,12 +705,12 @@ describe('Node', function(){
 
             it('disconnectNodes5 - returns error (direct order)', function(){
                 const result = root.disconnectNodes(0, 1);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('disconnectNodes6 - returns error (inverse order)', function(){
                 const result = root.disconnectNodes(1, 0);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
@@ -723,12 +723,12 @@ describe('Node', function(){
 
             it('disconnectNodes7 - returns error (direct order)', function(){
                 const result = root.disconnectNodes(1, 2);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
 
             it('disconnectNodes8 - returns error (inverse order)', function(){
                 const result = root.disconnectNodes(2, 1);
-                assert.isTrue(result.isFail());
+                assert.isTrue(result.isFail);
             });
         });
 
