@@ -17,17 +17,19 @@ class Result {
         this.note = note;
     }
 
-    get isEmpty() {
-        return true;
+    get isEmpty() { return true; }
+    get isOk() { return false; }
+    get isFail() { return false; }
+}
+
+class Success extends Result {
+    constructor() {
+        super();
     }
 
-    get isOk() {
-        return false;
-    }
-
-    get isFail() {
-        return false;
-    }
+    get isEmpty() { return false; }
+    get isOk() { return true; }
+    get isFail() { return false; }
 }
 
 class Identifier {
