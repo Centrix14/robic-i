@@ -160,15 +160,14 @@ class Node {
 
         if (recursive) {
             this.forSubnodes(function(node, nodeContainer){
-                const inner = node.selectNodes(condition, recursive,
-                                               nodeContainer, this);
-                sample.push(...inner.sample);
+                const inner = node
+                      .selectNodes(condition, recursive, nodeContainer, this)
+                      .get('sample');
+                sample.push(...inner);
             }, this);
         }
 
-        const result = new Result();
-        result.sample = sample;
-        return result;
+        return new Success([['sample', sample]]);
     }
 
     getNodeById(id, recursive=true) {
@@ -480,9 +479,7 @@ class EmptyNode {
     subnodes() { return []; }
 
     selectNodes() {
-        const result = new Result();
-        result.sample = [];
-        return result;
+        return new Success([['sample', []]]);
     }
 
     getNodeById() { return new EmptyNode(); }
