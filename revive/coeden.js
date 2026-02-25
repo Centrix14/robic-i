@@ -1,5 +1,3 @@
-// Nothig about nodejs framework here!
-
 class ErrorType {
     static Void = 'Void'
     static SubnodeNotFound = 'Subnode not found'
@@ -56,47 +54,9 @@ class Fail extends Result {
     get isFail() { return true; }
 }
 
-class Identifier {
-    constructor(seed) {
-        this._val = seed;
-    }
-
-    next() {
-        return this._val++;
-    }
-
-    isValid(id) {
-        return typeof(id) === 'number';
-    }
-
-    isUsed(id) {
-        return id < this._val;
-    }
-
-    isFree(id) {
-        return !this.isUsed(id);
-    }
-}
-
-class Relation {
-    
-}
-
-class Accordance {
-    
-}
-
-class Deviation {
-    
-}
-
 class Node {
     constructor(id, definition) {
         this._id = id;
-        this._relation = definition?.relation ?? new Relation();
-        this._subnodes = definition?.subnodes ?? new Map();
-        this._accordance = definition?.accordance ?? new Accordance();
-        this._deviation = definition?.deviation ?? new Deviation();
     }
 
     isEmpty() { return false; }
