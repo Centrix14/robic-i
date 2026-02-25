@@ -15,11 +15,24 @@ class ErrorType {
 class Result {
     constructor(note='') {
         this.note = note;
+        this._store = new Map();
     }
 
     get isEmpty() { return true; }
     get isOk() { return false; }
     get isFail() { return false; }
+
+    store() {
+        return this._store.entries().toArray();
+    }
+
+    set(key, value) {
+        this._store.set(key, value);
+    }
+
+    get(key) {
+        return this._store.get(key);
+    }
 }
 
 class Success extends Result {
