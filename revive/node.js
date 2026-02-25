@@ -32,6 +32,17 @@ class Success extends Result {
     get isFail() { return false; }
 }
 
+class Fail extends Result {
+    constructor(errorType=ErrorType.Void) {
+        super(errorType);
+        this._type = errorType;
+    }
+
+    get isEmpty() { return false; }
+    get isOk() { return false; }
+    get isFail() { return true; }
+}
+
 class Identifier {
     constructor(seed) {
         this._val = seed;
