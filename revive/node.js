@@ -223,13 +223,12 @@ class Node {
 
     ejectNode(id) {
         const selectResult = this.selectNodes((n, c, p) => (n.has(id)), true);
-        if (selectResult.isFail())
+        if (selectResult.isFail)
             return selectResult;
 
-        const node = selectResult.sample[0] ?? emptyNode;
+        const node = selectResult.get('sample')[0] ?? emptyNode;
         if (node.isEmpty()) {
-            return new Result(ErrorType.SubnodeNotFound,
-                              `Subnode id:${id} not found`);
+            return new Fail(ErrorType.SubnodeNotFound);
         }
 
         return node.removeSubnode(id);
@@ -478,15 +477,11 @@ class EmptyNode {
     getNodeById() { return new EmptyNode(); }
 
     addSubnode() {
-        const result = new Result();
-        result.id = NaN;
-        return result;
+        return new Result([['id', NaN]]);
     }
 
     removeSubnode() {
-        const result = new Result();
-        result.node = new EmptyNode();
-        return result;
+        return new Result([['node', new EmptyNode()]]);
     }
 }
 
