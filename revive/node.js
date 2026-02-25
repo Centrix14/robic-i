@@ -13,17 +13,20 @@ class ErrorType {
 }
 
 class Result {
-    constructor(type=ErrorType.Void, description='') {
-        this._type = type;
-        this.description = description;
+    constructor(note='') {
+        this.note = note;
     }
 
-    isOk() {
-        return this._type === ErrorType.Void;
+    get isEmpty() {
+        return true;
     }
 
-    isFail() {
-        return !this.isOk();
+    get isOk() {
+        return false;
+    }
+
+    get isFail() {
+        return false;
     }
 }
 
