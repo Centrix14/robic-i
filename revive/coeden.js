@@ -129,16 +129,15 @@ class Node {
     }
 
     ejectNode(id) {
-        const selectResult = this.selectNodes((n, p) => (n.has(id)), true);
+        const selectResult = this.selectNodes((n, _) => (n.has(id)), true);
         if (selectResult.isFail)
             return selectResult;
 
-        const node = selectResult.get('sample')[0] ?? emptyNode;
-        if (node.isEmpty()) {
+        const parent = selectResult.get('sample')[0] ?? emptyNode;
+        if (parent.isEmpty())
             return new Fail(ErrorType.SubnodeNotFound);
-        }
 
-        return node.removeSubnode(id);
+        return parent.removeSubnode(id);
     }
 
     isLogicalNeighbours(id1, id2) {
