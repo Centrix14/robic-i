@@ -20,9 +20,6 @@ class Node {
     get logicalOwn() { return this._logicalOwn; }
     get physicalOwn() { return this._physicalOwn; }
 
-    get relation() { return this._relation; }
-    set relation(newRelation) { this._relation = newRelation; }
-
     get(id) {
         return this._subnodes.get(id) ?? emptyNode;
     }
