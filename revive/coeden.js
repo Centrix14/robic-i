@@ -214,8 +214,7 @@ class Node {
             true
         );
 
-        const links = result.get('sample');
-        return links.length > 0;
+        return result.get('sample').length > 0;
     }
 
     isLinkToDerived(link, source) {
@@ -483,9 +482,31 @@ class EmptyNode {
         return new Result([['id', NaN]]);
     }
 
+    createSubnode() {
+        return new Success([['id', NaN], ['node', new EmptyNode()]]);
+    }
+
     removeSubnode() {
         return new Result([['node', new EmptyNode()]]);
     }
+
+    injectNode(parentId, node) {
+        return new Result();
+    }
+
+    ejectNode(id) {
+        return this.removeSubnode();
+    }
+
+    isLogicalNeighbours() { return false; }
+    isPhysicalNeighbours(id1, id2) { return false; }
+    static isLogicalRelatives(parent, child) { return false; }
+    static isPhysicalRelatives(parent, child) { return false; }
+
+    isLinkToShared(link, source) { return false; }
+    isShared(node) { return false; }
+    isLinkToDerived(link, source) { return false; }
+    isDerived(node) { return false; }
 }
 
 const emptyNode = new EmptyNode();
