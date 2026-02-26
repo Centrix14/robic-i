@@ -142,10 +142,10 @@ class Node {
 
     isLogicalNeighbours(id1, id2) {
         if (this.has(id1) && this.has(id2)) {
-            const container1 = this._subnodes.get(id1),
-                  container2 = this._subnodes.get(id2);
-            return container1.logicalOwn === SubnodeOwnership.Here &&
-                container2.logicalOwn === SubnodeOwnership.Here;
+            const node1 = this._subnodes.get(id1),
+                  node2 = this._subnodes.get(id2);
+            return node1.logicalOwn === SubnodeOwnership.Here &&
+                node2.logicalOwn === SubnodeOwnership.Here;
         }
         else
             return false;
@@ -153,10 +153,10 @@ class Node {
 
     isPhysicalNeighbours(id1, id2) {
         if (this.has(id1) && this.has(id2)) {
-            const container1 = this._subnodes.get(id1),
-                  container2 = this._subnodes.get(id2);
-            return container1.physicalOwn === SubnodeOwnership.Here &&
-                container2.physicalOwn === SubnodeOwnership.Here;
+            const node1 = this._subnodes.get(id1),
+                  node2 = this._subnodes.get(id2);
+            return node1.physicalOwn === SubnodeOwnership.Here &&
+                node2.physicalOwn === SubnodeOwnership.Here;
         }
         else
             return false;
@@ -164,8 +164,8 @@ class Node {
 
     static isLogicalRelatives(parent, child) {
         if (parent.has(child.id)) {
-            const container = parent._subnodes.get(child.id);
-            return container.logicalOwn === SubnodeOwnership.Here;
+            const node = parent._subnodes.get(child.id);
+            return node.logicalOwn === SubnodeOwnership.Here;
         }
         else
             return false;
@@ -173,8 +173,8 @@ class Node {
 
     static isPhysicalRelatives(parent, child) {
         if (parent.has(child.id)) {
-            const container = parent._subnodes.get(child.id);
-            return container.physicalOwn === SubnodeOwnership.Here;
+            const node = parent._subnodes.get(child.id);
+            return node.physicalOwn === SubnodeOwnership.Here;
         }
         else
             return false;
