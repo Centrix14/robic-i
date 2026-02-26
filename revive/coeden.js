@@ -183,14 +183,23 @@ class Node {
 
     isLinkToShared(link, source) {
         if (link.id !== source.id) return false;
+        if (link._subnodes.size > 0) return false;
 
         const result = this.selectNodes(
-            (n, p) => (Node.isLogicalRelatives(n, link)),
+            (n, _) => (Node.isPhysicalRelatives(n, source)),
             true
         );
 
-        const middleNodes = result.get('sample');
-        return middleNodes.length > 0;
+        if (result.get('sample').length === 0) return false;
+
+        const sourceKeeper = result.get('sample')[0];
+        const linksParent = sourceKeeper.selectNodes(
+            (n, _) => (Node.isLogicalRelatives(n, link) &&
+                       !Node.isPhysicalRelatives(n, link)),
+            true
+        );
+
+        return linksParent.get('sample').length > 0;
     }
 
     isShared(node) {
