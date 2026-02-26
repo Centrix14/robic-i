@@ -86,10 +86,10 @@ describe('isDerived', function(){
     });
 
     it('isDerived2 - detects ordinary node', function(){
-        const root = treeWithSharing();
+        const root = treeWithDeriving();
         const node1 = root.get(1);
 
-        assert.isFalse(root.isShared(node1));
+        assert.isFalse(root.isDerived(node1));
     });
 
 });
