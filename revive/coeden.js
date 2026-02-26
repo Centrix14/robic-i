@@ -165,7 +165,7 @@ class Node {
 
     static isLogicalRelatives(parent, child) {
         if (parent.has(child.id)) {
-            const node = parent._subnodes.get(child.id);
+            const node = parent.get(child.id);
             return node.logicalOwn === NodeOwnership.Here;
         }
         else
@@ -174,7 +174,7 @@ class Node {
 
     static isPhysicalRelatives(parent, child) {
         if (parent.has(child.id)) {
-            const node = parent._subnodes.get(child.id);
+            const node = parent.get(child.id);
             return node.physicalOwn === NodeOwnership.Here;
         }
         else
