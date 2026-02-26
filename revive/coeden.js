@@ -181,7 +181,6 @@ class Node {
             return false;
     }
 
-    // link: Subnode, source: Node
     isLinkToShared(link, source) {
         if (link.id !== source.id) return false;
 
@@ -192,6 +191,22 @@ class Node {
 
         const middleNodes = result.get('sample');
         return middleNodes.length > 0;
+    }
+
+    isShared(node) {
+        if (node.physicalOwn !== NodeOwnership.Here) return false;
+
+        // obvious case of shared node
+        if (node.logicalOwn === NodeOwnership.Subnode) return true;
+
+        const root = this;
+        const result = root.selectNodes(
+            (n, _) => (root.isLinkToShared(n, node)),
+            true
+        );
+
+        const links = result.get('sample');
+        return links.length > 0;
     }
 
     isSharingPossible(subject, supplicant) {
