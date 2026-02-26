@@ -237,6 +237,21 @@ class Node {
         return false;
     }
 
+
+    isDerived(node) {
+        if (node.logicalOwn !== NodeOwnership.Here ||
+            node.physicalOwn !== NodeOwnership.Here)
+            return false;
+
+        const root = this;
+        const result = root.selectNodes(
+            (n, _) => (root.isLinkToDerived(n, node)),
+            true
+        );
+
+        return result.get('sample').length > 0;
+    }
+
     isSharingPossible(subject, supplicant) {
         if (!this.has(supplicant.id))
             return false;
