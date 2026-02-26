@@ -268,18 +268,18 @@ class Node {
     }
 
     _connectPhysicalRelatives(parent, child) {
-        const container = parent._subnodes.get(child.id);
-        container._logicalOwn = SubnodeOwnership.Here;
+        const node = parent._subnodes.get(child.id);
+        node._logicalOwn = SubnodeOwnership.Here;
 
         return new Success();
     }
 
     _deriveNode(subject, supplicant) {
-        supplicant.addSubnode(emptyNode, {
+        supplicant.createSubnode(subject.id, {
             logicalOwn: SubnodeOwnership.Here,
             physicalOwn: SubnodeOwnership.Subnode,
             role: SubnodeRole.Void
-        }, subject.id);
+        });
 
         return new Success();
     }
