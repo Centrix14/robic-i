@@ -55,11 +55,12 @@ class Node {
 
     subnodes(rootNode) {
         const root = rootNode ?? this;
+        const Class = root.constructor;
         let sample = [];
 
         this.forSubnodes(function(node) {
             if (node.logicalOwn === NodeOwnership.Here) {
-                const subnode = Node._resolvePhysicalOwn(node, root);
+                const subnode = Class._resolvePhysicalOwn(node, root);
                 sample.push(subnode);
             }
         });
@@ -185,8 +186,10 @@ class Node {
         if (link.id !== source.id) return false;
         if (link._subnodes.size > 0) return false;
 
+        const Class = link.constructor;
+
         const result = this.selectNodes(
-            (n, _) => (Node.isPhysicalRelatives(n, source)),
+            (n, _) => (Class.isPhysicalRelatives(n, source)),
             true
         );
 
@@ -194,8 +197,8 @@ class Node {
 
         const sourceKeeper = result.get('sample')[0];
         const linksParent = sourceKeeper.selectNodes(
-            (n, _) => (Node.isLogicalRelatives(n, link) &&
-                       !Node.isPhysicalRelatives(n, link)),
+            (n, _) => (Class.isLogicalRelatives(n, link) &&
+                       !Class.isPhysicalRelatives(n, link)),
             true
         );
 
@@ -225,9 +228,10 @@ class Node {
             link.physicalOwn === NodeOwnership.Subnode) {
 
             const root = this;
+            const Class = root.constructor;
             const result = root.selectNodes(
-                (n, _) => (Node.isLogicalRelatives(n, source) &&
-                           Node.isPhysicalRelatives(n, source)),
+                (n, _) => (Class.isLogicalRelatives(n, source) &&
+                           Class.isPhysicalRelatives(n, source)),
                 true
             );
             return result.get('sample').length > 0;
