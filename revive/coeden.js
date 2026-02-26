@@ -14,8 +14,8 @@ class Node {
         this._physicalOwn = definition?.physicalOwn ?? NodeOwnership.Here;
     }
 
-    isEmpty() { return false; }
-    isPresent() { return true; }
+    get isEmpty() { return false; }
+    get isPresent() { return true; }
 
     get id() { return this._id; }
 
@@ -109,7 +109,7 @@ class Node {
 
     removeSubnode(id) {
         const node = this.get(id);
-        if (node.isEmpty())
+        if (node.isEmpty)
             return new Fail(ErrorType.SubnodeNotFound);
 
         const removed = this._subnodes.delete(id);
@@ -121,7 +121,7 @@ class Node {
 
     injectNode(parentId, node) {
         const parent = this.getNodeById(parentId, true);
-        if (parent.isEmpty())
+        if (parent.isEmpty)
             return new Fail(ErrorType.SubnodeNotFound);
 
         parent.addSubnode(node);
@@ -134,7 +134,7 @@ class Node {
             return selectResult;
 
         const parent = selectResult.get('sample')[0] ?? emptyNode;
-        if (parent.isEmpty())
+        if (parent.isEmpty)
             return new Fail(ErrorType.SubnodeNotFound);
 
         return parent.removeSubnode(id);
@@ -397,8 +397,8 @@ class EmptyNode {
         this._id = NaN;
     }
     
-    isEmpty() { return true; }
-    isPresent() { return false; }
+    get isEmpty() { return true; }
+    get isPresent() { return false; }
 
     get id() { return NaN; }
 
