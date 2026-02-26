@@ -81,7 +81,7 @@ class Node {
 
     getNodeById(id, recursive=true) {
         const sample = this
-              .selectNodes((n, c, p) => (n.id === id), recursive)
+              .selectNodes((n, p) => (n.id === id), recursive)
               .get('sample');
         return (sample.length === 0) ? emptyNode : sample[0];
     }
@@ -103,9 +103,8 @@ class Node {
     }
 
     removeSubnode(id) {
-        const container = this._subnodes.get(id);
-        
-        if (!container)
+        const node = this._subnodes.get(id);
+        if (!node)
             return new Fail(ErrorType.SubnodeNotFound);
 
         let result;
@@ -115,28 +114,21 @@ class Node {
         else
             result = new Fail(ErrorType.MapDeleteError);
 
-        result.set('node', container.node);
+        result.set('node', node);
         return result;
     }
 
-    injectNode(parentId, node, container=null) {
+    injectNode(parentId, node) {
         const parent = this.getNodeById(parentId, true);
-
         if (parent.isEmpty())
             return new Fail(ErrorType.SubnodeNotFound);
 
-        const definition = container ?? {
-            logicalOwn: SubnodeOwnership.Here,
-            physicalOwn: SubnodeOwnership.Here,
-            role: SubnodeRole.Void
-        };
-        parent.addSubnode(node, definition);
-
+        parent.addSubnode(node);
         return new Success();
     }
 
     ejectNode(id) {
-        const selectResult = this.selectNodes((n, c, p) => (n.has(id)), true);
+        const selectResult = this.selectNodes((n, p) => (n.has(id)), true);
         if (selectResult.isFail)
             return selectResult;
 
