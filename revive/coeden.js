@@ -108,19 +108,15 @@ class Node {
     }
 
     removeSubnode(id) {
-        const node = this._subnodes.get(id);
-        if (!node)
+        const node = this.get(id);
+        if (node.isEmpty())
             return new Fail(ErrorType.SubnodeNotFound);
 
-        let result;
         const removed = this._subnodes.delete(id);
         if (removed)
-            result = new Success();
+            return new Success([['node', node]]);
         else
-            result = new Fail(ErrorType.MapDeleteError);
-
-        result.set('node', node);
-        return result;
+            return new Fail(ErrorType.MapDeleteError);
     }
 
     injectNode(parentId, node) {
