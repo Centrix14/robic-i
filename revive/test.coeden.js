@@ -61,10 +61,10 @@ describe('isLinkToDerived', function(){
     });
 
     it('isLinkToDerived2 - detects ordinary node', function(){
-        const root = treeWithSharing();
+        const root = treeWithDeriving();
         const node1 = root.get(1), node2 = root.get(2);
 
-        assert.isFalse(root.isLinkToShared(node1, node2));
+        assert.isFalse(root.isLinkToDerived(node1, node2));
     });
 
     it('isLinkToDerived3 - node is not refers itself', function(){
