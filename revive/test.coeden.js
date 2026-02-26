@@ -24,6 +24,17 @@ describe('isLinkToShared', function(){
 
 });
 
+describe('isShared', function(){
+
+    it('isShared1 - detects shared node', function(){
+        const root = treeWithSharing();
+        const shared = root.get(3);
+
+        assert.isTrue(root.isShared(shared));
+    });
+
+});
+
 describe('selectNodes', function(){
 
     describe('select root and subnodes', function(){
