@@ -185,7 +185,7 @@ class Node {
         if (link.id !== source.id) return false;
 
         const middleNode = this.selectNodes(
-            (n, c, p) => (this.isLogicalRelatives(n, link)),
+            (n, p) => (this.isLogicalRelatives(n, link)),
             true
         );
         const x = 1;
@@ -196,7 +196,7 @@ class Node {
             return false;
 
         const result = this.selectNodes(
-            (node, _, parent) => (node.has(subject.id) && parent === this),
+            (node, parent) => (node.has(subject.id) && parent === this),
             true
         );
 
@@ -209,7 +209,7 @@ class Node {
 
     isDerivingPossible(subject, supplicant) {
         const result = this.selectNodes(
-            (node, _, parent) => (node.has(subject.id) && parent === supplicant),
+            (node, parent) => (node.has(subject.id) && parent === supplicant),
             true
         );
 
