@@ -68,10 +68,10 @@ describe('isLinkToDerived', function(){
     });
 
     it('isLinkToDerived3 - node is not refers itself', function(){
-        const root = treeWithSharing();
+        const root = treeWithDeriving();
         const node1 = root.get(1);
 
-        assert.isFalse(root.isLinkToShared(node1, node1));
+        assert.isFalse(root.isLinkToDerived(node1, node1));
     });
 
 });
