@@ -577,9 +577,9 @@ describe('connectNodes', function(){
 
             it(testNames[1], function(){
                 const result = root.selectNodes(
-                    (n, c, p) => (n.id === 3
-                                  && c?.logicalOwn === SubnodeOwnership.Here
-                                  && p === root),
+                    (n, p) => (n.id === 3
+                               && n.logicalOwn === SubnodeOwnership.Here
+                               && p === root),
                     true
                 );
 
