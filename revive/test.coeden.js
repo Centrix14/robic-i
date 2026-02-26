@@ -58,8 +58,8 @@ function treeWithSharing(base=0) {
 
     const node1 = new Node(base+1), node2 = new Node(base+2);
     const node3 = new Node(base+3, {
-        logicalOwn: SubnodeOwnership.Subnode,
-        physicalOwn: SubnodeOwnership.Here
+        logicalOwn: NodeOwnership.Subnode,
+        physicalOwn: NodeOwnership.Here
     });
 
     root.addSubnode(node1);
@@ -67,8 +67,8 @@ function treeWithSharing(base=0) {
     root.addSubnode(node3);
 
     const definition = {
-        logicalOwn: SubnodeOwnership.Here,
-        physicalOwn: SubnodeOwnership.Supnode
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Supnode
     };
 
     node1.createSubnode(base+3, definition);
@@ -91,8 +91,8 @@ function treeWithDeriving(base=0) {
 
     const node1 = new Node(base+1), node2 = new Node(base+2);
     const node3 = new Node(base+3, {
-        logicalOwn: SubnodeOwnership.Here,
-        physicalOwn: SubnodeOwnership.Subnode
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Subnode
     });
 
     root.addSubnode(node1);
@@ -100,8 +100,8 @@ function treeWithDeriving(base=0) {
     root.addSubnode(node3);
 
     node2.createSubnode(base+3, {
-        logicalOwn: SubnodeOwnership.Here,
-        physicalOwn: SubnodeOwnership.Here
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Here
     });
 
     return root;
@@ -140,8 +140,8 @@ describe('isLinkToShared', function(){
 
         const source = root.get(3);
         const link = root.selectNodes(
-            (n, c, p) => (c?.logicalOwn === SubnodeOwnership.Here
-                          && c?.physicalOwn === SubnodeOwnership.Supnode),
+            (n, c, p) => (c?.logicalOwn === NodeOwnership.Here
+                          && c?.physicalOwn === NodeOwnership.Supnode),
             true
         );
 
@@ -578,7 +578,7 @@ describe('connectNodes', function(){
             it(testNames[1], function(){
                 const result = root.selectNodes(
                     (n, p) => (n.id === 3
-                               && n.logicalOwn === SubnodeOwnership.Here
+                               && n.logicalOwn === NodeOwnership.Here
                                && p === root),
                     true
                 );
@@ -739,7 +739,7 @@ describe('disconnectNodes', function(){
             });
 
             it(testNames[1], function(){
-                const subnode = SubnodeOwnership.Subnode;
+                const subnode = NodeOwnership.Subnode;
                 const result = root.selectNodes(
                     (n, c, p) => (n.id === 3
                                   && c?.logicalOwn === subnode
