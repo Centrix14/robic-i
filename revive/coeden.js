@@ -91,6 +91,10 @@ class Node {
         return (sample.length === 0) ? emptyNode : sample[0];
     }
 
+    addSubnode(node) {
+        this._subnodes.set(node.id, node);
+    }
+
     createSubnode(id, definition=null) {
         const realDefinition = definition ?? {
             logicalOwn: NodeOwnership.Here,
@@ -98,13 +102,9 @@ class Node {
         };
 
         const node = new Node(id, realDefinition);
-        this._subnodes.set(id, node);
+        this.addSubnode(node);
 
         return new Success([['id', id]]);
-    }
-
-    addSubnode(node) {
-        this._subnodes.set(node.id, node);
     }
 
     removeSubnode(id) {
