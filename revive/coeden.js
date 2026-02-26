@@ -185,11 +185,13 @@ class Node {
     isLinkToShared(link, source) {
         if (link.id !== source.id) return false;
 
-        const middleNode = this.selectNodes(
-            (n, p) => (this.isLogicalRelatives(n, link)),
+        const result = this.selectNodes(
+            (n, p) => (Node.isLogicalRelatives(n, link)),
             true
         );
-        const x = 1;
+
+        const middleNodes = result.get('sample');
+        return middleNodes.length > 0;
     }
 
     isSharingPossible(subject, supplicant) {
