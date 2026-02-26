@@ -9,8 +9,8 @@ describe('isLinkToShared', function(){
             true
         );
 
-        const source = root.get(3);
         const link = result.get('sample')[0];
+        const source = root.get(3);
 
         assert.isTrue(root.isLinkToShared(link, source));
     });
@@ -45,6 +45,33 @@ describe('isShared', function(){
         const node1 = root.get(1);
 
         assert.isFalse(root.isShared(node1));
+    });
+
+});
+
+describe('isLinkToDerived', function(){
+
+    it('isLinkToDerived1 - detects link', function(){
+        const root = treeWithDeriving();
+
+        const link = root.get(3);
+        const source = root.get(2).get(3);
+
+        assert.isTrue(root.isLinkToDerived(link, source));
+    });
+
+    it('isLinkToDerived2 - detects ordinary node', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1), node2 = root.get(2);
+
+        assert.isFalse(root.isLinkToShared(node1, node2));
+    });
+
+    it('isLinkToDerived3 - node is not refers itself', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1);
+
+        assert.isFalse(root.isLinkToShared(node1, node1));
     });
 
 });
