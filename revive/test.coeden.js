@@ -33,6 +33,12 @@ describe('isShared', function(){
         assert.isTrue(root.isShared(shared));
     });
 
+    it('isShared2 - detects ordinary node', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1);
+
+        assert.isFalse(root.isShared(node1));
+    });
 });
 
 describe('selectNodes', function(){
