@@ -2,6 +2,8 @@ class Node {
     constructor(id, definition) {
         this._id = id;
         this._subnodes = definition?.subnodes ?? new Map();
+        this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
+        this._physicalOwn = definition?.physicalOwn ?? SubnodeOwnership.Here;
     }
 
     isEmpty() { return false; }
@@ -9,11 +11,14 @@ class Node {
 
     get id() { return this._id; }
 
+    get logicalOwn() { return this._logicalOwn; }
+    get physicalOwn() { return this._physicalOwn; }
+
     get relation() { return this._relation; }
     set relation(newRelation) { this._relation = newRelation; }
 
     get(id) {
-        return this._subnodes.get(id).node ?? emptyNode;
+        return this._subnodes.get(id) ?? emptyNode;
     }
 
     has(id) {
@@ -21,24 +26,23 @@ class Node {
     }
 
     forSubnodes(fun, thisArg) {
-        for (let container of this._subnodes.values())
-            fun.call(thisArg, container.node, container);
+        for (let node of this._subnodes.values())
+            fun.call(thisArg, node);
     }
 
-    static _resolvePhysicalOwn(container, node, root) {
-        switch (container.physicalOwn) {
+    static _resolvePhysicalOwn(node, root) {
+        switch (node.physicalOwn) {
         case SubnodeOwnership.Here:
             return node;
 
         case SubnodeOwnership.Supnode:
-            return root.get(container.id);
+            return root.get(node.id);
             break;
 
         case SubnodeOwnership.Subnode:
-            for (let subcontainer of root._subnodes.values()) {
-                const subnode = subcontainer.node;
-                if (subnode.has(container.id))
-                    return subnode.get(container.id);
+            for (let subnode of root._subnodes.values()) {
+                if (subnode.has(node.id))
+                    return subnode.get(node.id);
             }
         }
     }
@@ -47,9 +51,9 @@ class Node {
         const root = rootNode ?? this;
         let sample = [];
 
-        this.forSubnodes(function(node, container) {
-            if (container.logicalOwn === SubnodeOwnership.Here) {
-                const subnode = Node._resolvePhysicalOwn(container, node, root);
+        this.forSubnodes(function(node) {
+            if (node.logicalOwn === SubnodeOwnership.Here) {
+                const subnode = Node._resolvePhysicalOwn(node, root);
                 sample.push(subnode);
             }
         });
@@ -57,16 +61,16 @@ class Node {
         return sample;
     }
 
-    selectNodes(condition, recursive, container=null, parent=null) {
+    selectNodes(condition, recursive, parent=null) {
         const sample = [];
 
-        if (condition(this, container, parent))
+        if (condition(this, parent))
             sample.push(this);
 
         if (recursive) {
-            this.forSubnodes(function(node, nodeContainer){
+            this.forSubnodes(function(node){
                 const inner = node
-                      .selectNodes(condition, recursive, nodeContainer, this)
+                      .selectNodes(condition, recursive, this)
                       .get('sample');
                 sample.push(...inner);
             }, this);
@@ -82,15 +86,20 @@ class Node {
         return (sample.length === 0) ? emptyNode : sample[0];
     }
 
-    addSubnode(node, definition, id) {
-        const nodeId = node.isPresent() ? node.id : id;
-        if (!nodeId)
-            return new Fail(ErrorType.InvalidArguments);
-        
-        const container = new Subnode(nodeId, node, definition);
-        this._subnodes.set(nodeId, container);
+    createSubnode(id, definition=null) {
+        const realDefinition = definition ?? {
+            logicalOwn: SubnodeOwnership.Here,
+            physicalOwn: SubnodeOwnership.Here
+        };
 
-        return new Success([['id', nodeId]]);
+        const node = new Node(id, realDefinition);
+        this._subnodes.set(id, node);
+
+        return new Success([['id', id]]);
+    }
+
+    addSubnode(node) {
+        this._subnodes.set(node.id, node);
     }
 
     removeSubnode(id) {
@@ -177,6 +186,17 @@ class Node {
         }
         else
             return false;
+    }
+
+    // link: Subnode, source: Node
+    isLinkToShared(link, source) {
+        if (link.id !== source.id) return false;
+
+        const middleNode = this.selectNodes(
+            (n, c, p) => (this.isLogicalRelatives(n, link)),
+            true
+        );
+        const x = 1;
     }
 
     isSharingPossible(subject, supplicant) {
