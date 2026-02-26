@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1370</x>
-      <y>370</y>
-      <w>360</w>
-      <h>780</h>
+      <x>1096</x>
+      <y>296</y>
+      <w>288</w>
+      <h>624</h>
     </coordinates>
     <panel_attributes>Node
 --
--id: integer {const}
--subnodes: &lt;integer, Node&gt;
--logicalOwn: SubnodeOwnership {d}
--physicalOwn: SubnodeOwnership {d}
+-id: integer
 +data: any
+-subnodes: &lt;integer, Node&gt;
+-logicalOwn: SubnodeOwnership
+-physicalOwn: SubnodeOwnership
 --
 Node(id:integer, definition:Object)
 
-isEmpty(): boolean
-isPresent(): boolean
+&lt;&lt;get&gt;&gt; isEmpty(): boolean
+&lt;&lt;get&gt;&gt; isPresent(): boolean
 
 &lt;&lt;get&gt;&gt; id()
+
+&lt;&lt;get&gt;&gt; logicalOwn()
+&lt;&lt;get&gt;&gt; physicalOwn()
 
 get(id:integer): Node ? emptyNode
 has(id:integer): boolean
 
-forSubnodes(fun. thisArg)
+forSubnodes(fun, thisArg)
 
 subnodes(rootNode): Node [*]
 
 selectNodes(
-   condition:(node → container → parent → boolean),
-   recursive:boolean): Result
+   condition:(node → parent → boolean),
+   recursive:boolean,
+   parent:Node): Success
 getNodeById(id:integer,
    recursive:boolean): Node ? emptyNode
 
-addSubnode(node:Node, definition:Object,
-   id:integer): Result
-removeSubnode(id:integer): Result
+addSubnode(node:Node)
+createSubnode(id:integer, definition:Object): Success
+removeSubnode(id:integer): Success ? Fail
 
-injectNode(parentId:integer, node:Node,
-   container:Object=null):Result
-ejectNode(id:integer):Result
+injectNode(parentId:integer, node:Node): Success
+ejectNode(id:integer): Success ? Fail
 
 isNeighbours(id1:integer, id2:integer): boolean
 _isLogicalRelatives(parent:Node, child:Node): boolean_
@@ -65,10 +68,10 @@ clone(): Node</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>410</y>
-      <w>280</w>
-      <h>70</h>
+      <x>256</x>
+      <y>328</y>
+      <w>224</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>Relation
 --
@@ -78,10 +81,10 @@ calculate(Deviation [*]): Deviation</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1810</x>
-      <y>690</y>
-      <w>330</w>
-      <h>70</h>
+      <x>1448</x>
+      <y>552</y>
+      <w>264</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>equals(o) = this.toMap() === o.toMap()
 clone() = cloned.fromMap(this.toMap()),
@@ -91,10 +94,10 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1720</x>
-      <y>720</y>
-      <w>110</w>
-      <h>30</h>
+      <x>1376</x>
+      <y>576</y>
+      <w>88</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
@@ -102,34 +105,10 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1840</x>
-      <y>370</y>
-      <w>390</w>
-      <h>250</h>
-    </coordinates>
-    <panel_attributes>Subnode
---
--id: integer
--node: Node
-
--role: SubnodeRole {d}
---
-Subnode(id:integer, node:Node, definition:Object)
-
-&lt;&lt;get&gt;&gt; id()
-&lt;&lt;get&gt;&gt; node()
-&lt;&lt;get&gt;&gt; logicalOwn()
-&lt;&lt;get&gt;&gt; physicalOwn()
-&lt;&lt;get&gt;&gt; role()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>2320</x>
-      <y>640</y>
-      <w>160</w>
-      <h>100</h>
+      <x>1424</x>
+      <y>296</y>
+      <w>128</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 SubnodeOwnership
@@ -142,47 +121,22 @@ Supnode</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2220</x>
-      <y>530</y>
-      <w>120</w>
-      <h>150</h>
+      <x>1376</x>
+      <y>320</y>
+      <w>64</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;130.0;100.0;130.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>2300</x>
-      <y>370</y>
-      <w>180</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>Subnode - это не
-тип для подузлов,
-он делает иерархию
-настраиваемой.</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2220</x>
-      <y>390</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1370</x>
-      <y>220</y>
-      <w>220</w>
-      <h>100</h>
+      <x>1096</x>
+      <y>176</y>
+      <w>176</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Identifier
 --
@@ -195,10 +149,10 @@ isFree(id:integer): boolean</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1670</x>
-      <y>220</y>
-      <w>250</w>
-      <h>100</h>
+      <x>1336</x>
+      <y>176</y>
+      <w>200</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>isValid(id) проверяет, что id
 можно использовать.
@@ -210,10 +164,10 @@ isUsed() и isFree() проверяют
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1580</x>
-      <y>250</y>
-      <w>110</w>
-      <h>30</h>
+      <x>1264</x>
+      <y>200</y>
+      <w>88</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
@@ -221,10 +175,10 @@ isUsed() и isFree() проверяют
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
-      <y>220</y>
-      <w>330</w>
-      <h>220</h>
+      <x>600</x>
+      <y>176</y>
+      <w>264</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>Result
 --
@@ -244,10 +198,10 @@ get(key:string): any</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1130</x>
-      <y>220</y>
-      <w>180</w>
-      <h>160</h>
+      <x>904</x>
+      <y>176</y>
+      <w>144</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 ErrorType
@@ -268,10 +222,10 @@ InvalidArguments
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1070</x>
-      <y>240</y>
-      <w>80</w>
-      <h>30</h>
+      <x>856</x>
+      <y>192</y>
+      <w>64</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -279,10 +233,10 @@ InvalidArguments
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>640</y>
-      <w>250</w>
-      <h>130</h>
+      <x>544</x>
+      <y>512</y>
+      <w>200</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>Accordance
 --
@@ -298,10 +252,10 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>540</y>
-      <w>170</w>
-      <h>100</h>
+      <x>336</x>
+      <y>432</y>
+      <w>136</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Process
 --
@@ -315,42 +269,10 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2320</x>
-      <y>480</y>
-      <w>160</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;enumaration&gt;&gt;
-SubnodeRole
---
-Void
-Subprocess
-Diachronic
-Input
-Output
-Doer
-Mean</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>2220</x>
-      <y>480</y>
-      <w>120</w>
+      <x>360</x>
+      <y>520</y>
+      <w>112</w>
       <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>450</x>
-      <y>650</y>
-      <w>140</w>
-      <h>50</h>
     </coordinates>
     <panel_attributes>Element
 --
@@ -360,10 +282,10 @@ Mean</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>710</y>
-      <w>370</w>
-      <h>150</h>
+      <x>176</x>
+      <y>568</y>
+      <w>296</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Property
 --
@@ -379,10 +301,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>590</y>
-      <w>120</w>
-      <h>110</h>
+      <x>464</x>
+      <y>472</y>
+      <w>96</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;90.0;50.0;90.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -390,10 +312,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>670</y>
-      <w>120</w>
-      <h>30</h>
+      <x>464</x>
+      <y>536</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -401,10 +323,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>670</y>
-      <w>120</w>
-      <h>100</h>
+      <x>464</x>
+      <y>536</y>
+      <w>96</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;50.0;10.0;50.0;80.0;10.0;80.0</additional_attributes>
@@ -412,10 +334,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>870</y>
-      <w>200</w>
-      <h>140</h>
+      <x>544</x>
+      <y>696</y>
+      <w>160</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Deviation
 --
@@ -430,10 +352,10 @@ Deviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>880</y>
-      <w>190</w>
-      <h>130</h>
+      <x>320</x>
+      <y>704</y>
+      <w>152</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>PropertyDeviation
 --
@@ -446,10 +368,10 @@ PropertyDeviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>1030</y>
-      <w>190</w>
-      <h>130</h>
+      <x>320</x>
+      <y>824</y>
+      <w>152</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>Risk
 --
@@ -463,10 +385,10 @@ Risk()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>1180</y>
-      <w>160</w>
-      <h>50</h>
+      <x>344</x>
+      <y>944</y>
+      <w>128</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>GeometrySet
 bg=red</panel_attributes>
@@ -476,9 +398,9 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>280</y>
-      <w>200</w>
-      <h>70</h>
+      <y>224</y>
+      <w>160</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>JSON_MapConverter
 --
@@ -490,10 +412,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>230</x>
-      <y>280</y>
-      <w>190</w>
-      <h>90</h>
+      <x>184</x>
+      <y>224</y>
+      <w>152</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>MapBahaviour
 --
@@ -505,10 +427,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>460</x>
-      <y>280</y>
-      <w>140</w>
-      <h>100</h>
+      <x>368</x>
+      <y>224</y>
+      <w>112</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Определяет
 интерфейс и не
@@ -520,10 +442,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>280</y>
-      <w>70</w>
-      <h>30</h>
+      <x>328</x>
+      <y>224</y>
+      <w>56</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
@@ -531,10 +453,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>950</y>
-      <w>120</w>
-      <h>30</h>
+      <x>464</x>
+      <y>760</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -542,10 +464,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>950</y>
-      <w>120</w>
-      <h>160</h>
+      <x>464</x>
+      <y>760</y>
+      <w>96</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;50.0;10.0;50.0;140.0;10.0;140.0</additional_attributes>
@@ -553,10 +475,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>390</y>
-      <w>140</w>
-      <h>30</h>
+      <x>88</x>
+      <y>312</y>
+      <w>112</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Independance</panel_attributes>
     <additional_attributes/>
@@ -564,10 +486,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>430</y>
-      <w>140</w>
-      <h>30</h>
+      <x>88</x>
+      <y>344</y>
+      <w>112</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Compatibility</panel_attributes>
     <additional_attributes/>
@@ -575,10 +497,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>470</y>
-      <w>140</w>
-      <h>30</h>
+      <x>88</x>
+      <y>376</y>
+      <w>112</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Incompatibility</panel_attributes>
     <additional_attributes/>
@@ -586,10 +508,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>390</y>
-      <w>100</w>
-      <h>80</h>
+      <x>192</x>
+      <y>312</y>
+      <w>80</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;60.0;40.0;60.0;40.0;10.0;10.0;10.0</additional_attributes>
@@ -597,10 +519,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>440</y>
-      <w>100</w>
-      <h>30</h>
+      <x>192</x>
+      <y>352</y>
+      <w>80</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
@@ -608,10 +530,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>440</y>
-      <w>100</w>
-      <h>70</h>
+      <x>192</x>
+      <y>352</y>
+      <w>80</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;10.0;40.0;10.0;40.0;50.0;10.0;50.0</additional_attributes>
@@ -619,10 +541,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1850</x>
-      <y>940</y>
-      <w>100</w>
-      <h>30</h>
+      <x>1480</x>
+      <y>752</y>
+      <w>80</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>EmptyNode</panel_attributes>
     <additional_attributes/>
@@ -630,10 +552,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1720</x>
-      <y>950</y>
-      <w>150</w>
-      <h>30</h>
+      <x>1376</x>
+      <y>760</y>
+      <w>120</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
@@ -641,10 +563,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1790</x>
-      <y>1000</y>
-      <w>220</w>
-      <h>30</h>
+      <x>1432</x>
+      <y>800</y>
+      <w>176</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>emptyNode : EmptyNode</panel_attributes>
     <additional_attributes/>
@@ -652,10 +574,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1890</x>
-      <y>960</y>
-      <w>30</w>
-      <h>60</h>
+      <x>1512</x>
+      <y>768</y>
+      <w>24</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -663,10 +585,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>750</y>
-      <w>360</w>
-      <h>120</h>
+      <x>784</x>
+      <y>600</y>
+      <w>288</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>Unit
 --
@@ -679,10 +601,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>920</x>
-      <y>680</y>
-      <w>260</w>
-      <h>100</h>
+      <x>736</x>
+      <y>544</y>
+      <w>208</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -692,10 +614,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>860</y>
-      <w>260</w>
-      <h>110</h>
+      <x>696</x>
+      <y>688</y>
+      <w>208</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -705,10 +627,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>860</y>
-      <w>630</w>
-      <h>370</h>
+      <x>464</x>
+      <y>688</y>
+      <w>504</w>
+      <h>296</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -718,10 +640,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>590</x>
-      <y>440</y>
-      <w>640</w>
-      <h>330</h>
+      <x>472</x>
+      <y>352</y>
+      <w>512</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -731,10 +653,10 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
+      <x>448</x>
       <y>0</y>
-      <w>330</w>
-      <h>140</h>
+      <w>264</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Fail
 --
@@ -751,10 +673,10 @@ Result(type: ErrorType, content:any[*]=[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>940</x>
+      <x>752</x>
       <y>0</y>
-      <w>330</w>
-      <h>140</h>
+      <w>264</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Success
 --
@@ -767,10 +689,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>130</y>
-      <w>30</w>
-      <h>110</h>
+      <x>656</x>
+      <y>104</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -778,10 +700,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>990</x>
-      <y>130</y>
-      <w>30</w>
-      <h>110</h>
+      <x>792</x>
+      <y>104</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
