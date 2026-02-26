@@ -150,8 +150,15 @@ class Node {
             return false;
     }
 
-    isNeighbours(id1, id2) {
-        return this.has(id1) && this.has(id2);
+    isPhysicalNeighbours(id1, id2) {
+        if (this.has(id1) && this.has(id2)) {
+            const container1 = this._subnodes.get(id1),
+                  container2 = this._subnodes.get(id2);
+            return container1.physicalOwn === SubnodeOwnership.Here &&
+                container2.physicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
     }
 
     static isLogicalRelatives(parent, child) {
@@ -266,7 +273,7 @@ class Node {
         if (node1 === emptyNode || node2 === emptyNode)
             return new Fail(ErrorType.SubnodeNotFound);
 
-        else if (thisArg.isNeighbours(node1.id, node2.id))
+        else if (thisArg.isPhysicalNeighbours(node1.id, node2.id))
             return new Fail(ErrorType.AttemptToConnectNeighbours);
 
         else if (Node.isLogicalRelatives(node1, node2))
