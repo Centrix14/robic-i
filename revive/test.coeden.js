@@ -22,6 +22,13 @@ describe('isLinkToShared', function(){
         assert.isFalse(root.isLinkToShared(node1, node2));
     });
 
+    it('isLinkToShared3 - node is not refers itself', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1);
+
+        assert.isFalse(root.isLinkToShared(node1, node1));
+    });
+
 });
 
 describe('isShared', function(){
