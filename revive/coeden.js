@@ -218,6 +218,25 @@ class Node {
         return links.length > 0;
     }
 
+    isLinkToDerived(link, source) {
+        if (link.id !== source.id) return false;
+        if (link._subnodes.size > 0) return false;
+
+        if (link.logicalOwn === NodeOwnership.Here &&
+            link.physicalOwn === NodeOwnership.Subnode) {
+
+            const root = this;
+            const result = root.selectNodes(
+                (n, _) => (Node.isLogicalRelatives(n, source) &&
+                           Node.isPhysicalRelatives(n, source)),
+                true
+            );
+            return result.get('sample').length > 0;
+        }
+
+        return false;
+    }
+
     isSharingPossible(subject, supplicant) {
         if (!this.has(supplicant.id))
             return false;
