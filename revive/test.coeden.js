@@ -7,8 +7,8 @@ function treeWith2Childs(base=0) {
     
     const root = new Node(base);
     
-    root.addSubnode(new Node(base+1));
-    root.addSubnode(new Node(base+2));
+    root.createSubnode(base+1);
+    root.createSubnode(base+2);
 
     return root;
 }
@@ -16,9 +16,9 @@ function treeWith2Childs(base=0) {
 function treeWith3Childs(base=0) {
     const root = new Node(0);
     
-    root.addSubnode(new Node(base+1));
-    root.addSubnode(new Node(base+2));
-    root.addSubnode(new Node(base+3));
+    root.createSubnode(base+1);
+    root.createSubnode(base+2);
+    root.createSubnode(base+3);
 
     return root;
 }
@@ -36,9 +36,9 @@ function simpleNestedTree(base=0) {
     const node1 = new Node(base+1);
 
     root.addSubnode(node1);
-    node1.addSubnode(new Node(base+2));
-    node1.addSubnode(new Node(base+3));
-    root.addSubnode(new Node(base+4));
+    node1.createSubnode(base+2);
+    node1.createSubnode(base+3);
+    root.createSubnode(base+4);
 
     return root;
 }
@@ -56,21 +56,23 @@ function treeWithSharing(base=0) {
 
     const root = new Node(base);
 
-    const node = [new Node(base+1), new Node(base+2), new Node(base+3)];
+    const node1 = new Node(base+1), node2 = new Node(base+2);
+    const node3 = new Node(base+3, {
+        logicalOwn: SubnodeOwnership.Subnode,
+        physicalOwn: SubnodeOwnership.Here
+    });
+
+    root.addSubnode(node1);
+    root.addSubnode(node2);
+    root.addSubnode(node3);
+
     const definition = {
         logicalOwn: SubnodeOwnership.Here,
         physicalOwn: SubnodeOwnership.Supnode
     };
 
-    root.addSubnode(node[0]);
-    root.addSubnode(node[1]);
-    root.addSubnode(node[2], {
-        logicalOwn: SubnodeOwnership.Subnode,
-        physicalOwn: SubnodeOwnership.Here
-    });
-
-    node[0].addSubnode(emptyNode, definition, node[2].id);
-    node[1].addSubnode(emptyNode, definition, node[2].id);
+    node1.createSubnode(base+3, definition);
+    node2.createSubnode(base+3, definition);
 
     return root;
 }
@@ -86,16 +88,18 @@ function treeWithDeriving(base=0) {
     */
 
     const root = new Node(base);
-    const node = [new Node(base+1), new Node(base+2), new Node(base+3)];
 
-    root.addSubnode(node[0]);
-    root.addSubnode(node[1]);
-    root.addSubnode(emptyNode, {
+    const node1 = new Node(base+1), node2 = new Node(base+2);
+    const node3 = new Node(base+3, {
         logicalOwn: SubnodeOwnership.Here,
         physicalOwn: SubnodeOwnership.Subnode
-    }, node[2].id);
+    });
 
-    node[1].addSubnode(node[2], {
+    root.addSubnode(node1);
+    root.addSubnode(node2);
+    root.addSubnode(node3);
+
+    node2.createSubnode(base+3, {
         logicalOwn: SubnodeOwnership.Here,
         physicalOwn: SubnodeOwnership.Here
     });
@@ -128,6 +132,23 @@ function complexTree(base=0) {
 
     return root;
 }
+
+describe('isLinkToShared', function(){
+
+    it('founds link', function(){
+        const root = treeWithSharing();
+
+        const source = root.get(3);
+        const link = root.selectNodes(
+            (n, c, p) => (c?.logicalOwn === SubnodeOwnership.Here
+                          && c?.physicalOwn === SubnodeOwnership.Supnode),
+            true
+        );
+
+        assert.isTrue(root.isLinkToShared(link, source));
+    });
+
+});
 
 describe('selectNodes', function(){
 
@@ -187,7 +208,7 @@ describe('selectNodes', function(){
 
         it('selectNodes9 - result.isOk', function(){
             result = root.selectNodes(
-                (n, c, parent) => (parent === root),
+                (n, parent) => (parent === root),
                 true
             );
             assert.isTrue(result.isOk);
@@ -203,33 +224,6 @@ describe('selectNodes', function(){
             assert.isTrue(node[0].id === 1 &&
                           node[1].id === 2 &&
                           node[2].id === 3);
-        });
-    });
-
-    describe('select derived subnodes unaware of ownership', function(){
-        let root, result;
-
-        before(function(){
-            root = treeWithDeriving();
-        });
-
-        it('selectNodes12 - result.isOk', function(){
-            result = root.selectNodes(
-                (n, c, parent) => (parent === root),
-                true
-            );
-            assert.isTrue(result.isOk);
-        });
-
-        it('selectNodes13 - result.sample.length === 2', function(){
-            assert.lengthOf(result.get('sample'), 2);
-        });
-
-        it('selectNodes14 - selected node.id === 1, 2', function(){
-            const sample = result.get('sample');
-            const node = [sample[0], sample[1]];
-            assert.isTrue(node[0].id === 1 &&
-                          node[1].id === 2);
         });
     });
 
