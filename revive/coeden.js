@@ -1,3 +1,9 @@
+class SubnodeOwnership {
+    static Here = 'Here'
+    static Subnode = 'Subnode'
+    static Supnode = 'Supnode'
+}
+
 class Node {
     constructor(id, definition) {
         this._id = id;
@@ -277,8 +283,7 @@ class Node {
     _deriveNode(subject, supplicant) {
         supplicant.createSubnode(subject.id, {
             logicalOwn: SubnodeOwnership.Here,
-            physicalOwn: SubnodeOwnership.Subnode,
-            role: SubnodeRole.Void
+            physicalOwn: SubnodeOwnership.Subnode
         });
 
         return new Success();
@@ -429,30 +434,3 @@ class EmptyNode {
 }
 
 const emptyNode = new EmptyNode();
-
-class SubnodeOwnership {
-    static Here = 'Here'
-    static Subnode = 'Subnode'
-    static Supnode = 'Supnode'
-}
-
-class SubnodeRole {
-    static Void = ''
-}
-
-class Subnode {
-    constructor(id, node, definition) {
-        this._id = id;
-        this._node = node;
-
-        this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
-        this._physicalOwn = definition?.physicalOwn ?? SubnodeOwnership.Here;
-        this._role = definition?.role ?? SubnodeRole.Void;
-    }
-
-    get id() { return this._id; }
-    get node() { return this._node; }
-    get logicalOwn() { return this._logicalOwn; }
-    get physicalOwn() { return this._physicalOwn; }
-    get role() { return this._role; }
-}
