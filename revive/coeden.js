@@ -222,10 +222,13 @@ class Node {
     _shareNode(subject, supplicant) {
         const root = this;
 
-        const selectResult =
-              this.selectNodes((n, c, p) => (n.has(subject.id)), true);
+        const selectResult = this.selectNodes(
+            (n, p) => (n.has(subject.id)),
+            true
+        );
         if (selectResult.isFail)
             return selectResult;
+
         const subjectsParent = selectResult.get('sample')[0];
 
         // 1) ejecting subject from it's parent
@@ -235,29 +238,29 @@ class Node {
         if (result1.isFail)
             return result1;
 
-        // 2) injecting subject to root with proper ownership
-        result1 = root.injectNode(root.id, subject, {
-            logicalOwn: SubnodeOwnership.Subnode,
-            physicalOwn: SubnodeOwnership.Here,
-            role: SubnodeRole.Void
-        });
+        // 2.1) reset ownership parameters
+        subject._logicalOwn = SubnodeOwnership.Subnode;
+        subject._physicalOwn = SubnodeOwnership.Here;
+
+        // 2.2) injecting subject to root with proper ownership
+        result1 = root.injectNode(root.id, subject);
         if (result1.isFail)
             return result1;
 
-        // 3) create container definition or shared subnode
+        // 3) create definition for link to shared node
         const definition = {
             logicalOwn: SubnodeOwnership.Here,
             physicalOwn: SubnodeOwnership.Supnode
         };
 
-        // 4) add link to shared node to subjects parent and supplicant
+        // 4) add link to subject's parent and supplicant
         let result4;
 
-        result4 = subjectsParent.addSubnode(emptyNode, definition, subject.id);
+        result4 = subjectsParent.createSubnode(subject.id, definition);
         if (result4.isFail)
             return result4;
 
-        result4 = supplicant.addSubnode(emptyNode, definition, subject.id);
+        result4 = supplicant.createSubnode(subject.id, definition);
         if (result4.isFail)
             return result4;
 
