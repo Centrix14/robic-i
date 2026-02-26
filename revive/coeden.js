@@ -1,4 +1,4 @@
-class SubnodeOwnership {
+class NodeOwnership {
     static Here = 'Here'
     static Subnode = 'Subnode'
     static Supnode = 'Supnode'
@@ -7,9 +7,11 @@ class SubnodeOwnership {
 class Node {
     constructor(id, definition) {
         this._id = id;
+
         this._subnodes = definition?.subnodes ?? new Map();
-        this._logicalOwn = definition?.logicalOwn ?? SubnodeOwnership.Here;
-        this._physicalOwn = definition?.physicalOwn ?? SubnodeOwnership.Here;
+
+        this._logicalOwn = definition?.logicalOwn ?? NodeOwnership.Here;
+        this._physicalOwn = definition?.physicalOwn ?? NodeOwnership.Here;
     }
 
     isEmpty() { return false; }
@@ -35,14 +37,14 @@ class Node {
 
     static _resolvePhysicalOwn(node, root) {
         switch (node.physicalOwn) {
-        case SubnodeOwnership.Here:
+        case NodeOwnership.Here:
             return node;
 
-        case SubnodeOwnership.Supnode:
+        case NodeOwnership.Supnode:
             return root.get(node.id);
             break;
 
-        case SubnodeOwnership.Subnode:
+        case NodeOwnership.Subnode:
             for (let subnode of root._subnodes.values()) {
                 if (subnode.has(node.id))
                     return subnode.get(node.id);
@@ -55,7 +57,7 @@ class Node {
         let sample = [];
 
         this.forSubnodes(function(node) {
-            if (node.logicalOwn === SubnodeOwnership.Here) {
+            if (node.logicalOwn === NodeOwnership.Here) {
                 const subnode = Node._resolvePhysicalOwn(node, root);
                 sample.push(subnode);
             }
@@ -91,8 +93,8 @@ class Node {
 
     createSubnode(id, definition=null) {
         const realDefinition = definition ?? {
-            logicalOwn: SubnodeOwnership.Here,
-            physicalOwn: SubnodeOwnership.Here
+            logicalOwn: NodeOwnership.Here,
+            physicalOwn: NodeOwnership.Here
         };
 
         const node = new Node(id, realDefinition);
@@ -147,8 +149,8 @@ class Node {
         if (this.has(id1) && this.has(id2)) {
             const node1 = this._subnodes.get(id1),
                   node2 = this._subnodes.get(id2);
-            return node1.logicalOwn === SubnodeOwnership.Here &&
-                node2.logicalOwn === SubnodeOwnership.Here;
+            return node1.logicalOwn === NodeOwnership.Here &&
+                node2.logicalOwn === NodeOwnership.Here;
         }
         else
             return false;
@@ -158,8 +160,8 @@ class Node {
         if (this.has(id1) && this.has(id2)) {
             const node1 = this._subnodes.get(id1),
                   node2 = this._subnodes.get(id2);
-            return node1.physicalOwn === SubnodeOwnership.Here &&
-                node2.physicalOwn === SubnodeOwnership.Here;
+            return node1.physicalOwn === NodeOwnership.Here &&
+                node2.physicalOwn === NodeOwnership.Here;
         }
         else
             return false;
@@ -168,7 +170,7 @@ class Node {
     static isLogicalRelatives(parent, child) {
         if (parent.has(child.id)) {
             const node = parent._subnodes.get(child.id);
-            return node.logicalOwn === SubnodeOwnership.Here;
+            return node.logicalOwn === NodeOwnership.Here;
         }
         else
             return false;
@@ -177,7 +179,7 @@ class Node {
     static isPhysicalRelatives(parent, child) {
         if (parent.has(child.id)) {
             const node = parent._subnodes.get(child.id);
-            return node.physicalOwn === SubnodeOwnership.Here;
+            return node.physicalOwn === NodeOwnership.Here;
         }
         else
             return false;
@@ -242,8 +244,8 @@ class Node {
             return result1;
 
         // 2.1) reset ownership parameters
-        subject._logicalOwn = SubnodeOwnership.Subnode;
-        subject._physicalOwn = SubnodeOwnership.Here;
+        subject._logicalOwn = NodeOwnership.Subnode;
+        subject._physicalOwn = NodeOwnership.Here;
 
         // 2.2) injecting subject to root with proper ownership
         result1 = root.injectNode(root.id, subject);
@@ -252,8 +254,8 @@ class Node {
 
         // 3) create definition for link to shared node
         const definition = {
-            logicalOwn: SubnodeOwnership.Here,
-            physicalOwn: SubnodeOwnership.Supnode
+            logicalOwn: NodeOwnership.Here,
+            physicalOwn: NodeOwnership.Supnode
         };
 
         // 4) add link to subject's parent and supplicant
@@ -272,15 +274,15 @@ class Node {
 
     _connectPhysicalRelatives(parent, child) {
         const node = parent._subnodes.get(child.id);
-        node._logicalOwn = SubnodeOwnership.Here;
+        node._logicalOwn = NodeOwnership.Here;
 
         return new Success();
     }
 
     _deriveNode(subject, supplicant) {
         supplicant.createSubnode(subject.id, {
-            logicalOwn: SubnodeOwnership.Here,
-            physicalOwn: SubnodeOwnership.Subnode
+            logicalOwn: NodeOwnership.Here,
+            physicalOwn: NodeOwnership.Subnode
         });
 
         return new Success();
