@@ -46,6 +46,7 @@ describe('isShared', function(){
 
         assert.isFalse(root.isShared(node1));
     });
+
 });
 
 describe('selectNodes', function(){
