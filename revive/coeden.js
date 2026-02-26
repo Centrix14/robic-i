@@ -139,6 +139,17 @@ class Node {
         return node.removeSubnode(id);
     }
 
+    isLogicalNeighbours(id1, id2) {
+        if (this.has(id1) && this.has(id2)) {
+            const container1 = this._subnodes.get(id1),
+                  container2 = this._subnodes.get(id2);
+            return container1.logicalOwn === SubnodeOwnership.Here &&
+                container2.logicalOwn === SubnodeOwnership.Here;
+        }
+        else
+            return false;
+    }
+
     isNeighbours(id1, id2) {
         return this.has(id1) && this.has(id2);
     }
