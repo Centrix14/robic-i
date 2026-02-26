@@ -1,16 +1,25 @@
 describe('isLinkToShared', function(){
 
-    it('founds link', function(){
+    it('isLinkToShared1 - detects link', function(){
         const root = treeWithSharing();
 
-        const source = root.get(3);
-        const link = root.selectNodes(
-            (n, c, p) => (c?.logicalOwn === NodeOwnership.Here
-                          && c?.physicalOwn === NodeOwnership.Supnode),
+        const result = root.selectNodes(
+            (n, _) => (n.logicalOwn === NodeOwnership.Here
+                       && n.physicalOwn === NodeOwnership.Supnode),
             true
         );
 
+        const source = root.get(3);
+        const link = result.get('sample')[0];
+
         assert.isTrue(root.isLinkToShared(link, source));
+    });
+
+    it('isLinkToShared2 - detects ordinary node', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1), node2 = root.get(2);
+
+        assert.isFalse(root.isLinkToShared(node1, node2));
     });
 
 });
