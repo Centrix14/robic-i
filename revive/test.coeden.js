@@ -76,6 +76,24 @@ describe('isLinkToDerived', function(){
 
 });
 
+describe('isDerived', function(){
+
+    it('isDerived1 - detects derived node', function(){
+        const root = treeWithDeriving();
+        const derived = root.get(2).get(3);
+
+        assert.isTrue(root.isDerived(derived));
+    });
+
+    it('isDerived2 - detects ordinary node', function(){
+        const root = treeWithSharing();
+        const node1 = root.get(1);
+
+        assert.isFalse(root.isShared(node1));
+    });
+
+});
+
 describe('selectNodes', function(){
 
     describe('select root and subnodes', function(){
