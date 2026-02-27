@@ -13,12 +13,16 @@ class Node {
 
         this._logicalOwn = definition?.logicalOwn ?? NodeOwnership.Here;
         this._physicalOwn = definition?.physicalOwn ?? NodeOwnership.Here;
+        this._isLink = definition?.isLink ?? false;
     }
 
     get isEmpty() { return false; }
     get isPresent() { return true; }
 
     get id() { return this._id; }
+
+    get isLink() { return this._isLink; }
+    get isReal() { return !this.isLink; }
 
     get logicalOwn() { return this._logicalOwn; }
     get physicalOwn() { return this._physicalOwn; }
