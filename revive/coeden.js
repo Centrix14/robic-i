@@ -356,7 +356,7 @@ class Node {
             return {type: 'derive', list: [node2, node1]};
 
         // All other cases are wrong
-        return {type: 'error'};
+        return {type: 'fail'};
     }
 
     _shareNode(subject, supplicant) {
@@ -485,24 +485,24 @@ class Node {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
 
-        const result = Node._checkConnectionEdgeCases(this, node1, node2);
-        if (result.isFail)
-            return result;
+//        const result = Node._checkConnectionEdgeCases(this, node1, node2);
+//        if (result.isFail)
+//            return result;
 
-        const operands = Node._getOperands(this, node1, node2);
+        const connCase = Node._classifyConnectionCase(this, node1, node2);
 
-        switch (operands.type) {
-        case 'physical relatives':
-            return this._connectPhysicalRelatives.apply(this, operands.list);
+        switch (connCase.type) {
+        case 'adopt':
+            return this._connectPhysicalRelatives.apply(this, connCase.list);
 
-        case 'shared':
-            return this._shareNode.apply(this, operands.list);
+        case 'share':
+            return this._shareNode.apply(this, connCase.list);
 
-        case 'derived':
-            return this._deriveNode.apply(this, operands.list);
+        case 'derive':
+            return this._deriveNode.apply(this, connCase.list);
 
-        case 'none':
-            return new Result();
+        case 'fail':
+            return new Fail();
         }
     }
 
