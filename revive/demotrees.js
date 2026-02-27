@@ -67,6 +67,7 @@ function treeWithSharing(base=0) {
     root.addSubnode(node3);
 
     const definition = {
+        isLink: true,
         logicalOwn: NodeOwnership.Here,
         physicalOwn: NodeOwnership.Supnode
     };
@@ -91,6 +92,7 @@ function treeWithDeriving(base=0) {
 
     const node1 = new Node(base+1), node2 = new Node(base+2);
     const node3 = new Node(base+3, {
+        isLink: true,
         logicalOwn: NodeOwnership.Here,
         physicalOwn: NodeOwnership.Subnode
     });
