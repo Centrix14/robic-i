@@ -407,7 +407,7 @@ class Node {
         return new Success();
     }
 
-    _connectPhysicalRelatives(parent, child) {
+    _connectPhysicalRelatives(child, parent) {
         const node = parent._subnodes.get(child.id);
         node._logicalOwn = NodeOwnership.Here;
 
