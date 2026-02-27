@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1136</x>
-      <y>32</y>
-      <w>368</w>
-      <h>888</h>
+      <x>1278</x>
+      <y>243</y>
+      <w>414</w>
+      <h>999</h>
     </coordinates>
     <panel_attributes>Node
 --
@@ -79,10 +79,10 @@ clone(): Node</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>256</x>
-      <y>368</y>
-      <w>224</w>
-      <h>56</h>
+      <x>288</x>
+      <y>621</y>
+      <w>252</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Relation
 --
@@ -92,10 +92,10 @@ calculate(Deviation [*]): Deviation</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1592</x>
-      <y>288</y>
-      <w>264</w>
-      <h>56</h>
+      <x>1791</x>
+      <y>531</y>
+      <w>297</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>equals(o) = this.toMap() === o.toMap()
 clone() = cloned.fromMap(this.toMap()),
@@ -105,10 +105,10 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1496</x>
-      <y>312</y>
-      <w>112</w>
-      <h>24</h>
+      <x>1683</x>
+      <y>558</y>
+      <w>126</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
@@ -116,10 +116,10 @@ clone() = cloned.fromMap(this.toMap()),
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1568</x>
-      <y>32</y>
-      <w>128</w>
-      <h>80</h>
+      <x>1764</x>
+      <y>243</y>
+      <w>144</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 NodeOwnership
@@ -132,10 +132,10 @@ Supnode</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1496</x>
-      <y>56</y>
-      <w>88</w>
-      <h>32</h>
+      <x>1683</x>
+      <y>270</y>
+      <w>99</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
@@ -144,10 +144,10 @@ Supnode</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>648</x>
-      <y>952</y>
-      <w>176</w>
-      <h>80</h>
+      <x>729</x>
+      <y>1278</y>
+      <w>198</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Identifier
 --
@@ -160,10 +160,10 @@ isFree(id:integer): boolean</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>888</x>
-      <y>952</y>
-      <w>200</w>
-      <h>80</h>
+      <x>999</x>
+      <y>1278</y>
+      <w>225</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>isValid(id) проверяет, что id
 можно использовать.
@@ -175,10 +175,10 @@ isUsed() и isFree() проверяют
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>816</x>
-      <y>976</y>
-      <w>88</w>
-      <h>24</h>
+      <x>918</x>
+      <y>1305</y>
+      <w>99</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
@@ -186,10 +186,10 @@ isUsed() и isFree() проверяют
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>216</y>
-      <w>264</w>
-      <h>176</h>
+      <x>675</x>
+      <y>450</y>
+      <w>297</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>Result
 --
@@ -209,10 +209,10 @@ get(key:string): any</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>904</x>
-      <y>216</y>
-      <w>144</w>
-      <h>128</h>
+      <x>1017</x>
+      <y>450</y>
+      <w>162</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 ErrorType
@@ -233,10 +233,10 @@ InvalidArguments
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>232</y>
-      <w>64</w>
-      <h>24</h>
+      <x>963</x>
+      <y>468</y>
+      <w>72</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -244,10 +244,10 @@ InvalidArguments
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>544</x>
-      <y>552</y>
-      <w>200</w>
-      <h>104</h>
+      <x>612</x>
+      <y>828</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>Accordance
 --
@@ -263,10 +263,10 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>472</y>
-      <w>136</w>
-      <h>80</h>
+      <x>378</x>
+      <y>738</y>
+      <w>153</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Process
 --
@@ -280,10 +280,10 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>560</y>
-      <w>112</w>
-      <h>40</h>
+      <x>405</x>
+      <y>837</y>
+      <w>126</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Element
 --
@@ -293,10 +293,10 @@ fromMap(map:Map, mb: MapBehaviour): Result
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
-      <y>608</y>
-      <w>296</w>
-      <h>120</h>
+      <x>198</x>
+      <y>891</y>
+      <w>333</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>Property
 --
@@ -312,10 +312,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>512</y>
-      <w>96</w>
-      <h>88</h>
+      <x>522</x>
+      <y>783</y>
+      <w>108</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;90.0;50.0;90.0;50.0;10.0;10.0;10.0</additional_attributes>
@@ -323,10 +323,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>576</y>
-      <w>96</w>
-      <h>24</h>
+      <x>522</x>
+      <y>855</y>
+      <w>108</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -334,10 +334,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>576</y>
-      <w>96</w>
-      <h>80</h>
+      <x>522</x>
+      <y>855</y>
+      <w>108</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;50.0;10.0;50.0;80.0;10.0;80.0</additional_attributes>
@@ -345,10 +345,10 @@ removePossibleValue(id:integer): Result</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>544</x>
-      <y>736</y>
-      <w>160</w>
-      <h>112</h>
+      <x>612</x>
+      <y>1035</y>
+      <w>180</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Deviation
 --
@@ -363,10 +363,10 @@ Deviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>744</y>
-      <w>152</w>
-      <h>104</h>
+      <x>360</x>
+      <y>1044</y>
+      <w>171</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>PropertyDeviation
 --
@@ -379,10 +379,10 @@ PropertyDeviation()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>864</y>
-      <w>152</w>
-      <h>104</h>
+      <x>360</x>
+      <y>1179</y>
+      <w>171</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>Risk
 --
@@ -396,10 +396,10 @@ Risk()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>344</x>
-      <y>984</y>
-      <w>128</w>
-      <h>40</h>
+      <x>387</x>
+      <y>1314</y>
+      <w>144</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>GeometrySet
 bg=red</panel_attributes>
@@ -409,9 +409,9 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>264</y>
-      <w>160</w>
-      <h>56</h>
+      <y>504</y>
+      <w>180</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>JSON_MapConverter
 --
@@ -423,10 +423,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>184</x>
-      <y>264</y>
-      <w>152</w>
-      <h>72</h>
+      <x>207</x>
+      <y>504</y>
+      <w>171</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>MapBahaviour
 --
@@ -438,10 +438,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>368</x>
-      <y>264</y>
-      <w>112</w>
-      <h>80</h>
+      <x>414</x>
+      <y>504</y>
+      <w>126</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Определяет
 интерфейс и не
@@ -453,10 +453,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>328</x>
-      <y>264</y>
-      <w>56</w>
-      <h>24</h>
+      <x>369</x>
+      <y>504</y>
+      <w>63</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
@@ -464,10 +464,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>800</y>
-      <w>96</w>
-      <h>24</h>
+      <x>522</x>
+      <y>1107</y>
+      <w>108</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
@@ -475,10 +475,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>800</y>
-      <w>96</w>
-      <h>128</h>
+      <x>522</x>
+      <y>1107</y>
+      <w>108</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;50.0;10.0;50.0;140.0;10.0;140.0</additional_attributes>
@@ -486,10 +486,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>88</x>
-      <y>352</y>
-      <w>112</w>
-      <h>24</h>
+      <x>99</x>
+      <y>603</y>
+      <w>126</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Independance</panel_attributes>
     <additional_attributes/>
@@ -497,10 +497,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>88</x>
-      <y>384</y>
-      <w>112</w>
-      <h>24</h>
+      <x>99</x>
+      <y>639</y>
+      <w>126</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Compatibility</panel_attributes>
     <additional_attributes/>
@@ -508,10 +508,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>88</x>
-      <y>416</y>
-      <w>112</w>
-      <h>24</h>
+      <x>99</x>
+      <y>675</y>
+      <w>126</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Incompatibility</panel_attributes>
     <additional_attributes/>
@@ -519,10 +519,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>192</x>
-      <y>352</y>
-      <w>80</w>
-      <h>64</h>
+      <x>216</x>
+      <y>603</y>
+      <w>90</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;60.0;40.0;60.0;40.0;10.0;10.0;10.0</additional_attributes>
@@ -530,10 +530,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>192</x>
-      <y>392</y>
-      <w>80</w>
-      <h>24</h>
+      <x>216</x>
+      <y>648</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
@@ -541,10 +541,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>192</x>
-      <y>392</y>
-      <w>80</w>
-      <h>56</h>
+      <x>216</x>
+      <y>648</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>80.0;10.0;40.0;10.0;40.0;50.0;10.0;50.0</additional_attributes>
@@ -552,10 +552,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1624</x>
-      <y>488</y>
-      <w>80</w>
-      <h>24</h>
+      <x>1827</x>
+      <y>756</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>EmptyNode</panel_attributes>
     <additional_attributes/>
@@ -563,10 +563,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1496</x>
-      <y>496</y>
-      <w>144</w>
-      <h>24</h>
+      <x>1683</x>
+      <y>765</y>
+      <w>162</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
@@ -574,10 +574,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1576</x>
-      <y>536</y>
-      <w>176</w>
-      <h>24</h>
+      <x>1773</x>
+      <y>810</y>
+      <w>198</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>emptyNode : EmptyNode</panel_attributes>
     <additional_attributes/>
@@ -585,10 +585,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1656</x>
-      <y>504</y>
-      <w>24</w>
-      <h>48</h>
+      <x>1863</x>
+      <y>774</y>
+      <w>27</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -596,10 +596,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>784</x>
-      <y>640</y>
-      <w>288</w>
-      <h>96</h>
+      <x>882</x>
+      <y>927</y>
+      <w>324</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>Unit
 --
@@ -612,10 +612,10 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
-      <y>584</y>
-      <w>208</w>
-      <h>80</h>
+      <x>828</x>
+      <y>864</y>
+      <w>234</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -625,10 +625,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>728</y>
-      <w>208</w>
-      <h>88</h>
+      <x>783</x>
+      <y>1026</y>
+      <w>234</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -638,10 +638,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>728</y>
-      <w>504</w>
-      <h>296</h>
+      <x>522</x>
+      <y>1026</y>
+      <w>567</w>
+      <h>333</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -651,10 +651,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>472</x>
-      <y>392</y>
-      <w>512</w>
-      <h>264</h>
+      <x>531</x>
+      <y>648</y>
+      <w>576</w>
+      <h>297</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -664,10 +664,10 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>40</y>
-      <w>264</w>
-      <h>112</h>
+      <x>504</x>
+      <y>252</y>
+      <w>297</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Fail
 --
@@ -684,10 +684,10 @@ Result(type: ErrorType, content:any[*]=[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>752</x>
-      <y>40</y>
-      <w>264</w>
-      <h>112</h>
+      <x>846</x>
+      <y>252</y>
+      <w>297</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Success
 --
@@ -700,10 +700,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>656</x>
-      <y>144</y>
-      <w>24</w>
-      <h>88</h>
+      <x>738</x>
+      <y>369</y>
+      <w>27</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -711,10 +711,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
-      <y>144</y>
-      <w>24</w>
-      <h>88</h>
+      <x>891</x>
+      <y>369</y>
+      <w>27</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -722,10 +722,10 @@ Result(content:any[*]=[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1568</x>
-      <y>128</y>
-      <w>200</w>
-      <h>96</h>
+      <x>1764</x>
+      <y>351</y>
+      <w>225</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>Definition
 --
@@ -739,10 +739,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1496</x>
-      <y>152</y>
-      <w>88</w>
-      <h>32</h>
+      <x>1683</x>
+      <y>378</y>
+      <w>99</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
@@ -751,10 +751,10 @@ Result(content:any[*]=[])
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1784</x>
-      <y>128</y>
-      <w>208</w>
-      <h>40</h>
+      <x>2007</x>
+      <y>351</y>
+      <w>234</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Описывает не класс, а состав
 объекта Definition.</panel_attributes>
@@ -763,13 +763,35 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1760</x>
-      <y>136</y>
-      <w>40</w>
-      <h>32</h>
+      <x>1980</x>
+      <y>360</y>
+      <w>45</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
     <additional_attributes>10.0;20.0;30.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>504</x>
+      <y>0</y>
+      <w>522</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>Легенда
+
+&lt;T₁, T₂&gt; — хеш-таблица, где ключ имеет тип T₁, а значение — T₂;
+m(): T₁ ? T₂ — при успешном завершении работы метод m возвращает
+значение типа T₁, при ошибочном — типа T₂;
+a → b → … → z — функция, принимающая аргументы тппов a, b, … и
+возвращающая значение типа z;
+
+any — любой тип;
+
+&lt;&lt;enumeration&gt;&gt; — класс-перечисление;
+&lt;&lt;get&gt;&gt; — свойство-геттер;</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
