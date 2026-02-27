@@ -481,9 +481,9 @@ class Node {
         return {type: 'none'};
     }
 
-    connectNodes(id1, id2) {
-        const node1 = this.getNodeById(id1, true),
-              node2 = this.getNodeById(id2, true);
+    connectNodes(arg1, arg2) {
+        const node1 = arg1.isPresent ? arg1 : this.getNodeById(arg1, true),
+              node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
 
 //        const result = Node._checkConnectionEdgeCases(this, node1, node2);
 //        if (result.isFail)
