@@ -92,7 +92,7 @@ class Node {
 
     getNodeById(id, recursive=true) {
         const sample = this
-              .selectNodes((n, p) => (n.id === id), recursive)
+              .selectNodes((n, _) => (n.id === id), recursive)
               .get('sample');
         return (sample.length === 0) ? emptyNode : sample[0];
     }
@@ -253,7 +253,6 @@ class Node {
         return false;
     }
 
-
     isDerived(node) {
         if (node.logicalOwn !== NodeOwnership.Here ||
             node.physicalOwn !== NodeOwnership.Here)
@@ -395,28 +394,9 @@ class Node {
         return new Success();
     }
 
-    static _checkConnectionEdgeCases(thisArg, node1, node2) {
-        if (node1 === emptyNode || node2 === emptyNode)
-            return new Fail(ErrorType.SubnodeNotFound);
-
-        else if (thisArg.isPhysicalNeighbours(node1.id, node2.id))
-            return new Fail(ErrorType.AttemptToConnectNeighbours);
-
-        else if (Node.isLogicalRelatives(node1, node2))
-            return new Fail(ErrorType.AttemptToConnectRelatives);
-        else if (Node.isLogicalRelatives(node2, node1))
-            return new Fail(ErrorType.AttemptToConnectRelatives);
-
-        return new Success();
-    }
-
     connectNodes(arg1, arg2) {
         const node1 = arg1.isPresent ? arg1 : this.getNodeById(arg1, true),
               node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
-
-//        const result = Node._checkConnectionEdgeCases(this, node1, node2);
-//        if (result.isFail)
-//            return result;
 
         const connCase = Node._classifyConnectionCase(this, node1, node2);
 
