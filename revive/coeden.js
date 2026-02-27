@@ -113,9 +113,11 @@ class Node {
         };
 
         const node = new Node(id, realDefinition);
-        this.addSubnode(node);
-
-        return new Success([['id', id], ['node', node]]);
+        const result = this.addSubnode(node);
+        if (result.isOk)
+            return new Success([['id', id], ['node', node]]);
+        else
+            return result;
     }
 
     removeSubnode(id) {
