@@ -427,12 +427,12 @@ describe('connectNodes', function(){
 
         it('connectNodes3 - not connect root and leaf', function(){
             const result = root.connectNodes(0, 6);
-            assert.isTrue(result.isEmpty);
+            assert.isTrue(result.isFail);
         });
 
         it('connectNodes4 - not connect subnode of root and leaf', function(){
             const result = root.connectNodes(2, 5);
-            assert.isTrue(result.isEmpty);
+            assert.isTrue(result.isFail);
         });
     });
 
