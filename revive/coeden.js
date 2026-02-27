@@ -273,22 +273,6 @@ class Node {
     }
 
     isSharingPossible(subject, supplicant) {
-        if (!this.has(supplicant.id))
-            return false;
-
-        const result = this.selectNodes(
-            (node, parent) => (node.has(subject.id) && parent === this),
-            true
-        );
-
-        const middleNode = result.get('sample');
-        if (middleNode.length === 0)
-            return false;
-
-        return middleNode[0];
-    }
-
-    isSharingPossible1(subject, supplicant) {
         if (subject.isLink || supplicant.isLink) return false;
 
         const root = this;
@@ -310,18 +294,6 @@ class Node {
     }
 
     isDerivingPossible(subject, supplicant) {
-        const result = this.selectNodes(
-            (node, parent) => (node.has(subject.id) && parent === supplicant),
-            true
-        );
-
-        const middleNode = result.get('sample');
-        if (middleNode.length === 0)
-            return false;
-        return middleNode[0];
-    }
-
-    isDerivingPossible1(subject, supplicant) {
         const root = this;
         const Class = subject.constructor;
 
@@ -344,17 +316,17 @@ class Node {
             return {type: 'adopt', list: [node2, node1]};
 
         // Case 2: share node
-        if (root.isSharingPossible1(node1, node2))
+        if (root.isSharingPossible(node1, node2))
             return {type: 'share', list: [node1, node2]};
-        if (root.isSharingPossible1(node2, node1))
+        if (root.isSharingPossible(node2, node1))
             return {type: 'share', list: [node2, node1]};
-
+        
         // Case 3: derive node
-        if (root.isDerivingPossible1(node1, node2))
+        if (root.isDerivingPossible(node1, node2))
             return {type: 'derive', list: [node1, node2]};
-        if (root.isDerivingPossible1(node2, node1))
+        if (root.isDerivingPossible(node2, node1))
             return {type: 'derive', list: [node2, node1]};
-
+        
         // All other cases are wrong
         return {type: 'fail'};
     }
@@ -436,49 +408,6 @@ class Node {
             return new Fail(ErrorType.AttemptToConnectRelatives);
 
         return new Success();
-    }
-
-    static _getOperands(thisArg, node1, node2) {
-        if (Node.isPhysicalRelatives(node1, node2)) {
-            return {
-                type: 'physical relatives',
-                list: [node1, node2]
-            };
-        }
-        else if (Node.isPhysicalRelatives(node2, node1)) {
-            return {
-                type: 'physical relatives',
-                list: [node2, node1]
-            };
-        }
-
-        else if (thisArg.isSharingPossible(node1, node2)) {
-            return {
-                type: 'shared',
-                list: [node1, node2]
-            };
-        }
-        else if (thisArg.isSharingPossible(node2, node1)) { 
-            return {
-                type: 'shared',
-                list: [node2, node1]
-            };
-        }
-
-        else if (thisArg.isDerivingPossible(node1, node2)) {
-            return {
-                type: 'derived',
-                list: [node1, node2]
-            };
-        }
-        else if (thisArg.isDerivingPossible(node2, node1)) {
-            return {
-                type: 'derived',
-                list: [node2, node1]
-            };
-        }
-
-        return {type: 'none'};
     }
 
     connectNodes(arg1, arg2) {
