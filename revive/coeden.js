@@ -331,6 +331,13 @@ class Node {
         return {type: 'fail'};
     }
 
+    _adoptNode(child, parent) {
+        const node = parent._subnodes.get(child.id);
+        node._logicalOwn = NodeOwnership.Here;
+
+        return new Success();
+    }
+
     _shareNode(subject, supplicant) {
         const root = this;
 
@@ -379,13 +386,6 @@ class Node {
         return new Success();
     }
 
-    _connectPhysicalRelatives(child, parent) {
-        const node = parent._subnodes.get(child.id);
-        node._logicalOwn = NodeOwnership.Here;
-
-        return new Success();
-    }
-
     _deriveNode(subject, supplicant) {
         supplicant.createSubnode(subject.id, {
             logicalOwn: NodeOwnership.Here,
@@ -422,7 +422,7 @@ class Node {
 
         switch (connCase.type) {
         case 'adopt':
-            return this._connectPhysicalRelatives.apply(this, connCase.list);
+            return this._adoptNode.apply(this, connCase.list);
 
         case 'share':
             return this._shareNode.apply(this, connCase.list);
