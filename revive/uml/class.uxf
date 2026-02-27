@@ -16,6 +16,7 @@
 -subnodes: &lt;integer, Node&gt;
 -logicalOwn: SubnodeOwnership
 -physicalOwn: SubnodeOwnership
+-isLink: boolean
 --
 Node(id:integer, definition:Object)
 
@@ -23,6 +24,9 @@ Node(id:integer, definition:Object)
 &lt;&lt;get&gt;&gt; isPresent(): boolean
 
 &lt;&lt;get&gt;&gt; id()
+
+&lt;&lt;get&gt;&gt; isLink()
+&lt;&lt;get&gt;&gt; isReal()
 
 &lt;&lt;get&gt;&gt; logicalOwn()
 &lt;&lt;get&gt;&gt; physicalOwn()
@@ -41,8 +45,8 @@ selectNodes(
 getNodeById(id:integer,
    recursive:boolean): Node ? emptyNode
 
-addSubnode(node:Node)
-createSubnode(id:integer, definition:Object): Success
+addSubnode(node:Node): Success ? Fail
+createSubnode(id:integer, definition:Object): Success ? Fail
 removeSubnode(id:integer): Success ? Fail
 
 injectNode(parentId:integer, node:Node): Success
