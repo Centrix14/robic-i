@@ -534,8 +534,9 @@ describe('connectNodes', function(){
 
         describe('direct order', function(){
             const root = treeWithSharing();
+            const node3 = root.get(3);
 
-            test(root, [0, 3], [
+            test(root, [root, node3], [
                 'connectNodes15 - result.isOk',
                 'connectNodes16 - root has node id:3 logically'
             ]);
@@ -543,8 +544,9 @@ describe('connectNodes', function(){
 
         describe('inverse order', function(){
             const root = treeWithSharing();
+            const node3 = root.get(3);
 
-            test(root, [3, 0], [
+            test(root, [node3, root], [
                 'connectNodes17 - result.isOk',
                 'connectNodes18 - root has node id:3 logically'
             ]);
