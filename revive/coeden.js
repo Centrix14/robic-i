@@ -7,7 +7,7 @@ class NodeOwnership {
 class Node {
     constructor(id, definition) {
         this._id = id;
-        this.data = {};
+        this.data = definition?.data ?? {};
 
         this._subnodes = definition?.subnodes ?? new Map();
 
