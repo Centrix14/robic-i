@@ -268,6 +268,10 @@ class Node {
         return result.get('sample').length > 0;
     }
 
+    isAdoptionPossible(subject, supplicant) {
+        return this.isShared(subject) && supplicant.isReal;
+    }
+
     isSharingPossible(subject, supplicant) {
         if (!this.has(supplicant.id))
             return false;
@@ -284,6 +288,27 @@ class Node {
         return middleNode[0];
     }
 
+    isSharingPossible1(subject, supplicant) {
+        if (subject.isLink || supplicant.isLink) return false;
+
+        const root = this;
+        const Class = subject.constructor;
+
+        if (!Class.isLogicalRelatives(root, supplicant) ||
+            !Class.isPhysicalRelatives(root, supplicant))
+            return false;
+
+        const result = root.selectNodes(
+            (node, parent) => (Class.isLogicalRelatives(node, subject) &&
+                               Class.isPhysicalRelatives(node, subject) &&
+                               parent === root),
+            true
+        );
+
+        const middleNode = result.get('sample')[0] ?? emptyNode;
+        return middleNode.isPresent;
+    }
+
     isDerivingPossible(subject, supplicant) {
         const result = this.selectNodes(
             (node, parent) => (node.has(subject.id) && parent === supplicant),
@@ -294,6 +319,44 @@ class Node {
         if (middleNode.length === 0)
             return false;
         return middleNode[0];
+    }
+
+    isDerivingPossible1(subject, supplicant) {
+        const root = this;
+        const Class = subject.constructor;
+
+        const result = root.selectNodes(
+            (node, parent) => (Class.isLogicalRelatives(node, subject) &&
+                               Class.isPhysicalRelatives(node, subject) &&
+                               parent === supplicant),
+            true
+        );
+
+        const middleNode = result.get('sample')[0] ?? emptyNode;
+        return middleNode.isPresent;
+    }
+
+    static _classifyConnectionCase(root, node1, node2) {
+        // Case 1: adopt node
+        if (root.isAdoptionPossible(node1, node2))
+            return {type: 'adopt', list: [node1, node2]};
+        if (root.isAdoptionPossible(node2, node1))
+            return {type: 'adopt', list: [node2, node1]};
+
+        // Case 2: share node
+        if (root.isSharingPossible1(node1, node2))
+            return {type: 'share', list: [node1, node2]};
+        if (root.isSharingPossible1(node2, node1))
+            return {type: 'share', list: [node2, node1]};
+
+        // Case 3: derive node
+        if (root.isDerivingPossible1(node1, node2))
+            return {type: 'derive', list: [node1, node2]};
+        if (root.isDerivingPossible1(node2, node1))
+            return {type: 'derive', list: [node2, node1]};
+
+        // All other cases are wrong
+        return {type: 'error'};
     }
 
     _shareNode(subject, supplicant) {
