@@ -218,6 +218,7 @@ class Node {
     }
 
     isShared(node) {
+        if (node.isLink) return false;
         if (node.physicalOwn !== NodeOwnership.Here) return false;
 
         // obvious case of shared node
@@ -254,6 +255,7 @@ class Node {
     }
 
     isDerived(node) {
+        if (node.isLink) return false;
         if (node.logicalOwn !== NodeOwnership.Here ||
             node.physicalOwn !== NodeOwnership.Here)
             return false;
