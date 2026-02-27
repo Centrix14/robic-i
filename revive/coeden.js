@@ -98,7 +98,12 @@ class Node {
     }
 
     addSubnode(node) {
-        this._subnodes.set(node.id, node);
+        if (this.isReal) {
+            this._subnodes.set(node.id, node);
+            return new Success();
+        }
+        else
+            return new Fail(ErrorType.AttemptToAddNodeToLink);
     }
 
     createSubnode(id, definition=null) {
