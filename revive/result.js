@@ -8,6 +8,7 @@ class ErrorType {
     static AttemptToConnectNeighbours = 'Attempt to connect neighbours'
     static AttemptToConnectRelatives = 'Attempt to connect relatives'
     static NOP = 'No operations performed'
+    static AttemptToAddNodeToLink = 'Attempt to add node to link'
 }
 
 class Result {
