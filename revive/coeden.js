@@ -194,6 +194,7 @@ class Node {
     }
 
     isLinkToShared(link, source) {
+        if (link.isReal) return false; // if link is not a link
         if (link.id !== source.id) return false;
         if (link._subnodes.size > 0) return false;
 
@@ -232,6 +233,7 @@ class Node {
     }
 
     isLinkToDerived(link, source) {
+        if (link.isReal) return false; // if link is not a link
         if (link.id !== source.id) return false;
         if (link._subnodes.size > 0) return false;
 
