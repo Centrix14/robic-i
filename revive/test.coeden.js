@@ -669,11 +669,7 @@ describe('disconnectNodes', function(){
         });
     });
 
-    // остановился тут. необходимо изменить граничные условия таким образом,
-    // чтобы разъединение общего узла и корня стало возможным.
-    // условие того — доказать, что в дереве кто-то ссылается на этот узел,
-    // как на разделяемый.
-    describe('disconnect shared node and root', function(){
+    describe('disconnect adopted node', function(){
         function test(root, args, testNames) {
             before(function(){
                 root.connectNodes(args[0], args[1]);
@@ -685,34 +681,28 @@ describe('disconnectNodes', function(){
             });
 
             it(testNames[1], function(){
-                const subnode = NodeOwnership.Subnode;
-                const result = root.selectNodes(
-                    (n, c, p) => (n.id === 3
-                                  && c?.logicalOwn === subnode
-                                  && p === root),
-                    true
-                );
-
-                const node = result.get('sample')[0];
-                assert.equal(node.id, 3);
+                const node = root.get(3);
+                assert.equal(node.logicalOwn, NodeOwnership.Subnode);
             });
         }
 
         describe('direct order', function(){
             const root = treeWithSharing();
+            const node1 = root, node2 = root.get(3);
 
-            test(root, [0, 3], [
-                'disconnectNodes15 - disconnect result.isOk',
-                'disconnectNodes* - root has not node id:3 logically'
+            test(root, [node1, node2], [
+                'disconnectNodes9 - disconnect result.isOk',
+                'disconnectNodes10 - root has not node id:3 logically'
             ]);
         });
 
         describe('inverse order', function(){
             const root = treeWithSharing();
+            const node1 = root, node2 = root.get(3);
 
-            test(root, [3, 0], [
-                'disconnectNodes17 - result.isOk',
-                'disconnectNodes18 - root has node id:3 logically'
+            test(root, [node1, node2], [
+                'disconnectNodes11 - result.isOk',
+                'disconnectNodes12 - root has node id:3 logically'
             ]);
         });
     });
