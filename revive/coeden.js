@@ -40,7 +40,7 @@ class Node {
             fun.call(thisArg, node);
     }
 
-    static _resolvePhysicalOwn(node, root) {
+    static _resolveLink(node, root) {
         switch (node.physicalOwn) {
         case NodeOwnership.Here:
             return node;
@@ -54,6 +54,8 @@ class Node {
                 if (subnode.has(node.id))
                     return subnode.get(node.id);
             }
+
+            return emptyNode;
         }
     }
 
@@ -64,7 +66,7 @@ class Node {
 
         this.forSubnodes(function(node) {
             if (node.logicalOwn === NodeOwnership.Here) {
-                const subnode = Class._resolvePhysicalOwn(node, root);
+                const subnode = Class._resolveLink(node, root);
                 sample.push(subnode);
             }
         });
@@ -433,7 +435,7 @@ class Node {
         const Class = subject.constructor;
         const root = this;
 
-        const source = Class._resolvePhysicalOwn(subject, root);
+        const source = Class._resolveLink(subject, root);
         return source.isPresent;
     }
 
