@@ -444,7 +444,7 @@ class Node {
         if (root.isUnadoptionPossible(node1, node2))
             return {type: 'unadopt', list: [node1, node2]};
         if (root.isUnadoptionPossible(node2, node1))
-            return {type: 'unadoption', list: [node2, node1]};
+            return {type: 'unadopt', list: [node2, node1]};
 
         // Case 3: node underiving
         if (root.isUnderivingPossible(node1, node2))
@@ -456,18 +456,19 @@ class Node {
     }
 
     _unadoptNode(subject, supplicant) {
-        subject.logicalOwn = NodeOwnership.Subnode;
+        subject._logicalOwn = NodeOwnership.Subnode;
+        return new Success();
     }
 
     disconnectNodes(arg1, arg2) {
-        const node1 = arg1.isPresent ?? this.getNodeById(arg1, true),
-              node2 = arg2.isPresent ?? this.getNodeById(arg2, true);
+        const node1 = arg1.isPresent ? arg1 : this.getNodeById(arg1, true),
+              node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
 
         const disconnCase = Node._classifyDisconnectionCase(this, node1, node2);
 
         switch (disconnCase.type) {
         case 'unadopt':
-            return '';
+            return this._unadoptNode.apply(this, disconnCase.list);
 
         case 'underive':
             return '';
