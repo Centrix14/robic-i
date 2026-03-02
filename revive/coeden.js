@@ -437,6 +437,20 @@ class Node {
         return source.isPresent;
     }
 
+    static _classifyDisconnectionCase(root, node1, node2) {
+        // Case 1: node unadoption
+        if (root.isUnadoptionPossible(node1, node2))
+            return {type: 'unadoption', list: [node1, node2]};
+        if (root.isUnadoptionPossible(node2, node1))
+            return {type: 'unadoption', list: [node2, node1]};
+
+        // Case 3: node underiving
+        if (root.isUnderivingPossible(node1, node2))
+            return {type: 'underiving', list: [node1, node2]};
+        if (root.isUnderivingPossible(node2, node1))
+            return {type: 'underiving', list: [node2, node1]};
+    }
+
     disconnectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
