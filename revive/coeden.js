@@ -440,38 +440,33 @@ class Node {
     static _classifyDisconnectionCase(root, node1, node2) {
         // Case 1: node unadoption
         if (root.isUnadoptionPossible(node1, node2))
-            return {type: 'unadoption', list: [node1, node2]};
+            return {type: 'unadopt', list: [node1, node2]};
         if (root.isUnadoptionPossible(node2, node1))
             return {type: 'unadoption', list: [node2, node1]};
 
         // Case 3: node underiving
         if (root.isUnderivingPossible(node1, node2))
-            return {type: 'underiving', list: [node1, node2]};
+            return {type: 'underive', list: [node1, node2]};
         if (root.isUnderivingPossible(node2, node1))
-            return {type: 'underiving', list: [node2, node1]};
+            return {type: 'underive', list: [node2, node1]};
+
+        return {type: 'fail'};
     }
 
-    disconnectNodes(id1, id2) {
-        const node1 = this.getNodeById(id1, true),
-              node2 = this.getNodeById(id2, true);
+    disconnectNodes(arg1, arg2) {
+        const node1 = arg1.isPresent ?? this.getNodeById(arg1, true),
+              node2 = arg2.isPresent ?? this.getNodeById(arg2, true);
 
-        const result = Node._checkConnectionEdgeCases(this, node1, node2);
-        if (result.isFail)
-            return result;
+        const disconnCase = Node._classifyDisconnectionCase(this, node1, node2);
 
-        const operands = Node._getOperands(this, node1, node2);
-
-        switch (operands.type) {
-        case 'physical relatives':
+        switch (disconnCase.type) {
+        case 'unadopt':
             return '';
 
-        case 'shared':
+        case 'underive':
             return '';
 
-        case 'derived':
-            return '';
-
-        case 'none':
+        case 'fail':
             return new Result();
         }
     }
