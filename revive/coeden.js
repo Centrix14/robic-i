@@ -417,6 +417,16 @@ class Node {
         }
     }
 
+    isUnadoptionPossible(subject, supplicant) {
+        const Class = subject.constructor;
+        const root = this;
+
+        return Class.isLogicalRelatives(supplicant, subject) &&
+            Class.isPhysicalRelatives(supplicant, subject) &&
+            root.isShared(subject) &&
+            supplicant.isReal;
+    }
+
     disconnectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
