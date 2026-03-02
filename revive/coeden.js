@@ -413,7 +413,7 @@ class Node {
             return this._deriveNode.apply(this, connCase.list);
 
         case 'fail':
-            return new Fail();
+            return new Fail(ErrorType.InvalidConnectRequest);
         }
     }
 
@@ -467,7 +467,7 @@ class Node {
             return '';
 
         case 'fail':
-            return new Result();
+            return new Fail(ErrorType.InvalidDisconnectRequest);
         }
     }
 }
