@@ -9,6 +9,8 @@ class ErrorType {
     static AttemptToConnectRelatives = 'Attempt to connect relatives'
     static NOP = 'No operations performed'
     static AttemptToAddNodeToLink = 'Attempt to add node to link'
+    static InvalidConnectRequest = 'Invalid connect request'
+    static InvalidDisconnectRequest = 'Invalid disconnect request'
 }
 
 class Result {
