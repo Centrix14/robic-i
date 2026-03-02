@@ -427,6 +427,16 @@ class Node {
             supplicant.isReal;
     }
 
+    isUnderivingPossible(subject, supplicant) {
+        if (subject.isReal || supplicant.isLink) return false;
+
+        const Class = subject.constructor;
+        const root = this;
+
+        const source = Class._resolvePhysicalOwn(subject, root);
+        return source.isPresent;
+    }
+
     disconnectNodes(id1, id2) {
         const node1 = this.getNodeById(id1, true),
               node2 = this.getNodeById(id2, true);
