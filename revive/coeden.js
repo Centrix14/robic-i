@@ -455,6 +455,10 @@ class Node {
         return {type: 'fail'};
     }
 
+    _unadoptNode(subject, supplicant) {
+        subject.logicalOwn = NodeOwnership.Subnode;
+    }
+
     disconnectNodes(arg1, arg2) {
         const node1 = arg1.isPresent ?? this.getNodeById(arg1, true),
               node2 = arg2.isPresent ?? this.getNodeById(arg2, true);
