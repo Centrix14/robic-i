@@ -7,13 +7,16 @@ class NodeOwnership {
 class Node {
     constructor(id, definition) {
         this._id = id;
-        this.data = definition?.data ?? {};
 
+        this._supnode = definition?.supnode ?? null;
         this._subnodes = definition?.subnodes ?? new Map();
 
         this._logicalOwn = definition?.logicalOwn ?? NodeOwnership.Here;
         this._physicalOwn = definition?.physicalOwn ?? NodeOwnership.Here;
         this._isLink = definition?.isLink ?? false;
+        this._linkValue = definition?.linkValue ?? null;
+
+        this.data = definition?.data ?? {};
     }
 
     get isEmpty() { return false; }

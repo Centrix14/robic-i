@@ -12,7 +12,7 @@
     <panel_attributes>Node
 --
 -id: integer
--parent: Node
+-supnode: Node
 -subnodes: &lt;integer, Node&gt;
 -logicalOwn: SubnodeOwnership
 -physicalOwn: SubnodeOwnership
