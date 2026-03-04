@@ -12,11 +12,13 @@
     <panel_attributes>Node
 --
 -id: integer
-+data: any = {}
+-parent: Node
 -subnodes: &lt;integer, Node&gt;
 -logicalOwn: SubnodeOwnership
 -physicalOwn: SubnodeOwnership
 -isLink: boolean
+-linkValue: Node
++data: any = {}
 --
 Node(id:integer, definition:Object)
 
@@ -34,14 +36,15 @@ Node(id:integer, definition:Object)
 get(id:integer): Node ? emptyNode
 has(id:integer): boolean
 
+walk(options: Object)
 forSubnodes(fun, thisArg)
 
 subnodes(rootNode): Node [*]
 
 selectNodes(
    condition:(node → parent → boolean),
-   recursive:boolean,
-   parent:Node): Success
+   parent:Node
+   options:Object): Success
 getNodeById(id:integer,
    recursive:boolean): Node ? emptyNode
 
@@ -65,9 +68,14 @@ isAdoptionPossible(subject:Node, supplicant:Node): boolean
 isSharingPossible(subject:Node, supplicant:Node): boolean
 isDerivingPossible(subject:Node, supplicant:Node): boolean
 
+isUnadoptionPossible(subject:Node, supplicant:Node): boolean
+isUnsharingPossible(subject:Node, supplicant:Node): boolean
+isUnderivingPossible(subject:Node, supplicant:Node): boolean
+
 connectNodes(id1:integer, id2:integer): Success ? Fail
 connectNodes(node1:Node, node2:Node): Success ? Fail
-disconnectNodes(id1, id2):Result
+disconnectNodes(id1:integer, id2:integer): Success ? Fail
+disconnectNodes(node1:node, node2:Node): Success ? Fail
 
 toMap(): Map
 fromMap(map:Map, mb:MapBehaviour): Result
