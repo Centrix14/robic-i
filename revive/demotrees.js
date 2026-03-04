@@ -48,17 +48,17 @@ function treeWithSharing(base=0) {
       structure:
       root
       - node1
-      -- node3 (logical)
+      -- node3 (link)
       - node2
-      -- node3 (logical)
-      - node3 (physical)
+      -- node3 (link)
+      - node3 (source)
     */
 
     const root = new Node(base);
 
     const node1 = new Node(base+1), node2 = new Node(base+2);
     const node3 = new Node(base+3, {
-        supnode: node1,
+        supnode: root,
         logicalOwn: NodeOwnership.Subnode,
         physicalOwn: NodeOwnership.Here,
         isLink: false,
@@ -69,20 +69,14 @@ function treeWithSharing(base=0) {
     root.addSubnode(node2);
     root.addSubnode(node3);
 
-    node1.createSubnode(base+3, {
-        supnode: node1,
+    node1.createLink(base+4, node3, {
         logicalOwn: NodeOwnership.Here,
-        physicalOwn: NodeOwnership.Supnode,
-        isLink: true,
-        linkValue: node3
+        physicalOwn: NodeOwnership.Supnode
     });
 
-    node2.createSubnode(base+3, {
-        supnode: node2,
+    node2.createSubnode(base+5, node3, {
         logicalOwn: NodeOwnership.Here,
         physicalOwn: NodeOwnership.Supnode,
-        isLink: true,
-        linkValue: node3
     });
 
     return root;
