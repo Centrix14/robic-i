@@ -452,6 +452,12 @@ class Node {
         if (root.isUnadoptionPossible(node2, node1))
             return {type: 'unadopt', list: [node2, node1]};
 
+        // Case 2: node unsharing
+        if (root.isUnsharingPossible(node1, node2))
+            return {type: 'unshare', list: [node1, node2]};
+        if (root.isUnsharingPossible(node2, node1))
+            return {type: 'unshare', list: [node2, node1]};
+
         // Case 3: node underiving
         if (root.isUnderivingPossible(node1, node2))
             return {type: 'underive', list: [node1, node2]};
@@ -479,6 +485,9 @@ class Node {
         switch (disconnCase.type) {
         case 'unadopt':
             return this._unadoptNode.apply(this, disconnCase.list);
+
+        case 'unshare':
+            return this._unshareNode.apply(this, disconnCase.list);
 
         case 'underive':
             return this._underiveNode.apply(this, disconnCase.list);
