@@ -535,6 +535,9 @@ class Node {
         const node1 = arg1.isPresent ? arg1 : this.getNodeById(arg1, true),
               node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
 
+        if (node1.isEmpty || node2.isEmpty)
+            return new Fail();
+
         const disconnCase = Node._classifyDisconnectionCase(this, node1, node2);
 
         switch (disconnCase.type) {
