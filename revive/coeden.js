@@ -226,25 +226,6 @@ class Node {
 
         const root = link.linkValue.supnode;
         return root.has(link.supnode.id);
-/*
-        const Class = link.constructor;
-
-        const result = this.selectNodes(
-            (n, _) => (Class.isPhysicalRelatives(n, source)),
-            true
-        );
-
-        if (result.get('sample').length === 0) return false;
-
-        const sourceKeeper = result.get('sample')[0];
-        const linksParent = sourceKeeper.selectNodes(
-            (n, _) => (Class.isLogicalRelatives(n, link) &&
-                       !Class.isPhysicalRelatives(n, link)),
-            true
-        );
-
-        return linksParent.get('sample').length > 0;
-*/
     }
 
     isShared(node) {

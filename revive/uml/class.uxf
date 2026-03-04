@@ -39,7 +39,7 @@ has(id:integer): boolean
 walk(options: Object)
 forSubnodes(fun, thisArg)
 
-subnodes(rootNode): Node [*]
+subnodes(): Node [*]
 
 selectNodes(
    condition:(node → parent → boolean),
@@ -60,7 +60,7 @@ isNeighbours(id1:integer, id2:integer): boolean
 _isLogicalRelatives(parent:Node, child:Node): boolean_
 _isPhysicalRelatives(parent:Node, child:Node): boolean_
 
-isLinkToShared(link:Node, source:Node): boolean
+isLinkToShared(source:Node): boolean
 isShared(node:Node): boolean
 isLinkToDerived(link:Node, source:Node): boolean
 isDerived(node:Node): boolean
