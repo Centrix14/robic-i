@@ -219,11 +219,15 @@ class Node {
             return false;
     }
 
-    isLinkToShared(link, source) {
-        if (link.isReal) return false; // if link is not a link
-        if (link.id !== source.id) return false;
-        if (link._subnodes.size > 0) return false;
+    isLinkToShared(node) {
+        if (node.isReal ||
+            !node.linkValue ||
+            node._subnodes.size > 0)
+            return false;
 
+        const root = node.linkValue.supnode;
+        return root.has(node.supnode.id);
+/*
         const Class = link.constructor;
 
         const result = this.selectNodes(
@@ -241,6 +245,7 @@ class Node {
         );
 
         return linksParent.get('sample').length > 0;
+*/
     }
 
     isShared(node) {
