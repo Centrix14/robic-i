@@ -23,9 +23,12 @@ class Node {
     get isPresent() { return true; }
 
     get id() { return this._id; }
+    get supnode() { return this._supnode; }
 
     get isLink() { return this._isLink; }
     get isReal() { return !this.isLink; }
+
+    get linkValue() { return this._linkValue; }
 
     get logicalOwn() { return this._logicalOwn; }
     get physicalOwn() { return this._physicalOwn; }
@@ -113,8 +116,11 @@ class Node {
 
     createSubnode(id, definition=null) {
         const realDefinition = definition ?? {
+            supnode: this,
             logicalOwn: NodeOwnership.Here,
-            physicalOwn: NodeOwnership.Here
+            physicalOwn: NodeOwnership.Here,
+            isLink: false,
+            linkValue: null
         };
 
         const node = new Node(id, realDefinition);
