@@ -472,27 +472,59 @@ class Node {
         return new Success();
     }
 
-    _countLinks(root, source) {
+    _collectLinks(root, source) {
         const Class = source.constructor;
-        let count = 0;
+        let sample = [];
 
         root.forSubnodes((node) =>
             node.forSubnodes((subnode) =>
                 {
                     if (subnode !== source &&
                         root.isLinkToShared(subnode, source))
-                        count++
+                        sample.push(subnode)
                 },
                 root
             ),
             root
         );
 
-        return count;
+        return sample;
     }
 
+    // полностью переписать. логика:
+    // 1) subject - это ссылка, берём её источник,
+    // 2) считаем общее число ссылок на источник в дереве,
+    // 3) если ссылок 2, то:
+    // 3.1) вырезаем все ссылки из дерева,
+    // 3.2) вырезаем из корня источник,
+    // 3.3) на место ссылки, которая != subject вставляем источник.
+    // 4) если ссылок более 2, то:
+    // 4.1) у просителя вырезаем ссылку
     _unshareNode(subject, supplicant) {
-        return new Result();
+        const Class = subject.constructor;
+        const root = this;
+
+        const source = Class._resolveLink(subject, root);
+        const links = root._collectLinks(root, source);
+        if ((links.length - 1) === 1) {
+            const targetLink = (links[0] === subject) ? links[1] : links[0];
+            const res = root.selectNodes((n, _) => n.has(targetLink.id) && (n !== supplicant), true);
+            const targetNode = res.get('sample')[0];
+
+            let result;
+            result = supplicant.ejectNode(subject.id);
+            if (result.isFail) return result;
+
+            result = targetNode.ejectNode(subject.id);
+            if (result.isFail) return result;
+
+            result = root.ejectNode(source.id);
+            if (result.isFail) return result;
+            
+            return targetLink.injectNode(supplicant.id, source);
+        }
+        else
+            return supplicant.ejectNode(subject.id);
     }
 
     _underiveNode(subject, supplicant) {
