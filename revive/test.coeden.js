@@ -12,7 +12,7 @@ describe('isLinkToShared', function(){
         const link = result.get('sample')[0];
         const source = root.get(3);
 
-        assert.isTrue(root.isLinkToShared(link, source));
+        assert.isTrue(link.isLinkToShared(source));
     });
 
     it('isLinkToShared2 - detects ordinary node', function(){
