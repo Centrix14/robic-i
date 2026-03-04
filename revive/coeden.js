@@ -442,7 +442,7 @@ class Node {
         const root = this;
 
         const source = Class._resolveLink(subject, root);
-        return source.isPresent && this.isLinkToDerived(subject, source);
+        return source.isPresent && root.isLinkToDerived(subject, source);
     }
 
     static _classifyDisconnectionCase(root, node1, node2) {
