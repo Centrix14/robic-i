@@ -65,16 +65,12 @@ class Node {
         }
     }
 
-    subnodes(rootNode) {
-        const root = rootNode ?? this;
-        const Class = root.constructor;
+    subnodes() {
         let sample = [];
-
-        this.forSubnodes(function(node) {
-            if (node.logicalOwn === NodeOwnership.Here) {
-                const subnode = Class._resolveLink(node, root);
-                sample.push(subnode);
-            }
+        
+        this.forSubnodes(function(node){
+            if (node.logicalOwn === NodeOwnership.Here)
+                sample.push(node.isReal ? node : node.linkValue);
         });
 
         return sample;
