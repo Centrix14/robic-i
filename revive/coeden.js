@@ -131,6 +131,21 @@ class Node {
             return result;
     }
 
+    createLink(id, target, ownership) {
+        const link = new Node(id, {
+            supnode: this,
+            isLink: true,
+            linkValue: target,
+            ...ownership
+        });
+
+        const result = this.addSubnode(link);
+        if (result.isOk)
+            return new Success([['id', id], ['node', link]]);
+        else
+            return result;
+    }
+
     removeSubnode(id) {
         const node = this.get(id);
         if (node.isEmpty)
