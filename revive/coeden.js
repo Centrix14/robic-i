@@ -536,7 +536,7 @@ class Node {
               node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
 
         if (node1.isEmpty || node2.isEmpty)
-            return new Fail();
+            return new Fail(ErrorType.InvalidDisconnectRequest);
 
         const disconnCase = Node._classifyDisconnectionCase(this, node1, node2);
 
