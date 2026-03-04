@@ -623,12 +623,12 @@ describe('disconnectNodes', function(){
 
         it('disconnectNodes3 - not disconnect root and leaf', function(){
             const result = root.disconnectNodes(0, 6);
-            assert.isTrue(result.isEmpty);
+            assert.isTrue(result.isFail);
         });
 
         it('disconnectNodes4 - not disconnect subnode of root and leaf', function(){
             const result = root.disconnectNodes(2, 5);
-            assert.isTrue(result.isEmpty);
+            assert.isTrue(result.isFail);
         });
 
     });
