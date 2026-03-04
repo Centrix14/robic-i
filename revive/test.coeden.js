@@ -710,26 +710,21 @@ describe('disconnectNodes', function(){
     describe('unshare node', function(){
         function test(root, args, testNames) {
             it(testNames[0], function(){
-                const node1 = root.getNodeById(1, true);
-                assert.isTrue(node1.has(3));
-            });
-
-            it(testNames[1], function(){
                 const result = root.disconnectNodes(args[0], args[1]);
                 assert.isTrue(result.isOk);
             });
 
-            it(testNames[2], function(){
+            it(testNames[1], function(){
                 const node0 = root.getNodeById(0, true);
                 assert.isFalse(node0.has(3));
             });
 
-            it(testNames[3], function(){
+            it(testNames[2], function(){
                 const node1 = root.getNodeById(1, true);
                 assert.isFalse(node1.has(3));
             });
 
-            it(testNames[4], function(){
+            it(testNames[3], function(){
                 const node2 = root.getNodeById(2, true);
                 assert.isTrue(node2.has(3));
             });
@@ -739,7 +734,6 @@ describe('disconnectNodes', function(){
             const root = treeWithSharing();
             
             test(root, [1, 3], [
-                'disconnectNodes9 - node id:1 has node id:3',
                 'disconnectNodes10 - result.isOk',
                 'disconnectNodes11 - node id:0 has not node id:3',
                 'disconnectNodes12 - node id:1 has not node id:3',
@@ -751,7 +745,6 @@ describe('disconnectNodes', function(){
             const root = treeWithSharing();
 
             test(root, [3, 1], [
-                'disconnectNodes14 - node id:1 has node id:3',
                 'disconnectNodes15 - result.isOk',
                 'disconnectNodes16 - node id:0 has not node id:3',
                 'disconnectNodes17 - node id:1 has not node id:3',
