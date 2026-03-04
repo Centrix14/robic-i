@@ -50,6 +50,7 @@ getNodeById(id:integer,
 
 addSubnode(node:Node): Success ? Fail
 createSubnode(id:integer, definition:Object): Success ? Fail
+createLink(id:integer, linkValue:Node): Success ? Fail
 removeSubnode(id:integer): Success ? Fail
 
 injectNode(parentId:integer, node:Node): Success
