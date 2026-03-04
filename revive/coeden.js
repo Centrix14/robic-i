@@ -335,9 +335,7 @@ class Node {
     }
 
     _adoptNode(child, parent) {
-        const node = parent._subnodes.get(child.id);
-        node._logicalOwn = NodeOwnership.Here;
-
+        child._logicalOwn = NodeOwnership.Here;
         return new Success();
     }
 
