@@ -74,7 +74,7 @@ function treeWithSharing(base=0) {
         physicalOwn: NodeOwnership.Supnode
     });
 
-    node2.createSubnode(base+5, node3, {
+    node2.createLink(base+5, node3, {
         logicalOwn: NodeOwnership.Here,
         physicalOwn: NodeOwnership.Supnode,
     });
