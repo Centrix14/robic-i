@@ -760,4 +760,36 @@ describe('disconnectNodes', function(){
         });
     });
 
+    describe('underive node', function(){
+        function test(root, args, testNames) {
+            it(testNames[0], function(){
+                const result = root.disconnectNodes(args[0], args[1]);
+                assert.isTrue(result.isOk);
+            });
+
+            it(testNames[1], function(){
+                const node1 = args[0], node2 = args[1];
+                assert.isFalse(node1.has(node2.id));
+            });
+        }
+
+        describe('direct order', function(){
+            let root = treeWithDeriving();
+
+            test(root, [root, root.get(3)], [
+                'disconnectNodes* - result.isOk',
+                'disconnectNodes* - node underived'
+            ]);
+        });
+
+        describe('inverse order', function(){
+            let root = treeWithDeriving();
+
+            test(root, [root.get(3), root], [
+                'disconnectNodes* - result.isOk',
+                'disconnectNodes* - node underived'
+            ]);
+        });
+
+    });
 });
