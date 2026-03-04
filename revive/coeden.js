@@ -472,6 +472,25 @@ class Node {
         return new Success();
     }
 
+    _countLinks(root, source) {
+        const Class = source.constructor;
+        let count = 0;
+
+        root.forSubnodes((node) =>
+            node.forSubnodes((subnode) =>
+                {
+                    if (subnode !== source &&
+                        root.isLinkToShared(subnode, source))
+                        count++
+                },
+                root
+            ),
+            root
+        );
+
+        return count;
+    }
+
     _unshareNode(subject, supplicant) {
         return new Result();
     }
