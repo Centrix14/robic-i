@@ -472,6 +472,10 @@ class Node {
         return new Success();
     }
 
+    _unshareNode(subject, supplicant) {
+        return new Result();
+    }
+
     _underiveNode(subject, supplicant) {
         return supplicant.ejectNode(subject.id);
     }
