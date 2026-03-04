@@ -458,6 +458,10 @@ class Node {
         return new Success();
     }
 
+    _underiveNode(subject, supplicant) {
+        return supplicant.ejectNode(subject.id);
+    }
+
     disconnectNodes(arg1, arg2) {
         const node1 = arg1.isPresent ? arg1 : this.getNodeById(arg1, true),
               node2 = arg2.isPresent ? arg2 : this.getNodeById(arg2, true);
@@ -469,7 +473,7 @@ class Node {
             return this._unadoptNode.apply(this, disconnCase.list);
 
         case 'underive':
-            return '';
+            return this._underiveNode.apply(this, disconnCase.list);
 
         case 'fail':
             return new Fail(ErrorType.InvalidDisconnectRequest);
