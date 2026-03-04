@@ -58,22 +58,32 @@ function treeWithSharing(base=0) {
 
     const node1 = new Node(base+1), node2 = new Node(base+2);
     const node3 = new Node(base+3, {
+        supnode: node1,
         logicalOwn: NodeOwnership.Subnode,
-        physicalOwn: NodeOwnership.Here
+        physicalOwn: NodeOwnership.Here,
+        isLink: false,
+        linkValue: null
     });
 
     root.addSubnode(node1);
     root.addSubnode(node2);
     root.addSubnode(node3);
 
-    const definition = {
-        isLink: true,
+    node1.createSubnode(base+3, {
+        supnode: node1,
         logicalOwn: NodeOwnership.Here,
-        physicalOwn: NodeOwnership.Supnode
-    };
+        physicalOwn: NodeOwnership.Supnode,
+        isLink: true,
+        linkValue: node3
+    });
 
-    node1.createSubnode(base+3, definition);
-    node2.createSubnode(base+3, definition);
+    node2.createSubnode(base+3, {
+        supnode: node2,
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Supnode,
+        isLink: true,
+        linkValue: node3
+    });
 
     return root;
 }
@@ -90,21 +100,19 @@ function treeWithDeriving(base=0) {
 
     const root = new Node(base);
 
-    const node1 = new Node(base+1), node2 = new Node(base+2);
-    const node3 = new Node(base+3, {
-        isLink: true,
-        logicalOwn: NodeOwnership.Here,
-        physicalOwn: NodeOwnership.Subnode
-    });
+    const node1 = new Node(base+1), node2 = new Node(base+2), node3 = new Node(base+3);
 
     root.addSubnode(node1);
     root.addSubnode(node2);
-    root.addSubnode(node3);
-
-    node2.createSubnode(base+3, {
+    root.createSubnode(base+3, {
+        supnode: node1,
         logicalOwn: NodeOwnership.Here,
-        physicalOwn: NodeOwnership.Here
+        physicalOwn: NodeOwnership.Subnode,
+        isLink: true,
+        linkValue: node3
     });
+
+    node2.addSubnode(node3);
 
     return root;
 }
