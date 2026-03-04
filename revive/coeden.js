@@ -481,7 +481,7 @@ class Node {
                 {
                     if (subnode !== source &&
                         root.isLinkToShared(subnode, source))
-                        sample.push(subnode)
+                        sample.push([subnode, node])
                 },
                 root
             ),
@@ -506,25 +506,25 @@ class Node {
 
         const source = Class._resolveLink(subject, root);
         const links = root._collectLinks(root, source);
-        if ((links.length - 1) === 1) {
-            const targetLink = (links[0] === subject) ? links[1] : links[0];
-            const res = root.selectNodes((n, _) => n.has(targetLink.id) && (n !== supplicant), true);
-            const targetNode = res.get('sample')[0];
+        if (links.length === 2) {
+            const link1 = { parent: links[0][1], value: links[0][0] },
+                  link2 = { parent: links[1][1], value: links[1][0] };
+            const target = link1.value === subject ? link2.parent : link1.parent;
 
             let result;
-            result = supplicant.ejectNode(subject.id);
+            result = link1.parent.removeSubnode(link1.value.id);
             if (result.isFail) return result;
 
-            result = targetNode.ejectNode(subject.id);
+            result = link2.parent.removeSubnode(link2.value.id);
             if (result.isFail) return result;
 
-            result = root.ejectNode(source.id);
+            result = root.removeSubnode(source.id);
             if (result.isFail) return result;
-            
-            return targetLink.injectNode(supplicant.id, source);
+
+            return target.addSubnode(source);
         }
         else
-            return supplicant.ejectNode(subject.id);
+            return supplicant.removeSubnode(subject.id);
     }
 
     _underiveNode(subject, supplicant) {
