@@ -440,8 +440,7 @@ class Node {
         const Class = subject.constructor;
         const root = this;
 
-        const source = Class._resolveLink(subject, root);
-        return supplicant.isReal && root.isLinkToShared(subject, source);
+        return supplicant.isReal && subject.isLinkToShared(subject.linkValue);
     }
 
     isUnderivingPossible(subject, supplicant) {
