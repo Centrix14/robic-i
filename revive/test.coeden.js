@@ -721,30 +721,30 @@ describe('disconnectNodes', function(){
 
             it(testNames[2], function(){
                 const node1 = root.getNodeById(1, true);
-                assert.isFalse(node1.has(3));
+                assert.isFalse(node1.has(4));
             });
 
             it(testNames[3], function(){
                 const node2 = root.getNodeById(2, true);
-                assert.isTrue(node2.has(3));
+                assert.isTrue(node2.has(5));
             });
         }
 
         describe('direct order', function(){
             const root = treeWithSharing();
             
-            test(root, [1, 3], [
+            test(root, [1, 4], [
                 'disconnectNodes10 - result.isOk',
                 'disconnectNodes11 - node id:0 has not node id:3',
-                'disconnectNodes12 - node id:1 has not node id:3',
-                'disconnectNodes13 - node id:2 has node id:3'
+                'disconnectNodes12 - node id:1 has not node id:4',
+                'disconnectNodes13 - node id:2 has node id:5'
             ]);
         });
 
         describe('inverse order', function(){
             const root = treeWithSharing();
 
-            test(root, [3, 1], [
+            test(root, [4, 1], [
                 'disconnectNodes15 - result.isOk',
                 'disconnectNodes16 - node id:0 has not node id:3',
                 'disconnectNodes17 - node id:1 has not node id:3',
