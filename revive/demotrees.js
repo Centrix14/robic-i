@@ -48,9 +48,9 @@ function treeWithSharing(base=0) {
       structure:
       root
       - node1
-      -- node3 (link)
+      -- node4 (link to node3)
       - node2
-      -- node3 (link)
+      -- node5 (link to node3)
       - node3 (source)
     */
 
