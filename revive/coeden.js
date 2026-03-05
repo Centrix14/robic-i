@@ -237,7 +237,7 @@ class Node {
 
         const root = this;
         const result = root.selectNodes(
-            (n, _) => (root.isLinkToShared(node)),
+            (n, _) => (n.isLinkToShared(node)),
             true
         );
 
