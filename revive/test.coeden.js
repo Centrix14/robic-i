@@ -27,27 +27,20 @@ describe('addNode', function(){
 
 describe('connect', function(){
 
-    it('connect1 - returns Success for new connection', function(){
+    it('connect1 - creates direct connection', function(){
         const g = new Graph();
 
         g.addNode(0, 'Alice');
         g.addNode(1, 'Johne');
-        const result = g.connect(0, 1, 'friendship');
 
-        assert.isTrue(result.isOk);
-    });
-
-    it('connect2 - defenetly creates connection', function(){
-        const g = new Graph();
-
-        g.addNode(0, 'Alice');
-        g.addNode(1, 'Johne');
-        g.connect(0, 1, {
+        const result = g.connect(0, 1, {
             direction: ConnectDirections.Direct,
             data: 'friendship'
         });
 
-        assert.isTrue(g.areAdjacents(0, 1));
+        assert.isTrue(result.isOk, 'Result is fail');
+        assert.isTrue(g.areAdjacents(0, 1), 'Connection not created');
+        assert.isFalse(g.areAdjacents(1, 0), 'Wrong connection created');
     });
 
 });
