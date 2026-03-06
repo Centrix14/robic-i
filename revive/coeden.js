@@ -6,7 +6,7 @@ const DefaultGraphOptions = {
 class Graph {
     constructor(options=DefaultGraphOptions) {
         this._nodes = options.nodes ?? new Map();
-        this._adjacency = options.adjacency ?? [];
+        this._adjacency = options.adjacency ?? new Map();
     }
 
     get nodes() { return this._nodes.keys(); }
@@ -51,6 +51,15 @@ class Graph {
             return new Fail();
 
         this._nodes.set(id, data);
+        return new Success();
+    }
+
+    connect(id1, id2, data) {
+        this._adjacency.set(id1, {
+            node: id2,
+            data
+        });
+
         return new Success();
     }
 }
