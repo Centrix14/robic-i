@@ -1,3 +1,61 @@
+const DefaultGraphOptions = {
+    nodes: null,
+    adjacency: null
+}
+
+class Graph {
+    constructor(options=DefaultGraphOptions) {
+        this._nodes = options.nodes ?? new Map();
+        this._adjacency = options.adjacency ?? [];
+    }
+
+    get nodes() { return this._nodes.keys(); }
+
+    hasNode(id) {
+        return this._nodes.has(id);
+    }
+
+    getNode(id) {
+        return this._nodes.get(id) ?? null;
+    }
+
+    getNodeId(data) {
+        for (let [id, nodeData] of this._nodes.entries()) {
+            if (data === nodeData)
+                return id;
+        }
+    }
+
+    hasAdjacents(id) {
+        return this._adjacency.has(id);
+    }
+
+    getAdjacents(id) {
+        let sample = [];
+
+        if (this._adjacency.has(id)) {
+            const adjacency = this._adjacency.get(id);
+            for (let entry of adjacency) {
+                sample.push({
+                    node: this.getNode(entry.id),
+                    data: entry.data
+                });
+            }
+        }
+
+        return sample;
+    }
+
+    addNode(id, data) {
+        if (this.hasNode(id))
+            return new Fail();
+
+        this._nodes.set(id, data);
+        return new Success();
+    }
+}
+
+
 class NodeOwnership {
     static Here = 'Here'
     static Subnode = 'Subnode'
@@ -244,22 +302,17 @@ class Node {
         return result.get('sample').length > 0;
     }
 
-    isLinkToDerived(link, source) {
+    isLinkToDerived(source) {
+        const link = this;
+
         if (link.isReal) return false; // if link is not a link
-        if (link.id !== source.id) return false;
         if (link._subnodes.size > 0) return false;
 
         if (link.logicalOwn === NodeOwnership.Here &&
             link.physicalOwn === NodeOwnership.Subnode) {
 
-            const root = this;
-            const Class = root.constructor;
-            const result = root.selectNodes(
-                (n, _) => (Class.isLogicalRelatives(n, source) &&
-                           Class.isPhysicalRelatives(n, source)),
-                true
-            );
-            return result.get('sample').length > 0;
+            const root = link.linkValue.supnode;
+            return root.has(link.supnode.id);
         }
 
         return false;
