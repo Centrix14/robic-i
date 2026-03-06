@@ -6,6 +6,14 @@ describe('addNode', function(){
         assert.isTrue(result.isOk);
     });
 
+    it('addNode2 - defenetly adds node', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'sample');
+
+        assert.equal('sample', g.getNode(0));
+    });
+
 });
 
 describe('isLinkToShared', function(){
