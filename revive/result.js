@@ -19,9 +19,12 @@ class Result {
         this._store = new Map(content);
     }
 
-    get isEmpty() { return true; }
+    get isPlain() { return true; }
     get isOk() { return false; }
     get isFail() { return false; }
+
+    get isEmpty() { return this._store.size === 0; }
+    get isExist() { return !this.isEmpty; }
 
     store() {
         return this._store.entries().toArray();
