@@ -133,7 +133,7 @@ describe('getAdjacents', function(){
     });
 
     it('getAdjacents1 - returns adjacents IDs', function(){
-        const sample = g.getAdjacents(0, GetAdjacentsFields.Id);
+        const sample = g.getAdjacents(0, NodeFields.Id);
 
         assert.isArray(sample, 'Method returns not array');
         assert.equal(sample[0], 1, 'Sample does not include Zoe');
@@ -141,7 +141,7 @@ describe('getAdjacents', function(){
     });
 
     it('getAdjacents2 - returns adjacents data', function(){
-        const sample = g.getAdjacents(0, GetAdjacentsFields.Data);
+        const sample = g.getAdjacents(0, NodeFields.Data);
 
         assert.isArray(sample, 'Method returns not array');
         assert.equal(sample[0], 'Zoe', 'Sample does not include Zoe');

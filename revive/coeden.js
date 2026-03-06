@@ -4,7 +4,7 @@ const ConnectDirections = {
     Both: 3
 }
 
-const GetAdjacentsFields = {
+const NodeFields = {
     Id: 1,
     Data: 2
 }
@@ -20,7 +20,7 @@ class Graph {
         this._adjacency = options.adjacency ?? new Map();
     }
 
-    get nodes() { return this._nodes.keys(); }
+    get nodes() { return this._nodes.keys().toArray(); }
 
     hasNode(id) {
         return this._nodes.has(id);
@@ -41,12 +41,12 @@ class Graph {
         return this._adjacency.has(id);
     }
 
-    getAdjacents(id, field=GetAdjacentsFields.Id) {
+    getAdjacents(id, field=NodeFields.Id) {
         const adjacency = this._adjacency.get(id).keys();
 
-        if (field === GetAdjacentsFields.Id)
+        if (field === NodeFields.Id)
             return adjacency.toArray();
-        if (field === GetAdjacentsFields.Data)
+        if (field === NodeFields.Data)
             return adjacency.map((id) => this.getNode(id)).toArray();
     }
 
