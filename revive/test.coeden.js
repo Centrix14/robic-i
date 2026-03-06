@@ -37,6 +37,16 @@ describe('connect', function(){
         assert.isTrue(result.isOk);
     });
 
+    it('connect2 - defenetly creates connection', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+        g.connect(0, 1, 'friendship');
+
+        assert.isTrue(g.areAdjacents(0, 1));
+    });
+
 });
 
 describe('isLinkToShared', function(){
