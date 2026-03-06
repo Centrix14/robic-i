@@ -93,6 +93,18 @@ describe('connect', function(){
         assert.isTrue(result.isFail, 'Method not prevents duplication');
     });
 
+    it('connect5 - allows loops', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        const result = g.connect(0, 0, {
+            direction: ConnectDirections.Direct,
+            data: 'loop'
+        });
+
+        assert.isTrue(result.isOk, 'Method disallows loops');
+    });
+
 });
 
 describe('getAdjacents', function(){
