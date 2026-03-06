@@ -52,6 +52,11 @@ class Graph {
         return sample;
     }
 
+    areAdjacents(id1, id2) {
+        const adjacency = this._adjacency.get(id1) ?? new Map();
+        return adjacency.has(id2);
+    }
+
     addNode(id, data) {
         if (this.hasNode(id))
             return new Fail();
