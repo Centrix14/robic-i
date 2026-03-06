@@ -4,6 +4,11 @@ const ConnectDirections = {
     Both: 3
 }
 
+const GetAdjacentsFields = {
+    Id: 1,
+    Data: 2
+}
+
 const DefaultGraphOptions = {
     nodes: null,
     adjacency: null
@@ -36,20 +41,11 @@ class Graph {
         return this._adjacency.has(id);
     }
 
-    getAdjacents(id) {
-        let sample = [];
-
-        if (this._adjacency.has(id)) {
-            const adjacency = this._adjacency.get(id);
-            for (let entry of adjacency) {
-                sample.push({
-                    node: this.getNode(entry.id),
-                    data: entry.data
-                });
-            }
-        }
-
-        return sample;
+    getAdjacents(id, field=GetAdjacentsFields.Id) {
+        if (field === GetAdjacentsFields.Id)
+            return Array.from(this._adjacency.get(id).keys());
+        if (field === GetAdjacentsFields.Data)
+            return Array.from(this._adjacency.get(id).values());
     }
 
     areAdjacents(id1, id2) {
