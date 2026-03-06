@@ -42,7 +42,10 @@ describe('connect', function(){
 
         g.addNode(0, 'Alice');
         g.addNode(1, 'Johne');
-        g.connect(0, 1, 'friendship');
+        g.connect(0, 1, {
+            direction: both,
+            data: 'friendship'
+        });
 
         assert.isTrue(g.areAdjacents(0, 1));
     });
