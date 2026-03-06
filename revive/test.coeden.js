@@ -128,6 +128,14 @@ describe('getAdjacents', function(){
         assert.equal(sample[1], 2, 'Sample does not include Lizy');
     });
 
+    it('getAdjacents2 - returns adjacents data', function(){
+        const sample = g.getAdjacents(0, GetAdjacentsFields.Data);
+
+        assert.isArray(sample, 'Method returns not array');
+        assert.equal(sample[0], 'Zoe', 'Sample does not include Zoe');
+        assert.equal(sample[1], 'Lizy', 'Sample does not include Lizy');
+    });
+
 });
 
 describe('isLinkToShared', function(){
