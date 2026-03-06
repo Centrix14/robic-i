@@ -181,6 +181,28 @@ describe('getAdjacents', function(){
 
 });
 
+describe('disconnect', function(){
+
+    it('disconnect1 - disconnects directly', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'friendship'
+        });
+
+        const result = g.disconnect(0, 1, ConnectDirections.Direct);
+
+        assert.isTrue(result.isOk, 'Method failed');
+        assert.isFalse(g.areAdjacents(0, 1), 'Connection not destroyed');
+        assert.isTrue(g.areAdjacents(1, 0), 'Wrong disconnection');
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
