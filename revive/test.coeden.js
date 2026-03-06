@@ -95,6 +95,41 @@ describe('connect', function(){
 
 });
 
+describe('getAdjacents', function(){
+
+    let g;
+
+    before(function(){
+        g = new Graph();
+
+        g.addNode(0, 'Chloe');
+        g.addNode(1, 'Zoe');
+        g.addNode(2, 'Lizy');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'sisters'
+        });
+        g.connect(0, 2, {
+            direction: ConnectDirections.Both,
+            data: 'sisters'
+        });
+        g.connect(1, 2, {
+            direction: ConnectDirections.Both,
+            data: 'sisters'
+        });
+    });
+
+    it('getAdjacents1 - returns adjacents IDs', function(){
+        const sample = g.getAdjacents(0, GetAdjacentsFields.Id);
+
+        assert.isArray(sample, 'Method returns not array');
+        assert.equal(sample[0], 1, 'Sample does not include Zoe');
+        assert.equal(sample[1], 2, 'Sample does not include Lizy');
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
