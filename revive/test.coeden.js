@@ -219,6 +219,24 @@ describe('disconnect', function(){
         assert.isTrue(g.areAdjacents(0, 1), 'Connection not destroyed');
     });
 
+    it('disconnect3 - disconnects in both directions', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'friendship'
+        });
+
+        const result = g.disconnect(0, 1, ConnectDirections.Both);
+
+        assert.isTrue(result.isOk, 'Method failed');
+        assert.isFalse(g.areAdjacents(0, 1), 'Connection not destroyed');
+        assert.isFalse(g.areAdjacents(1, 0), 'Connection not destroyed');
+    });
+
 });
 
 describe('isLinkToShared', function(){
