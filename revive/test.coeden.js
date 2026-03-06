@@ -59,6 +59,22 @@ describe('connect', function(){
         assert.isFalse(g.areAdjacents(0, 1), 'Wrong connection created');
     });
 
+    it('connect3 - creates connection in both directions', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        const result = g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'friendship'
+        });
+
+        assert.isTrue(result.isOk, 'Result is fail');
+        assert.isTrue(g.areAdjacents(0, 1), 'Connection not created (or it is wrong)');
+        assert.isTrue(g.areAdjacents(1, 0), 'Connection not created (or it is wrong)');
+    });
+
 });
 
 describe('isLinkToShared', function(){
