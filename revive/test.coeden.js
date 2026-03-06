@@ -43,7 +43,7 @@ describe('connect', function(){
         g.addNode(0, 'Alice');
         g.addNode(1, 'Johne');
         g.connect(0, 1, {
-            direction: both,
+            direction: ConnectDirections.Direct,
             data: 'friendship'
         });
 
