@@ -201,6 +201,24 @@ describe('disconnect', function(){
         assert.isTrue(g.areAdjacents(1, 0), 'Wrong disconnection');
     });
 
+    it('disconnect2 - disconnects inversely', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'friendship'
+        });
+
+        const result = g.disconnect(0, 1, ConnectDirections.Inverse);
+
+        assert.isTrue(result.isOk, 'Method failed');
+        assert.isFalse(g.areAdjacents(1, 0), 'Wrong disconnection');
+        assert.isTrue(g.areAdjacents(0, 1), 'Connection not destroyed');
+    });
+
 });
 
 describe('isLinkToShared', function(){
