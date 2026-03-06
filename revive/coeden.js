@@ -20,7 +20,12 @@ class Graph {
         this._adjacency = options.adjacency ?? new Map();
     }
 
-    get nodes() { return this._nodes.keys().toArray(); }
+    nodes(field) {
+        if (field === NodeFields.Id)
+            return this._nodes.keys().toArray();
+        if (field === NodeFields.Data)
+            return this._nodes.values().toArray();
+    }
 
     hasNode(id) {
         return this._nodes.has(id);
