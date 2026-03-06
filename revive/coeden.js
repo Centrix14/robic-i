@@ -55,6 +55,10 @@ class Graph {
             return adjacency.map((id) => this.getNode(id)).toArray();
     }
 
+    getAdjacencyData(id1, id2) {
+        return this._adjacency.get(id1).get(id2);
+    }
+
     areAdjacents(id1, id2) {
         const adjacency = this._adjacency.get(id1) ?? new Map();
         return adjacency.has(id2);
@@ -92,7 +96,7 @@ class Graph {
             if (result.isFail) return result;
 
         case ConnectDirections.Direct:
-            return this._bareConnect(id1, id2);
+            return this._bareConnect(id1, id2, options.data);
         }
     }
 }
