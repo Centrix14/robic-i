@@ -75,6 +75,24 @@ describe('connect', function(){
         assert.isTrue(g.areAdjacents(1, 0), 'Connection not created (or it is wrong)');
     });
 
+    it('connect4 - prevents connection duplication', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Direct,
+            data: 'friendship'
+        });
+        const result = g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'friendship'
+        });
+
+        assert.isTrue(result.isFail, 'Method not prevents duplication');
+    });
+
 });
 
 describe('isLinkToShared', function(){
