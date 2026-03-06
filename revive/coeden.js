@@ -1,3 +1,9 @@
+const ConnectDirections = {
+    Direct: 1,
+    Inverse: 2,
+    Both: 3
+}
+
 const DefaultGraphOptions = {
     nodes: null,
     adjacency: null
@@ -54,11 +60,12 @@ class Graph {
         return new Success();
     }
 
-    connect(id1, id2, data) {
-        this._adjacency.set(id1, {
-            node: id2,
-            data
-        });
+    connect(id1, id2, options) {
+        if (!this.hasAdjacents(id1))
+            this._adjacency.set(id1, new Map());
+
+        const entry = this._adjacency.get(id1);
+        entry.set(id2, options.data);
 
         return new Success();
     }
