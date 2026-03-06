@@ -42,10 +42,12 @@ class Graph {
     }
 
     getAdjacents(id, field=GetAdjacentsFields.Id) {
+        const adjacency = this._adjacency.get(id).keys();
+
         if (field === GetAdjacentsFields.Id)
-            return Array.from(this._adjacency.get(id).keys());
+            return adjacency.toArray();
         if (field === GetAdjacentsFields.Data)
-            return Array.from(this._adjacency.get(id).values());
+            return adjacency.map((id) => this.getNode(id)).toArray();
     }
 
     areAdjacents(id1, id2) {
