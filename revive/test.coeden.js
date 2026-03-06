@@ -25,6 +25,28 @@ describe('addNode', function(){
 
 });
 
+describe('nodes', function(){
+
+    let g;
+
+    before(function(){
+        g = new Graph();
+        g.addNode(0, 'Ivan');
+        g.addNode(1, 'Misha');
+        g.addNode(2, 'Sasha');
+    });
+
+    it('nodes1 - returns IDs', function(){
+        const nodes = g.nodes(NodeFields.Id);
+
+        assert.isArray(nodes, 'Method returns not array');
+        assert.equal(0, nodes[0], 'Method miss some node');
+        assert.equal(1, nodes[1], 'Method miss some node');
+        assert.equal(2, nodes[2], 'Method miss some node');
+    });
+
+});
+
 describe('connect', function(){
 
     it('connect1 - creates direct connection', function(){
