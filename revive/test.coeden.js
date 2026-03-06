@@ -36,13 +36,22 @@ describe('nodes', function(){
         g.addNode(2, 'Sasha');
     });
 
-    it('nodes1 - returns IDs', function(){
+    it('nodes1 - returns nodes IDs', function(){
         const nodes = g.nodes(NodeFields.Id);
 
         assert.isArray(nodes, 'Method returns not array');
         assert.equal(0, nodes[0], 'Method miss some node');
         assert.equal(1, nodes[1], 'Method miss some node');
         assert.equal(2, nodes[2], 'Method miss some node');
+    });
+
+    it('nodes2 - returns nodes data', function(){
+        const nodes = g.nodes(NodeFields.Data);
+
+        assert.isArray(nodes, 'Method returns not array');
+        assert.equal('Ivan', nodes[0], 'Method miss some node');
+        assert.equal('Misha', nodes[1], 'Method miss some node');
+        assert.equal('Sasha', nodes[2], 'Method miss some node');
     });
 
 });
