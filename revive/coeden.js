@@ -65,22 +65,7 @@ class Graph {
         return new Success();
     }
 
-    connect(id1, id2, options) {
-        switch (options.direction) {
-        case ConnectDirections.Inverse:
-            return this.connect(id2, id1, {
-                direction: ConnectDirections.Direct,
-                data: options.data
-            });
-        case ConnectDirections.Both:
-            const result = this.connect(id2, id1, {
-                direction: ConnectDirections.Direct,
-                data: options.data
-            });
-
-            if (result.isFail) return result;
-        }
-
+    _bareConnect(id1, id2, data) {
         if (!this.hasAdjacents(id1))
             this._adjacency.set(id1, new Map());
 
@@ -88,9 +73,24 @@ class Graph {
         if (entry.has(id2))
             return new Fail();
 
-        entry.set(id2, options.data);
+        entry.set(id2, data);
 
         return new Success();
+    }
+
+    connect(id1, id2, options) {
+        switch (options.direction) {
+
+        case ConnectDirections.Inverse:
+            return this._bareConnect(id2, id1, options.data);
+
+        case ConnectDirections.Both:
+            const result = this._bareConnect(id2, id1, options.data);
+            if (result.isFail) return result;
+
+        case ConnectDirections.Direct:
+            return this._bareConnect(id1, id2);
+        }
     }
 }
 
