@@ -14,6 +14,15 @@ describe('addNode', function(){
         assert.equal('sample', g.getNode(0));
     });
 
+    it('addNode3 - returns Fail for id duplication', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'original');
+        const result = g.addNode(0, 'duplicate');
+
+        assert.isTrue(result.isFail);
+    });
+
 });
 
 describe('isLinkToShared', function(){
