@@ -66,6 +66,23 @@ class Graph {
     }
 
     connect(id1, id2, options) {
+        switch (options.direction) {
+
+        case ConnectDirections.Inverse:
+            return this.connect(id2, id1, {
+                direction: ConnectDirections.Direct,
+                data: options.data
+            });
+
+        case ConnectDirections.Both:
+            const result = this.connect(id2, id1, {
+                direction: ConnectDirections.Direct,
+                data: options.data
+            });
+
+            if (result.isFail) return result;
+        }
+
         if (!this.hasAdjacents(id1))
             this._adjacency.set(id1, new Map());
 
