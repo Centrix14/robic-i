@@ -232,6 +232,19 @@ describe('disconnect', function(){
         assert.isFalse(g.areAdjacents(1, 0), 'Connection not destroyed');
     });
 
+    it('disconnect4 - disconnect loops', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.connect(0, 0, {
+            direction: ConnectDirections.Direct,
+            data: 'loop'
+        });
+        const result = g.disconnect(0, 0, ConnectDirections.Direct);
+
+        assert.isTrue(result.isOk, 'Method disallows loops');
+    });
+
 });
 
 describe('isLinkToShared', function(){
