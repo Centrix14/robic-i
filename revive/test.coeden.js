@@ -1,20 +1,15 @@
 describe('addNode', function(){
 
-    it('addNode1 - returns Success for new nodes', function(){
+    it('addNode1 - creates new nodes', function(){
         const g = new Graph();
+
         const result = g.addNode(0, 'sample');
+
         assert.isTrue(result.isOk);
-    });
-
-    it('addNode2 - defenetly adds node', function(){
-        const g = new Graph();
-
-        g.addNode(0, 'sample');
-
         assert.equal('sample', g.getNode(0));
     });
 
-    it('addNode3 - returns Fail for id duplication', function(){
+    it('addNode2 - prevents ID duplication', function(){
         const g = new Graph();
 
         g.addNode(0, 'original');
