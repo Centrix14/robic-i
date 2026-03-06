@@ -99,6 +99,30 @@ class Graph {
             return this._bareConnect(id1, id2, options.data);
         }
     }
+
+    _bareDisconnect(id1, id2) {
+        const adjacency = this._adjacency.get(id1) ?? new Map();
+        const data = adjacency.get(id2);
+
+        if (adjacency.delete(id2))
+            return new Success([['data', data]]);
+        return new Fail([['data', data]]);
+    }
+
+    disconnect(id1, id2, direction) {
+        switch (direction) {
+
+        case ConnectDirections.Inverse:
+            return this._bareDisconnect(id2, id1);
+
+        case ConnectDirections.Both:
+            const result = this._bareDisconnect(id2, id1);
+            if (result.isFail) return result;
+
+        case ConnectDirections.Direct:
+            return this._bareDisconnect(id1, id2);
+        }
+    }
 }
 
 
