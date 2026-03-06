@@ -25,6 +25,20 @@ describe('addNode', function(){
 
 });
 
+describe('connect', function(){
+
+    it('connect1 - returns Success for new connection', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+        const result = g.connect(0, 1, 'friendship');
+
+        assert.isTrue(result.isOk);
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
