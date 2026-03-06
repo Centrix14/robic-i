@@ -43,6 +43,22 @@ describe('connect', function(){
         assert.isFalse(g.areAdjacents(1, 0), 'Wrong connection created');
     });
 
+    it('connect2 - creates inverse connection', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'Alice');
+        g.addNode(1, 'Johne');
+
+        const result = g.connect(0, 1, {
+            direction: ConnectDirections.Inverse,
+            data: 'friendship'
+        });
+
+        assert.isTrue(result.isOk, 'Result is fail');
+        assert.isTrue(g.areAdjacents(1, 0), 'Connection not created');
+        assert.isFalse(g.areAdjacents(0, 1), 'Wrong connection created');
+    });
+
 });
 
 describe('isLinkToShared', function(){
