@@ -1,3 +1,13 @@
+describe('addNode', function(){
+
+    it('addNode1 - returns Success for new nodes', function(){
+        const g = new Graph();
+        const result = g.addNode(0, 'sample');
+        assert.isTrue(result.isOk);
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
@@ -769,7 +779,7 @@ describe('disconnectNodes', function(){
         describe('direct order', function(){
             let root = treeWithDeriving();
 
-            test(root, [root, root.get(3)], [
+            test(root, [0, 4], [
                 'disconnectNodes* - result.isOk',
                 'disconnectNodes* - node underived'
             ]);
