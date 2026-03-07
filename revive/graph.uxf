@@ -35,7 +35,10 @@ dropNode(id:integer): Success ? Fail
 connect(id1:integer, id2:integer,
    options:ConnectOptions): Success ? Fail
 disconnect(id1:integer, id2:integer,
-   direction:ConnectDirection): Success ? Fail</panel_attributes>
+   direction:ConnectDirection): Success ? Fail
+
+serialize(options): Object
+deserialize(options): Object</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
