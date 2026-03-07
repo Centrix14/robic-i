@@ -332,13 +332,15 @@ describe('serialize', function(){
     });
 
     it('serialize2 - serialized value includes nodes', function(){
-        assert.deepPropertyVal(store, 'nodes',
-                               {
-                                   '0': 'target',
-                                   '1': 'buddy1',
-                                   '2': 'buddy2'
-                               },
-                               'Method does not include valid nodes');
+        assert.deepPropertyVal(
+            store, 'nodes',
+            [
+                ['0', 'target'],
+                ['1', 'buddy1'],
+                ['2', 'buddy2']
+            ],
+            'Method does not include valid nodes'
+        );
     });
 
 });
