@@ -123,6 +123,16 @@ class Graph {
             return this._bareDisconnect(id1, id2);
         }
     }
+
+    dropNode(id) {
+        if (this.hasNode(id)) {
+            const node = this.getNode(id);
+            this._nodes.delete(id);
+            return new Success([['data', node]]);
+        }
+
+        return new Fail();
+    }
 }
 
 
