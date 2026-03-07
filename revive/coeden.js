@@ -126,9 +126,14 @@ class Graph {
 
     dropNode(id) {
         if (this.hasNode(id)) {
+            const adjacency = this._adjacency.get(id);
+            this._adjacency.delete(id);
+
             const node = this.getNode(id);
             this._nodes.delete(id);
-            return new Success([['data', node]]);
+
+            return new Success([['data', node],
+                                ['adjacents', adjacency]]);
         }
 
         return new Fail();
