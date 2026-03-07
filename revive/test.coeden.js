@@ -306,8 +306,10 @@ describe('dropNode', function(){
 
 describe('serialize', function(){
 
-    it('serialize1 - return whole graph as object', function(){
-        const g = new Graph();
+    let g, store;
+
+    before(function(){
+        g = new Graph();
 
         g.addNode(0, 'target');
         g.addNode(1, 'buddy1');
@@ -322,8 +324,21 @@ describe('serialize', function(){
             data: 'connection'
         });
 
-        const store = g.serialize();
+        store = g.serialize();
+    })
+
+    it('serialize1 - return whole graph as object', function(){
         assert.isObject(store, 'Method returns not object');
+    });
+
+    it('serialize2 - serialized value includes nodes', function(){
+        assert.deepPropertyVal(store, 'nodes',
+                               {
+                                   '0': 'target',
+                                   '1': 'buddy1',
+                                   '2': 'buddy2'
+                               },
+                               'Method does not include valid nodes');
     });
 
 });
