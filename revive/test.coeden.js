@@ -247,6 +247,22 @@ describe('disconnect', function(){
 
 });
 
+describe('dropNode', function(){
+
+    it('dropNode1 - drops given node', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'target');
+        g.addNode(1, 'buddy');
+
+        const result = g.dropNode(0);
+        assert.isTrue(result.isOk, 'Method failed');
+        assert.isFalse(g.hasNode(0), 'Node not dropped');
+        assert.isTrue(g.hasNode(1), 'Wrong node droppped');
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
