@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>5</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>375</y>
-      <w>225</w>
-      <h>265</h>
+      <x>640</x>
+      <y>304</y>
+      <w>360</w>
+      <h>424</h>
     </coordinates>
     <panel_attributes>Graph
 --
@@ -35,19 +35,16 @@ dropNode(id:integer): Success ? Fail
 connect(id1:integer, id2:integer,
    options:ConnectOptions): Success ? Fail
 disconnect(id1:integer, id2:integer,
-   direction:ConnectDirection): Success ? Fail
-
-clear()
-clearAdjacency()</panel_attributes>
+   direction:ConnectDirection): Success ? Fail</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>325</y>
-      <w>140</w>
-      <h>35</h>
+      <x>640</x>
+      <y>224</y>
+      <w>224</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>GraphOptions
 --
@@ -58,10 +55,10 @@ clearAdjacency()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>375</y>
-      <w>105</w>
-      <h>45</h>
+      <x>1040</x>
+      <y>304</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;inline object&gt;&gt;
 Adjacent
@@ -73,10 +70,10 @@ Adjacent
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>710</x>
-      <y>325</y>
-      <w>145</w>
-      <h>35</h>
+      <x>912</x>
+      <y>224</y>
+      <w>232</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>_DefaultGraphOptions : GraphOptions_
 --
@@ -87,10 +84,10 @@ Adjacent
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>675</x>
-      <y>340</y>
-      <w>45</w>
-      <h>15</h>
+      <x>856</x>
+      <y>248</y>
+      <w>72</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -98,10 +95,10 @@ Adjacent
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>440</y>
-      <w>115</w>
-      <h>45</h>
+      <x>1040</x>
+      <y>408</y>
+      <w>184</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;inline object&gt;&gt;
 ConnectOptions
@@ -113,10 +110,10 @@ ConnectOptions
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>505</y>
-      <w>105</w>
-      <h>55</h>
+      <x>1040</x>
+      <y>512</y>
+      <w>168</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 ConnectDirection
@@ -129,10 +126,10 @@ Both</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>575</y>
-      <w>105</w>
-      <h>45</h>
+      <x>1040</x>
+      <y>624</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 NodeFields
@@ -144,10 +141,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>385</y>
-      <w>40</w>
-      <h>20</h>
+      <x>992</x>
+      <y>320</y>
+      <w>64</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
@@ -155,10 +152,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>450</y>
-      <w>40</w>
-      <h>20</h>
+      <x>992</x>
+      <y>424</y>
+      <w>64</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
@@ -166,10 +163,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>585</y>
-      <w>40</w>
-      <h>20</h>
+      <x>992</x>
+      <y>640</y>
+      <w>64</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
@@ -177,10 +174,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>480</y>
-      <w>15</w>
-      <h>35</h>
+      <x>1120</x>
+      <y>472</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -188,10 +185,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
-      <y>355</y>
-      <w>15</w>
-      <h>30</h>
+      <x>736</x>
+      <y>272</y>
+      <w>24</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -199,10 +196,10 @@ Data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>520</y>
-      <w>40</w>
-      <h>20</h>
+      <x>992</x>
+      <y>536</y>
+      <w>64</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
@@ -210,10 +207,10 @@ Data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>485</y>
-      <w>165</w>
-      <h>110</h>
+      <x>176</x>
+      <y>480</y>
+      <w>264</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>Result
 --
@@ -233,10 +230,10 @@ get(key:string): any</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
-      <y>485</y>
-      <w>90</w>
-      <h>80</h>
+      <x>480</x>
+      <y>480</y>
+      <w>144</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 ErrorType
@@ -257,10 +254,10 @@ InvalidArguments
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>495</y>
-      <w>40</w>
-      <h>15</h>
+      <x>432</x>
+      <y>496</y>
+      <w>64</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -268,10 +265,10 @@ InvalidArguments
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>155</x>
-      <y>375</y>
-      <w>165</w>
-      <h>70</h>
+      <x>24</x>
+      <y>304</y>
+      <w>264</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Fail
 --
@@ -288,10 +285,10 @@ Result(type: ErrorType, content:any[*]=[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>345</x>
-      <y>375</y>
-      <w>165</w>
-      <h>70</h>
+      <x>328</x>
+      <y>304</y>
+      <w>264</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Success
 --
@@ -304,10 +301,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>285</x>
-      <y>440</y>
-      <w>15</w>
-      <h>55</h>
+      <x>232</x>
+      <y>408</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -315,10 +312,10 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>440</y>
-      <w>15</w>
-      <h>55</h>
+      <x>368</x>
+      <y>408</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -326,10 +323,10 @@ Result(content:any[*]=[])
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>155</x>
-      <y>250</y>
-      <w>290</w>
-      <h>115</h>
+      <x>24</x>
+      <y>104</y>
+      <w>464</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>Легенда
 
