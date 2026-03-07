@@ -124,17 +124,23 @@ class Graph {
         }
     }
 
+    _dropNodeConnections(id) {
+        this._adjacency.delete(id);
+
+        for (let [sourceId, targets] of this._adjacency.entries())
+            targets.delete(id);
+    }
+
+    _dropNodeItself(id) {
+        const node = this.getNode(id);
+        this._nodes.delete(id);
+        return node;
+    }
+
     dropNode(id) {
         if (this.hasNode(id)) {
-            this._adjacency.delete(id);
-
-            for (let [sourceId, targets] of this._adjacency.entries())
-                    targets.delete(id);
-
-            const node = this.getNode(id);
-            this._nodes.delete(id);
-
-            return new Success([['data', node]]);
+            this._dropNodeConnections(id);
+            return new Success([['data', this._dropNodeItself(id)]]);
         }
 
         return new Fail();
