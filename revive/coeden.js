@@ -146,22 +146,25 @@ class Graph {
         return new Fail();
     }
 
-    static _mapToObject(map) {
-        let obj = {};
+    static _mapToArray(map) {
+        let array = [];
 
         for (let [key, value] of map.entries()) {
-            obj[key.toString()] = (value instanceof Map)
-                ? Graph._mapToObject(value)
-                : value;
+            array.push([
+                key.toString(),
+                (value instanceof Map)
+                    ? Graph._mapToArray(value)
+                    : value
+            ]);
         }
 
-        return obj;
+        return array;
     }
 
     serialize(options) {
         return {
-            nodes: Graph._mapToObject(this._nodes),
-            adjacency: Graph._mapToObject(this._adjacency)
+            nodes: Graph._mapToArray(this._nodes),
+            adjacency: Graph._mapToArray(this._adjacency)
         };
     }
 }
