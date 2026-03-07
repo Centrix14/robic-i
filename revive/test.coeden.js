@@ -276,6 +276,32 @@ describe('dropNode', function(){
         assert.isFalse(g.areAdjacents(0, 1), 'Connection was not dropped');
     });
 
+    it('dropNode3 - drops connection to given node too', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'target');
+        g.addNode(1, 'buddy1');
+        g.addNode(2, 'buddy2');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+        g.connect(1, 2, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+
+        g.dropNode(0);
+
+        assert.isFalse(g.areAdjacents(0, 1),
+                       'Direct connection was not dropped');
+        assert.isFalse(g.areAdjacents(1, 0),
+                       'Inverse connection was not dropped');
+        assert.isTrue(g.areAdjacents(1, 2),
+                      'Wrong connection was dropped');
+    });
+
 });
 
 describe('isLinkToShared', function(){
