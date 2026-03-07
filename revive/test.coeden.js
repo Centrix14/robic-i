@@ -304,6 +304,30 @@ describe('dropNode', function(){
 
 });
 
+describe('serialize', function(){
+
+    it('serialize1 - return whole graph as object', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'target');
+        g.addNode(1, 'buddy1');
+        g.addNode(2, 'buddy2');
+
+        g.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+        g.connect(1, 2, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+
+        const store = g.serialize();
+        assert.isObject(store, 'Method returns not object');
+    });
+
+});
+
 describe('isLinkToShared', function(){
 
     it('isLinkToShared1 - detects link', function(){
