@@ -261,6 +261,21 @@ describe('dropNode', function(){
         assert.isTrue(g.hasNode(1), 'Wrong node droppped');
     });
 
+    it('dropNode2 - drops connections from given node', function(){
+        const g = new Graph();
+
+        g.addNode(0, 'target');
+        g.addNode(1, 'buddy');
+        g.connect(0, 1, {
+            direction: ConnectDirections.Direct,
+            data: 'connection'
+        });
+
+        g.dropNode(0);
+
+        assert.isFalse(g.areAdjacents(0, 1), 'Connection was not dropped');
+    });
+
 });
 
 describe('isLinkToShared', function(){
