@@ -145,6 +145,25 @@ class Graph {
 
         return new Fail();
     }
+
+    static _mapToObject(map) {
+        let obj = {};
+
+        for (let [key, value] of map.entries()) {
+            obj[key.toString()] = (value instanceof Map)
+                ? Graph._mapToObject(value)
+                : value;
+        }
+
+        return obj;
+    }
+
+    serialize(options) {
+        return {
+            nodes: Graph._mapToObject(this._nodes),
+            adjacency: Graph._mapToObject(this._adjacency)
+        };
+    }
 }
 
 
