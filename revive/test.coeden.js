@@ -351,9 +351,9 @@ describe('serialize', function(){
         assert.deepPropertyVal(
             store, 'nodes',
             [
-                ['0', 'target'],
-                ['1', 'buddy1'],
-                ['2', 'buddy2']
+                [0, 'target'],
+                [1, 'buddy1'],
+                [2, 'buddy2']
             ],
             'Method does not include valid nodes'
         );
