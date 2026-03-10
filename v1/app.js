@@ -4,26 +4,6 @@ const statusBar = {
     print: (text) => statusBar.element.innerText = text
 }
 
-const State = {
-    Idle: 'Idle',
-
-    ClickStart: 'ClickStart',
-    ClickEnd: 'ClickEnd',
-
-    GrabStart: 'GrabStart',
-    GrabEnd: 'GrabEnd',
-
-    ProcessCreation: 'ProcessCreation',
-    ElementCreationInit: 'ElementCreationInit',
-    ElementCreationSrcSet: 'ElementCreationSrcSet',
-    ElementCreationDestSet: 'ElementCreationDestSet',
-    PropertyCreation: 'PropertyCreation',
-
-    ProcessSelect: 'ProcessSelect',
-    ElementSelect: 'ElementSelect',
-    PropertySelect: 'PropertySelect'
-}
-
 class EventHandler {
     constructor(app) {
         this._app = app;
@@ -60,7 +40,7 @@ class ButtonHandler extends EventHandler {
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ElementCreated
             || this.state === ButtonHandler.State.PropertyCreated)
-            this.state = State.ProcessCreated;
+            this.state = ButtonHandler.State.ProcessCreated;
 
         this.end(event);
     }
@@ -71,7 +51,7 @@ class ButtonHandler extends EventHandler {
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ProcessCreated
             || this.state === ButtonHandler.State.PropertyCreated)
-            this.state = State.ElementCreationInit;
+            this.state = ButtonHandler.State.ElementCreationInit;
 
         this.end(event);
     }
@@ -82,21 +62,34 @@ class ButtonHandler extends EventHandler {
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ProcessCreated
             || this.state === ButtonHandler.State.ElementCreated)
-            this.state = State.PropertyCreation;
+            this.state = ButtonHandler.State.PropertyCreation;
 
         this.end(event);
     }
 }
 
 class MouseHandler extends EventHandler {
+    static State = {
+        Idle: 'Idle',
+        ClickStart: 'ClickStart',
+        ClickEnd: 'ClickEnd',
+        Grabbing: 'Grabbing',
+        GrabEnd: 'GrabEnd'
+    }
 
-    _localState = State.Idle;
+    constructor(app) {
+        super(app);
+
+        this.state = MouseHandler.State.Idle;
+    }
 
     down(event) {
         this.start(event);
 
-        if (this.state === State.Idle)
-            this._localState = State.ClickStart;
+        if (this.state === MouseHandler.State.Idle
+            || this.state === MouseHandler.State.ClickEnd
+            || this.state === MouseHandler.State.GrabEnd)
+            this.state = MouseHandler.State.ClickStart;
 
         this.end(event);
     }
@@ -104,10 +97,9 @@ class MouseHandler extends EventHandler {
     move(event) {
         this.start(event);
 
-        if (this.state === State.Idle && this._localState === State.ClickStart) {
-            this.state = State.GrabStart;
-            this._localState = State.GrabStart;
-        }
+        if (this.state === MouseHandler.State.ClickStart
+            || this.state === MouseHandler.State.ClickEnd)
+            this.state = MouseHandler.State.Grabbing;
 
         this.end(event);
     }
@@ -115,14 +107,12 @@ class MouseHandler extends EventHandler {
     up(event) {
         this.start(event);
 
-        switch (this._localState) {
-        case State.ClickStart:
-            this.state = State.ClickEnd;
-            this._localState = State.Idle;
+        switch (this.state) {
+        case MouseHandler.State.ClickStart:
+            this.state = MouseHandler.State.ClickEnd;
             break;
-        case State.GrabStart:
-            this.state = State.GrabEnd;
-            this._localState = State.Idle;
+        case MouseHandler.State.Grabbing:
+            this.state = MouseHandler.State.GrabEnd;
             break;
         }
 
@@ -131,21 +121,19 @@ class MouseHandler extends EventHandler {
 }
 
 class Application {
+    static State = {
+        Idle: 'Idle'
+    }
+
     constructor() {
-        this._currentState = State.Idle;
+        this.state = Application.State.Idle;
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
     }
 
     setState(newState) {
-        const currentState = this._currentState;
 
-        if (currentState === State.ElementCreationInit
-            && newState === State.ClickEnd)
-            this._currentState = State.ElementCreationSrcSet;
-        else
-            this._currentState = newState;
     }
 
     startEvent(e) {
@@ -153,25 +141,7 @@ class Application {
     }
 
     endEvent(e) {
-        switch (this._currentState) {
-        case State.ClickEnd:
-            statusBar.print('Clicked');
-            this._currentState = State.Idle;
-            break;
-        case State.GrabEnd:
-            statusBar.print('Grab');
-            this._currentState = State.Idle;
-            break;
 
-        case State.ProcessCreation:
-            statusBar.print('Process created');
-            this._currentState = State.Idle;
-            break;
-        case State.PropertyCreation:
-            statusBar.print('Property created');
-            this._currentState = State.Idle;
-            break;
-        }
     }
 }
 
