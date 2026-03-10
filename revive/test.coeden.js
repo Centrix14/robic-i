@@ -306,7 +306,23 @@ describe('dropNode', function(){
 
 describe('serialize', function(){
 
-    let g, store;
+    let g, store, nodeFnCalled, connectionFnCalled;
+
+    function nodeFn(value) {
+        if (value === 'target' || value === 'buddy1' || value === 'buddy2')
+            nodeFnCalled = true;
+        else
+            nodeFnCalled = false;
+        return value;
+    }
+
+    function connectionFn(value) {
+        if (value === 'connection')
+            connectionFnCalled = true;
+        else
+            connectionFnCalled = false;
+        return value;
+    }
 
     before(function(){
         g = new Graph();
@@ -324,7 +340,7 @@ describe('serialize', function(){
             data: 'connection'
         });
 
-        store = g.serialize();
+        store = g.serialize({ nodeFn, connectionFn });
     })
 
     it('serialize1 - return whole graph as object', function(){
@@ -353,6 +369,12 @@ describe('serialize', function(){
             ],
             'Method does not include valid adjacency table'
         );
+    });
+
+    it('serialize4 - serializers called for graph content', function(){
+        assert.isTrue(nodeFnCalled, 'Node serializer called unproperly');
+        assert.isTrue(connectionFnCalled,
+                      'Connection serializer called unproperly');
     });
 
 });
