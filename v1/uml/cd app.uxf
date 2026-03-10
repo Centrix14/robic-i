@@ -11,7 +11,8 @@
     </coordinates>
     <panel_attributes>App
 --
--currentLayer: Layer</panel_attributes>
+-currentLayer: Layer
+-currentState: State = State.Idle</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -20,18 +21,24 @@
       <x>170</x>
       <y>250</y>
       <w>210</w>
-      <h>190</h>
+      <h>250</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 State
 --
 Idle
 
+ClickStart
+ClickEnd
+
+GrabStart
+GrabEnd
+
 ProcessCreation
-PropertyCreation
 ElementCreationInit
 ElementCreationSrcSet
 ElementCreationDestSet
+PropertyCreation
 
 ProcessSelect
 ElementSelect
