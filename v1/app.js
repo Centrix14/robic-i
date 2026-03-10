@@ -35,11 +35,30 @@ class ButtonHandler {
     }
 }
 
+class MouseHandler {
+    constructor(app) {
+        this._app = app;
+    }
+
+    down(event) {
+        statusBar.print('mousedown');
+    }
+
+    move(event) {
+        statusBar.print('mousemove');
+    }
+
+    up(event) {
+        statusBar.print('mouseup');
+    }
+}
+
 class Application {
     constructor() {
         this._currentState = State.Idle;
 
         this.buttons = new ButtonHandler(this);
+        this.mouse = new MouseHandler(this);
     }
 }
 
@@ -57,5 +76,9 @@ setEvents({
         ['#newProcessBtn', ()=>app.buttons.newProcessClick()],
         ['#newElementBtn', ()=>app.buttons.newElementClick()],
         ['#newPropertyBtn', ()=>app.buttons.newPropertyClick()]
-    ]
+    ],
+
+    'mousedown': [['.canvas', ()=>app.mouse.down()]],
+    'mousemove': [['.canvas', ()=>app.mouse.move()]],
+    'mouseup': [['.canvas', ()=>app.mouse.up()]]
 });
