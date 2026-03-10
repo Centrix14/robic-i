@@ -29,45 +29,74 @@ class EventHandler {
         this._app = app;
     }
 
-    get state() { return this._app._currentState; }
-    set state(value) { this._app._currentState = value; }
-
     start(event) {
-        this._app.startEvent(event);
+        this._app.startEvent(this, event);
     }
 
     end(event) {
-        statusBar.print(this.state);
-        this._app.endEvent(event);
+        this._app.endEvent(this, event);
     }
 }
 
 class ButtonHandler extends EventHandler {
+    static State = {
+        Idle: 'Idle',
+        ProcessCreated: 'ProcessCreated',
+        PropertyCreated: 'PropertyCreated',
+        ElementInit: 'ElementInit',
+        ElementSrcSet: 'ElementSrcSet',
+        ElementCreated: 'ElementCreated'
+    }
+
+    constructor(app) {
+        super(app);
+
+        this.state = ButtonHandler.State.Idle;
+    }
+
     newProcessClick(event) {
         this.start(event);
-        this.state = State.ProcessCreation;
+
+        if (this.state === ButtonHandler.State.Idle
+            || this.state === ButtonHandler.State.ElementCreated
+            || this.state === ButtonHandler.State.PropertyCreated)
+            this.state = State.ProcessCreated;
+
         this.end(event);
     }
 
     newElementClick() {
         this.start(event);
-        this.state = State.ElementCreationInit;
+
+        if (this.state === ButtonHandler.State.Idle
+            || this.state === ButtonHandler.State.ProcessCreated
+            || this.state === ButtonHandler.State.PropertyCreated)
+            this.state = State.ElementCreationInit;
+
         this.end(event);
     }
 
     newPropertyClick() {
         this.start(event);
-        this.state = State.PropertyCreation;
+
+        if (this.state === ButtonHandler.State.Idle
+            || this.state === ButtonHandler.State.ProcessCreated
+            || this.state === ButtonHandler.State.ElementCreated)
+            this.state = State.PropertyCreation;
+
         this.end(event);
     }
 }
 
 class MouseHandler extends EventHandler {
+
+    _localState = State.Idle;
+
     down(event) {
         this.start(event);
 
         if (this.state === State.Idle)
-            this.state = State.ClickStart;
+            this._localState = State.ClickStart;
 
         this.end(event);
     }
@@ -75,8 +104,10 @@ class MouseHandler extends EventHandler {
     move(event) {
         this.start(event);
 
-        if (this.state === State.ClickStart)
+        if (this.state === State.Idle && this._localState === State.ClickStart) {
             this.state = State.GrabStart;
+            this._localState = State.GrabStart;
+        }
 
         this.end(event);
     }
@@ -84,12 +115,14 @@ class MouseHandler extends EventHandler {
     up(event) {
         this.start(event);
 
-        switch (this.state) {
+        switch (this._localState) {
         case State.ClickStart:
             this.state = State.ClickEnd;
+            this._localState = State.Idle;
             break;
         case State.GrabStart:
             this.state = State.GrabEnd;
+            this._localState = State.Idle;
             break;
         }
 
@@ -105,12 +138,40 @@ class Application {
         this.mouse = new MouseHandler(this);
     }
 
+    setState(newState) {
+        const currentState = this._currentState;
+
+        if (currentState === State.ElementCreationInit
+            && newState === State.ClickEnd)
+            this._currentState = State.ElementCreationSrcSet;
+        else
+            this._currentState = newState;
+    }
+
     startEvent(e) {
         
     }
 
     endEvent(e) {
-        
+        switch (this._currentState) {
+        case State.ClickEnd:
+            statusBar.print('Clicked');
+            this._currentState = State.Idle;
+            break;
+        case State.GrabEnd:
+            statusBar.print('Grab');
+            this._currentState = State.Idle;
+            break;
+
+        case State.ProcessCreation:
+            statusBar.print('Process created');
+            this._currentState = State.Idle;
+            break;
+        case State.PropertyCreation:
+            statusBar.print('Property created');
+            this._currentState = State.Idle;
+            break;
+        }
     }
 }
 
