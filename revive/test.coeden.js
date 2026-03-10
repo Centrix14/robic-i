@@ -382,6 +382,23 @@ describe('serialize', function(){
 describe('deserialize', function(){
 
     let g = new Graph();
+    let nodeFnCalled, connectionFnCalled;
+
+    function nodeFn(value) {
+        if (value === 'target' || value === 'buddy1' || value === 'buddy2')
+            nodeFnCalled = true;
+        else
+            nodeFnCalled = false;
+        return value;
+    }
+
+    function connectionFn(value) {
+        if (value === 'connection')
+            connectionFnCalled = true;
+        else
+            connectionFnCalled = false;
+        return value;
+    }
 
     before(function(){
         const src = new Graph();
@@ -401,12 +418,18 @@ describe('deserialize', function(){
 
         const store = src.serialize();
 
-        g.deserialize(store);
+        g.deserialize(store, { nodeFn, connectionFn });
     });
 
     it('deserialize1 - returns correct graph', function(){
         assert.isTrue(g.areAdjacents(0, 1), 'Deserialization failed');
         assert.isTrue(g.areAdjacents(1, 2), 'Deserialization failed');
+    });
+
+    it('deserialize2 - deserializers called for source content', function(){
+        assert.isTrue(nodeFnCalled, 'Node serializer called unproperly');
+        assert.isTrue(connectionFnCalled,
+                      'Connection serializer called unproperly');
     });
 
 });
