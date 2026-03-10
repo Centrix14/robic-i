@@ -191,7 +191,7 @@ class Graph {
     serialize(options) {
         return {
             nodes: this._serializeNodes(options?.nodeFn),
-            adjacency: this._serializeAdjacents(options?.adjacentFn)
+            adjacency: this._serializeAdjacents(options?.connectionFn)
         };
     }
 }
