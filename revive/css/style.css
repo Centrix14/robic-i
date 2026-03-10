@@ -1,0 +1,191 @@
+/* Fundamental properties */
+html {
+    font-family: sans;
+}
+
+/* Page layout */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.whole {
+    display: grid;
+
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-columns: 0.8fr 4fr 1.3fr;
+    grid-template-areas:
+        "header header header"
+        "toolbar canvas palette"
+        "tree canvas palette";
+
+    gap: 10px;
+}
+
+.header {
+    grid-area: header;
+
+    vertical-align: middle;
+}
+
+.panel {
+    padding: 5px;
+}
+
+.toolbar {
+    grid-area: toolbar;
+
+    display: inline-grid;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 50px));
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 3px;
+}
+
+.tree {
+    grid-area: tree;
+}
+
+.palette {
+    grid-area: palette;
+}
+
+.canvas-container {
+    grid-area: canvas;
+
+    overflow: auto;
+}
+
+.canvas-container > svg {
+    border: 1px solid #ced4da;
+}
+
+/* Menu */
+
+.menu-item {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.menu-banner {
+    padding: 10px;
+}
+
+.menu-dropdown {
+    position: relative;
+}
+
+.menu-dropdown-button {
+    font-size: 16px;
+    
+    background-color: white;
+    
+    padding: 7px;
+
+    border: none;
+}
+.menu-dropdown-button:after {
+    content: "  \25BE";
+}
+.menu-dropdown:hover .menu-dropdown-button {
+    background-color: #dee2e6;
+}
+
+.menu-dropdown-container {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    left: 0%;
+    top: 100%;
+    min-width: 140px;
+    z-index: 3;
+}
+.menu-dropdown:hover .menu-dropdown-container {
+    display: block;
+}
+
+.menu-dropdown-item {
+    margin: 10px;
+}
+
+/* Icons */
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Buttons */
+
+.panel-button {
+    background-color: #f8f9fa;
+    border: none;
+}
+.panel-button:hover {
+    background-color: #e9ecef;
+}
+.panel-button:active, .panel-button-active {
+    background-color: #dee2e6;
+}
+
+.palette-button {
+    padding: 10px;
+}
+
+.link-button {
+    color: #495057;
+    background-color: white;
+    
+    border: none;
+    
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+.link-button:hover {
+    text-decoration: none;
+}
+
+/* Headers and text */
+
+.palette-h1 {
+    font-size: 20px;
+    font-weight: bold;
+
+    margin: 0 0 10px 0;
+}
+
+.palette-h2 {
+    font-size: 18px;
+    font-weight: normal;
+
+    line-height: 1.2;
+}
+
+.palette-input-label {
+    font-size: 15px;
+}
+
+/* Tables */
+
+.palette-section {
+    border-collapse: separate;
+    border-spacing: 8px 3px;
+}
+
+/* SVG elements styles */
+
+.caption, .designation {
+    user-select: none;
+}
+
+textarea {
+    font-family: sans;
+    font-size: 10pt;
+}

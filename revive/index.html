@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Исток | Диаграммы МИСО</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" type="image/x-icon" href="media/logo.png">
+    <link rel="icon" type="image/svg+xml" href="media/logo.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="media/favicon/48.png">
+  </head>
+
+  <body class="whole">
+
+    <div class="header">
+      <div class="menu-item menu-banner">
+        <img class="logo-icon"
+             src="media/logo.png"
+             alt="Logo">
+      </div>
+
+      <div class="menu-item menu-dropdown">
+        <button class="menu-dropdown-button">Файл</button>
+        <div class="menu-dropdown-container">
+          <p class="menu-dropdown-item">Новый</p>
+          <p class="menu-dropdown-item">Открыть</p>
+          <p class="menu-dropdown-item">Сохранить</p>
+        </div>
+      </div>
+
+      <div class="menu-item menu-dropdown">
+        <button class="menu-dropdown-button">Помощь</button>
+        <div class="menu-dropdown-container">
+          <p class="menu-dropdown-item">Справка</p>
+          <p class="menu-dropdown-item">О программе</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel toolbar">
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/composition.png"
+             alt="Композиция">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/decomposition.png"
+             alt="Декомпозиция">
+      </button>
+
+      <button class="panel-button">
+      </button>
+
+      <button class="panel-button"
+              id="newProcessBtn">
+        <img class="icon"
+             src="media/icons/png/process.png"
+             alt="Процесс">
+      </button>
+
+      <button class="panel-button"
+              id="newElementBtn">
+        <img class="icon"
+             src="media/icons/png/element.png"
+             alt="Элемент">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/property.png"
+             alt="Свойство">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/independance.png"
+             alt="Независимость">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/compatibility.png"
+             alt="Совместность">
+      </button>
+
+      <button class="panel-button">
+        <img class="icon"
+             src="media/icons/png/incompatibility.png"
+             alt="Несовместность">
+      </button>
+    </div>
+
+    <div class="panel tree">
+    </div>
+
+    <div class="panel canvas-container">
+      <svg class="canvas" viewBox="0 0 1000 1000">
+        <defs>
+          <marker
+            id="element-line-marker"
+            viewBox="0 0 10 10"
+            refX="5"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="panel palette">
+      <p class="palette-h1">
+        Свойства
+      </p>
+
+      <div class="palette-console">
+        <button class="panel-button palette-button"
+                id="palette-applyBtn">
+          Применить
+        </button>
+        <button class="panel-button palette-button"
+                id="palette-resetBtn">
+          Сбросить
+        </button>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Общие
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-designation">
+                Обозначение
+            </label></td>
+            <td><input id="palette-designation" type="text" disabled></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-name">
+                Имя
+            </label></td>
+            <td><input id="palette-name" type="text"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-description">
+                Описание
+            </label></td>
+            <td><input id="palette-description" type="text"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Процесс
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-iteration">
+                Итерация
+            </label></td>
+            <td><input id="palette-iteration" type="number"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-isHiding">
+                Скрывающий
+            </label></td>
+            <td><input id="palette-isHiding" type="checkbox"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Свойство
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-possibleValues">
+                Возможные значения
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-possibleValues">
+                Изменить
+            </button></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-referenceValue">
+                Эталонное значение
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-referenceValue">
+                Отсутствует
+            </button></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-actualValue">
+                Фактическое значение
+            </label></td>
+            <td><button class="link-button"
+                        id="palette-actualValue">
+                Отсутствует
+            </button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Риск
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-risk-name">
+                Название
+            </label></td>
+            <td><textarea id="palette-risk-name"></textarea>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-risk-character">
+                Характер
+            </label></td>
+            <td><input id="palette-risk-character"
+                       type="text">
+            </input></td>
+          </tr>
+
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-risk-influence">
+                Влияние
+            </label></td>
+            <td><input id="palette-risk-influence"
+                       type="text">
+            </input></td>
+          </tr>
+
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-risk-magnitude">
+                Величина
+            </label></td>
+            <td><input id="palette-risk-magnitude"
+                       type="number">
+            </input></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+
+  </body>
+
+</html>
