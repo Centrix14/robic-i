@@ -13,9 +13,11 @@ const State = {
     GrabStart: 'GrabStart',
     GrabEnd: 'GrabEnd',
 
+    ProcessCreation: 'ProcessCreation',
     ElementCreationInit: 'ElementCreationInit',
     ElementCreationSrcSet: 'ElementCreationSrcSet',
     ElementCreationDestSet: 'ElementCreationDestSet',
+    PropertyCreation: 'PropertyCreation',
 
     ProcessSelect: 'ProcessSelect',
     ElementSelect: 'ElementSelect',
@@ -26,7 +28,7 @@ class EventHandler {
     constructor(app) {
         this._app = app;
     }
-    
+
     get state() { return this._app._currentState; }
     set state(value) { this._app._currentState = value; }
 
@@ -43,7 +45,7 @@ class EventHandler {
 class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
-        statusBar.print('Process created');
+        this.state = State.ProcessCreation;
         this.end(event);
     }
 
@@ -55,7 +57,7 @@ class ButtonHandler extends EventHandler {
 
     newPropertyClick() {
         this.start(event);
-        statusBar.print('Property created');
+        this.state = State.PropertyCreation;
         this.end(event);
     }
 }
