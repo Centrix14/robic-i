@@ -155,32 +155,26 @@ class Graph {
         return array;
     }
 
-    _serializeNodes(serializer) {
+    _serializeNodes(serializer=((v)=>v)) {
         const nodeList = Graph._mapToArray(this._nodes);
 
-        if (serializer) {
-            let nodes = [];
+        let nodes = [];
 
-            for (let [key, node] of nodeList)
-                nodes.push([ key, serializer(node) ]);
+        for (let [key, node] of nodeList)
+            nodes.push([ key, serializer(node) ]);
 
-            return nodes;
-        }
-        else
-            return nodeList;
+        return nodes;
     }
 
-    _serializeAdjacents(serializer) {
+    _serializeAdjacents(serializer=((v)=>v)) {
         const adjacencyList = Graph._mapToArray(this._adjacency);
 
         let adjacency = [];
         for (let [key, adjacents] of adjacencyList) {
             const array = Graph._mapToArray(adjacents);
 
-            if (serializer) {
-                for (let i = 0; i < array.length; i++)
-                    array[i][1] = serializer(array[i][1]);
-            }
+            for (let i = 0; i < array.length; i++)
+                array[i][1] = serializer(array[i][1]);
 
             adjacency.push([ key, array ]);
         }
