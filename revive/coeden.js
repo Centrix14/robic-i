@@ -156,14 +156,9 @@ class Graph {
     }
 
     _serializeNodes(serializer=((v)=>v)) {
-        const nodeList = Graph._mapToArray(this._nodes);
-
-        let nodes = [];
-
-        for (let [key, node] of nodeList)
-            nodes.push([ key, serializer(node) ]);
-
-        return nodes;
+        return Array.from(this._nodes).map(
+            ([key, value]) => [key, serializer(value)]
+        );
     }
 
     _serializeAdjacents(serializer=((v)=>v)) {
