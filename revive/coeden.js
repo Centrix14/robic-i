@@ -146,15 +146,6 @@ class Graph {
         return new Fail();
     }
 
-    static _mapToArray(map) {
-        let array = [];
-
-        for (let [key, value] of map.entries())
-            array.push([ key.toString(), value ]);
-
-        return array;
-    }
-
     _serializeNodes(serializer=((v)=>v)) {
         return Array.from(this._nodes).map(
             ([key, value]) => [key, serializer(value)]
@@ -177,12 +168,9 @@ class Graph {
     }
 
     _deserializeNodes(source, deserializer=((v)=>v)) {
-        const map = new Map();
-
-        for (let [key, value] of source)
-            map.set(+key, deserializer(value));
-
-        return map;
+        return new Map(
+            source.map(([key, value]) => [key, deserializer(value)])
+        );
     }
 
     _deserializeAdjacents(source, deserializer=((v)=>v)) {
@@ -192,9 +180,9 @@ class Graph {
             const mapValue = new Map();
 
             for (let [key, data] of value)
-                mapValue.set(+key, deserializer(data));
+                mapValue.set(key, deserializer(data));
 
-            map.set(+key, mapValue);
+            map.set(key, mapValue);
         }
 
         return map;
