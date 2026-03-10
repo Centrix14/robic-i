@@ -7,7 +7,7 @@
       <x>640</x>
       <y>304</y>
       <w>360</w>
-      <h>424</h>
+      <h>504</h>
     </coordinates>
     <panel_attributes>Graph
 --
@@ -37,8 +37,8 @@ connect(id1:integer, id2:integer,
 disconnect(id1:integer, id2:integer,
    direction:ConnectDirection): Success ? Fail
 
-serialize(options): Object
-deserialize(options): Object</panel_attributes>
+serialize(options: SerializeOptions): Object
+deserialize(options: SerializeOptions): Object</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -167,7 +167,7 @@ Data</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>992</x>
-      <y>640</y>
+      <y>656</y>
       <w>64</w>
       <h>32</h>
     </coordinates>
@@ -344,5 +344,31 @@ any — любой тип;
 &lt;&lt;enumeration&gt;&gt; — класс-перечисление;
 &lt;&lt;get&gt;&gt; — свойство-геттер;</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>720</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+SerializeOptions
+--
++nodeFn: function
++connectionFn: function</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>992</x>
+      <y>752</y>
+      <w>64</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
   </element>
 </diagram>
