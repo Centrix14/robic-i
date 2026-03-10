@@ -162,19 +162,11 @@ class Graph {
     }
 
     _serializeAdjacents(serializer=((v)=>v)) {
-        const adjacencyList = Graph._mapToArray(this._adjacency);
-
-        let adjacency = [];
-        for (let [key, adjacents] of adjacencyList) {
-            const array = Graph._mapToArray(adjacents);
-
-            for (let i = 0; i < array.length; i++)
-                array[i][1] = serializer(array[i][1]);
-
-            adjacency.push([ key, array ]);
-        }
-
-        return adjacency;
+        return Array.from(this._adjacency).map(
+            ([key, list]) => [key, Array.from(list).map(
+                ([key, value]) => [key, serializer(value)]
+            )]
+        );
     }
 
     serialize(options) {
