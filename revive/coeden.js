@@ -194,6 +194,36 @@ class Graph {
             adjacency: this._serializeAdjacents(options?.connectionFn)
         };
     }
+
+    _deserializeNodes(source, deserializer=((v)=>v)) {
+        const map = new Map();
+
+        for (let [key, value] of source)
+            map.set(+key, deserializer(value));
+
+        return map;
+    }
+
+    _deserializeAdjacents(source, deserializer=((v)=>v)) {
+        const map = new Map();
+
+        for (let [key, value] of source) {
+            const mapValue = new Map();
+
+            for (let [key, data] of value)
+                mapValue.set(+key, deserializer(data));
+
+            map.set(+key, mapValue);
+        }
+
+        return map;
+    }
+
+    deserialize(source, options) {
+        this._nodes = this._deserializeNodes(source.nodes, options?.nodeFn);
+        this._adjacency =
+            this._deserializeAdjacents(source.adjacency, options?.connectionFn);
+    }
 }
 
 
