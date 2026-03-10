@@ -7,6 +7,12 @@ const statusBar = {
 const State = {
     Idle: 'Idle',
 
+    ClickStart: 'ClickStart',
+    ClickEnd: 'ClickEnd',
+
+    GrabStart: 'GrabStart',
+    GrabEnd: 'GrabEnd',
+
     ElementCreationInit: 'ElementCreationInit',
     ElementCreationSrcSet: 'ElementCreationSrcSet',
     ElementCreationDestSet: 'ElementCreationDestSet',
@@ -40,16 +46,38 @@ class MouseHandler {
         this._app = app;
     }
 
+    get state() { return this._app._currentState; }
+    set state(value) { this._app._currentState = value; }
+
+    _end(event) {
+        statusBar.print(this.state);
+    }
+
     down(event) {
-        statusBar.print('mousedown');
+        if (this.state === State.Idle)
+            this.state = State.ClickStart;
+
+        this._end(event);
     }
 
     move(event) {
-        statusBar.print('mousemove');
+        if (this.state === State.ClickStart)
+            this.state = State.GrabStart;
+
+        this._end(event);
     }
 
     up(event) {
-        statusBar.print('mouseup');
+        switch (this.state) {
+        case State.ClickStart:
+            this.state = State.ClickEnd;
+            break;
+        case State.GrabStart:
+            this.state = State.GrabEnd;
+            break;
+        }
+
+        this._end(event);
     }
 }
 
@@ -78,7 +106,7 @@ setEvents({
         ['#newPropertyBtn', ()=>app.buttons.newPropertyClick()]
     ],
 
-    'mousedown': [['.canvas', ()=>app.mouse.down()]],
-    'mousemove': [['.canvas', ()=>app.mouse.move()]],
-    'mouseup': [['.canvas', ()=>app.mouse.up()]]
+    'mousedown': [['.canvas', (e)=>app.mouse.down(e)]],
+    'mousemove': [['.canvas', (e)=>app.mouse.move(e)]],
+    'mouseup': [['.canvas', (e)=>app.mouse.up(e)]]
 });
