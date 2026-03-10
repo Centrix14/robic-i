@@ -89,24 +89,34 @@ function treeWithDeriving(base=0) {
       - node1
       - node2
       -- node3 (physical)
-      - node3 (logical)
+      - node4 (logical)
     */
 
     const root = new Node(base);
+    root.createSubnode(base+1);
 
-    const node1 = new Node(base+1), node2 = new Node(base+2), node3 = new Node(base+3);
-
-    root.addSubnode(node1);
-    root.addSubnode(node2);
-    root.createSubnode(base+3, {
-        supnode: node1,
-        logicalOwn: NodeOwnership.Here,
-        physicalOwn: NodeOwnership.Subnode,
-        isLink: true,
-        linkValue: node3
+    const node2 = new Node(base+2, {
+        supnode: root,
+        logicalOwn: NodeOwnership.Subnode,
+        physicalOwn: NodeOwnership.Here,
+        isLink: false,
+        linkValue: null
     });
+    root.addSubnode(node2);
 
+    const node3 = new Node(base+3, {
+        supnode: node2,
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Here,
+        isLink: false,
+        linkValue: null
+    });
     node2.addSubnode(node3);
+
+    root.createLink(base+4, node3, {
+        logicalOwn: NodeOwnership.Here,
+        physicalOwn: NodeOwnership.Subnode
+    });
 
     return root;
 }
