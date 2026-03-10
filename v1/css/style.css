@@ -1,4 +1,5 @@
 /* Fundamental properties */
+
 html {
     font-family: sans;
 }
@@ -71,6 +72,15 @@ body {
 
 .menu-banner {
     padding: 10px;
+}
+
+.menu-status-bar {
+    margin-left: 3%;
+}
+
+.menu-status-bar > p {
+    font-size: 14px;
+    color: #717d8e;
 }
 
 .menu-dropdown {
