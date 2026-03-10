@@ -156,9 +156,15 @@ class Graph {
     }
 
     serialize(options) {
+        const adjacencyList = Graph._mapToArray(this._adjacency);
+
+        const adjacency = [];
+        for (let [key, adjacents] of adjacencyList)
+            adjacency.push([ key, Graph._mapToArray(adjacents) ]);
+
         return {
             nodes: Graph._mapToArray(this._nodes),
-            adjacency: Graph._mapToArray(this._adjacency)
+            adjacency
         };
     }
 }
