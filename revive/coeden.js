@@ -174,18 +174,13 @@ class Graph {
     }
 
     _deserializeAdjacents(source, deserializer=((v)=>v)) {
-        const map = new Map();
-
-        for (let [key, value] of source) {
-            const mapValue = new Map();
-
-            for (let [key, data] of value)
-                mapValue.set(key, deserializer(data));
-
-            map.set(key, mapValue);
-        }
-
-        return map;
+        return new Map(
+            source.map(
+                ([key, entry]) => [key, new Map(
+                    entry.map(([target, data]) => [target, deserializer(data)])
+                )]
+            )
+        );
     }
 
     deserialize(source, options) {
