@@ -170,16 +170,28 @@ class Graph {
             return nodeList;
     }
 
-    serialize(options) {
+    _serializeAdjacents(serializer) {
         const adjacencyList = Graph._mapToArray(this._adjacency);
 
-        const adjacency = [];
-        for (let [key, adjacents] of adjacencyList)
-            adjacency.push([ key, Graph._mapToArray(adjacents) ]);
+        let adjacency = [];
+        for (let [key, adjacents] of adjacencyList) {
+            const array = Graph._mapToArray(adjacents);
 
+            if (serializer) {
+                for (let i = 0; i < array.length; i++)
+                    array[i][1] = serializer(array[i][1]);
+            }
+
+            adjacency.push([ key, array ]);
+        }
+
+        return adjacency;
+    }
+
+    serialize(options) {
         return {
-            nodes: this._serializeNodes(options?.nodeSerializer),
-            adjacency
+            nodes: this._serializeNodes(options?.nodeFn),
+            adjacency: this._serializeAdjacents(options?.adjacentFn)
         };
     }
 }
