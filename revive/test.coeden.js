@@ -363,9 +363,9 @@ describe('serialize', function(){
         assert.deepPropertyVal(
             store, 'adjacency',
             [
-                ['1', [['0', 'connection'], ['2', 'connection']]],
-                ['0', [['1', 'connection']]],
-                ['2', [['1', 'connection']]]
+                [1, [[0, 'connection'], [2, 'connection']]],
+                [0, [[1, 'connection']]],
+                [2, [[1, 'connection']]]
             ],
             'Method does not include valid adjacency table'
         );
