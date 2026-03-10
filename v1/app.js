@@ -22,52 +22,66 @@ const State = {
     PropertySelect: 'PropertySelect'
 }
 
-class ButtonHandler {
+class EventHandler {
     constructor(app) {
         this._app = app;
     }
-
-    newProcessClick() {
-        statusBar.print('Process created');
-    }
-
-    newElementClick() {
-        this._app._currentState = State.ElementCreationInit;
-        statusBar.print(this._app._currentState);
-    }
-
-    newPropertyClick() {
-        statusBar.print('Property created');
-    }
-}
-
-class MouseHandler {
-    constructor(app) {
-        this._app = app;
-    }
-
+    
     get state() { return this._app._currentState; }
     set state(value) { this._app._currentState = value; }
 
-    _end(event) {
-        statusBar.print(this.state);
+    start(event) {
+        this._app.startEvent(event);
     }
 
+    end(event) {
+        statusBar.print(this.state);
+        this._app.endEvent(event);
+    }
+}
+
+class ButtonHandler extends EventHandler {
+    newProcessClick(event) {
+        this.start(event);
+        statusBar.print('Process created');
+        this.end(event);
+    }
+
+    newElementClick() {
+        this.start(event);
+        this.state = State.ElementCreationInit;
+        this.end(event);
+    }
+
+    newPropertyClick() {
+        this.start(event);
+        statusBar.print('Property created');
+        this.end(event);
+    }
+}
+
+class MouseHandler extends EventHandler {
     down(event) {
+        this.start(event);
+
         if (this.state === State.Idle)
             this.state = State.ClickStart;
 
-        this._end(event);
+        this.end(event);
     }
 
     move(event) {
+        this.start(event);
+
         if (this.state === State.ClickStart)
             this.state = State.GrabStart;
 
-        this._end(event);
+        this.end(event);
     }
 
     up(event) {
+        this.start(event);
+
         switch (this.state) {
         case State.ClickStart:
             this.state = State.ClickEnd;
@@ -77,7 +91,7 @@ class MouseHandler {
             break;
         }
 
-        this._end(event);
+        this.end(event);
     }
 }
 
@@ -87,6 +101,14 @@ class Application {
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
+    }
+
+    startEvent(e) {
+        
+    }
+
+    endEvent(e) {
+        
     }
 }
 
