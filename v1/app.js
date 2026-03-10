@@ -37,10 +37,7 @@ class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
 
-        if (this.state === ButtonHandler.State.Idle
-            || this.state === ButtonHandler.State.ElementCreated
-            || this.state === ButtonHandler.State.PropertyCreated)
-            this.state = ButtonHandler.State.ProcessCreated;
+        this.state = ButtonHandler.State.ProcessCreated;
 
         this.end(event);
     }
@@ -51,7 +48,7 @@ class ButtonHandler extends EventHandler {
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ProcessCreated
             || this.state === ButtonHandler.State.PropertyCreated)
-            this.state = ButtonHandler.State.ElementCreationInit;
+            this.state = ButtonHandler.State.ElementInit;
 
         this.end(event);
     }
@@ -59,10 +56,7 @@ class ButtonHandler extends EventHandler {
     newPropertyClick() {
         this.start(event);
 
-        if (this.state === ButtonHandler.State.Idle
-            || this.state === ButtonHandler.State.ProcessCreated
-            || this.state === ButtonHandler.State.ElementCreated)
-            this.state = ButtonHandler.State.PropertyCreation;
+        this.state = ButtonHandler.State.PropertyCreated;
 
         this.end(event);
     }
@@ -97,8 +91,7 @@ class MouseHandler extends EventHandler {
     move(event) {
         this.start(event);
 
-        if (this.state === MouseHandler.State.ClickStart
-            || this.state === MouseHandler.State.ClickEnd)
+        if (this.state === MouseHandler.State.ClickStart)
             this.state = MouseHandler.State.Grabbing;
 
         this.end(event);
@@ -136,12 +129,12 @@ class Application {
 
     }
 
-    startEvent(e) {
+    startEvent(handler, event) {
         
     }
 
-    endEvent(e) {
-
+    endEvent(handler, event) {
+        console.log('Handler: ' + handler.constructor.name + ' | ' + handler.state);
     }
 }
 
