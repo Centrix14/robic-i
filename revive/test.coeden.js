@@ -378,3 +378,35 @@ describe('serialize', function(){
     });
 
 });
+
+describe('deserialize', function(){
+
+    let g = new Graph();
+
+    before(function(){
+        const src = new Graph();
+
+        src.addNode(0, 'target');
+        src.addNode(1, 'buddy1');
+        src.addNode(2, 'buddy2');
+
+        src.connect(0, 1, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+        src.connect(1, 2, {
+            direction: ConnectDirections.Both,
+            data: 'connection'
+        });
+
+        const store = src.serialize();
+
+        g.deserialize(store);
+    });
+
+    it('deserialize1 - returns correct graph', function(){
+        assert.isTrue(g.areAdjacents(0, 1), 'Deserialization failed');
+        assert.isTrue(g.areAdjacents(1, 2), 'Deserialization failed');
+    });
+
+});
