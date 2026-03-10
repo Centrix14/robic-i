@@ -149,14 +149,8 @@ class Graph {
     static _mapToArray(map) {
         let array = [];
 
-        for (let [key, value] of map.entries()) {
-            array.push([
-                key.toString(),
-                (value instanceof Map)
-                    ? Graph._mapToArray(value)
-                    : value
-            ]);
-        }
+        for (let [key, value] of map.entries())
+            array.push([ key.toString(), value ]);
 
         return array;
     }
