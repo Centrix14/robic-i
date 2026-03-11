@@ -85,8 +85,15 @@ class MouseHandler extends EventHandler {
     move(event) {
         this.start(event);
 
-        if (this.state === MouseHandler.State.ClickStart)
+        switch (this.state) {
+        case MouseHandler.State.ClickStart:
             this.state = MouseHandler.State.Grabbing;
+            break;
+        case MouseHandler.State.ClickEnd:
+        case MouseHandler.State.GrabEnd:
+            this.state = MouseHandler.State.Idle;
+            break;
+        }
 
         this.end(event);
     }
