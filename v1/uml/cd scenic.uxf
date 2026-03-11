@@ -5,38 +5,38 @@
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>780</y>
+      <y>770</y>
       <w>200</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>StyleElement
 --
-publish(options): Object</panel_attributes>
+useOn(element, options)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>220</y>
+      <y>210</y>
       <w>360</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>Stroke
 --
 -color: string = "black"
+-width: string = "1px"
 -dasharray: string = ""
--linecap: StrokeLinecap = StrokeLinecap.Butt
--linejoin: StrokeLinejoin = StrokeLinejoin.Miter
 -opacity: string = "1"
--width: string = "1px"</panel_attributes>
+-linecap: StrokeLinecap = StrokeLinecap.Butt
+-linejoin: StrokeLinejoin = StrokeLinejoin.Miter</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>80</y>
+      <y>70</y>
       <w>150</w>
       <h>110</h>
     </coordinates>
@@ -52,7 +52,7 @@ Square</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1260</x>
-      <y>50</y>
+      <y>40</y>
       <w>150</w>
       <h>140</h>
     </coordinates>
@@ -70,7 +70,7 @@ Round</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>890</y>
+      <y>880</y>
       <w>190</w>
       <h>70</h>
     </coordinates>
@@ -84,7 +84,7 @@ Round</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>520</y>
+      <y>510</y>
       <w>340</w>
       <h>110</h>
     </coordinates>
@@ -100,7 +100,7 @@ Round</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>380</y>
+      <y>370</y>
       <w>150</w>
       <h>110</h>
     </coordinates>
@@ -116,7 +116,7 @@ Oblique</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1240</x>
-      <y>370</y>
+      <y>360</y>
       <w>150</w>
       <h>120</h>
     </coordinates>
@@ -133,11 +133,11 @@ Lighter</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>790</y>
+      <y>780</y>
       <w>370</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>Align
+    <panel_attributes>TextAlign
 --
 -anchor: AlignAnchor = AlignAnchor.Middle
 -baseline: AlignBaseline = AlignBaseline.Middle</panel_attributes>
@@ -147,7 +147,7 @@ Lighter</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>650</y>
+      <y>640</y>
       <w>150</w>
       <h>110</h>
     </coordinates>
@@ -163,7 +163,7 @@ End</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1270</x>
-      <y>640</y>
+      <y>630</y>
       <w>150</w>
       <h>120</h>
     </coordinates>
@@ -180,7 +180,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>280</y>
+      <y>270</y>
       <w>160</w>
       <h>560</h>
     </coordinates>
@@ -191,7 +191,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>810</y>
+      <y>800</y>
       <w>160</w>
       <h>140</h>
     </coordinates>
@@ -202,7 +202,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>570</y>
+      <y>560</y>
       <w>160</w>
       <h>270</h>
     </coordinates>
@@ -213,7 +213,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>810</y>
+      <y>800</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -224,7 +224,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1120</x>
-      <y>180</y>
+      <y>170</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -235,7 +235,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1330</x>
-      <y>180</y>
+      <y>170</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -246,7 +246,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1120</x>
-      <y>480</y>
+      <y>470</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -257,7 +257,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1310</x>
-      <y>480</y>
+      <y>470</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -268,7 +268,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1110</x>
-      <y>750</y>
+      <y>740</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -279,7 +279,7 @@ Bottom</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1350</x>
-      <y>750</y>
+      <y>740</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -290,7 +290,7 @@ Bottom</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>570</x>
-      <y>530</y>
+      <y>520</y>
       <w>350</w>
       <h>150</h>
     </coordinates>
@@ -309,7 +309,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>810</x>
-      <y>670</y>
+      <y>660</y>
       <w>60</w>
       <h>130</h>
     </coordinates>
@@ -322,7 +322,7 @@ m2=0..*</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>60</x>
-      <y>280</y>
+      <y>270</y>
       <w>380</w>
       <h>180</h>
     </coordinates>
@@ -343,7 +343,7 @@ Rect(start:Point, width:integer, height:integer)
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>70</y>
+      <y>60</y>
       <w>240</w>
       <h>200</h>
     </coordinates>
@@ -365,7 +365,7 @@ sub(arg:Point): Point</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>70</y>
+      <y>60</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -379,7 +379,7 @@ sub(arg:Point): Point</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>100</y>
+      <y>90</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
@@ -390,7 +390,7 @@ sub(arg:Point): Point</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>470</y>
+      <y>460</y>
       <w>240</w>
       <h>150</h>
     </coordinates>
@@ -409,7 +409,7 @@ Line(start:Point, end:Point)
     <id>UMLClass</id>
     <coordinates>
       <x>110</x>
-      <y>660</y>
+      <y>650</y>
       <w>340</w>
       <h>80</h>
     </coordinates>
@@ -424,7 +424,7 @@ Arrow(start:Point, end:Point, marker:string)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>300</x>
-      <y>610</y>
+      <y>600</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -435,7 +435,7 @@ Arrow(start:Point, end:Point, marker:string)</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>110</x>
-      <y>750</y>
+      <y>740</y>
       <w>340</w>
       <h>180</h>
     </coordinates>
@@ -456,7 +456,7 @@ shift(dX:integer, dY:integer)</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>570</x>
-      <y>200</y>
+      <y>190</y>
       <w>240</w>
       <h>90</h>
     </coordinates>
@@ -471,7 +471,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>430</x>
-      <y>180</y>
+      <y>170</y>
       <w>160</w>
       <h>80</h>
     </coordinates>
@@ -482,7 +482,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>430</x>
-      <y>280</y>
+      <y>270</y>
       <w>190</w>
       <h>140</h>
     </coordinates>
@@ -493,7 +493,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>430</x>
-      <y>280</y>
+      <y>270</y>
       <w>190</w>
       <h>310</h>
     </coordinates>
@@ -504,7 +504,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>280</y>
+      <y>270</y>
       <w>180</w>
       <h>460</h>
     </coordinates>
@@ -515,7 +515,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>280</y>
+      <y>270</y>
       <w>180</w>
       <h>530</h>
     </coordinates>
@@ -526,7 +526,7 @@ publish(options): Object</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>650</x>
-      <y>350</y>
+      <y>340</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -545,7 +545,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>720</x>
-      <y>280</y>
+      <y>270</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -556,7 +556,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>850</x>
-      <y>310</y>
+      <y>300</y>
       <w>80</w>
       <h>100</h>
     </coordinates>
@@ -567,7 +567,7 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
-      <y>450</y>
+      <y>440</y>
       <w>60</w>
       <h>100</h>
     </coordinates>
@@ -580,7 +580,7 @@ m2=0..1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>760</x>
-      <y>120</y>
+      <y>110</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -591,7 +591,7 @@ m2=0..1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>140</y>
+      <y>130</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -602,7 +602,7 @@ m2=0..1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>830</x>
-      <y>140</y>
+      <y>130</y>
       <w>30</w>
       <h>230</h>
     </coordinates>
