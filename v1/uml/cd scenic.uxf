@@ -417,7 +417,7 @@ Line(start:Point, end:Point)
 --
 -marker: string = ""
 --
-Line(start:Point, end:Point, marker:string)</panel_attributes>
+Arrow(start:Point, end:Point, marker:string)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
