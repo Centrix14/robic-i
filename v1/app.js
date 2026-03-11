@@ -37,6 +37,8 @@ class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
 
+        console.log('+Process');
+
         this.state = ButtonHandler.State.ProcessCreated;
     }
 
@@ -45,15 +47,17 @@ class ButtonHandler extends EventHandler {
 
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ProcessCreated
-            || this.state === ButtonHandler.State.PropertyCreated)
+            || this.state === ButtonHandler.State.PropertyCreated) {
+            console.log('Element init');
             this.state = ButtonHandler.State.ElementInit;
+        }
         else if (this.state === ButtonHandler.State.ElementInit) {
             this.state = ButtonHandler.State.ElementSrcSet;
-            console.log(`Src set ${event.x} ${event.y}`);
+            console.log(`Element src = ${event.x} ${event.y}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
             this.state = ButtonHandler.State.ElementCreated;
-            console.log(`Dst set ${event.x} ${event.y}`);
+            console.log(`Element dst = ${event.x} ${event.y}`);
         }
 
         this.end(event);
@@ -61,6 +65,8 @@ class ButtonHandler extends EventHandler {
 
     newPropertyClick(event) {
         this.start(event);
+
+        console.log('+Property');
 
         this.state = ButtonHandler.State.PropertyCreated;
     }
@@ -140,17 +146,40 @@ class Application {
     endEvent(handler, event) {
         const buttons = this.buttons, mouse = this.mouse;
 
+        // Select unit
         if (handler === mouse
+            && handler.state === MouseHandler.State.ClickEnd
+            && buttons.state === ButtonHandler.State.Idle) {
+            console.log('Select');
+        }
+
+        // Units moving
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.Grabbing) {
+            this.buttons.state = ButtonHandler.State.Idle;
+            console.log('Move!');
+        }
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.GrabEnd) {
+            this.buttons.state = ButtonHandler.State.Idle;
+            console.log('Move ended!');
+        }
+
+        // Buttons state clearing
+        else if (handler === mouse
             && handler.state === MouseHandler.State.Idle
             && (buttons.state === ButtonHandler.State.ProcessCreated
                 || buttons.state === ButtonHandler.State.ElementCreated
                 || buttons.state === ButtonHandler.State.PropertyCreated))
             this.buttons.state = ButtonHandler.State.Idle;
 
+        // Element creation 1: first process selected
         else if (handler === mouse
                  && buttons.state === ButtonHandler.State.ElementInit
                  && handler.state === MouseHandler.State.ClickEnd)
             this.buttons.newElementClick(event);
+
+        // Element creation 2: second process selected
         else if (handler === mouse
                  && handler.state === MouseHandler.State.ClickEnd
                  && buttons.state === ButtonHandler.State.ElementSrcSet)
