@@ -211,18 +211,18 @@ class Application {
 
         // Buttons state clearing
         else if (handler === mouse
-            && handler.state === MouseHandler.State.Idle
-            && (buttons.state === ButtonHandler.State.ProcessCreated
-                || buttons.state === ButtonHandler.State.ElementCreated
-                || buttons.state === ButtonHandler.State.PropertyCreated
-                || buttons.state === ButtonHandler.State.IndependanceCreated
-               ))
+                 && handler.state === MouseHandler.State.Idle
+                 && (buttons.state === ButtonHandler.State.ProcessCreated
+                     || buttons.state === ButtonHandler.State.ElementCreated
+                     || buttons.state === ButtonHandler.State.PropertyCreated
+                     || buttons.state === ButtonHandler.State.IndependanceCreated
+                    ))
             this.buttons.state = ButtonHandler.State.Idle;
 
         // Element creation 1: first process selected
         else if (handler === mouse
-                 && buttons.state === ButtonHandler.State.ElementInit
-                 && handler.state === MouseHandler.State.ClickEnd)
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.ElementInit)
             this.buttons.newElementClick(event);
 
         // Element creation 2: second process selected
