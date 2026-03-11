@@ -124,9 +124,6 @@ class MouseHandler extends EventHandler {
 
 class Application {
     static State = {
-        Idle: 'Idle',
-
-        ElementCreated: 'ElementCreated'
     }
 
     constructor() {
@@ -134,10 +131,6 @@ class Application {
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
-    }
-
-    setState(newState) {
-
     }
 
     startEvent(handler, event) {
