@@ -61,7 +61,7 @@ IncompatibilityCreated</panel_attributes>
     </coordinates>
     <panel_attributes>EventHandler
 --
-EventHandler(app: Application)
+EventHandler(app:Application)
 
 start(event)
 end(event)</panel_attributes>
