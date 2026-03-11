@@ -185,25 +185,27 @@ class Application {
                  && buttons.state === ButtonHandler.State.ElementSrcSet)
             this.buttons.newElementClick(event);
     }
+
+    setEvents(definition) {
+        for (let event in definition) {
+            for (let [selector, scope, func] of definition[event])
+                document
+                .querySelector(selector)
+                .addEventListener(event, (e)=>func.call(scope, e));
+        }
+    }
 }
 
 const app = new Application();
 
-function setEvents(definition) {
-    for (let event in definition) {
-        for (let [selector, lambda] of definition[event])
-            document.querySelector(selector).addEventListener(event, lambda);
-    }
-}
-
-setEvents({
+app.setEvents({
     'click': [
-        ['#newProcessBtn', ()=>app.buttons.newProcessClick()],
-        ['#newElementBtn', ()=>app.buttons.newElementClick()],
-        ['#newPropertyBtn', ()=>app.buttons.newPropertyClick()]
+        ['#newProcessBtn', app.buttons, app.buttons.newProcessClick],
+        ['#newElementBtn', app.buttons, app.buttons.newElementClick],
+        ['#newPropertyBtn', app.buttons, app.buttons.newPropertyClick]
     ],
 
-    'mousedown': [['.canvas', (e)=>app.mouse.down(e)]],
-    'mousemove': [['.canvas', (e)=>app.mouse.move(e)]],
-    'mouseup': [['.canvas', (e)=>app.mouse.up(e)]]
+    'mousedown': [['.canvas', app.mouse, app.mouse.down]],
+    'mousemove': [['.canvas', app.mouse, app.mouse.move]],
+    'mouseup': [['.canvas', app.mouse, app.mouse.up]]
 });
