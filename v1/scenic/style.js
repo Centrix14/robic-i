@@ -52,13 +52,13 @@ class Fill {
 }
 
 class Font {
-    static Style {
+    static Style = {
         Normal: 'Normal',
         Italic: 'Italic',
         Oblique: 'Oblique'
     }
 
-    static Weight {
+    static Weight = {
         Normal: 'Normal',
         Bold: 'Bold',
         Bolder: 'Bolder',
