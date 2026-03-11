@@ -23,9 +23,14 @@ class ButtonHandler extends EventHandler {
         Idle: 'Idle',
         ProcessCreated: 'ProcessCreated',
         PropertyCreated: 'PropertyCreated',
+
         ElementInit: 'ElementInit',
         ElementSrcSet: 'ElementSrcSet',
-        ElementCreated: 'ElementCreated'
+        ElementCreated: 'ElementCreated',
+
+        IndependanceInit: 'IndependanceInit',
+        IndependanceSrcSet: 'IndependanceSrcSet',
+        IndependanceCreated: 'IndependanceCreated'
     }
 
     constructor(app) {
@@ -35,7 +40,11 @@ class ButtonHandler extends EventHandler {
     }
 
     cursorClick(event) {
-        
+        this.start(event);
+
+        console.log('Idle');
+
+        this.state = ButtonHandler.State.Idle;
     }
 
     newProcessClick(event) {
@@ -75,16 +84,35 @@ class ButtonHandler extends EventHandler {
         this.state = ButtonHandler.State.PropertyCreated;
     }
 
-    newIndependanceClick() {
-        
+    newIndependanceClick(event) {
+        this.start(event);
+
+        if (this.state === ButtonHandler.State.Idle) {
+            this.state = ButtonHandler.State.IndependanceInit;
+            console.log('Independance init');
+        }
+        else if (this.state === ButtonHandler.State.IndependanceInit) {
+            this.state = ButtonHandler.State.IndependanceSrcSet;
+            console.log(`Independance src = ${event.x} ${event.y}`);
+        }
+        else if (this.state === ButtonHandler.State.IndependanceSrcSet) {
+            this.state = ButtonHandler.State.IndependanceCreated;
+            console.log(`Independance dst = ${event.x} ${event.y}`);
+        }
+
+        this.end(event);
     }
 
     newCompatibilityClick() {
-        
+        this.start();
+
+        console.log('Compatibility init');
     }
 
     newIncompatibilityClick() {
-        
+        this.start();
+
+        console.log('Incompatibility init');
     }
 }
 
@@ -186,7 +214,9 @@ class Application {
             && handler.state === MouseHandler.State.Idle
             && (buttons.state === ButtonHandler.State.ProcessCreated
                 || buttons.state === ButtonHandler.State.ElementCreated
-                || buttons.state === ButtonHandler.State.PropertyCreated))
+                || buttons.state === ButtonHandler.State.PropertyCreated
+                || buttons.state === ButtonHandler.State.IndependanceCreated
+               ))
             this.buttons.state = ButtonHandler.State.Idle;
 
         // Element creation 1: first process selected
@@ -200,6 +230,18 @@ class Application {
                  && handler.state === MouseHandler.State.ClickEnd
                  && buttons.state === ButtonHandler.State.ElementSrcSet)
             this.buttons.newElementClick(event);
+
+        // Independance creation 1: first process selected
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.IndependanceInit)
+            this.buttons.newIndependanceClick(event);
+
+        // Independance creation 2: second process selected
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.IndependanceSrcSet)
+            this.buttons.newIndependanceClick(event);
     }
 
     setEvents(definition) {
