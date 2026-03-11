@@ -34,6 +34,10 @@ class ButtonHandler extends EventHandler {
         this.state = ButtonHandler.State.Idle;
     }
 
+    cursorClick(event) {
+        
+    }
+
     newProcessClick(event) {
         this.start(event);
 
@@ -69,6 +73,18 @@ class ButtonHandler extends EventHandler {
         console.log('+Property');
 
         this.state = ButtonHandler.State.PropertyCreated;
+    }
+
+    newIndependanceClick() {
+        
+    }
+
+    newCompatibilityClick() {
+        
+    }
+
+    newIncompatibilityClick() {
+        
     }
 }
 
