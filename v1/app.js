@@ -34,7 +34,11 @@ class ButtonHandler extends EventHandler {
 
         CompatibilityInit: 'CompatibilityInit',
         CompatibilitySrcSet: 'CompatibilitySrcSet',
-        CompatibilityCreated: 'CompatibilityCreated'
+        CompatibilityCreated: 'CompatibilityCreated',
+
+        IncompatibilityInit: 'IncompatibilityInit',
+        IncompatibilitySrcSet: 'IncompatibilitySrcSet',
+        IncompatibilityCreated: 'IncompatibilityCreated'
     }
 
     constructor(app) {
@@ -127,9 +131,22 @@ class ButtonHandler extends EventHandler {
     }
 
     newIncompatibilityClick() {
-        this.start();
+        this.start(event);
 
-        console.log('Incompatibility init');
+        if (this.state === ButtonHandler.State.Idle) {
+            this.state = ButtonHandler.State.IncompatibilityInit;
+            console.log('Incompatibility init');
+        }
+        else if (this.state === ButtonHandler.State.IncompatibilityInit) {
+            this.state = ButtonHandler.State.IncompatibilitySrcSet;
+            console.log(`Incompatibility src = ${event.x} ${event.y}`);
+        }
+        else if (this.state === ButtonHandler.State.IncompatibilitySrcSet) {
+            this.state = ButtonHandler.State.IncompatibilityCreated;
+            console.log(`Incompatibility dst = ${event.x} ${event.y}`);
+        }
+
+        this.end(event);
     }
 }
 
@@ -234,6 +251,7 @@ class Application {
                      || buttons.state === ButtonHandler.State.PropertyCreated
                      || buttons.state === ButtonHandler.State.IndependanceCreated
                      || buttons.state === ButtonHandler.State.CompatibilityCreated
+                     || buttons.state === ButtonHandler.State.IncompatibilityCreated
                     ))
             this.buttons.state = ButtonHandler.State.Idle;
 
@@ -272,6 +290,18 @@ class Application {
                  && handler.state === MouseHandler.State.ClickEnd
                  && buttons.state === ButtonHandler.State.CompatibilitySrcSet)
             this.buttons.newCompatibilityClick(event);
+
+        // Incompatibility creation 1: first process selected
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.IncompatibilityInit)
+            this.buttons.newIncompatibilityClick(event);
+
+        // Incompatibility creation 2: second process selected
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.IncompatibilitySrcSet)
+            this.buttons.newIncompatibilityClick(event);
     }
 
     setEvents(definition) {
