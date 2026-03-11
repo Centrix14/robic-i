@@ -21,10 +21,10 @@ endEvent(handler:EventHandler, event)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
+      <x>110</x>
       <y>70</y>
-      <w>160</w>
-      <h>180</h>
+      <w>190</w>
+      <h>330</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 BHState
@@ -40,7 +40,11 @@ ElementCreated
 
 IndependanceInit
 IndependanceSrcSet
-IndependanceCreated</panel_attributes>
+IndependanceCreated
+
+CompatibilityInit
+CompatibilitySrcSet
+CompatibilityCreated</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
