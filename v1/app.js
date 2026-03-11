@@ -216,9 +216,16 @@ const app = new Application();
 
 app.setEvents({
     'click': [
+        ['#cursorBtn', app.buttons, app.buttons.cursorClick],
+
         ['#newProcessBtn', app.buttons, app.buttons.newProcessClick],
         ['#newElementBtn', app.buttons, app.buttons.newElementClick],
-        ['#newPropertyBtn', app.buttons, app.buttons.newPropertyClick]
+        ['#newPropertyBtn', app.buttons, app.buttons.newPropertyClick],
+
+        ['#newIndependanceBtn', app.buttons, app.buttons.newIndependanceClick],
+        ['#newCompatibilityBtn', app.buttons, app.buttons.newCompatibilityClick],
+        ['#newIncompatibilityBtn', app.buttons,
+         app.buttons.newIncompatibilityClick]
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
