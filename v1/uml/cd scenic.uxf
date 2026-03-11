@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>770</y>
+      <y>830</y>
       <w>200</w>
       <h>60</h>
     </coordinates>
@@ -182,21 +182,21 @@ Bottom</panel_attributes>
       <x>910</x>
       <y>270</y>
       <w>160</w>
-      <h>560</h>
+      <h>620</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;540.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;600.0;140.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>800</y>
+      <y>860</y>
       <w>160</w>
-      <h>140</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;140.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -204,21 +204,21 @@ Bottom</panel_attributes>
       <x>910</x>
       <y>560</y>
       <w>160</w>
-      <h>270</h>
+      <h>330</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;250.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;310.0;140.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>910</x>
-      <y>800</y>
+      <y>820</y>
       <w>160</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;30.0</additional_attributes>
+    <additional_attributes>10.0;50.0;140.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -292,31 +292,35 @@ Bottom</panel_attributes>
       <x>570</x>
       <y>520</y>
       <w>350</w>
-      <h>150</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>Style
 --
--store: StyleElement [*]
+-index: integer = 0
+-store: &lt;integer, StyleElement&gt; [*]
 --
-Style(set: StyleElement [*])
+Style()
 
-add(element:StyleElement): Success ? Fail
+get(id:integer): StyleElement ? undefined
 
-publish(options): Object</panel_attributes>
+add(element:StyleElement): Success
+drop(id:integer): Success ? Fail
+
+useOn(target, options)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>810</x>
-      <y>660</y>
+      <y>730</y>
       <w>60</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=0..*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
