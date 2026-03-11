@@ -32,10 +32,15 @@ BHState
 Idle
 
 ProcessCreated
+PropertyCreated
+
 ElementInit
 ElementSrcSet
 ElementCreated
-PropertyCreated</panel_attributes>
+
+IndependanceInit
+IndependanceSrcSet
+IndependanceCreated</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
