@@ -38,8 +38,6 @@ class ButtonHandler extends EventHandler {
         this.start(event);
 
         this.state = ButtonHandler.State.ProcessCreated;
-
-        this.end(event);
     }
 
     newElementClick() {
@@ -57,8 +55,6 @@ class ButtonHandler extends EventHandler {
         this.start(event);
 
         this.state = ButtonHandler.State.PropertyCreated;
-
-        this.end(event);
     }
 }
 
@@ -84,8 +80,6 @@ class MouseHandler extends EventHandler {
             || this.state === MouseHandler.State.ClickEnd
             || this.state === MouseHandler.State.GrabEnd)
             this.state = MouseHandler.State.ClickStart;
-
-        this.end(event);
     }
 
     move(event) {
