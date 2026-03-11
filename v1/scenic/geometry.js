@@ -31,6 +31,8 @@ class Point extends Primitive {
         this._x += dX;
         this._y += dY;
     }
+
+    publish() { return {}; }
 }
 
 const zeroPoint = new Point(0, 0);
@@ -50,6 +52,13 @@ class Rect extends Primitive {
     shift(dX, dY) {
         this._start.shift(dX, dY);
     }
+
+    publish() {
+        return {
+            x: this._x,
+            y: this._y
+        };
+    }
 }
 
 class Line extends Primitive {
@@ -66,12 +75,28 @@ class Line extends Primitive {
         this._start.shift(dX, dY);
         this._end.shift(dX, dY);
     }
+
+    publish() {
+        return {
+            x1: this._start.x,
+            y1: this._start.y,
+            x2: this._end.x,
+            y2: this._end.y
+        };
+    }
 }
 
 class Arrow extends Line {
     constructor(start, end, marker="") {
         super(start, end);
         this._marker = marker;
+    }
+
+    publish() {
+        return {
+            ...super.publish(),
+            marker: this._marker
+        };
     }
 }
 
@@ -87,5 +112,13 @@ class Text extends Primitive {
 
     shift(dX, dY) {
         this._start.shift(dX, dY);
+    }
+
+    publish() {
+        return {
+            x: this._start.x,
+            y: this._start.y,
+            text: this._value
+        };
     }
 }
