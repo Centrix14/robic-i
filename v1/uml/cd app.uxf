@@ -4,45 +4,165 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>250</y>
-      <w>210</w>
-      <h>190</h>
+      <x>430</x>
+      <y>480</y>
+      <w>330</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>App
 --
--currentLayer: Layer
--currentState: State = State.Idle</panel_attributes>
++buttons: ButtonHandler
++mouse: MouseHandler
+--
+startEvent(handler:EventHandler, event)
+endEvent(handler:EventHandler, event)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>250</y>
-      <w>210</w>
-      <h>250</h>
+      <x>140</x>
+      <y>70</y>
+      <w>160</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
-State
+BHState
+--
+Idle
+
+ProcessCreated
+ElementInit
+ElementSrcSet
+ElementCreated
+PropertyCreated</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>240</y>
+      <w>250</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>EventHandler
+--
+EventHandler(app: Application)
+
+start(event)
+end(event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>70</y>
+      <w>220</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>ButtonHandler
+--
+_+State: Object = BHState_
+--
+newProcessClick(event)
+newElementClick(event)
+newPropertyClick(event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>70</y>
+      <w>220</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>MouseHandler
+--
+_+State: Object = MHState_
+--
+down(event)
+move(event)
+up(event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>70</y>
+      <w>160</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+MHState
 --
 Idle
 
 ClickStart
 ClickEnd
 
-GrabStart
-GrabEnd
-
-ProcessCreation
-ElementCreationInit
-ElementCreationSrcSet
-ElementCreationDestSet
-PropertyCreation
-
-ProcessSelect
-ElementSelect
-PropertySelect</panel_attributes>
+Grabbing
+GrabEnd</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>120</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>120</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>170</y>
+      <w>160</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>170</y>
+      <w>160</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>340</y>
+      <w>40</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=2</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
