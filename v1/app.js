@@ -40,18 +40,26 @@ class ButtonHandler extends EventHandler {
         this.state = ButtonHandler.State.ProcessCreated;
     }
 
-    newElementClick() {
+    newElementClick(event) {
         this.start(event);
 
         if (this.state === ButtonHandler.State.Idle
             || this.state === ButtonHandler.State.ProcessCreated
             || this.state === ButtonHandler.State.PropertyCreated)
             this.state = ButtonHandler.State.ElementInit;
+        else if (this.state === ButtonHandler.State.ElementInit) {
+            this.state = ButtonHandler.State.ElementSrcSet;
+            console.log(`Src set ${event.x} ${event.y}`);
+        }
+        else if (this.state === ButtonHandler.State.ElementSrcSet) {
+            this.state = ButtonHandler.State.ElementCreated;
+            console.log(`Dst set ${event.x} ${event.y}`);
+        }
 
         this.end(event);
     }
 
-    newPropertyClick() {
+    newPropertyClick(event) {
         this.start(event);
 
         this.state = ButtonHandler.State.PropertyCreated;
@@ -116,7 +124,9 @@ class MouseHandler extends EventHandler {
 
 class Application {
     static State = {
-        Idle: 'Idle'
+        Idle: 'Idle',
+
+        ElementCreated: 'ElementCreated'
     }
 
     constructor() {
@@ -135,7 +145,23 @@ class Application {
     }
 
     endEvent(handler, event) {
-        console.log('Handler: ' + handler.constructor.name + ' | ' + handler.state);
+        const buttons = this.buttons, mouse = this.mouse;
+
+        if (handler === mouse
+            && handler.state === MouseHandler.State.Idle
+            && (buttons.state === ButtonHandler.State.ProcessCreated
+                || buttons.state === ButtonHandler.State.ElementCreated
+                || buttons.state === ButtonHandler.State.PropertyCreated))
+            this.buttons.state = ButtonHandler.State.Idle;
+
+        else if (handler === mouse
+                 && buttons.state === ButtonHandler.State.ElementInit
+                 && handler.state === MouseHandler.State.ClickEnd)
+            this.buttons.newElementClick(event);
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.ClickEnd
+                 && buttons.state === ButtonHandler.State.ElementSrcSet)
+            this.buttons.newElementClick(event);
     }
 }
 
