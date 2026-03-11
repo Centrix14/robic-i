@@ -528,12 +528,15 @@ publish(options): Object</panel_attributes>
       <x>650</x>
       <y>350</y>
       <w>240</w>
-      <h>100</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>Group
 --
--store: (Primitive | Group) [*]
+-store: &lt;integer, Shape&gt; [*]
 --
+add(element: Shape): Success ? Fail
+drop(id: integer): Success ? Fail
+
 shift(dX:integer, dY:integer)
 publish(options): Object</panel_attributes>
     <additional_attributes/>
@@ -564,13 +567,46 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
-      <y>440</y>
+      <y>450</y>
       <w>60</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=0..1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>120</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Shape</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>140</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>140</y>
+      <w>30</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
   </element>
 </diagram>
