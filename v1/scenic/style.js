@@ -105,47 +105,30 @@ class TextAlign {
     }
 }
 
-class StyleSet {
-    _name = '';
-    _repository = new Map();
-
-    constructor(name) {
-        this._name = name;
+class Style {
+    constructor() {
+        this._index = 0;
+        this._store = new Map();
     }
 
-    get name() { return this._name; }
-
-    get(styleName) {
-        const result = this._repository.get(styleName);
-        if (result)
-            return result;
-
-        return new SkeletonStyle('', new Stroke());
+    get(id) {
+        return this._store.get(id);
     }
     
-    get repository() {
-        return new Map(this._repository);
+    add(element) {
+        this._store.set(this._index, element);
+        return this._index++;
     }
 
-    add(style) {
-        this._repository.set(style.name, style);
-        return style.name;
+    drop(id) {
+        const element = this._store.delete(id);
+        if (element)
+            return new Success([['element', element]]);
+        else
+            return new Fail();
     }
 
-    eject(styleName) {
-        const style = this.get(styleName);
-        this._repository.delete(styleName);
-        return style;
-    }
-
-    useOn(target, styleName='all') {
-        if (styleName === 'all') {
-            this.repository.forEach((style) => style.useOn(target));
-        }
-        else {
-            this.get(styleName).useOn(target);
-        }
-
-        return target;
+    useOn(target) {
+        this._store.forEach((element) => element.useOn(target));
     }
 }
