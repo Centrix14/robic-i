@@ -18,8 +18,8 @@ describe('ProcessGroup', function(){
             const pg = new ProcessGroup();
             pg.init('0', operator);
 
-            assert.equal(operator.rects, 1, 'Rect creation failure');
-            assert.equal(operator.texts, 2, 'Texts creation failure');
+            assert.equal(1, operator.rects, 'Rect creation failure');
+            assert.equal(2, operator.texts, 'Texts creation failure');
         });
 
         it('init2 - applying properties to SVG elements', function(){
@@ -43,7 +43,7 @@ describe('ProcessGroup', function(){
             const pg = new ProcessGroup();
             pg.init('0', operator);
 
-            assert.isTrue(operator.isOk);
+            assert.isTrue(operator.isOk, 'Properties not set');
         });
 
         it('init3 - creates itself', function(){
@@ -69,8 +69,9 @@ describe('ProcessGroup', function(){
             const pg = new ProcessGroup();
             pg.init('0', operator);
 
-            assert.isTrue(operator.groupCreated);
-            assert.isTrue(operator.groupIdApplied);
+            assert.isTrue(operator.groupCreated, 'Group does not created');
+            assert.isTrue(operator.groupIdApplied,
+                          'Definition does not applied');
         });
 
         it('init4 - appends childs to group', function(){
@@ -92,8 +93,8 @@ describe('ProcessGroup', function(){
             const pg = new ProcessGroup();
             const groupElm = pg.init('0', operator);
 
-            assert.equal(3, operator.childs);
-            assert.equal(groupElm, 'group');
+            assert.equal(3, operator.childs, 'Not all childs added');
+            assert.equal('group', groupElm, 'Group does not returned');
         });
 
     });
