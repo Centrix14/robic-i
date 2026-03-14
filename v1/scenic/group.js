@@ -20,9 +20,15 @@ class Group {
 }
 
 class ProcessGroup extends Group {
+    constructor() {
+        super();
+        this._selfElm = null;
+    }
+
     init(id, operator) {
         const group = operator.createGroup();
         operator.applyTo(group, { id });
+        this._selfElm = group;
 
         const store = this._store;
         store.set('shape', [
