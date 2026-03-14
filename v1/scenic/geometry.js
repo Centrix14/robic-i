@@ -32,7 +32,12 @@ class Point extends Primitive {
         this._y += dY;
     }
 
-    publish() { return {}; }
+    publish() {
+        return {
+            x: this._x,
+            y: this._y
+        };
+    }
 }
 
 const zeroPoint = new Point(0, 0);
@@ -55,8 +60,9 @@ class Rect extends Primitive {
 
     publish() {
         return {
-            x: this._x,
-            y: this._y
+            ...this._start.publish(),
+            width: this._width,
+            height: this._height
         };
     }
 }
@@ -116,8 +122,7 @@ class Text extends Primitive {
 
     publish() {
         return {
-            x: this._start.x,
-            y: this._start.y,
+            ...this._start.publish(),
             text: this._value
         };
     }
