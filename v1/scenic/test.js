@@ -46,19 +46,28 @@ describe('ProcessGroup', function(){
 
         it('init3 - creates itself', function(){
             const operator = {
-                isOk: false,
+                groupCreated: false,
+                groupIdApplied: false,
 
                 createRect: () => {},
                 createText: () => {},
-                createGroup: () => operator.isOk = true,
+                createGroup: () => (operator.groupCreated = true, 'group'),
 
-                applyTo: () => {}
+                applyTo: function(element, definition) {
+                    if (element === 'group') {
+                        if (definition.id === '0')
+                            operator.groupIdApplied = true;
+                        else
+                            operator.groupIdApplied = false;
+                    }
+                }
             };
 
             const pg = new ProcessGroup();
             pg.init('0', operator);
 
-            assert.isTrue(operator.isOk);
+            assert.isTrue(operator.groupCreated);
+            assert.isTrue(operator.groupIdApplied);
         });
 
     });
