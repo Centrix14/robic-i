@@ -11,7 +11,8 @@ describe('ProcessGroup', function(){
                 createText: () => operator.texts++,
                 createGroup: () => {},
 
-                applyTo: () => {}
+                applyTo: () => {},
+                appendChild: () => {}
             };
 
             const pg = new ProcessGroup();
@@ -35,7 +36,8 @@ describe('ProcessGroup', function(){
                 applyTo: function(element, definition){
                     if ((element === 1 || element === 2) && definition)
                         operator.isOk = true;
-                }
+                },
+                appendChild: () => {}
             };
 
             const pg = new ProcessGroup();
@@ -60,7 +62,8 @@ describe('ProcessGroup', function(){
                         else
                             operator.groupIdApplied = false;
                     }
-                }
+                },
+                appendChild: () => {}
             };
 
             const pg = new ProcessGroup();
@@ -68,6 +71,28 @@ describe('ProcessGroup', function(){
 
             assert.isTrue(operator.groupCreated);
             assert.isTrue(operator.groupIdApplied);
+        });
+
+        it('init4 - appends childs to group', function(){
+            const operator = {
+                createRect: () => 'rect',
+                createText: () => 'text',
+                createGroup: () => 'group',
+
+                applyTo: () => {},
+
+                childs: 0,
+                appendChild: function(parent, child) {
+                    if (parent === 'group' && (child === 'rect'
+                                               || child === 'text'))
+                        operator.childs++;
+                }
+            };
+
+            const pg = new ProcessGroup();
+            pg.init('0', operator);
+
+            assert.equal(3, operator.childs);
         });
 
     });
