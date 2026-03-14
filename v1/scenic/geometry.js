@@ -103,7 +103,7 @@ class Arrow extends Line {
 class Text extends Primitive {
     constructor(start=zeroPoint, value='') {
         super();
-        this._start = _start;
+        this._start = start;
         this._value = value;
     }
 
