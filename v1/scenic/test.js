@@ -9,6 +9,8 @@ describe('ProcessGroup', function(){
 
                 createRect: () => operator.rects++,
                 createText: () => operator.texts++,
+                createGroup: () => {},
+
                 applyTo: () => {}
             };
 
@@ -28,11 +30,29 @@ describe('ProcessGroup', function(){
 
                 createRect: () => operator.rects++,
                 createText: () => operator.texts++,
+                createGroup: () => {},
 
                 applyTo: function(element, definition){
                     if ((element === 1 || element === 2) && definition)
                         operator.isOk = true;
                 }
+            };
+
+            const pg = new ProcessGroup();
+            pg.init(operator);
+
+            assert.isTrue(operator.isOk);
+        });
+
+        it('init3 - creates itself', function(){
+            const operator = {
+                isOk: false,
+
+                createRect: () => {},
+                createText: () => {},
+                createGroup: () => operator.isOk = true,
+
+                applyTo: () => {}
             };
 
             const pg = new ProcessGroup();
