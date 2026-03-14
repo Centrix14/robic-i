@@ -24,18 +24,14 @@ describe('ProcessGroup', function(){
 
         it('init2 - applying properties to SVG elements', function(){
             const operator = {
-                rects: 0,
-                texts: 0,
-
-                isOk: false,
-
-                createRect: () => operator.rects++,
-                createText: () => operator.texts++,
+                createRect: () => 'rect',
+                createText: () => 'text',
                 createGroup: () => {},
 
+                propertiesApplied: false,
                 applyTo: function(element, definition){
-                    if ((element === 1 || element === 2) && definition)
-                        operator.isOk = true;
+                    if ((element === 'rect' || element === 'group') && definition)
+                        operator.propertiesApplied = true;
                 },
                 appendChild: () => {}
             };
@@ -43,7 +39,7 @@ describe('ProcessGroup', function(){
             const pg = new ProcessGroup();
             pg.init('0', operator);
 
-            assert.isTrue(operator.isOk, 'Properties not set');
+            assert.isTrue(operator.propertiesApplied, 'Properties not set');
         });
 
         it('init3 - creates itself', function(){
