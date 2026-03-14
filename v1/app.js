@@ -24,7 +24,9 @@ const SVG = {
 
     applyTo: function(element, definition) {
         for (let prop in definition) element.setAttribute(prop, definition[prop])
-    }
+    },
+
+    appendChild: (parent, child) => parent.appendChild(child)
 }
 
 class EventHandler {
