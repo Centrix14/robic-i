@@ -51,4 +51,24 @@ class ProcessGroup extends Group {
 
         return group;
     }
+
+    getName() {
+        return this._store.get('name')[0].value;
+    }
+
+    setName(newer, operator) {
+        const name = this._store.get('name');
+        name[0].value = newer;
+        operator.applyTo(name[1], { value: newer });
+    }
+
+    getDesignation() {
+        return this._store.get('designation')[0].value;
+    }
+
+    setDesignation(newer, operator) {
+        const designation = this._store.get('designation');
+        designation[0].value = newer;
+        operator.applyTo(designation[1], { value: newer });
+    }
 }
