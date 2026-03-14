@@ -51,5 +51,7 @@ class ProcessGroup extends Group {
         operator.appendChild(group, shapeElm);
         operator.appendChild(group, nameElm);
         operator.appendChild(group, designationElm);
+
+        return group;
     }
 }
