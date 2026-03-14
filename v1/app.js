@@ -23,7 +23,12 @@ const SVG = {
     createText: () => SVG.createTag('text'),
 
     applyTo: function(element, definition) {
-        for (let prop in definition) element.setAttribute(prop, definition[prop])
+        for (let prop in definition) {
+            if (element.tagName === 'text' && prop === 'value')
+                element.textContent = definition[prop];
+            else
+                element.setAttribute(prop, definition[prop]);
+        }
     },
 
     appendChild: (parent, child) => parent.appendChild(child)
