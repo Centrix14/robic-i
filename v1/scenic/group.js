@@ -45,7 +45,7 @@ class ProcessGroup extends Group {
         ]);
 
         for (let [id, [figure, element]] of store) {
-            operator.applyTo(element, { id, ...figure });
+            operator.applyTo(element, { id, ...figure.publish() });
             operator.appendChild(group, element);
         }
 
