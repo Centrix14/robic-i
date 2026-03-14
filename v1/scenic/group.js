@@ -48,5 +48,8 @@ class ProcessGroup extends Group {
 
         const group = operator.createGroup();
         operator.applyTo(group, { id });
+        operator.appendChild(group, shapeElm);
+        operator.appendChild(group, nameElm);
+        operator.appendChild(group, designationElm);
     }
 }
