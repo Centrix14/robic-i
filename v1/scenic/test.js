@@ -15,7 +15,7 @@ describe('ProcessGroup', function(){
             };
 
             const pg = new ProcessGroup();
-            pg.init(operator);
+            pg.init('0', operator);
 
             assert.equal(operator.rects, 1, 'Rect creation failure');
             assert.equal(operator.texts, 2, 'Texts creation failure');
@@ -39,7 +39,7 @@ describe('ProcessGroup', function(){
             };
 
             const pg = new ProcessGroup();
-            pg.init(operator);
+            pg.init('0', operator);
 
             assert.isTrue(operator.isOk);
         });
@@ -56,7 +56,7 @@ describe('ProcessGroup', function(){
             };
 
             const pg = new ProcessGroup();
-            pg.init(operator);
+            pg.init('0', operator);
 
             assert.isTrue(operator.isOk);
         });
