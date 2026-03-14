@@ -20,7 +20,7 @@ class Group {
 }
 
 class ProcessGroup extends Group {
-    init(operator) {
+    init(id, operator) {
         const shape = new Rect(new Point(10, 10), 100, 50);
         this._store.set('shape', shape);
 
@@ -38,7 +38,7 @@ class ProcessGroup extends Group {
             ...name
         });
 
-        const designation = new Text(new Point(100, 50), 'П ?');
+        const designation = new Text(new Point(100, 50), `П ${id}`);
         this._store.set('designation', designation);
         const designationElm = operator.createText();
         operator.applyTo(designationElm, {
@@ -47,5 +47,6 @@ class ProcessGroup extends Group {
         });
 
         const group = operator.createGroup();
+        operator.applyTo(group, { id });
     }
 }
