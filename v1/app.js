@@ -10,11 +10,11 @@ const SVG = {
     namespace: 'http://www.w3.org/2000/svg',
     point: canvas.createSVGPoint(),
 
-    translateCoordinates: function(x, y) {
-        SVG.point.x = x;
-        SVG.point.y = y;
-        return SVG.point.matrixTransform(canvas.getScreenCTM().inverse());
-    },
+    translateCoordinates: (x, y) => (
+        SVG.point.x = x,
+        SVG.point.y = y,
+        SVG.point.matrixTransform(canvas.getScreenCTM().inverse())
+    ),
 
     createTag: (tag) => document.createElementNS(SVG.namespace, tag),
     createGroup: () => SVG.createTag('g'),
