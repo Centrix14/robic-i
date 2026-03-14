@@ -45,5 +45,7 @@ class ProcessGroup extends Group {
             id: 'designation',
             ...designation
         });
+
+        const group = operator.createGroup();
     }
 }
