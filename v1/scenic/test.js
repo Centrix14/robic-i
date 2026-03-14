@@ -90,9 +90,10 @@ describe('ProcessGroup', function(){
             };
 
             const pg = new ProcessGroup();
-            pg.init('0', operator);
+            const groupElm = pg.init('0', operator);
 
             assert.equal(3, operator.childs);
+            assert.equal(groupElm, 'group');
         });
 
     });
