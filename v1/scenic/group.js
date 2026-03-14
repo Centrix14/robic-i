@@ -13,8 +13,16 @@ class Group {
 
     drop(id) {
         if (this._store.has(id))
-            return new Success([['element': this._store.delete(id)]]);
+            return new Success([['element', this._store.delete(id)]]);
 
         return new Fail();
+    }
+}
+
+class ProcessGroup extends Group {
+    init(operator) {
+        const shape = operator.createRect();
+        const name = operator.createText();
+        const designation = operator.createText();
     }
 }
