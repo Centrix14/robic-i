@@ -123,7 +123,7 @@ class Text extends Primitive {
     publish() {
         return {
             ...this._start.publish(),
-            text: this._value
+            value: this._value
         };
     }
 }
