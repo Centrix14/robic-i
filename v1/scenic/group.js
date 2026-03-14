@@ -22,15 +22,28 @@ class Group {
 class ProcessGroup extends Group {
     init(operator) {
         const shape = new Rect(new Point(10, 10), 100, 50);
+        this._store.set('shape', shape);
+
         const shapeElm = operator.createRect();
-        operator.applyTo(shapeElm, shape);
+        operator.applyTo(shapeElm, {
+            id: 'shape',
+            ...shape
+        });
 
         const name = new Text(new Point(55, 35), 'Процесс');
+        this._store.set('name', name);
         const nameElm = operator.createText();
-        operator.applyTo(nameElm, name);
+        operator.applyTo(nameElm, {
+            id: 'name',
+            ...name
+        });
 
         const designation = new Text(new Point(100, 50), 'П ?');
+        this._store.set('designation', designation);
         const designationElm = operator.createText();
-        operator.applyTo(designationElm, designation);
+        operator.applyTo(designationElm, {
+            id: 'designation',
+            ...designation
+        });
     }
 }
