@@ -21,8 +21,16 @@ class Group {
 
 class ProcessGroup extends Group {
     init(operator) {
-        const shape = operator.createRect();
-        const name = operator.createText();
-        const designation = operator.createText();
+        const shape = new Rect(new Point(10, 10), 100, 50);
+        const shapeElm = operator.createRect();
+        operator.applyTo(shapeElm, shape);
+
+        const name = new Text(new Point(55, 35), 'Процесс');
+        const nameElm = operator.createText();
+        operator.applyTo(nameElm, name);
+
+        const designation = new Text(new Point(100, 50), 'П ?');
+        const designationElm = operator.createText();
+        operator.applyTo(designationElm, designation);
     }
 }
