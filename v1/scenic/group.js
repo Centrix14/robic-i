@@ -91,7 +91,8 @@ class ProcessGroup extends Group {
     }
 
     getMemberElement(member) {
-        if (member === ProcessGroup.Member.Name
+        if (member === ProcessGroup.Member.Shape
+            || member === ProcessGroup.Member.Name
             || member === ProcessGroup.Member.Designation) {
 
             return new Success([['element', this._store.get(member)[1]]]);
