@@ -95,6 +95,7 @@ newPropertyClick(event)</panel_attributes>
     <panel_attributes>MouseHandler
 --
 _+State: Object = MHState_
+-queue: [*] = []
 --
 down(event)
 move(event)
