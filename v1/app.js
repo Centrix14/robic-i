@@ -275,7 +275,7 @@ class Application {
 
             this.buttons.state = ButtonHandler.State.Idle;
 
-            const spatia = new Spatia();
+            const spatia = new Spatia(10);
             const coordinates = SVG.translateCoordinates(event.x, event.y);
             const cursor = new Point(coordinates.x, coordinates.y);
             for (let pg of this.buttons._pgs) {
