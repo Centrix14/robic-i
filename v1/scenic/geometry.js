@@ -71,8 +71,7 @@ class Rect extends Primitive {
     }
 
     isTouching(cursor, spatia) {
-        return this._start.isTouching(cursor, spatia)
-            || this._end.isTouching(cursor, spatia);
+        return this._start.isTouching(cursor, spatia);
     }
 }
 
