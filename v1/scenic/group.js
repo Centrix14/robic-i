@@ -28,8 +28,12 @@ class ProcessGroup extends Group {
 
     constructor() {
         super();
+
         this._selfElm = null;
+        this._init = false;
     }
+
+    get isInitiated() { return this._init; }
 
     init(id, operator) {
         const group = operator.createGroup();
@@ -55,6 +59,7 @@ class ProcessGroup extends Group {
             operator.appendChild(group, element);
         }
 
+        this._init = true;
         return group;
     }
 
