@@ -280,7 +280,7 @@ class Application {
             const cursor = new Point(coordinates.x, coordinates.y);
             for (let pg of this.buttons._pgs) {
                 if (pg.isTouching(cursor, spatia))
-                    pg.shift(event.movementX, event.movementY);
+                    pg.shift(event.movementX, event.movementY, SVG);
             }
             console.log(`Move ${event.x} ${event.y}`);
         }
