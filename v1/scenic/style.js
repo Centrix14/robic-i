@@ -4,17 +4,17 @@ class StyleElement {
 
 class Stroke {
     static Linecap = {
-        Butt: 'Butt',
-        Round: 'Round',
-        Square: 'Square'
+        Butt: 'butt',
+        Round: 'round',
+        Square: 'square'
     }
 
     static Linejoin = {
-        Arcs: 'Arcs',
-        Bevel: 'Bevel',
-        Miter: 'Miter',
-        MiterClip: 'MiterClip',
-        Round: 'Round'
+        Arcs: 'arcs',
+        Bevel: 'bevel',
+        Miter: 'miter',
+        MiterClip: 'miterclip',
+        Round: 'round'
     }
 
     constructor(definition) {
@@ -53,16 +53,16 @@ class Fill {
 
 class Font {
     static Style = {
-        Normal: 'Normal',
-        Italic: 'Italic',
-        Oblique: 'Oblique'
+        Normal: 'normal',
+        Italic: 'italic',
+        Oblique: 'oblique'
     }
 
     static Weight = {
-        Normal: 'Normal',
-        Bold: 'Bold',
-        Bolder: 'Bolder',
-        Lighter: 'Lighter'
+        Normal: 'normal',
+        Bold: 'bold',
+        Bolder: 'bolder',
+        Lighter: 'lighter'
     }
 
     constructor(definition) {
@@ -82,16 +82,16 @@ class Font {
 
 class TextAlign {
     static Anchor = {
-        Start: 'Start',
-        Middle: 'Middle',
-        End: 'End'
+        Start: 'start',
+        Middle: 'middle',
+        End: 'end'
     }
 
     static Baseline = {
-        Auto: 'Auto',
-        Top: 'Top',
-        Middle: 'Middle',
-        Bottom: 'Bottom'
+        Auto: 'auto',
+        Top: 'top',
+        Middle: 'middle',
+        Bottom: 'bottom'
     }
 
     constructor(definition) {
