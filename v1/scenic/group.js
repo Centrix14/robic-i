@@ -58,6 +58,9 @@ class ProcessGroup extends Group {
         return group;
     }
 
+    add() { return new Fail(); }
+    drop() { return new Fail(); }
+
     getMemberValue(member) {
         if (member === ProcessGroup.Member.Name
             || member === ProcessGroup.Member.Designation) {
