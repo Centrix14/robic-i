@@ -173,4 +173,9 @@ class ProcessGeometrySet {
 
         return group._selfElm;
     }
+
+    isTouching(cursor, spatia) {
+        const State = ProcessGeometrySet.State;
+        return this._geometry.get(State.Main).isTouching(cursor, spatia);
+    }
 }
