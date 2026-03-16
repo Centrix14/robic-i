@@ -71,7 +71,7 @@ class Rect extends Primitive {
     }
 
     isTouching(cursor, spatia) {
-        return this._start.isTouching(cursor, spatia);
+        return spatia.isInRect(this, cursor);
     }
 }
 
@@ -146,5 +146,14 @@ class Spatia {
 
         return (Math.abs(delta.x) <= this._precision) &&
             (Math.abs(delta.y) <= this._precision);
+    }
+
+    isInRect(rect, cursor) {
+        const start = rect._start,
+              end = start.sum(new Point(rect._width, rect._height));
+        return (cursor.x - start.x >= -this._precision)
+            && (cursor.y - start.y >= -this._precision)
+            && (cursor.x - end.x <= this._precision)
+            && (cursor.y - end.y <= this._precision);
     }
 }
