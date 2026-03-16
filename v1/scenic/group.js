@@ -76,4 +76,11 @@ class ProcessGroup extends Group {
         const shape = this._store.get('shape')[0];
         return shape.isTouching(cursor, spatia);
     }
+
+    shift(dX, dY, operator) {
+        for (let [shape, element] of this._store.values()) {
+            shape.shift(dX, dY);
+            operator.applyTo(element, shape.publish());
+        }
+    }
 }
