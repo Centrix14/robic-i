@@ -651,4 +651,22 @@ drop(): Fail</panel_attributes>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;280.0;10.0;10.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>90</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Spatia
+--
+-precision: integer = 5
+--
+Spatia(precision:integer)
+
+isReachable(target:Point, cursor:Point): boolean
+isInRect(rect:Rect, cursor:Point): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
