@@ -37,7 +37,10 @@ class ProcessGeometrySet {
             family: 'sans',
             size: '12px'
         }), 'font');
-        style.add(new TextAlign(), 'textAlign');
+        style.add(new TextAlign({
+            anchor: TextAlign.Anchor.Middle,
+            baseline: TextAlign.Baseline.Middle
+        }), 'textAlign');
 
         return style;
     }
