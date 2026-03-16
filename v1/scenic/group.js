@@ -40,17 +40,28 @@ class ProcessGroup extends Group {
         operator.applyTo(group, { id });
         this._selfElm = group;
 
+        const spawn = Defaults.process.spawn,
+              size = Defaults.process.size,
+              offset = Defaults.process.designationOffset;
+
         const store = this._store;
         store.set(ProcessGroup.Member.Shape, [
-            new Rect(new Point(10, 10), 100, 50),
+            new Rect(new Point(spawn.x, spawn.y),
+                     size.width, size.height),
             operator.createRect()
         ]);
         store.set(ProcessGroup.Member.Name, [
-            new Text(new Point(55, 35), 'Процесс'),
+            new Text(new Point(
+                (size.width / 2) + spawn.x,
+                (size.height / 2) + spawn.y
+            ), 'Процесс'),
             operator.createText()
         ]);
         store.set(ProcessGroup.Member.Designation, [
-            new Text(new Point(100, 50), `П ${id}`),
+            new Text(new Point(
+                (spawn.x + size.width + offset.x),
+                (spawn.y + size.height + offset.y)
+            ), `П ${id}`),
             operator.createText()
         ]);
 
