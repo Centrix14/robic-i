@@ -127,3 +127,16 @@ class Text extends Primitive {
         };
     }
 }
+
+class Spatia {
+    constructor(precision=5) {
+        this._precision = precision;
+    }
+
+    isReachable(target, cursor) {
+        const delta = cursor.sub(target);
+
+        return (Math.abs(delta.x) <= this._precision) &&
+            (Math.abs(delta.y) <= this._precision);
+    }
+}
