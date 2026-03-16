@@ -17,6 +17,94 @@ class ProcessGeometrySet {
         DesignationHidden: 'Designation.Hidden',
     }
 
+    constructor(operator) {
+        const State = ProcessGeometrySet.State;
+        const Style = ProcessGeometrySet.Style;
+
+        this._state = State.Main;
+        this._operator = operator;
+
+        this._geometry = new Map([[
+            State.Main, new ProcessGroup()
+        ]]);
+
+        this._styles = new Map([
+            [Style.ShapeMain, ProcessGeometrySet._shapeMainStyle()],
+            [Style.NameMain, ProcessGeometrySet._nameMainStyle()],
+            [Style.DesignationMain, ProcessGeometrySet._designationMainStyle()],
+
+            [Style.ShapeSelected, ProcessGeometrySet._shapeSelectedStyle()],
+
+            [Style.ShapeHidden, ProcessGeometrySet._shapeHiddenStyle()],
+            [Style.NameHidden, ProcessGeometrySet._nameHiddenStyle()],
+            [Style.DesignationHidden,
+             ProcessGeometrySet._designationHiddenStyle()],
+        ]);
+
+        this._supplement = new Map();
+    }
+
+    combine(options) {
+        const State = ProcessGeometrySet.State;
+        const state = options?.state ?? State.Main;
+
+        const group = this._geometry.get(State.Main);
+        if (!group.isInitiated) {
+            const id = options?.id;
+
+            if (!id)
+                return new Fail();
+
+            group.init(id, this._operator);
+        }
+
+        return this._combine(state, group);
+    }
+
+    _combine(state, group) {
+        const State = ProcessGeometrySet.State,
+              Member = ProcessGroup.Member,
+              Style = ProcessGeometrySet.Style;
+
+        const shape = group.getMemberElement(Member.Shape).get('element'),
+              name = group.getMemberElement(Member.Name).get('element');
+        const designation =
+              group.getMemberElement(Member.Designation).get('element');
+
+        switch (state) {
+
+        case State.Main:
+            this._styles.get(Style.ShapeMain).useOn(shape);
+            this._styles.get(Style.NameMain).useOn(name);
+            this._styles.get(Style.DesignationMain).useOn(designation);
+            break;
+
+        case State.Selected: 
+            this._styles.get(Style.ShapeSelected).useOn(shape);
+            this._styles.get(Style.NameMain).useOn(name);
+            this._styles.get(Style.DesignationMain).useOn(designation);
+            break;
+
+        case State.Hidden:
+            this._styles.get(Style.ShapeHidden).useOn(shape);
+            this._styles.get(Style.NameHidden).useOn(name);
+            this._styles.get(Style.DesignationHidden).useOn(designation);
+            break;
+        }
+
+        return group._selfElm;
+    }
+
+    isTouching(cursor, spatia) {
+        const State = ProcessGeometrySet.State;
+        return this._geometry.get(State.Main).isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY) {
+        const State = ProcessGeometrySet.State;
+        this._geometry.get(State.Main).shift(dX, dY, this._operator);
+    }
+
     static _shapeMainStyle() {
         const style = new Style();
 
@@ -98,89 +186,5 @@ class ProcessGeometrySet {
         style.add(new Fill({opacity: '0'}), 'fill');
 
         return style;
-    }
-
-    constructor(operator) {
-        const State = ProcessGeometrySet.State;
-        const Style = ProcessGeometrySet.Style;
-
-        this._state = State.Main;
-        this._operator = operator;
-
-        this._geometry = new Map([[
-            State.Main, new ProcessGroup()
-        ]]);
-
-        this._styles = new Map([
-            [Style.ShapeMain, ProcessGeometrySet._shapeMainStyle()],
-            [Style.NameMain, ProcessGeometrySet._nameMainStyle()],
-            [Style.DesignationMain, ProcessGeometrySet._designationMainStyle()],
-
-            [Style.ShapeSelected, ProcessGeometrySet._shapeSelectedStyle()],
-
-            [Style.ShapeHidden, ProcessGeometrySet._shapeHiddenStyle()],
-            [Style.NameHidden, ProcessGeometrySet._nameHiddenStyle()],
-            [Style.DesignationHidden,
-             ProcessGeometrySet._designationHiddenStyle()],
-        ]);
-
-        this._supplement = new Map();
-    }
-
-    combine(options) {
-        const State = ProcessGeometrySet.State;
-        const state = options?.state ?? State.Main;
-
-        const group = this._geometry.get(State.Main);
-        if (!group.isInitiated) {
-            const id = options?.id;
-
-            if (!id)
-                return new Fail();
-
-            group.init(id, this._operator);
-        }
-
-        return this._combine(state, group);
-    }
-
-    _combine(state, group) {
-        const State = ProcessGeometrySet.State,
-              Member = ProcessGroup.Member,
-              Style = ProcessGeometrySet.Style;
-
-        const shape = group.getMemberElement(Member.Shape).get('element'),
-              name = group.getMemberElement(Member.Name).get('element'),
-              designation = group.getMemberElement(Member.Designation).get('element');
-
-        switch (state) {
-        case State.Main:
-            this._styles.get(Style.ShapeMain).useOn(shape);
-            this._styles.get(Style.NameMain).useOn(name);
-            this._styles.get(Style.DesignationMain).useOn(designation);
-            break;
-        case State.Selected: 
-            this._styles.get(Style.ShapeSelected).useOn(shape);
-            this._styles.get(Style.NameMain).useOn(name);
-            this._styles.get(Style.DesignationMain).useOn(designation);
-            break;
-        case State.Hidden:
-            this._styles.get(Style.ShapeHidden).useOn(shape);
-            this._styles.get(Style.NameHidden).useOn(name);
-            this._styles.get(Style.DesignationHidden).useOn(designation);
-            break;
-        }
-
-        return group._selfElm;
-    }
-
-    isTouching(cursor, spatia) {
-        const State = ProcessGeometrySet.State;
-        return this._geometry.get(State.Main).isTouching(cursor, spatia);
-    }
-
-    shift(dX, dY) {
-        const State = ProcessGeometrySet.State;
-        this._geometry.get(State.Main).shift(dX, dY, this._operator);
     }
 }
