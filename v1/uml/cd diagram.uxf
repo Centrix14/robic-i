@@ -28,7 +28,9 @@
    {data = Unit, connection=UnitConnection}
 +name: string
 +author: string
-+changed: Date</panel_attributes>
++changed: Date
+--
+newProcess(doc:Document, canvas:HTMLElement): Success ? Fail</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
