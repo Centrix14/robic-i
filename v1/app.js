@@ -266,14 +266,23 @@ class Application {
         if (handler === mouse
             && handler.state === MouseHandler.State.ClickEnd
             && buttons.state === ButtonHandler.State.Idle) {
-            console.log('Select');
+            console.log(`Select ${event.x} ${event.y}`);
         }
 
         // Units moving
         else if (handler === mouse
                  && handler.state === MouseHandler.State.Grabbing) {
+
             this.buttons.state = ButtonHandler.State.Idle;
-            console.log('Move!');
+
+            const spatia = new Spatia();
+            const coordinates = SVG.translateCoordinates(event.x, event.y);
+            const cursor = new Point(coordinates.x, coordinates.y);
+            for (let pg of this.buttons._pgs) {
+                if (pg.isTouching(cursor, spatia))
+                    pg.shift(event.movementX, event.movementY);
+            }
+            console.log(`Move ${event.x} ${event.y}`);
         }
         else if (handler === mouse
                  && handler.state === MouseHandler.State.GrabEnd) {
