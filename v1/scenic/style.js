@@ -115,9 +115,13 @@ class Style {
         return this._store.get(id);
     }
     
-    add(element) {
-        this._store.set(this._index, element);
-        return this._index++;
+    add(element, id=null) {
+        this._store.set(id ?? this._index, element);
+
+        if (id)
+            return id;
+        else
+            return this._index++;
     }
 
     drop(id) {
