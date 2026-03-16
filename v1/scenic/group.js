@@ -71,4 +71,9 @@ class ProcessGroup extends Group {
         designation[0].value = newer;
         operator.applyTo(designation[1], { value: newer });
     }
+
+    isTouching(cursor, spatia) {
+        const shape = this._store.get('shape')[0];
+        return shape.isTouching(cursor, spatia);
+    }
 }
