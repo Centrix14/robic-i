@@ -71,6 +71,22 @@ class ProcessGeometrySet {
         return style;
     }
 
+    static _nameHiddenStyle() {
+        const style = new Style();
+
+        style.add(new Fill({opacity: '0'}), 'fill');
+
+        return style;
+    }
+
+    static _designationHiddenStyle() {
+        const style = new Style();
+
+        style.add(new Fill({opacity: '0'}), 'fill');
+
+        return style;
+    }
+
     constructor() {
         const State = ProcessGeometrySet.State;
         const Style = ProcessGeometrySet.Style;
