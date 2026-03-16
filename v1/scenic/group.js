@@ -20,7 +20,7 @@ class Group {
 }
 
 class ProcessGroup extends Group {
-    const Member = {
+    static Member = {
         Shape: 'shape',
         Name: 'name',
         Designation: 'designation'
