@@ -64,6 +64,8 @@ class ProcessGroup extends Group {
 
             return this._store.get(member)[0].value;
         }
+        else
+            return new Fail();
     }
 
     setMemberValue(member, value, operator) {
@@ -74,6 +76,8 @@ class ProcessGroup extends Group {
             m[0].value = value;
             operator.applyTo(m[1], { value });
         }
+        else
+            return new Fail();
     }
 
     getMemberElement(member) {
