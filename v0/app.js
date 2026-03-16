@@ -199,7 +199,7 @@ class Application {
     grab(startX, startY, endX, endY) {
         const shiftX = canvasCoords(endX, endY).x - canvasCoords(startX, startY).x;
         const shiftY = canvasCoords(endX, endY).y - canvasCoords(startX, startY).y;
-        
+
         this.#editor.grab(shiftX, shiftY);
     }
 
