@@ -62,7 +62,7 @@ class ProcessGroup extends Group {
         if (member === ProcessGroup.Member.Name
             || member === ProcessGroup.Member.Designation) {
 
-            return this._store.get(member)[0].value;
+            return new Success([['value', this._store.get(member)[0].value]]);
         }
         else
             return new Fail();
@@ -75,6 +75,8 @@ class ProcessGroup extends Group {
             const m = this._store.get(member);
             m[0].value = value;
             operator.applyTo(m[1], { value });
+
+            return new Success();
         }
         else
             return new Fail();
