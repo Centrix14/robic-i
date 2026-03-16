@@ -13,6 +13,8 @@ class ProcessGeometrySet {
         ShapeSelected: 'Shape.Selected',
 
         ShapeHidden: 'Shape.Hidden',
+        NameHidden: 'Name.Hidden',
+        DesignationHidden: 'Designation.Hidden',
     }
 
     static _shapeMainStyle() {
@@ -105,6 +107,9 @@ class ProcessGeometrySet {
             [Style.ShapeSelected, ProcessGeometrySet._shapeSelectedStyle()],
 
             [Style.ShapeHidden, ProcessGeometrySet._shapeHiddenStyle()],
+            [Style.NameHidden, ProcessGeometrySet._nameHiddenStyle()],
+            [Style.DesignationHidden,
+             ProcessGeometrySet._designationHiddenStyle()],
         ]);
 
         this._supplement = new Map();
@@ -150,6 +155,8 @@ class ProcessGeometrySet {
             break;
         case State.Hidden:
             this._styles.get(Style.ShapeHidden).useOn(shape);
+            this._styles.get(Style.NameHidden).useOn(name);
+            this._styles.get(Style.DesignationHidden).useOn(designation);
             break;
         }
 
