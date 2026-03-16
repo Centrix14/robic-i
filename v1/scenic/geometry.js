@@ -38,6 +38,10 @@ class Point extends Primitive {
             y: this._y
         };
     }
+
+    isTouching(cursor, spatia) {
+        return spatia.isReachable(this, cursor);
+    }
 }
 
 const zeroPoint = new Point(0, 0);
@@ -64,6 +68,11 @@ class Rect extends Primitive {
             width: this._width,
             height: this._height
         };
+    }
+
+    isTouching(cursor, spatia) {
+        return this._start.isTouching(cursor, spatia)
+            || this._end.isTouching(cursor, spatia);
     }
 }
 
