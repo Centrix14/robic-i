@@ -75,6 +75,7 @@ class ButtonHandler extends EventHandler {
         super(app);
 
         this.state = ButtonHandler.State.Idle;
+        this._i = 0;
     }
 
     cursorClick(event) {
@@ -88,9 +89,13 @@ class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
 
-        console.log('+Process');
+        const pg = new ProcessGroup();
+        const elm = pg.init(this._i.toString(), SVG);
+        SVG.appendChild(canvas, elm);
 
+        this._i++;
         this.state = ButtonHandler.State.ProcessCreated;
+        console.log('+Process');
     }
 
     newElementClick(event) {
