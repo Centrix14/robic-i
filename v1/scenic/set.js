@@ -27,7 +27,10 @@ class ProcessGeometrySet {
     static _nameMainStyle() {
         const style = new Style();
 
-        style.add(new Font('sans', '12px'), 'font');
+        style.add(new Font({
+            family: 'sans',
+            size: '12px'
+        }), 'font');
         style.add(new TextAlign(), 'textAlign');
 
         return style;
@@ -36,9 +39,14 @@ class ProcessGeometrySet {
     static _designationMainStyle() {
         const style = new Style();
 
-        style.add(new Font('sans', '10px'), 'font');
-        style.add(new TextAlign(TextAlign.Anchor.End, TextAlign.Baseline.Top),
-                  'textAlign');
+        style.add(new Font({
+            family: 'sans',
+            size: '10px'
+        }), 'font');
+        style.add(new TextAlign({
+            anchor: TextAlign.Anchor.End,
+            baseline: TextAlign.Baseline.Top
+        }), 'textAlign');
 
         return style;
     }
@@ -47,7 +55,9 @@ class ProcessGeometrySet {
         const style = new Style();
 
         style.add(new Fill(), 'fill');
-        style.add(new Stroke('blue'), 'stroke');
+        style.add(new Stroke({
+            color: 'blue'
+        }), 'stroke');
 
         return style;
     }
@@ -55,8 +65,8 @@ class ProcessGeometrySet {
     static _shapeHiddenStyle() {
         const style = new Style();
 
-        style.add(new Fill('white', '0'), 'fill');
-        style.add(new Stroke('black', '1px', '', '0'), 'stroke');
+        style.add(new Fill({opacity: '0'}), 'fill');
+        style.add(new Stroke({opacity: '0'}), 'stroke');
 
         return style;
     }
@@ -65,7 +75,9 @@ class ProcessGeometrySet {
         const State = ProcessGeometrySet.State;
         const Style = ProcessGeometrySet.Style;
 
-        this._shapes = new Map([[
+        this._state = State.Main;
+
+        this._geometry = new Map([[
             State.Main, new ProcessGroup()
         ]]);
 
@@ -80,5 +92,51 @@ class ProcessGeometrySet {
         ]);
 
         this._supplement = new Map();
+    }
+
+    combine(options) {
+        const State = ProcessGeometrySet.State;
+        const state = options?.state ?? State.Main;
+
+        const group = this._geometry.get(State.Main);
+        if (!group.isInitiated) {
+            const id = options?.id;
+            const operator = options?.operator;
+
+            if (!id || !operator)
+                return new Fail();
+
+            group.init(id, operator);
+        }
+
+        return this._combine(state, group);
+    }
+
+    _combine(state, group) {
+        const State = ProcessGeometrySet.State,
+              Member = ProcessGroup.Member,
+              Style = ProcessGeometrySet.Style;
+
+        const shape = group.getMemberElement(Member.Shape).get('element'),
+              name = group.getMemberElement(Member.Name).get('element'),
+              designation = group.getMemberElement(Member.Designation).get('element');
+
+        switch (state) {
+        case State.Main:
+            this._styles.get(Style.ShapeMain).useOn(shape);
+            this._styles.get(Style.NameMain).useOn(name);
+            this._styles.get(Style.DesignationMain).useOn(designation);
+            break;
+        case State.Selected: 
+            this._styles.get(Style.ShapeSelected).useOn(shape);
+            this._styles.get(Style.NameMain).useOn(name);
+            this._styles.get(Style.DesignationMain).useOn(designation);
+            break;
+        case State.Hidden:
+            this._styles.get(Style.ShapeHidden).useOn(shape);
+            break;
+        }
+
+        return group._selfElm;
     }
 }
