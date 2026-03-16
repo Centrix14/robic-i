@@ -83,7 +83,13 @@ class ProcessGroup extends Group {
     }
 
     getMemberElement(member) {
-        return this._store.get(member)[1];
+        if (member === ProcessGroup.Member.Name
+            || member === ProcessGroup.Member.Designation) {
+
+            return new Success([['element', this._store.get(member)[1]]]);
+        }
+        else
+            return new Fail();
     }
 
     isTouching(cursor, spatia) {
