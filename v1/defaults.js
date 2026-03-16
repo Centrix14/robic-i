@@ -1,0 +1,16 @@
+const Defaults = {
+    process: {
+        spawn: {
+            x: 20,
+            y: 20
+        },
+        size: {
+            width: 100,
+            height: 50
+        },
+        designationOffset: {
+            x: -5,
+            y: -5
+        }
+    }
+}
