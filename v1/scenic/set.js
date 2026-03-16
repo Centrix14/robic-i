@@ -29,6 +29,10 @@ class ProcessGeometrySet {
     static _nameMainStyle() {
         const style = new Style();
 
+        style.add(new Fill({
+            color: 'black',
+            opacity: '1'
+        }), 'fill');
         style.add(new Font({
             family: 'sans',
             size: '12px'
@@ -41,6 +45,10 @@ class ProcessGeometrySet {
     static _designationMainStyle() {
         const style = new Style();
 
+        style.add(new Fill({
+            color: 'black',
+            opacity: '1'
+        }), 'fill');
         style.add(new Font({
             family: 'sans',
             size: '10px'
