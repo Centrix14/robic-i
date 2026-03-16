@@ -100,11 +100,12 @@ class ProcessGeometrySet {
         return style;
     }
 
-    constructor() {
+    constructor(operator) {
         const State = ProcessGeometrySet.State;
         const Style = ProcessGeometrySet.Style;
 
         this._state = State.Main;
+        this._operator = operator;
 
         this._geometry = new Map([[
             State.Main, new ProcessGroup()
@@ -133,12 +134,11 @@ class ProcessGeometrySet {
         const group = this._geometry.get(State.Main);
         if (!group.isInitiated) {
             const id = options?.id;
-            const operator = options?.operator;
 
-            if (!id || !operator)
+            if (!id)
                 return new Fail();
 
-            group.init(id, operator);
+            group.init(id, this._operator);
         }
 
         return this._combine(state, group);
@@ -177,5 +177,10 @@ class ProcessGeometrySet {
     isTouching(cursor, spatia) {
         const State = ProcessGeometrySet.State;
         return this._geometry.get(State.Main).isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY) {
+        const State = ProcessGeometrySet.State;
+        this._geometry.get(State.Main).shift(dX, dY, this._operator);
     }
 }
