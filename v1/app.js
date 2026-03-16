@@ -201,6 +201,7 @@ class MouseHandler extends EventHandler {
         super(app);
 
         this.state = MouseHandler.State.Idle;
+        this.queue = [];
     }
 
     down(event) {
@@ -208,8 +209,11 @@ class MouseHandler extends EventHandler {
 
         if (this.state === MouseHandler.State.Idle
             || this.state === MouseHandler.State.ClickEnd
-            || this.state === MouseHandler.State.GrabEnd)
+            || this.state === MouseHandler.State.GrabEnd) {
+
             this.state = MouseHandler.State.ClickStart;
+            this.queue.push(event);
+        }
     }
 
     move(event) {
@@ -218,10 +222,18 @@ class MouseHandler extends EventHandler {
         switch (this.state) {
         case MouseHandler.State.ClickStart:
             this.state = MouseHandler.State.Grabbing;
+
+            this.queue.push(event);
             break;
+
+        case MouseHandler.State.Grabbing:
+            this.queue = [this.queue[1], event];
+            break;
+
         case MouseHandler.State.ClickEnd:
         case MouseHandler.State.GrabEnd:
             this.state = MouseHandler.State.Idle;
+            this.queue = [];
             break;
         }
 
@@ -275,14 +287,22 @@ class Application {
 
             this.buttons.state = ButtonHandler.State.Idle;
 
+            const start = handler.queue[0], end = handler.queue[1];
+            const coords1 = SVG.translateCoordinates(start.x, start.y),
+                  coords1p = new Point(coords1.x, coords1.y);
+            const coords2 = SVG.translateCoordinates(end.x, end.y),
+                  coords2p = new Point(coords2.x, coords2.y);
+            const delta = new Point(
+                SVG.translateCoordinates(end.x, end.y).x - SVG.translateCoordinates(start.x, start.y).x,
+                SVG.translateCoordinates(end.x, end.y).y - SVG.translateCoordinates(start.x, start.y).y,
+            );
+
             const spatia = new Spatia(10);
-            const coordinates = SVG.translateCoordinates(event.x, event.y);
-            const cursor = new Point(coordinates.x, coordinates.y);
+
             for (let pg of this.buttons._pgs) {
-                if (pg.isTouching(cursor, spatia))
-                    pg.shift(event.movementX, event.movementY, SVG);
+                if (pg.isTouching(coords1p, spatia))
+                    pg.shift(delta.x, delta.y, SVG);
             }
-            console.log(`Move ${event.x} ${event.y}`);
         }
         else if (handler === mouse
                  && handler.state === MouseHandler.State.GrabEnd) {
