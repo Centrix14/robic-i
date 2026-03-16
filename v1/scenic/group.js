@@ -20,6 +20,12 @@ class Group {
 }
 
 class ProcessGroup extends Group {
+    const Member = {
+        Shape: 'shape',
+        Name: 'name',
+        Designation: 'designation'
+    }
+
     constructor() {
         super();
         this._selfElm = null;
@@ -31,15 +37,15 @@ class ProcessGroup extends Group {
         this._selfElm = group;
 
         const store = this._store;
-        store.set('shape', [
+        store.set(ProcessGroup.Member.Shape, [
             new Rect(new Point(10, 10), 100, 50),
             operator.createRect()
         ]);
-        store.set('name', [
+        store.set(ProcessGroup.Member.Name, [
             new Text(new Point(55, 35), 'Процесс'),
             operator.createText()
         ]);
-        store.set('designation', [
+        store.set(ProcessGroup.Member.Designation, [
             new Text(new Point(100, 50), `П ${id}`),
             operator.createText()
         ]);
@@ -52,24 +58,22 @@ class ProcessGroup extends Group {
         return group;
     }
 
-    getName() {
-        return this._store.get('name')[0].value;
+    getMemberValue(member) {
+        if (member === ProcessGroup.Member.Name
+            || member === ProcessGroup.Member.Designation) {
+
+            return this._store.get(member)[0].value;
+        }
     }
 
-    setName(newer, operator) {
-        const name = this._store.get('name');
-        name[0].value = newer;
-        operator.applyTo(name[1], { value: newer });
-    }
+    setMemberValue(member, value, operator) {
+        if (member === ProcessGroup.Member.Name
+            || member === ProcessGroup.Member.Designation) {
 
-    getDesignation() {
-        return this._store.get('designation')[0].value;
-    }
-
-    setDesignation(newer, operator) {
-        const designation = this._store.get('designation');
-        designation[0].value = newer;
-        operator.applyTo(designation[1], { value: newer });
+            const m = this._store.get(member);
+            m[0].value = value;
+            operator.applyTo(m[1], { value });
+        }
     }
 
     isTouching(cursor, spatia) {
