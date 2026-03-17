@@ -158,7 +158,7 @@ class NaiveStepLineV extends Primitive {
 }
 
 class Text extends Primitive {
-    constructor(start=zeroPoint, value='') {
+    constructor(value='', start=zeroPoint) {
         super();
         this._start = start;
         this.value = value;
