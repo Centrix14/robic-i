@@ -111,4 +111,11 @@ describe('NaiveStepLine', function(){
         assert.equal('M 10 10 h 40', obj.d, 'Incorrect path');
     });
 
+    it('NaiveStepLine3 - makes step regular line', function(){
+        const line = new NaiveStepLine(new Point(10, 10), new Point(50, 50));
+        const obj = line.publish();
+        assert.equal('M 10 10 h 25 M 25 10 v 40 M 25 50 h 25', obj.d,
+                     'Incorrect path');
+    })
+
 });
