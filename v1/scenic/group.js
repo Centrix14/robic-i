@@ -124,3 +124,66 @@ class ProcessGroup extends Group {
         }
     }
 }
+
+class ElementArrowGroup extends Group {
+    static Member = {
+        Shape: 'shape',
+        Name: 'name',
+        Designation: 'designation'
+    }
+
+    constructor() {
+        super();
+
+        this._selfElm = null;
+        this._init = false;
+    }
+
+    get isInitiated() { return this._init; }
+
+    init(id, operator, coords) {
+        if (!coords?.start || !coords?.end)
+            return new Fail();
+
+        const Member = ElementArrowGroup.Member;
+
+        const group = operator.createGroup();
+        operator.applyTo(group, { id });
+        this._selfElm = group;
+
+        const start = coords.start, end = coords.end;
+        const stepline = new NaiveStepLineV(start, end),
+              center = stepline.getCenter();
+
+        const store = this._store;
+        store.set(Member.Shape, [
+            stepline,
+            operator.createPath()
+        ]);
+        store.set(Member.Name, [
+            new Text(new Point(
+                center.x,
+                center.y - 5
+            ), 'Элемент'),
+            operator.createText()
+        ]);
+        store.set(Member.Designation, [
+            new Text(new Point(
+                center.x,
+                center.y + 5
+            ), `Э ${id}`),
+            operator.createText()
+        ]);
+
+        for (let [id, [figure, element]] of store) {
+            operator.applyTo(element, { id, ...figure.publish() });
+            operator.appendChild(group, element);
+        }
+
+        this._init = true;
+        return group;
+    }
+
+    add() { return new Fail(); }
+    drop() { return new Fail(); }
+}
