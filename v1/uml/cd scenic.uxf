@@ -709,12 +709,13 @@ Designation</panel_attributes>
     </coordinates>
     <panel_attributes>ProcessGeometrySet
 --
+-operator: CanvasOperator
 -state: PGSstate = PGSstate.Main
 -shapes: &lt;string, Group&gt; [*]
 -styles: &lt;string, Style&gt; [*]
 -supplement: &lt;string, Group&gt; [*]
 --
-GeometrySet()
+ProcessGeometrySet(operator: CanvasOperator)
 
 combine(options): Success
 
