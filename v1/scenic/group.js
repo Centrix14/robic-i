@@ -118,9 +118,9 @@ class ProcessGroup extends Group {
     }
 
     shift(dX, dY, operator) {
-        for (let [shape, element] of this._store.values()) {
-            shape.shift(dX, dY);
-            operator.applyTo(element, shape.publish());
+        for (let [figure, element] of this._store.values()) {
+            figure.shift(dX, dY);
+            operator.applyTo(element, figure.publish());
         }
     }
 }
