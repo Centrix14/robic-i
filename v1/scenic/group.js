@@ -186,4 +186,39 @@ class ElementArrowGroup extends Group {
 
     add() { return new Fail(); }
     drop() { return new Fail(); }
+
+    getMemberValue(member) {
+        if (member === ElementArrowGroup.Member.Name
+            || member === ElementArrowGroup.Member.Designation) {
+
+            return new Success([['value', this._store.get(member)[0].value]]);
+        }
+        else
+            return new Fail();
+    }
+
+    setMemberValue(member, value, operator) {
+        if (member === ElementArrowGroup.Member.Name
+            || member === ElementArrowGroup.Member.Designation) {
+
+            const m = this._store.get(member);
+            m[0].value = value;
+            operator.applyTo(m[1], { value });
+
+            return new Success();
+        }
+        else
+            return new Fail();
+    }
+
+    getMemberElement(member) {
+        if (member === ElementArrowGroup.Member.Shape
+            || member === ElementArrowGroup.Member.Name
+            || member === ElementArrowGroup.Member.Designation) {
+
+            return new Success([['element', this._store.get(member)[1]]]);
+        }
+        else
+            return new Fail();
+    }
 }
