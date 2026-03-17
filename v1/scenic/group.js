@@ -221,4 +221,11 @@ class ElementArrowGroup extends Group {
         else
             return new Fail();
     }
+
+    shift(dX, dY, operator) {
+        for (let [figure, element] of this._store.values()) {
+            figure.shift(dX, dY);
+            operator.applyTo(element, figure.publish());
+        }
+    }
 }
