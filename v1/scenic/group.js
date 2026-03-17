@@ -53,17 +53,17 @@ class ProcessGroup extends Group {
             operator.createRect()
         ]);
         store.set(ProcessGroup.Member.Name, [
-            new Text(new Point(
-                (size.width / 2) + spawn.x,
-                (size.height / 2) + spawn.y
-            ), 'Процесс'),
+            new Text('Процесс',
+                     new Point((size.width / 2) + spawn.x,
+                               (size.height / 2) + spawn.y)
+                    ),
             operator.createText()
         ]);
         store.set(ProcessGroup.Member.Designation, [
-            new Text(new Point(
-                (spawn.x + size.width + offset.x),
-                (spawn.y + size.height + offset.y)
-            ), `П ${id}`),
+            new Text(`П ${id}`,
+                     new Point((spawn.x + size.width + offset.x),
+                               (spawn.y + size.height + offset.y))
+                    ),
             operator.createText()
         ]);
 
@@ -154,17 +154,17 @@ class ElementArrowGroup extends Group {
             operator.createPath()
         ]);
         store.set(Member.Name, [
-            new Text(new Point(
-                center.x + nameOffset.x,
-                center.y + nameOffset.y
-            ), 'Элемент'),
+            new Text('Элемент',
+                     new Point(center.x + nameOffset.x,
+                               center.y + nameOffset.y)
+                    ),
             operator.createText()
         ]);
         store.set(Member.Designation, [
-            new Text(new Point(
-                center.x + designationOffset.x,
-                center.y + designationOffset.y
-            ), `Э ${id}`),
+            new Text(`Э ${id}`,
+                     new Point(center.x + designationOffset.x,
+                               center.y + designationOffset.y)
+                    ),
             operator.createText()
         ]);
 
