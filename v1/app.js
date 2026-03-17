@@ -17,9 +17,11 @@ const SVG = {
     ),
 
     createTag: (tag) => document.createElementNS(SVG.namespace, tag),
+
     createGroup: () => SVG.createTag('g'),
     createRect: () => SVG.createTag('rect'),
     createLine: () => SVG.createTag('line'),
+    createPath: () => SVG.createTag('path'),
     createText: () => SVG.createTag('text'),
 
     applyTo: function(element, definition) {
