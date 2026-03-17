@@ -100,20 +100,6 @@ class Line extends Primitive {
     }
 }
 
-class Arrow extends Line {
-    constructor(start, end, marker="") {
-        super(start, end);
-        this._marker = marker;
-    }
-
-    publish() {
-        return {
-            ...super.publish(),
-            'marker-end': this._marker
-        };
-    }
-}
-
 class Text extends Primitive {
     constructor(start=zeroPoint, value='') {
         super();
