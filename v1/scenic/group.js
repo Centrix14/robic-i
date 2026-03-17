@@ -228,4 +228,9 @@ class ElementArrowGroup extends Group {
             operator.applyTo(element, figure.publish());
         }
     }
+
+    isTouching(cursor, spatia) {
+        const shape = this._store.get(ElementArrowGroup.Member.Shape)[0];
+        return shape.isTouching(cursor, spatia);
+    }
 }
