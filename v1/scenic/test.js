@@ -97,36 +97,36 @@ describe('ProcessGroup', function(){
 
 });
 
-describe('NaiveStepLine', function(){
+describe('NaiveStepLineV', function(){
 
-    it('NaiveStepLine1 - makes point in degenerate case', function(){
-        const line = new NaiveStepLine(new Point(10, 10), new Point(10, 10));
+    it('NaiveStepLineV1 - makes point in degenerate case', function(){
+        const line = new NaiveStepLineV(new Point(10, 10), new Point(10, 10));
         const obj = line.publish();
         assert.equal('M 10 10 v 0', obj.d, 'Incorrect path');
     });
 
-    it('NaiveStepLine2 - makes straight line in degenerate case', function(){
-        const line = new NaiveStepLine(new Point(10, 10), new Point(50, 10));
+    it('NaiveStepLineV2 - makes straight line in degenerate case', function(){
+        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, 10));
         const obj = line.publish();
         assert.equal('M 10 10 h 40', obj.d, 'Incorrect path');
     });
 
-    it('NaiveStepLine3 - makes step regular line', function(){
-        const line = new NaiveStepLine(new Point(10, 10), new Point(50, 50));
+    it('NaiveStepLineV3 - makes step regular line', function(){
+        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, 50));
         const obj = line.publish();
         assert.equal('M 10 10 h 20 M 30 10 v 40 M 30 50 h 20', obj.d,
                      'Incorrect path');
     });
 
-    it('NaiveStepLine4 - makes line in III quadrant', function(){
-        const line = new NaiveStepLine(new Point(50, 50), new Point(10, 10));
+    it('NaiveStepLineV4 - makes line in III quadrant', function(){
+        const line = new NaiveStepLineV(new Point(50, 50), new Point(10, 10));
         const obj = line.publish();
         assert.equal('M 50 50 h -20 M 30 50 v -40 M 30 10 h -20', obj.d,
                      'Incorrect path');
     });
 
-    it('NaiveStepLine5 - makes line in II quadrant', function(){
-        const line = new NaiveStepLine(new Point(10, 10), new Point(50, -30));
+    it('NaiveStepLineV5 - makes line in II quadrant', function(){
+        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, -30));
         const obj = line.publish();
         assert.equal('M 10 10 h 20 M 30 10 v -40 M 30 -30 h 20', obj.d,
                      'Incorrect path');
