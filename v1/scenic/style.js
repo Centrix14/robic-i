@@ -34,7 +34,7 @@ class StyleElement {
     useOn(target, options) {}
 }
 
-class Stroke {
+class Stroke extends StyleElement {
     static Linecap = {
         Butt: 'butt',
         Round: 'round',
@@ -68,7 +68,7 @@ class Stroke {
     }
 }
 
-class Fill {
+class Fill extends StyleElement {
     _color = '';
     _opacity = '';
 
@@ -83,7 +83,7 @@ class Fill {
     }
 }
 
-class Font {
+class Font extends StyleElement {
     static Style = {
         Normal: 'normal',
         Italic: 'italic',
@@ -112,7 +112,7 @@ class Font {
     }
 }
 
-class TextAlign {
+class TextAlign extends StyleElement {
     static Anchor = {
         Start: 'start',
         Middle: 'middle',
