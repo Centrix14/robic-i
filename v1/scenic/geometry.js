@@ -129,9 +129,9 @@ class NaiveStepLine extends Primitive {
             return { d: `${d} h ${dx}` };
         }
         else {
-            const l = dx / 2;
+            const l = dx / 2, al = Math.abs(l);
 
-            return { d: `${d} h ${l} M ${l} ${y1} v ${dy} M ${l} ${y2} h ${l}` }
+            return { d: `${d} h ${l} M ${al} ${y1} v ${dy} M ${al} ${y2} h ${l}` }
         }
     }
 }
