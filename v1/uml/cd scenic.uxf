@@ -398,12 +398,12 @@ sub(arg:Point): Point</panel_attributes>
       <w>144</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Line
+    <panel_attributes>StraightLine
 --
 -start: Point = zeroPoint
 -end: Point = zeroPoint
 --
-Line(start:Point, end:Point)
+StraightLine(start:Point, end:Point)
 
 &lt;&lt;get&gt;&gt; start()
 &lt;&lt;get&gt;&gt; end()</panel_attributes>
