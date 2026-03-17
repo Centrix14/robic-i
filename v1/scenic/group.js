@@ -154,6 +154,8 @@ class ElementArrowGroup extends Group {
         const start = coords.start, end = coords.end;
         const stepline = new NaiveStepLineV(start, end),
               center = stepline.getCenter();
+        const nameOffset = Defaults.element.arrow.name.offset,
+              designationOffset = Defaults.element.arrow.designation.offset;
 
         const store = this._store;
         store.set(Member.Shape, [
@@ -162,15 +164,15 @@ class ElementArrowGroup extends Group {
         ]);
         store.set(Member.Name, [
             new Text(new Point(
-                center.x,
-                center.y - 5
+                center.x + nameOffset.x,
+                center.y + nameOffset.y
             ), 'Элемент'),
             operator.createText()
         ]);
         store.set(Member.Designation, [
             new Text(new Point(
-                center.x,
-                center.y + 5
+                center.x + designationOffset.x,
+                center.y + designationOffset.y
             ), `Э ${id}`),
             operator.createText()
         ]);
