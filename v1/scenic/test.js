@@ -114,14 +114,21 @@ describe('NaiveStepLine', function(){
     it('NaiveStepLine3 - makes step regular line', function(){
         const line = new NaiveStepLine(new Point(10, 10), new Point(50, 50));
         const obj = line.publish();
-        assert.equal('M 10 10 h 20 M 20 10 v 40 M 20 50 h 20', obj.d,
+        assert.equal('M 10 10 h 20 M 30 10 v 40 M 30 50 h 20', obj.d,
                      'Incorrect path');
     });
 
     it('NaiveStepLine4 - makes inversed step line', function(){
         const line = new NaiveStepLine(new Point(50, 50), new Point(10, 10));
         const obj = line.publish();
-        assert.equal('M 50 50 h -20 M 20 50 v -40 M 20 10 h -20', obj.d,
+        assert.equal('M 50 50 h -20 M 30 50 v -40 M 30 10 h -20', obj.d,
+                     'Incorrect path');
+    });
+
+    it('NaiveStepLine5 - makes line in negative direction', function(){
+        const line = new NaiveStepLine(new Point(10, 10), new Point(-10, -10));
+        const obj = line.publish();
+        assert.equal('M 10 10 h -10 M 0 10 v -20 M 0 -10 h -10', obj.d,
                      'Incorrect path');
     });
 
