@@ -152,11 +152,10 @@ class Text extends Primitive {
     constructor(start=zeroPoint, value='') {
         super();
         this._start = start;
-        this._value = value;
+        this.value = value;
     }
 
     get start() { return this._start; }
-    get value() { return this._value; }
 
     shift(dX, dY) {
         this._start.shift(dX, dY);
@@ -165,7 +164,7 @@ class Text extends Primitive {
     publish() {
         return {
             ...this._start.publish(),
-            value: this._value
+            value: this.value
         };
     }
 }
