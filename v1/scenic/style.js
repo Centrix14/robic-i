@@ -1,3 +1,35 @@
+class Style {
+    constructor() {
+        this._index = 0;
+        this._store = new Map();
+    }
+
+    get(id) {
+        return this._store.get(id);
+    }
+
+    add(element, id=null) {
+        this._store.set(id ?? this._index, element);
+
+        if (id)
+            return id;
+        else
+            return this._index++;
+    }
+
+    drop(id) {
+        const element = this._store.delete(id);
+        if (element)
+            return new Success([['element', element]]);
+        else
+            return new Fail();
+    }
+
+    useOn(target) {
+        this._store.forEach((element) => element.useOn(target));
+    }
+}
+
 class StyleElement {
     useOn(target, options) {}
 }
@@ -102,37 +134,5 @@ class TextAlign {
     useOn(target) {
         target.setAttribute('text-anchor', this._anchor);
         target.setAttribute('dominant-baseline', this._baseline);
-    }
-}
-
-class Style {
-    constructor() {
-        this._index = 0;
-        this._store = new Map();
-    }
-
-    get(id) {
-        return this._store.get(id);
-    }
-    
-    add(element, id=null) {
-        this._store.set(id ?? this._index, element);
-
-        if (id)
-            return id;
-        else
-            return this._index++;
-    }
-
-    drop(id) {
-        const element = this._store.delete(id);
-        if (element)
-            return new Success([['element', element]]);
-        else
-            return new Fail();
-    }
-
-    useOn(target) {
-        this._store.forEach((element) => element.useOn(target));
     }
 }
