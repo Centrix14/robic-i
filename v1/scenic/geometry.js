@@ -146,6 +146,15 @@ class NaiveStepLineV extends Primitive {
             }
         }
     }
+
+    isTouching(cursor, spatia) {
+        const [x1, y1] = [this._start.x, this._start.y], x2 = this._end.x;
+        const a = new Point(x1 + (x2 - x1) / 2, y1), end = this._end;
+
+        return spatia.cEq(cursor.y, a.y)
+            || spatia.cEq(cursor.x, a.x)
+            || spatia.cEq(cursor.y, end.y);
+    }
 }
 
 class Text extends Primitive {
@@ -189,4 +198,6 @@ class Spatia {
             && (cursor.x - end.x <= this._precision)
             && (cursor.y - end.y <= this._precision);
     }
+
+    cEq(c1, c2) { return Math.abs(c1 - c2) <= this._precision; }
 }
