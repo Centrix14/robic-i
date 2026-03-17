@@ -109,7 +109,7 @@ class Arrow extends Line {
     publish() {
         return {
             ...super.publish(),
-            marker: this._marker
+            'marker-end': this._marker
         };
     }
 }
