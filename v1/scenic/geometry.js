@@ -100,7 +100,7 @@ class StraightLine extends Primitive {
     }
 }
 
-class NaiveStepLine extends Primitive {
+class NaiveStepLineV extends Primitive {
     constructor(start=zeroPoint, end=zeroPoint) {
         super();
         this._start = start;
@@ -131,7 +131,9 @@ class NaiveStepLine extends Primitive {
         else {
             const l = dx / 2;
 
-            return { d: `${d} h ${l} M ${x1+l} ${y1} v ${dy} M ${x1+l} ${y1+dy} h ${l}` }
+            return {
+                d: `${d} h ${l} M ${x1+l} ${y1} v ${dy} M ${x1+l} ${y1+dy} h ${l}`
+            }
         }
     }
 }
