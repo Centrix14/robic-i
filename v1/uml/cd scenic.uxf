@@ -393,9 +393,9 @@ sub(arg:Point): Point</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>216</x>
+      <x>192</x>
       <y>606</y>
-      <w>144</w>
+      <w>168</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>StraightLine
@@ -412,34 +412,8 @@ StraightLine(start:Point, end:Point)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>162</x>
-      <y>720</y>
-      <w>204</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>Arrow
---
--marker: string = ""
---
-Arrow(start:Point, end:Point, marker:string)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>276</x>
-      <y>690</y>
-      <w>18</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>162</x>
-      <y>774</y>
+      <x>156</x>
+      <y>798</y>
       <w>204</w>
       <h>108</h>
     </coordinates>
@@ -451,24 +425,23 @@ Arrow(start:Point, end:Point, marker:string)</panel_attributes>
 Text(start:Point, value:string)
 
 &lt;&lt;get&gt;&gt; start()
-&lt;&lt;get&gt;&gt; value()
-
-shift(dX:integer, dY:integer)</panel_attributes>
+&lt;&lt;get&gt;&gt; value()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>426</x>
-      <y>384</y>
+      <y>378</y>
       <w>144</w>
-      <h>54</h>
+      <h>66</h>
     </coordinates>
     <panel_attributes>Primitive
 --
-shift(dX:integer, dY:integer)
-
+isTouching(cursor:Point, spatia:Spatia)
 publish(options): Object
+
+shift(dX:integer, dY:integer)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -476,56 +449,45 @@ publish(options): Object
     <id>Relation</id>
     <coordinates>
       <x>354</x>
-      <y>402</y>
+      <y>396</y>
       <w>84</w>
-      <h>48</h>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>120.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>354</x>
-      <y>432</y>
+      <y>438</y>
       <w>102</w>
-      <h>144</h>
+      <h>138</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;210.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>354</x>
-      <y>432</y>
+      <y>438</y>
       <w>102</w>
-      <h>246</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;390.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;380.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>432</y>
-      <w>96</w>
-      <h>336</h>
+      <x>354</x>
+      <y>438</y>
+      <w>102</w>
+      <h>396</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;540.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>360</x>
-      <y>432</y>
-      <w>96</w>
-      <h>378</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;610.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;640.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -552,12 +514,12 @@ publish(options): Object</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>516</x>
-      <y>432</y>
+      <y>438</y>
       <w>18</w>
-      <h>54</h>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -600,10 +562,10 @@ m2=0..1</panel_attributes>
       <x>546</x>
       <y>348</y>
       <w>18</w>
-      <h>48</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -826,5 +788,35 @@ Hidden</panel_attributes>
 m1=1
 m2=1</panel_attributes>
     <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>174</x>
+      <y>702</y>
+      <w>186</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>NaiveStepLineV
+--
+-start: Point = zeroPoint
+-end: Point = zeroPoint
+--
+NaiveStepLineV(start:Point, end:Point)
+
+&lt;&lt;get&gt;&gt; start()
+&lt;&lt;get&gt;&gt; end()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>354</x>
+      <y>438</y>
+      <w>102</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;530.0</additional_attributes>
   </element>
 </diagram>
