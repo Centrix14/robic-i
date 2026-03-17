@@ -100,6 +100,42 @@ class StraightLine extends Primitive {
     }
 }
 
+class NaiveStepLine extends Primitive {
+    constructor(start=zeroPoint, end=zeroPoint) {
+        super();
+        this._start = start;
+        this._end = end;
+    }
+
+    get start() { return this._start; }
+    get end() { return this._end; }
+
+    shift(dX, dY) {
+        this._start.shift(dX, dY);
+        this._end.shift(dX, dY);
+    }
+
+    publish() {
+        const [x1, y1] = [this._start.x, this._start.y],
+              [x2, y2] = [this._end.x, this._end.y];
+        const dx = x2 - x1, dy = y2 - y1;
+
+        const d = `M ${x1} ${y1}`;
+
+        if (x1 === x2) {
+            return { d: `${d} v ${dy}` };
+        }
+        else if (y1 === y2) {
+            return { d: `${d} h ${dx}` };
+        }
+        else {
+            const l = dx / 2;
+
+            return { d: `${d} h ${l} v ${dy} M ${x2/2} ${y2} h ${l}` }
+        }
+    }
+}
+
 class Text extends Primitive {
     constructor(start=zeroPoint, value='') {
         super();
