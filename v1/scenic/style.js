@@ -136,3 +136,17 @@ class TextAlign {
         target.setAttribute('dominant-baseline', this._baseline);
     }
 }
+
+class Maker extends StyleElement {
+    constructor(definition) {
+        this._start = definition?.start ?? '';
+        this._middle = definition?.middle ?? '';
+        this._end = definition?.end ?? '';
+    }
+
+    useOn(target) {
+        target.setAttribute('marker-start', this._start);
+        target.setAttribute('marker-middle', this._middle);
+        target.setAttribute('marker-end', this._end);
+    }
+}
