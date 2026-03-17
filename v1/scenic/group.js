@@ -39,11 +39,6 @@ class ProcessGroup extends Group {
         Designation: 'designation'
     }
 
-    constructor() {
-        super();
-
-    }
-
     init(id, operator) {
         const group = super.init(id, operator);
 
@@ -137,10 +132,6 @@ class ElementArrowGroup extends Group {
         Shape: 'shape',
         Name: 'name',
         Designation: 'designation'
-    }
-
-    constructor() {
-        super();
     }
 
     init(id, operator, coords) {
