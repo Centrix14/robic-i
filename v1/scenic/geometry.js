@@ -110,6 +110,16 @@ class NaiveStepLineV extends Primitive {
     get start() { return this._start; }
     get end() { return this._end; }
 
+    getCenter() {
+        const [x1, y1] = [this._start.x, this._start.y],
+              [x2, y2] = [this._end.x, this._end.y];
+
+        return new Point(
+            x1 + (x2 - x1) / 2,
+            y1 + (y2 - y1) / 2
+        );
+    }
+
     shift(dX, dY) {
         this._start.shift(dX, dY);
         this._end.shift(dX, dY);
