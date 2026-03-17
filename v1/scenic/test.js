@@ -96,3 +96,19 @@ describe('ProcessGroup', function(){
     });
 
 });
+
+describe('NaiveStepLine', function(){
+
+    it('NaiveStepLine1 - makes point in degenerate case', function(){
+        const line = new NaiveStepLine(new Point(10, 10), new Point(10, 10));
+        const obj = line.publish();
+        assert.equal('M 10 10 v 0', obj.d, 'Incorrect path');
+    });
+
+    it('NaiveStepLine2 - makes straight line in degenerate case', function(){
+        const line = new NaiveStepLine(new Point(10, 10), new Point(50, 10));
+        const obj = line.publish();
+        assert.equal('M 10 10 h 40', obj.d, 'Incorrect path');
+    });
+
+});
