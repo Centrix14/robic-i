@@ -750,4 +750,46 @@ Hidden</panel_attributes>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;50.0;20.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>84</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>ElementGeometrySet
+--
+-operator: CanvasOperator
+-state: PGSstate = EGSstate.Main
+-layer: Layer = ProcessLayer
+-shapes: &lt;string, Group&gt; [*]
+-styles: &lt;string, Style&gt; [*]
+-supplement: &lt;string, Group&gt; [*]
+--
+ElementGeometrySet(operator: CanvasOperator)
+
+combine(options): Success
+
+isTouching(cursor:Point, spatia:Spatia): boolean
+shift(dX:integer, dY:integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1110</x>
+      <y>84</y>
+      <w>114</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+EGSstate
+--
+Creation
+Main
+Selected
+Hidden</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
