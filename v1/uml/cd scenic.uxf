@@ -819,4 +819,30 @@ NaiveStepLineV(start:Point, end:Point)
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>150.0;10.0;10.0;530.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>714</x>
+      <y>852</y>
+      <w>114</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Marker
+--
+-start: string
+-middle: string
+-end: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>786</y>
+      <w>96</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;160.0</additional_attributes>
+  </element>
 </diagram>
