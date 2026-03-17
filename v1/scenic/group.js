@@ -1,8 +1,12 @@
 class Group {
     constructor() {
         this._store = new Map();
+
         this._selfElm = null;
+        this._init = false;
     }
+ 
+    get isInitiated() { return this._init; }
 
     init(id, operator) {
         const group = operator.createGroup();
@@ -38,10 +42,7 @@ class ProcessGroup extends Group {
     constructor() {
         super();
 
-        this._init = false;
     }
-
-    get isInitiated() { return this._init; }
 
     init(id, operator) {
         const group = super.init(id, operator);
@@ -140,11 +141,7 @@ class ElementArrowGroup extends Group {
 
     constructor() {
         super();
-
-        this._init = false;
     }
-
-    get isInitiated() { return this._init; }
 
     init(id, operator, coords) {
         if (!coords?.start || !coords?.end)
