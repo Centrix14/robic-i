@@ -13,4 +13,22 @@ const Defaults = {
             y: -5
         }
     }
+
+    element: {
+        arrow: {
+            name: {
+                offset: {
+                    x: 0,
+                    y: -5
+                }
+            },
+
+            designation: {
+                offset: {
+                    x: 0,
+                    y: +5
+                }
+            }
+        }
+    }
 }
