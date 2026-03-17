@@ -75,7 +75,7 @@ class Rect extends Primitive {
     }
 }
 
-class Line extends Primitive {
+class StraightLine extends Primitive {
     constructor(start=zeroPoint, end=zeroPoint) {
         super();
         this._start = start;
