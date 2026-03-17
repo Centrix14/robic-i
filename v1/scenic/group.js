@@ -1,6 +1,15 @@
 class Group {
     constructor() {
         this._store = new Map();
+        this._selfElm = null;
+    }
+
+    init(id, operator) {
+        const group = operator.createGroup();
+        operator.applyTo(group, { id });
+        this._selfElm = group;
+
+        return group;
     }
 
     add(id, element) {
@@ -29,16 +38,13 @@ class ProcessGroup extends Group {
     constructor() {
         super();
 
-        this._selfElm = null;
         this._init = false;
     }
 
     get isInitiated() { return this._init; }
 
     init(id, operator) {
-        const group = operator.createGroup();
-        operator.applyTo(group, { id });
-        this._selfElm = group;
+        const group = super.init(id, operator);
 
         const spawn = Defaults.process.spawn,
               size = Defaults.process.size,
@@ -135,7 +141,6 @@ class ElementArrowGroup extends Group {
     constructor() {
         super();
 
-        this._selfElm = null;
         this._init = false;
     }
 
@@ -147,9 +152,7 @@ class ElementArrowGroup extends Group {
 
         const Member = ElementArrowGroup.Member;
 
-        const group = operator.createGroup();
-        operator.applyTo(group, { id });
-        this._selfElm = group;
+        const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
         const stepline = new NaiveStepLineV(start, end),
