@@ -12,7 +12,7 @@ const Defaults = {
             x: -5,
             y: -5
         }
-    }
+    },
 
     element: {
         arrow: {
@@ -26,7 +26,7 @@ const Defaults = {
             designation: {
                 offset: {
                     x: 0,
-                    y: +5
+                    y: 5
                 }
             }
         }
