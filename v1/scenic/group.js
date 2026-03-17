@@ -115,7 +115,7 @@ class ProcessGroup extends Group {
     }
 
     isTouching(cursor, spatia) {
-        const shape = this._store.get('shape')[0];
+        const shape = this._store.get(ProcessGroup.Member.Shape)[0];
         return shape.isTouching(cursor, spatia);
     }
 
