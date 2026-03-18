@@ -29,6 +29,25 @@ const Defaults = {
                     y: 5
                 }
             }
+        },
+
+        rect: {
+            shape: {
+                spawn: {
+                    x: 20,
+                    y: 20
+                },
+                size: {
+                    width: 100,
+                    height: 50
+                },
+            },
+            designation: {
+                offset: {
+                    x: -5,
+                    y: -5
+                }
+            }
         }
     }
 }
