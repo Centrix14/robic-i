@@ -238,23 +238,27 @@ class ElementRectGroup extends Group {
     init(id, operator) {
         const group = super.init(id, operator);
 
+        const spawn = Defaults.element.rect.shape.spawn,
+              size = Defaults.element.rect.shape.size,
+              offset = Defaults.element.rect.designation.offset;
+
         const store = this._store;
         store.set(ElementRectGroup.Member.Shape, [
-            new Rect(new Point(20, 20),
-                     100, 50),
+            new Rect(new Point(spawn.x, spawn.y),
+                     size.width, size.height),
             operator.createRect()
         ]);
         store.set(ElementRectGroup.Member.Name, [
             new Text('Элемент',
-                     new Point(70,
-                               45)
+                     new Point((size.width / 2) + spawn.x,
+                               (size.height / 2) + spawn.y)
                     ),
             operator.createText()
         ]);
         store.set(ElementRectGroup.Member.Designation, [
             new Text(`Э ${id}`,
-                     new Point(120,
-                               70)
+                     new Point((spawn.x + size.width + offset.x),
+                               (spawn.y + size.height + offset.y))
                     ),
             operator.createText()
         ]);
