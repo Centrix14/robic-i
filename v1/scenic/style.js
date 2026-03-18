@@ -50,6 +50,7 @@ class Stroke extends StyleElement {
     }
 
     constructor(definition) {
+        super();
         this._color = definition?.color ?? 'black';
         this._width = definition?.width ?? '1px';
         this._dasharray = definition?.dasharray ?? '';
@@ -73,6 +74,7 @@ class Fill extends StyleElement {
     _opacity = '';
 
     constructor(definition) {
+        super();
         this._color = definition?.color ?? 'white';
         this._opacity = definition?.opacity ?? '1';
     }
@@ -98,6 +100,7 @@ class Font extends StyleElement {
     }
 
     constructor(definition) {
+        super();
         this._family = definition?.family ?? 'sans';
         this._size = definition?.size ?? '12px';
         this._style = definition?.style ?? Font.Style.Normal;
@@ -127,6 +130,7 @@ class TextAlign extends StyleElement {
     }
 
     constructor(definition) {
+        super();
         this._anchor = definition?.anchor ?? TextAlign.Anchor.Middle;
         this._baseline = definition?.baseline ?? TextAlign.Baseline.Middle;
     }
@@ -139,6 +143,7 @@ class TextAlign extends StyleElement {
 
 class Maker extends StyleElement {
     constructor(definition) {
+        super();
         this._start = definition?.start ?? '';
         this._middle = definition?.middle ?? '';
         this._end = definition?.end ?? '';
