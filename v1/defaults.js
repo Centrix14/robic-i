@@ -1,16 +1,20 @@
 const Defaults = {
     process: {
-        spawn: {
-            x: 20,
-            y: 20
+        shape: {
+            spawn: {
+                x: 20,
+                y: 20
+            },
+            size: {
+                width: 100,
+                height: 50
+            },
         },
-        size: {
-            width: 100,
-            height: 50
-        },
-        designationOffset: {
-            x: -5,
-            y: -5
+        designation: {
+            offset: {
+                x: -5,
+                y: -5
+            }
         }
     },
 
