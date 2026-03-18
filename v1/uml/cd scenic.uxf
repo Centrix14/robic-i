@@ -587,11 +587,8 @@ m2=0..1</panel_attributes>
     </coordinates>
     <panel_attributes>ProcessGroup
 --
--selfElm: SVGElement = null
---
 init(id:string, operator:CanvasOperator)
 
-isInitiated(): boolean
 getMemberElement(member:ProcessGroupMember): Success ? Fail
 getMemberValue(member:ProcessGroupMember): Success ? Fail
 setMemberValue(member:ProcessGroupMember,
