@@ -188,3 +188,7 @@ class ProcessGeometrySet {
         return style;
     }
 }
+
+class ElementGeometrySet {
+    
+}
