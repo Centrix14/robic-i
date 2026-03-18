@@ -32,35 +32,35 @@ class Group {
     }
 }
 
-class ProcessGroup extends Group {
+class NamedRectGroup extends Group {
     static Member = {
         Shape: 'shape',
         Name: 'name',
         Designation: 'designation'
     }
 
-    init(id, operator) {
+    init(id, operator, defaults, labels) {
         const group = super.init(id, operator);
 
-        const spawn = Defaults.process.spawn,
-              size = Defaults.process.size,
-              offset = Defaults.process.designationOffset;
+        const spawn = defaults.shape.spawn,
+              size = defaults.shape.size,
+              offset = defaults.designation.offset;
 
         const store = this._store;
-        store.set(ProcessGroup.Member.Shape, [
+        store.set(NamedRectGroup.Member.Shape, [
             new Rect(new Point(spawn.x, spawn.y),
                      size.width, size.height),
             operator.createRect()
         ]);
-        store.set(ProcessGroup.Member.Name, [
-            new Text('Процесс',
+        store.set(NamedRectGroup.Member.Name, [
+            new Text(labels.name,
                      new Point((size.width / 2) + spawn.x,
                                (size.height / 2) + spawn.y)
                     ),
             operator.createText()
         ]);
-        store.set(ProcessGroup.Member.Designation, [
-            new Text(`П ${id}`,
+        store.set(ElementRectGroup.Member.Designation, [
+            new Text(labels.designation,
                      new Point((spawn.x + size.width + offset.x),
                                (spawn.y + size.height + offset.y))
                     ),
@@ -80,8 +80,8 @@ class ProcessGroup extends Group {
     drop() { return new Fail(); }
 
     getMemberValue(member) {
-        if (member === ProcessGroup.Member.Name
-            || member === ProcessGroup.Member.Designation) {
+        if (member === NamedRectGroup.Member.Name
+            || member === NamedRectGroup.Member.Designation) {
 
             return new Success([['value', this._store.get(member)[0].value]]);
         }
@@ -90,8 +90,8 @@ class ProcessGroup extends Group {
     }
 
     setMemberValue(member, value, operator) {
-        if (member === ProcessGroup.Member.Name
-            || member === ProcessGroup.Member.Designation) {
+        if (member === NamedRectGroup.Member.Name
+            || member === NamedRectGroup.Member.Designation) {
 
             const m = this._store.get(member);
             m[0].value = value;
@@ -104,9 +104,9 @@ class ProcessGroup extends Group {
     }
 
     getMemberElement(member) {
-        if (member === ProcessGroup.Member.Shape
-            || member === ProcessGroup.Member.Name
-            || member === ProcessGroup.Member.Designation) {
+        if (member === NamedRectGroup.Member.Shape
+            || member === NamedRectGroup.Member.Name
+            || member === NamedRectGroup.Member.Designation) {
 
             return new Success([['element', this._store.get(member)[1]]]);
         }
@@ -115,7 +115,7 @@ class ProcessGroup extends Group {
     }
 
     isTouching(cursor, spatia) {
-        const shape = this._store.get(ProcessGroup.Member.Shape)[0];
+        const shape = this._store.get(NamedRectGroup.Member.Shape)[0];
         return shape.isTouching(cursor, spatia);
     }
 
@@ -124,6 +124,15 @@ class ProcessGroup extends Group {
             figure.shift(dX, dY);
             operator.applyTo(element, figure.publish());
         }
+    }
+}
+
+class ProcessGroup extends NamedRectGroup {
+    init(id, operator) {
+        return super.init(id, operator, Defaults.process, {
+            name: 'Процесс',
+            designation: `П ${id}`
+        });
     }
 }
 
@@ -228,97 +237,11 @@ class ElementArrowGroup extends Group {
     }
 }
 
-class ElementRectGroup extends Group {
-    static Member = {
-        Shape: 'shape',
-        Name: 'name',
-        Designation: 'designation'
-    }
-
+class ElementRectGroup extends NamedRectGroup {
     init(id, operator) {
-        const group = super.init(id, operator);
-
-        const spawn = Defaults.element.rect.shape.spawn,
-              size = Defaults.element.rect.shape.size,
-              offset = Defaults.element.rect.designation.offset;
-
-        const store = this._store;
-        store.set(ElementRectGroup.Member.Shape, [
-            new Rect(new Point(spawn.x, spawn.y),
-                     size.width, size.height),
-            operator.createRect()
-        ]);
-        store.set(ElementRectGroup.Member.Name, [
-            new Text('Элемент',
-                     new Point((size.width / 2) + spawn.x,
-                               (size.height / 2) + spawn.y)
-                    ),
-            operator.createText()
-        ]);
-        store.set(ElementRectGroup.Member.Designation, [
-            new Text(`Э ${id}`,
-                     new Point((spawn.x + size.width + offset.x),
-                               (spawn.y + size.height + offset.y))
-                    ),
-            operator.createText()
-        ]);
-
-        for (let [id, [figure, element]] of store) {
-            operator.applyTo(element, { id, ...figure.publish() });
-            operator.appendChild(group, element);
-        }
-
-        this._init = true;
-        return group;
-    }
-
-    add() { return new Fail(); }
-    drop() { return new Fail(); }
-
-    getMemberValue(member) {
-        if (member === ElementRectGroup.Member.Name
-            || member === ElementRectGroup.Member.Designation) {
-
-            return new Success([['value', this._store.get(member)[0].value]]);
-        }
-        else
-            return new Fail();
-    }
-
-    setMemberValue(member, value, operator) {
-        if (member === ElementRectGroup.Member.Name
-            || member === ElementRectGroup.Member.Designation) {
-
-            const m = this._store.get(member);
-            m[0].value = value;
-            operator.applyTo(m[1], { value });
-
-            return new Success();
-        }
-        else
-            return new Fail();
-    }
-
-    getMemberElement(member) {
-        if (member === ElementRectGroup.Member.Shape
-            || member === ElementRectGroup.Member.Name
-            || member === ElementRectGroup.Member.Designation) {
-
-            return new Success([['element', this._store.get(member)[1]]]);
-        }
-        else
-            return new Fail();
-    }
-
-    isTouching(cursor, spatia) {
-        const shape = this._store.get(ElementRectGroup.Member.Shape)[0];
-        return shape.isTouching(cursor, spatia);
-    }
-
-    shift(dX, dY, operator) {
-        for (let [figure, element] of this._store.values()) {
-            figure.shift(dX, dY);
-            operator.applyTo(element, figure.publish());
-        }
+        return super.init(id, operator, Defaults.element.rect, {
+            name: 'Элемент',
+            designation: `Э ${id}`
+        });
     }
 }
