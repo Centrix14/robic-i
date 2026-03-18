@@ -844,4 +844,28 @@ NaiveStepLineV(start:Point, end:Point)
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;140.0;140.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>315</y>
+      <w>260</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>ElementArrowGroup
+--
+init(id:string, operator:CanvasOperator)
+
+getMemberElement(member:ProcessGroupMember): Success ? Fail
+getMemberValue(member:ProcessGroupMember): Success ? Fail
+setMemberValue(member:ProcessGroupMember,
+   value:string, operator:CanvasOperator): Success ? Fail
+
+add(): Fail
+drop(): Fail
+
+shift(dX:integer, dY:integer, operator:CanvasOperator)
+isTouching(cursor:Point, spatia:Spatia):boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
