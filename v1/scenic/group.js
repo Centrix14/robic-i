@@ -227,3 +227,94 @@ class ElementArrowGroup extends Group {
         return shape.isTouching(cursor, spatia);
     }
 }
+
+class ElementRectGroup extends Group {
+    static Member = {
+        Shape: 'shape',
+        Name: 'name',
+        Designation: 'designation'
+    }
+
+    init(id, operator) {
+        const group = super.init(id, operator);
+
+        const store = this._store;
+        store.set(ElementRectGroup.Member.Shape, [
+            new Rect(new Point(20, 20),
+                     100, 50),
+            operator.createRect()
+        ]);
+        store.set(ElementRectGroup.Member.Name, [
+            new Text('Элемент',
+                     new Point(70,
+                               45)
+                    ),
+            operator.createText()
+        ]);
+        store.set(ElementRectGroup.Member.Designation, [
+            new Text(`Э ${id}`,
+                     new Point(120,
+                               70)
+                    ),
+            operator.createText()
+        ]);
+
+        for (let [id, [figure, element]] of store) {
+            operator.applyTo(element, { id, ...figure.publish() });
+            operator.appendChild(group, element);
+        }
+
+        this._init = true;
+        return group;
+    }
+
+    add() { return new Fail(); }
+    drop() { return new Fail(); }
+
+    getMemberValue(member) {
+        if (member === ElementRectGroup.Member.Name
+            || member === ElementRectGroup.Member.Designation) {
+
+            return new Success([['value', this._store.get(member)[0].value]]);
+        }
+        else
+            return new Fail();
+    }
+
+    setMemberValue(member, value, operator) {
+        if (member === ElementRectGroup.Member.Name
+            || member === ElementRectGroup.Member.Designation) {
+
+            const m = this._store.get(member);
+            m[0].value = value;
+            operator.applyTo(m[1], { value });
+
+            return new Success();
+        }
+        else
+            return new Fail();
+    }
+
+    getMemberElement(member) {
+        if (member === ElementRectGroup.Member.Shape
+            || member === ElementRectGroup.Member.Name
+            || member === ElementRectGroup.Member.Designation) {
+
+            return new Success([['element', this._store.get(member)[1]]]);
+        }
+        else
+            return new Fail();
+    }
+
+    isTouching(cursor, spatia) {
+        const shape = this._store.get(ElementRectGroup.Member.Shape)[0];
+        return shape.isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY, operator) {
+        for (let [figure, element] of this._store.values()) {
+            figure.shift(dX, dY);
+            operator.applyTo(element, figure.publish());
+        }
+    }
+}
