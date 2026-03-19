@@ -112,12 +112,15 @@ class NaiveVerticalStepline extends Group {
     }
 
     isTouching(cursor, spatia) {
-        const [x1, y1] = [this._start.x, this._start.y], x2 = this._end.x;
-        const a = new Point(x1 + (x2 - x1) / 2, y1), end = this._end;
+        const Rib = NaiveVerticalStepline.Rib;
 
-        return spatia.cEq(cursor.y, a.y)
-            || spatia.cEq(cursor.x, a.x)
-            || spatia.cEq(cursor.y, end.y);
+        const up = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              down = this._store.get(Rib.Down);
+
+        return up.isTouching(cursor, spatia)
+            || middle.isTouching(cursor, spatia)
+            || down.isTouching(cursor, spatia);
     }
 }
 
