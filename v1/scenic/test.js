@@ -273,3 +273,16 @@ describe('ProcessGroup', function(){
     });
 
 });
+
+describe('Spatia', function(){
+
+    describe('isReachable(target:Line, cursor:Point)', function(){
+        const s = new Spatia(),
+              l = new StraightLine(new Point(1,1), new Point(5,5));
+
+        it('isReachable(lp) 1 - detects direct hit', function(){
+            assert.isTrue(s.isReachable(l, new Point(2,2)));
+        });
+    });
+
+});
