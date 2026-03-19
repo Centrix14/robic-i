@@ -1,13 +1,13 @@
 describe('Point', function(){
 
     describe('isTouching', function(){
-        it('isTouching1 - detects direct touch', function(){
+        it('isTouching1 - detects precise touch', function(){
             const p = new Point(0,0);
             assert.isTrue(p.isTouching(new Point(0,0), new Spatia()),
                          'Direct touch not detected');
         });
 
-        it('isTouching2 - detects near touches', function(){
+        it('isTouching2 - detects touch in precision radius', function(){
             const p = new Point(0,0), s = new Spatia();
 
             assert.isTrue(p.isTouching(new Point(1,4), s),
