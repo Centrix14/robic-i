@@ -104,63 +104,6 @@ class StraightLine extends Primitive {
     }
 }
 
-class NaiveStepLineV extends Primitive {
-    constructor(start=zeroPoint, end=zeroPoint) {
-        super();
-        this._start = start;
-        this._end = end;
-    }
-
-    get start() { return this._start; }
-    get end() { return this._end; }
-
-    getCenter() {
-        const [x1, y1] = [this._start.x, this._start.y],
-              [x2, y2] = [this._end.x, this._end.y];
-
-        return new Point(
-            x1 + (x2 - x1) / 2,
-            y1 + (y2 - y1) / 2
-        );
-    }
-
-    shift(dX, dY) {
-        this._start.shift(dX, dY);
-        this._end.shift(dX, dY);
-    }
-
-    publish() {
-        const [x1, y1] = [this._start.x, this._start.y],
-              [x2, y2] = [this._end.x, this._end.y];
-        const dx = x2 - x1, dy = y2 - y1;
-
-        const d = `M ${x1} ${y1}`;
-
-        if (x1 === x2) {
-            return { d: `${d} v ${dy}` };
-        }
-        else if (y1 === y2) {
-            return { d: `${d} h ${dx}` };
-        }
-        else {
-            const l = dx / 2;
-
-            return {
-                d: `${d} h ${l} M ${x1+l} ${y1} v ${dy} M ${x1+l} ${y1+dy} h ${l}`
-            }
-        }
-    }
-
-    isTouching(cursor, spatia) {
-        const [x1, y1] = [this._start.x, this._start.y], x2 = this._end.x;
-        const a = new Point(x1 + (x2 - x1) / 2, y1), end = this._end;
-
-        return spatia.cEq(cursor.y, a.y)
-            || spatia.cEq(cursor.x, a.x)
-            || spatia.cEq(cursor.y, end.y);
-    }
-}
-
 class Text extends Primitive {
     constructor(value='', start=zeroPoint) {
         super();
