@@ -81,6 +81,14 @@ describe('Rect', function(){
                assert.isTrue(r.isTouching(new Point(7,2), s),
                              'Touch @ 7,2 not detected');
            });
+
+        it('Rect.isTouching5 - touch outside precision area not detected',
+           function(){
+               assert.isFalse(r.isTouching(new Point(-6,-6), s),
+                              'Touch @ -6,-6 detected');
+               assert.isFalse(r.isTouching(new Point(11,2), s),
+                              'Touch @ 11,2 detected');
+           });
     });
 
 });
