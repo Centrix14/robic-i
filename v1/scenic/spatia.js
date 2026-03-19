@@ -44,10 +44,12 @@ class Spatia {
         const l1 = this.calcLinear(A1, B1), l2 = this.calcLinear(A2, B2),
               l3 = this.calcLinear(B1, B2), l4 = this.calcLinear(A1, A2);
 
-        return (C.y <= l1.k * C.x + l1.b)
-            && (C.y >= l2.k * C.x + l2.b)
-            && (C.y <= l3.k * C.x + l3.b)
-            && (C.y >= l4.k * C.x + l4.b);
+        return ((C.y <= l1.k * C.x + l1.b)
+                && (C.y >= l2.k * C.x + l2.b)
+                && (C.y <= l3.k * C.x + l3.b)
+                && (C.y >= l4.k * C.x + l4.b))
+            || (this._isReachablePoint(A, C))
+            || (this._isReachablePoint(B, C));
     }
 
     isInRect(rect, cursor) {
