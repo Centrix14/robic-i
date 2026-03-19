@@ -3,7 +3,21 @@ describe('Point', function(){
     describe('isTouching', function(){
         it('isTouching1 - detects direct touch', function(){
             const p = new Point(0,0);
-            assert.isTrue(p.isTouching(new Point(0,0), new Spatia()));
+            assert.isTrue(p.isTouching(new Point(0,0), new Spatia()),
+                         'Direct touch not detected');
+        });
+
+        it('isTouching2 - detects near touches', function(){
+            const p = new Point(0,0), s = new Spatia();
+
+            assert.isTrue(p.isTouching(new Point(1,4), s),
+                          'Touch @ 1,4 not detected');
+            assert.isTrue(p.isTouching(new Point(2,-1), s),
+                          'Touch @ 2,-1 not detected');
+            assert.isTrue(p.isTouching(new Point(0,-3), s),
+                          'Touch @ 0,-3 not detected');
+            assert.isTrue(p.isTouching(new Point(-1,-1), s),
+                          'Touch @ -1,-1 not detected');
         });
     });
 
