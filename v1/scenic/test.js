@@ -156,6 +156,13 @@ describe('NaiveStepLineV', function(){
             assert.isTrue(l.isTouching(new Point(4,6), s),
                           'Touch @ horizontal-down not detected');
         });
+
+        it('NSLV.isTouching3 - detects touch inside precision area', function(){
+            assert.isTrue(l.isTouching(new Point(6,4), s),
+                          'Touch @ 6,4 not detected');
+            assert.isTrue(l.isTouching(new Point(1,2), s),
+                          'Touch @ 1,2 not detected');
+        });
     });
 
 });
