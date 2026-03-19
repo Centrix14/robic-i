@@ -1,3 +1,14 @@
+describe('Point', function(){
+
+    describe('isTouching', function(){
+        it('isTouching1 - detects direct touch', function(){
+            const p = new Point(0,0);
+            assert.isTrue(p.isTouching(new Point(0,0), new Spatia()));
+        });
+    });
+
+});
+
 describe('ProcessGroup', function(){
 
     describe('init', function(){
