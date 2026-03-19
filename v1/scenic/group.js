@@ -252,7 +252,7 @@ class ElementArrowGroup extends Group {
         const store = this._store;
         store.set(Member.Shape, [
             stepline,
-            operator.createPath()
+            operator.createPolyline()
         ]);
         store.set(Member.Name, [
             new Text('Элемент',
