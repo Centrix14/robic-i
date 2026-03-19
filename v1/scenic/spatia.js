@@ -31,10 +31,8 @@ class Spatia {
         }
     }
 
-    _isReachablePoint(target, cursor) {
-        const delta = cursor.sub(target);
-        return (Math.abs(delta.x) <= this._precision) &&
-            (Math.abs(delta.y) <= this._precision);
+    _isReachablePoint(A, C) {
+        return (C.x - A.x)**2 + (C.y - A.y)**2 <= this._precision**2;
     }
 
     _isReachableLine(target, C) {
