@@ -147,6 +147,15 @@ describe('NaiveStepLineV', function(){
             assert.isTrue(l.isTouching(new Point(6,6), s),
                           'Touch @ 6,6 not detected');
         });
+
+        it('NSLV.isTouching2 - detects touch at ribs', function(){
+            assert.isTrue(l.isTouching(new Point(2,0), s),
+                          'Touch @ horizontal-up rib not detected');
+            assert.isTrue(l.isTouching(new Point(3,3), s),
+                          'Touch @ vertical rib not detected');
+            assert.isTrue(l.isTouching(new Point(4,6), s),
+                          'Touch @ horizontal-down not detected');
+        });
     });
 
 });
