@@ -96,7 +96,7 @@ describe('Rect', function(){
 describe('NaiveVerticalStepline', function(){
 
     describe('NaiveVerticalStepline.constructor', function(){
-        it('NSLV.constructor1 - makes point when start=end', function(){
+        it('NSLV.constructor1 - handles point as regular stepline', function(){
             const line = new NaiveVerticalStepline(new Point(10, 10),
                                             new Point(10, 10));
             const obj = line.publish();
@@ -104,7 +104,7 @@ describe('NaiveVerticalStepline', function(){
                          'Incorrect path');
         });
 
-        it('NSLV.constructor2 - makes straight line in degenerate case',
+        it('NSLV.constructor2 - handles straight line as resular stepline',
            function(){
                const line = new NaiveVerticalStepline(new Point(10, 10),
                                                new Point(50, 10));
@@ -113,29 +113,31 @@ describe('NaiveVerticalStepline', function(){
                             'Incorrect path');
            });
 
-        it('NSLV.constructor3 - makes step regular line', function(){
+        it('NSLV.constructor3 - makes regular stepline', function(){
             const line = new NaiveVerticalStepline(new Point(10, 10),
                                             new Point(50, 50));
             const obj = line.publish();
-            assert.equal('M 10 10 h 20 M 30 10 v 40 M 30 50 h 20', obj.d,
+            assert.equal('10,10 30,10 30,50 50,50', obj.points,
                          'Incorrect path');
         });
 
-        it('NSLV.constructor4 - makes line in III quadrant', function(){
-            const line = new NaiveVerticalStepline(new Point(50, 50),
-                                            new Point(10, 10));
-            const obj = line.publish();
-            assert.equal('M 50 50 h -20 M 30 50 v -40 M 30 10 h -20', obj.d,
-                         'Incorrect path');
-        });
-
-        it('NSLV.constructor5 - makes line in II quadrant', function(){
+        it('NSLV.constructor4 - makes stepline in IV quadrant', function(){
             const line = new NaiveVerticalStepline(new Point(10, 10),
                                             new Point(50, -30));
             const obj = line.publish();
-            assert.equal('M 10 10 h 20 M 30 10 v -40 M 30 -30 h 20', obj.d,
+            assert.equal('10,10 30,10 30,-30 50,-30', obj.points,
                          'Incorrect path');
         });
+
+        it('NSLV.constructor5 - makes stepline in reversed direction',
+           function(){
+               const line = new NaiveVerticalStepline(new Point(50, 50),
+                                                      new Point(10, 10));
+               const obj = line.publish();
+               assert.equal('50,50 30,50 30,10 10,10', obj.points,
+                            'Incorrect path');
+           });
+
     });
 
     describe('NaiveVerticalStepline.isTouching', function(){
