@@ -29,6 +29,13 @@ describe('Point', function(){
                assert.isTrue(p.isTouching(new Point(5,0), s),
                              'Touch @ 5,0 not detected');
            });
+
+        it('isTouching4 - touch outside precision area not detected', function(){
+            const p = new Point(0,0), s = new Spatia();
+
+            assert.isFalse(p.isTouching(new Point(5,6), s),
+                           'Touch @ 5,6 detected');
+        });
     });
 
 });
