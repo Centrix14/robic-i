@@ -793,12 +793,12 @@ m2=1</panel_attributes>
       <w>155</w>
       <h>75</h>
     </coordinates>
-    <panel_attributes>NaiveStepLineV
+    <panel_attributes>NaiveVerticalStepline
 --
 -start: Point = zeroPoint
 -end: Point = zeroPoint
 --
-NaiveStepLineV(start:Point, end:Point)
+NaiveVerticalStepline(start:Point, end:Point)
 
 &lt;&lt;get&gt;&gt; start()
 &lt;&lt;get&gt;&gt; end()</panel_attributes>

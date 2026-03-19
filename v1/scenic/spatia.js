@@ -3,6 +3,8 @@ class Spatia {
         this._precision = precision;
     }
 
+    // todo: добавить дистанцию для случая линия-точка
+    // реализовать через формулу Герона
     distance(from, to) {
         if (to instanceof Point)
             return this.distanceToPoint(from, to);
