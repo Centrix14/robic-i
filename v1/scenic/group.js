@@ -33,7 +33,7 @@ class Group {
 }
 
 class NaiveVerticalStepline extends Group {
-    static Ribs = {
+    static Rib = {
         Up: 'up',
         Middle: 'middle',
         Down: 'down'
@@ -43,13 +43,34 @@ class NaiveVerticalStepline extends Group {
         super();
 
         this._store = new Map([
-            [NaiveVerticalStepline.Ribs.Up, new StraightLine()],
-            [NaiveVerticalStepline.Ribs.Middle, new StraightLine()],
-            [NaiveVerticalStepline.Ribs.Down, new StraightLine()]
+            [NaiveVerticalStepline.Rib.Up, new StraightLine()],
+            [NaiveVerticalStepline.Rib.Middle, new StraightLine()],
+            [NaiveVerticalStepline.Rib.Down, new StraightLine()]
         ]);
 
         this._start = start;
         this._end = end;
+    }
+
+    _calcRibs() {
+        const Rib = NaiveVerticalStepline.Rib;
+
+        const up = this._store.get(Rib.Up)[1],
+              middle = this._store.get(Rib.Middle)[1],
+              down = this._store.get(Rib.Down)[1];
+
+        const [x1, y1] = [this.start.x, this.start.y],
+              [x2, y2] = [this.end.x, this.end.y];
+        const dx = x2 - x1, dy = y2 - y1, l = dx / 2;
+
+        [up.start.x, up.start.y] = [x1, y1];
+        [up.end.x, up.end.y] = [x1 + l, y1];
+
+        [middle.start.x, middle.start.y] = [x1 + l, y1];
+        [middle.end.x, middle.end.y] = [x1 + l, y1 + dy];
+
+        [down.start.x, down.start.y] = [x1 + l, y1 + dy];
+        [down.end.x, down.end.y] = [x2, y2];
     }
 
     get start() { return this._start; }
