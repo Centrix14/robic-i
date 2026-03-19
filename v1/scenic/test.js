@@ -283,6 +283,13 @@ describe('Spatia', function(){
         it('isReachable(lp) 1 - detects direct hit', function(){
             assert.isTrue(s.isReachable(l, new Point(2,2)));
         });
+ 
+        it('isReachable(lp) 2 - detects hit in precision area', function(){
+            assert.isTrue(s.isReachable(l, new Point(1,6)));
+            assert.isTrue(s.isReachable(l, new Point(7,2)));
+            assert.isTrue(s.isReachable(l, new Point(6,6)));
+            assert.isTrue(s.isReachable(l, new Point(8,9)));
+        });
     });
 
 });
