@@ -40,6 +40,23 @@ describe('Point', function(){
 
 });
 
+describe('Rect', function(){
+
+    it('Rect.isTouching1 - detects touch at vertices', function(){
+        const r = new Rect(new Point(0,0), 5, 5), s = new Spatia();
+
+        assert.isTrue(r.isTouching(new Point(0,0), s),
+                     'Touch @ left-up vertex not detected');
+        assert.isTrue(r.isTouching(new Point(5,0), s),
+                     'Touch @ right-up vertex not detected');
+        assert.isTrue(r.isTouching(new Point(0,5), s),
+                     'Touch @ left-down vertex not detected');
+        assert.isTrue(r.isTouching(new Point(5,5), s),
+                     'Touch @ right-down vertex not detected');
+    });
+
+});
+
 describe('ProcessGroup', function(){
 
     describe('init', function(){
