@@ -12,6 +12,14 @@ class Spatia {
         return (to.x - from.x)**2 + (to.y - from.y)**2;
     }
 
+    calcLinear(A, B) {
+        const [x1, y1] = [A.x, A.y], [x2, y2] = [B.x, B.y];
+        return {
+            k: (y2 - y1) / (x2 - x1),
+            b: (y1*x2 - y2*x1) / (x2 - x1)
+        };
+    }
+
     isReachable(target, cursor) {
         switch (target.constructor.name) {
         case 'Point':
