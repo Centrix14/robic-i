@@ -1,13 +1,13 @@
 describe('Point', function(){
 
-    describe('isTouching', function(){
-        it('isTouching1 - detects precise touch', function(){
+    describe('Point.isTouching', function(){
+        it('Point.isTouching1 - detects precise touch', function(){
             const p = new Point(0,0);
             assert.isTrue(p.isTouching(new Point(0,0), new Spatia()),
                          'Direct touch not detected');
         });
 
-        it('isTouching2 - detects touch in precision radius', function(){
+        it('Point.isTouching2 - detects touch in precision radius', function(){
             const p = new Point(0,0), s = new Spatia();
 
             assert.isTrue(p.isTouching(new Point(1,4), s),
@@ -20,7 +20,7 @@ describe('Point', function(){
                           'Touch @ -1,-1 not detected');
         });
 
-        it('isTouching3 - detects touch at the edge of precision radius',
+        it('Point.isTouching3 - detects touch at the edge of precision radius',
            function(){
             const p = new Point(0,0), s = new Spatia();
 
@@ -30,7 +30,8 @@ describe('Point', function(){
                              'Touch @ 5,0 not detected');
            });
 
-        it('isTouching4 - touch outside precision area not detected', function(){
+        it('Point.isTouching4 - touch outside precision area not detected',
+           function(){
             const p = new Point(0,0), s = new Spatia();
 
             assert.isFalse(p.isTouching(new Point(5,6), s),
@@ -42,7 +43,7 @@ describe('Point', function(){
 
 describe('Rect', function(){
 
-    describe('isTouching', function(){
+    describe('Rect.isTouching', function(){
         const r = new Rect(new Point(0,0), 5, 5), s = new Spatia();
 
         it('Rect.isTouching1 - detects touch at vertices', function(){
