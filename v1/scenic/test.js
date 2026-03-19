@@ -290,6 +290,14 @@ describe('Spatia', function(){
             assert.isTrue(s.isReachable(l, new Point(6,6)));
             assert.isTrue(s.isReachable(l, new Point(8,9)));
         });
+
+        it('isReachable(lp) 3 - not detects hit outside precision area',
+           function(){
+               assert.isFalse(s.isReachable(l, new Point(1,10)));
+               assert.isFalse(s.isReachable(l, new Point(11,7)));
+               assert.isFalse(s.isReachable(l, new Point(-3,-3)));
+               assert.isFalse(s.isReachable(l, new Point(-3,5)));
+           });
     });
 
 });
