@@ -281,22 +281,31 @@ describe('Spatia', function(){
               l = new StraightLine(new Point(1,1), new Point(5,5));
 
         it('isReachable(lp) 1 - detects direct hit', function(){
-            assert.isTrue(s.isReachable(l, new Point(2,2)));
+            assert.isTrue(s.isReachable(l, new Point(2,2)),
+                         'Direct hit not detected');
         });
  
         it('isReachable(lp) 2 - detects hit in precision area', function(){
-            assert.isTrue(s.isReachable(l, new Point(1,6)));
-            assert.isTrue(s.isReachable(l, new Point(7,2)));
-            assert.isTrue(s.isReachable(l, new Point(6,6)));
-            assert.isTrue(s.isReachable(l, new Point(8,9)));
+            assert.isTrue(s.isReachable(l, new Point(1,6)),
+                          'Cursor @ 1,6 unreachable');
+            assert.isTrue(s.isReachable(l, new Point(7,2)),
+                          'Cursor @ 7,2 unreachable');
+            assert.isTrue(s.isReachable(l, new Point(6,6)),
+                          'Cursor @ 6,6 unreachable');
+            assert.isTrue(s.isReachable(l, new Point(8,9)),
+                          'Cursor @ 8,9 unreachable');
         });
 
         it('isReachable(lp) 3 - not detects hit outside precision area',
            function(){
-               assert.isFalse(s.isReachable(l, new Point(1,10)));
-               assert.isFalse(s.isReachable(l, new Point(11,7)));
-               assert.isFalse(s.isReachable(l, new Point(-3,-3)));
-               assert.isFalse(s.isReachable(l, new Point(-3,5)));
+               assert.isFalse(s.isReachable(l, new Point(1,10)),
+                              'Cursor @ 1,10 reachable');
+               assert.isFalse(s.isReachable(l, new Point(11,7)),
+                              'Cursor @ 11,7 reachable');
+               assert.isFalse(s.isReachable(l, new Point(-3,-3)),
+                              'Cursor @ -3,-3 reachable');
+               assert.isFalse(s.isReachable(l, new Point(-3,5)),
+                              'Cursor @ -3,5 reachable');
            });
     });
 
