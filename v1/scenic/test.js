@@ -136,6 +136,19 @@ describe('NaiveStepLineV', function(){
         });
     });
 
+    describe('NaiveStepLineV.isTouching', function(){
+        const s = new Spatia();
+        const l = new NaiveStepLineV(new Point(0,0),
+                                     new Point(6,6));
+
+        it('NSLV.isTouching1 - detects touch at vertices', function(){
+            assert.isTrue(l.isTouching(new Point(0,0), s),
+                          'Touch @ 0,0 not detected');
+            assert.isTrue(l.isTouching(new Point(6,6), s),
+                          'Touch @ 6,6 not detected');
+        });
+    });
+
 });
 
 describe('ProcessGroup', function(){
