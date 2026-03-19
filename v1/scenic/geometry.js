@@ -36,12 +36,10 @@ class Point extends Primitive {
     }
 }
 
-const zeroPoint = new Point(0, 0);
-
 class Rect extends Primitive {
-    constructor(start=zeroPoint, width=1, height=1) {
+    constructor(start, width=1, height=1) {
         super();
-        this._start = start;
+        this._start = start ?? new Point(0,0);
         this._width = width;
         this._height = height;
     }
@@ -68,26 +66,23 @@ class Rect extends Primitive {
 }
 
 class StraightLine extends Primitive {
-    constructor(start=zeroPoint, end=zeroPoint) {
+    constructor(start, end) {
         super();
-        this._start = start;
-        this._end = end;
+        this.start = start ?? new Point(0,0);
+        this.end = end ?? new Point(0,0);
     }
 
-    get start() { return this._start; }
-    get end() { return this._end; }
-
     shift(dX, dY) {
-        this._start.shift(dX, dY);
-        this._end.shift(dX, dY);
+        this.start.shift(dX, dY);
+        this.end.shift(dX, dY);
     }
 
     publish() {
         return {
-            x1: this._start.x,
-            y1: this._start.y,
-            x2: this._end.x,
-            y2: this._end.y
+            x1: this.start.x,
+            y1: this.start.y,
+            x2: this.end.x,
+            y2: this.end.y
         };
     }
 
