@@ -98,6 +98,10 @@ class StraightLine extends Primitive {
             y2: this._end.y
         };
     }
+
+    isTouching(cursor, spatia) {
+        return spatia.isReachable(this, cursor);
+    }
 }
 
 class NaiveStepLineV extends Primitive {
