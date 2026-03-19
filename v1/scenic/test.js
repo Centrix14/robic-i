@@ -93,6 +93,51 @@ describe('Rect', function(){
 
 });
 
+describe('NaiveStepLineV', function(){
+
+    describe('NaiveStepLineV.constructor', function(){
+        it('NSLV.constructor1 - makes point in degenerate case', function(){
+            const line = new NaiveStepLineV(new Point(10, 10),
+                                            new Point(10, 10));
+            const obj = line.publish();
+            assert.equal('M 10 10 v 0', obj.d, 'Incorrect path');
+        });
+
+        it('NSLV.constructor2 - makes straight line in degenerate case',
+           function(){
+               const line = new NaiveStepLineV(new Point(10, 10),
+                                               new Point(50, 10));
+               const obj = line.publish();
+               assert.equal('M 10 10 h 40', obj.d, 'Incorrect path');
+           });
+
+        it('NSLV.constructor3 - makes step regular line', function(){
+            const line = new NaiveStepLineV(new Point(10, 10),
+                                            new Point(50, 50));
+            const obj = line.publish();
+            assert.equal('M 10 10 h 20 M 30 10 v 40 M 30 50 h 20', obj.d,
+                         'Incorrect path');
+        });
+
+        it('NSLV.constructor4 - makes line in III quadrant', function(){
+            const line = new NaiveStepLineV(new Point(50, 50),
+                                            new Point(10, 10));
+            const obj = line.publish();
+            assert.equal('M 50 50 h -20 M 30 50 v -40 M 30 10 h -20', obj.d,
+                         'Incorrect path');
+        });
+
+        it('NSLV.constructor5 - makes line in II quadrant', function(){
+            const line = new NaiveStepLineV(new Point(10, 10),
+                                            new Point(50, -30));
+            const obj = line.publish();
+            assert.equal('M 10 10 h 20 M 30 10 v -40 M 30 -30 h 20', obj.d,
+                         'Incorrect path');
+        });
+    });
+
+});
+
 describe('ProcessGroup', function(){
 
     describe('init', function(){
@@ -188,43 +233,6 @@ describe('ProcessGroup', function(){
             assert.equal('group', groupElm, 'Group does not returned');
         });
 
-    });
-
-});
-
-describe('NaiveStepLineV', function(){
-
-    it('NaiveStepLineV1 - makes point in degenerate case', function(){
-        const line = new NaiveStepLineV(new Point(10, 10), new Point(10, 10));
-        const obj = line.publish();
-        assert.equal('M 10 10 v 0', obj.d, 'Incorrect path');
-    });
-
-    it('NaiveStepLineV2 - makes straight line in degenerate case', function(){
-        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, 10));
-        const obj = line.publish();
-        assert.equal('M 10 10 h 40', obj.d, 'Incorrect path');
-    });
-
-    it('NaiveStepLineV3 - makes step regular line', function(){
-        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, 50));
-        const obj = line.publish();
-        assert.equal('M 10 10 h 20 M 30 10 v 40 M 30 50 h 20', obj.d,
-                     'Incorrect path');
-    });
-
-    it('NaiveStepLineV4 - makes line in III quadrant', function(){
-        const line = new NaiveStepLineV(new Point(50, 50), new Point(10, 10));
-        const obj = line.publish();
-        assert.equal('M 50 50 h -20 M 30 50 v -40 M 30 10 h -20', obj.d,
-                     'Incorrect path');
-    });
-
-    it('NaiveStepLineV5 - makes line in II quadrant', function(){
-        const line = new NaiveStepLineV(new Point(10, 10), new Point(50, -30));
-        const obj = line.publish();
-        assert.equal('M 10 10 h 20 M 30 10 v -40 M 30 -30 h 20', obj.d,
-                     'Incorrect path');
     });
 
 });
