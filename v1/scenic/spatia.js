@@ -37,8 +37,15 @@ class Spatia {
             (Math.abs(delta.y) <= this._precision);
     }
 
-    _isReachableLine(target, cursor) {
-        
+    _isReachableLine(target, C) {
+        const [A, B] = [target.start, target.end];
+        const a = Math.sqrt((this._precision**2) / 2);
+
+        const A1 = new Point(A.x - a, A.y + a), B1 = new Point(B.x - a, B.y + a);
+        const A2 = new Point(A.x + a, A.y - a), B2 = new Point(B.x + a, B.y - a);
+        const l1 = this.calcLinear(A1, B1), l2 = this.calcLinear(A2, B2);
+
+        return (C.y < l1.k * C.x + l1.b) && (C.y > l2.k * C.x + l2.b);
     }
 
     isInRect(rect, cursor) {
