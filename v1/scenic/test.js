@@ -19,6 +19,16 @@ describe('Point', function(){
             assert.isTrue(p.isTouching(new Point(-1,-1), s),
                           'Touch @ -1,-1 not detected');
         });
+
+        it('isTouching3 - detects touch at the edge of precision radius',
+           function(){
+            const p = new Point(0,0), s = new Spatia();
+
+               assert.isTrue(p.isTouching(new Point(-1,5), s),
+                             'Touch @ -1,5 not detected');
+               assert.isTrue(p.isTouching(new Point(5,0), s),
+                             'Touch @ 5,0 not detected');
+           });
     });
 
 });
