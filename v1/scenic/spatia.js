@@ -3,6 +3,15 @@ class Spatia {
         this._precision = precision;
     }
 
+    distance(from, to) {
+        if (to instanceof Point)
+            return this.distanceToPoint;
+    }
+
+    distanceToPoint(from, to) {
+        return (to.x - from.x)**2 + (to.y - from.y)**2;
+    }
+
     isReachable(target, cursor) {
         const delta = cursor.sub(target);
 
