@@ -66,6 +66,14 @@ describe('Rect', function(){
             assert.isTrue(r.isTouching(new Point(3,5), s),
                           'Touch @ down rib not detected');
         });
+
+        it('Rect.isTouching3 - detects touch inside', function(){
+            assert.isTrue(r.isTouching(new Point(4,1), s),
+                          'Touch @ 4,1 not detected');
+            assert.isTrue(r.isTouching(new Point(2,4), s),
+                          'Touch @ 2,4 not detected');
+        });
+
     });
 
 });
