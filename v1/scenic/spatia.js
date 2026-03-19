@@ -45,7 +45,7 @@ class Spatia {
         const A2 = new Point(A.x + a, A.y - a), B2 = new Point(B.x + a, B.y - a);
         const l1 = this.calcLinear(A1, B1), l2 = this.calcLinear(A2, B2);
 
-        return (C.y < l1.k * C.x + l1.b) && (C.y > l2.k * C.x + l2.b);
+        return (C.y <= l1.k * C.x + l1.b) && (C.y >= l2.k * C.x + l2.b);
     }
 
     isInRect(rect, cursor) {
