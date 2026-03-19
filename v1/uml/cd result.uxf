@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>100</y>
+      <w>210</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Result
+--
++note: string = ""
+-store: &lt;any, any&gt; = &lt;&gt;
+
++isPlain: boolean = true
++isOk: boolean = false
++isFail: boolean = false
+--
+Result(note:string, content:any [*])
+
+&lt;&lt;get&gt;&gt; isExist(): boolean
+&lt;&lt;get&gt;&gt; isEmpty(): boolean
+
+store(): any [*]
+set(key:any, value:any)
+get(key:any): any</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>100</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Success
+--
++note: string = ""
+
++isPlain: boolean = false
++isOk: boolean = true
++isFail: boolean = false</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>260</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Fail
+--
++note: string = ""
+
++isPlain: boolean = false
++isOk: boolean = false
++isFail: boolean = true</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>160</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>310</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>
