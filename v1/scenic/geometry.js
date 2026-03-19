@@ -6,36 +6,28 @@ class Primitive {
 class Point extends Primitive {
     constructor(x, y) {
         super();
-	    this._x = x;
-	    this._y = y;
-    }
-
-    get x() {
-        return this._x;
-    }
-
-    get y() {
-        return this._y;
+	    this.x = x;
+	    this.y = y;
     }
 
     sum(arg) {
-        return new Point(this._x + arg._x,
-                         this._y + arg._y);
+        return new Point(this.x + arg.x,
+                         this.y + arg.y);
     }
 
     sub(arg) {
-        return this.sum(new Point(-arg._x, -arg._y));
+        return this.sum(new Point(-arg.x, -arg.y));
     }
 
     shift(dX, dY) {
-        this._x += dX;
-        this._y += dY;
+        this.x += dX;
+        this.y += dY;
     }
 
     publish() {
         return {
-            x: this._x,
-            y: this._y
+            x: this.x,
+            y: this.y
         };
     }
 
