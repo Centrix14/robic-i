@@ -5,7 +5,7 @@ class Spatia {
 
     distance(from, to) {
         if (to instanceof Point)
-            return this.distanceToPoint;
+            return this.distanceToPoint(from, to);
     }
 
     distanceToPoint(from, to) {
@@ -13,10 +13,24 @@ class Spatia {
     }
 
     isReachable(target, cursor) {
-        const delta = cursor.sub(target);
+        switch (target.constructor.name) {
+        case 'Point':
+            return this._isReachablePoint(target, cursor);
+            break;
+        case 'StraightLine':
+            return this._isReachableLine(target, cursor);
+            break;
+        }
+    }
 
+    _isReachablePoint(target, cursor) {
+        const delta = cursor.sub(target);
         return (Math.abs(delta.x) <= this._precision) &&
             (Math.abs(delta.y) <= this._precision);
+    }
+
+    _isReachableLine(target, cursor) {
+        
     }
 
     isInRect(rect, cursor) {
