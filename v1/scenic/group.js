@@ -32,9 +32,22 @@ class Group {
     }
 }
 
-class NaiveStepLineV extends Primitive {
+class NaiveVerticalStepline extends Group {
+    static Ribs = {
+        Up: 'up',
+        Middle: 'middle',
+        Down: 'down'
+    }
+
     constructor(start=zeroPoint, end=zeroPoint) {
         super();
+
+        this._store = new Map([
+            [NaiveVerticalStepline.Ribs.Up, new StraightLine()],
+            [NaiveVerticalStepline.Ribs.Middle, new StraightLine()],
+            [NaiveVerticalStepline.Ribs.Down, new StraightLine()]
+        ]);
+
         this._start = start;
         this._end = end;
     }
@@ -51,6 +64,9 @@ class NaiveStepLineV extends Primitive {
             y1 + (y2 - y1) / 2
         );
     }
+
+    add() { return new Result(); }
+    drop() { return new Result(); }
 
     shift(dX, dY) {
         this._start.shift(dX, dY);
@@ -209,7 +225,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new NaiveStepLineV(start, end),
+        const stepline = new NaiveVerticalStepline(start, end),
               center = stepline.getCenter();
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
