@@ -96,11 +96,11 @@ describe('Rect', function(){
 describe('NaiveVerticalStepline', function(){
 
     describe('NaiveVerticalStepline.constructor', function(){
-        it('NSLV.constructor1 - makes point in degenerate case', function(){
+        it('NSLV.constructor1 - makes point when start=end', function(){
             const line = new NaiveVerticalStepline(new Point(10, 10),
                                             new Point(10, 10));
             const obj = line.publish();
-            assert.equal('M 10 10 v 0', obj.d, 'Incorrect path');
+            assert.equal('10,10 10,10 10,10 10,10', obj.points, 'Incorrect path');
         });
 
         it('NSLV.constructor2 - makes straight line in degenerate case',
