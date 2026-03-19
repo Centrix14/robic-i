@@ -50,14 +50,16 @@ class NaiveVerticalStepline extends Group {
 
         this._start = start;
         this._end = end;
+
+        this._calcRibs();
     }
 
     _calcRibs() {
         const Rib = NaiveVerticalStepline.Rib;
 
-        const up = this._store.get(Rib.Up)[1],
-              middle = this._store.get(Rib.Middle)[1],
-              down = this._store.get(Rib.Down)[1];
+        const up = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              down = this._store.get(Rib.Down);
 
         const [x1, y1] = [this.start.x, this.start.y],
               [x2, y2] = [this.end.x, this.end.y];
@@ -95,25 +97,18 @@ class NaiveVerticalStepline extends Group {
     }
 
     publish() {
-        const [x1, y1] = [this._start.x, this._start.y],
-              [x2, y2] = [this._end.x, this._end.y];
-        const dx = x2 - x1, dy = y2 - y1;
+        const Rib = NaiveVerticalStepline.Rib;
 
-        const d = `M ${x1} ${y1}`;
+        const up = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              down = this._store.get(Rib.Down);
 
-        if (x1 === x2) {
-            return { d: `${d} v ${dy}` };
-        }
-        else if (y1 === y2) {
-            return { d: `${d} h ${dx}` };
-        }
-        else {
-            const l = dx / 2;
-
-            return {
-                d: `${d} h ${l} M ${x1+l} ${y1} v ${dy} M ${x1+l} ${y1+dy} h ${l}`
-            }
-        }
+        return {
+            points: `${up.start.x},${up.start.y} `
+                + `${middle.start.x},${middle.start.y} `
+                + `${down.start.x},${down.start.y} `
+                + `${down.end.x},${down.end.y}`
+        };
     }
 
     isTouching(cursor, spatia) {
