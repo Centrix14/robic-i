@@ -24,8 +24,8 @@ describe('Point', function(){
            function(){
             const p = new Point(0,0), s = new Spatia();
 
-               assert.isTrue(p.isTouching(new Point(-1,5), s),
-                             'Touch @ -1,5 not detected');
+               assert.isTrue(p.isTouching(new Point(-3,4), s),
+                             'Touch @ -3,4 not detected');
                assert.isTrue(p.isTouching(new Point(5,0), s),
                              'Touch @ 5,0 not detected');
            });
