@@ -226,6 +226,7 @@ class ElementGeometrySet {
         const Layer = ElementGeometrySet.Layer;
         const State = ElementGeometrySet.State;
         const Geometry = ElementGeometrySet.Geometry;
+        const Style = ElementGeometrySet.Style;
 
         this._operator = operator;
 
@@ -235,7 +236,19 @@ class ElementGeometrySet {
             [Geometry.Rect, new ElementRectGroup()]
         ]);
 
-        this._styles = new Map();
+        this._styles = new Map([
+            [Style.RectMain, ElementGeometrySet._rectMainStyle],
+            [Style.RectSelected, ElementGeometrySet._rectSelectedStyle],
+            [Style.RectHidden, ElementGeometrySet._rectHiddenStyle],
+
+            [Style.ArrowCreation, ElementGeometrySet._arrowCreationStyle],
+            [Style.ArrowMain, ElementGeometrySet._arrowMainStyle],
+            [Style.ArrowSelected, ElementGeometrySet._arrowSelectedStyle],
+            [Style.ArrowHidden, ElementGeometrySet._arrowHiddenStyle],
+
+            [Style.LabelMain, ElementGeometrySet._labelMainStyle],
+            [Style.LabelHidden, ElementGeometrySet._labelHiddenStyle]
+        ]);
         this._supplement = new Map();
     }
 
