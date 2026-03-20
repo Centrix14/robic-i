@@ -190,5 +190,43 @@ class ProcessGeometrySet {
 }
 
 class ElementGeometrySet {
-    
+    static State = {
+        Creation: 'creation',
+        Main: 'main',
+        Selected: 'selected',
+        Hidden: 'hidden'
+    }
+
+    static Layer = {
+        Process: 'process',
+        Element: 'element'
+    }
+
+    static Geometry = {
+        ArrowCreation: 'arrowCreation',
+        ArrowMain: 'arrowMain',
+        Rect: 'rect',
+    }
+
+    constructor(operator) {
+        const Layer = ElementGeometrySet.Layer;
+        const State = ElementGeometrySet.State;
+        const Geometry = ElementGeometrySet.Geometry;
+
+        this._operator = operator;
+
+        this._geometry = new Map([
+            [Geometry.ArrowCreation, new StraightLine()],
+            [Geometry.ArrowMain, new ElementArrowGroup()],
+            [Geometry.Rect, new ElementRectGroup()]
+        ]);
+
+        this._styles = new Map();
+        this._supplement = new Map();
+    }
+
+    combine(options) {
+        
+    }
+
 }
