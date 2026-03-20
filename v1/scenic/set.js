@@ -229,4 +229,65 @@ class ElementGeometrySet {
         
     }
 
+    static _arrowCreationStyle() {
+        const style = new Style();
+
+        style.add(new Stroke({ dasharray: '4' }), 'stroke');
+
+        return style;
+    }
+
+    static _arrowMainStyle() {
+        const style = new Style();
+
+        style.add(new Fill({ color: 'none' }), 'fill');
+        style.add(new Stroke(), 'stroke');
+
+        return style;
+    }
+
+    static _arrowMainSelectedStyle {
+        const style = new Style();
+
+        style.add(new Fill({ color: 'none' }), 'fill');
+        style.add(new Stroke({ color: 'blue' }), 'stroke');
+
+        return style;
+    }
+
+    static _arrowMainHiddenStyle {
+        const style = new Style();
+
+        style.add(new Fill({ color: 'none' }), 'fill');
+        style.add(new Stroke({ opacity: '0' }), 'stroke');
+
+        return style;
+    }
+
+    static _rectMainStyle {
+        const style = new Style();
+
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke(), 'stroke');
+
+        return style;
+    }
+
+    static _rectSelectedStyle {
+        const style = new Style();
+ 
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke({ color: 'blue' }), 'stroke');
+
+        return style;
+    }
+
+    static _rectHiddenStyle {
+        const style = new Style();
+
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke({ opacity: '0' }), 'stroke');
+
+        return style;
+    }
 }
