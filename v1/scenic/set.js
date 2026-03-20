@@ -219,7 +219,6 @@ class ElementGeometrySet {
         ArrowHidden: 'Arrow.Hidden',
 
         LabelMain: 'Label.Main',
-        LabelSelected: 'Label.Selected',
         LabelHidden: 'Label.Hidden'
     }
 
@@ -244,6 +243,33 @@ class ElementGeometrySet {
         
     }
 
+    static _rectMainStyle() {
+        const style = new Style();
+
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke(), 'stroke');
+
+        return style;
+    }
+
+    static _rectSelectedStyle() {
+        const style = new Style();
+
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke({ color: 'blue' }), 'stroke');
+
+        return style;
+    }
+
+    static _rectHiddenStyle() {
+        const style = new Style();
+
+        style.add(new Fill({ opacity: '0' }), 'fill');
+        style.add(new Stroke({ color: 'black', opacity: '0' }), 'stroke');
+
+        return style;
+    }
+
     static _arrowCreationStyle() {
         const style = new Style();
 
@@ -252,57 +278,42 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _arrowMainShapeMainStyle() {
-        const style = new Style();
+    static _arrowMainStyle() {
+        const style = ElementGeometrySet._rectMainStyle();
 
-        style.add(new Fill({ color: 'none' }), 'fill');
-        style.add(new Stroke(), 'stroke');
         style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
 
         return style;
     }
 
-    static _arrowMainShapeSelectedStyle {
-        const style = new Style();
+    static _arrowSelectedStyle() {
+        const style = ElementGeometrySet._rectSelectedStyle();
 
-        style.add(new Fill({ color: 'none' }), 'fill');
-        style.add(new Stroke({ color: 'blue' }), 'stroke');
-
-        return style;
-    }
-
-    static _arrowMainShapeHiddenStyle {
-        const style = new Style();
-
-        style.add(new Fill({ color: 'none' }), 'fill');
-        style.add(new Stroke({ opacity: '0' }), 'stroke');
+        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
 
         return style;
     }
 
-    static _rectShapeMainStyle {
+    static _arrowHiddenStyle() {
+        const style = ElementGeometrySet._rectMainStyle();
+
+        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
+
+        return style;
+    }
+
+    static _labelMainStyle() {
+        const style = new Style();
+
+        style.add(new Fill(), 'fill');
+
+        return style;
+    }
+
+    static _labelHiddenStyle() {
         const style = new Style();
 
         style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke(), 'stroke');
-
-        return style;
-    }
-
-    static _rectShapeSelectedStyle {
-        const style = new Style();
- 
-        style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke({ color: 'blue' }), 'stroke');
-
-        return style;
-    }
-
-    static _rectShapeHiddenStyle {
-        const style = new Style();
-
-        style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke({ opacity: '0' }), 'stroke');
 
         return style;
     }
