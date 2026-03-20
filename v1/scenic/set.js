@@ -237,7 +237,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _arrowMainStyle() {
+    static _arrowMainShapeMainStyle() {
         const style = new Style();
 
         style.add(new Fill({ color: 'none' }), 'fill');
@@ -247,7 +247,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _arrowMainSelectedStyle {
+    static _arrowMainShapeSelectedStyle {
         const style = new Style();
 
         style.add(new Fill({ color: 'none' }), 'fill');
@@ -256,7 +256,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _arrowMainHiddenStyle {
+    static _arrowMainShapeHiddenStyle {
         const style = new Style();
 
         style.add(new Fill({ color: 'none' }), 'fill');
@@ -265,7 +265,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _rectMainStyle {
+    static _rectShapeMainStyle {
         const style = new Style();
 
         style.add(new Fill({ opacity: '0' }), 'fill');
@@ -274,7 +274,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _rectSelectedStyle {
+    static _rectShapeSelectedStyle {
         const style = new Style();
  
         style.add(new Fill({ opacity: '0' }), 'fill');
@@ -283,7 +283,7 @@ class ElementGeometrySet {
         return style;
     }
 
-    static _rectHiddenStyle {
+    static _rectShapeHiddenStyle {
         const style = new Style();
 
         style.add(new Fill({ opacity: '0' }), 'fill');
