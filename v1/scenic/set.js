@@ -208,6 +208,21 @@ class ElementGeometrySet {
         Rect: 'rect',
     }
 
+    static Style = {
+        RectMain: 'Rect.Main',
+        RectSelected: 'Rect.Selected',
+        RectHidden: 'Rect.Hidden',
+
+        ArrowCreation: 'Arrow.Creation',
+        ArrowMain: 'Arrow.Main',
+        ArrowSelected: 'Arrow.Selected',
+        ArrowHidden: 'Arrow.Hidden',
+
+        LabelMain: 'Label.Main',
+        LabelSelected: 'Label.Selected',
+        LabelHidden: 'Label.Hidden'
+    }
+
     constructor(operator) {
         const Layer = ElementGeometrySet.Layer;
         const State = ElementGeometrySet.State;
