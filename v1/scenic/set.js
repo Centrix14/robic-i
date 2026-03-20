@@ -242,6 +242,7 @@ class ElementGeometrySet {
 
         style.add(new Fill({ color: 'none' }), 'fill');
         style.add(new Stroke(), 'stroke');
+        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
 
         return style;
     }
