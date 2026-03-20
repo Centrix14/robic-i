@@ -141,7 +141,7 @@ class TextAlign extends StyleElement {
     }
 }
 
-class Maker extends StyleElement {
+class Marker extends StyleElement {
     constructor(definition) {
         super();
         this._start = definition?.start ?? '';
