@@ -249,10 +249,76 @@ class ElementGeometrySet {
             [Style.LabelMain, ElementGeometrySet._labelMainStyle],
             [Style.LabelHidden, ElementGeometrySet._labelHiddenStyle]
         ]);
+
         this._supplement = new Map();
     }
 
     combine(options) {
+        const Layer = ElementGeometrySet.Layer, layer = options.layer;
+
+        switch (layer) {
+        case Layer.Process:
+            return this._combineProcessLayer(options);
+        case Layer.Element:
+            return this._combineElementLayer(options);
+        default:
+            return new Fail();
+        }
+    }
+
+    _combineProcessLayer(options) {
+        const State = ElementGeometrySet.State,
+              Geometry = ElementGeometrySet.Geometry;
+        const state = options.state;
+
+        if (state === State.Creation)
+            ;
+        else
+            return this._combineArrowMain(options);
+    }
+
+    _combineArrowMain(options) {
+        const State = ElementGeometrySet.State,
+              Geometry = ElementGeometrySet.Geometry,
+              Member = ElementArrowGroup.Member;
+        const state = options.state,
+              geometry = this._geometry.get(Geometry.ArrowMain);
+
+        if (!geometry.isInitiated) {
+            const id = options?.id;
+            if (!id)
+                return new Fail();
+
+            geometry.init(id, this._operator);
+        }
+
+        const shape = geometry.getMemberElement(Member.Shape).get('element'),
+              name = geometry.getMemberElement(Member.Name).get('element');
+        const designation =
+              geometry.getMemberElement(Member.Designation).get('element');
+
+        switch (state) {
+        case State.Main:
+            this._styles.get(Style.ArrowMain).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(name);
+            this._styles.get(Style.LabelMain).useOn(designation);
+            break;
+        case State.Selected:
+            this._styles.get(Style.ArrowSelected).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(name);
+            this._styles.get(Style.LabelMain).useOn(designation);
+            break;
+        case State.Hidden:
+            this._styles.get(Style.ArrowHidden).useOn(shape);
+            this._styles.get(Style.LabelHidden).useOn(name);
+            this._styles.get(Style.LabelHidden).useOn(designation);
+            break;
+        }
+
+        return geometry._selfElm;
+    }
+
+    _combineElementLayer(state) {
         
     }
 
