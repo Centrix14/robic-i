@@ -39,7 +39,7 @@ class NaiveVerticalStepline extends Group {
         Down: 'down'
     }
 
-    constructor(start=zeroPoint, end=zeroPoint) {
+    constructor(start, end) {
         super();
 
         this._store = new Map([
@@ -48,8 +48,8 @@ class NaiveVerticalStepline extends Group {
             [NaiveVerticalStepline.Rib.Down, new StraightLine()]
         ]);
 
-        this._start = start;
-        this._end = end;
+        this._start = start ?? new Point(0,0);
+        this._end = end ?? new Point(0,0);
 
         this._calcRibs();
     }

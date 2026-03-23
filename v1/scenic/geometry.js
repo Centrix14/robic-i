@@ -92,9 +92,9 @@ class StraightLine extends Primitive {
 }
 
 class Text extends Primitive {
-    constructor(value='', start=zeroPoint) {
+    constructor(value='', start) {
         super();
-        this._start = start;
+        this._start = start ?? new Point(0,0);
         this.value = value;
     }
 
