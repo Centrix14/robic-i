@@ -237,17 +237,17 @@ class ElementGeometrySet {
         ]);
 
         this._styles = new Map([
-            [Style.RectMain, ElementGeometrySet._rectMainStyle],
-            [Style.RectSelected, ElementGeometrySet._rectSelectedStyle],
-            [Style.RectHidden, ElementGeometrySet._rectHiddenStyle],
+            [Style.RectMain, ElementGeometrySet._rectMainStyle()],
+            [Style.RectSelected, ElementGeometrySet._rectSelectedStyle()],
+            [Style.RectHidden, ElementGeometrySet._rectHiddenStyle()],
 
-            [Style.ArrowCreation, ElementGeometrySet._arrowCreationStyle],
-            [Style.ArrowMain, ElementGeometrySet._arrowMainStyle],
-            [Style.ArrowSelected, ElementGeometrySet._arrowSelectedStyle],
-            [Style.ArrowHidden, ElementGeometrySet._arrowHiddenStyle],
+            [Style.ArrowCreation, ElementGeometrySet._arrowCreationStyle()],
+            [Style.ArrowMain, ElementGeometrySet._arrowMainStyle()],
+            [Style.ArrowSelected, ElementGeometrySet._arrowSelectedStyle()],
+            [Style.ArrowHidden, ElementGeometrySet._arrowHiddenStyle()],
 
-            [Style.LabelMain, ElementGeometrySet._labelMainStyle],
-            [Style.LabelHidden, ElementGeometrySet._labelHiddenStyle]
+            [Style.LabelMain, ElementGeometrySet._labelMainStyle()],
+            [Style.LabelHidden, ElementGeometrySet._labelHiddenStyle()]
         ]);
 
         this._supplement = new Map();
@@ -289,7 +289,10 @@ class ElementGeometrySet {
             if (!id)
                 return new Fail();
 
-            geometry.init(id, this._operator);
+            geometry.init(id, this._operator, {
+                start: new Point(10,10),
+                end: new Point(50,50)
+            });
         }
 
         const shape = geometry.getMemberElement(Member.Shape).get('element'),
@@ -297,6 +300,7 @@ class ElementGeometrySet {
         const designation =
               geometry.getMemberElement(Member.Designation).get('element');
 
+        const Style = ElementGeometrySet.Style;
         switch (state) {
         case State.Main:
             this._styles.get(Style.ArrowMain).useOn(shape);
