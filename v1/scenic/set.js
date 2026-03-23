@@ -5,16 +5,37 @@ class ProcessGeometrySet {
         Hidden: 'hidden'
     }
 
-    static Style = {
-        ShapeMain: 'Shape.Main',
-        NameMain: 'Name.Main',
-        DesignationMain: 'Designation.Main',
+    static Stylesheet = {
+        ShapeMain: Style.build({
+            fill: {},
+            stroke: {}
+        }),
+        NameMain: Style.build({
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '12px' },
+            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
+        }),
+        DesignationMain: Style.build({
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '10px' },
+            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
+        }),
 
-        ShapeSelected: 'Shape.Selected',
+        ShapeSelected: Style.build({
+            fill: {},
+            stroke: { color: 'blue' }
+        }),
 
-        ShapeHidden: 'Shape.Hidden',
-        NameHidden: 'Name.Hidden',
-        DesignationHidden: 'Designation.Hidden',
+        ShapeHidden: Style.build({
+            fill: { opacity: '0' },
+            stroke: { opacity: '0' }
+        }),
+        NameHidden: Style.build({
+            fill: { opacity: '0' }
+        }),
+        DesignationHidden: Style.build({
+            fill: { opacity: '0' }
+        })
     }
 
     constructor(operator) {
@@ -27,19 +48,6 @@ class ProcessGeometrySet {
         this._geometry = new Map([[
             State.Main, new ProcessGroup()
         ]]);
-
-        this._styles = new Map([
-            [Style.ShapeMain, ProcessGeometrySet._shapeMainStyle()],
-            [Style.NameMain, ProcessGeometrySet._nameMainStyle()],
-            [Style.DesignationMain, ProcessGeometrySet._designationMainStyle()],
-
-            [Style.ShapeSelected, ProcessGeometrySet._shapeSelectedStyle()],
-
-            [Style.ShapeHidden, ProcessGeometrySet._shapeHiddenStyle()],
-            [Style.NameHidden, ProcessGeometrySet._nameHiddenStyle()],
-            [Style.DesignationHidden,
-             ProcessGeometrySet._designationHiddenStyle()],
-        ]);
 
         this._supplement = new Map();
     }
@@ -71,24 +79,24 @@ class ProcessGeometrySet {
         const designation =
               group.getMemberElement(Member.Designation).get('element');
 
+        const stylesheet = ProcessGeometrySet.Stylesheet;
         switch (state) {
-
         case State.Main:
-            this._styles.get(Style.ShapeMain).useOn(shape);
-            this._styles.get(Style.NameMain).useOn(name);
-            this._styles.get(Style.DesignationMain).useOn(designation);
+            stylesheet.ShapeMain.useOn(shape);
+            stylesheet.NameMain.useOn(name);
+            stylesheet.DesignationMain.useOn(designation);
             break;
 
         case State.Selected:
-            this._styles.get(Style.ShapeSelected).useOn(shape);
-            this._styles.get(Style.NameMain).useOn(name);
-            this._styles.get(Style.DesignationMain).useOn(designation);
+            stylesheet.ShapeSelected.useOn(shape);
+            stylesheet.NameMain.useOn(name);
+            stylesheet.DesignationMain.useOn(designation);
             break;
 
         case State.Hidden:
-            this._styles.get(Style.ShapeHidden).useOn(shape);
-            this._styles.get(Style.NameHidden).useOn(name);
-            this._styles.get(Style.DesignationHidden).useOn(designation);
+            stylesheet.ShapeHidden.useOn(shape);
+            stylesheet.NameHidden.useOn(name);
+            stylesheet.DesignationHidden.useOn(designation);
             break;
         }
 
@@ -103,89 +111,6 @@ class ProcessGeometrySet {
     shift(dX, dY) {
         const State = ProcessGeometrySet.State;
         this._geometry.get(State.Main).shift(dX, dY, this._operator);
-    }
-
-    static _shapeMainStyle() {
-        const style = new Style();
-
-        style.add(new Fill(), 'fill');
-        style.add(new Stroke(), 'stroke');
-
-        return style;
-    }
-
-    static _nameMainStyle() {
-        const style = new Style();
-
-        style.add(new Fill({
-            color: 'black',
-            opacity: '1'
-        }), 'fill');
-        style.add(new Font({
-            family: 'sans',
-            size: '12px'
-        }), 'font');
-        style.add(new TextAlign({
-            anchor: TextAlign.Anchor.Middle,
-            baseline: TextAlign.Baseline.Middle
-        }), 'textAlign');
-
-        return style;
-    }
-
-    static _designationMainStyle() {
-        const style = new Style();
-
-        style.add(new Fill({
-            color: 'black',
-            opacity: '1'
-        }), 'fill');
-        style.add(new Font({
-            family: 'sans',
-            size: '10px'
-        }), 'font');
-        style.add(new TextAlign({
-            anchor: TextAlign.Anchor.End,
-            baseline: TextAlign.Baseline.Top
-        }), 'textAlign');
-
-        return style;
-    }
-
-    static _shapeSelectedStyle() {
-        const style = new Style();
-
-        style.add(new Fill(), 'fill');
-        style.add(new Stroke({
-            color: 'blue'
-        }), 'stroke');
-
-        return style;
-    }
-
-    static _shapeHiddenStyle() {
-        const style = new Style();
-
-        style.add(new Fill({opacity: '0'}), 'fill');
-        style.add(new Stroke({opacity: '0'}), 'stroke');
-
-        return style;
-    }
-
-    static _nameHiddenStyle() {
-        const style = new Style();
-
-        style.add(new Fill({opacity: '0'}), 'fill');
-
-        return style;
-    }
-
-    static _designationHiddenStyle() {
-        const style = new Style();
-
-        style.add(new Fill({opacity: '0'}), 'fill');
-
-        return style;
     }
 }
 
