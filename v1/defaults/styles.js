@@ -1,4 +1,37 @@
 const Styles = {
+    PGS: {
+        ShapeMain: {
+            fill: {},
+            stroke: {}
+        },
+
+        NameMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '12px' },
+            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
+        },
+
+        DesignationMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '10px' },
+            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
+        },
+
+        ShapeSelected: {
+            fill: {},
+            stroke: { color: 'blue' }
+        },
+
+        ShapeHidden: {
+            fill: { opacity: '0' },
+            stroke: { opacity: '0' }
+        },
+
+        LabelHidden: {
+            fill: { opacity: '0' }
+        }
+    },
+
     EGS: {
         RectMain: {
             fill: { color: 'none', opacity: '0' },
