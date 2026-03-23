@@ -13,13 +13,13 @@ const GeometryLayer = {
 class ProcessGeometrySet {
     static Stylesheet = {
         ShapeMain: Style.build(Styles.PGS.ShapeMain),
-        NameMain: Style.build(Styles.PGS.NameMain),
-        DesignationMain: Style.build(Styles.PGS.DesignationMain),
+        NameMain: Style.build(Styles.Common.NameMain),
+        DesignationMain: Style.build(Styles.Common.DesignationMain),
 
         ShapeSelected: Style.build(Styles.PGS.ShapeSelected),
 
         ShapeHidden: Style.build(Styles.PGS.ShapeHidden),
-        LabelHidden: Style.build(Styles.PGS.LabelHidden)
+        LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
     constructor(operator) {
@@ -113,8 +113,9 @@ class ElementGeometrySet {
         ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
         ArrowHidden: Style.build(Styles.EGS.ArrowHidden),
 
-        LabelMain: Style.build(Styles.EGS.LabelMain),
-        LabelHidden: Style.build(Styles.EGS.LabelHidden)
+        NameMain: Style.build(Styles.Common.NameMain),
+        DesignationMain: Style.build(Styles.Common.DesignationMain),
+        LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
     constructor(operator) {
@@ -170,13 +171,13 @@ class ElementGeometrySet {
         switch (options.state) {
         case GeometryState.Main:
             stylesheet.ArrowMain.useOn(shape);
-            stylesheet.LabelMain.useOn(name);
-            stylesheet.LabelMain.useOn(designation);
+            stylesheet.NameMain.useOn(name);
+            stylesheet.DesignationMain.useOn(designation);
             break;
         case GeometryState.Selected:
             stylesheet.ArrowSelected.useOn(shape);
-            stylesheet.LabelMain.useOn(name);
-            stylesheet.LabelMain.useOn(designation);
+            stylesheet.NameMain.useOn(name);
+            stylesheet.DesignationMain.useOn(designation);
             break;
         case GeometryState.Hidden:
             stylesheet.ArrowHidden.useOn(shape);
@@ -212,13 +213,13 @@ class ElementGeometrySet {
         switch (options.state) {
         case GeometryState.Main:
             stylesheet.RectMain.useOn(shape);
-            stylesheet.LabelMain.useOn(shape);
-            stylesheet.LabelMain.useOn(shape);
+            stylesheet.NameMain.useOn(shape);
+            stylesheet.DesignationMain.useOn(shape);
             break;
         case GeometryState.Selected:
             stylesheet.RectSelected.useOn(shape);
-            stylesheet.LabelMain.useOn(shape);
-            stylesheet.LabelMain.useOn(shape);
+            stylesheet.NameMain.useOn(shape);
+            stylesheet.DesignationMain.useOn(shape);
             break;
         case GeometryState.Hidden:
             stylesheet.RectHidden.useOn(shape);
