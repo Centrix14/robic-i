@@ -25,7 +25,7 @@ const SVG = {
 describe('ElementGeometrySet (EGS)', function(){
 
     describe('EGS.combine (layer=Process, state=Main)', function(){
-        let tag;
+        let tag, shape, name, designation;
 
         before(function(){
             const egs = new ElementGeometrySet(SVG);
@@ -38,6 +38,10 @@ describe('ElementGeometrySet (EGS)', function(){
                     end: new Point(50,50)
                 }
             });
+
+            shape = tag.querySelector('#shape')
+            name = tag.querySelector('#name')
+            designation = tag.querySelector('#designation')
         });
 
         it('EGS.combine1 - returns <g> SVG element', function(){
@@ -45,9 +49,9 @@ describe('ElementGeometrySet (EGS)', function(){
         });
 
         it('EGS.combine2 - group has necessary childs', function(){
-            assert.isNotNull(tag.querySelector('#shape'));
-            assert.isNotNull(tag.querySelector('#name'));
-            assert.isNotNull(tag.querySelector('#designation'));
+            assert.isNotNull(shape, 'shape = null');
+            assert.isNotNull(name, 'name = null');
+            assert.isNotNull(designation, 'designation = null');
         });
     });
 
