@@ -1,10 +1,5 @@
 const Styles = {
-    PGS: {
-        ShapeMain: {
-            fill: {},
-            stroke: {}
-        },
-
+    Common: {
         NameMain: {
             fill: { color: 'black', opacity: '1' },
             font: { family: 'sans', size: '12px' },
@@ -17,6 +12,17 @@ const Styles = {
             textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
         },
 
+        LabelHidden: {
+            fill: { opacity: '0' }
+        }
+    },
+
+    PGS: {
+        ShapeMain: {
+            fill: {},
+            stroke: {}
+        },
+
         ShapeSelected: {
             fill: {},
             stroke: { color: 'blue' }
@@ -26,10 +32,6 @@ const Styles = {
             fill: { opacity: '0' },
             stroke: { opacity: '0' }
         },
-
-        LabelHidden: {
-            fill: { opacity: '0' }
-        }
     },
 
     EGS: {
@@ -68,14 +70,6 @@ const Styles = {
             fill: { color: 'none', opacity: '0' },
             stroke: { color: 'none', opacity: '0' },
             marker: { end: 'url(#element-arrow-marker)' }
-        },
-
-        LabelMain: {
-            fill: { color: 'black', opacity: '1' }
-        },
-
-        LabelHidden: {
-            fill: { color: 'black', opacity: '0' }
         }
     }
 }
