@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>120</y>
+      <w>380</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Spatia
+--
+-precision: integer = 5
+--
+Spatia(precision:integer)
+
+distance(from, to): float
+calcLinear(A:Point, B:Point): Linear
+
+isReachable(target:Point, cursor:Point): boolean
+isInRect(rect:Rect, cursor:Point): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>120</y>
+      <w>140</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+Linear
+--
++k: float
++b: bloat</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>170</y>
+      <w>60</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+</diagram>

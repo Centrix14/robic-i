@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>270</y>
+      <w>390</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ProcessGeometrySet
+--
+-operator: CanvasOperator
+-state: PGSstate = PGSstate.Main
+-shapes: &lt;string, Group&gt; [*]
+-styles: &lt;string, Style&gt; [*]
+-supplement: &lt;string, Group&gt; [*]
+--
+ProcessGeometrySet(operator: CanvasOperator)
+
+combine(options): Success
+
+isTouching(cursor:Point, spatia:Spatia): boolean
+shift(dX:integer, dY:integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>120</y>
+      <w>190</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+PGSstate
+--
+Main
+Selected
+Hidden</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>220</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>120</y>
+      <w>390</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>ElementGeometrySet
+--
+-operator: CanvasOperator
+-state: PGSstate = EGSstate.Main
+-layer: Layer = ProcessLayer
+-shapes: &lt;string, Group&gt; [*]
+-styles: &lt;string, Style&gt; [*]
+-supplement: &lt;string, Group&gt; [*]
+--
+ElementGeometrySet(operator: CanvasOperator)
+
+combine(options): Success
+
+isTouching(cursor:Point, spatia:Spatia): boolean
+shift(dX:integer, dY:integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>120</y>
+      <w>190</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+EGSstate
+--
+Creation
+Main
+Selected
+Hidden</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>160</y>
+      <w>70</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;50.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>260</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Layer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>260</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+</diagram>

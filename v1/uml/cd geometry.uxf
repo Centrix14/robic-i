@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>415</y>
+      <w>190</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Rect
+--
+-start: Point = zeroPoint
+-width: integer = 1
+-height: integer = 1
+--
+Rect(start:Point, width:integer, height:integer)
+
+&lt;&lt;get&gt;&gt; start()
+&lt;&lt;get&gt;&gt; width()
+&lt;&lt;get&gt;&gt; height()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>310</y>
+      <w>120</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Point
+--
+-x: integer = 0
+-y: integer = 0
+--
+Point(x:integer, y:integer)
+
+&lt;&lt;get&gt;&gt; x()
+&lt;&lt;get&gt;&gt; y()
+
+sum(arg:Point): Point
+sub(arg:Point): Point</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>510</y>
+      <w>140</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>StraightLine
+--
+-start: Point = zeroPoint
+-end: Point = zeroPoint
+--
+StraightLine(start:Point, end:Point)
+
+&lt;&lt;get&gt;&gt; start()
+&lt;&lt;get&gt;&gt; end()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>590</y>
+      <w>120</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Text
+--
+-start: Point = zeroPoint
++value: string = ""
+--
+Text(start:Point, value:string)
+
+&lt;&lt;get&gt;&gt; start()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>485</y>
+      <w>150</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>Primitive
+--
+isTouching(cursor:Point, spatia:Spatia)
+publish(options): Object
+
+shift(dX:integer, dY:integer)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>365</y>
+      <w>165</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;240.0;310.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>490</y>
+      <w>90</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>525</y>
+      <w>90</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>535</y>
+      <w>165</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;310.0;150.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>450</y>
+      <w>215</w>
+      <h>255</h>
+    </coordinates>
+    <panel_attributes>Group
+--
+-store: &lt;integer, Shape&gt; [*]
+-selfElf: SVGElement = null
+-init: boolean = false
+--
+Group()
+
+&lt;&lt;get&gt;&gt; isInitiated()
+
+init(id, operator): SVGElement
+
+add(id:integer, element: Shape): Success ? Fail
+drop(id: integer): Success ? Fail
+
+shift(dX:integer, dY:integer, operator:CanvasOperator)
+isTouching(cursor:Point, spatia:Spatia): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>510</y>
+      <w>70</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>475</x>
+      <y>425</y>
+      <w>145</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>260.0;50.0;260.0;10.0;10.0;10.0;10.0;90.0;70.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>670</y>
+      <w>260</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>NaiveVerticalStepline
+--
+-start: Point
+-end: Point
+--
+NaiveVerticalStepline(start:Point, end:Point)
+
+&lt;&lt;get&gt;&gt; start()
+&lt;&lt;get&gt;&gt; end()
+
+add(): Fail
+drop(): Fail
+
+getCenter(): Point
+
+publish(): Object</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>415</y>
+      <w>70</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>ProcessGroup</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1025</x>
+      <y>450</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Member
+--
+Shape
+Name
+Designation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>565</y>
+      <w>260</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>ElementArrowGroup
+--
+init(id:string, operator:CanvasOperator, coords: Coords)
+
+add(): Fail
+drop(): Fail
+
+getMemberElement(member:ProcessGroupMember): Success ? Fail
+getMemberValue(member:ProcessGroupMember): Success ? Fail
+setMemberValue(member:ProcessGroupMember,
+   value:string, operator:CanvasOperator): Success ? Fail</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>450</y>
+      <w>260</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>NamedRectGroup
+--
+init(id:string, operator:CanvasOperator,
+   defaults:Object, labels:Labels): SVGElement
+
+add(): Fail
+drop(): Fail
+
+getMemberElement(member:ProcessGroupMember): Success ? Fail
+getMemberValue(member:ProcessGroupMember): Success ? Fail
+setMemberValue(member:ProcessGroupMember,
+   value:string, operator:CanvasOperator): Success ? Fail
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1005</x>
+      <y>475</y>
+      <w>30</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1025</x>
+      <y>510</y>
+      <w>85</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+Labels
+--
++name: string
++designation: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1005</x>
+      <y>525</y>
+      <w>30</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>505</y>
+      <w>40</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>415</y>
+      <w>90</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>ElementRectGroup</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>425</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>425</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1025</x>
+      <y>565</y>
+      <w>85</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+Coords
+--
++start: Point
++end: Point</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1005</x>
+      <y>585</y>
+      <w>30</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>580</y>
+      <w>40</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1025</x>
+      <y>670</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Rib
+--
+Up
+Middle
+Down</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1005</x>
+      <y>700</y>
+      <w>30</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>685</y>
+      <w>40</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>
