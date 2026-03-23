@@ -18,7 +18,7 @@ class ProcessGeometrySet {
 
         ShapeSelected: Style.build(Styles.PGS.ShapeSelected),
 
-        ShapeHidden: Style.build(Styles.PGS.ShapeHidden),
+        ShapeHidden: Style.build(Styles.Common.ShapeHidden),
         LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
@@ -106,15 +106,15 @@ class ElementGeometrySet {
     static Stylesheet = {
         RectMain: Style.build(Styles.EGS.RectMain),
         RectSelected: Style.build(Styles.EGS.RectSelected),
-        RectHidden: Style.build(Styles.EGS.RectHidden),
 
         ArrowCreation: Style.build(Styles.EGS.ArrowCreation),
         ArrowMain: Style.build(Styles.EGS.ArrowMain),
         ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
-        ArrowHidden: Style.build(Styles.EGS.ArrowHidden),
 
         NameMain: Style.build(Styles.Common.NameMain),
         DesignationMain: Style.build(Styles.Common.DesignationMain),
+
+        ShapeHidden: Style.build(Styles.Common.ShapeHidden),
         LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
@@ -180,7 +180,7 @@ class ElementGeometrySet {
             stylesheet.DesignationMain.useOn(designation);
             break;
         case GeometryState.Hidden:
-            stylesheet.ArrowHidden.useOn(shape);
+            stylesheet.ShapeHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(name);
             stylesheet.LabelHidden.useOn(designation);
             break;
@@ -222,7 +222,7 @@ class ElementGeometrySet {
             stylesheet.DesignationMain.useOn(shape);
             break;
         case GeometryState.Hidden:
-            stylesheet.RectHidden.useOn(shape);
+            stylesheet.ShapeHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(shape);
             break;

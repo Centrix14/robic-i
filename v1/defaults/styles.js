@@ -14,6 +14,11 @@ const Styles = {
 
         LabelHidden: {
             fill: { opacity: '0' }
+        },
+
+        ShapeHidden: {
+            fill: { opacity: '0' },
+            stroke: { opacity: '0' }
         }
     },
 
@@ -27,11 +32,6 @@ const Styles = {
             fill: {},
             stroke: { color: 'blue' }
         },
-
-        ShapeHidden: {
-            fill: { opacity: '0' },
-            stroke: { opacity: '0' }
-        },
     },
 
     EGS: {
@@ -43,11 +43,6 @@ const Styles = {
         RectSelected: {
             fill: { color: 'none', opacity: '0' },
             stroke: { color: 'blue', opacity: '1' }
-        },
-
-        RectHidden: {
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'black', opacity: '0' }
         },
 
         ArrowCreation: {
@@ -63,12 +58,6 @@ const Styles = {
         ArrowSelected: {
             fill: { color: 'none', opacity: '0' },
             stroke: { color: 'blue', opacity: '1' },
-            marker: { end: 'url(#element-arrow-marker)' }
-        },
-
-        ArrowHidden: {
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'none', opacity: '0' },
             marker: { end: 'url(#element-arrow-marker)' }
         }
     }
