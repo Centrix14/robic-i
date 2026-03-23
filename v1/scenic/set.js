@@ -12,33 +12,14 @@ const GeometryLayer = {
 
 class ProcessGeometrySet {
     static Stylesheet = {
-        ShapeMain: Style.build({
-            fill: {},
-            stroke: {}
-        }),
-        NameMain: Style.build({
-            fill: { color: 'black', opacity: '1' },
-            font: { family: 'sans', size: '12px' },
-            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
-        }),
-        DesignationMain: Style.build({
-            fill: { color: 'black', opacity: '1' },
-            font: { family: 'sans', size: '10px' },
-            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
-        }),
+        ShapeMain: Style.build(Styles.PGS.ShapeMain),
+        NameMain: Style.build(Styles.PGS.NameMain),
+        DesignationMain: Style.build(Styles.PGS.DesignationMain),
 
-        ShapeSelected: Style.build({
-            fill: {},
-            stroke: { color: 'blue' }
-        }),
+        ShapeSelected: Style.build(Styles.PGS.ShapeSelected),
 
-        ShapeHidden: Style.build({
-            fill: { opacity: '0' },
-            stroke: { opacity: '0' }
-        }),
-        LabelHidden: Style.build({
-            fill: { opacity: '0' }
-        })
+        ShapeHidden: Style.build(Styles.PGS.ShapeHidden),
+        LabelHidden: Style.build(Styles.PGS.LabelHidden)
     }
 
     constructor(operator) {
