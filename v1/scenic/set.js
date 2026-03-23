@@ -210,16 +210,16 @@ class ElementGeometrySet {
 
     static Stylesheet = {
         RectMain: Style.build({
-            fill: {opacity: '0'},
+            fill: { opacity: '0' },
             stroke: {}
         }),
         RectSelected: Style.build({
-            fill: {opacity: '0'},
-            stroke: {color: 'blue'}
+            fill: { opacity: '0' },
+            stroke: { color: 'blue' }
         }),
         RectHidden: Style.build({
-            fill: {opacity: '0'},
-            stroke: {color: 'black'}
+            fill: { opacity: '0' },
+            stroke: { color: 'black' }
         }),
 
         ArrowCreation: Style.build({
@@ -236,10 +236,10 @@ class ElementGeometrySet {
         }),
 
         LabelMain: Style.build({
-            fill: {}
+            fill: { color: 'black', opacity: '1' }
         }),
         LabelHidden: Style.build({
-            fill: { opacity: '0' }
+            fill: { color: 'black', opacity: '0' }
         })
     }
 
