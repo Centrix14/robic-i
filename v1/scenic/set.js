@@ -210,28 +210,34 @@ class ElementGeometrySet {
 
     static Stylesheet = {
         RectMain: Style.build({
-            fill: { opacity: '0' },
-            stroke: {}
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'black', opacity: '1' }
         }),
         RectSelected: Style.build({
-            fill: { opacity: '0' },
-            stroke: { color: 'blue' }
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'blue', opacity: '1' }
         }),
         RectHidden: Style.build({
-            fill: { opacity: '0' },
-            stroke: { color: 'black' }
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'black', opacity: '0' }
         }),
 
         ArrowCreation: Style.build({
-            stroke: { dasharray: '4' }
+            stroke: { color: 'black', opacity: '1', dasharray: '4' }
         }),
         ArrowMain: Style.build({
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'black', opacity: '1' },
             marker: { end: 'url(#element-arrow-marker)' }
         }),
         ArrowSelected: Style.build({
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'blue', opacity: '1' },
             marker: { end: 'url(#element-arrow-marker)' }
         }),
         ArrowHidden: Style.build({
+            fill: { color: 'none', opacity: '0' },
+            stroke: { color: 'none', opacity: '0' },
             marker: { end: 'url(#element-arrow-marker)' }
         }),
 
