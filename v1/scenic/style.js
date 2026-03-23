@@ -28,6 +28,39 @@ class Style {
     useOn(target) {
         this._store.forEach((element) => element.useOn(target));
     }
+
+    static build(stylesheet) {
+        const style = new Style();
+
+        for (let key in stylesheet) {
+            const definition = stylesheet[key];
+
+            let element;
+            switch (key) {
+            case 'stroke':
+                element = new Stroke(definition);
+                break;
+            case 'fill':
+                element = new Fill(definition);
+                break;
+            case 'font':
+                element = new Font(definition);
+                break;
+            case 'textAlign':
+                element = new TextAlign(definition);
+                break;
+            case 'marker':
+                element = new Marker(definition);
+                break;
+            default:
+                return new Fail();
+            }
+
+            style.add(element, key);
+        }
+
+        return style;
+    }
 }
 
 class StyleElement {
@@ -155,3 +188,4 @@ class Marker extends StyleElement {
         target.setAttribute('marker-end', this._end);
     }
 }
+
