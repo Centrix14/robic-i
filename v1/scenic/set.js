@@ -36,10 +36,7 @@ class ProcessGeometrySet {
             fill: { opacity: '0' },
             stroke: { opacity: '0' }
         }),
-        NameHidden: Style.build({
-            fill: { opacity: '0' }
-        }),
-        DesignationHidden: Style.build({
+        LabelHidden: Style.build({
             fill: { opacity: '0' }
         })
     }
@@ -99,8 +96,8 @@ class ProcessGeometrySet {
 
         case State.Hidden:
             stylesheet.ShapeHidden.useOn(shape);
-            stylesheet.NameHidden.useOn(name);
-            stylesheet.DesignationHidden.useOn(designation);
+            stylesheet.LabelHidden.useOn(name);
+            stylesheet.LabelHidden.useOn(designation);
             break;
         }
 
