@@ -319,8 +319,49 @@ class ElementGeometrySet {
         return geometry._selfElm;
     }
 
-    _combineElementLayer(state) {
-        
+    _combineElementLayer(options) {
+        const State = ElementGeometrySet.State,
+              Geometry = ElementGeometrySet.Geometry,
+              Member = ElementArrowGroup.Member;
+        const state = options.state,
+              geometry = this._geometry.get(Geometry.Rect);
+
+        if (!geometry.isInitiated) {
+            const id = options?.id;
+            if (!id)
+                return new Fail();
+
+            geometry.init(id, this._operator, Defaults, {
+                name: 'Элемент',
+                designation: `Э ${id}`
+            });
+        }
+
+        const shape = geometry.getMemberElement(Member.Shape).get('element'),
+              name = geometry.getMemberElement(Member.Name).get('element');
+        const designation =
+              geometry.getMemberElement(Member.Designation).get('element');
+
+        const Style = ElementGeometrySet.Style;
+        switch (state) {
+        case State.Main:
+            this._styles.get(Style.RectMain).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(shape);
+            break;
+        case State.Selected:
+            this._styles.get(Style.RectSelected).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(shape);
+            this._styles.get(Style.LabelMain).useOn(shape);
+            break;
+        case State.Hidden:
+            this._styles.get(Style.RectHidden).useOn(shape);
+            this._styles.get(Style.LabelHidden).useOn(shape);
+            this._styles.get(Style.LabelHidden).useOn(shape);
+            break;
+        }
+
+        return geometry._selfElm;
     }
 
     static _rectMainStyle() {
