@@ -46,7 +46,6 @@ class ProcessGeometrySet {
 
     constructor(operator) {
         const State = GeometryState;
-        const Style = ProcessGeometrySet.Style;
 
         this._state = State.Main;
         this._operator = operator;
@@ -77,8 +76,7 @@ class ProcessGeometrySet {
 
     _combine(state, group) {
         const State = GeometryState,
-              Member = ProcessGroup.Member,
-              Style = ProcessGeometrySet.Style;
+              Member = ProcessGroup.Member;
 
         const shape = group.getMemberElement(Member.Shape).get('element'),
               name = group.getMemberElement(Member.Name).get('element');
@@ -169,8 +167,6 @@ class ElementGeometrySet {
     }
 
     constructor(operator) {
-        const Layer = GeometryLayer;
-        const State = GeometryState;
         const Geometry = ElementGeometrySet.Geometry;
 
         this._operator = operator;
@@ -185,12 +181,10 @@ class ElementGeometrySet {
     }
 
     combine(options) {
-        const Layer = GeometryLayer, layer = options.layer;
-
-        switch (layer) {
-        case Layer.Process:
+        switch (options.layer) {
+        case GeometryLayer.Process:
             return this._combineProcessLayer(options);
-        case Layer.Element:
+        case GeometryLayer.Element:
             return this._combineElementLayer(options);
         default:
             return new Fail();
@@ -198,22 +192,15 @@ class ElementGeometrySet {
     }
 
     _combineProcessLayer(options) {
-        const State = GeometryState,
-              Geometry = ElementGeometrySet.Geometry;
-        const state = options.state;
-
-        if (state === State.Creation)
+        if (options.state === GeometryState.Creation)
             ;
         else
             return this._combineArrowMain(options);
     }
 
     _combineArrowMain(options) {
-        const State = GeometryState,
-              Geometry = ElementGeometrySet.Geometry,
-              Member = ElementArrowGroup.Member;
-        const state = options.state,
-              geometry = this._geometry.get(Geometry.ArrowMain);
+        const Member = ElementArrowGroup.Member;
+        const geometry = this._geometry.get(ElementGeometrySet.Geometry.ArrowMain);
 
         if (!geometry.isInitiated) {
             const id = options?.id;
@@ -229,18 +216,18 @@ class ElementGeometrySet {
               geometry.getMemberElement(Member.Designation).get('element');
 
         const stylesheet = ElementGeometrySet.Stylesheet;
-        switch (state) {
-        case State.Main:
+        switch (options.state) {
+        case GeometryState.Main:
             stylesheet.ArrowMain.useOn(shape);
             stylesheet.LabelMain.useOn(name);
             stylesheet.LabelMain.useOn(designation);
             break;
-        case State.Selected:
+        case GeometryState.Selected:
             stylesheet.ArrowSelected.useOn(shape);
             stylesheet.LabelMain.useOn(name);
             stylesheet.LabelMain.useOn(designation);
             break;
-        case State.Hidden:
+        case GeometryState.Hidden:
             stylesheet.ArrowHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(name);
             stylesheet.LabelHidden.useOn(designation);
@@ -251,11 +238,8 @@ class ElementGeometrySet {
     }
 
     _combineElementLayer(options) {
-        const State = GeometryState,
-              Geometry = ElementGeometrySet.Geometry,
-              Member = ElementArrowGroup.Member;
-        const state = options.state,
-              geometry = this._geometry.get(Geometry.Rect);
+        const Member = ElementArrowGroup.Member;
+        const geometry = this._geometry.get(ElementGeometrySet.Geometry.Rect);
 
         if (!geometry.isInitiated) {
             const id = options?.id;
@@ -274,18 +258,18 @@ class ElementGeometrySet {
               geometry.getMemberElement(Member.Designation).get('element');
 
         const stylesheet = ElementGeometrySet.Stylesheet;
-        switch (state) {
-        case State.Main:
+        switch (options.state) {
+        case GeometryState.Main:
             stylesheet.RectMain.useOn(shape);
             stylesheet.LabelMain.useOn(shape);
             stylesheet.LabelMain.useOn(shape);
             break;
-        case State.Selected:
+        case GeometryState.Selected:
             stylesheet.RectSelected.useOn(shape);
             stylesheet.LabelMain.useOn(shape);
             stylesheet.LabelMain.useOn(shape);
             break;
-        case State.Hidden:
+        case GeometryState.Hidden:
             stylesheet.RectHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(shape);
