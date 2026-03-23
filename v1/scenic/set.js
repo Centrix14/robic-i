@@ -1,10 +1,16 @@
-class ProcessGeometrySet {
-    static State = {
-        Main: 'main',
-        Selected: 'selected',
-        Hidden: 'hidden'
-    }
+const GeometryState = {
+    Creation: 'creation',
+    Main: 'main',
+    Selected: 'selected',
+    Hidden: 'hidden'
+}
 
+const GeometryLayer = {
+    Process: 'process',
+    Element: 'element'
+}
+
+class ProcessGeometrySet {
     static Stylesheet = {
         ShapeMain: Style.build({
             fill: {},
@@ -39,7 +45,7 @@ class ProcessGeometrySet {
     }
 
     constructor(operator) {
-        const State = ProcessGeometrySet.State;
+        const State = GeometryState;
         const Style = ProcessGeometrySet.Style;
 
         this._state = State.Main;
@@ -53,7 +59,7 @@ class ProcessGeometrySet {
     }
 
     combine(options) {
-        const State = ProcessGeometrySet.State;
+        const State = GeometryState;
         const state = options?.state ?? State.Main;
 
         const group = this._geometry.get(State.Main);
@@ -70,7 +76,7 @@ class ProcessGeometrySet {
     }
 
     _combine(state, group) {
-        const State = ProcessGeometrySet.State,
+        const State = GeometryState,
               Member = ProcessGroup.Member,
               Style = ProcessGeometrySet.Style;
 
@@ -104,29 +110,17 @@ class ProcessGeometrySet {
     }
 
     isTouching(cursor, spatia) {
-        const State = ProcessGeometrySet.State;
+        const State = GeometryState;
         return this._geometry.get(State.Main).isTouching(cursor, spatia);
     }
 
     shift(dX, dY) {
-        const State = ProcessGeometrySet.State;
+        const State = GeometryState;
         this._geometry.get(State.Main).shift(dX, dY, this._operator);
     }
 }
 
 class ElementGeometrySet {
-    static State = {
-        Creation: 'creation',
-        Main: 'main',
-        Selected: 'selected',
-        Hidden: 'hidden'
-    }
-
-    static Layer = {
-        Process: 'process',
-        Element: 'element'
-    }
-
     static Geometry = {
         ArrowCreation: 'arrowCreation',
         ArrowMain: 'arrowMain',
@@ -175,8 +169,8 @@ class ElementGeometrySet {
     }
 
     constructor(operator) {
-        const Layer = ElementGeometrySet.Layer;
-        const State = ElementGeometrySet.State;
+        const Layer = GeometryLayer;
+        const State = GeometryState;
         const Geometry = ElementGeometrySet.Geometry;
 
         this._operator = operator;
@@ -191,7 +185,7 @@ class ElementGeometrySet {
     }
 
     combine(options) {
-        const Layer = ElementGeometrySet.Layer, layer = options.layer;
+        const Layer = GeometryLayer, layer = options.layer;
 
         switch (layer) {
         case Layer.Process:
@@ -204,7 +198,7 @@ class ElementGeometrySet {
     }
 
     _combineProcessLayer(options) {
-        const State = ElementGeometrySet.State,
+        const State = GeometryState,
               Geometry = ElementGeometrySet.Geometry;
         const state = options.state;
 
@@ -215,7 +209,7 @@ class ElementGeometrySet {
     }
 
     _combineArrowMain(options) {
-        const State = ElementGeometrySet.State,
+        const State = GeometryState,
               Geometry = ElementGeometrySet.Geometry,
               Member = ElementArrowGroup.Member;
         const state = options.state,
@@ -257,7 +251,7 @@ class ElementGeometrySet {
     }
 
     _combineElementLayer(options) {
-        const State = ElementGeometrySet.State,
+        const State = GeometryState,
               Geometry = ElementGeometrySet.Geometry,
               Member = ElementArrowGroup.Member;
         const state = options.state,
