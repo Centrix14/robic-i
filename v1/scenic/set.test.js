@@ -25,15 +25,29 @@ const SVG = {
 describe('ElementGeometrySet (EGS)', function(){
 
     describe('EGS.combine', function(){
-        it('EGS.combine1 - returns <g> SVG element', function(){
+        let tag;
+
+        before(function(){
             const egs = new ElementGeometrySet(SVG);
-            const tag = egs.combine({
+            tag = egs.combine({
                 id: '0',
                 state: ElementGeometrySet.State.Main,
-                layer: ElementGeometrySet.Layer.Process
+                layer: ElementGeometrySet.Layer.Process,
+                coords: {
+                    start: new Point(10,10),
+                    end: new Point(50,50)
+                }
             });
+        });
 
+        it('EGS.combine1 - returns <g> SVG element', function(){
             assert.equal('g', tag.tagName, '<g> tag expected');
+        });
+
+        it('EGS.combine2 - group has necessary childs', function(){
+            assert.isNotNull(tag.querySelector('#shape'));
+            assert.isNotNull(tag.querySelector('#name'));
+            assert.isNotNull(tag.querySelector('#designation'));
         });
     });
 
