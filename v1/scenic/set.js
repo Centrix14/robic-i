@@ -289,10 +289,7 @@ class ElementGeometrySet {
             if (!id)
                 return new Fail();
 
-            geometry.init(id, this._operator, {
-                start: new Point(10,10),
-                end: new Point(50,50)
-            });
+            geometry.init(id, this._operator, options.coords);
         }
 
         const shape = geometry.getMemberElement(Member.Shape).get('element'),
