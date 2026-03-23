@@ -126,44 +126,17 @@ class ElementGeometrySet {
     }
 
     static Stylesheet = {
-        RectMain: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'black', opacity: '1' }
-        }),
-        RectSelected: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'blue', opacity: '1' }
-        }),
-        RectHidden: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'black', opacity: '0' }
-        }),
+        RectMain: Style.build(Styles.EGS.RectMain),
+        RectSelected: Style.build(Styles.EGS.RectSelected),
+        RectHidden: Style.build(Styles.EGS.RectHidden),
 
-        ArrowCreation: Style.build({
-            stroke: { color: 'black', opacity: '1', dasharray: '4' }
-        }),
-        ArrowMain: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'black', opacity: '1' },
-            marker: { end: 'url(#element-arrow-marker)' }
-        }),
-        ArrowSelected: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'blue', opacity: '1' },
-            marker: { end: 'url(#element-arrow-marker)' }
-        }),
-        ArrowHidden: Style.build({
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'none', opacity: '0' },
-            marker: { end: 'url(#element-arrow-marker)' }
-        }),
+        ArrowCreation: Style.build(Styles.EGS.ArrowCreation),
+        ArrowMain: Style.build(Styles.EGS.ArrowMain),
+        ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
+        ArrowHidden: Style.build(Styles.EGS.ArrowHidden),
 
-        LabelMain: Style.build({
-            fill: { color: 'black', opacity: '1' }
-        }),
-        LabelHidden: Style.build({
-            fill: { color: 'black', opacity: '0' }
-        })
+        LabelMain: Style.build(Styles.EGS.LabelMain),
+        LabelHidden: Style.build(Styles.EGS.LabelHidden)
     }
 
     constructor(operator) {
