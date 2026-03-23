@@ -23,12 +23,12 @@ const Styles = {
     },
 
     PGS: {
-        ShapeMain: {
+        RectMain: {
             fill: {},
             stroke: {}
         },
 
-        ShapeSelected: {
+        RectSelected: {
             fill: {},
             stroke: { color: 'blue' }
         },

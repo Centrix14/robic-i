@@ -12,11 +12,11 @@ const GeometryLayer = {
 
 class ProcessGeometrySet {
     static Stylesheet = {
-        ShapeMain: Style.build(Styles.PGS.ShapeMain),
+        RectMain: Style.build(Styles.PGS.RectMain),
         NameMain: Style.build(Styles.Common.NameMain),
         DesignationMain: Style.build(Styles.Common.DesignationMain),
 
-        ShapeSelected: Style.build(Styles.PGS.ShapeSelected),
+        RectSelected: Style.build(Styles.PGS.RectSelected),
 
         ShapeHidden: Style.build(Styles.Common.ShapeHidden),
         LabelHidden: Style.build(Styles.Common.LabelHidden)
@@ -64,13 +64,13 @@ class ProcessGeometrySet {
         const stylesheet = ProcessGeometrySet.Stylesheet;
         switch (state) {
         case State.Main:
-            stylesheet.ShapeMain.useOn(shape);
+            stylesheet.RectMain.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
 
         case State.Selected:
-            stylesheet.ShapeSelected.useOn(shape);
+            stylesheet.RectSelected.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
