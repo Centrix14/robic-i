@@ -79,7 +79,7 @@ class ProcessGeometrySet {
             this._styles.get(Style.DesignationMain).useOn(designation);
             break;
 
-        case State.Selected: 
+        case State.Selected:
             this._styles.get(Style.ShapeSelected).useOn(shape);
             this._styles.get(Style.NameMain).useOn(name);
             this._styles.get(Style.DesignationMain).useOn(designation);
@@ -208,25 +208,45 @@ class ElementGeometrySet {
         Rect: 'rect',
     }
 
-    static Style = {
-        RectMain: 'Rect.Main',
-        RectSelected: 'Rect.Selected',
-        RectHidden: 'Rect.Hidden',
+    static Stylesheet = {
+        RectMain: Style.build({
+            fill: {opacity: '0'},
+            stroke: {}
+        }),
+        RectSelected: Style.build({
+            fill: {opacity: '0'},
+            stroke: {color: 'blue'}
+        }),
+        RectHidden: Style.build({
+            fill: {opacity: '0'},
+            stroke: {color: 'black'}
+        }),
 
-        ArrowCreation: 'Arrow.Creation',
-        ArrowMain: 'Arrow.Main',
-        ArrowSelected: 'Arrow.Selected',
-        ArrowHidden: 'Arrow.Hidden',
+        ArrowCreation: Style.build({
+            stroke: { dasharray: '4' }
+        }),
+        ArrowMain: Style.build({
+            marker: { end: 'url(#element-arrow-marker)' }
+        }),
+        ArrowSelected: Style.build({
+            marker: { end: 'url(#element-arrow-marker)' }
+        }),
+        ArrowHidden: Style.build({
+            marker: { end: 'url(#element-arrow-marker)' }
+        }),
 
-        LabelMain: 'Label.Main',
-        LabelHidden: 'Label.Hidden'
+        LabelMain: Style.build({
+            fill: {}
+        }),
+        LabelHidden: Style.build({
+            fill: { opacity: '0' }
+        })
     }
 
     constructor(operator) {
         const Layer = ElementGeometrySet.Layer;
         const State = ElementGeometrySet.State;
         const Geometry = ElementGeometrySet.Geometry;
-        const Style = ElementGeometrySet.Style;
 
         this._operator = operator;
 
@@ -234,20 +254,6 @@ class ElementGeometrySet {
             [Geometry.ArrowCreation, new StraightLine()],
             [Geometry.ArrowMain, new ElementArrowGroup()],
             [Geometry.Rect, new ElementRectGroup()]
-        ]);
-
-        this._styles = new Map([
-            [Style.RectMain, ElementGeometrySet._rectMainStyle()],
-            [Style.RectSelected, ElementGeometrySet._rectSelectedStyle()],
-            [Style.RectHidden, ElementGeometrySet._rectHiddenStyle()],
-
-            [Style.ArrowCreation, ElementGeometrySet._arrowCreationStyle()],
-            [Style.ArrowMain, ElementGeometrySet._arrowMainStyle()],
-            [Style.ArrowSelected, ElementGeometrySet._arrowSelectedStyle()],
-            [Style.ArrowHidden, ElementGeometrySet._arrowHiddenStyle()],
-
-            [Style.LabelMain, ElementGeometrySet._labelMainStyle()],
-            [Style.LabelHidden, ElementGeometrySet._labelHiddenStyle()]
         ]);
 
         this._supplement = new Map();
@@ -297,22 +303,22 @@ class ElementGeometrySet {
         const designation =
               geometry.getMemberElement(Member.Designation).get('element');
 
-        const Style = ElementGeometrySet.Style;
+        const stylesheet = ElementGeometrySet.Stylesheet;
         switch (state) {
         case State.Main:
-            this._styles.get(Style.ArrowMain).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(name);
-            this._styles.get(Style.LabelMain).useOn(designation);
+            stylesheet.ArrowMain.useOn(shape);
+            stylesheet.LabelMain.useOn(name);
+            stylesheet.LabelMain.useOn(designation);
             break;
         case State.Selected:
-            this._styles.get(Style.ArrowSelected).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(name);
-            this._styles.get(Style.LabelMain).useOn(designation);
+            stylesheet.ArrowSelected.useOn(shape);
+            stylesheet.LabelMain.useOn(name);
+            stylesheet.LabelMain.useOn(designation);
             break;
         case State.Hidden:
-            this._styles.get(Style.ArrowHidden).useOn(shape);
-            this._styles.get(Style.LabelHidden).useOn(name);
-            this._styles.get(Style.LabelHidden).useOn(designation);
+            stylesheet.ArrowHidden.useOn(shape);
+            stylesheet.LabelHidden.useOn(name);
+            stylesheet.LabelHidden.useOn(designation);
             break;
         }
 
@@ -342,100 +348,25 @@ class ElementGeometrySet {
         const designation =
               geometry.getMemberElement(Member.Designation).get('element');
 
-        const Style = ElementGeometrySet.Style;
+        const stylesheet = ElementGeometrySet.Stylesheet;
         switch (state) {
         case State.Main:
-            this._styles.get(Style.RectMain).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(shape);
+            stylesheet.RectMain.useOn(shape);
+            stylesheet.LabelMain.useOn(shape);
+            stylesheet.LabelMain.useOn(shape);
             break;
         case State.Selected:
-            this._styles.get(Style.RectSelected).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(shape);
-            this._styles.get(Style.LabelMain).useOn(shape);
+            stylesheet.RectSelected.useOn(shape);
+            stylesheet.LabelMain.useOn(shape);
+            stylesheet.LabelMain.useOn(shape);
             break;
         case State.Hidden:
-            this._styles.get(Style.RectHidden).useOn(shape);
-            this._styles.get(Style.LabelHidden).useOn(shape);
-            this._styles.get(Style.LabelHidden).useOn(shape);
+            stylesheet.RectHidden.useOn(shape);
+            stylesheet.LabelHidden.useOn(shape);
+            stylesheet.LabelHidden.useOn(shape);
             break;
         }
 
         return geometry._selfElm;
-    }
-
-    static _rectMainStyle() {
-        const style = new Style();
-
-        style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke(), 'stroke');
-
-        return style;
-    }
-
-    static _rectSelectedStyle() {
-        const style = new Style();
-
-        style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke({ color: 'blue' }), 'stroke');
-
-        return style;
-    }
-
-    static _rectHiddenStyle() {
-        const style = new Style();
-
-        style.add(new Fill({ opacity: '0' }), 'fill');
-        style.add(new Stroke({ color: 'black', opacity: '0' }), 'stroke');
-
-        return style;
-    }
-
-    static _arrowCreationStyle() {
-        const style = new Style();
-
-        style.add(new Stroke({ dasharray: '4' }), 'stroke');
-
-        return style;
-    }
-
-    static _arrowMainStyle() {
-        const style = ElementGeometrySet._rectMainStyle();
-
-        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
-
-        return style;
-    }
-
-    static _arrowSelectedStyle() {
-        const style = ElementGeometrySet._rectSelectedStyle();
-
-        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
-
-        return style;
-    }
-
-    static _arrowHiddenStyle() {
-        const style = ElementGeometrySet._rectMainStyle();
-
-        style.add(new Marker({ end: 'url(#element-arrow-marker)' }), 'stroke');
-
-        return style;
-    }
-
-    static _labelMainStyle() {
-        const style = new Style();
-
-        style.add(new Fill(), 'fill');
-
-        return style;
-    }
-
-    static _labelHiddenStyle() {
-        const style = new Style();
-
-        style.add(new Fill({ opacity: '0' }), 'fill');
-
-        return style;
     }
 }
