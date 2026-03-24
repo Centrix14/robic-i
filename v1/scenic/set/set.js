@@ -127,15 +127,13 @@ class ElementGeometrySet {
         this._supplement = new Map();
     }
 
-    combine(options) {
-        switch (options.layer) {
-        case GeometryLayer.Process:
-            return this._combineProcessLayer(options);
-        case GeometryLayer.Element:
-            return this._combineElementLayer(options);
-        default:
+    combine(layer, state, options) {
+        if (layer === GeometryLayer.Process)
+            return this._combineProcessLayer(state, options);
+        else if (layer === GeometryLayer.Element)
+            return this._combineElementLayer(state, options);
+        else
             return new Fail();
-        }
     }
 
     _combineProcessLayer(options) {
