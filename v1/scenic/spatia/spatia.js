@@ -22,13 +22,34 @@ class Spatia {
         };
     }
 
+    calcLinearABC(S, E) {
+        const [x1, y1] = [S.x, S.y], [x2, y2] = [E.x, E.y];
+        if (x1 === x2)
+            return { A: 1, B: 0, C: -x1 };
+        else if (y1 === y2)
+            return { A: 0, B: 1, C: -y1 };
+        else
+            return {
+                A: (y1 - y2) / (x2 - x1),
+                B: 1,
+                C: -((y1-y2) / (x2-x1))*x1 - y1
+            };
+    }
+
+    confVector(linearABC) {
+        return new Point(
+            (linearABC.A > 0) ? 1 : 0,
+            (linearABC.B > 0) ? 1 : 0
+        );
+    }
+
     isReachable(target, cursor) {
         switch (target.constructor.name) {
         case 'Point':
             return this._isReachablePoint(target, cursor);
             break;
         case 'StraightLine':
-            return this._isReachableLine(target, cursor);
+            return this._isReachableLine1(target, cursor);
             break;
         }
     }
@@ -52,6 +73,24 @@ class Spatia {
                 && (C.y >= l4.k * C.x + l4.b))
             || (this._isReachablePoint(A, C))
             || (this._isReachablePoint(B, C));
+    }
+
+    _isReachableLine1(target, C) {
+        const [S, E] = [target.start, target.end];
+        const r = Math.sqrt((this._precision**2) / 2);
+
+        const S1 = new Point(S.x - r, S.y + r), E1 = new Point(E.x - r, E.y + r);
+        const S2 = new Point(S.x + r, S.y - r), E2 = new Point(E.x + r, E.y - r);
+
+        const l1 = this.calcLinearABC(S1, E1), l2 = this.calcLinearABC(S2, E2),
+              l3 = this.calcLinearABC(E1, E2), l4 = this.calcLinearABC(S1, S2);
+
+        return ((l1.A * C.x + l1.B * C.y + l1.C <= 0)
+                && (l2.A * C.x + l2.B * C.y + l2.C >= 0)
+                && (l3.A * C.x + l3.B * C.y + l3.C <= 0)
+                && (l4.A * C.x + l4.B * C.y + l4.C >= 0))
+            || (this._isReachablePoint(S, C))
+            || (this._isReachablePoint(E, C));
     }
 
     isInRect(rect, cursor) {
