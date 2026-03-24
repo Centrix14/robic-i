@@ -91,6 +91,4 @@ class Spatia {
             && (cursor.x - end.x <= this._precision)
             && (cursor.y - end.y <= this._precision);
     }
-
-    cEq(c1, c2) { return Math.abs(c1 - c2) <= this._precision; }
 }
