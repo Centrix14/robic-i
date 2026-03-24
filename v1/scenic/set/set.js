@@ -133,10 +133,13 @@ class ElementGeometrySet extends GeometrySet {
 
     combine(layer, state, options) {
         if (layer === GeometryLayer.Process) {
+            this._layer = layer;
             return this._combineProcessLayer(state, options);
         }
-        else if (layer === GeometryLayer.Element)
+        else if (layer === GeometryLayer.Element) {
+            this._layer = layer;
             return this._combineElementLayer(state, options);
+        }
         else
             return new Fail();
     }
@@ -175,7 +178,6 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
-        this._layer = layer;
         return group._selfElm;
     }
 
@@ -214,7 +216,28 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
-        this._layer = layer;
         return group._selfElm;
+    }
+
+    isTouching(cursor, spatia) {
+        const rect = this._geometry.get(ElementGeometrySet.Geometry.Rect),
+              arrow = this._geometry.get(ElementGeometrySet.Geometry.Arrow);
+
+        if (this._layer === GeometryLayer.Process)
+            return arrow.isTouching(cursor, spatia);
+        else if (this._layer === GeometryLayer.Element)
+            return rect.isTouching(cursor, spatia);
+        else
+            return false;
+    }
+
+    shift(dX, dY) {
+        let group;
+        if (this._layer === GeometryLayer.Process)
+            group = this._geometry.get(ElementGeometrySet.Geometry.Arrow);
+        else if (this._layer === GeometryLayer.Element)
+            group = this._geometry.get(ElementGeometrySet.Geometry.Rect);
+
+        group.shift(dX, dY, this._operator);
     }
 }
