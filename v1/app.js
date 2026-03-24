@@ -10,10 +10,14 @@ const SVG = {
     namespace: 'http://www.w3.org/2000/svg',
     point: canvas.createSVGPoint(),
 
-    translateCoordinates: (x, y) => (
+    translateXY: (x, y) => (
         SVG.point.x = x,
         SVG.point.y = y,
         SVG.point.matrixTransform(canvas.getScreenCTM().inverse())
+    ),
+
+    translateToPoint: (x, y) => (
+        new Point(SVG.translateXY(x, y).x, SVG.translateXY(x, y).y)
     ),
 
     createTag: (tag) => document.createElementNS(SVG.namespace, tag),
@@ -295,19 +299,14 @@ class Application {
             this.buttons.state = ButtonHandler.State.Idle;
 
             const start = handler.queue[0], end = handler.queue[1];
-            const coords1 = SVG.translateCoordinates(start.x, start.y),
-                  coords1p = new Point(coords1.x, coords1.y);
-            const coords2 = SVG.translateCoordinates(end.x, end.y),
-                  coords2p = new Point(coords2.x, coords2.y);
-            const delta = new Point(
-                SVG.translateCoordinates(end.x, end.y).x - SVG.translateCoordinates(start.x, start.y).x,
-                SVG.translateCoordinates(end.x, end.y).y - SVG.translateCoordinates(start.x, start.y).y,
-            );
+            const startP = SVG.translateToPoint(start.x, start.y),
+                  endP = SVG.translateToPoint(end.x, end.y);
+            const delta = endP.sub(startP);
 
             const spatia = new Spatia(10);
 
             for (let pg of this.buttons._pgs) {
-                if (pg.isTouching(coords1p, spatia))
+                if (pg.isTouching(startP, spatia))
                     pg.shift(delta.x, delta.y);
             }
         }
