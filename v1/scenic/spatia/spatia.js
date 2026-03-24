@@ -6,6 +6,8 @@ class Spatia {
     distance(from, to) {
         if (to instanceof Point)
             return this.distanceToPoint(from, to);
+        else if (to instanceof StraightLine)
+            return this.distanceToLine(from, to);
     }
 
     distanceToPoint(from, to) {
