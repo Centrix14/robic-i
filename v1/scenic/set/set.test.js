@@ -29,10 +29,8 @@ describe('ElementGeometrySet (EGS)', function(){
 
         before(function(){
             const egs = new ElementGeometrySet(SVG);
-            tag = egs.combine({
+            tag = egs.combine(GeometryLayer.Process, GeometryState.Main, {
                 id: '0',
-                state: GeometryState.Main,
-                layer: GeometryLayer.Process,
                 coords: {
                     start: new Point(10,10),
                     end: new Point(50,50)
@@ -60,10 +58,8 @@ describe('ElementGeometrySet (EGS)', function(){
 
         before(function(){
             const egs = new ElementGeometrySet(SVG);
-            tag = egs.combine({
-                id: '0',
-                state: GeometryState.Main,
-                layer: GeometryLayer.Element
+            tag = egs.combine(GeometryLayer.Element, GeometryState.Main, {
+                id: '0'
             });
         });
 
