@@ -45,10 +45,6 @@ const Styles = {
             stroke: { color: 'blue', opacity: '1' }
         },
 
-        ArrowCreation: {
-            stroke: { color: 'black', opacity: '1', dasharray: '4' }
-        },
-
         ArrowMain: {
             fill: { color: 'none', opacity: '0' },
             stroke: { color: 'black', opacity: '1' },
