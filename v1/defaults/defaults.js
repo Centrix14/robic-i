@@ -23,14 +23,14 @@ const Defaults = {
             name: {
                 offset: {
                     x: 0,
-                    y: -5
+                    y: -7
                 }
             },
 
             designation: {
                 offset: {
                     x: 0,
-                    y: 5
+                    y: 7
                 }
             }
         },
