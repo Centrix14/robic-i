@@ -11,6 +11,10 @@ const GeometryLayer = {
 }
 
 class ProcessGeometrySet {
+    static Geometry = {
+        Rect: 'rect'
+    }
+
     static Stylesheet = {
         RectMain: Style.build(Styles.PGS.RectMain),
         NameMain: Style.build(Styles.Common.NameMain),
@@ -23,13 +27,11 @@ class ProcessGeometrySet {
     }
 
     constructor(operator) {
-        const State = GeometryState;
-
-        this._state = State.Main;
+        this._state = GeometryState.Main;
         this._operator = operator;
 
         this._geometry = new Map([[
-            State.Main, new ProcessGroup()
+            ProcessGeometrySet.Geometry.Rect, new ProcessGroup()
         ]]);
 
         this._supplement = new Map();
