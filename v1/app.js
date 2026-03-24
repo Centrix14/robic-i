@@ -84,8 +84,15 @@ class ButtonHandler extends EventHandler {
         super(app);
 
         this.state = ButtonHandler.State.Idle;
+
         this._i = 0;
         this._pgs = [];
+
+        this._j = 0;
+        this._egs = [];
+
+        this._start = null;
+        this._end = null;
     }
 
     cursorClick(event) {
@@ -123,11 +130,29 @@ class ButtonHandler extends EventHandler {
         }
         else if (this.state === ButtonHandler.State.ElementInit) {
             this.state = ButtonHandler.State.ElementSrcSet;
-            console.log(`Element src = ${event.x} ${event.y}`);
+
+            this._start = SVG.translateToPoint(event.x, event.y);
+            console.log(`Element src = ${this._start.x} ${this._start.y}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
             this.state = ButtonHandler.State.ElementCreated;
-            console.log(`Element dst = ${event.x} ${event.y}`);
+
+            this._end = SVG.translateToPoint(event.x, event.y);
+
+            const egs = new ElementGeometrySet(SVG);
+            const elm = egs.combine(GeometryLayer.Process, GeometryState.Main, {
+                id: this._j.toString(),
+                coords: {
+                    start: this._start,
+                    end: this._end
+                }
+            });
+
+            SVG.appendChild(canvas, elm);
+            this._egs.push(egs);
+            this._j++;
+
+            console.log(`Element dst = ${this._end.x} ${this._end.y}`);
         }
 
         this.end(event);
