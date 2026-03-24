@@ -36,11 +36,17 @@ class Spatia {
             };
     }
 
-    confVector(linearABC) {
+    confVector(line) {
         return new Point(
-            (linearABC.A > 0) ? 1 : 0,
-            (linearABC.B > 0) ? 1 : 0
+            (line.A > 0) ? 1 : 0,
+            (line.B > 0) ? 1 : 0
         );
+    }
+
+    translateVector(line, R) {
+        const K = this.confVector(line),
+              r = Math.sqrt((R**2) / (K.x + K.y));
+        return new Point(K.x * r, K.y * r);
     }
 
     isReachable(target, cursor) {
