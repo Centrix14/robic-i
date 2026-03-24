@@ -128,6 +128,7 @@ class ElementGeometrySet extends GeometrySet {
         ]);
 
         this._supplement = new Map();
+        this._layer = GeometryLayer.Process;
     }
 
     combine(layer, state, options) {
@@ -174,6 +175,7 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
+        this._layer = layer;
         return group._selfElm;
     }
 
@@ -212,6 +214,7 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
+        this._layer = layer;
         return group._selfElm;
     }
 }
