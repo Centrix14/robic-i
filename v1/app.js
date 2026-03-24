@@ -289,7 +289,18 @@ class Application {
         if (handler === mouse
             && handler.state === MouseHandler.State.ClickEnd
             && buttons.state === ButtonHandler.State.Idle) {
-            console.log(`Select ${event.x} ${event.y}`);
+
+            const cursor = SVG.translateToPoint(event.x, event.y);
+            const spatia = new Spatia(10);
+
+            for (let pg of this.buttons._pgs) {
+                if (pg.isTouching(cursor, spatia))
+                    pg.combine(GeometryLayer.Process, GeometryState.Selected);
+                else
+                    pg.combine(GeometryLayer.Process, GeometryState.Main);
+            }
+
+            console.log(`Select ${cursor.x} ${cursor.y}`);
         }
 
         // Units moving
