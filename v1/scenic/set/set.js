@@ -136,32 +136,30 @@ class ElementGeometrySet {
             return new Fail();
     }
 
-    _combineProcessLayer(options) {
-        if (options.state === GeometryState.Creation)
+    _combineProcessLayer(state, options) {
+        if (state === GeometryState.Creation)
             ;
         else
-            return this._combineArrowMain(options);
+            return this._combineArrowMain(state, options);
     }
 
-    _combineArrowMain(options) {
-        const Member = ElementArrowGroup.Member;
-        const geometry = this._geometry.get(ElementGeometrySet.Geometry.ArrowMain);
-
-        if (!geometry.isInitiated) {
+    _combineArrowMain(state, options) {
+        const group = this._geometry.get(ElementGeometrySet.Geometry.ArrowMain);
+        if (!group.isInitiated) {
             const id = options?.id;
             if (!id)
                 return new Fail();
-
-            geometry.init(id, this._operator, options.coords);
+            group.init(id, this._operator, options.coords);
         }
 
-        const shape = geometry.getMemberElement(Member.Shape).get('element'),
-              name = geometry.getMemberElement(Member.Name).get('element');
+        const Member = ElementArrowGroup.Member;
+        const shape = group.getMemberElement(Member.Shape).get('element'),
+              name = group.getMemberElement(Member.Name).get('element');
         const designation =
-              geometry.getMemberElement(Member.Designation).get('element');
+              group.getMemberElement(Member.Designation).get('element');
 
         const stylesheet = ElementGeometrySet.Stylesheet;
-        switch (options.state) {
+        switch (state) {
         case GeometryState.Main:
             stylesheet.ArrowMain.useOn(shape);
             stylesheet.NameMain.useOn(name);
@@ -179,7 +177,7 @@ class ElementGeometrySet {
             break;
         }
 
-        return geometry._selfElm;
+        return group._selfElm;
     }
 
     _combineElementLayer(options) {
