@@ -187,10 +187,7 @@ class ElementGeometrySet {
             if (!id)
                 return new Fail();
 
-            group.init(id, this._operator, Defaults, {
-                name: 'Элемент',
-                designation: `Э ${id}`
-            });
+            group.init(id, this._operator);
         }
 
         const Member = ElementArrowGroup.Member;
