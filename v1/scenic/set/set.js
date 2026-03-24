@@ -106,8 +106,7 @@ class ElementGeometrySet extends GeometrySet {
         RectMain: Style.build(Styles.EGS.RectMain),
         RectSelected: Style.build(Styles.EGS.RectSelected),
 
-        ArrowCreation: Style.build(Styles.EGS.ArrowCreation),
-        Arrow: Style.build(Styles.EGS.Arrow),
+        ArrowMain: Style.build(Styles.EGS.ArrowMain),
         ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
 
         NameMain: Style.build(Styles.Common.NameMain),
@@ -162,7 +161,7 @@ class ElementGeometrySet extends GeometrySet {
         const stylesheet = ElementGeometrySet.Stylesheet;
         switch (state) {
         case GeometryState.Main:
-            stylesheet.Arrow.useOn(shape);
+            stylesheet.ArrowMain.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
