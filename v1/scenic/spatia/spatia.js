@@ -3,8 +3,6 @@ class Spatia {
         this._precision = precision;
     }
 
-    // todo: добавить дистанцию для случая линия-точка
-    // реализовать через формулу Герона
     distance(from, to) {
         if (to instanceof Point)
             return this.distanceToPoint(from, to);
@@ -12,6 +10,19 @@ class Spatia {
 
     distanceToPoint(from, to) {
         return (to.x - from.x)**2 + (to.y - from.y)**2;
+    }
+
+    distanceToLine(cursor, line) {
+        const [x1, y1] = [line.start.x, line.start.y],
+              [x2, y2] = [line.end.x, line.end.y],
+              [X, Y] = [cursor.x, cursor.y];
+
+        const a = Math.sqrt((x2-x1)**2 + (y2-y1)**2),
+              b = Math.sqrt((X-x1)**2 + (Y-y1)**2),
+              c = Math.sqrt((X-x2)**2 + (Y-y2)**2),
+              p = (a + b + c) / 2;
+
+        return 2 / a * Math.sqrt(p * (p-a) * (p-b) * (p-c));
     }
 
     calcLinearKB(A, B) {
@@ -83,10 +94,11 @@ class Spatia {
 
     _isReachableLine1(target, C) {
         const [S, E] = [target.start, target.end];
-        const r = Math.sqrt((this._precision**2) / 2);
+        const l = this.calcLinearABC(S, E);
 
-        const S1 = new Point(S.x - r, S.y + r), E1 = new Point(E.x - r, E.y + r);
-        const S2 = new Point(S.x + r, S.y - r), E2 = new Point(E.x + r, E.y - r);
+        const T = this.translateVector(l, this._precision);
+        const S1 = new Point(S.x - T.x, S.y + T.y), E1 = new Point(E.x - T.x, E.y + T.y);
+        const S2 = new Point(S.x + T.x, S.y - T.y), E2 = new Point(E.x + T.x, E.y - T.y);
 
         const l1 = this.calcLinearABC(S1, E1), l2 = this.calcLinearABC(S2, E2),
               l3 = this.calcLinearABC(E1, E2), l4 = this.calcLinearABC(S1, S2);
