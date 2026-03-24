@@ -1,17 +1,5 @@
 const Styles = {
     Common: {
-        NameMain: {
-            fill: { color: 'black', opacity: '1' },
-            font: { family: 'sans', size: '12px' },
-            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
-        },
-
-        DesignationMain: {
-            fill: { color: 'black', opacity: '1' },
-            font: { family: 'sans', size: '10px' },
-            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
-        },
-
         LabelHidden: {
             fill: { opacity: '0' }
         },
@@ -32,6 +20,18 @@ const Styles = {
             fill: {},
             stroke: { color: 'blue' }
         },
+
+        NameMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '12px' },
+            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
+        },
+
+        DesignationMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '10px' },
+            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
+        }
     },
 
     EGS: {
@@ -55,6 +55,18 @@ const Styles = {
             fill: { color: 'none', opacity: '0' },
             stroke: { color: 'blue', opacity: '1' },
             marker: { end: 'url(#element-arrow-marker)' }
+        },
+
+        NameMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '12px' },
+            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Top }
+        },
+
+        DesignationMain: {
+            fill: { color: 'black', opacity: '1' },
+            font: { family: 'sans', size: '10px' },
+            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Bottom }
         }
     }
 }
