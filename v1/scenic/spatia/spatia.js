@@ -14,7 +14,7 @@ class Spatia {
         return (to.x - from.x)**2 + (to.y - from.y)**2;
     }
 
-    calcLinear(A, B) {
+    calcLinearKB(A, B) {
         const [x1, y1] = [A.x, A.y], [x2, y2] = [B.x, B.y];
         return {
             k: (y2 - y1) / (x2 - x1),
@@ -43,8 +43,8 @@ class Spatia {
 
         const A1 = new Point(A.x - a, A.y + a), B1 = new Point(B.x - a, B.y + a);
         const A2 = new Point(A.x + a, A.y - a), B2 = new Point(B.x + a, B.y - a);
-        const l1 = this.calcLinear(A1, B1), l2 = this.calcLinear(A2, B2),
-              l3 = this.calcLinear(B1, B2), l4 = this.calcLinear(A1, A2);
+        const l1 = this.calcLinearKB(A1, B1), l2 = this.calcLinearKB(A2, B2),
+              l3 = this.calcLinearKB(B1, B2), l4 = this.calcLinearKB(A1, A2);
 
         return ((C.y <= l1.k * C.x + l1.b)
                 && (C.y >= l2.k * C.x + l2.b)
