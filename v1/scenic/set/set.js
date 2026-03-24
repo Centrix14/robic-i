@@ -86,13 +86,13 @@ class ProcessGeometrySet extends GeometrySet {
     }
 
     isTouching(cursor, spatia) {
-        const State = GeometryState;
-        return this._geometry.get(State.Main).isTouching(cursor, spatia);
+        const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
+        return group.isTouching(cursor, spatia);
     }
 
     shift(dX, dY) {
-        const State = GeometryState;
-        this._geometry.get(State.Main).shift(dX, dY, this._operator);
+        const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
+        group.shift(dX, dY, this._operator);
     }
 }
 
