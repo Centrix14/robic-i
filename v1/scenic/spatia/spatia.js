@@ -68,7 +68,7 @@ class Spatia {
             return this._isReachablePoint(target, cursor);
             break;
         case 'StraightLine':
-            return this._isReachableLine1(target, cursor);
+            return this._isReachableLine(target, cursor);
             break;
         }
     }
