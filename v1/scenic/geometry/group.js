@@ -91,11 +91,6 @@ class NaiveVerticalStepline extends Group {
     add() { return new Result(); }
     drop() { return new Result(); }
 
-    shift(dX, dY) {
-        this._start.shift(dX, dY);
-        this._end.shift(dX, dY);
-    }
-
     publish() {
         const Rib = NaiveVerticalStepline.Rib;
 
@@ -121,6 +116,12 @@ class NaiveVerticalStepline extends Group {
         return up.isTouching(cursor, spatia)
             || middle.isTouching(cursor, spatia)
             || down.isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY, operator) {
+        this._start.shift(dX, dY);
+        this._end.shift(dX, dY);
+        this._calcRibs();
     }
 }
 
