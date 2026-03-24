@@ -22,8 +22,8 @@ class ProcessGeometrySet extends GeometrySet {
 
     static Stylesheet = {
         RectMain: Style.build(Styles.PGS.RectMain),
-        NameMain: Style.build(Styles.Common.NameMain),
-        DesignationMain: Style.build(Styles.Common.DesignationMain),
+        NameMain: Style.build(Styles.PGS.NameMain),
+        DesignationMain: Style.build(Styles.PGS.DesignationMain),
 
         RectSelected: Style.build(Styles.PGS.RectSelected),
 
@@ -109,8 +109,8 @@ class ElementGeometrySet extends GeometrySet {
         ArrowMain: Style.build(Styles.EGS.ArrowMain),
         ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
 
-        NameMain: Style.build(Styles.Common.NameMain),
-        DesignationMain: Style.build(Styles.Common.DesignationMain),
+        NameMain: Style.build(Styles.EGS.NameMain),
+        DesignationMain: Style.build(Styles.EGS.DesignationMain),
 
         ShapeHidden: Style.build(Styles.Common.ShapeHidden),
         LabelHidden: Style.build(Styles.Common.LabelHidden)
