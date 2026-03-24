@@ -1,5 +1,4 @@
 const GeometryState = {
-    Creation: 'creation',
     Main: 'main',
     Selected: 'selected',
     Hidden: 'hidden'
@@ -99,8 +98,7 @@ class ProcessGeometrySet extends GeometrySet {
 
 class ElementGeometrySet extends GeometrySet {
     static Geometry = {
-        ArrowCreation: 'arrowCreation',
-        ArrowMain: 'arrowMain',
+        Arrow: 'arrowMain',
         Rect: 'rect',
     }
 
@@ -109,7 +107,7 @@ class ElementGeometrySet extends GeometrySet {
         RectSelected: Style.build(Styles.EGS.RectSelected),
 
         ArrowCreation: Style.build(Styles.EGS.ArrowCreation),
-        ArrowMain: Style.build(Styles.EGS.ArrowMain),
+        Arrow: Style.build(Styles.EGS.Arrow),
         ArrowSelected: Style.build(Styles.EGS.ArrowSelected),
 
         NameMain: Style.build(Styles.Common.NameMain),
@@ -125,8 +123,7 @@ class ElementGeometrySet extends GeometrySet {
         const Geometry = ElementGeometrySet.Geometry;
 
         this._geometry = new Map([
-            [Geometry.ArrowCreation, new StraightLine()],
-            [Geometry.ArrowMain, new ElementArrowGroup()],
+            [Geometry.Arrow, new ElementArrowGroup()],
             [Geometry.Rect, new ElementRectGroup()]
         ]);
 
@@ -134,8 +131,9 @@ class ElementGeometrySet extends GeometrySet {
     }
 
     combine(layer, state, options) {
-        if (layer === GeometryLayer.Process)
+        if (layer === GeometryLayer.Process) {
             return this._combineProcessLayer(state, options);
+        }
         else if (layer === GeometryLayer.Element)
             return this._combineElementLayer(state, options);
         else
@@ -143,17 +141,7 @@ class ElementGeometrySet extends GeometrySet {
     }
 
     _combineProcessLayer(state, options) {
-        if (state === GeometryState.Creation)
-            return this._combineArrowCreation(options);
-        else
-            return this._combineArrowMain(state, options);
-    }
-
-    _combineArrowCreation(options) {
-    }
-
-    _combineArrowMain(state, options) {
-        const group = this._geometry.get(ElementGeometrySet.Geometry.ArrowMain);
+        const group = this._geometry.get(ElementGeometrySet.Geometry.Arrow);
         if (!group.isInitiated) {
             const id = options?.id;
             if (!id)
@@ -170,7 +158,7 @@ class ElementGeometrySet extends GeometrySet {
         const stylesheet = ElementGeometrySet.Stylesheet;
         switch (state) {
         case GeometryState.Main:
-            stylesheet.ArrowMain.useOn(shape);
+            stylesheet.Arrow.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
