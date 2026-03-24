@@ -351,6 +351,10 @@ class Application {
                 if (pg.isTouching(startP, spatia))
                     pg.shift(delta.x, delta.y);
             }
+            for (let eg of this.buttons._egs) {
+                if (eg.isTouching(startP, spatia))
+                    eg.shift(delta.x, delta.y);
+            }
         }
         else if (handler === mouse
                  && handler.state === MouseHandler.State.GrabEnd) {
