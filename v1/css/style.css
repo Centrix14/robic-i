@@ -191,7 +191,7 @@ body {
 
 /* SVG elements styles */
 
-.caption, .designation {
+svg #name, svg #designation {
     user-select: none;
 }
 
