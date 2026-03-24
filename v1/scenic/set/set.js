@@ -138,9 +138,12 @@ class ElementGeometrySet {
 
     _combineProcessLayer(state, options) {
         if (state === GeometryState.Creation)
-            ;
+            return this._combineArrowCreation(options);
         else
             return this._combineArrowMain(state, options);
+    }
+
+    _combineArrowCreation(options) {
     }
 
     _combineArrowMain(state, options) {
