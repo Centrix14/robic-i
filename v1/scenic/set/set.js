@@ -42,7 +42,7 @@ class ProcessGeometrySet extends GeometrySet {
     }
 
     combine(layer, state, options) {
-        const group = this._geometry.get(GeometryState.Main);
+        const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
         if (!group.isInitiated) {
             const id = options?.id;
             if (!id)
