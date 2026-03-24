@@ -95,11 +95,13 @@ class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
 
-        const pg = new ProcessGroup();
-        const elm = pg.init(this._i.toString(), SVG);
+        const pgs = new ProcessGeometrySet(SVG);
+        const elm = pgs.combine(GeometryLayer.Process, GeometryState.Main, {
+            id: this._i.toString()
+        });
 
         SVG.appendChild(canvas, elm);
-        this._pgs.push(pg);
+        this._pgs.push(pgs);
 
         this._i++;
         this.state = ButtonHandler.State.ProcessCreated;
@@ -306,7 +308,7 @@ class Application {
 
             for (let pg of this.buttons._pgs) {
                 if (pg.isTouching(coords1p, spatia))
-                    pg.shift(delta.x, delta.y, SVG);
+                    pg.shift(delta.x, delta.y);
             }
         }
         else if (handler === mouse
