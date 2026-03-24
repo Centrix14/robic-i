@@ -27,7 +27,6 @@ class ProcessGeometrySet {
     }
 
     constructor(operator) {
-        this._state = GeometryState.Main;
         this._operator = operator;
 
         this._geometry = new Map([[
@@ -37,17 +36,12 @@ class ProcessGeometrySet {
         this._supplement = new Map();
     }
 
-    combine(options) {
-        const State = GeometryState;
-        const state = options?.state ?? State.Main;
-
-        const group = this._geometry.get(State.Main);
+    combine(layer, state, options) {
+        const group = this._geometry.get(GeometryState.Main);
         if (!group.isInitiated) {
             const id = options?.id;
-
             if (!id)
                 return new Fail();
-
             group.init(id, this._operator);
         }
 
@@ -55,8 +49,7 @@ class ProcessGeometrySet {
     }
 
     _combine(state, group) {
-        const State = GeometryState,
-              Member = ProcessGroup.Member;
+        const Member = ProcessGroup.Member;
 
         const shape = group.getMemberElement(Member.Shape).get('element'),
               name = group.getMemberElement(Member.Name).get('element');
@@ -65,19 +58,19 @@ class ProcessGeometrySet {
 
         const stylesheet = ProcessGeometrySet.Stylesheet;
         switch (state) {
-        case State.Main:
+        case GeometryState.Main:
             stylesheet.RectMain.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
 
-        case State.Selected:
+        case GeometryState.Selected:
             stylesheet.RectSelected.useOn(shape);
             stylesheet.NameMain.useOn(name);
             stylesheet.DesignationMain.useOn(designation);
             break;
 
-        case State.Hidden:
+        case GeometryState.Hidden:
             stylesheet.ShapeHidden.useOn(shape);
             stylesheet.LabelHidden.useOn(name);
             stylesheet.LabelHidden.useOn(designation);
