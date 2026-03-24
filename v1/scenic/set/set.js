@@ -10,7 +10,13 @@ const GeometryLayer = {
     Element: 'element'
 }
 
-class ProcessGeometrySet {
+class GeometrySet {
+    constructor(operator) {
+        this._operator = operator;
+    }
+}
+
+class ProcessGeometrySet extends GeometrySet {
     static Geometry = {
         Rect: 'rect'
     }
@@ -27,7 +33,7 @@ class ProcessGeometrySet {
     }
 
     constructor(operator) {
-        this._operator = operator;
+        super(operator);
 
         this._geometry = new Map([[
             ProcessGeometrySet.Geometry.Rect, new ProcessGroup()
@@ -91,7 +97,7 @@ class ProcessGeometrySet {
     }
 }
 
-class ElementGeometrySet {
+class ElementGeometrySet extends GeometrySet {
     static Geometry = {
         ArrowCreation: 'arrowCreation',
         ArrowMain: 'arrowMain',
@@ -114,9 +120,9 @@ class ElementGeometrySet {
     }
 
     constructor(operator) {
-        const Geometry = ElementGeometrySet.Geometry;
+        super(operator);
 
-        this._operator = operator;
+        const Geometry = ElementGeometrySet.Geometry;
 
         this._geometry = new Map([
             [Geometry.ArrowCreation, new StraightLine()],
