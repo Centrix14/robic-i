@@ -180,28 +180,27 @@ class ElementGeometrySet {
         return group._selfElm;
     }
 
-    _combineElementLayer(options) {
-        const Member = ElementArrowGroup.Member;
-        const geometry = this._geometry.get(ElementGeometrySet.Geometry.Rect);
-
-        if (!geometry.isInitiated) {
+    _combineElementLayer(state, options) {
+        const group = this._geometry.get(ElementGeometrySet.Geometry.Rect);
+        if (!group.isInitiated) {
             const id = options?.id;
             if (!id)
                 return new Fail();
 
-            geometry.init(id, this._operator, Defaults, {
+            group.init(id, this._operator, Defaults, {
                 name: 'Элемент',
                 designation: `Э ${id}`
             });
         }
 
-        const shape = geometry.getMemberElement(Member.Shape).get('element'),
-              name = geometry.getMemberElement(Member.Name).get('element');
+        const Member = ElementArrowGroup.Member;
+        const shape = group.getMemberElement(Member.Shape).get('element'),
+              name = group.getMemberElement(Member.Name).get('element');
         const designation =
-              geometry.getMemberElement(Member.Designation).get('element');
+              group.getMemberElement(Member.Designation).get('element');
 
         const stylesheet = ElementGeometrySet.Stylesheet;
-        switch (options.state) {
+        switch (state) {
         case GeometryState.Main:
             stylesheet.RectMain.useOn(shape);
             stylesheet.NameMain.useOn(shape);
@@ -219,6 +218,6 @@ class ElementGeometrySet {
             break;
         }
 
-        return geometry._selfElm;
+        return group._selfElm;
     }
 }
