@@ -39,6 +39,46 @@ class Spatia {
             return { D, x: [] };
     }
 
+    intersectionLineCircle(L, C) {
+        if (L.B === 0) {
+            const a = 1,
+                  b = -2 * C.Y,
+                  c = (L.C/L.A)**2 + (2*L.C*C.X)/L.A + C.X**2 + C.Y**2 - C.R**2;
+
+            const s = this.solveQE(a, b, c);
+            if (s.D > 0)
+                return [
+                    { x: -L.C/L.A, y: s.x[0] },
+                    { x: -L.C/L.A, y: s.x[1] }
+                ];
+            else if (s.D === 0)
+                return [
+                    { x: -L.C/L.A, y: s.x[0] }
+                ];
+            else
+                return [];
+        }
+
+        else {
+            const a = 1 + (A/B)**2,
+                  b = (2*A*C)/(B**2) + (2*A*Y)/B - 2*X,
+                  c = (C/B)**2 + (2*C*Y)/B + X**2 + Y**2 - R**2;
+
+            const s = this.solveQE(a, b, c);
+            if (s.D > 0)
+                return [
+                    { x: s.x[0], y: -s.x[0] * (L.A/L.B) - L.C/L.B },
+                    { x: s.x[1], y: -s.x[1] * (L.A/L.B) - L.C/L.B }
+                ];
+            else if (s.D === 0)
+                return [
+                    { x: s.x[0], y: -s.x[0] * (L.A/L.B) - L.C/L.B }
+                ];
+            else
+                return [];
+        }
+    }
+
     calcLinearKB(A, B) {
         const [x1, y1] = [A.x, A.y], [x2, y2] = [B.x, B.y];
         return {
