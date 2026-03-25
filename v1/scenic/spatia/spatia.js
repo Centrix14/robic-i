@@ -11,7 +11,7 @@ class Spatia {
     }
 
     distanceToPoint(from, to) {
-        return (to.x - from.x)**2 + (to.y - from.y)**2;
+        return Math.sqrt((to.x - from.x)**2 + (to.y - from.y)**2);
     }
 
     distanceToLine(cursor, line) {
@@ -133,9 +133,24 @@ class Spatia {
         const l = this.calcLinearABC(line.start, line.end),
               c = { r: this._precision, x: cursor.x, y: cursor.y };
 
-        return (this.intersectionLineCircle(l, c).length > 0)
-            || this._isReachablePoint(line.start, cursor)
-            || this._isReachablePoint(line.end, cursor);
+        const i = this.intersectionLineCircle(l, c);
+        if (i.length === 2) {
+            const p1 = new Point(i[0].x, i[0].y),
+                  p2 = new Point(i[1].x, i[1].y);
+
+            return (this.distance(line.start, line.end) ===
+                    (this.distance(line.start, p1) + this.distance(line.end, p1)))
+                || (this.distance(line.start, line.end) ===
+                    (this.distance(line.start, p2) + this.distance(line.end, p2)));
+        }
+        else if (i.length === 1) {
+            const p = new Point(i[0].x, i[0].y);
+
+            return this.distance(line.start, line.end) ===
+                (this.distance(line.start, p) + this.distance(line.end, p));
+        }
+        else
+            return false;
     }
 
     isInRect(rect, cursor) {
