@@ -41,6 +41,33 @@ describe('Point', function(){
 
 });
 
+describe('StraightLine', function(){
+
+    describe('StraightLine.isTouching', function(){
+        const l = new StraightLine(new Point(1,1), new Point(50,50)),
+              s = new Spatia(5);
+
+        it('StraightLine.isTouching1 - detects touch', function(){
+            assert.isTrue(l.isTouching(new Point(0,0), s),
+                          'Touch @ 0,0 not detected');
+            assert.isTrue(l.isTouching(new Point(1,1), s),
+                          'Touch @ start not detected');
+            assert.isTrue(l.isTouching(new Point(50,50), s),
+                          'Touch @ end not detected');
+            assert.isTrue(l.isTouching(new Point(5,5), s),
+                          'Touch @ 4,4 not detected');
+        });
+
+        it('StraightLine.isTouching2 - not detects touch', function(){
+            assert.isFalse(l.isTouching(new Point(-5,5), s),
+                           'Touch @ 0,0 detected');
+            assert.isFalse(l.isTouching(new Point(12.3,5), s),
+                           'Touch @ 12.3,5detected');
+        });
+    });
+
+});
+
 describe('Rect', function(){
 
     describe('Rect.isTouching', function(){
