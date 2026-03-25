@@ -42,8 +42,8 @@ class Spatia {
     intersectionLineCircle(L, C) {
         if (L.B === 0) {
             const a = 1,
-                  b = -2 * C.Y,
-                  c = (L.C/L.A)**2 + (2*L.C*C.X)/L.A + C.X**2 + C.Y**2 - C.R**2;
+                  b = -2 * C.y,
+                  c = (L.C/L.A)**2 + (2*L.C*C.x)/L.A + C.x**2 + C.y**2 - C.r**2;
 
             const s = this.solveQE(a, b, c);
             if (s.D > 0)
@@ -60,9 +60,9 @@ class Spatia {
         }
 
         else {
-            const a = 1 + (A/B)**2,
-                  b = (2*A*C)/(B**2) + (2*A*Y)/B - 2*X,
-                  c = (C/B)**2 + (2*C*Y)/B + X**2 + Y**2 - R**2;
+            const a = 1 + (L.A/L.B)**2,
+                  b = (2*L.A*L.C)/(L.B**2) + (2*L.A*C.y)/L.B - 2*C.x,
+                  c = (L.C/L.B)**2 + (2*L.C*C.y)/L.B + C.x**2 + C.y**2 - C.r**2;
 
             const s = this.solveQE(a, b, c);
             if (s.D > 0)
@@ -129,10 +129,13 @@ class Spatia {
         return (C.x - A.x)**2 + (C.y - A.y)**2 <= this._precision**2;
     }
 
-    _isReachableLine(target, C) {
-        return this.distance(C, target) <= this._precision
-            || this._isReachablePoint(target.start, C)
-            || this._isReachablePoint(target.end, C);
+    _isReachableLine(line, cursor) {
+        const l = this.calcLinearABC(line.start, line.end),
+              c = { r: this._precision, x: cursor.x, y: cursor.y };
+
+        return (this.intersectionLineCircle(l, c).length > 0)
+            || this._isReachablePoint(line.start, cursor)
+            || this._isReachablePoint(line.end, cursor);
     }
 
     isInRect(rect, cursor) {
