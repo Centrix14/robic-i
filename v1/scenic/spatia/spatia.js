@@ -27,6 +27,18 @@ class Spatia {
         return 2 / a * Math.sqrt(p * (p-a) * (p-b) * (p-c));
     }
 
+    solveQE(a, b, c) {
+        const D = b**2 - 4*a*c;
+
+        if (D > 0)
+            return { D, x: [ (-b - Math.sqrt(D)) / (2*a),
+                             (-b + Math.sqrt(D)) / (2*a) ] };
+        else if (D === 0)
+            return { D, x: [ (-b) / (2*a) ] };
+        else
+            return { D, x: [] };
+    }
+
     calcLinearKB(A, B) {
         const [x1, y1] = [A.x, A.y], [x2, y2] = [B.x, B.y];
         return {
