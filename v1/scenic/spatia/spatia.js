@@ -138,10 +138,10 @@ class Spatia {
             const p1 = new Point(i[0].x, i[0].y),
                   p2 = new Point(i[1].x, i[1].y);
 
-            return (this.distance(line.start, line.end) ===
-                    (this.distance(line.start, p1) + this.distance(line.end, p1)))
-                || (this.distance(line.start, line.end) ===
-                    (this.distance(line.start, p2) + this.distance(line.end, p2)));
+            const d = (from, to) => this.distance(from, to),
+                  start = line.start, end = line.end;
+            return (d(start, end) === (d(start, p1) + d(end, p1)))
+                || (d(start, end) === (d(start, p2) + d(end, p2)));
         }
         else if (i.length === 1) {
             const p = new Point(i[0].x, i[0].y);
