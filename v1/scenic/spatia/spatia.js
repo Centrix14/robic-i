@@ -4,6 +4,10 @@ class Spatia {
         this._precision = precision;
     }
 
+    eq(x, y) {
+        return Math.abs(x - y) < this._precision;
+    }
+
     distance(from, to) {
         if (to instanceof Point)
             return this.distanceToPoint(from, to);
@@ -141,8 +145,8 @@ class Spatia {
 
             const d = (from, to) => this.distance(from, to),
                   start = line.start, end = line.end;
-            return (d(start, end) === (d(start, p1) + d(end, p1)))
-                || (d(start, end) === (d(start, p2) + d(end, p2)));
+            return this.eq(d(start, end), d(start, p1) + d(end, p1))
+                || this.eq(d(start, end), d(start, p2) + d(end, p2));
         }
         else if (i.length === 1) {
             const p = new Point(i[0].x, i[0].y);
