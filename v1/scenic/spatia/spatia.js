@@ -1,6 +1,7 @@
 class Spatia {
-    constructor(precision=5) {
-        this._backlash = precision;
+    constructor(backlash=5, precision=0.0001) {
+        this._backlash = backlash;
+        this._precision = precision;
     }
 
     distance(from, to) {
