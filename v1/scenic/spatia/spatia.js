@@ -1,6 +1,6 @@
 class Spatia {
     constructor(precision=5) {
-        this._precision = precision;
+        this._backlash = precision;
     }
 
     distance(from, to) {
@@ -126,12 +126,12 @@ class Spatia {
     }
 
     _isReachablePoint(A, C) {
-        return (C.x - A.x)**2 + (C.y - A.y)**2 <= this._precision**2;
+        return (C.x - A.x)**2 + (C.y - A.y)**2 <= this._backlash**2;
     }
 
     _isReachableLine(line, cursor) {
         const l = this.calcLinearABC(line.start, line.end),
-              c = { r: this._precision, x: cursor.x, y: cursor.y };
+              c = { r: this._backlash, x: cursor.x, y: cursor.y };
 
         const i = this.intersectionLineCircle(l, c);
         if (i.length === 2) {
@@ -156,9 +156,9 @@ class Spatia {
     isInRect(rect, cursor) {
         const start = rect._start,
               end = start.sum(new Point(rect._width, rect._height));
-        return (cursor.x - start.x >= -this._precision)
-            && (cursor.y - start.y >= -this._precision)
-            && (cursor.x - end.x <= this._precision)
-            && (cursor.y - end.y <= this._precision);
+        return (cursor.x - start.x >= -this._backlash)
+            && (cursor.y - start.y >= -this._backlash)
+            && (cursor.x - end.x <= this._backlash)
+            && (cursor.y - end.y <= this._backlash);
     }
 }
