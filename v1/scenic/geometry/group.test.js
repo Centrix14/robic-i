@@ -46,39 +46,39 @@ describe('NaiveVerticalStepline', function(){
     });
 
     describe('NaiveVerticalStepline.isTouching', function(){
-        const s = new Spatia();
+        const s = new Spatia(5);
         const l = new NaiveVerticalStepline(new Point(0,0),
-                                     new Point(6,6));
+                                            new Point(50,50));
 
         it('NSLV.isTouching1 - detects touch at vertices', function(){
             assert.isTrue(l.isTouching(new Point(0,0), s),
                           'Touch @ 0,0 not detected');
-            assert.isTrue(l.isTouching(new Point(6,6), s),
-                          'Touch @ 6,6 not detected');
+            assert.isTrue(l.isTouching(new Point(50,50), s),
+                          'Touch @ 50,50 not detected');
         });
 
         it('NSLV.isTouching2 - detects touch at ribs', function(){
-            assert.isTrue(l.isTouching(new Point(2,0), s),
+            assert.isTrue(l.isTouching(new Point(40,50), s),
                           'Touch @ horizontal-up rib not detected');
-            assert.isTrue(l.isTouching(new Point(3,3), s),
+            assert.isTrue(l.isTouching(new Point(25,25), s),
                           'Touch @ vertical rib not detected');
-            assert.isTrue(l.isTouching(new Point(4,6), s),
+            assert.isTrue(l.isTouching(new Point(15,0), s),
                           'Touch @ horizontal-down not detected');
         });
 
         it('NSLV.isTouching3 - detects touch inside precision area', function(){
-            assert.isTrue(l.isTouching(new Point(6,4), s),
-                          'Touch @ 6,4 not detected');
-            assert.isTrue(l.isTouching(new Point(1,2), s),
-                          'Touch @ 1,2 not detected');
+            assert.isTrue(l.isTouching(new Point(30,25), s),
+                          'Touch @ 30,25 not detected');
+            assert.isTrue(l.isTouching(new Point(45,52), s),
+                          'Touch @ 45,52 not detected');
         });
 
         it('NSLV.isTouching4 - touch outside precision area not detected',
            function(){
-               assert.isFalse(l.isTouching(new Point(12,1), s),
-                              'Touch @ 12,1 detected');
-               assert.isFalse(l.isTouching(new Point(1,-7), s),
-                              'Touch @ 1,-7 detected');
+               assert.isFalse(l.isTouching(new Point(35,40), s),
+                              'Touch @ 35,40 detected');
+               assert.isFalse(l.isTouching(new Point(10,6), s),
+                              'Touch @ 10,6 detected');
            });
     });
 
