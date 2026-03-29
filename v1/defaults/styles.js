@@ -68,5 +68,15 @@ const Styles = {
             font: { family: 'sans', size: '10px' },
             textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Bottom }
         }
+    },
+
+    EALGS: {
+        LineMain: {
+            stroke: { color: 'black', opacity: '1', dasharray: '4' }
+        },
+
+        LineHidden: {
+            stroke: { color: 'black', opacity: '0', dasharray: '4' }
+        }
     }
 }
