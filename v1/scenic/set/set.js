@@ -273,10 +273,33 @@ class ElementAuxLineGeometrySet extends GeometrySet {
     }
 
     _combineMain(options) {
-        
+        const stylesheet = ElementAuxLineGeometrySet.Stylesheet;
+        const Member = LineView.Member;
+        const group
+              = this._geometry.get(ElementAuxLineGeometrySet.Geometry.Line);
+
+        group.setMemberField(Member.Shape, 'start', options.coords, this._operator);
+
+        const element = group.getMemberElement(Member.Shape).get('element');
+        stylesheet.LineMain.useOn(element);
+
+        const changer = (cursor) => {
+            group.setMemberField(LineView.Member.Shape, 'end', cursor, operator);
+        };
+
+        return [group._selfElm, changer];
     }
 
     _combineHidden(options) {
-        
+        const stylesheet = ElementAuxLineGeometrySet.Stylesheet;
+        const group
+              = this._geometry.get(ElementAuxLineGeometrySet.Geometry.Line);
+
+        const element =
+              group.getMemberElement(LineView.Member.Shape).get('element');
+
+        stylesheet.LineHidden.useOn(element);
+
+        return [group._selfElm];
     }
 }
