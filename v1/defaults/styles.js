@@ -24,13 +24,19 @@ const Styles = {
         NameMain: {
             fill: { color: 'black', opacity: '1' },
             font: { family: 'sans', size: '12px' },
-            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Middle }
+            textAlign: {
+                anchor: TextAlign.Anchor.Middle,
+                baseline: TextAlign.Baseline.Middle
+            }
         },
 
         DesignationMain: {
             fill: { color: 'black', opacity: '1' },
             font: { family: 'sans', size: '10px' },
-            textAlign: { anchor: TextAlign.Anchor.End, baseline: TextAlign.Baseline.Top }
+            textAlign: {
+                anchor: TextAlign.Anchor.End,
+                baseline: TextAlign.Baseline.Top
+            }
         }
     },
 
@@ -60,13 +66,19 @@ const Styles = {
         NameMain: {
             fill: { color: 'black', opacity: '1' },
             font: { family: 'sans', size: '12px' },
-            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Top }
+            textAlign: {
+                anchor: TextAlign.Anchor.Middle,
+                baseline: TextAlign.Baseline.Top
+            }
         },
 
         DesignationMain: {
             fill: { color: 'black', opacity: '1' },
             font: { family: 'sans', size: '10px' },
-            textAlign: { anchor: TextAlign.Anchor.Middle, baseline: TextAlign.Baseline.Bottom }
+            textAlign: {
+                anchor: TextAlign.Anchor.Middle,
+                baseline: TextAlign.Baseline.Bottom
+            }
         }
     },
 
