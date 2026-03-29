@@ -338,3 +338,51 @@ class ElementRectGroup extends NamedRectGroup {
         });
     }
 }
+
+class LineView extends Group {
+    static Member = { Shape: 'shape' }
+
+    init(operator, coords) {
+        if (!coords?.start || !coords?.end)
+            return new Fail();
+
+        const store = this._store;
+        const start = coords.start, end = coords.end;
+        const line = StraightLine(start, end);
+
+        this._selfElm = operator.createLine();
+        store.set(LineView.Member.Shape, [ line, this._selfElm ]);
+        operator.applyTo(this._selfElm, line.publish());
+
+        return this._selfElm;
+    }
+
+    add() { return new Fail(); }
+    drop() { return new Fail(); }
+
+    getMemberField(member, field) {
+        if (member === LineView.Member.Shape)
+            return new Success([['value', this._store.get(member)[0][field]]]);
+        else
+            return new Fail();
+    }
+
+    setMemberField(member, field, value, operator) {
+        if (member === LineView.Member.Shape) {
+            const m = this._store.get(member);
+            m[field] = value;
+            operator.applyTo(m[1], m[0].publish());
+
+            return new Success();
+        }
+        else
+            return new Fail();
+    }
+
+    getMemberElement(member) {
+        if (member === LineView.Member.Shape)
+            return new Success([['element', this._selfElm]]);
+        else
+            return new Fail();
+    }
+}
