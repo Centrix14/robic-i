@@ -348,7 +348,7 @@ class LineView extends Group {
 
         const store = this._store;
         const start = coords.start, end = coords.end;
-        const line = StraightLine(start, end);
+        const line = new StraightLine(start, end);
 
         this._selfElm = operator.createLine();
         store.set(LineView.Member.Shape, [ line, this._selfElm ]);
@@ -370,7 +370,7 @@ class LineView extends Group {
     setMemberField(member, field, value, operator) {
         if (member === LineView.Member.Shape) {
             const m = this._store.get(member);
-            m[field] = value;
+            m[0][field] = value;
             operator.applyTo(m[1], m[0].publish());
 
             return new Success();
