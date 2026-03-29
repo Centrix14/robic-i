@@ -106,19 +106,6 @@ class Spatia {
             };
     }
 
-    confVector(line) {
-        return new Point(
-            (line.A > 0) ? 1 : 0,
-            (line.B > 0) ? 1 : 0
-        );
-    }
-
-    translateVector(line, R) {
-        const K = this.confVector(line),
-              r = Math.sqrt((R**2) / (K.x + K.y));
-        return new Point(K.x * r, K.y * r);
-    }
-
     isReachable(target, cursor) {
         switch (target.constructor.name) {
         case 'Point':
