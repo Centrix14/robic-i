@@ -264,12 +264,12 @@ class ElementAuxLineGeometrySet extends GeometrySet {
     combine(layer, state, options) {
         if (layer === GeometryLayer.Process) {
             if (state === GeometryState.Main)
-                this._combineMain(options);
+                return this._combineMain(options);
             else
-                this._combineHidden(options);
+                return this._combineHidden(options);
         }
         else
-            this._combineHidden();
+            return this._combineHidden();
     }
 
     _combineMain(options) {
@@ -278,12 +278,15 @@ class ElementAuxLineGeometrySet extends GeometrySet {
         const group
               = this._geometry.get(ElementAuxLineGeometrySet.Geometry.Line);
 
-        group.setMemberField(Member.Shape, 'start', options.coords, this._operator);
+        if (!group.isInitiated)
+            group.init(this._operator, options);
+
+        group.setMemberField(Member.Shape, 'start', options.start, this._operator);
 
         const element = group.getMemberElement(Member.Shape).get('element');
         stylesheet.LineMain.useOn(element);
 
-        const changer = (cursor) => {
+        const changer = (cursor, operator) => {
             group.setMemberField(LineView.Member.Shape, 'end', cursor, operator);
         };
 
@@ -294,6 +297,9 @@ class ElementAuxLineGeometrySet extends GeometrySet {
         const stylesheet = ElementAuxLineGeometrySet.Stylesheet;
         const group
               = this._geometry.get(ElementAuxLineGeometrySet.Geometry.Line);
+
+        if (!group.isInitiated)
+            group.init(this._operator, options.coords);
 
         const element =
               group.getMemberElement(LineView.Member.Shape).get('element');
