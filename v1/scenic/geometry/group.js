@@ -385,4 +385,12 @@ class LineView extends Group {
         else
             return new Fail();
     }
+
+    shift(dX, dY, operator) {
+        const figure = this._store.get(LineView.Member.Shape)[0],
+              element = this._selfElm;
+
+        figure.shift(dX, dY);
+        operator.applyTo(element, figure.publish());
+    }
 }
