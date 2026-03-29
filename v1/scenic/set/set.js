@@ -260,4 +260,23 @@ class ElementAuxLineGeometrySet extends GeometrySet {
 
         this._supplement = new Map();
     }
+
+    combine(layer, state, options) {
+        if (layer === GeometryLayer.Process) {
+            if (state === GeometryState.Main)
+                this._combineMain(options);
+            else
+                this._combineHidden(options);
+        }
+        else
+            this._combineHidden();
+    }
+
+    _combineMain(options) {
+        
+    }
+
+    _combineHidden(options) {
+        
+    }
 }
