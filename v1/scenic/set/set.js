@@ -240,3 +240,24 @@ class ElementGeometrySet extends GeometrySet {
         group.shift(dX, dY, this._operator);
     }
 }
+
+class ElementAuxLineGeometrySet extends GeometrySet {
+    static Geometry = { Line: 'line' }
+
+    static Stylesheet = {
+        LineMain: Style.build(Styles.EALGS.LineMain),
+        LineHidden: Style.build(Styles.EALGS.LineHidden)
+    }
+
+    constructor(operator) {
+        super(operator);
+
+        const Geometry = ElementAuxLineGeometrySet.Geometry;
+
+        this._geometry = new Map([
+            [Geometry.Line, new LineView()],
+        ]);
+
+        this._supplement = new Map();
+    }
+}
