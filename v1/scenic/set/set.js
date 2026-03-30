@@ -282,6 +282,7 @@ class ElementAuxLineGeometrySet extends GeometrySet {
             group.init(this._operator, options);
 
         group.setMemberField(Member.Shape, 'start', options.start, this._operator);
+        group.setMemberField(Member.Shape, 'end', options.end, this._operator);
 
         const element = group.getMemberElement(Member.Shape).get('element');
         stylesheet.LineMain.useOn(element);
