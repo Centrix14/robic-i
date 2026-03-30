@@ -281,17 +281,14 @@ class ElementAuxLineGeometrySet extends GeometrySet {
         if (!group.isInitiated)
             group.init(this._operator, options);
 
-        group.setMemberField(Member.Shape, 'start', options.start, this._operator);
+        if (!group.getMemberField(Member.Shape, 'start'))
+            group.setMemberField(Member.Shape, 'start', options.start, this._operator);
         group.setMemberField(Member.Shape, 'end', options.end, this._operator);
 
         const element = group.getMemberElement(Member.Shape).get('element');
         stylesheet.LineMain.useOn(element);
 
-        const changer = (cursor, operator) => {
-            group.setMemberField(LineView.Member.Shape, 'end', cursor, operator);
-        };
-
-        return [group._selfElm, changer];
+        return group._selfElm;
     }
 
     _combineHidden(options) {
@@ -310,6 +307,6 @@ class ElementAuxLineGeometrySet extends GeometrySet {
 
         stylesheet.LineHidden.useOn(element);
 
-        return [group._selfElm];
+        return group._selfElm;
     }
 }
