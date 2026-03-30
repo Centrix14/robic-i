@@ -347,8 +347,7 @@ class LineView extends Group {
             return new Fail();
 
         const store = this._store;
-        const start = coords.start, end = coords.end;
-        const line = new StraightLine(start, end);
+        const line = new StraightLine(coords.start, coords.end);
 
         this._selfElm = operator.createLine();
         store.set(LineView.Member.Shape, [ line, this._selfElm ]);
@@ -384,13 +383,5 @@ class LineView extends Group {
             return new Success([['element', this._selfElm]]);
         else
             return new Fail();
-    }
-
-    shift(dX, dY, operator) {
-        const figure = this._store.get(LineView.Member.Shape)[0],
-              element = this._selfElm;
-
-        figure.shift(dX, dY);
-        operator.applyTo(element, figure.publish());
     }
 }
