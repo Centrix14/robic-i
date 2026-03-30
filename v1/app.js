@@ -93,6 +93,9 @@ class ButtonHandler extends EventHandler {
 
         this._start = null;
         this._end = null;
+
+        this._auxLine = new ElementAuxLineGeometrySet(SVG);
+        SVG.appendChild(canvas, this._auxLine.combine(GeometryLayer.Process, GeometryState.Hidden, {start: new Point(0,0), end: new Point(0,0)}));
     }
 
     cursorClick(event) {
@@ -132,27 +135,40 @@ class ButtonHandler extends EventHandler {
             this.state = ButtonHandler.State.ElementSrcSet;
 
             this._start = SVG.translateToPoint(event.x, event.y);
+            this._auxLine.combine(GeometryLayer.Process, GeometryState.Hidden, {
+                start: this._start,
+                end: new Point(0,0)
+            });
+
             console.log(`Element src = ${this._start.x} ${this._start.y}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
-            this.state = ButtonHandler.State.ElementCreated;
-
             this._end = SVG.translateToPoint(event.x, event.y);
 
-            const egs = new ElementGeometrySet(SVG);
-            const elm = egs.combine(GeometryLayer.Process, GeometryState.Main, {
-                id: this._j.toString(),
-                coords: {
-                    start: this._start,
+            if (event.type === 'mouseup') {
+                this.state = ButtonHandler.State.ElementCreated;
+
+                const egs = new ElementGeometrySet(SVG);
+                const elm = egs.combine(GeometryLayer.Process, GeometryState.Main, {
+                    id: this._j.toString(),
+                    coords: {
+                        start: this._start,
+                        end: this._end
+                    }
+                });
+
+                SVG.appendChild(canvas, elm);
+                this._egs.push(egs);
+                this._j++;
+
+                console.log(`Element dst = ${this._end.x} ${this._end.y}`);
+            }
+            else {
+                console.log('search');
+                this._auxLine.combine(GeometryLayer.Process, GeometryState.Main, {
                     end: this._end
-                }
-            });
-
-            SVG.appendChild(canvas, elm);
-            this._egs.push(egs);
-            this._j++;
-
-            console.log(`Element dst = ${this._end.x} ${this._end.y}`);
+                })
+            }
         }
 
         this.end(event);
@@ -384,7 +400,7 @@ class Application {
         else if (handler === mouse
                  && handler.state === MouseHandler.State.Idle
                  && buttons.state === ButtonHandler.State.ElementSrcSet)
-            console.log('search');
+            this.buttons.newElementClick(event);
 
         // Element creation 3: second process selected
         else if (handler === mouse
