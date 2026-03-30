@@ -161,13 +161,18 @@ class ButtonHandler extends EventHandler {
                 this._egs.push(egs);
                 this._j++;
 
+                this._auxLine.combine(GeometryLayer.Process, GeometryState.Hidden, {
+                    start: new Point(0,0),
+                    end: new Point(0,0)
+                });
+
                 console.log(`Element dst = ${this._end.x} ${this._end.y}`);
             }
             else {
                 console.log('search');
                 this._auxLine.combine(GeometryLayer.Process, GeometryState.Main, {
                     end: this._end
-                })
+                });
             }
         }
 
