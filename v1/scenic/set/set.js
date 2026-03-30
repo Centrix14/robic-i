@@ -269,7 +269,7 @@ class ElementAuxLineGeometrySet extends GeometrySet {
                 return this._combineHidden(options);
         }
         else
-            return this._combineHidden();
+            return this._combineHidden(options);
     }
 
     _combineMain(options) {
@@ -300,7 +300,10 @@ class ElementAuxLineGeometrySet extends GeometrySet {
               = this._geometry.get(ElementAuxLineGeometrySet.Geometry.Line);
 
         if (!group.isInitiated)
-            group.init(this._operator, options.coords);
+            group.init(this._operator, options);
+
+        group.setMemberField(LineView.Member.Shape, 'start', options.start, this._operator);
+        group.setMemberField(LineView.Member.Shape, 'end', options.end, this._operator);
 
         const element =
               group.getMemberElement(LineView.Member.Shape).get('element');
