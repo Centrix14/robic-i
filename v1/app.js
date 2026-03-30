@@ -380,7 +380,13 @@ class Application {
                  && buttons.state === ButtonHandler.State.ElementInit)
             this.buttons.newElementClick(event);
 
-        // Element creation 2: second process selected
+        // Element creation 2: seeking for a second process
+        else if (handler === mouse
+                 && handler.state === MouseHandler.State.Idle
+                 && buttons.state === ButtonHandler.State.ElementSrcSet)
+            console.log('search');
+
+        // Element creation 3: second process selected
         else if (handler === mouse
                  && handler.state === MouseHandler.State.ClickEnd
                  && buttons.state === ButtonHandler.State.ElementSrcSet)
