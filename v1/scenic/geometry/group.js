@@ -353,6 +353,7 @@ class LineView extends Group {
         store.set(LineView.Member.Shape, [ line, this._selfElm ]);
         operator.applyTo(this._selfElm, line.publish());
 
+        this._init = true;
         return this._selfElm;
     }
 
