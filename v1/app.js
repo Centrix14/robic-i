@@ -134,7 +134,18 @@ class ButtonHandler extends EventHandler {
         else if (this.state === ButtonHandler.State.ElementInit) {
             this.state = ButtonHandler.State.ElementSrcSet;
 
-            this._start = SVG.translateToPoint(event.x, event.y);
+            this._start = null;
+            const s = new Spatia(10);
+            const cursor = SVG.translateToPoint(event.x, event.y);
+            for (let pg of this._pgs) {
+                if (pg.isTouching(cursor, s))
+                    this._start = pg.snapPoint(cursor, s);
+            }
+            if (!this._start) {
+                console.log('err');
+                return ;
+            }
+
             this._auxLine.combine(GeometryLayer.Process, GeometryState.Hidden, {
                 start: this._start,
                 end: new Point(0,0)
