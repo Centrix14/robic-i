@@ -153,4 +153,54 @@ class Spatia {
             && (cursor.x - end.x <= this._backlash)
             && (cursor.y - end.y <= this._backlash);
     }
+
+    determineNearestRectSide(rect, cursor) {
+        if (this.isInRect(rect, cursor)) {
+            const make = (x1, y1, x2, y2) => (
+                new StraightLine(new Point(x1, y1), new Point(x2, y2))
+            );
+
+            const sides = [
+                {
+                    line: make(rect.start.x, rect.start.y,
+                               rect.start.x + rect.width, rect.start.y),
+                    d: 0
+                },
+                {
+                    line: make(rect.start.x, rect.start.y,
+                               rect.start.x, rect.start.y + rect.height),
+                    d: 0,
+                },
+                {
+                    line: make(rect.start.x, rect.start.y + rect.height,
+                               rect.start.x + rect.width,
+                               rect.start.y + rect.height),
+                    d: 0
+                },
+                {
+                    line: make(rect.start.x + rect.width, rect.start.y,
+                               rect.start.x + rect.width,
+                               rect.start.y + rect.height),
+                    d: 0
+                }
+            ];
+
+            let min;
+            for (let i = 0; i < 4; i++) {
+                sides[i].d = this.distance(cursor, sides[i].line);
+
+                if (i) {
+                    if (sides[i].d < min.d)
+                        min = sides[i];
+                }
+                else
+                    min = sides[i];
+            }
+
+            return min;
+        }
+        else {
+            return false;
+        }
+    }
 }
