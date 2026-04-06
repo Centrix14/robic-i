@@ -218,6 +218,11 @@ class NamedRectGroup extends Group {
             operator.applyTo(element, figure.publish());
         }
     }
+
+    snapPoint(cursor, spatia) {
+        const shape = this._store.get(NamedRectGroup.Member.Shape)[0];
+        return spatia.snapToRectSide(shape, cursor);
+    }
 }
 
 class ProcessGroup extends NamedRectGroup {
