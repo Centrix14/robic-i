@@ -94,6 +94,11 @@ class ProcessGeometrySet extends GeometrySet {
         const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
         group.shift(dX, dY, this._operator);
     }
+
+    snapPoint(point, spatia) {
+        const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
+        return group.snapPoint(point, spatia);
+    }
 }
 
 class ElementGeometrySet extends GeometrySet {
