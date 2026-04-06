@@ -154,9 +154,20 @@ class ButtonHandler extends EventHandler {
             console.log(`Element src = ${this._start.x} ${this._start.y}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
-            this._end = SVG.translateToPoint(event.x, event.y);
-
             if (event.type === 'mouseup') {
+                this._end = null;
+
+                const s = new Spatia(10);
+                const cursor = SVG.translateToPoint(event.x, event.y);
+                for (let pg of this._pgs) {
+                    if (pg.isTouching(cursor, s))
+                        this._end = pg.snapPoint(cursor, s);
+                }
+                if (!this._end) {
+                    console.log('err');
+                    return ;
+                }
+
                 this.state = ButtonHandler.State.ElementCreated;
 
                 const egs = new ElementGeometrySet(SVG);
@@ -180,6 +191,7 @@ class ButtonHandler extends EventHandler {
                 console.log(`Element dst = ${this._end.x} ${this._end.y}`);
             }
             else {
+                this._end = SVG.translateToPoint(event.x, event.y);
                 console.log('search');
                 this._auxLine.combine(GeometryLayer.Process, GeometryState.Main, {
                     end: this._end
