@@ -200,7 +200,22 @@ class Spatia {
             return min;
         }
         else {
-            return false;
+            return null;
+        }
+    }
+
+    snapToRectSide(rect, cursor) {
+        const nearest = this.determineNearestRectSide(rect, cursor);
+
+        if (nearest === null)
+            return null;
+
+        const start = nearest.line.start, end = nearest.line.end;
+        if (start.x === end.x) {
+            return new Point(start.x, cursor.y);
+        }
+        else {
+            return new Point(cursor.x, start.y);
         }
     }
 }
