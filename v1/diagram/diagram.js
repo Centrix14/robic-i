@@ -71,7 +71,8 @@ class Property extends Accordance {
 
 class Unit {
     static Type = {
-        Process: [Process, ProcessGeometrySet]
+        Process: [Process, ProcessGeometrySet],
+        Element: [Element, ElementGeometrySet]
     }
 
     constructor(type, operator, name, note) {
@@ -138,6 +139,18 @@ class Diagram {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
             id: this._index
+        });
+
+        this._graph.addNode(this._index, unit);
+
+        return new Success([['id', this._index++], ['element', element]]);
+    }
+
+    addElement(operator, layer, state, coords) {
+        const unit = new Unit(Unit.Type.Element, operator, '', '');
+        const element = unit._accordanceGS.combine(layer, state, {
+            id: this._index,
+            coords
         });
 
         this._graph.addNode(this._index, unit);
