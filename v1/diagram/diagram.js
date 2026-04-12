@@ -124,6 +124,11 @@ class Diagram {
         gs.combine(GeometryLayer.Process, GeometryState.Selected);
     }
 
+    shift(id, dX, dY) {
+        const gs = this._graph.getNode(id)._accordanceGS;
+        gs.shift(dX, dY);
+    }
+
     addProcess(operator, layer, state) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
