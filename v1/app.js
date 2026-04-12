@@ -400,20 +400,14 @@ class Application {
             this.buttons.state = ButtonHandler.State.Idle;
 
             const start = handler.queue[0], end = handler.queue[1];
-            const startP = SVG.translateToPoint(start.x, start.y),
-                  endP = SVG.translateToPoint(end.x, end.y);
-            const delta = endP.sub(startP);
+            const s = SVG.translateToPoint(start.x, start.y),
+                  e = SVG.translateToPoint(end.x, end.y);
+            const delta = e.sub(s);
 
-            const spatia = new Spatia(10);
-
-            for (let pg of this.buttons._pgs) {
-                if (pg.isTouching(startP, spatia))
-                    pg.shift(delta.x, delta.y);
-            }
-            for (let eg of this.buttons._egs) {
-                if (eg.isTouching(startP, spatia))
-                    eg.shift(delta.x, delta.y);
-            }
+            const diagram = this.diagram;
+            const result = diagram.getByPoint(s);
+            if (result.isOk)
+                diagram.shift(result.get('id'), delta.x, delta.y);
         }
         else if (handler === mouse
                  && handler.state === MouseHandler.State.GrabEnd) {
