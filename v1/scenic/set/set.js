@@ -45,7 +45,7 @@ class ProcessGeometrySet extends GeometrySet {
         const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
         if (!group.isInitiated) {
             const id = options?.id;
-            if (!id)
+            if (id === null)
                 return new Fail();
             group.init(id, this._operator);
         }
