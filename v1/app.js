@@ -154,7 +154,7 @@ class ButtonHandler extends EventHandler {
                 const cursor = SVG.translateToPoint(event.x, event.y);
 
                 const diagram = this._app.diagram;
-                const result = diagram.getByPoint(cursor);
+                let result = diagram.getByPoint(cursor);
                 if (result.isOk)
                     this._end = diagram.snapPoint(result.get('id'), cursor);
                 else {
@@ -164,18 +164,16 @@ class ButtonHandler extends EventHandler {
 
                 this.state = ButtonHandler.State.ElementCreated;
 
-                const egs = new ElementGeometrySet(SVG);
-                const elm = egs.combine(GeometryLayer.Process, GeometryState.Main, {
-                    id: this._j.toString(),
-                    coords: {
-                        start: this._start,
-                        end: this._end
-                    }
-                });
+                const coords = {
+                    start: this._start,
+                    end: this._end
+                };
+                result =
+                    diagram.addElement(SVG,
+                                       GeometryLayer.Process, GeometryState.Main,
+                                       coords);
 
-                SVG.appendChild(canvas, elm);
-                this._egs.push(egs);
-                this._j++;
+                SVG.appendChild(canvas, result.get('element'));
 
                 this._auxLine.combine(GeometryLayer.Process, GeometryState.Hidden, {
                     start: new Point(0,0),
