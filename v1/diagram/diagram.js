@@ -93,6 +93,18 @@ class Diagram {
         this._changed = null;
     }
 
+    getByPoint(point) {
+        const spatia = this._spatia;
+        const units = this._graph.nodes(NodeFields.All);
+
+        for (let [id, unit] of units) {
+            if (unit._accordanceGS.isTouching(point, spatia))
+                return new Success([['id', id]]);
+        }
+
+        return new Fail();
+    }
+
     addProcess(operator, layer, state) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
