@@ -109,17 +109,21 @@ class ButtonHandler extends EventHandler {
     newProcessClick(event) {
         this.start(event);
 
-        const pgs = new ProcessGeometrySet(SVG);
-        const elm = pgs.combine(GeometryLayer.Process, GeometryState.Main, {
-            id: this._i.toString()
-        });
-
-        SVG.appendChild(canvas, elm);
-        this._pgs.push(pgs);
-
-        this._i++;
-        this.state = ButtonHandler.State.ProcessCreated;
-        console.log(this._pgs);
+        const diagram = this._app.diagram;
+        const result =
+              diagram.addProcess(SVG, GeometryLayer.Process, GeometryState.Main);
+        SVG.appendChild(canvas, result.get('element'));
+//        const pgs = new ProcessGeometrySet(SVG);
+//        const elm = pgs.combine(GeometryLayer.Process, GeometryState.Main, {
+//            id: this._i.toString()
+//        });
+//
+//        SVG.appendChild(canvas, elm);
+//        this._pgs.push(pgs);
+//
+//        this._i++;
+//        this.state = ButtonHandler.State.ProcessCreated;
+//        console.log(this._pgs);
     }
 
     newElementClick(event) {
@@ -342,6 +346,8 @@ class Application {
 
     constructor() {
         this.state = Application.State.Idle;
+
+        this.diagram = new Diagram();
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
