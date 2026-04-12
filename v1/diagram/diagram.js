@@ -92,9 +92,14 @@ class Diagram {
         this._changed = null;
     }
 
-    addProcess(operator) {
+    addProcess(operator, layer, state) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
+        const element = unit._accordanceGS.combine(layer, state, {
+            id: this._index
+        });
+
         this._graph.addNode(this._index, unit);
-        return new Success([['id', this._index++]]);
+
+        return new Success([['id', this._index++], ['element', element]]);
     }
 }
