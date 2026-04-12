@@ -366,20 +366,29 @@ class Application {
             && buttons.state === ButtonHandler.State.Idle) {
 
             const cursor = SVG.translateToPoint(event.x, event.y);
-            const spatia = new Spatia(10);
+            const diagram = this.diagram;
 
-            for (let pg of this.buttons._pgs) {
-                if (pg.isTouching(cursor, spatia))
-                    pg.combine(GeometryLayer.Process, GeometryState.Selected);
-                else
-                    pg.combine(GeometryLayer.Process, GeometryState.Main);
+            const result = diagram.getByPoint(cursor);
+            if (result.isOk) {
+                const id = result.get('id');
+                diagram.select(id);
             }
-            for (let eg of this.buttons._egs) {
-                if (eg.isTouching(cursor, spatia))
-                    eg.combine(GeometryLayer.Process, GeometryState.Selected);
-                else
-                    eg.combine(GeometryLayer.Process, GeometryState.Main);
-            }
+            else
+                diagram.clearSelection();
+//            const spatia = new Spatia(10);
+//
+//            for (let pg of this.buttons._pgs) {
+//                if (pg.isTouching(cursor, spatia))
+//                    pg.combine(GeometryLayer.Process, GeometryState.Selected);
+//                else
+//                    pg.combine(GeometryLayer.Process, GeometryState.Main);
+//            }
+//            for (let eg of this.buttons._egs) {
+//                if (eg.isTouching(cursor, spatia))
+//                    eg.combine(GeometryLayer.Process, GeometryState.Selected);
+//                else
+//                    eg.combine(GeometryLayer.Process, GeometryState.Main);
+//            }
 
             console.log(`Select ${cursor.x} ${cursor.y}`);
         }
