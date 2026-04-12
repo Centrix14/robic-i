@@ -86,6 +86,7 @@ class Diagram {
     constructor() {
         this._index = 0;
         this._graph = new Graph();
+        this._spatia = new Spatia(5);
 
         this._name = '';
         this._author = '';
