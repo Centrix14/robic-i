@@ -6,7 +6,8 @@ const ConnectDirections = {
 
 const NodeFields = {
     Id: 1,
-    Data: 2
+    Data: 2,
+    All: 3
 }
 
 const DefaultGraphOptions = {
@@ -25,6 +26,8 @@ class Graph {
             return this._nodes.keys().toArray();
         if (field === NodeFields.Data)
             return this._nodes.values().toArray();
+        if (field === NodeFields.All)
+            return this._nodes.entries();
     }
 
     hasNode(id) {
