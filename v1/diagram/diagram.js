@@ -88,6 +88,8 @@ class Diagram {
         this._graph = new Graph();
         this._spatia = new Spatia(5);
 
+        this._selected = null;
+
         this._name = '';
         this._author = '';
         this._changed = null;
@@ -103,6 +105,23 @@ class Diagram {
         }
 
         return new Fail();
+    }
+
+    clearSelection() {
+        if (this._selected !== null) {
+            const gs = this._graph.getNode(this._selected)._accordanceGS;
+            gs.combine(GeometryLayer.Process, GeometryState.Main);
+        }
+
+        this._selected = null;
+    }
+
+    select(id) {
+        this.clearSelection();
+        this._selected = id;
+
+        const gs = this._graph.getNode(this._selected)._accordanceGS;
+        gs.combine(GeometryLayer.Process, GeometryState.Selected);
     }
 
     addProcess(operator, layer, state) {
