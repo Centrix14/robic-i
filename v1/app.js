@@ -375,20 +375,6 @@ class Application {
             }
             else
                 diagram.clearSelection();
-//            const spatia = new Spatia(10);
-//
-//            for (let pg of this.buttons._pgs) {
-//                if (pg.isTouching(cursor, spatia))
-//                    pg.combine(GeometryLayer.Process, GeometryState.Selected);
-//                else
-//                    pg.combine(GeometryLayer.Process, GeometryState.Main);
-//            }
-//            for (let eg of this.buttons._egs) {
-//                if (eg.isTouching(cursor, spatia))
-//                    eg.combine(GeometryLayer.Process, GeometryState.Selected);
-//                else
-//                    eg.combine(GeometryLayer.Process, GeometryState.Main);
-//            }
 
             console.log(`Select ${cursor.x} ${cursor.y}`);
         }
