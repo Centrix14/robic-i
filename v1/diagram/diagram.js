@@ -1,7 +1,7 @@
 class Accordance {
     constructor(name, note) {
-        this._name = name;
-        this._note = note;
+        this.name = name;
+        this.note = note;
     }
 }
 
@@ -9,10 +9,10 @@ class Process extends Accordance {
     constructor(name, note) {
         super(name, note);
 
-        this._objective = '';
-        this._owner = '';
-        this._environment = '';
-        this._pov = '';
+        this.objective = '';
+        this.owner = '';
+        this.environment = '';
+        this.pov = '';
     }
 }
 
@@ -20,7 +20,7 @@ class Element extends Accordance {
     constructor(name, note) {
         super(name, note);
 
-        this._owner = '';
+        this.owner = '';
     }
 }
 
