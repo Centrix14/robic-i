@@ -129,6 +129,11 @@ class Diagram {
         gs.shift(dX, dY);
     }
 
+    snapPoint(id, point) {
+        const gs = this._graph.getNode(id)._accordanceGS;
+        return gs.snapPoint(point, this._spatia);
+    }
+
     addProcess(operator, layer, state) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
