@@ -25,7 +25,7 @@ class Element extends Accordance {
 }
 
 class Property extends Accordance {
-    const ValueField = {
+    static ValueField = {
         Id: 'id',
         Value: 'value',
         All: 'all'
@@ -70,7 +70,7 @@ class Property extends Accordance {
 }
 
 class Unit {
-    const Type = {
+    static Type = {
         Process: [Process, ProcessGeometrySet]
     }
 
