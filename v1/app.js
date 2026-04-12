@@ -113,17 +113,6 @@ class ButtonHandler extends EventHandler {
         const result =
               diagram.addProcess(SVG, GeometryLayer.Process, GeometryState.Main);
         SVG.appendChild(canvas, result.get('element'));
-//        const pgs = new ProcessGeometrySet(SVG);
-//        const elm = pgs.combine(GeometryLayer.Process, GeometryState.Main, {
-//            id: this._i.toString()
-//        });
-//
-//        SVG.appendChild(canvas, elm);
-//        this._pgs.push(pgs);
-//
-//        this._i++;
-//        this.state = ButtonHandler.State.ProcessCreated;
-//        console.log(this._pgs);
     }
 
     newElementClick(event) {
@@ -139,13 +128,14 @@ class ButtonHandler extends EventHandler {
             this.state = ButtonHandler.State.ElementSrcSet;
 
             this._start = null;
-            const s = new Spatia(10);
+
             const cursor = SVG.translateToPoint(event.x, event.y);
-            for (let pg of this._pgs) {
-                if (pg.isTouching(cursor, s))
-                    this._start = pg.snapPoint(cursor, s);
-            }
-            if (!this._start) {
+
+            const diagram = this._app.diagram;
+            const result = diagram.getByPoint(cursor);
+            if (result.isOk)
+                this._start = diagram.snapPoint(result.get('id'), cursor);
+            else {
                 console.log('err');
                 return ;
             }
@@ -161,13 +151,13 @@ class ButtonHandler extends EventHandler {
             if (event.type === 'mouseup') {
                 this._end = null;
 
-                const s = new Spatia(10);
                 const cursor = SVG.translateToPoint(event.x, event.y);
-                for (let pg of this._pgs) {
-                    if (pg.isTouching(cursor, s))
-                        this._end = pg.snapPoint(cursor, s);
-                }
-                if (!this._end) {
+
+                const diagram = this._app.diagram;
+                const result = diagram.getByPoint(cursor);
+                if (result.isOk)
+                    this._end = diagram.snapPoint(result.get('id'), cursor);
+                else {
                     console.log('err');
                     return ;
                 }
