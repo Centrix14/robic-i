@@ -96,6 +96,8 @@ class Diagram {
         this._changed = null;
     }
 
+    get graph() { return this._graph; }
+
     getByPoint(point) {
         const spatia = this._spatia;
         const units = this._graph.nodes(NodeFields.All);
