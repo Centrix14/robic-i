@@ -45,7 +45,7 @@ class ProcessGeometrySet extends GeometrySet {
         const group = this._geometry.get(ProcessGeometrySet.Geometry.Rect);
         if (!group.isInitiated) {
             const id = options?.id;
-            if (id === null)
+            if (id === null || id === undefined)
                 return new Fail();
             group.init(id, this._operator);
         }
@@ -152,7 +152,7 @@ class ElementGeometrySet extends GeometrySet {
         const group = this._geometry.get(ElementGeometrySet.Geometry.Arrow);
         if (!group.isInitiated) {
             const id = options?.id;
-            if (!id)
+            if (id === null || id === undefined)
                 return new Fail();
             group.init(id, this._operator, options.coords);
         }
