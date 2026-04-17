@@ -148,7 +148,7 @@ class ButtonHandler extends EventHandler {
             console.log(`Element src = ${this._start.x} ${this._start.y}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
-            if (event.type === 'mouseup') {
+            if (event.type === 'mouseup') { // second process selected
                 this._end = null;
 
                 const cursor = SVG.translateToPoint(event.x, event.y);
@@ -180,9 +180,19 @@ class ButtonHandler extends EventHandler {
                     end: new Point(0,0)
                 });
 
+                const id = {
+                    start: this._app.diagram.getByPoint(coords.start).get('id'),
+                    end: this._app.diagram.getByPoint(coords.end).get('id')
+                };
+                const graph = this._app.diagram.graph;
+                graph.connect(id.start, id.end, {
+                    direction: ConnectDirections.Direct,
+                    data: null
+                });
+
                 console.log(`Element dst = ${this._end.x} ${this._end.y}`);
             }
-            else {
+            else { // searching second processx
                 this._end = SVG.translateToPoint(event.x, event.y);
                 console.log('search');
                 this._auxLine.combine(GeometryLayer.Process, GeometryState.Main, {
