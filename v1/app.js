@@ -180,14 +180,23 @@ class ButtonHandler extends EventHandler {
                     end: new Point(0,0)
                 });
 
-                const id = {
+                const processId = {
                     start: this._app.diagram.getByPoint(coords.start).get('id'),
                     end: this._app.diagram.getByPoint(coords.end).get('id')
                 };
+                const elementId = result.get('id');
                 const graph = this._app.diagram.graph;
-                graph.connect(id.start, id.end, {
-                    direction: ConnectDirections.Direct,
-                    data: null
+                graph.connect(processId.start, elementId, {
+                    direction: ConnectDirections.Both,
+                    data: {
+                        role: 'start'
+                    }
+                });
+                graph.connect(elementId, processId.end, {
+                    direction: ConnectDirections.Both,
+                    data: {
+                        role: 'end'
+                    }
                 });
 
                 console.log(`Element dst = ${this._end.x} ${this._end.y}`);
