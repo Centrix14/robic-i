@@ -85,7 +85,7 @@ class Unit {
 
 class Diagram {
     constructor() {
-        this._index = { process: 0, element: 0 };
+        this._index = { total: 0, process: 0, element: 0 };
         this._graph = new Graph();
         this._spatia = new Spatia(5);
 
@@ -140,25 +140,25 @@ class Diagram {
     addProcess(operator, layer, state) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
-            id: this._index.process
+            id: this._index.process++
         });
 
-        this._graph.addNode(this._index.process, unit);
+        this._graph.addNode(this._index.total, unit);
 
-        return new Success([['id', this._index.process++],
+        return new Success([['id', this._index.total++],
                             ['element', element]]);
     }
 
     addElement(operator, layer, state, coords) {
         const unit = new Unit(Unit.Type.Element, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
-            id: this._index.element,
+            id: this._index.element++,
             coords
         });
 
-        this._graph.addNode(this._index.element, unit);
+        this._graph.addNode(this._index.total, unit);
 
-        return new Success([['id', this._index.element++],
+        return new Success([['id', this._index.total++],
                             ['element', element]]);
     }
 }
