@@ -50,12 +50,15 @@ class Graph {
     }
 
     getAdjacents(id, field=NodeFields.Id) {
-        const adjacency = this._adjacency.get(id).keys();
+        const adjacency = this._adjacency.get(id);
+        if (!adjacency)
+            return [];
 
+        const keys = adjacency.keys();
         if (field === NodeFields.Id)
-            return adjacency.toArray();
+            return keys.toArray();
         if (field === NodeFields.Data)
-            return adjacency.map((id) => this.getNode(id)).toArray();
+            return keys.map((id) => this.getNode(id)).toArray();
     }
 
     getAdjacencyData(id1, id2) {
