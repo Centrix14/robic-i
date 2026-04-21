@@ -135,6 +135,15 @@ class ElementGeometrySet extends GeometrySet {
         this._layer = GeometryLayer.Process;
     }
 
+    getGroup(layer, state) {
+        const Geometry = ElementGeometrySet.Geometry;
+
+        if (layer === GeometryLayer.Process)
+            return this._geometry.get(Geometry.Arrow);
+        else if (layer === GeometryLayer.Element)
+            return this._geometry.get(Geometry.Rect);
+    }
+
     combine(layer, state, options) {
         if (layer === GeometryLayer.Process) {
             this._layer = layer;
@@ -235,14 +244,14 @@ class ElementGeometrySet extends GeometrySet {
             return false;
     }
 
-    shift(dX, dY) {
+    shift(dX, dY, flags) {
         let group;
         if (this._layer === GeometryLayer.Process)
             group = this._geometry.get(ElementGeometrySet.Geometry.Arrow);
         else if (this._layer === GeometryLayer.Element)
             group = this._geometry.get(ElementGeometrySet.Geometry.Rect);
 
-        group.shift(dX, dY, this._operator);
+        group.shift(dX, dY, this._operator, flags);
     }
 }
 
