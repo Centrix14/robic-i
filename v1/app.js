@@ -201,7 +201,7 @@ class ButtonHandler extends EventHandler {
 
                 console.log(`Element dst = ${this._end.x} ${this._end.y}`);
             }
-            else { // searching second processx
+            else { // searching second process
                 this._end = SVG.translateToPoint(event.x, event.y);
                 console.log('search');
                 this._auxLine.combine(GeometryLayer.Process, GeometryState.Main, {
