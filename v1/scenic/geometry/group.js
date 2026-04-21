@@ -118,9 +118,13 @@ class NaiveVerticalStepline extends Group {
             || down.isTouching(cursor, spatia);
     }
 
-    shift(dX, dY, operator) {
-        this._start.shift(dX, dY);
-        this._end.shift(dX, dY);
+    shift(dX, dY, flags) {
+        const f = flags ?? {start: true, end: true};
+
+        if (f.start)
+            this._start.shift(dX, dY);
+        if (f.end)
+            this._end.shift(dX, dY);
         this._calcRibs();
     }
 }
@@ -322,9 +326,9 @@ class ElementArrowGroup extends Group {
             return new Fail();
     }
 
-    shift(dX, dY, operator) {
+    shift(dX, dY, operator, flags) {
         for (let [figure, element] of this._store.values()) {
-            figure.shift(dX, dY);
+            figure.shift(dX, dY, flags);
             operator.applyTo(element, figure.publish());
         }
     }
