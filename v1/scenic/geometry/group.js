@@ -327,10 +327,20 @@ class ElementArrowGroup extends Group {
     }
 
     shift(dX, dY, operator, flags) {
-        for (let [figure, element] of this._store.values()) {
-            figure.shift(dX, dY, flags);
-            operator.applyTo(element, figure.publish());
-        }
+        const Member = ElementArrowGroup.Member;
+
+        const shape = this._store.get(Member.Shape),
+              name = this._store.get(Member.Name),
+              designation = this._store.get(Member.Designation);
+
+        shape[0].shift(dX, dY, flags);
+        operator.applyTo(shape[1], shape[0].publish());
+
+        // TODO: надписи не должны сдвигаться, их нужно расположить в новом центре
+//        for (let [figure, element] of this._store.values()) {
+//            figure.shift(dX, dY, flags);
+//            operator.applyTo(element, figure.publish());
+//        }
     }
 
     isTouching(cursor, spatia) {
