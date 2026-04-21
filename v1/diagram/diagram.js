@@ -128,8 +128,35 @@ class Diagram {
     }
 
     shift(id, dX, dY) {
-        const gs = this._graph.getNode(id)._accordanceGS;
+        const graph = this._graph;
+
+        const gs = graph.getNode(id)._accordanceGS;
         gs.shift(dX, dY);
+
+        if (gs instanceof ElementGeometrySet)
+            return;
+
+        const adjacents = graph.getAdjacents(id);
+        for (let adjacentId of adjacents) {
+            const connection = graph.getAdjacencyData(id, adjacentId);
+
+            if (connection?.role === 'start' || connection?.role === 'end') {
+                const adjacentGS = graph.getNode(adjacentId)._accordanceGS;
+
+                if (connection?.role === 'start') {
+                    adjacentGS.shift(dX, dY, {
+                        start: true,
+                        end: false
+                    });
+                }
+                else if (connection?.role === 'end') {
+                    adjacentGS.shift(dX, dY, {
+                        start: false,
+                        end: true
+                    });
+                }
+            }
+        }
     }
 
     snapPoint(id, point) {
