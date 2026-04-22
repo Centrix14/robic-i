@@ -336,11 +336,17 @@ class ElementArrowGroup extends Group {
         shape[0].shift(dX, dY, flags);
         operator.applyTo(shape[1], shape[0].publish());
 
-        // TODO: надписи не должны сдвигаться, их нужно расположить в новом центре
-//        for (let [figure, element] of this._store.values()) {
-//            figure.shift(dX, dY, flags);
-//            operator.applyTo(element, figure.publish());
-//        }
+        const center = shape[0].getCenter();
+        const nameOffset = Defaults.element.arrow.name.offset,
+              designationOffset = Defaults.element.arrow.designation.offset;
+
+        name[0]._start = new Point(center.x + nameOffset.x,
+                                   center.y + nameOffset.y);
+        operator.applyTo(name[1], name[0].publish());
+
+        designation[0]._start = new Point(center.x + designationOffset.x,
+                                          center.y + designationOffset.y);
+        operator.applyTo(designation[1], designation[0].publish());
     }
 
     isTouching(cursor, spatia) {
