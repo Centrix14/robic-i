@@ -118,6 +118,7 @@ body {
 
 .menu-dropdown-item {
     margin: 10px;
+    user-select: none;
 }
 
 /* Icons */
