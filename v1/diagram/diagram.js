@@ -131,10 +131,10 @@ class Diagram {
         const graph = this._graph;
 
         const gs = graph.getNode(id)._accordanceGS;
-        gs.shift(dX, dY);
-
         if (gs instanceof ElementGeometrySet)
             return;
+
+        gs.shift(dX, dY);
 
         const adjacents = graph.getAdjacents(id);
         for (let adjacentId of adjacents) {
