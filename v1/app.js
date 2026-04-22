@@ -136,6 +136,7 @@ class ButtonHandler extends EventHandler {
             if (result.isOk)
                 this._start = diagram.snapPoint(result.get('id'), cursor);
             else {
+                this.state = ButtonHandler.State.Idle;
                 console.log('err');
                 return ;
             }
