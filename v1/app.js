@@ -499,7 +499,9 @@ app.setEvents({
         ['#newIndependanceBtn', app.buttons, app.buttons.newIndependanceClick],
         ['#newCompatibilityBtn', app.buttons, app.buttons.newCompatibilityClick],
         ['#newIncompatibilityBtn', app.buttons,
-         app.buttons.newIncompatibilityClick]
+         app.buttons.newIncompatibilityClick],
+
+        ['#saveFileBtn', ()=>console.log('save')],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
