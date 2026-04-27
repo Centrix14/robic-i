@@ -1,0 +1,31 @@
+function exportToPng(svg) {
+    const serializer = new XMLSerializer();
+    const data = serializer.serializeToString(svg);
+    const vectorBlob = new Blob([data], { type: 'image/svg+xml' });
+    const vectorURL = URL.createObjectURL(vectorBlob);
+
+    const image = document.createElement('img');
+    image.onload = () => {
+        const rect = svg.getBoundingClientRect();
+
+        const canvas = document.createElement('canvas');
+        canvas.height = rect.height;
+        canvas.width = rect.width;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(image, 0, 0, rect.width, rect.height);
+
+        canvas.toBlob((rasterBlob) => {
+            const rasterURL = URL.createObjectURL(rasterBlob);
+
+            const a = document.createElement('a');
+            a.href = rasterURL;
+            a.download = 'export.png';
+            a.click();
+
+            URL.revokeObjectURL(vectorURL);
+            URL.revokeObjectURL(rasterURL);
+        });
+    };
+    image.src = vectorURL;
+}
