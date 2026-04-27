@@ -478,10 +478,11 @@ class Application {
 
     setEvents(definition) {
         for (let event in definition) {
-            for (let [selector, scope, func] of definition[event])
+            for (let [selector, scope, func] of definition[event]) {
                 document
-                .querySelector(selector)
-                .addEventListener(event, (e)=>func.call(scope, e));
+                    .querySelector(selector)
+                    .addEventListener(event, (e)=>func.call(scope, e));
+            }
         }
     }
 }
@@ -501,7 +502,8 @@ app.setEvents({
         ['#newIncompatibilityBtn', app.buttons,
          app.buttons.newIncompatibilityClick],
 
-        ['#saveFileBtn', ()=>console.log('save')],
+        ['#saveFileBtn', null, ()=>console.log('save')],
+        ['#exportPngBtn', null, ()=>exportToPng(canvas)],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
