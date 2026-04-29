@@ -212,6 +212,15 @@ textarea {
     font-size: 15px;
 }
 
+.palette-input {}
+
+.palette-input-disabled {
+    border: dashed 1px var(--existance);
+
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .palette-section {
     border-collapse: separate;
     border-spacing: 8px 3px;
