@@ -155,13 +155,6 @@
         <table class="palette-section">
           <tr>
             <td><label class="palette-input-label"
-                       for="palette-designation">
-                Обозначение
-            </label></td>
-            <td><input id="palette-designation" type="text" disabled></td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
                        for="palette-name">
                 Имя
             </label></td>
@@ -170,9 +163,16 @@
           <tr>
             <td><label class="palette-input-label"
                        for="palette-description">
-                Описание
+                Заметка
             </label></td>
-            <td><input id="palette-description" type="text"></td>
+            <td><input id="palette-note" type="text"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-description">
+                Активная
+            </label></td>
+            <td><input id="palette-activity" type="checkbox"></td>
           </tr>
         </table>
       </div>
@@ -185,17 +185,47 @@
         <table class="palette-section">
           <tr>
             <td><label class="palette-input-label"
-                       for="palette-iteration">
-                Итерация
+                       for="palette-processAim">
+                Цель
             </label></td>
-            <td><input id="palette-iteration" type="number"></td>
+            <td><input id="palette-processAim" type="text"></td>
           </tr>
           <tr>
             <td><label class="palette-input-label"
-                       for="palette-isHiding">
-                Скрывающий
+                       for="palette-processOwner">
+                Владелец
             </label></td>
-            <td><input id="palette-isHiding" type="checkbox"></td>
+            <td><input id="palette-processOwner" type="text"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-processEnvironment">
+                Среда
+            </label></td>
+            <td><input id="palette-processEnvironment" type="text"></td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-processPov">
+                Точка зрения
+            </label></td>
+            <td><input id="palette-processPov" type="text"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Элемент
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-elementOwner">
+                Владелец
+            </label></td>
+            <td><input id="palette-elementOwner" type="text"></td>
           </tr>
         </table>
       </div>
@@ -235,53 +265,6 @@
                         id="palette-actualValue">
                 Отсутствует
             </button></td>
-          </tr>
-        </table>
-      </div>
-
-      <div>
-        <p class="palette-h2">
-          Риск
-        </p>
-
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-risk-name">
-                Название
-            </label></td>
-            <td><textarea id="palette-risk-name"></textarea>
-            </td>
-          </tr>
-
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-risk-character">
-                Характер
-            </label></td>
-            <td><input id="palette-risk-character"
-                       type="text">
-            </input></td>
-          </tr>
-
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-risk-influence">
-                Влияние
-            </label></td>
-            <td><input id="palette-risk-influence"
-                       type="text">
-            </input></td>
-          </tr>
-
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-risk-magnitude">
-                Величина
-            </label></td>
-            <td><input id="palette-risk-magnitude"
-                       type="number">
-            </input></td>
           </tr>
         </table>
       </div>
