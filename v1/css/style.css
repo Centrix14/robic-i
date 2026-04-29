@@ -2,7 +2,9 @@
 
 :root {
     --bg: white;
+
     --existance: #495057;
+    --empty: white;
 
     --touchable: #f8f9fa;
     --touchable-active: #dee2e6;
@@ -143,6 +145,14 @@ body {
 }
 .panel-button:active, .panel-button-active {
     background-color: var(--touchable-active);
+}
+
+.panel-button-disabled,
+.panel-button-disabled:hover,
+.panel-button-disabled:active
+{
+    background-color: var(--empty);
+    cursor: not-allowed;
 }
 
 /* Tree */
