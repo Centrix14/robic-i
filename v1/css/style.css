@@ -4,7 +4,7 @@ html {
     font-family: sans;
 }
 
-/* Page layout */
+/* Common styles and page layout */
 
 body {
     margin: 0;
@@ -25,44 +25,12 @@ body {
     gap: 10px;
 }
 
+/* Header */
+
 .header {
     grid-area: header;
 
     vertical-align: middle;
-}
-
-.panel {
-    padding: 5px;
-}
-
-.toolbar {
-    grid-area: toolbar;
-
-    display: inline-grid;
-    grid-template-rows: repeat(auto-fill, minmax(20px, 50px));
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 3px;
-}
-
-.tree {
-    grid-area: tree;
-}
-
-.palette {
-    grid-area: palette;
-}
-
-.canvas-container {
-    grid-area: canvas;
-
-    overflow: auto;
-}
-
-.canvas-container > svg {
-    border: 1px solid #ced4da;
-    width: 97%;
-    height: 97%;
 }
 
 /* Menu */
@@ -123,8 +91,6 @@ body {
     user-select: none;
 }
 
-/* Icons */
-
 .icon {
     width: 20px;
     height: 20px;
@@ -135,7 +101,21 @@ body {
     height: 30px;
 }
 
-/* Buttons */
+/* Toolbar & panel */
+
+.toolbar {
+    grid-area: toolbar;
+
+    display: inline-grid;
+    grid-template-rows: repeat(auto-fill, minmax(20px, 50px));
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 3px;
+}
+
+.panel {
+    padding: 5px;
+}
 
 .panel-button {
     background-color: #f8f9fa;
@@ -148,24 +128,44 @@ body {
     background-color: #dee2e6;
 }
 
+/* Tree */
+
+.tree {
+    grid-area: tree;
+}
+
+/* SVG elements styles */
+
+.canvas-container {
+    grid-area: canvas;
+
+    overflow: auto;
+}
+
+.canvas-container > svg {
+    border: 1px solid #ced4da;
+    width: 97%;
+    height: 97%;
+}
+
+svg #name, svg #designation {
+    user-select: none;
+}
+
+textarea {
+    font-family: sans;
+    font-size: 10pt;
+}
+
+/* Palette */
+
+.palette {
+    grid-area: palette;
+}
+
 .palette-button {
     padding: 10px;
 }
-
-.link-button {
-    color: #495057;
-    background-color: white;
-    
-    border: none;
-    
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-}
-.link-button:hover {
-    text-decoration: none;
-}
-
-/* Headers and text */
 
 .palette-h1 {
     font-size: 20px;
@@ -185,20 +185,20 @@ body {
     font-size: 15px;
 }
 
-/* Tables */
-
 .palette-section {
     border-collapse: separate;
     border-spacing: 8px 3px;
 }
 
-/* SVG elements styles */
-
-svg #name, svg #designation {
-    user-select: none;
+.link-button {
+    color: #495057;
+    background-color: white;
+    
+    border: none;
+    
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
-
-textarea {
-    font-family: sans;
-    font-size: 10pt;
+.link-button:hover {
+    text-decoration: none;
 }
