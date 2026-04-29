@@ -152,7 +152,8 @@ body {
 .panel-button-disabled:active
 {
     background-color: var(--empty);
-    cursor: not-allowed;
+
+    pointer-events: none;
 }
 
 /* Tree */
@@ -217,7 +218,6 @@ textarea {
 .palette-input-disabled {
     border: dashed 1px var(--existance);
 
-    cursor: not-allowed;
     pointer-events: none;
 }
 
