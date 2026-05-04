@@ -143,7 +143,7 @@ body {
 .panel-button:hover {
     background-color: var(--touchable-hover);
 }
-.panel-button:active, .panel-button-active {
+.panel-button:active {
     background-color: var(--touchable-active);
 }
 
@@ -208,14 +208,6 @@ textarea {
 
 .palette-input-label {
     font-size: 15px;
-}
-
-.palette-input {}
-
-.palette-input-disabled {
-    border: dashed 1px var(--existance);
-
-    pointer-events: none;
 }
 
 .palette-section {
