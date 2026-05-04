@@ -79,7 +79,7 @@ class Palette {
     }
 
     get state() { return this._state; }
-    set state(value) { this._state = state; this.updateState(); }
+    set state(value) { this._state = value; this.updateState(); }
 
     updateState() {
         const state = Palette.State;
@@ -444,6 +444,7 @@ class Application {
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
+        this.palette = new Palette();
     }
 
     startEvent(handler, event) {
@@ -464,10 +465,19 @@ class Application {
             const result = diagram.getByPoint(cursor);
             if (result.isOk) {
                 const id = result.get('id');
-                diagram.select(id);
+                const unit = diagram.select(id);
+
+                if (unit._accordance.constructor.name === 'Process')
+                    this.palette.state = Palette.State.Process;
+                else if (unit._accordance.constructor.name === 'Element')
+                    this.palette.state = Palette.State.Element;
+                else
+                    this.palette.state = Palette.State.None;
             }
-            else
+            else {
                 diagram.clearSelection();
+                this.palette.state = Palette.State.None;
+            }
 
             console.log(`Select ${cursor.x} ${cursor.y}`);
         }
@@ -595,5 +605,3 @@ app.setEvents({
     'mousemove': [['.canvas', app.mouse, app.mouse.move]],
     'mouseup': [['.canvas', app.mouse, app.mouse.up]]
 });
-
-const palette = new Palette();
