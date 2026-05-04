@@ -129,7 +129,18 @@ class Palette {
     }
 
     applyCb(event) {
-        console.log('apply');
+        const state = Palette.State;
+
+        switch (this._state) {
+
+        case state.Process:
+            console.log({
+                name: this.name.value,
+                note: this.note.value,
+                activity: this.activity.checked,
+            });
+            break;
+        }
     }
 
     resetCb(event) {
