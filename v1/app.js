@@ -43,6 +43,35 @@ const SVG = {
     appendChild: (parent, child) => parent.appendChild(child)
 }
 
+class Palette {
+    static State = {
+        None: 'none',
+        Process: 'process',
+        Element: 'element'
+    }
+
+    constructor() {
+        function elm(selector) { return document.querySelector(selector); }
+
+        this.name = elm('#palette-name');
+        this.note = elm('#palette-note');
+        this.activity = elm('#palette-activity');
+
+        this.process = {
+            aim: elm('#palette-processAim'),
+            owner: elm('#palette-processOwner'),
+            environment: elm('#palette-processEnvironment'),
+            pov: elm('#palette-processPov')
+        };
+
+        this.element = {
+            owner: elm('#palette-elementOwner')
+        };
+
+        this.state = State.None;
+    }
+}
+
 class EventHandler {
     constructor(app) {
         this._app = app;
