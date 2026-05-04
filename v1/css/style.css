@@ -228,7 +228,7 @@ textarea {
 
 .link-button {
     color: var(--existance);
-    background-color: --var(bg);
+    background-color: var(--bg);
     
     border: none;
     
