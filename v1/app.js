@@ -61,11 +61,16 @@ class Palette {
             aim: elm('#palette-processAim'),
             owner: elm('#palette-processOwner'),
             environment: elm('#palette-processEnvironment'),
-            pov: elm('#palette-processPov')
+            pov: elm('#palette-processPov'),
         };
 
         this.element = {
-            owner: elm('#palette-elementOwner')
+            owner: elm('#palette-elementOwner'),
+        };
+
+        this.buttons = {
+            apply: elm('#palette-applyBtn'),
+            reset: elm('#palette-resetBtn'),
         };
 
         this.state = Palette.State.None;
@@ -89,6 +94,7 @@ class Palette {
                 this.process.aim, this.process.owner, this.process.environment,
                 this.process.pov,
                 this.element.owner,
+                this.buttons.apply, this.buttons.reset,
             ]);
             break;
 
@@ -97,6 +103,7 @@ class Palette {
                 this.name, this.note, this.activity,
                 this.process.aim, this.process.owner, this.process.environment,
                 this.process.pov,
+                this.buttons.apply, this.buttons.reset,
             ]);
             off(true, [
                 this.element.owner,
@@ -107,6 +114,7 @@ class Palette {
             off(false, [
                 this.name, this.note, this.activity,
                 this.element.owner,
+                this.buttons.apply, this.buttons.reset,
             ]);
             off(true, [
                 this.process.aim, this.process.owner, this.process.environment,
