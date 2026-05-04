@@ -73,10 +73,13 @@ class Palette {
             reset: elm('#palette-resetBtn'),
         };
 
-        this.state = Palette.State.None;
+        this._state = Palette.State.None;
 
         this.updateState();
     }
+
+    get state() { return this._state; }
+    set state(value) { this._state = state; this.updateState(); }
 
     updateState() {
         const state = Palette.State;
@@ -86,7 +89,7 @@ class Palette {
                 elm.disabled = value;
         }
 
-        switch (this.state) {
+        switch (this._state) {
 
         case state.None:
             off(true, [
