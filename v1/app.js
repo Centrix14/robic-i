@@ -72,9 +72,10 @@ class Palette {
             apply: elm('#palette-applyBtn'),
             reset: elm('#palette-resetBtn'),
         };
+        this.buttons.apply.onclick = (e) => this.applyCb(e);
+        this.buttons.reset.onclick = (e) => this.resetCb(e);
 
         this._state = Palette.State.None;
-
         this.updateState();
     }
 
@@ -125,6 +126,14 @@ class Palette {
             ]);
             break;
         }
+    }
+
+    applyCb(event) {
+        console.log('apply');
+    }
+
+    resetCb(event) {
+        console.log('reset');
     }
 }
 
