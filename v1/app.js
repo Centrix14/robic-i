@@ -68,7 +68,52 @@ class Palette {
             owner: elm('#palette-elementOwner')
         };
 
-        this.state = State.None;
+        this.state = Palette.State.None;
+
+        this.updateState();
+    }
+
+    updateState() {
+        const state = Palette.State;
+
+        function off(value, elms) {
+            for (let elm of elms)
+                elm.disabled = value;
+        }
+
+        switch (this.state) {
+
+        case state.None:
+            off(true, [
+                this.name, this.note, this.activity,
+                this.process.aim, this.process.owner, this.process.environment,
+                this.process.pov,
+                this.element.owner,
+            ]);
+            break;
+
+        case state.Process:
+            off(false, [
+                this.name, this.note, this.activity,
+                this.process.aim, this.process.owner, this.process.environment,
+                this.process.pov,
+            ]);
+            off(true, [
+                this.element.owner,
+            ]);
+            break;
+
+        case state.Element:
+            off(false, [
+                this.name, this.note, this.activity,
+                this.element.owner,
+            ]);
+            off(true, [
+                this.process.aim, this.process.owner, this.process.environment,
+                this.process.pov,
+            ]);
+            break;
+        }
     }
 }
 
@@ -539,3 +584,5 @@ app.setEvents({
     'mousemove': [['.canvas', app.mouse, app.mouse.move]],
     'mouseup': [['.canvas', app.mouse, app.mouse.up]]
 });
+
+const palette = new Palette();
