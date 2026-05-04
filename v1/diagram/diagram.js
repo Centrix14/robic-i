@@ -123,8 +123,12 @@ class Diagram {
         this.clearSelection();
         this._selected = id;
 
-        const gs = this._graph.getNode(this._selected)._accordanceGS;
+        const unit = this._graph.getNode(this._selected);
+
+        const gs = unit._accordanceGS;
         gs.combine(GeometryLayer.Process, GeometryState.Selected);
+
+        return unit;
     }
 
     shift(id, dX, dY) {
