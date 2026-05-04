@@ -147,10 +147,7 @@ body {
     background-color: var(--touchable-active);
 }
 
-.panel-button-disabled,
-.panel-button-disabled:hover,
-.panel-button-disabled:active
-{
+.panel-button:disabled {
     background-color: var(--empty);
 
     pointer-events: none;
