@@ -138,6 +138,10 @@ class Palette {
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
+                processAim: this.process.aim.value,
+                processOwner: this.process.owner.value,
+                processEnvironment: this.process.environment.value,
+                processPov: this.process.pov.value,
             });
             break;
         }
