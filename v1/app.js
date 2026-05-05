@@ -93,6 +93,8 @@ class Palette {
         switch (this._state) {
 
         case state.None:
+            this.clearValues();
+
             off(true, [
                 this.name, this.note, this.activity,
                 this.process.aim, this.process.owner, this.process.environment,
@@ -128,19 +130,17 @@ class Palette {
         }
     }
 
-    clearState() {
-        this.state = Palette.State.None;
-
+    clearValues() {
         this.name.value = '';
         this.note.value = '';
-        this.activity.value = false;
+        this.activity.checked = false;
 
-        this.process.aim = '';
-        this.process.owner = '';
-        this.process.environment = '';
-        this.process.pov = '';
+        this.process.aim.value = '';
+        this.process.owner.value = '';
+        this.process.environment.value = '';
+        this.process.pov.value = '';
 
-        this.element.owner = '';
+        this.element.owner.value = '';
     }
 
     applyCb(event) {
