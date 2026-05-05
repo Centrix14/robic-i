@@ -144,6 +144,15 @@ class Palette {
                 processPov: this.process.pov.value,
             });
             break;
+
+        case state.Element:
+            console.log({
+                name: this.name.value,
+                note: this.note.value,
+                activity: this.activity.checked,
+                elementOwner: this.element.owner.value,
+            });
+            break;
         }
     }
 
