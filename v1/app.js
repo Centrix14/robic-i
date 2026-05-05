@@ -128,6 +128,21 @@ class Palette {
         }
     }
 
+    clearState() {
+        this.state = Palette.State.None;
+
+        this.name.value = '';
+        this.note.value = '';
+        this.activity.value = false;
+
+        this.process.aim = '';
+        this.process.owner = '';
+        this.process.environment = '';
+        this.process.pov = '';
+
+        this.element.owner = '';
+    }
+
     applyCb(event) {
         const state = Palette.State;
 
