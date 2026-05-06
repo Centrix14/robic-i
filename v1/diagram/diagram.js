@@ -81,6 +81,10 @@ class Unit {
         this._accordance = new accConstructor(name, note);
         this._accordanceGS = new gsConstructor(operator);
     }
+
+    applyData(data) {
+        console.log(data);
+    }
 }
 
 class Diagram {
@@ -111,10 +115,10 @@ class Diagram {
     }
 
     getSelection() {
-        if (this._selected)
-            return this._graph.getNode(this._selected);
-        else
+        if (this._selected === null)
             return null;
+        else
+            return this._graph.getNode(this._selected);
     }
 
     clearSelection() {
