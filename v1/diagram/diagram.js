@@ -110,6 +110,13 @@ class Diagram {
         return new Fail();
     }
 
+    getSelection() {
+        if (this._selected)
+            return this._graph.getNode(this._selected);
+        else
+            return null;
+    }
+
     clearSelection() {
         if (this._selected !== null) {
             const gs = this._graph.getNode(this._selected)._accordanceGS;
