@@ -50,8 +50,10 @@ class Palette {
         Element: 'element'
     }
 
-    constructor() {
+    constructor(app) {
         function elm(selector) { return document.querySelector(selector); }
+
+        this._app = app;
 
         this.name = elm('#palette-name');
         this.note = elm('#palette-note');
@@ -492,7 +494,7 @@ class Application {
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
-        this.palette = new Palette();
+        this.palette = new Palette(this);
     }
 
     startEvent(handler, event) {
