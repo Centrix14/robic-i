@@ -51,10 +51,10 @@ class ProcessGeometrySet extends GeometrySet {
             group.init(id, this._operator);
         }
 
-        return this._combine(state, group);
+        return this._combine(state, group, options);
     }
 
-    _combine(state, group) {
+    _combine(state, group, options) {
         const Member = ProcessGroup.Member;
 
         const shape = group.getMemberElement(Member.Shape).get('element'),
@@ -81,6 +81,12 @@ class ProcessGeometrySet extends GeometrySet {
             stylesheet.LabelHidden.useOn(name);
             stylesheet.LabelHidden.useOn(designation);
             break;
+        }
+
+        if (options?.name) {
+            group.setMemberValue(ProcessGroup.Member.Name,
+                                 options.name,
+                                 this._operator);
         }
 
         return group._selfElm;
