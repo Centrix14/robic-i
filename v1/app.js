@@ -622,7 +622,8 @@ class Application {
     }
 
     applyData(data) {
-        console.log(data);
+        const selection = this.diagram.getSelection();
+        selection.applyData(data);
     }
 
     setEvents(definition) {
