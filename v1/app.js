@@ -151,7 +151,7 @@ class Palette {
         switch (this._state) {
 
         case state.Process:
-            console.log({
+            this._app.applyData({
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
@@ -163,7 +163,7 @@ class Palette {
             break;
 
         case state.Element:
-            console.log({
+            this._app.applyData({
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
@@ -619,6 +619,10 @@ class Application {
                  && handler.state === MouseHandler.State.ClickEnd
                  && buttons.state === ButtonHandler.State.IncompatibilitySrcSet)
             this.buttons.newIncompatibilityClick(event);
+    }
+
+    applyData(data) {
+        console.log(data);
     }
 
     setEvents(definition) {
