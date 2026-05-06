@@ -1,7 +1,8 @@
 const GeometryState = {
     Main: 'main',
     Selected: 'selected',
-    Hidden: 'hidden'
+    Hidden: 'hidden',
+    None: 'none',
 }
 
 const GeometryLayer = {
