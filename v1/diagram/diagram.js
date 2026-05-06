@@ -1,7 +1,8 @@
 class Accordance {
-    constructor(name, note) {
+    constructor(name, note, activity=true) {
         this.name = name;
         this.note = note;
+        this.activity = activity;
     }
 }
 
@@ -78,12 +79,31 @@ class Unit {
     constructor(type, operator, name, note) {
         const accConstructor = type[0], gsConstructor = type[1];
 
+        this.type = type;
         this._accordance = new accConstructor(name, note);
         this._accordanceGS = new gsConstructor(operator);
     }
 
     applyData(data) {
-        console.log(data);
+        const accordance = this._accordance, gs = this._accordanceGS;
+
+        accordance.name = data.name;
+        accordance.note = data.note;
+        accordance.activity = data.activity;
+
+        if (this.type === Unit.Type.Process) {
+            accordance.objective = data.processAim;
+            accordance.owner = data.processOwner;
+            accordance.environment = data.processEnvironment;
+            accordance.pov = data.processPov;
+
+            gs.combine(GeometryLayer.Process, GeometryState.None, {
+                name: data.name
+            });
+            console.log(accordance);
+        }
+        else if (this.type === Unit.Type.Element)
+            ;
     }
 }
 
