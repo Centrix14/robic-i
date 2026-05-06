@@ -92,7 +92,7 @@ class Unit {
         accordance.activity = data.activity;
 
         if (this.type === Unit.Type.Process) {
-            accordance.objective = data.processAim;
+            accordance.objective = data.processObjective;
             accordance.owner = data.processOwner;
             accordance.environment = data.processEnvironment;
             accordance.pov = data.processPov;

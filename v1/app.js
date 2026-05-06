@@ -60,7 +60,7 @@ class Palette {
         this.activity = elm('#palette-activity');
 
         this.process = {
-            aim: elm('#palette-processAim'),
+            aim: elm('#palette-processObjective'),
             owner: elm('#palette-processOwner'),
             environment: elm('#palette-processEnvironment'),
             pov: elm('#palette-processPov'),
@@ -155,7 +155,7 @@ class Palette {
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
-                processAim: this.process.aim.value,
+                processObjective: this.process.aim.value,
                 processOwner: this.process.owner.value,
                 processEnvironment: this.process.environment.value,
                 processPov: this.process.pov.value,
