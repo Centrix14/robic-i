@@ -60,7 +60,7 @@ class Palette {
         this.activity = elm('#palette-activity');
 
         this.process = {
-            aim: elm('#palette-processObjective'),
+            objective: elm('#palette-processObjective'),
             owner: elm('#palette-processOwner'),
             environment: elm('#palette-processEnvironment'),
             pov: elm('#palette-processPov'),
@@ -99,8 +99,8 @@ class Palette {
 
             off(true, [
                 this.name, this.note, this.activity,
-                this.process.aim, this.process.owner, this.process.environment,
-                this.process.pov,
+                this.process.objective, this.process.owner,
+                this.process.environment, this.process.pov,
                 this.element.owner,
                 this.buttons.apply, this.buttons.reset,
             ]);
@@ -109,8 +109,8 @@ class Palette {
         case state.Process:
             off(false, [
                 this.name, this.note, this.activity,
-                this.process.aim, this.process.owner, this.process.environment,
-                this.process.pov,
+                this.process.objective, this.process.owner,
+                this.process.environment, this.process.pov,
                 this.buttons.apply, this.buttons.reset,
             ]);
             off(true, [
@@ -125,7 +125,7 @@ class Palette {
                 this.buttons.apply, this.buttons.reset,
             ]);
             off(true, [
-                this.process.aim, this.process.owner, this.process.environment,
+                this.process.objective, this.process.owner, this.process.environment,
                 this.process.pov,
             ]);
             break;
@@ -141,7 +141,7 @@ class Palette {
             this.note.value = dto.note;
             this.activity.checked = dto.activity;
 
-            this.process.aim.value = dto.processObjective;
+            this.process.objective.value = dto.processObjective;
             this.process.owner.value = dto.processOwner;
             this.process.environment.value = dto.processEnvironment;
             this.process.pov.value = dto.processPov;
@@ -161,7 +161,7 @@ class Palette {
         this.note.value = '';
         this.activity.checked = false;
 
-        this.process.aim.value = '';
+        this.process.objective.value = '';
         this.process.owner.value = '';
         this.process.environment.value = '';
         this.process.pov.value = '';
@@ -179,7 +179,7 @@ class Palette {
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
-                processObjective: this.process.aim.value,
+                processObjective: this.process.objective.value,
                 processOwner: this.process.owner.value,
                 processEnvironment: this.process.environment.value,
                 processPov: this.process.pov.value,
