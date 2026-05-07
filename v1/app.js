@@ -125,8 +125,8 @@ class Palette {
                 this.buttons.apply, this.buttons.reset,
             ]);
             off(true, [
-                this.process.objective, this.process.owner, this.process.environment,
-                this.process.pov,
+                this.process.objective, this.process.owner,
+                this.process.environment, this.process.pov,
             ]);
             break;
         }
@@ -545,8 +545,10 @@ class Application {
                     this.palette.state = Palette.State.Process;
                     this.palette.data = unit.getData();
                 }
-                else if (unit._accordance.constructor.name === 'Element')
+                else if (unit._accordance.constructor.name === 'Element') {
                     this.palette.state = Palette.State.Element;
+                    this.palette.data = unit.getData();
+                }
                 else
                     this.palette.state = Palette.State.None;
             }
