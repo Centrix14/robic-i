@@ -95,7 +95,7 @@ class Palette {
         switch (this._state) {
 
         case state.None:
-            this.clearValues();
+            this.clearData();
 
             off(true, [
                 this.name, this.note, this.activity,
@@ -156,7 +156,7 @@ class Palette {
         }
     }
 
-    clearValues() {
+    clearData() {
         this.name.value = '';
         this.note.value = '';
         this.activity.checked = false;
