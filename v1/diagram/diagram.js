@@ -128,8 +128,14 @@ class Unit {
             });
             console.log(accordance);
         }
-        else if (this.type === Unit.Type.Element)
-            ;
+        else if (this.type === Unit.Type.Element) {
+            accordance.owner = data.processOwner;
+
+            gs.combine(GeometryLayer.Process, GeometryState.None, {
+                name: data.name
+            });
+            console.log(accordance);
+        }
     }
 }
 
