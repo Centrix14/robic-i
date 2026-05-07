@@ -84,6 +84,28 @@ class Unit {
         this._accordanceGS = new gsConstructor(operator);
     }
 
+    getData() {
+        const accordance = this._accordance;
+
+        const common = {
+            name: accordance.name,
+            note: accordance.note,
+            activity: accordance.activity,
+        };
+
+        if (this.type === Unit.Type.Process) {
+            return {
+                ...common,
+                processObjective: accordance.objective,
+                processOwner: accordance.owner,
+                processEnvironment: accordance.environment,
+                processPov: accordance.pov,
+            };
+        }
+        else if (this.type === Unit.Type.Element)
+            ;
+    }
+
     applyData(data) {
         const accordance = this._accordance, gs = this._accordanceGS;
 
