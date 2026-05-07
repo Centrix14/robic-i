@@ -198,6 +198,12 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
+        if (options?.name) {
+            group.setMemberValue(ElementArrowGroup.Member.Name,
+                                 options.name,
+                                 this._operator);
+        }
+
         return group._selfElm;
     }
 
