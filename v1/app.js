@@ -132,6 +132,30 @@ class Palette {
         }
     }
 
+    set data(dto) {
+        const state = Palette.State;
+
+        switch (this._state) {
+        case state.Process:
+            this.name.value = dto.name;
+            this.note.value = dto.note;
+            this.activity.checked = dto.activity;
+
+            this.process.aim.value = dto.processObjective;
+            this.process.owner.value = dto.processOwner;
+            this.process.environment.value = dto.processEnvironment;
+            this.process.pov.value = dto.processPov;
+            break;
+
+        case state.Element:
+            this.name.value = dto.name;
+            this.note.value = dto.note;
+            this.activity.checked = dto.activity;
+            this.element.owner.value = dto.elementOwner;
+            break;
+        }
+    }
+
     clearValues() {
         this.name.value = '';
         this.note.value = '';
@@ -517,8 +541,10 @@ class Application {
                 const id = result.get('id');
                 const unit = diagram.select(id);
 
-                if (unit._accordance.constructor.name === 'Process')
+                if (unit._accordance.constructor.name === 'Process') {
                     this.palette.state = Palette.State.Process;
+                    this.palette.data = unit.getData();
+                }
                 else if (unit._accordance.constructor.name === 'Element')
                     this.palette.state = Palette.State.Element;
                 else
