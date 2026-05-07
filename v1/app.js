@@ -198,7 +198,7 @@ class Palette {
     }
 
     resetCb(event) {
-        console.log('reset');
+        this.clearData();
     }
 }
 
