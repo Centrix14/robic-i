@@ -102,8 +102,12 @@ class Unit {
                 processPov: accordance.pov,
             };
         }
-        else if (this.type === Unit.Type.Element)
-            ;
+        else if (this.type === Unit.Type.Element) {
+            return {
+                ...common,
+                elementOwner: accordance.owner,
+            };
+        }
     }
 
     applyData(data) {
