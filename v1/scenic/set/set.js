@@ -83,7 +83,7 @@ class ProcessGeometrySet extends GeometrySet {
             break;
         }
 
-        if (options?.name) {
+        if (options?.name !== null && options?.name !== undefined) {
             group.setMemberValue(ProcessGroup.Member.Name,
                                  options.name,
                                  this._operator);
@@ -198,7 +198,7 @@ class ElementGeometrySet extends GeometrySet {
             break;
         }
 
-        if (options?.name) {
+        if (options?.name !== null && options?.name !== undefined) {
             group.setMemberValue(ElementArrowGroup.Member.Name,
                                  options.name,
                                  this._operator);
