@@ -129,7 +129,7 @@ class Unit {
             console.log(accordance);
         }
         else if (this.type === Unit.Type.Element) {
-            accordance.owner = data.processOwner;
+            accordance.owner = data.elementOwner;
 
             gs.combine(GeometryLayer.Process, GeometryState.None, {
                 name: data.name
