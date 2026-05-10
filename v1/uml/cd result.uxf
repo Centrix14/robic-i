@@ -4,9 +4,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>240</y>
-      <w>330</w>
+      <x>330</x>
+      <y>320</y>
+      <w>390</w>
       <h>220</h>
     </coordinates>
     <panel_attributes>Result
@@ -27,10 +27,10 @@ get(key:string): any</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>240</y>
-      <w>180</w>
-      <h>160</h>
+      <x>770</x>
+      <y>320</y>
+      <w>240</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumaration&gt;&gt;
 ErrorType
@@ -51,20 +51,20 @@ InvalidArguments
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>260</y>
+      <x>710</x>
+      <y>330</y>
       <w>80</w>
-      <h>30</h>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>20</y>
-      <w>330</w>
+      <x>80</x>
+      <y>100</y>
+      <w>390</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>Fail
@@ -82,8 +82,8 @@ Result(type: ErrorType, content:any[*]=[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>20</y>
+      <x>520</x>
+      <y>100</y>
       <w>330</w>
       <h>140</h>
     </coordinates>
@@ -98,8 +98,8 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>150</y>
+      <x>400</x>
+      <y>230</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
@@ -109,8 +109,8 @@ Result(content:any[*]=[])
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>150</y>
+      <x>570</x>
+      <y>230</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
