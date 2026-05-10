@@ -30,6 +30,18 @@ function exportToPng(svg) {
     image.src = vectorURL;
 }
 
+function saveIdf(contents) {
+    const blob = new Blob([contents], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'diagram.idf';
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
 class IDFile {
     save(diagram, options) {
         const serializer = {
