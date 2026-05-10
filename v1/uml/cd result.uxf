@@ -4,84 +4,117 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>100</y>
-      <w>210</w>
-      <h>280</h>
+      <x>210</x>
+      <y>240</y>
+      <w>330</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>Result
 --
-+note: string = ""
--store: &lt;any, any&gt; = &lt;&gt;
-
-+isPlain: boolean = true
-+isOk: boolean = false
-+isFail: boolean = false
+-store: &lt;string, any&gt;
++note: string
 --
-Result(note:string, content:any [*])
+Result(note:string="", content:any[*]=[])
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = true
+&lt;&lt;get&gt;&gt; isOk(): boolean = false
+&lt;&lt;get&gt;&gt; isFail(): boolean = false
 
-&lt;&lt;get&gt;&gt; isExist(): boolean
-&lt;&lt;get&gt;&gt; isEmpty(): boolean
-
-store(): any [*]
-set(key:any, value:any)
-get(key:any): any</panel_attributes>
+store(): [*]
+set(key:string, value:any)
+get(key:string): any</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>100</y>
-      <w>210</w>
-      <h>120</h>
+      <x>590</x>
+      <y>240</y>
+      <w>180</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>Success
+    <panel_attributes>&lt;&lt;enumaration&gt;&gt;
+ErrorType
 --
-+note: string = ""
-
-+isPlain: boolean = false
-+isOk: boolean = true
-+isFail: boolean = false</panel_attributes>
+Void
+InvalidSnapshotMap
+InvalidId
+NonuniqueId
+UnusedId
+SubnodeNotFound
+InconsistentNodeTree
+ImpossibleSelectCondition
+MapDeleteError
+InvalidArguments
+</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>260</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>260</y>
-      <w>210</w>
-      <h>120</h>
+      <x>20</x>
+      <y>20</y>
+      <w>330</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Fail
 --
-+note: string = ""
-
-+isPlain: boolean = false
-+isOk: boolean = false
-+isFail: boolean = true</panel_attributes>
+-type: ErrorType
+--
+Result(type: ErrorType, content:any[*]=[])
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = false
+&lt;&lt;get&gt;&gt; isOk(): boolean = false
+&lt;&lt;get&gt;&gt; isFail(): boolean = true
+&lt;&lt;get&gt;&gt; type(): ErrorType
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>20</y>
+      <w>330</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Success
+--
+Result(content:any[*]=[])
+&lt;&lt;get&gt;&gt; isEmpty(): boolean = false
+&lt;&lt;get&gt;&gt; isOk(): boolean = true
+&lt;&lt;get&gt;&gt; isFail(): boolean = false</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>160</y>
-      <w>80</w>
-      <h>30</h>
+      <x>280</x>
+      <y>150</y>
+      <w>30</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>310</y>
-      <w>80</w>
-      <h>30</h>
+      <x>450</x>
+      <y>150</y>
+      <w>30</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
