@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>7</x>
+      <x>0</x>
       <y>154</y>
       <w>266</w>
       <h>126</h>
@@ -25,7 +25,7 @@ Rect(start:Point, width:integer, height:integer)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>105</x>
+      <x>98</x>
       <y>7</y>
       <w>168</w>
       <h>140</h>
@@ -47,7 +47,7 @@ sub(arg:Point): Point</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>77</x>
+      <x>70</x>
       <y>287</y>
       <w>196</w>
       <h>105</h>
@@ -66,7 +66,7 @@ StraightLine(start:Point, end:Point)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>105</x>
+      <x>98</x>
       <y>399</y>
       <w>168</w>
       <h>91</h>
@@ -84,7 +84,7 @@ Text(start:Point, value:string)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
+      <x>371</x>
       <y>252</y>
       <w>210</w>
       <h>77</h>
@@ -101,7 +101,7 @@ shift(dX:integer, dY:integer)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
+      <x>259</x>
       <y>84</y>
       <w>231</w>
       <h>182</h>
@@ -112,7 +112,7 @@ shift(dX:integer, dY:integer)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
+      <x>259</x>
       <y>259</y>
       <w>126</w>
       <h>21</h>
@@ -123,7 +123,7 @@ shift(dX:integer, dY:integer)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
+      <x>259</x>
       <y>308</y>
       <w>126</w>
       <h>21</h>
@@ -134,7 +134,7 @@ shift(dX:integer, dY:integer)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
+      <x>259</x>
       <y>322</y>
       <w>231</w>
       <h>119</h>
@@ -145,7 +145,7 @@ shift(dX:integer, dY:integer)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>665</x>
+      <x>658</x>
       <y>203</y>
       <w>301</w>
       <h>357</h>
@@ -172,7 +172,7 @@ isTouching(cursor:Point, spatia:Spatia): boolean</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
+      <x>574</x>
       <y>287</y>
       <w>98</w>
       <h>28</h>
@@ -185,7 +185,7 @@ m2=0..*</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
+      <x>609</x>
       <y>168</y>
       <w>203</w>
       <h>84</h>
@@ -198,7 +198,7 @@ m2=0..*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1001</x>
+      <x>994</x>
       <y>511</y>
       <w>364</w>
       <h>189</h>
@@ -212,11 +212,10 @@ NaiveVerticalStepline(start:Point, end:Point)
 
 &lt;&lt;get&gt;&gt; start()
 &lt;&lt;get&gt;&gt; end()
+getCenter(): Point
 
 add(): Fail
 drop(): Fail
-
-getCenter(): Point
 
 publish(): Object</panel_attributes>
     <additional_attributes/>
@@ -224,7 +223,7 @@ publish(): Object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1001</x>
+      <x>994</x>
       <y>154</y>
       <w>98</w>
       <h>21</h>
@@ -235,7 +234,7 @@ publish(): Object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1386</x>
+      <x>1379</x>
       <y>203</y>
       <w>133</w>
       <h>77</h>
@@ -251,7 +250,7 @@ Designation</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1001</x>
+      <x>994</x>
       <y>364</y>
       <w>364</w>
       <h>133</h>
@@ -272,7 +271,7 @@ setMemberValue(member:ProcessGroupMember,
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1001</x>
+      <x>994</x>
       <y>203</y>
       <w>364</w>
       <h>147</h>
@@ -295,7 +294,7 @@ setMemberValue(member:ProcessGroupMember,
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1358</x>
+      <x>1351</x>
       <y>238</y>
       <w>42</w>
       <h>28</h>
@@ -306,7 +305,7 @@ setMemberValue(member:ProcessGroupMember,
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1386</x>
+      <x>1379</x>
       <y>287</y>
       <w>119</w>
       <h>63</h>
@@ -321,7 +320,7 @@ Labels
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1358</x>
+      <x>1351</x>
       <y>308</y>
       <w>42</w>
       <h>28</h>
@@ -332,7 +331,7 @@ Labels
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>959</x>
+      <x>952</x>
       <y>280</y>
       <w>56</w>
       <h>21</h>
@@ -343,7 +342,7 @@ Labels
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1127</x>
+      <x>1120</x>
       <y>154</y>
       <w>126</w>
       <h>21</h>
@@ -354,7 +353,7 @@ Labels
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1043</x>
+      <x>1036</x>
       <y>168</y>
       <w>21</w>
       <h>49</h>
@@ -365,7 +364,7 @@ Labels
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1183</x>
+      <x>1176</x>
       <y>168</y>
       <w>21</w>
       <h>49</h>
@@ -376,7 +375,7 @@ Labels
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1386</x>
+      <x>1379</x>
       <y>364</y>
       <w>119</w>
       <h>63</h>
@@ -391,7 +390,7 @@ Coords
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1358</x>
+      <x>1351</x>
       <y>392</y>
       <w>42</w>
       <h>28</h>
@@ -402,7 +401,7 @@ Coords
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>959</x>
+      <x>952</x>
       <y>385</y>
       <w>56</w>
       <h>21</h>
@@ -413,7 +412,7 @@ Coords
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1386</x>
+      <x>1379</x>
       <y>511</y>
       <w>133</w>
       <h>77</h>
@@ -429,7 +428,7 @@ Down</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1358</x>
+      <x>1351</x>
       <y>553</y>
       <w>42</w>
       <h>28</h>
@@ -440,7 +439,7 @@ Down</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>959</x>
+      <x>952</x>
       <y>532</y>
       <w>56</w>
       <h>21</h>
@@ -451,7 +450,7 @@ Down</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1001</x>
+      <x>994</x>
       <y>714</y>
       <w>364</w>
       <h>147</h>
@@ -463,12 +462,6 @@ init(operator:CanvasOperator, coords: Coords)
 add(): Fail
 drop(): Fail
 
-&lt;&lt;get&gt;&gt; start()
-&lt;&lt;set&gt;&gt; start()
-
-&lt;&lt;get&gt;&gt; end()
-&lt;&lt;set&gt;&gt; end()
-
 getMemberElement(member:ProcessGroupMember): Success ? Fail
 getMemberValue(member:ProcessGroupMember): Success ? Fail
 setMemberValue(member:ProcessGroupMember,
@@ -478,7 +471,7 @@ setMemberValue(member:ProcessGroupMember,
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>805</x>
+      <x>798</x>
       <y>553</y>
       <w>210</w>
       <h>259</h>
