@@ -663,6 +663,12 @@ class Application {
             }
         }
     }
+
+    save() {
+        const file = new IDFile();
+        const contents = JSON.stringify(file.save(this.diagram));
+        saveIdf(contents);
+    }
 }
 
 const app = new Application();
@@ -680,7 +686,7 @@ app.setEvents({
         ['#newIncompatibilityBtn', app.buttons,
          app.buttons.newIncompatibilityClick],
 
-        ['#saveFileBtn', null, ()=>console.log('save')],
+        ['#saveFileBtn', app, app.save],
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
     ],
 
