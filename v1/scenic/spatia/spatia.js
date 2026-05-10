@@ -218,4 +218,11 @@ class Spatia {
             return new Point(cursor.x, start.y);
         }
     }
+
+    serialize() {
+        return {
+            backlash: this._backlash,
+            precision: this._precision,
+        };
+    }
 }
