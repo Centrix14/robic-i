@@ -7,11 +7,12 @@
       <x>70</x>
       <y>160</y>
       <w>460</w>
-      <h>370</h>
+      <h>420</h>
     </coordinates>
     <panel_attributes>Spatia
 --
--precision: integer = 5
+-precision: float = 0.0001
+-backlash: integer = 5
 --
 Spatia(precision:integer)
 
@@ -30,7 +31,9 @@ snapToRectSide(r:Rect
 calcLinearKB(A:Point, B:Point): LinearKB
 calcLinearABC(S:Point, E:Point): LinearABC
 
-solveQE(a:integer, b:integer, c:integer)</panel_attributes>
+solveQE(a:integer, b:integer, c:integer)
+
+serialize()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -38,7 +41,7 @@ solveQE(a:integer, b:integer, c:integer)</panel_attributes>
     <coordinates>
       <x>620</x>
       <y>160</y>
-      <w>140</w>
+      <w>150</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;inline object&gt;&gt;
@@ -63,11 +66,12 @@ LinearKB
     <id>UMLClass</id>
     <coordinates>
       <x>620</x>
-      <y>390</y>
+      <y>380</y>
       <w>150</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>QESolution
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+QESolution
 --
 +D: integer
 +x: integer [*]</panel_attributes>
@@ -78,10 +82,11 @@ LinearKB
     <coordinates>
       <x>620</x>
       <y>480</y>
-      <w>120</w>
-      <h>90</h>
+      <w>150</w>
+      <h>110</h>
     </coordinates>
-    <panel_attributes>Circle
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+Circle
 --
 +x: integer
 +y: integer
@@ -93,7 +98,7 @@ LinearKB
     <coordinates>
       <x>620</x>
       <y>260</y>
-      <w>140</w>
+      <w>150</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>&lt;&lt;inline object&gt;&gt;
@@ -119,7 +124,7 @@ LinearABC
     <id>Relation</id>
     <coordinates>
       <x>520</x>
-      <y>410</y>
+      <y>390</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
