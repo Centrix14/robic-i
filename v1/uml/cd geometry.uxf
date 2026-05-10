@@ -166,7 +166,8 @@ add(id:integer, element: Shape): Success ? Fail
 drop(id: integer): Success ? Fail
 
 shift(dX:integer, dY:integer, operator:CanvasOperator)
-isTouching(cursor:Point, spatia:Spatia): boolean</panel_attributes>
+isTouching(cursor:Point, spatia:Spatia): boolean
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -288,6 +289,8 @@ getMemberElement(member:ProcessGroupMember): Success ? Fail
 getMemberValue(member:ProcessGroupMember): Success ? Fail
 setMemberValue(member:ProcessGroupMember,
    value:string, operator:CanvasOperator): Success ? Fail
+
+snapPoint(cursor:Point, s:Spatia): Point
 </panel_attributes>
     <additional_attributes/>
   </element>
