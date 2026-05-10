@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>120</y>
-      <w>380</w>
-      <h>180</h>
+      <x>70</x>
+      <y>160</y>
+      <w>460</w>
+      <h>370</h>
     </coordinates>
     <panel_attributes>Spatia
 --
@@ -15,37 +15,126 @@
 --
 Spatia(precision:integer)
 
-distance(from, to): float
-calcLinear(A:Point, B:Point): Linear
+distance(from, to): integer
 
+intersectionLineCircle(L:StraightLine, C:Circle)
 isReachable(target:Point, cursor:Point): boolean
-isInRect(rect:Rect, cursor:Point): boolean</panel_attributes>
+isInRect(rect:Rect, cursor:Point): boolean
+determineNearestRectSide(rect:Rect
+                         , cursor:Point)
+                         : StraightLine
+snapToRectSide(r:Rect
+               , cursor:Point)
+               : Point ? null
+
+calcLinearKB(A:Point, B:Point): LinearKB
+calcLinearABC(S:Point, E:Point): LinearABC
+
+solveQE(a:integer, b:integer, c:integer)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>120</y>
+      <x>620</x>
+      <y>160</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;inline object&gt;&gt;
-Linear
+LinearKB
 --
-+k: float
-+b: bloat</panel_attributes>
++k: integer
++b: integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>170</y>
-      <w>60</w>
+      <x>520</x>
+      <y>210</y>
+      <w>120</w>
       <h>40</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>390</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>QESolution
+--
++D: integer
++x: integer [*]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>480</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Circle
+--
++x: integer
++y: integer
++r: integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>260</y>
+      <w>140</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;inline object&gt;&gt;
+LinearABC
+--
++a: integer
++b: integer
++c: integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>300</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>410</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>490</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
   </element>
 </diagram>
