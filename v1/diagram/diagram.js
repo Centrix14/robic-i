@@ -166,6 +166,31 @@ class Unit {
         Element: [Element, ElementGeometrySet]
     }
 
+    static toJSON(obj) {
+        let accordance, gs;
+
+        if (obj.type === Unit.Type.Process) {
+            accordance = Process.toJSON(obj._accordance);
+            gs = ProcessGeometrySet.toJSON(obj._accordanceGS);
+        }
+        else if (obj.type === Unit.Type.Element) {
+            accordance = Element.toJSON(obj._accordance);
+            gs = ElementGeometrySet.toJSON(obj._accordanceGS);
+        }
+
+        return {
+            type: obj.type,
+            accordance,
+            accordanceGS: gs,
+        };
+    }
+
+    static applyJSON(json, obj) {
+    }
+
+    static fromJSON(json) {
+    }
+
     constructor(type, operator, name, note) {
         const accConstructor = type[0], gsConstructor = type[1];
 
