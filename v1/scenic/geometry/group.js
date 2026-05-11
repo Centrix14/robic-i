@@ -310,6 +310,30 @@ class ElementArrowGroup extends Group {
         Designation: 'designation'
     }
 
+    static toJSON(obj) {
+        const Member = ElementArrowGroup.Member;
+        const store = obj._store;
+
+        return {
+            id: obj._id,
+            shape: NaiveVerticalStepline.toJSON(store.get(Member.Shape)[0]),
+            name: Text.toJSON(store.get(Member.Name)[0]),
+            designation: Text.toJSON(store.get(Member.Designation)[0]),
+        };
+    }
+
+    static applyJSON(json, obj) {
+        Point.applyJSON(json.start, obj._start);
+        obj._width = json.width;
+        obj._height = json.height;
+    }
+
+    static fromJSON(json) {
+        const obj = new Rect();
+        Rect.applyJSON(json, obj);
+        return obj;
+    }
+
     init(id, operator, coords) {
         if (!coords?.start || !coords?.end)
             return new Fail();
