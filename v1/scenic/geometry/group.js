@@ -322,10 +322,12 @@ class ElementArrowGroup extends Group {
         };
     }
 
-    static applyJSON(json, obj) {
-        Point.applyJSON(json.start, obj._start);
-        obj._width = json.width;
-        obj._height = json.height;
+    static applyJSON(json, obj, operator) {
+        const shape = NaiveVerticalStepline.fromJSON(json.shape);
+        obj.init(json.id, operator, {
+            start: shape._start,
+            end: shape._end,
+        });
     }
 
     static fromJSON(json) {
