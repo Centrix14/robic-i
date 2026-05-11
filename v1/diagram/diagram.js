@@ -1,4 +1,16 @@
 class Accordance {
+    static toJSON(obj) {
+    }
+
+    static applyJSON(json, obj) {
+    }
+
+    static fromJSON(json) {
+        const obj = new Accordance();
+        Accordance.applyJSON(json, obj);
+        return obj;
+    }
+
     constructor(name, note, activity=true) {
         this.name = name;
         this.note = note;
