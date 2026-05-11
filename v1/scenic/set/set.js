@@ -168,15 +168,20 @@ class ElementGeometrySet extends GeometrySet {
     }
 
     static applyJSON(json, obj) {
-        const arrowJSON = json.geometry[0][1],
-              rectJSON = json.geometry[1][1];
-        const arrowGroup = ElementArrowGroup.fromJSON(arrowJSON, obj._operator);
-//              rectGroup = ElementRectGroup.fromJSON(rectJSON, obj._operator);
+        const arrowJSON = json.geometry.arrow,
+              rectJSON = json.geometry.rect;
 
         const Geometry = ElementGeometrySet.Geometry;
         obj._geometry = new Map();
-        obj._geometry.set(Geometry.Arrow, arrowGroup);
-//        obj._geometry.set(Geometry.Rect, rectGroup);
+
+        if (arrowJSON) {
+            const group = ElementArrowGroup.fromJSON(arrowJSON, obj._operator);
+            obj._geometry.set(Geometry.Arrow, group);
+        }
+        if (rectJSON) {
+            const group = ElementRectGroup.fromJSON(rectJSON, obj._operator);
+            obj._geometry.set(Geometry.Rect, group);
+        }
     }
 
     static fromJSON(json, operator) {
