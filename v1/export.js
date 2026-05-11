@@ -59,20 +59,3 @@ function saveIdf(contents) {
 
     URL.revokeObjectURL(url);
 }
-
-class IDFile {
-    save(diagram, options) {
-        const serializer = {
-            nodeFn: (v) => v.getData()
-        };
-
-        return {
-            name: diagram._name,
-            author: diagram._author,
-            changed: diagram._changed,
-            index: diagram._index,
-            graph: diagram._graph.serialize(serializer),
-            spatia: diagram._spatia.serialize(),
-        };
-    }
-}
