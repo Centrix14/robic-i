@@ -209,7 +209,10 @@ class Unit {
         }
     }
 
-    static fromJSON(json) {
+    static fromJSON(json, operator) {
+        const obj = new Unit(Unit.Type.Process, operator);
+        Unit.applyJSON(json, obj, operator);
+        return obj;
     }
 
     constructor(type, operator, name, note) {
