@@ -279,6 +279,26 @@ class Unit {
 }
 
 class Diagram {
+    static toJSON(obj) {
+        const serializer = {
+            nodeFn: (u) => Unit.toJSON(u),
+        }
+
+        return {
+            name: obj._name,
+            author: obj._author,
+            changed: obj._changed,
+            index: obj._index,
+            graph: obj._graph.serialize(serializer),
+        };
+    }
+
+    static applyJSON(json, obj) {
+    }
+
+    static fromJSON(json) {
+    }
+
     constructor() {
         this._index = { total: 0, process: 0, element: 0 };
         this._graph = new Graph();
