@@ -193,7 +193,20 @@ class Unit {
         };
     }
 
-    static applyJSON(json, obj) {
+    static applyJSON(json, obj, operator) {
+        if (json.type === 'Process') {
+            obj.type = Unit.Type.Process;
+            obj._accordance = Process.fromJSON(json.accordance);
+            obj._accordanceGS = ProcessGeometrySet.fromJSON(
+                json.accordanceGS,
+                operator
+            );
+        }
+        else if (json.type === 'Element') {
+            obj.type = Unit.Type.Element;
+            obj._accordance = Element.fromJSON(json.accordance);
+            obj._accordanceGS = ElementGeometrySet.fromJSON(json.accordanceGS);
+        }
     }
 
     static fromJSON(json) {
