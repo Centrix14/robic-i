@@ -4,6 +4,7 @@ class Group {
 
         this._selfElm = null;
         this._init = false;
+        this._id = null;
     }
  
     get isInitiated() { return this._init; }
@@ -12,6 +13,7 @@ class Group {
         const group = operator.createGroup();
         operator.applyTo(group, { id });
         this._selfElm = group;
+        this._id = id;
 
         return group;
     }
@@ -37,6 +39,25 @@ class NaiveVerticalStepline extends Group {
         Up: 'up',
         Middle: 'middle',
         Down: 'down'
+    }
+
+    static toJSON(obj) {
+        return {
+            start: Point.toJSON(obj._start),
+            end: Point.toJSON(obj._end),
+        };
+    }
+
+    static applyJSON(json, obj) {
+        Point.applyJSON(json.start, obj._start);
+        Point.applyJSON(json.end, obj._end);
+        obj._calcRibs();
+    }
+
+    static fromJSON(json) {
+        const obj = new NaiveVerticalStepline();
+        NaiveVerticalStepline.applyJSON(json, obj);
+        return obj;
     }
 
     constructor(start, end) {
@@ -134,6 +155,50 @@ class NamedRectGroup extends Group {
         Shape: 'shape',
         Name: 'name',
         Designation: 'designation'
+    }
+
+    static toJSON(obj) {
+        const Member = NamedRectGroup.Member;
+        const store = obj._store;
+        return {
+            id: obj._id,
+            shape: Rect.toJSON(store.get(Member.Shape)[0]),
+            name: Text.toJSON(store.get(Member.Name)[0]),
+            designation: Text.toJSON(store.get(Member.Designation)[0]),
+        };
+    }
+
+    static applyJSON(json, obj, operator) {
+        const shape = Rect.fromJSON(json.shape),
+              name = Text.fromJSON(json.name),
+              designation = Text.fromJSON(json.designation);
+
+        obj.init(json.id, operator,
+                 {
+                     shape: {
+                         spawn: shape._start,
+                         size: {
+                             width: shape.width,
+                             height: shape.height,
+                         },
+                     },
+                     designation: {
+                         offset: {
+                             x: 0,
+                             y: 0,
+                         },
+                     },
+                 },
+                 {
+                     name: name.value,
+                     designation: designation.value,
+                 });
+    }
+
+    static fromJSON(json, operator) {
+        const obj = new NamedRectGroup();
+        NamedRectGroup.applyJSON(json, obj, operator);
+        return obj;
     }
 
     init(id, operator, defaults, labels) {
