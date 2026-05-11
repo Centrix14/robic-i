@@ -162,8 +162,16 @@ class Property extends Accordance {
 
 class Unit {
     static Type = {
-        Process: [Process, ProcessGeometrySet],
-        Element: [Element, ElementGeometrySet]
+        Process: {
+            name: 'Process',
+            accCtor: Process,
+            gsCtor: ProcessGeometrySet
+        },
+        Element: {
+            name: 'Element',
+            accCtor: Element,
+            gsCtor: ElementGeometrySet
+        },
     }
 
     static toJSON(obj) {
@@ -179,7 +187,7 @@ class Unit {
         }
 
         return {
-            type: obj.type,
+            type: obj.type.name,
             accordance,
             accordanceGS: gs,
         };
@@ -192,7 +200,7 @@ class Unit {
     }
 
     constructor(type, operator, name, note) {
-        const accConstructor = type[0], gsConstructor = type[1];
+        const accConstructor = type.accCtor, gsConstructor = type.gsCtor;
 
         this.type = type;
         this._accordance = new accConstructor(name, note);
