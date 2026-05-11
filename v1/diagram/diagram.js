@@ -205,7 +205,10 @@ class Unit {
         else if (json.type === 'Element') {
             obj.type = Unit.Type.Element;
             obj._accordance = Element.fromJSON(json.accordance);
-            obj._accordanceGS = ElementGeometrySet.fromJSON(json.accordanceGS);
+            obj._accordanceGS = ElementGeometrySet.fromJSON(
+                json.accordanceGS,
+                operator
+            );
         }
     }
 
@@ -293,7 +296,18 @@ class Diagram {
         };
     }
 
-    static applyJSON(json, obj) {
+    static applyJSON(json, obj, operator) {
+        const deserializer = {
+            nodeFn: (j) => Unit.fromJSON(j, operator),
+        }
+
+        obj._name = json.name;
+        obj._author = json.author;
+        obj._changed = json.changed;
+        obj._index = json.index;
+
+        obj._graph = new Graph();
+        obj._graph.deserialize(json.graph, deserializer);
     }
 
     static fromJSON(json) {
