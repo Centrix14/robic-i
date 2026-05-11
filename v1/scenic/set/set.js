@@ -151,6 +151,18 @@ class ElementGeometrySet extends GeometrySet {
         LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
+    static toJSON(obj) {
+    }
+
+    static applyJSON(json, obj) {
+    }
+
+    static fromJSON(json, operator) {
+        const obj = new ElementGeometrySet(operator);
+        Rect.applyJSON(json, obj);
+        return obj;
+    }
+
     constructor(operator) {
         super(operator);
 
