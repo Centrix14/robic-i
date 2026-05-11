@@ -323,11 +323,19 @@ class ElementArrowGroup extends Group {
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = NaiveVerticalStepline.fromJSON(json.shape);
-        obj.init(json.id, operator, {
-            start: shape._start,
-            end: shape._end,
-        });
+        const shape = NaiveVerticalStepline.fromJSON(json.shape),
+              name = Text.fromJSON(json.name),
+              designation = Text.fromJSON(json.designation);
+
+        obj.init(json.id, operator,
+                 {
+                     start: shape._start,
+                     end: shape._end,
+                 },
+                 {
+                     name: name.value,
+                     designation: designation.value
+                 });
     }
 
     static fromJSON(json) {
@@ -336,9 +344,11 @@ class ElementArrowGroup extends Group {
         return obj;
     }
 
-    init(id, operator, coords) {
+    init(id, operator, coords, labels) {
         if (!coords?.start || !coords?.end)
             return new Fail();
+
+        labels = labels ?? {name: 'Элемент', designation: `Э ${id}`};
 
         const Member = ElementArrowGroup.Member;
 
@@ -356,14 +366,14 @@ class ElementArrowGroup extends Group {
             operator.createPolyline()
         ]);
         store.set(Member.Name, [
-            new Text('Элемент',
+            new Text(labels.name,
                      new Point(center.x + nameOffset.x,
                                center.y + nameOffset.y)
                     ),
             operator.createText()
         ]);
         store.set(Member.Designation, [
-            new Text(`Э ${id}`,
+            new Text(labels.designation,
                      new Point(center.x + designationOffset.x,
                                center.y + designationOffset.y)
                     ),
