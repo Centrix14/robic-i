@@ -8,9 +8,9 @@ class Accordance {
     }
 
     static applyJSON(json, obj) {
-        obj.name = json.name;
-        obj.note = json.note;
-        obj.activity = json.activity;
+        obj.name = json.name ?? '';
+        obj.note = json.note ?? '';
+        obj.activity = json.activity ?? true;
     }
 
     static fromJSON(json) {
