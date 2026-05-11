@@ -99,6 +99,15 @@ class Property extends Accordance {
     }
 
     static applyJSON(json, obj) {
+        obj._values = new Map();
+
+        obj._index = 0;
+        for (let value of json.values) {
+            obj._values.set(obj._index, value);
+            obj._index++;
+        }
+
+        obj._referenceValue = json.referenceIndex;
     }
 
     static fromJSON(json) {
