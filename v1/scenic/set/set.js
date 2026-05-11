@@ -156,17 +156,27 @@ class ElementGeometrySet extends GeometrySet {
         const geometry = obj._geometry;
 
         const arrow = geometry.get(Geometry.Arrow),
-              rect = geometry.get(Geometry.Arrow);
+              rect = geometry.get(Geometry.Rect);
 
-        return {
-            geometry: [
-                ['arrow', ElementArrowGroup.toJSON(arrow)],
-                ['rect', ElementRectGroup.toJSON(rect)],
-            ],
-        };
+        let result = {};
+        if (arrow.isInitiated)
+            result.arrow = ElementArrowGroup.toJSON(arrow);
+        if (rect.isInitiated)
+            result.rect = ElementRectGroup.toJSON(rect);
+
+        return { geometry: result };
     }
 
     static applyJSON(json, obj) {
+        const arrowJSON = json.geometry[0][1],
+              rectJSON = json.geometry[1][1];
+        const arrowGroup = ElementArrowGroup.fromJSON(arrowJSON, obj._operator);
+//              rectGroup = ElementRectGroup.fromJSON(rectJSON, obj._operator);
+
+        const Geometry = ElementGeometrySet.Geometry;
+        obj._geometry = new Map();
+        obj._geometry.set(Geometry.Arrow, arrowGroup);
+//        obj._geometry.set(Geometry.Rect, rectGroup);
     }
 
     static fromJSON(json, operator) {
@@ -258,13 +268,13 @@ class ElementGeometrySet extends GeometrySet {
         const group = this._geometry.get(ElementGeometrySet.Geometry.Rect);
         if (!group.isInitiated) {
             const id = options?.id;
-            if (!id)
+            if (id === null || id === undefined)
                 return new Fail();
 
             group.init(id, this._operator);
         }
 
-        const Member = ElementArrowGroup.Member;
+        const Member = ElementRectGroup.Member;
         const shape = group.getMemberElement(Member.Shape).get('element'),
               name = group.getMemberElement(Member.Name).get('element');
         const designation =
