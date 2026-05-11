@@ -310,7 +310,10 @@ class Diagram {
         obj._graph.deserialize(json.graph, deserializer);
     }
 
-    static fromJSON(json) {
+    static fromJSON(json, operator) {
+        const obj = new Diagram();
+        Diagram.applyJSON(json, obj, operator);
+        return obj;
     }
 
     constructor() {
