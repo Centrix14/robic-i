@@ -62,6 +62,24 @@ class Process extends Accordance {
 }
 
 class Element extends Accordance {
+    static toJSON(obj) {
+        return {
+            ...super.toJSON(obj),
+            owner: obj.owner,
+        };
+    }
+
+    static applyJSON(json, obj) {
+        super.applyJSON(json, obj);
+        obj.owner = json.owner ?? '';
+    }
+
+    static fromJSON(json) {
+        const obj = new Element();
+        Element.applyJSON(json, obj);
+        return obj;
+    }
+
     constructor(name, note) {
         super(name, note);
 
