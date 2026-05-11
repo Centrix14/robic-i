@@ -664,6 +664,15 @@ class Application {
         }
     }
 
+    open() {
+        const self = this;
+
+        openIdf((text) => {
+            const json = JSON.parse(text);
+            this.diagram = Diagram.fromJSON(json, SVG);
+        });
+    }
+
     save() {
         const contents = JSON.stringify(Diagram.toJSON(this.diagram));
         saveIdf(contents);
@@ -685,6 +694,7 @@ app.setEvents({
         ['#newIncompatibilityBtn', app.buttons,
          app.buttons.newIncompatibilityClick],
 
+        ['#openFileBtn', app, app.open],
         ['#saveFileBtn', app, app.save],
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
     ],
