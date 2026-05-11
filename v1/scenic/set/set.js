@@ -186,7 +186,7 @@ class ElementGeometrySet extends GeometrySet {
 
     static fromJSON(json, operator) {
         const obj = new ElementGeometrySet(operator);
-        Rect.applyJSON(json, obj);
+        ElementGeometrySet.applyJSON(json, obj);
         return obj;
     }
 
