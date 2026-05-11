@@ -89,9 +89,12 @@ class Element extends Accordance {
 
 class Property extends Accordance {
     static toJSON(obj) {
+        const keys = Array.from(obj._values.keys()),
+              values = Array.from(obj._values.values());
+
         return {
-            values: Array.from(obj._values.values()),
-            referenceValue: obj._referenceValue,
+            values,
+            referenceIndex: keys.indexOf(obj._referenceValue),
         };
     }
 
