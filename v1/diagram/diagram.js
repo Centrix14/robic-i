@@ -1,5 +1,10 @@
 class Accordance {
     static toJSON(obj) {
+        return {
+            name: obj.name,
+            note: obj.note,
+            activity: obj.activity,
+        };
     }
 
     static applyJSON(json, obj) {
