@@ -338,9 +338,9 @@ class ElementArrowGroup extends Group {
                  });
     }
 
-    static fromJSON(json) {
-        const obj = new Rect();
-        Rect.applyJSON(json, obj);
+    static fromJSON(json, operator) {
+        const obj = new ElementArrowGroup();
+        ElementArrowGroup.applyJSON(json, obj, operator);
         return obj;
     }
 
