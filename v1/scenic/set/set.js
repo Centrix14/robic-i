@@ -42,6 +42,11 @@ class ProcessGeometrySet extends GeometrySet {
     }
 
     static applyJSON(json, obj) {
+        const jsonGroup = json.geometry[0][1],
+              processGroup = ProcessGroup.fromJSON(jsonGroup, obj._operator);
+
+        obj._geometry = new Map();
+        obj._geometry.set(ProcessGeometrySet.Geometry.Rect, processGroup);
     }
 
     static fromJSON(json) {
