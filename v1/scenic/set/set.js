@@ -32,6 +32,18 @@ class ProcessGeometrySet extends GeometrySet {
         LabelHidden: Style.build(Styles.Common.LabelHidden)
     }
 
+    static toJSON(obj) {
+    }
+
+    static applyJSON(json, obj) {
+    }
+
+    static fromJSON(json) {
+        const obj = new ProcessGeometrySet();
+        ProcessGeometrySet.applyJSON(json, obj);
+        return obj;
+    }
+
     constructor(operator) {
         super(operator);
 
