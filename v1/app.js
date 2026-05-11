@@ -665,8 +665,7 @@ class Application {
     }
 
     save() {
-        const file = new IDFile();
-        const contents = JSON.stringify(file.save(this.diagram));
+        const contents = JSON.stringify(Diagram.toJSON(this.diagram));
         saveIdf(contents);
     }
 }
