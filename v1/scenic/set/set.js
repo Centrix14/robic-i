@@ -152,6 +152,18 @@ class ElementGeometrySet extends GeometrySet {
     }
 
     static toJSON(obj) {
+        const Geometry = ElementGeometrySet.Geometry;
+        const geometry = obj._geometry;
+
+        const arrow = geometry.get(Geometry.Arrow),
+              rect = geometry.get(Geometry.Arrow);
+
+        return {
+            geometry: [
+                ['arrow', ElementArrowGroup.toJSON(arrow)],
+                ['rect', ElementRectGroup.toJSON(rect)],
+            ],
+        };
     }
 
     static applyJSON(json, obj) {
