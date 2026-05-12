@@ -661,7 +661,7 @@ class Application {
     }
 
     dropUnit() {
-        console.log('drop');
+        this.diagram.dropSelection();
     }
 
     setEvents(definition) {
