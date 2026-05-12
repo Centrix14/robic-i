@@ -342,6 +342,18 @@ class Diagram {
         return new Fail();
     }
 
+    select(id) {
+        this.clearSelection();
+        this._selected = id;
+
+        const unit = this._graph.getNode(this._selected);
+
+        const gs = unit._accordanceGS;
+        gs.combine(GeometryLayer.Process, GeometryState.Selected);
+
+        return unit;
+    }
+
     getSelection() {
         if (this._selected === null)
             return null;
@@ -367,23 +379,10 @@ class Diagram {
                 this._index.process--;
             else if (unit.type === Unit.Type.Element)
                 this._index.element--;
-
             this._index.total--;
 
             this._graph.dropNode(id);
         }
-    }
-
-    select(id) {
-        this.clearSelection();
-        this._selected = id;
-
-        const unit = this._graph.getNode(this._selected);
-
-        const gs = unit._accordanceGS;
-        gs.combine(GeometryLayer.Process, GeometryState.Selected);
-
-        return unit;
     }
 
     shift(id, dX, dY) {
