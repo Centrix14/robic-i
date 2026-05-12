@@ -381,7 +381,9 @@ class Diagram {
                 this._index.element--;
             this._index.total--;
 
+            this.clearSelection();
             this._graph.dropNode(id);
+            return id;
         }
     }
 
