@@ -665,11 +665,23 @@ class Application {
     }
 
     open() {
+        function drawDiagram(unit) {
+            const element = unit._accordanceGS.combine(
+                GeometryLayer.Process,
+                GeometryState.Main
+            );
+
+            SVG.appendChild(canvas, element);
+        }
+
         const self = this;
 
         openIdf((text) => {
             const json = JSON.parse(text);
             this.diagram = Diagram.fromJSON(json, SVG);
+
+            const nodes = this.diagram.graph.nodes(NodeFields.Data);
+            nodes.forEach(drawDiagram);
         });
     }
 
