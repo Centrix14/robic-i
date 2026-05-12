@@ -184,8 +184,8 @@ class NamedRectGroup extends Group {
                      },
                      designation: {
                          offset: {
-                             x: 0,
-                             y: 0,
+                             x: -5,
+                             y: -5,
                          },
                      },
                  },
