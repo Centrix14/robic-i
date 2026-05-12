@@ -358,6 +358,22 @@ class Diagram {
         this._selected = null;
     }
 
+    dropSelection() {
+        if (this._selected !== null && this._selected !== undefined) {
+            const id = this._selected;
+
+            const unit = this._graph.getNode(id);
+            if (unit.type === Unit.Type.Process)
+                this._index.process--;
+            else if (unit.type === Unit.Type.Element)
+                this._index.element--;
+
+            this._index.total--;
+
+            this._graph.dropNode(id);
+        }
+    }
+
     select(id) {
         this.clearSelection();
         this._selected = id;
