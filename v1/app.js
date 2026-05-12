@@ -73,9 +73,11 @@ class Palette {
         this.buttons = {
             apply: elm('#palette-applyBtn'),
             reset: elm('#palette-resetBtn'),
+            drop: elm('#palette-dropBtn'),
         };
         this.buttons.apply.onclick = (e) => this.applyCb(e);
         this.buttons.reset.onclick = (e) => this.resetCb(e);
+        this.buttons.drop.onclick = (e) => this.dropCb(e);
 
         this._state = Palette.State.None;
         this.updateState();
@@ -102,7 +104,7 @@ class Palette {
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
                 this.element.owner,
-                this.buttons.apply, this.buttons.reset,
+                this.buttons.apply, this.buttons.reset, this.buttons.drop,
             ]);
             break;
 
@@ -111,7 +113,7 @@ class Palette {
                 this.name, this.note, this.activity,
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
-                this.buttons.apply, this.buttons.reset,
+                this.buttons.apply, this.buttons.reset, this.buttons.drop,
             ]);
             off(true, [
                 this.element.owner,
@@ -122,7 +124,7 @@ class Palette {
             off(false, [
                 this.name, this.note, this.activity,
                 this.element.owner,
-                this.buttons.apply, this.buttons.reset,
+                this.buttons.apply, this.buttons.reset, this.buttons.drop,
             ]);
             off(true, [
                 this.process.objective, this.process.owner,
@@ -199,6 +201,10 @@ class Palette {
 
     resetCb(event) {
         this.clearData();
+    }
+
+    dropCb(event) {
+        this._app.dropUnit();
     }
 }
 
@@ -652,6 +658,10 @@ class Application {
     applyData(data) {
         const selection = this.diagram.getSelection();
         selection.applyData(data);
+    }
+
+    dropUnit() {
+        console.log('drop');
     }
 
     setEvents(definition) {
