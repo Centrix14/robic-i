@@ -661,7 +661,12 @@ class Application {
     }
 
     dropUnit() {
-        this.diagram.dropSelection();
+        const id = this.diagram.dropSelection();
+
+        this.palette.state = Palette.State.None;
+
+        const group = canvas.querySelector(`g[id="${id}"]`);
+        canvas.removeChild(group);
     }
 
     setEvents(definition) {
