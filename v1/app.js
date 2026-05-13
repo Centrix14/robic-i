@@ -581,6 +581,12 @@ class Application {
             const result = diagram.getByPoint(s);
             if (result.isOk)
                 diagram.shift(result.get('id'), delta.x, delta.y);
+            else {
+                const selection = diagram.getSelection();
+                if (selection) {
+                    console.log('resize');
+                }
+            }
         }
         else if (handler === mouse
                  && handler.state === MouseHandler.State.GrabEnd) {
