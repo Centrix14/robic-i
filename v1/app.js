@@ -50,6 +50,12 @@ class Palette {
         Element: 'element'
     }
 
+    static Tab = {
+        Diagram: 'palette-diagramTab-radio',
+        Accordance: 'palette-accordanceTab-radio',
+        Deviation: 'palette-deviationTab-radio',
+    }
+
     constructor(app) {
         function elm(selector) { return document.querySelector(selector); }
 
@@ -92,10 +98,13 @@ class Palette {
                 btn: elm('#palette-deviationTab-radio'),
                 body: elm('#palette-deviationTab'),
             },
-        }
+        };
         this.tabs.diagram.btn.onchange = (e) => this.changeTab(e);
         this.tabs.accordance.btn.onchange = (e) => this.changeTab(e);
         this.tabs.deviation.btn.onchange = (e) => this.changeTab(e);
+
+        this._tab = Palette.Tab.Diagram;
+        this.updateTabs();
 
         this._state = Palette.State.None;
         this.updateState();
@@ -148,6 +157,28 @@ class Palette {
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
             ]);
+            break;
+        }
+    }
+
+    updateTabs() {
+        switch (this._tab) {
+        case 'palette-diagramTab-radio':
+            this.tabs.diagram.body.hidden = false;
+            this.tabs.accordance.body.hidden = true;
+            this.tabs.deviation.body.hidden = true;
+            break;
+
+        case 'palette-accordanceTab-radio':
+            this.tabs.diagram.body.hidden = true;
+            this.tabs.accordance.body.hidden = false;
+            this.tabs.deviation.body.hidden = true;
+            break;
+
+        case 'palette-deviationTab-radio':
+            this.tabs.diagram.body.hidden = true;
+            this.tabs.accordance.body.hidden = true;
+            this.tabs.deviation.body.hidden = false;
             break;
         }
     }
@@ -226,21 +257,8 @@ class Palette {
     }
 
     changeTab(event) {
-        const tab = event.target;
-
-        switch (tab.id) {
-        case 'palette-diagramTab-radio':
-            console.log('diagram');
-            break;
-
-        case 'palette-accordanceTab-radio':
-            console.log('accordance');
-            break;
-
-        case 'palette-deviationTab-radio':
-            console.log('deviation');
-            break;
-        }
+        this._tab = event.target.id;
+        this.updateTabs();
     }
 }
 
