@@ -207,10 +207,13 @@ textarea {
 }
 
 .palette-h2 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
 
     line-height: 1.2;
+}
+.palette-h2:before {
+    content: "\00A7";
 }
 
 .palette-input-label {
@@ -238,7 +241,7 @@ textarea {
 /* Palette tabs */
 
 .palette-notebook {
-    margin: 3% 0 1% 0;
+    margin: 3% 0 7% 0;
 }
 
 .palette-notebook > .palette-tab-radio {
