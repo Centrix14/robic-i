@@ -339,12 +339,29 @@ class Diagram {
     }
 
     init(operator, canv) {
-//        const supprocess = {
-//            input: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
-//            output: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
-//            doer: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
-//            mean: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
-//        };
+        const supprocess = {
+            input: null,
+            output: null,
+            doer: null,
+            mean: null,
+        };
+
+        for (let process in supprocess) {
+            const result = this.addProcess(
+                operator,
+                GeometryLayer.Process,
+                GeometryState.Main,
+            );
+
+            operator.appendChild(canv.element, result.get('element'));
+            supprocess[process] = result.get('unit');
+        }
+
+        const corner = 40;
+        supprocess.doer.setPosition(new Point(0, 0));
+        supprocess.input.setPosition(new Point(0, corner));
+        supprocess.output.setPosition(new Point(canv.width - corner, corner));
+        supprocess.mean.setPosition(new Point(0, canv.height - corner));
     }
 
     get graph() { return this._graph; }
