@@ -164,18 +164,24 @@ class Palette {
     updateTabs() {
         switch (this._tab) {
         case 'palette-diagramTab-radio':
+            this.tabs.diagram.btn.checked = true;
+
             this.tabs.diagram.body.hidden = false;
             this.tabs.accordance.body.hidden = true;
             this.tabs.deviation.body.hidden = true;
             break;
 
         case 'palette-accordanceTab-radio':
+            this.tabs.accordance.btn.checked = true;
+
             this.tabs.diagram.body.hidden = true;
             this.tabs.accordance.body.hidden = false;
             this.tabs.deviation.body.hidden = true;
             break;
 
         case 'palette-deviationTab-radio':
+            this.tabs.deviation.btn.checked = true;
+
             this.tabs.diagram.body.hidden = true;
             this.tabs.accordance.body.hidden = true;
             this.tabs.deviation.body.hidden = false;
