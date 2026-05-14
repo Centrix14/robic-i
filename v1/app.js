@@ -590,6 +590,7 @@ class Application {
         this.state = Application.State.Idle;
 
         this.diagram = new Diagram();
+        this.diagram.init(SVG);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
