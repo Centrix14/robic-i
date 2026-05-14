@@ -195,309 +195,313 @@
       </div>
 
       <div id="palette-accordanceTab">
-        <p class="palette-h2">
-          Общие
-        </p>
+        <div id="palette-accordanceTab-general">
+          <p class="palette-h2">
+            Общие
+          </p>
 
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-name">
-                Имя
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-name"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-note">
-                Заметка
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-note"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-activity">
-                Активная
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-activity"
-                     type="checkbox">
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div>
-        <p class="palette-h2">
-          Процесс
-        </p>
-
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-processObjective">
-                Цель
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-processObjective"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-processOwner">
-                Владелец
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-processOwner"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-processEnvironment">
-                Среда
-            </label></td>
-            <td><input class="palette-input"
-                       id="palette-processEnvironment"
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-name">
+                  Имя
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-name"
                        type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-processPov">
-                Точка зрения
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-processPov"
-                     type="text">
-            </td>
-          </tr>
-        </table>
-      </div>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-note">
+                  Заметка
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-note"
+                       type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-activity">
+                  Активная
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-activity"
+                       type="checkbox">
+              </td>
+            </tr>
+          </table>
+        </div>
 
-      <div>
-        <p class="palette-h2">
-          Элемент
-        </p>
+        <div id="palette-accordanceTab-process">
+          <p class="palette-h2">
+            Процесс
+          </p>
 
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-elementOwner">
-                Владелец
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-elementOwner"
-                     type="text">
-            </td>
-          </tr>
-        </table>
-      </div>
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-processObjective">
+                  Цель
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-processObjective"
+                       type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-processOwner">
+                  Владелец
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-processOwner"
+                       type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-processEnvironment">
+                  Среда
+              </label></td>
+              <td><input class="palette-input"
+                         id="palette-processEnvironment"
+                         type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-processPov">
+                  Точка зрения
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-processPov"
+                       type="text">
+              </td>
+            </tr>
+          </table>
+        </div>
 
-      <div>
-        <p class="palette-h2">
-          Свойство
-        </p>
+        <div id="palette-accordanceTab-element">
+          <p class="palette-h2">
+            Элемент
+          </p>
 
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-possibleValues">
-                Возможные значения
-            </label></td>
-            <td><button class="link-button"
-                        id="palette-possibleValues">
-                Изменить
-            </button></td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-referenceValue">
-                Эталонное значение
-            </label></td>
-            <td><button class="link-button"
-                        id="palette-referenceValue">
-                Отсутствует
-            </button></td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-actualValue">
-                Фактическое значение
-            </label></td>
-            <td><button class="link-button"
-                        id="palette-actualValue">
-                Отсутствует
-            </button></td>
-          </tr>
-        </table>
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-elementOwner">
+                  Владелец
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-elementOwner"
+                       type="text">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="palette-accordanceTab-property">
+          <p class="palette-h2">
+            Свойство
+          </p>
+
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-possibleValues">
+                  Возможные значения
+              </label></td>
+              <td><button class="link-button"
+                          id="palette-possibleValues">
+                  Изменить
+              </button></td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-referenceValue">
+                  Эталонное значение
+              </label></td>
+              <td><button class="link-button"
+                          id="palette-referenceValue">
+                  Отсутствует
+              </button></td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-actualValue">
+                  Фактическое значение
+              </label></td>
+              <td><button class="link-button"
+                          id="palette-actualValue">
+                  Отсутствует
+              </button></td>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <div id="palette-deviationTab">
-        <p class="palette-h2">
-          Отклонение
-        </p>
+        <div id="palette-deviationTab-deviation">
+          <p class="palette-h2">
+            Отклонение
+          </p>
 
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-deviationName">
-                Имя
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-deviationName"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-deviationNote">
-                Заметка
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-deviationNote"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-deviationCause">
-                Причина
-            </label></td>
-            <td><input class="palette-input"
-                       id="palette-deviationCause"
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-deviationName">
+                  Имя
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-deviationName"
                        type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-deviationActivity">
-                Активная
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-deviationActivity"
-                     type="checkbox">
-            </td>
-          </tr>
-        </table>
-      </div>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-deviationNote">
+                  Заметка
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-deviationNote"
+                       type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-deviationCause">
+                  Причина
+              </label></td>
+              <td><input class="palette-input"
+                         id="palette-deviationCause"
+                         type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-deviationActivity">
+                  Активная
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-deviationActivity"
+                       type="checkbox">
+              </td>
+            </tr>
+          </table>
+        </div>
 
-      <div>
-        <p class="palette-h2">
-          Риск
-        </p>
+        <div id="palette-accordanceTab-risk">
+          <p class="palette-h2">
+            Риск
+          </p>
 
-        <table class="palette-section">
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskCharacter">
-                Характер
-            </label></td>
-            <td>
-              <select class="palette-input"
-                      id="palette-riskCharacter">
-                <option value="possibility">Возможность</option>
-                <option value="treat">Угроза</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskLCStep">
-                Этап ЖЦ
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-riskLCStep"
-                     type="text">
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskOutrunning">
-                Опережение, д
-            </label></td>
-            <td><input class="palette-input"
-                       id="palette-riskOutrunning"
+          <table class="palette-section">
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskCharacter">
+                  Характер
+              </label></td>
+              <td>
+                <select class="palette-input"
+                        id="palette-riskCharacter">
+                  <option value="possibility">Возможность</option>
+                  <option value="treat">Угроза</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskLCStep">
+                  Этап ЖЦ
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-riskLCStep"
+                       type="text">
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskOutrunning">
+                  Опережение, д
+              </label></td>
+              <td><input class="palette-input"
+                         id="palette-riskOutrunning"
+                         type="number"
+                         step="0.5"
+                         >
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskProfit">
+                  Прибыль, ₽
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-riskProfit"
                        type="number"
                        step="0.5"
                        >
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskProfit">
-                Прибыль, ₽
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-riskProfit"
-                     type="number"
-                     step="0.5"
-                     >
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskScore">
-                Оценка
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-riskScore"
-                     type="number"
-                     step="0.01"
-                     >
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskProbability">
-                Вероятность, %
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-riskProbability"
-                     type="number"
-                     step="0.01"
-                     min="0"
-                     max="100"
-                     >
-            </td>
-          </tr>
-          <tr>
-            <td><label class="palette-input-label"
-                       for="palette-riskError">
-                Ошибка, %
-            </label></td>
-            <td>
-              <input class="palette-input"
-                     id="palette-riskError"
-                     type="number"
-                     step="0.01"
-                     min="0"
-                     max="100"
-                     >
-            </td>
-          </tr>
-        </table>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskScore">
+                  Оценка
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-riskScore"
+                       type="number"
+                       step="0.01"
+                       >
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskProbability">
+                  Вероятность, %
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-riskProbability"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       max="100"
+                       >
+              </td>
+            </tr>
+            <tr>
+              <td><label class="palette-input-label"
+                         for="palette-riskError">
+                  Ошибка, %
+              </label></td>
+              <td>
+                <input class="palette-input"
+                       id="palette-riskError"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       max="100"
+                       >
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
