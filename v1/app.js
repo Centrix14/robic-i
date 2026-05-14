@@ -277,6 +277,15 @@ class Palette {
     }
 }
 
+class Canvas {
+    constructor(element) {
+        this._element = element;
+    }
+
+    get width() { return this._element.width.baseVal.value; }
+    get height() { return this._element.height.baseVal.value; }
+}
+
 class EventHandler {
     constructor(app) {
         this._app = app;
@@ -590,7 +599,7 @@ class Application {
         this.state = Application.State.Idle;
 
         this.diagram = new Diagram();
-        this.diagram.init(SVG);
+        //this.diagram.init(SVG);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
