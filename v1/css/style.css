@@ -191,8 +191,12 @@ textarea {
     grid-area: palette;
 }
 
+.palette-console {
+    margin: 0 1% 2% 0;
+}
+
 .palette-button {
-    padding: 10px;
+    padding: 2%;
 }
 
 .palette-h1 {
@@ -229,4 +233,22 @@ textarea {
 }
 .link-button:hover {
     text-decoration: none;
+}
+
+/* Palette tabs */
+
+.palette-notebook {
+    margin: 3% 0 1% 0;
+}
+
+.palette-notebook > .palette-tab-radio {
+    display: none;
+}
+
+.palette-notebook > .palette-tab-radio + label {
+    margin: 0 1%;
+    padding: 0.5%;
+}
+.palette-notebook > .palette-tab-radio:checked + label {
+    border-bottom: solid black 1px;
 }
