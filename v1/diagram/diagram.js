@@ -332,8 +332,13 @@ class Diagram {
         this._changed = null;
     }
 
-    init() {
-        
+    init(operator) {
+        const supprocess = {
+            input: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
+            output: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
+            doer: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
+            mean: this.addProcess(operator, GeometryLayer.Process, GeometryState.Hidden),
+        };
     }
 
     get graph() { return this._graph; }
