@@ -288,6 +288,14 @@ class NamedRectGroup extends Group {
         }
     }
 
+    setPosition(newPosition, operator) {
+        const shape = this._store.get(NamedRectGroup.Member.Shape),
+              currentPosition = shape[0].start;
+
+        const delta = newPosition.sub(currentPosition);
+        this.shift(delta.x, delta.y, operator);
+    }
+
     snapPoint(cursor, spatia) {
         const shape = this._store.get(NamedRectGroup.Member.Shape)[0];
         return spatia.snapToRectSide(shape, cursor);
