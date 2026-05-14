@@ -111,7 +111,10 @@ class Palette {
     }
 
     get state() { return this._state; }
-    set state(value) { this._state = value; this.updateState(); }
+    set state(value) {
+        this._state = value;
+        this.updateState();
+    }
 
     updateState() {
         const state = Palette.State;
@@ -159,6 +162,12 @@ class Palette {
             ]);
             break;
         }
+    }
+
+    get tab() { return this._tab; }
+    set tab(value) {
+        this._tab = value;
+        this.updateTabs();
     }
 
     updateTabs() {
