@@ -206,6 +206,24 @@ class Palette {
     dropCb(event) {
         this._app.dropUnit();
     }
+
+    changeTab(event) {
+        const tab = event.target;
+
+        switch (tab.id) {
+        case 'palette-diagramTab-radio':
+            console.log('diagram');
+            break;
+
+        case 'palette-accordanceTab-radio':
+            console.log('accordance');
+            break;
+
+        case 'palette-deviationTab-radio':
+            console.log('deviation');
+            break;
+        }
+    }
 }
 
 class EventHandler {
@@ -739,5 +757,11 @@ app.setEvents({
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
     'mousemove': [['.canvas', app.mouse, app.mouse.move]],
-    'mouseup': [['.canvas', app.mouse, app.mouse.up]]
+    'mouseup': [['.canvas', app.mouse, app.mouse.up]],
+
+    'change': [
+        ['#palette-diagramTab-radio', app.palette, app.palette.changeTab],
+        ['#palette-accordanceTab-radio', app.palette, app.palette.changeTab],
+        ['#palette-deviationTab-radio', app.palette, app.palette.changeTab],
+    ],
 });
