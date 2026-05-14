@@ -282,6 +282,7 @@ class Canvas {
         this._element = element;
     }
 
+    get element() { return this._element; }
     get width() { return this._element.width.baseVal.value; }
     get height() { return this._element.height.baseVal.value; }
 }
