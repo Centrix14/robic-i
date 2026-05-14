@@ -583,7 +583,7 @@ class Application {
                 diagram.shift(result.get('id'), delta.x, delta.y);
             else {
                 const selection = diagram.getSelection();
-                if (selection) {
+                if (selection && selection.type !== Unit.Type.Element) {
                     console.log('resize');
                 }
             }
@@ -685,6 +685,10 @@ class Application {
         }
     }
 
+    newFile() {
+        window.location.reload();
+    }
+
     open() {
         function drawDiagram(unit) {
             const element = unit._accordanceGS.combine(
@@ -727,6 +731,7 @@ app.setEvents({
         ['#newIncompatibilityBtn', app.buttons,
          app.buttons.newIncompatibilityClick],
 
+        ['#newFileBtn', app, app.newFile],
         ['#openFileBtn', app, app.open],
         ['#saveFileBtn', app, app.save],
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
