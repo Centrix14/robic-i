@@ -279,6 +279,10 @@ class Unit {
             console.log(accordance);
         }
     }
+
+    resize(delta) {
+        
+    }
 }
 
 class Diagram {
@@ -326,6 +330,10 @@ class Diagram {
         this._name = '';
         this._author = '';
         this._changed = null;
+    }
+
+    init() {
+        
     }
 
     get graph() { return this._graph; }
@@ -433,6 +441,7 @@ class Diagram {
         this._graph.addNode(this._index.total, unit);
 
         return new Success([['id', this._index.total++],
+                            ['unit', unit],
                             ['element', element]]);
     }
 
@@ -446,6 +455,7 @@ class Diagram {
         this._graph.addNode(this._index.total, unit);
 
         return new Success([['id', this._index.total++],
+                            ['unit', unit],
                             ['element', element]]);
     }
 }
