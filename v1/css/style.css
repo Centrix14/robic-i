@@ -109,6 +109,9 @@ body {
     margin: 10px;
     user-select: none;
 }
+.menu-dropdown-item:hover {
+    background-color: var(--empty);
+}
 
 .icon {
     width: 20px;
