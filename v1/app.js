@@ -93,6 +93,9 @@ class Palette {
                 body: elm('#palette-deviationTab'),
             },
         }
+        this.tabs.diagram.btn.onchange = (e) => this.changeTab(e);
+        this.tabs.accordance.btn.onchange = (e) => this.changeTab(e);
+        this.tabs.deviation.btn.onchange = (e) => this.changeTab(e);
 
         this._state = Palette.State.None;
         this.updateState();
@@ -773,10 +776,4 @@ app.setEvents({
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
     'mousemove': [['.canvas', app.mouse, app.mouse.move]],
     'mouseup': [['.canvas', app.mouse, app.mouse.up]],
-
-    'change': [
-        ['#palette-diagramTab-radio', app.palette, app.palette.changeTab],
-        ['#palette-accordanceTab-radio', app.palette, app.palette.changeTab],
-        ['#palette-deviationTab-radio', app.palette, app.palette.changeTab],
-    ],
 });
