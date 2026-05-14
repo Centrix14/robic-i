@@ -111,6 +111,9 @@ class ProcessGeometrySet extends GeometrySet {
                                  options.name,
                                  this._operator);
         }
+        if (options?.position) {
+            group.setPosition(options.position, this._operator);
+        }
 
         return group._selfElm;
     }
