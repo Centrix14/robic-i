@@ -79,6 +79,21 @@ class Palette {
         this.buttons.reset.onclick = (e) => this.resetCb(e);
         this.buttons.drop.onclick = (e) => this.dropCb(e);
 
+        this.tabs = {
+            diagram: {
+                btn: elm('#palette-diagramTab-radio'),
+                body: elm('#palette-diagramTab'),
+            },
+            accordance: {
+                btn: elm('#palette-accordanceTab-radio'),
+                body: elm('#palette-accordanceTab'),
+            },
+            deviation: {
+                btn: elm('#palette-deviationTab-radio'),
+                body: elm('#palette-deviationTab'),
+            },
+        }
+
         this._state = Palette.State.None;
         this.updateState();
     }
