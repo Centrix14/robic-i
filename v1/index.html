@@ -306,6 +306,107 @@
           </tr>
         </table>
       </div>
+
+      <div>
+        <p class="palette-h2">
+          Риск
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskCharacter">
+                Характер
+            </label></td>
+            <td>
+              <select class="palette-input"
+                      id="palette-riskCharacter">
+                <option value="possibility">Возможность</option>
+                <option value="treat">Угроза</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskLCStep">
+                Этап ЖЦ
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-riskLCStep"
+                     type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskOutrunning">
+                Опережение, д
+            </label></td>
+            <td><input class="palette-input"
+                       id="palette-riskOutrunning"
+                       type="number"
+                       step="0.5"
+                       >
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskProfit">
+                Прибыль, ₽
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-riskProfit"
+                     type="number"
+                     step="0.5"
+                     >
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskScore">
+                Оценка
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-riskScore"
+                     type="number"
+                     step="0.01"
+                     >
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskProbability">
+                Вероятность, %
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-riskProbability"
+                     type="number"
+                     step="0.01"
+                     min="0"
+                     max="100"
+                     >
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-riskError">
+                Ошибка, %
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-riskError"
+                     type="number"
+                     step="0.01"
+                     min="0"
+                     max="100"
+                     >
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <script src="scenic/style/element.js"></script>
