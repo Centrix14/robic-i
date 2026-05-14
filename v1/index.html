@@ -139,6 +139,37 @@
         Свойства
       </p>
 
+      <label class="palette-tab-label"
+             for="palette-diagramTab-radio">
+        Диаграмма
+      </label>
+      <input class="palette-tab-radio"
+             id="palette-diagramTab-radio"
+             type="radio"
+             value=""
+             checked
+             >
+
+      <label class="palette-tab-label"
+             for="palette-accordanceTab-radio">
+        Соответствие
+      </label>
+      <input class="palette-tab-radio"
+             id="palette-accordanceTab-radio"
+             type="radio"
+             value=""
+             >
+
+      <label class="palette-tab-label"
+             for="palette-deviationTab-radio">
+        Отклонение
+      </label>
+      <input class="palette-tab-radio"
+             id="palette-deviationTab-radio"
+             type="radio"
+             value=""
+             >
+
       <div class="palette-console">
         <button class="panel-button palette-button"
                 id="palette-applyBtn">
@@ -303,6 +334,58 @@
                         id="palette-actualValue">
                 Отсутствует
             </button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <p class="palette-h2">
+          Отклонение
+        </p>
+
+        <table class="palette-section">
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-deviationName">
+                Имя
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-deviationName"
+                     type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-deviationNote">
+                Заметка
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-deviationNote"
+                     type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-deviationCause">
+                Причина
+            </label></td>
+            <td><input class="palette-input"
+                       id="palette-deviationCause"
+                       type="text">
+            </td>
+          </tr>
+          <tr>
+            <td><label class="palette-input-label"
+                       for="palette-deviationActivity">
+                Активная
+            </label></td>
+            <td>
+              <input class="palette-input"
+                     id="palette-deviationActivity"
+                     type="checkbox">
+            </td>
           </tr>
         </table>
       </div>
