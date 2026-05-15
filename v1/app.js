@@ -147,6 +147,7 @@ class Palette {
         ]);
 
         turn(state.element, [
+            this.name, this.note, this.activity,
             this.element.owner,
         ]);
     }
