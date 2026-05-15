@@ -140,14 +140,16 @@ class Palette {
             this.buttons.apply, this.buttons.reset, this.buttons.drop,
         ]);
 
-        turn(state.process, [
+        turn(state.process || state.element, [
             this.name, this.note, this.activity,
+        ]);
+
+        turn(state.process, [
             this.process.objective, this.process.owner,
             this.process.environment, this.process.pov,
         ]);
 
         turn(state.element, [
-            this.name, this.note, this.activity,
             this.element.owner,
         ]);
     }
@@ -187,10 +189,7 @@ class Palette {
     }
 
     set data(dto) {
-        const state = Palette.State;
-
-        switch (this._state) {
-        case state.Process:
+        if (this._state.process) {
             this.name.value = dto.name;
             this.note.value = dto.note;
             this.activity.checked = dto.activity;
@@ -199,14 +198,12 @@ class Palette {
             this.process.owner.value = dto.processOwner;
             this.process.environment.value = dto.processEnvironment;
             this.process.pov.value = dto.processPov;
-            break;
-
-        case state.Element:
+        }
+        else if (this._state.element) {
             this.name.value = dto.name;
             this.note.value = dto.note;
             this.activity.checked = dto.activity;
             this.element.owner.value = dto.elementOwner;
-            break;
         }
     }
 
@@ -234,29 +231,24 @@ class Palette {
     _applyAccordance() {
         const state = Palette.State;
 
-        switch (this._state) {
+        let data = {};
 
-        case state.Process:
-            this._app.applyToSelection({
-                name: this.name.value,
-                note: this.note.value,
-                activity: this.activity.checked,
-                processObjective: this.process.objective.value,
-                processOwner: this.process.owner.value,
-                processEnvironment: this.process.environment.value,
-                processPov: this.process.pov.value,
-            });
-            break;
-
-        case state.Element:
-            this._app.applyToSelection({
-                name: this.name.value,
-                note: this.note.value,
-                activity: this.activity.checked,
-                elementOwner: this.element.owner.value,
-            });
-            break;
+        if (this._state.process || this._state.element) {
+            data.name = this.name.value;
+            data.note = this.note.value;
+            data.activity = this.activity.value;
         }
+        if (this._state.process) {
+            data.processObjective = this.process.objective.value;
+            data.processOwner = this.process.owner.value;
+            data.processEnvironment = this.process.environment.value;
+            data.processPov = this.process.pov.value;
+        }
+        if (this._state.element) {
+            data.elementOwner = this.element.owner.value;
+        }
+
+        this._app.applyToSelection(data);
     }
 
     applyCb(event) {
@@ -649,7 +641,7 @@ class Application {
                         process: true,
                         element: false,
                     };
-//                    this.palette.data = unit.getData();
+                    this.palette.data = unit.getData();
                 }
                 else if (unit._accordance.constructor.name === 'Element') {
                     this.palette.state = {
@@ -657,7 +649,7 @@ class Application {
                         process: false,
                         element: true,
                     };
-//                    this.palette.data = unit.getData();
+                    this.palette.data = unit.getData();
                 }
                 else {
                     this.palette.state = {
