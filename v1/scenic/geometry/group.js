@@ -312,6 +312,12 @@ class NamedRectGroup extends Group {
               designation = this._store.get(Member.Designation);
 
         const shapeJSON = Rect.toJSON(shape[0]);
+
+        if (newSize?.increment && newSize.increment === true) {
+            newSize.width += shapeJSON.width;
+            newSize.height += shapeJSON.height;
+        }
+
         shapeJSON.width = newSize.width;
         shapeJSON.height = newSize.height;
 
