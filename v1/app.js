@@ -235,7 +235,7 @@ class Palette {
         this.element.owner.value = '';
     }
 
-    applyCb(event) {
+    _applyAccordance() {
         const state = Palette.State;
 
         switch (this._state) {
@@ -259,6 +259,23 @@ class Palette {
                 activity: this.activity.checked,
                 elementOwner: this.element.owner.value,
             });
+            break;
+        }
+    }
+
+    applyCb(event) {
+        const tab = Palette.Tab;
+
+        switch (this._tab) {
+
+        case tab.Diagram:
+            break;
+
+        case tab.Accordance:
+            this._applyAccordance();
+            break;
+
+        case tab.Deviation:
             break;
         }
     }
