@@ -91,6 +91,14 @@ class Palette {
         this.buttons.reset.onclick = (e) => this.resetCb(e);
         this.buttons.drop.onclick = (e) => this.dropCb(e);
 
+        this._state = {
+            buttons: false,
+            diagram: false,
+            process: false,
+            element: false,
+        };
+        this.updateState();
+
         this.tabs = {
             diagram: {
                 btn: elm('#palette-diagramTab-radio'),
@@ -111,13 +119,6 @@ class Palette {
 
         this._tab = Palette.Tab.Diagram;
         this.updateTabs();
-
-        this._state = {
-            buttons: false,
-            process: false,
-            element: false,
-        };
-        this.updateState();
     }
 
     get state() { return this._state; }
@@ -138,6 +139,10 @@ class Palette {
 
         turn(state.buttons, [
             this.buttons.apply, this.buttons.reset, this.buttons.drop,
+        ]);
+
+        turn(state.diagram, [
+            this.diagram.name, this.diagram.author, this.diagram.changed,
         ]);
 
         turn(state.process || state.element, [
@@ -168,6 +173,11 @@ class Palette {
             this.tabs.diagram.body.hidden = false;
             this.tabs.accordance.body.hidden = true;
             this.tabs.deviation.body.hidden = true;
+
+            this.state = {
+                buttons: true,
+                diagram: true,
+            };
             break;
 
         case 'palette-accordanceTab-radio':
@@ -176,6 +186,8 @@ class Palette {
             this.tabs.diagram.body.hidden = true;
             this.tabs.accordance.body.hidden = false;
             this.tabs.deviation.body.hidden = true;
+
+            this.state = {};
             break;
 
         case 'palette-deviationTab-radio':
@@ -184,6 +196,8 @@ class Palette {
             this.tabs.diagram.body.hidden = true;
             this.tabs.accordance.body.hidden = true;
             this.tabs.deviation.body.hidden = false;
+
+            this.state = {};
             break;
         }
     }
@@ -257,6 +271,7 @@ class Palette {
         switch (this._tab) {
 
         case tab.Diagram:
+            this._applyDiagram();
             break;
 
         case tab.Accordance:
