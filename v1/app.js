@@ -649,7 +649,7 @@ class Application {
             console.log(`Select ${cursor.x} ${cursor.y}`);
         }
 
-        // Units moving
+        // Units moving & resizing
         else if (handler === mouse
                  && handler.state === MouseHandler.State.Grabbing) {
 
@@ -662,12 +662,20 @@ class Application {
 
             const diagram = this.diagram;
             const result = diagram.getByPoint(s);
+
+            // moving
             if (result.isOk)
                 diagram.shift(result.get('id'), delta.x, delta.y);
             else {
                 const selection = diagram.getSelection();
+
+                // resizing
                 if (selection && selection.type !== Unit.Type.Element) {
-                    console.log('resize');
+                    selection.setSize({
+                        width: delta.x,
+                        height: delta.y,
+                        increment: true,
+                    });
                 }
             }
         }
