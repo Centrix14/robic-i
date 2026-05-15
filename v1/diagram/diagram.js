@@ -298,6 +298,8 @@ class Unit {
     }
 
     isTouching(cursor, spatia) {
+        if (this.isSystem)
+            return false;
         return this._accordanceGS.isTouching(cursor, spatia);
     }
 }
