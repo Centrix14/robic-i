@@ -112,7 +112,11 @@ class Palette {
         this._tab = Palette.Tab.Diagram;
         this.updateTabs();
 
-        this._state = Palette.State.None;
+        this._state = {
+            buttons: false,
+            process: false,
+            element: false,
+        };
         this.updateState();
     }
 
@@ -123,14 +127,13 @@ class Palette {
     }
 
     updateState() {
-        const state = Palette.State;
-
         function off(elms, value=true) {
             for (let elm of elms)
                 elm.disabled = value;
         }
         function on(elms) { off(elms, false); }
 
+        this.clearData();
         switch (this._state) {
 
         case state.None:
