@@ -361,6 +361,7 @@ class Diagram {
                 operator,
                 GeometryLayer.Process,
                 GeometryState.Hidden,
+                false // this is a system process
             );
 
             operator.appendChild(canv.element, result.get('element'));
@@ -385,6 +386,8 @@ class Diagram {
             width: corner,
             height: canv.height - corner * 2,
         });
+
+        this._index.process.system = 4;
     }
 
     get graph() { return this._graph; }
