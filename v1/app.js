@@ -127,52 +127,28 @@ class Palette {
     }
 
     updateState() {
-        const on = true, off = false;
-
         function turn(value, elms) {
             for (let elm of elms)
                 elm.disabled = !value;
         }
 
         this.clearData();
-        switch (this._state) {
 
-        case state.None:
-            this.clearData();
+        const state = this._state;
 
-            off([
-                this.name, this.note, this.activity,
-                this.process.objective, this.process.owner,
-                this.process.environment, this.process.pov,
-                this.element.owner,
-                this.buttons.apply, this.buttons.reset, this.buttons.drop,
-            ]);
-            break;
+        turn(state.buttons, [
+            this.buttons.apply, this.buttons.reset, this.buttons.drop,
+        ]);
 
-        case state.Process:
-            on([
-                this.name, this.note, this.activity,
-                this.process.objective, this.process.owner,
-                this.process.environment, this.process.pov,
-                this.buttons.apply, this.buttons.reset, this.buttons.drop,
-            ]);
-            off([
-                this.element.owner,
-            ]);
-            break;
+        turn(state.process, [
+            this.name, this.note, this.activity,
+            this.process.objective, this.process.owner,
+            this.process.environment, this.process.pov,
+        ]);
 
-        case state.Element:
-            on([
-                this.name, this.note, this.activity,
-                this.element.owner,
-                this.buttons.apply, this.buttons.reset, this.buttons.drop,
-            ]);
-            off([
-                this.process.objective, this.process.owner,
-                this.process.environment, this.process.pov,
-            ]);
-            break;
-        }
+        turn(state.element, [
+            this.element.owner,
+        ]);
     }
 
     get tab() { return this._tab; }
