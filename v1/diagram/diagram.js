@@ -296,6 +296,10 @@ class Unit {
             position: newPosition,
         });
     }
+
+    isTouching(cursor, spatia) {
+        return this._accordanceGS.isTouching(cursor, spatia);
+    }
 }
 
 class Diagram {
@@ -402,7 +406,7 @@ class Diagram {
         const units = this._graph.nodes(NodeFields.All);
 
         for (let [id, unit] of units) {
-            if (unit._accordanceGS.isTouching(point, spatia))
+            if (unit.isTouching(point, spatia))
                 return new Success([['id', id]]);
         }
 
