@@ -258,7 +258,7 @@ class Palette {
         if (this._state.process || this._state.element) {
             data.name = this.accordance.name.value;
             data.note = this.accordance.note.value;
-            data.activity = this.accordance.activity.value;
+            data.activity = this.accordance.activity.checked;
         }
         if (this._state.process) {
             data.processObjective = this.process.objective.value;
