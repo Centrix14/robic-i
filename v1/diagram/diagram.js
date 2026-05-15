@@ -210,7 +210,9 @@ class PropertyDeviation extends Deviation {
         return obj;
     }
 
-    constructor() {
+    constructor(name, note) {
+        super(name, note);
+
         this.actualValue = null;
         this.value = 0;
     }
@@ -250,7 +252,9 @@ class Risk extends Deviation {
         return obj;
     }
 
-    constructor(character=Risk.Character.Possibility) {
+    constructor(name, note, character=Risk.Character.Possibility) {
+        super(name, note);
+
         this.character = character;
         this.LCStep = '';
         this.outrunning = 0;
