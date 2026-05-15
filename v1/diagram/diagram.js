@@ -414,11 +414,12 @@ class Diagram {
     }
 
     select(id) {
+        this.clearSelection();
+
         const unit = this._graph.getNode(id);
         if (unit.isSystem)
             return null;
 
-        this.clearSelection();
         this._selected = id;
 
         const gs = unit._accordanceGS;
@@ -500,7 +501,10 @@ class Diagram {
     addProcess(operator, layer, state, isSystem=false) {
         const unit = new Unit(Unit.Type.Process, operator, '', '', isSystem);
         const element = unit._accordanceGS.combine(layer, state, {
-            id: this._index.process.user
+            id: {
+                inner: this._index.total,
+                outer: this._index.process.user,
+            }
         });
 
         if (!isSystem)
@@ -516,7 +520,10 @@ class Diagram {
     addElement(operator, layer, state, coords) {
         const unit = new Unit(Unit.Type.Element, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
-            id: this._index.element++,
+            id: {
+                inner: this._index.total,
+                outer: this._index.element,
+            },
             coords
         });
 
