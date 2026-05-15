@@ -242,7 +242,11 @@ class Palette {
     }
 
     _applyDiagram() {
-        
+        this._app.applyToDiagram({
+            name: this.diagram.name.value,
+            author: this.diagram.author.value,
+            changed: this.diagram.changed.value,
+        });
     }
 
     _applyAccordance() {
