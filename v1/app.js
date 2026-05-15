@@ -628,6 +628,8 @@ class Application {
                 const id = result.get('id');
                 const unit = diagram.select(id);
 
+                if (!unit)
+                    return;
                 if (unit._accordance.constructor.name === 'Process') {
                     this.palette.state = Palette.State.Process;
                     this.palette.data = unit.getData();
