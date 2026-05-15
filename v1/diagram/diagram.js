@@ -218,10 +218,11 @@ class Unit {
         return obj;
     }
 
-    constructor(type, operator, name, note) {
+    constructor(type, operator, name, note, isSystem=false) {
         const accConstructor = type.accCtor, gsConstructor = type.gsCtor;
 
         this.type = type;
+        this.isSystem = isSystem;
         this._accordance = new accConstructor(name, note);
         this._accordanceGS = new gsConstructor(operator);
     }
@@ -361,7 +362,7 @@ class Diagram {
                 operator,
                 GeometryLayer.Process,
                 GeometryState.Hidden,
-                false // this is a system process
+                true, // this is a system process
             );
 
             operator.appendChild(canv.element, result.get('element'));
@@ -486,13 +487,13 @@ class Diagram {
         return gs.snapPoint(point, this._spatia);
     }
 
-    addProcess(operator, layer, state, user=true) {
-        const unit = new Unit(Unit.Type.Process, operator, '', '');
+    addProcess(operator, layer, state, isSystem=false) {
+        const unit = new Unit(Unit.Type.Process, operator, '', '', isSystem);
         const element = unit._accordanceGS.combine(layer, state, {
             id: this._index.process.user
         });
 
-        if (user)
+        if (!isSystem)
             this._index.process.user++;
 
         this._graph.addNode(this._index.total, unit);
