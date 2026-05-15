@@ -99,7 +99,7 @@ class Property extends Accordance {
               values = Array.from(obj._values.values());
 
         return {
-            super.toJSON(obj),
+            ...super.toJSON(obj),
             values,
             referenceIndex: keys.indexOf(obj._referenceValue),
         };
@@ -276,13 +276,21 @@ class Unit {
     static Type = {
         Process: {
             name: 'Process',
+
             accCtor: Process,
-            gsCtor: ProcessGeometrySet
+            gsCtor: ProcessGeometrySet,
+
+            devCtor: Risk,
+            devGSCtor: null,
         },
         Element: {
             name: 'Element',
+
             accCtor: Element,
-            gsCtor: ElementGeometrySet
+            gsCtor: ElementGeometrySet,
+
+            devCtor: Deviation,
+            devGSCtor: null,
         },
     }
 
@@ -335,12 +343,16 @@ class Unit {
     }
 
     constructor(type, operator, name, note, isSystem=false) {
-        const accConstructor = type.accCtor, gsConstructor = type.gsCtor;
+        const accConstructor = type.accCtor, gsConstructor = type.gsCtor,
+              devConstructor = type.devCtor;
 
         this.type = type;
         this.isSystem = isSystem;
+
         this._accordance = new accConstructor(name, note);
         this._accordanceGS = new gsConstructor(operator);
+
+        this._deviation = new devConstructor();
     }
 
     getData() {
