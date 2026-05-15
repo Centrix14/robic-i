@@ -88,6 +88,12 @@ class Element extends Accordance {
 }
 
 class Property extends Accordance {
+    static ValueField = {
+        Id: 'id',
+        Value: 'value',
+        All: 'all'
+    }
+
     static toJSON(obj) {
         const keys = Array.from(obj._values.keys()),
               values = Array.from(obj._values.values());
@@ -117,12 +123,6 @@ class Property extends Accordance {
         const obj = new Property();
         Property.applyJSON(json, obj);
         return obj;
-    }
-
-    static ValueField = {
-        Id: 'id',
-        Value: 'value',
-        All: 'all'
     }
 
     constructor(name, note) {
