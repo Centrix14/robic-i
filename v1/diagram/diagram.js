@@ -93,12 +93,15 @@ class Property extends Accordance {
               values = Array.from(obj._values.values());
 
         return {
+            super.toJSON(obj),
             values,
             referenceIndex: keys.indexOf(obj._referenceValue),
         };
     }
 
     static applyJSON(json, obj) {
+        super.applyJSON(json, obj);
+
         obj._values = new Map();
 
         obj._index = 0;
@@ -194,12 +197,14 @@ class Deviation {
 class PropertyDeviation extends Deviation {
     static toJSON(obj) {
         return {
+            ...super.toJSON(obj),
             actualValue: obj.actualValue,
             value: obj.value,
         };
     }
 
     static applyJSON(json, obj) {
+        super.applyJSON(json, obj);
         obj.actualValue = json.actualValue;
         obj.value = json.value;
     }
@@ -226,6 +231,7 @@ class Risk extends Deviation {
 
     static toJSON(obj) {
         return {
+            ...super.toJSON(obj),
             character: obj.character,
             LCStep: obj.LCStep,
             outrunning: obj.outrunning,
@@ -237,6 +243,7 @@ class Risk extends Deviation {
     }
 
     static applyJSON(json, obj) {
+        super.applyJSON(json, obj);
         obj.character = json.character;
         obj.LCStep = json.LCStep;
         obj.outrunning = json.outrunning;
