@@ -216,6 +216,51 @@ class PropertyDeviation extends Deviation {
     }
 }
 
+class Risk extends Deviation {
+    static Character = {
+        Treat: 'treat',
+        Possibility: 'possibility',
+    }
+
+    static toJSON(obj) {
+        return {
+            character: obj.character,
+            LCStep: obj.LCStep,
+            outrunning: obj.outrunning,
+            profit: obj.profit,
+            probability: obj.probability,
+            score: obj.score,
+            error: obj.error,
+        };
+    }
+
+    static applyJSON(json, obj) {
+        obj.character = json.character;
+        obj.LCStep = json.LCStep;
+        obj.outrunning = json.outrunning;
+        obj.profit = json.profit;
+        obj.probability = json.probability;
+        obj.score = json.score;
+        obj.error = json.error;
+    }
+
+    static fromJSON(json) {
+        const obj = new Risk();
+        Risk.applyJSON(json, obj);
+        return obj;
+    }
+
+    constructor(character=Risk.Character.Possibility) {
+        this.character = character;
+        this.LCStep = '';
+        this.outrunning = 0;
+        this.profit = 0;
+        this.probability = 0;
+        this.score = 0;
+        this.error = 0;
+    }
+}
+
 class Unit {
     static Type = {
         Process: {
