@@ -203,6 +203,12 @@ class Palette {
     }
 
     set data(dto) {
+        if (dto?.diagram) {
+            this.diagram.name.value = dto.diagram.name;
+            this.diagram.author.value = dto.diagram.author;
+            this.diagram.changed.value = dto.diagram.changed;
+        }
+
         if (this._state.process) {
             this.name.value = dto.name;
             this.note.value = dto.note;
