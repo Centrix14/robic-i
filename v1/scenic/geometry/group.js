@@ -4,14 +4,20 @@ class Group {
 
         this._selfElm = null;
         this._init = false;
-        this._id = null;
+        this._id = {
+            inner: null,
+            outer: null,
+        };
     }
  
     get isInitiated() { return this._init; }
 
     init(id, operator) {
         const group = operator.createGroup();
-        operator.applyTo(group, { id });
+        operator.applyTo(group, {
+            id: id.inner,
+        });
+
         this._selfElm = group;
         this._id = id;
 
@@ -339,7 +345,7 @@ class ProcessGroup extends NamedRectGroup {
     init(id, operator) {
         return super.init(id, operator, Defaults.process, {
             name: 'Процесс',
-            designation: `П ${id}`
+            designation: `П ${id.outer}`
         });
     }
 }
@@ -389,7 +395,7 @@ class ElementArrowGroup extends Group {
         if (!coords?.start || !coords?.end)
             return new Fail();
 
-        labels = labels ?? {name: 'Элемент', designation: `Э ${id}`};
+        labels = labels ?? {name: 'Элемент', designation: `Э ${id.outer}`};
 
         const Member = ElementArrowGroup.Member;
 
@@ -501,7 +507,7 @@ class ElementRectGroup extends NamedRectGroup {
     init(id, operator) {
         return super.init(id, operator, Defaults.element.rect, {
             name: 'Элемент',
-            designation: `Э ${id}`
+            designation: `Э ${id.outer}`
         });
     }
 }
