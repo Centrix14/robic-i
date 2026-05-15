@@ -601,7 +601,7 @@ class Application {
 
         this.canvas = new Canvas(canvas);
         this.diagram = new Diagram();
-        this.diagram.init(SVG, this.canvas);
+        this.diagram.init(SVG, this.canvas, Defaults.diagram);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
