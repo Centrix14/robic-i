@@ -360,10 +360,23 @@ class Diagram {
         }
 
         const corner = 40;
+
         supprocess.doer.setPosition(new Point(0, 0));
         supprocess.input.setPosition(new Point(0, corner));
         supprocess.output.setPosition(new Point(canv.width - corner, corner));
         supprocess.mean.setPosition(new Point(0, canv.height - corner));
+
+        supprocess.doer.setSize({width: canv.width, height: corner});
+        supprocess.mean.setSize({width: canv.width, height: corner});
+
+        supprocess.input.setSize({
+            width: corner,
+            height: canv.height - corner * 2,
+        });
+        supprocess.output.setSize({
+            width: corner,
+            height: canv.height - corner * 2,
+        });
     }
 
     get graph() { return this._graph; }
