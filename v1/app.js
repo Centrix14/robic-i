@@ -241,13 +241,17 @@ class Palette {
         this.element.owner.value = '';
     }
 
+    _applyDiagram() {
+        
+    }
+
     _applyAccordance() {
         const state = Palette.State;
 
         switch (this._state) {
 
         case state.Process:
-            this._app.applyData({
+            this._app.applyToSelection({
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
@@ -259,7 +263,7 @@ class Palette {
             break;
 
         case state.Element:
-            this._app.applyData({
+            this._app.applyToSelection({
                 name: this.name.value,
                 note: this.note.value,
                 activity: this.activity.checked,
@@ -775,7 +779,7 @@ class Application {
             this.buttons.newIncompatibilityClick(event);
     }
 
-    applyData(data) {
+    applyToSelection(data) {
         const selection = this.diagram.getSelection();
         selection.applyData(data);
     }
