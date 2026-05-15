@@ -429,7 +429,7 @@ class Diagram {
     }
 
     getSelection() {
-        if (this._selected === null)
+        if (isEmpty(this._selected))
             return null;
         else
             return this._graph.getNode(this._selected);

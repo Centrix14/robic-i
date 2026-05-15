@@ -207,7 +207,7 @@ class Spatia {
     snapToRectSide(rect, cursor) {
         const nearest = this.determineNearestRectSide(rect, cursor);
 
-        if (nearest === null)
+        if (isEmpty(nearest))
             return null;
 
         const start = nearest.line.start, end = nearest.line.end;
