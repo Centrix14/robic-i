@@ -352,7 +352,7 @@ class Diagram {
             const result = this.addProcess(
                 operator,
                 GeometryLayer.Process,
-                GeometryState.Main,
+                GeometryState.Hidden,
             );
 
             operator.appendChild(canv.element, result.get('element'));
