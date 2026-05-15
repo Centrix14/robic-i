@@ -599,8 +599,9 @@ class Application {
     constructor() {
         this.state = Application.State.Idle;
 
+        this.canvas = new Canvas(canvas);
         this.diagram = new Diagram();
-        //this.diagram.init(SVG);
+        this.diagram.init(SVG, this.canvas);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
