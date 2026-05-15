@@ -329,7 +329,15 @@ class Diagram {
     }
 
     constructor() {
-        this._index = { total: 0, process: 0, element: 0 };
+        this._index = {
+            total: 0,
+            process: {
+                user: 0,
+                system: 0,
+            },
+            element: 0
+        };
+
         this._graph = new Graph();
         this._spatia = new Spatia(5);
 
