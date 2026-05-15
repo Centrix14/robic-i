@@ -184,9 +184,16 @@ class ElementGeometrySet extends GeometrySet {
             const group = ElementArrowGroup.fromJSON(arrowJSON, obj._operator);
             obj._geometry.set(Geometry.Arrow, group);
         }
+        else {
+            obj._geometry.set(Geometry.Arrow, new ElementArrowGroup());
+        }
+
         if (rectJSON) {
             const group = ElementRectGroup.fromJSON(rectJSON, obj._operator);
             obj._geometry.set(Geometry.Rect, group);
+        }
+        else {
+            obj._geometry.set(Geometry.Rect, new ElementRectGroup());
         }
     }
 
