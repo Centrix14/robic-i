@@ -643,15 +643,28 @@ class Application {
                 if (!unit)
                     return;
                 if (unit._accordance.constructor.name === 'Process') {
-                    this.palette.state = Palette.State.Process;
-                    this.palette.data = unit.getData();
+                    this.palette.state = {
+                        buttons: true,
+                        process: true,
+                        element: false,
+                    };
+//                    this.palette.data = unit.getData();
                 }
                 else if (unit._accordance.constructor.name === 'Element') {
-                    this.palette.state = Palette.State.Element;
-                    this.palette.data = unit.getData();
+                    this.palette.state = {
+                        buttons: true,
+                        process: false,
+                        element: true,
+                    };
+//                    this.palette.data = unit.getData();
                 }
-                else
-                    this.palette.state = Palette.State.None;
+                else {
+                    this.palette.state = {
+                        buttons: false,
+                        process: false,
+                        element: false,
+                    };
+                }
             }
             else {
                 diagram.clearSelection();
