@@ -108,9 +108,11 @@ body {
 .menu-dropdown-item {
     margin: 10px;
     user-select: none;
+
+    font-weight: normal;
 }
 .menu-dropdown-item:hover {
-    background-color: var(--empty);
+    font-weight: bold;
 }
 
 .icon {
