@@ -65,6 +65,12 @@ class Palette {
         this.note = elm('#palette-note');
         this.activity = elm('#palette-activity');
 
+        this.diagram = {
+            name: elm('#palette-diagramName'),
+            author: elm('#palette-diagramAuthor'),
+            changed: elm('#palette-diagramChanged'),
+        };
+
         this.process = {
             objective: elm('#palette-processObjective'),
             owner: elm('#palette-processOwner'),
