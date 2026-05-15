@@ -799,6 +799,10 @@ class Application {
     }
 }
 
+function isEmpty(value) {
+    return value === null || value === undefined;
+}
+
 const app = new Application();
 
 app.setEvents({
