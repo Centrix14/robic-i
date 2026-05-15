@@ -774,9 +774,13 @@ class Application {
 
     open() {
         function drawDiagram(unit) {
+            let state = GeometryState.Main;
+            if (unit.isSystem)
+                state = GeometryState.Hidden;
+
             const element = unit._accordanceGS.combine(
                 GeometryLayer.Process,
-                GeometryState.Main
+                state,
             );
 
             SVG.appendChild(canvas, element);
