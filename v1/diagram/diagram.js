@@ -280,8 +280,10 @@ class Unit {
         }
     }
 
-    resize(delta) {
-        
+    setSize(newSize) {
+        this._accordanceGS.combine(GeometryLayer.Process, GeometryState.None, {
+            size: newSize,
+        });
     }
 
     setPosition(newPosition) {
