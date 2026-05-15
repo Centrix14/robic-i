@@ -125,17 +125,18 @@ class Palette {
     updateState() {
         const state = Palette.State;
 
-        function off(value, elms) {
+        function off(elms, value=true) {
             for (let elm of elms)
                 elm.disabled = value;
         }
+        function on(elms) { off(elms, false); }
 
         switch (this._state) {
 
         case state.None:
             this.clearData();
 
-            off(true, [
+            off([
                 this.name, this.note, this.activity,
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
@@ -145,24 +146,24 @@ class Palette {
             break;
 
         case state.Process:
-            off(false, [
+            on([
                 this.name, this.note, this.activity,
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
                 this.buttons.apply, this.buttons.reset, this.buttons.drop,
             ]);
-            off(true, [
+            off([
                 this.element.owner,
             ]);
             break;
 
         case state.Element:
-            off(false, [
+            on([
                 this.name, this.note, this.activity,
                 this.element.owner,
                 this.buttons.apply, this.buttons.reset, this.buttons.drop,
             ]);
-            off(true, [
+            off([
                 this.process.objective, this.process.owner,
                 this.process.environment, this.process.pov,
             ]);
