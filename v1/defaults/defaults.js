@@ -1,4 +1,10 @@
 const Defaults = {
+    diagram: {
+        supprocess: {
+            corner: 40,
+        },
+    },
+
     process: {
         shape: {
             spawn: {
