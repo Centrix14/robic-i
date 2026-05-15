@@ -296,6 +296,39 @@ class NamedRectGroup extends Group {
         this.shift(delta.x, delta.y, operator);
     }
 
+    setSize(newSize, operator, defaults) {
+        const Member = NamedRectGroup.Member;
+
+        const offset = defaults.designation.offset;
+
+        const shape = this._store.get(Member.Shape),
+              name = this._store.get(Member.Name),
+              designation = this._store.get(Member.Designation);
+
+        const shapeJSON = Rect.toJSON(shape[0]);
+        shapeJSON.width = newSize.width;
+        shapeJSON.height = newSize.height;
+
+        Rect.applyJSON(shapeJSON, shape[0]);
+        operator.applyTo(shape[1], shape[0].publish());
+
+        const nameJSON = Text.toJSON(name[0]);
+        nameJSON.start = new Point(
+            (newSize.width / 2) + shapeJSON.start.x,
+            (newSize.height / 2) + shapeJSON.start.y
+        );
+        Text.applyJSON(nameJSON, name[0]);
+        operator.applyTo(name[1], name[0].publish());
+
+        const designationJSON = Text.toJSON(designation[0]);
+        designationJSON.start = new Point(
+            shapeJSON.start.x + newSize.width + offset.x,
+            shapeJSON.start.y + newSize.height + offset.y,
+        );
+        Text.applyJSON(designationJSON, designation[0]);
+        operator.applyTo(designation[1], designation[0].publish());
+    }
+
     snapPoint(cursor, spatia) {
         const shape = this._store.get(NamedRectGroup.Member.Shape)[0];
         return spatia.snapToRectSide(shape, cursor);
