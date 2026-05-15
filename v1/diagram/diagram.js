@@ -160,6 +160,37 @@ class Property extends Accordance {
     }
 }
 
+class Deviation {
+    static toJSON(obj) {
+        return {
+            name: obj.name,
+            note: obj.note,
+            cause: obj.cause,
+            activity: obj.activity,
+        };
+    }
+
+    static applyJSON(json, obj) {
+        obj.name = name;
+        obj.note = note;
+        obj.cause = cause;
+        obj.activity = activity;
+    }
+
+    static fromJSON(json) {
+        const obj = new Deviation();
+        Deviation.applyJSON(json, obj);
+        return obj;
+    }
+
+    constructor(name='', note='', cause='', activity=true) {
+        this.name = name;
+        this.note = note;
+        this.cause = cause;
+        this.activity = activity;
+    }
+}
+
 class Unit {
     static Type = {
         Process: {
