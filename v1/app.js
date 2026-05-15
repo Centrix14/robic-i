@@ -847,6 +847,10 @@ class Application {
 
             const nodes = this.diagram.graph.nodes(NodeFields.Data);
             nodes.forEach(drawDiagram);
+
+            this.palette.data = {
+                diagram: json,
+            };
         });
     }
 
