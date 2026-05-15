@@ -435,7 +435,7 @@ class Diagram {
 
             const unit = this._graph.getNode(id);
             if (unit.type === Unit.Type.Process)
-                this._index.process--;
+                this._index.process.user--;
             else if (unit.type === Unit.Type.Element)
                 this._index.element--;
             this._index.total--;
@@ -483,11 +483,14 @@ class Diagram {
         return gs.snapPoint(point, this._spatia);
     }
 
-    addProcess(operator, layer, state) {
+    addProcess(operator, layer, state, user=true) {
         const unit = new Unit(Unit.Type.Process, operator, '', '');
         const element = unit._accordanceGS.combine(layer, state, {
-            id: this._index.process++
+            id: this._index.process.user
         });
+
+        if (user)
+            this._index.process.user++;
 
         this._graph.addNode(this._index.total, unit);
 
