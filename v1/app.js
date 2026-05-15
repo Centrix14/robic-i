@@ -61,14 +61,16 @@ class Palette {
 
         this._app = app;
 
-        this.name = elm('#palette-accordanceName');
-        this.note = elm('#palette-accordanceNote');
-        this.activity = elm('#palette-accordanceActivity');
-
         this.diagram = {
             name: elm('#palette-diagramName'),
             author: elm('#palette-diagramAuthor'),
             changed: elm('#palette-diagramChanged'),
+        };
+
+        this.accordance = {
+            name: elm('#palette-accordanceName'),
+            note: elm('#palette-accordanceNote'),
+            activity: elm('#palette-accordanceActivity'),
         };
 
         this.process = {
@@ -146,7 +148,7 @@ class Palette {
         ]);
 
         turn(state.process || state.element, [
-            this.name, this.note, this.activity,
+            this.accordance.name, this.accordance.note, this.accordance.activity,
         ]);
 
         turn(state.process, [
@@ -210,9 +212,9 @@ class Palette {
         }
 
         if (this._state.process) {
-            this.name.value = dto.name;
-            this.note.value = dto.note;
-            this.activity.checked = dto.activity;
+            this.accordance.name.value = dto.name;
+            this.accordance.note.value = dto.note;
+            this.accordance.activity.checked = dto.activity;
 
             this.process.objective.value = dto.processObjective;
             this.process.owner.value = dto.processOwner;
@@ -220,17 +222,17 @@ class Palette {
             this.process.pov.value = dto.processPov;
         }
         else if (this._state.element) {
-            this.name.value = dto.name;
-            this.note.value = dto.note;
-            this.activity.checked = dto.activity;
+            this.accordance.name.value = dto.name;
+            this.accordance.note.value = dto.note;
+            this.accordance.activity.checked = dto.activity;
             this.element.owner.value = dto.elementOwner;
         }
     }
 
     clearData() {
-        this.name.value = '';
-        this.note.value = '';
-        this.activity.checked = false;
+        this.accordance.name.value = '';
+        this.accordance.note.value = '';
+        this.accordance.activity.checked = false;
 
         this.process.objective.value = '';
         this.process.owner.value = '';
@@ -254,9 +256,9 @@ class Palette {
         let data = {};
 
         if (this._state.process || this._state.element) {
-            data.name = this.name.value;
-            data.note = this.note.value;
-            data.activity = this.activity.value;
+            data.name = this.accordance.name.value;
+            data.note = this.accordance.note.value;
+            data.activity = this.accordance.activity.value;
         }
         if (this._state.process) {
             data.processObjective = this.process.objective.value;
