@@ -61,9 +61,9 @@ class Palette {
 
         this._app = app;
 
-        this.name = elm('#palette-name');
-        this.note = elm('#palette-note');
-        this.activity = elm('#palette-activity');
+        this.name = elm('#palette-accordanceName');
+        this.note = elm('#palette-accordanceNote');
+        this.activity = elm('#palette-accordanceActivity');
 
         this.diagram = {
             name: elm('#palette-diagramName'),
