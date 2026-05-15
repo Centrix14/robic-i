@@ -357,7 +357,7 @@ class Diagram {
         this._changed = null;
     }
 
-    init(operator, canv) {
+    init(operator, canv, defaults) {
         const supprocess = {
             input: null,
             output: null,
@@ -377,7 +377,7 @@ class Diagram {
             supprocess[process] = result.get('unit');
         }
 
-        const corner = 40;
+        const corner = defaults.supprocess.corner;
 
         supprocess.doer.setPosition(new Point(0, 0));
         supprocess.input.setPosition(new Point(0, corner));
