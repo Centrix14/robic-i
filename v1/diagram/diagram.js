@@ -171,10 +171,10 @@ class Deviation {
     }
 
     static applyJSON(json, obj) {
-        obj.name = name;
-        obj.note = note;
-        obj.cause = cause;
-        obj.activity = activity;
+        obj.name = json.name;
+        obj.note = json.note;
+        obj.cause = json.cause;
+        obj.activity = json.activity;
     }
 
     static fromJSON(json) {
@@ -188,6 +188,31 @@ class Deviation {
         this.note = note;
         this.cause = cause;
         this.activity = activity;
+    }
+}
+
+class PropertyDeviation extends Deviation {
+    static toJSON(obj) {
+        return {
+            actualValue: obj.actualValue,
+            value: obj.value,
+        };
+    }
+
+    static applyJSON(json, obj) {
+        obj.actualValue = json.actualValue;
+        obj.value = json.value;
+    }
+
+    static fromJSON(json) {
+        const obj = new PropertyDeviation();
+        PropertyDeviation.applyJSON(json, obj);
+        return obj;
+    }
+
+    constructor() {
+        this.actualValue = null;
+        this.value = 0;
     }
 }
 
