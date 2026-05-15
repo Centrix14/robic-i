@@ -295,15 +295,20 @@ class Unit {
     }
 
     static toJSON(obj) {
-        let accordance, gs;
+        let accordance, gs,
+            deviation;
 
         if (obj.type === Unit.Type.Process) {
             accordance = Process.toJSON(obj._accordance);
             gs = ProcessGeometrySet.toJSON(obj._accordanceGS);
+
+            deviation = Risk.toJSON(obj._deviation);
         }
         else if (obj.type === Unit.Type.Element) {
             accordance = Element.toJSON(obj._accordance);
             gs = ElementGeometrySet.toJSON(obj._accordanceGS);
+
+            deviation = Deviation.toJSON(obj._deviation);
         }
 
         return {
@@ -312,6 +317,8 @@ class Unit {
 
             accordance,
             accordanceGS: gs,
+
+            deviation,
         };
     }
 
@@ -319,11 +326,14 @@ class Unit {
         if (json.type === 'Process') {
             obj.type = Unit.Type.Process;
             obj.isSystem = json.isSystem;
+
             obj._accordance = Process.fromJSON(json.accordance);
             obj._accordanceGS = ProcessGeometrySet.fromJSON(
                 json.accordanceGS,
                 operator
             );
+
+            obj._deviation = Risk.fromJSON(json.deviation);
         }
         else if (json.type === 'Element') {
             obj.type = Unit.Type.Element;
@@ -333,6 +343,8 @@ class Unit {
                 json.accordanceGS,
                 operator
             );
+
+            obj._deviation = Deviation.fromJSON(json.deviation);
         }
     }
 
