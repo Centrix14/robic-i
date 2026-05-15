@@ -414,10 +414,12 @@ class Diagram {
     }
 
     select(id) {
+        const unit = this._graph.getNode(id);
+        if (unit.isSystem)
+            return null;
+
         this.clearSelection();
         this._selected = id;
-
-        const unit = this._graph.getNode(this._selected);
 
         const gs = unit._accordanceGS;
         gs.combine(GeometryLayer.Process, GeometryState.Selected);
