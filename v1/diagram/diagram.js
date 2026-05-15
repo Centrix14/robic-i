@@ -188,6 +188,8 @@ class Unit {
 
         return {
             type: obj.type.name,
+            isSystem: obj.isSystem,
+
             accordance,
             accordanceGS: gs,
         };
@@ -196,6 +198,7 @@ class Unit {
     static applyJSON(json, obj, operator) {
         if (json.type === 'Process') {
             obj.type = Unit.Type.Process;
+            obj.isSystem = json.isSystem;
             obj._accordance = Process.fromJSON(json.accordance);
             obj._accordanceGS = ProcessGeometrySet.fromJSON(
                 json.accordanceGS,
@@ -204,6 +207,7 @@ class Unit {
         }
         else if (json.type === 'Element') {
             obj.type = Unit.Type.Element;
+            obj.isSystem = json.isSystem;
             obj._accordance = Element.fromJSON(json.accordance);
             obj._accordanceGS = ElementGeometrySet.fromJSON(
                 json.accordanceGS,
