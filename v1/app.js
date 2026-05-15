@@ -127,11 +127,12 @@ class Palette {
     }
 
     updateState() {
-        function off(elms, value=true) {
+        const on = true, off = false;
+
+        function turn(value, elms) {
             for (let elm of elms)
-                elm.disabled = value;
+                elm.disabled = !value;
         }
-        function on(elms) { off(elms, false); }
 
         this.clearData();
         switch (this._state) {
