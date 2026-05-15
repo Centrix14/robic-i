@@ -779,6 +779,12 @@ class Application {
             this.buttons.newIncompatibilityClick(event);
     }
 
+    applyToDiagram(data) {
+        this.diagram._name = data.name;
+        this.diagram._author = data.author;
+        this.diagram._changed = data.changed;
+    }
+
     applyToSelection(data) {
         const selection = this.diagram.getSelection();
         selection.applyData(data);
