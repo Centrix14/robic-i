@@ -274,6 +274,22 @@ class Palette {
         this.process.pov.value = '';
 
         this.element.owner.value = '';
+
+        this.deviation.name.value = '';
+        this.deviation.note.value = '';
+        this.deviation.cause.value = '';
+        this.deviation.activity.checked = false;
+
+        this.propertyDeviation.actualValue.value = 'noValue';
+        this.propertyDeviation.scale.value = '';
+
+        this.risk.character.value = '';
+        this.risk.LCStep.value = '';
+        this.risk.outrunning.value = '';
+        this.risk.profit.value = '';
+        this.risk.score.value = '';
+        this.risk.probability.value = '';
+        this.risk.error.value = '';
     }
 
     _applyDiagram() {
