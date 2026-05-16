@@ -184,6 +184,21 @@ class Palette {
         turn(state.element, [
             this.element.owner,
         ]);
+
+        turn(state.deviation, [
+            this.deviation.name, this.deviation.note, this.deviation.cause,
+            this.deviation.activity,
+        ]);
+
+        turn(state.propertyDeviation, [
+            this.propertyDeviation.actualValue, this.propertyDeviation.scale,
+        ]);
+
+        turn(state.risk, [
+            this.risk.character, this.risk.LCStep,
+            this.risk.outrunning, this.risk.profit, this.risk.score,
+            this.risk.probability, this.risk.error,
+        ]);
     }
 
     get tab() { return this._tab; }
