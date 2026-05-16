@@ -70,7 +70,7 @@ function openIdf(callback) {
     input.click();
 }
 
-function saveIdf(contents) {
+function saveString(contents) {
     const blob = new Blob([contents], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
