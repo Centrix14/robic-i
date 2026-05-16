@@ -97,37 +97,23 @@ function buildProcessTree(process, doc, root) {
 
 function buildElementTree(element, doc, root) {
     const json = Element.toJSON(element);
-    const map = [
+    appendProps(doc, root, [
         ['owner', json.owner],
-    ];
-
-    for (let [prop, val] of map) {
-        const entry = doc.createElement('li');
-        entry.textContent = `${prop}: ${val}`;
-
-        root.appendChild(entry);
-    }
+    ]);
 }
 
 function buildDeviationTree(json, doc, root) {
-    const map = [
+    appendProps(doc, root, [
         ['name', json.name],
         ['note', json.note],
         ['cause', json.cause],
         ['activity', json.activity],
-    ];
-
-    for (let [prop, val] of map) {
-        const entry = doc.createElement('li');
-        entry.textContent = `${prop}: ${val}`;
-
-        root.appendChild(entry);
-    }
+    ]);
 }
 
 function buildRiskTree(risk, doc, root) {
     const json = Risk.toJSON(risk);
-    const map = [
+    appendProps(doc, root, [
         ['character', json.character],
         ['LCStep', json.LCStep],
         ['outrunning', json.outrunning],
@@ -135,14 +121,7 @@ function buildRiskTree(risk, doc, root) {
         ['probability', json.probability],
         ['score', json.score],
         ['error', json.error],
-    ];
-
-    for (let [prop, val] of map) {
-        const entry = doc.createElement('li');
-        entry.textContent = `${prop}: ${val}`;
-
-        root.appendChild(entry);
-    }
+    ]);
 }
 
 function buildDiagramTree(units, doc) {
