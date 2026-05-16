@@ -968,7 +968,7 @@ class Application {
 
     save() {
         const contents = JSON.stringify(Diagram.toJSON(this.diagram));
-        saveString(contents);
+        saveString(contents, 'application/json', 'diagram.idf');
     }
 }
 

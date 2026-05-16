@@ -70,13 +70,13 @@ function openIdf(callback) {
     input.click();
 }
 
-function saveString(contents) {
-    const blob = new Blob([contents], { type: 'application/json' });
+function saveString(contents, type, name) {
+    const blob = new Blob([contents], { type });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'diagram.idf';
+    a.download = name;
     a.click();
 
     URL.revokeObjectURL(url);
