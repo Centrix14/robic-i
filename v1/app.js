@@ -313,6 +313,10 @@ class Palette {
         this._app.applyToSelection(data);
     }
 
+    _applyDeviation() {
+        console.log('dev apply');
+    }
+
     applyCb(event) {
         const tab = Palette.Tab;
 
@@ -327,6 +331,7 @@ class Palette {
             break;
 
         case tab.Deviation:
+            this._applyDeviation();
             break;
         }
     }
