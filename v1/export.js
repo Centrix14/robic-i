@@ -157,7 +157,12 @@ function buildDiagramTree(units, doc) {
 
             if (deviationJSON.name !== '') {
                 const deviationEntry = doc.createElement('li');
-                deviationEntry.textContent = deviationJSON.name;
+
+                const deviationDetails = doc.createElement('details');
+                deviationDetails.open = '';
+
+                const deviationSummary = doc.createElement('summary');
+                deviationSummary.textContent = deviationJSON.name;
 
                 const deviationProps = doc.createElement('ul');
 
@@ -166,7 +171,9 @@ function buildDiagramTree(units, doc) {
                 if (unit.type === Unit.Type.Process)
                     buildRiskTree(deviation, doc, deviationProps);
 
-                deviationEntry.appendChild(deviationProps);
+                deviationDetails.appendChild(deviationProps);
+                deviationDetails.appendChild(deviationSummary);
+                deviationEntry.appendChild(deviationDetails);
                 accordanceProps.appendChild(deviationEntry);
             }
 
