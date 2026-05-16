@@ -411,15 +411,13 @@ class Unit {
             gs.combine(GeometryLayer.Process, GeometryState.None, {
                 name: data?.accordance.name
             });
-            console.log(accordance);
         }
         else if (this.type === Unit.Type.Element) {
-            accordance.owner = data.elementOwner;
+            accordance.owner = data.element.owner;
 
             gs.combine(GeometryLayer.Process, GeometryState.None, {
-                name: data.name
+                name: data?.accordance.name
             });
-            console.log(accordance);
         }
     }
 

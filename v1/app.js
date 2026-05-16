@@ -311,7 +311,9 @@ class Palette {
             };
         }
         if (this._state.element) {
-            data.elementOwner = this.element.owner.value;
+            data.element = {
+                owner: this.element.owner.value,
+            };
         }
 
         this._app.applyToSelection(data);
