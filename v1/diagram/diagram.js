@@ -709,6 +709,8 @@ class Diagram {
             coords
         });
 
+        this._index.element++;
+
         this._graph.addNode(this._index.total, unit);
 
         return new Success([['id', this._index.total++],
