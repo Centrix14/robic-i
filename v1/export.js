@@ -146,6 +146,20 @@ function makeAccordanceBadge(type, doc) {
     }
 }
 
+function makeDeviationBadge(type, doc) {
+    const badge = doc.createElement('span');
+    badge.className = 'deviation-badge';
+
+    if (type === Unit.Type.Process) {
+        badge.textContent = 'риск';
+        return badge;
+    }
+    else if (type === Unit.Type.Element) {
+        badge.textContent = 'отклонение';
+        return badge;
+    }
+}
+
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
     root.className = 'tree';
