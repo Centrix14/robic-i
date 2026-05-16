@@ -991,6 +991,14 @@ class Application {
 
         const tab = window.open();
         buildDiagramTree(units, tab.document);
+
+        const doc = tab.document;
+
+        const link = doc.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/tree.css';
+
+        doc.head.appendChild(link);
     }
 }
 
