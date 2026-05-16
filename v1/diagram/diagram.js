@@ -548,11 +548,15 @@ class Diagram {
             mean: null,
         };
 
+        let state = GeometryState.Hidden;
+        if (defaults.supprocess.show)
+            state = GeometryState.Main;
+
         for (let process in supprocess) {
             const result = this.addProcess(
                 operator,
                 GeometryLayer.Process,
-                GeometryState.Hidden,
+                state,
                 true, // this is a system process
             );
 
