@@ -6,6 +6,19 @@ html {
     font-family: sans;
 }
 
+.credentials-table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.credentials-table td {
+    border: 1px solid black;
+}
+
+.credentials-table-data {
+    margin: 4;
+}
+
 .tree {
     --spacing : 1.5rem;
     --line-height: 1.5;
