@@ -44,12 +44,6 @@ const SVG = {
 }
 
 class Palette {
-    static State = {
-        None: 'none',
-        Process: 'process',
-        Element: 'element'
-    }
-
     static Tab = {
         Diagram: 'palette-diagramTab-radio',
         Accordance: 'palette-accordanceTab-radio',
