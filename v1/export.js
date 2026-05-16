@@ -69,6 +69,51 @@ function exportRisksToCSV(units) {
     return table;
 }
 
+function buildProcessTree(process, doc) {
+    const root = doc.createElement('ul');
+
+    const json = Process.toJSON(process);
+    const map = [
+        ['objective', json.objective],
+        ['owner', json.owner],
+        ['environment', json.environment],
+        ['pov', json.pov],
+    ];
+
+    for (let [prop, val] of map) {
+        const entry = doc.createElement('li');
+        entry.textContent = `${prop}: ${val}`;
+
+        root.appendChild(entry);
+    }
+
+    return root;
+}
+
+function buildDiagramTree(units, doc) {
+    const root = doc.createElement('ul');
+
+    for (let unit of units) {
+        if (unit.isSystem)
+            continue;
+        
+        const accordance = unit._accordance;
+
+        const accordanceJSON = Accordance.toJSON(accordance);
+        if (accordanceJSON.name !== '') {
+            const title = doc.createElement('li');
+            title.textContent = accordanceJSON.name;
+
+            if (unit.type === Unit.Type.Process)
+                title.appendChild(buildProcessTree(accordance, doc));
+
+            root.appendChild(title);
+        }
+    }
+
+    doc.body.appendChild(root);
+}
+
 function openIdf(callback) {
     const input = document.createElement('input');
 
