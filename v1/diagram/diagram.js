@@ -396,9 +396,11 @@ class Unit {
     applyData(data) {
         const accordance = this._accordance, gs = this._accordanceGS;
 
-        accordance.name = data.name;
-        accordance.note = data.note;
-        accordance.activity = data.activity;
+        if (data?.accordance) {
+            accordance.name = data.accordance.name;
+            accordance.note = data.accordance.note;
+            accordance.activity = data.accordance.activity;
+        }
 
         if (this.type === Unit.Type.Process) {
             accordance.objective = data.processObjective;
@@ -407,7 +409,7 @@ class Unit {
             accordance.pov = data.processPov;
 
             gs.combine(GeometryLayer.Process, GeometryState.None, {
-                name: data.name
+                name: data?.accordance.name
             });
             console.log(accordance);
         }

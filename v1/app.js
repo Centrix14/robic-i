@@ -296,9 +296,11 @@ class Palette {
         let data = {};
 
         if (this._state.process || this._state.element) {
-            data.name = this.accordance.name.value;
-            data.note = this.accordance.note.value;
-            data.activity = this.accordance.activity.checked;
+            data.accordance = {
+                name: this.accordance.name.value,
+                note: this.accordance.note.value,
+                activity: this.accordance.activity.checked,
+            };
         }
         if (this._state.process) {
             data.processObjective = this.process.objective.value;
