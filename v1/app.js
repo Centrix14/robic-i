@@ -84,6 +84,28 @@ class Palette {
             owner: elm('#palette-elementOwner'),
         };
 
+        this.deviation = {
+            name: elm('#palette-deviationName'),
+            note: elm('#palette-deviationNote'),
+            cause: elm('#palette-deviationCause'),
+            activity: elm('#palette-deviationActivity'),
+        };
+
+        this.propertyDeviation = {
+            actualValue: elm('#palette-propertyDeviationActualValue'),
+            scale: elm('#palette-propertyDeviationValue'),
+        };
+
+        this.risk = {
+            character: elm('#palette-riskCharacter'),
+            LCStep: elm('#palette-riskLCStep'),
+            outrunning: elm('#palette-riskOutrunning'),
+            profit: elm('#palette-riskProfit'),
+            score: elm('#palette-riskScore'),
+            probability: elm('#palette-riskProbability'),
+            error: elm('#palette-riskError'),
+        };
+
         this.buttons = {
             apply: elm('#palette-applyBtn'),
             reset: elm('#palette-resetBtn'),
