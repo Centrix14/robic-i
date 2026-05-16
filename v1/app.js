@@ -973,7 +973,12 @@ class Application {
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(exportProcessesToCSV(units), 'text/csv', 'table.csv');
+        saveString(exportProcessesToCSV(units), 'text/csv', 'process.csv');
+    }
+
+    exportDeviationCSV() {
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        saveString(exportDeviationsToCSV(units), 'text/csv', 'deviation.csv');
     }
 }
 
@@ -1002,6 +1007,7 @@ app.setEvents({
 
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
         ['#exportProcessCSVBtn', app, app.exportProcessCSV],
+        ['#exportDeviationCSVBtn', app, app.exportDeviationCSV],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
