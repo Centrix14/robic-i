@@ -188,10 +188,17 @@ function appendDiagramCredentials(diagram, doc) {
         },
     };
 
-    cols.author.name.textContent = 'Автор';
-    cols.author.value.textContent = diagram.author;
-    cols.changed.name.textContent = 'Ревизия от';
-    cols.changed.value.textContent = diagram.changed;
+    function content(elm, text) {
+        const tag = doc.createElement('span');
+        tag.className = 'credentials-table-data';
+        tag.textContent = text;
+        elm.appendChild(tag);
+    }
+
+    content(cols.author.name, 'Автор');
+    content(cols.author.value, diagram.author);
+    content(cols.changed.name, 'Ревизия от');
+    content(cols.changed.value, diagram.changed);
 
     rows.author.appendChild(cols.author.name);
     rows.author.appendChild(cols.author.value);
