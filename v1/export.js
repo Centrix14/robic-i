@@ -132,7 +132,7 @@ function makeSummaryTitle(text, doc) {
     return title;
 }
 
-function makeAccordanceBadge(type, accordance, doc) {
+function makeAccordanceBadge(type, doc) {
     const badge = doc.createElement('span');
     badge.className = 'accordance-badge';
 
@@ -140,7 +140,7 @@ function makeAccordanceBadge(type, accordance, doc) {
         badge.textContent = 'процесс';
         return badge;
     }
-    else (type === Unit.Type.Element) {
+    else if (type === Unit.Type.Element) {
         badge.textContent = 'элемент';
         return badge;
     }
@@ -164,13 +164,19 @@ function buildDiagramTree(units, doc) {
             accordanceDetails.open = '';
 
             const accordanceSummary = doc.createElement('summary');
-            accordanceSummary.textContent = accordanceJSON.name;
 
             const accordanceProps = doc.createElement('ul');
 
             buildAccordanceTree(accordanceJSON, doc, accordanceProps);
 
             if (unit.type === Unit.Type.Process) {
+                accordanceSummary.appendChild(makeAccordanceBadge(
+                    Unit.Type.Process, doc,
+                ));
+                accordanceSummary.appendChild(makeSummaryTitle(
+                    accordanceJSON.name, doc,
+                ))
+
                 buildProcessTree(accordance, doc, accordanceProps);
             }
             else if (unit.type === Unit.Type.Element)
