@@ -112,7 +112,7 @@ body {
     font-weight: normal;
 }
 .menu-dropdown-item:hover {
-    font-weight: bold;
+    color: blue;
 }
 
 .icon {
