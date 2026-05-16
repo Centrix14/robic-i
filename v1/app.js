@@ -993,8 +993,6 @@ class Application {
         if (!tab)
             return;
 
-        buildDiagramTree(units, tab.document);
-
         const doc = tab.document;
 
         const link = doc.createElement('link');
@@ -1002,6 +1000,11 @@ class Application {
         link.href = 'css/tree.css';
 
         doc.head.appendChild(link);
+
+        const diagramJSON = Diagram.toJSON(this.diagram);
+        appendDiagramHeading(diagramJSON.name, doc);
+
+        buildDiagramTree(units, tab.document);
     }
 }
 
