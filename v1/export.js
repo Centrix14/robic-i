@@ -125,6 +125,7 @@ function buildRiskTree(risk, doc, root) {
 
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
+    root.className = 'tree';
 
     for (let unit of units) {
         if (unit.isSystem)
@@ -135,7 +136,12 @@ function buildDiagramTree(units, doc) {
         const accordanceJSON = Accordance.toJSON(accordance);
         if (accordanceJSON.name !== '') {
             const accordanceEntry = doc.createElement('li');
-            accordanceEntry.textContent = accordanceJSON.name;
+
+            const accordanceDetails = doc.createElement('details');
+            accordanceDetails.open = '';
+
+            const accordanceSummary = doc.createElement('summary');
+            accordanceSummary.textContent = accordanceJSON.name;
 
             const accordanceProps = doc.createElement('ul');
 
@@ -164,7 +170,9 @@ function buildDiagramTree(units, doc) {
                 accordanceProps.appendChild(deviationEntry);
             }
 
-            accordanceEntry.appendChild(accordanceProps);
+            accordanceDetails.appendChild(accordanceProps);
+            accordanceDetails.appendChild(accordanceSummary);
+            accordanceEntry.appendChild(accordanceDetails);
             root.appendChild(accordanceEntry);
         }
     }
