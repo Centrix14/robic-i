@@ -374,6 +374,13 @@ class Unit {
             activity: this._accordance.activity,
         };
 
+        const deviation = {
+            name: this._deviation.name,
+            note: this._deviation.note,
+            cause: this._deviation.cause,
+            activity: this._deviation.activity,
+        };
+
         if (this.type === Unit.Type.Process) {
             return {
                 accordance,
@@ -383,6 +390,17 @@ class Unit {
                     environment: this._accordance.environment,
                     pov: this._accordance.pov,
                 },
+
+                deviation,
+                risk: {
+                    character: this._deviation.character,
+                    LCStep: this._deviation.LCStep,
+                    outrunning: this._deviation.outrunning,
+                    profit: this._deviation.profit,
+                    score: this._deviation.score,
+                    probability: this._deviation.probability,
+                    error: this._deviation.error,
+                },
             };
         }
         else if (this.type === Unit.Type.Element) {
@@ -391,6 +409,7 @@ class Unit {
                 element: {
                     owner: this._accordance.owner,
                 },
+                deviation,
             };
         }
     }
