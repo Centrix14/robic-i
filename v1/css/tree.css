@@ -1,13 +1,22 @@
 /* source: https://xhtml.ru/2022/html/tree-views/ */
 
+html {
+    background-color: white;
+
+    font-family: sans;
+}
+
 .tree {
     --spacing : 1.5rem;
+    --line-height: 1.5;
     --radius  : 10px;
 }
 
 .tree li {
     display: block;
     position: relative;
+    line-height: var(--line-height);
+
     padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
 
