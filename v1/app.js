@@ -98,6 +98,9 @@ class Palette {
             diagram: false,
             process: false,
             element: false,
+            deviation: false,
+            propertyDeviation: false,
+            risk: false,
         };
         this.updateState();
 
