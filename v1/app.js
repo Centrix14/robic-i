@@ -93,7 +93,7 @@ class Palette {
 
         this.propertyDeviation = {
             actualValue: elm('#palette-propertyDeviationActualValue'),
-            scale: elm('#palette-propertyDeviationValue'),
+            scale: elm('#palette-propertyDeviationScale'),
         };
 
         this.risk = {
