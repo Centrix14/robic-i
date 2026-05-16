@@ -1003,6 +1003,7 @@ class Application {
 
         const diagramJSON = Diagram.toJSON(this.diagram);
         appendDiagramHeading(diagramJSON.name, doc);
+        appendDiagramCredentials(diagramJSON, doc);
 
         buildDiagramTree(units, tab.document);
     }
