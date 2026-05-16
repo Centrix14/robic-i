@@ -114,6 +114,23 @@ function buildElementTree(element, doc, root) {
     }
 }
 
+function buildDeviationTree(deviation, doc, root) {
+    const json = Deviation.toJSON(deviation);
+    const map = [
+        ['name', json.name],
+        ['note', json.note],
+        ['cause', json.cause],
+        ['activity', json.activity],
+    ];
+
+    for (let [prop, val] of map) {
+        const entry = doc.createElement('li');
+        entry.textContent = `${prop}: ${val}`;
+
+        root.appendChild(entry);
+    }
+}
+
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
 
@@ -125,20 +142,35 @@ function buildDiagramTree(units, doc) {
 
         const accordanceJSON = Accordance.toJSON(accordance);
         if (accordanceJSON.name !== '') {
-            const title = doc.createElement('li');
-            title.textContent = accordanceJSON.name;
+            const accordanceEntry = doc.createElement('li');
+            accordanceEntry.textContent = accordanceJSON.name;
 
-            const properties = doc.createElement('ul');
+            const accordanceProps = doc.createElement('ul');
 
-            buildAccordanceTree(accordanceJSON, doc, properties);
+            buildAccordanceTree(accordanceJSON, doc, accordanceProps);
 
             if (unit.type === Unit.Type.Process)
-                buildProcessTree(accordance, doc, properties);
+                buildProcessTree(accordance, doc, accordanceProps);
             else if (unit.type === Unit.Type.Element)
-                buildElementTree(accordance, doc, properties);
+                buildElementTree(accordance, doc, accordanceProps);
 
-            title.appendChild(properties);
-            root.appendChild(title);
+            const deviation = unit._deviation,
+                  deviationJSON = Deviation.toJSON(deviation);
+
+            if (deviationJSON.name !== '') {
+                const deviationEntry = doc.createElement('li');
+                deviationEntry.textContent = deviationJSON.name;
+
+                const deviationProps = doc.createElement('ul');
+
+                buildDeviationTree(deviationJSON, doc, deviationProps);
+
+                deviationEntry.appendChild(deviationProps);
+                accordanceProps.appendChild(deviationEntry);
+            }
+
+            accordanceEntry.appendChild(accordanceProps);
+            root.appendChild(accordanceEntry);
         }
     }
 
