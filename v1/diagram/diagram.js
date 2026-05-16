@@ -227,6 +227,7 @@ class Risk extends Deviation {
     static Character = {
         Treat: 'treat',
         Possibility: 'possibility',
+        noValue: 'noValue',
     }
 
     static toJSON(obj) {
