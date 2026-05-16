@@ -80,47 +80,46 @@ function appendProps(doc, target, props) {
 
 function buildAccordanceTree(json, doc, root) {
     appendProps(doc, root, [
-        ['note', json.note],
-        ['activity', json.activity],
+        ['Заметка', json.note],
+        ['Активная', json.activity],
     ]);
 }
 
 function buildProcessTree(process, doc, root) {
     const json = Process.toJSON(process);
     appendProps(doc, root, [
-        ['objective', json.objective],
-        ['owner', json.owner],
-        ['environment', json.environment],
-        ['pov', json.pov],
+        ['Цель', json.objective],
+        ['Владелец', json.owner],
+        ['Среда', json.environment],
+        ['Точка зрения', json.pov],
     ]);
 }
 
 function buildElementTree(element, doc, root) {
     const json = Element.toJSON(element);
     appendProps(doc, root, [
-        ['owner', json.owner],
+        ['Владелец', json.owner],
     ]);
 }
 
 function buildDeviationTree(json, doc, root) {
     appendProps(doc, root, [
-        ['name', json.name],
-        ['note', json.note],
-        ['cause', json.cause],
-        ['activity', json.activity],
+        ['Заметка', json.note],
+        ['Причина', json.cause],
+        ['Активная', json.activity],
     ]);
 }
 
 function buildRiskTree(risk, doc, root) {
     const json = Risk.toJSON(risk);
     appendProps(doc, root, [
-        ['character', json.character],
-        ['LCStep', json.LCStep],
-        ['outrunning', json.outrunning],
-        ['profit', json.profit],
-        ['probability', json.probability],
-        ['score', json.score],
-        ['error', json.error],
+        ['Характер', json.character],
+        ['Этап ЖЦ', json.LCStep],
+        ['Опережение', json.outrunning],
+        ['Прибыль', json.profit],
+        ['Оценка', json.score],
+        ['Вероятность', json.probability],
+        ['Ошибка', json.error],
     ]);
 }
 
