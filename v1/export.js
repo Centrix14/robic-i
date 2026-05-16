@@ -114,13 +114,32 @@ function buildElementTree(element, doc, root) {
     }
 }
 
-function buildDeviationTree(deviation, doc, root) {
-    const json = Deviation.toJSON(deviation);
+function buildDeviationTree(json, doc, root) {
     const map = [
         ['name', json.name],
         ['note', json.note],
         ['cause', json.cause],
         ['activity', json.activity],
+    ];
+
+    for (let [prop, val] of map) {
+        const entry = doc.createElement('li');
+        entry.textContent = `${prop}: ${val}`;
+
+        root.appendChild(entry);
+    }
+}
+
+function buildRiskTree(risk, doc, root) {
+    const json = Risk.toJSON(risk);
+    const map = [
+        ['character', json.character],
+        ['LCStep', json.LCStep],
+        ['outrunning', json.outrunning],
+        ['profit', json.profit],
+        ['probability', json.probability],
+        ['score', json.score],
+        ['error', json.error],
     ];
 
     for (let [prop, val] of map) {
@@ -164,6 +183,9 @@ function buildDiagramTree(units, doc) {
                 const deviationProps = doc.createElement('ul');
 
                 buildDeviationTree(deviationJSON, doc, deviationProps);
+
+                if (unit.type === Unit.Type.Process)
+                    buildRiskTree(deviation, doc, deviationProps);
 
                 deviationEntry.appendChild(deviationProps);
                 accordanceProps.appendChild(deviationEntry);
