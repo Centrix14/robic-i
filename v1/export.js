@@ -43,6 +43,19 @@ function exportProcessesToCSV(units) {
     return table;
 }
 
+function exportDeviationsToCSV(units) {
+    let table = 'name,note,cause,activity\n';
+
+    for (let unit of units) {
+        if (!unit?.isSystem) {
+            const j = Deviation.toJSON(unit._deviation);
+            table += `${j.name},${j.note},${j.cause},${j.activity}\n`;
+        }
+    }
+
+    return table;
+}
+
 function openIdf(callback) {
     const input = document.createElement('input');
 
