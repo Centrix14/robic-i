@@ -394,7 +394,8 @@ class Unit {
     }
 
     applyData(data) {
-        const accordance = this._accordance, gs = this._accordanceGS;
+        const accordance = this._accordance, gs = this._accordanceGS,
+              deviation = this._deviation;
 
         if (data?.accordance) {
             accordance.name = data.accordance.name;
@@ -402,22 +403,46 @@ class Unit {
             accordance.activity = data.accordance.activity;
         }
 
-        if (this.type === Unit.Type.Process) {
-            accordance.objective = data.process.objective;
-            accordance.owner = data.process.owner;
-            accordance.environment = data.process.environment;
-            accordance.pov = data.process.pov;
+        if (data?.deviation) {
+            deviation.name = data.deviation.name;
+            deviation.note = data.deviation.note;
+            deviation.cause = data.deviation.cause;
+            deviation.activity = data.deviation.activity;
+        }
 
-            gs.combine(GeometryLayer.Process, GeometryState.None, {
-                name: data?.accordance.name
-            });
+        if (this.type === Unit.Type.Process) {
+            if (data?.process) {
+                accordance.objective = data.process.objective;
+                accordance.owner = data.process.owner;
+                accordance.environment = data.process.environment;
+                accordance.pov = data.process.pov;
+            }
+
+            if (data?.risk) {
+                deviation.character = data.risk.character;
+                deviation.LCStep = data.risk.LCStep;
+                deviation.outrunning = data.risk.outrunning;
+                deviation.profit = data.risk.profit;
+                deviation.score = data.risk.score;
+                deviation.probability = data.risk.probability;
+                deviation.error = data.risk.error;
+            }
+
+            if (data?.accordance) {
+                gs.combine(GeometryLayer.Process, GeometryState.None, {
+                    name: data.accordance.name
+                });
+            }
         }
         else if (this.type === Unit.Type.Element) {
-            accordance.owner = data.element.owner;
+            if (data?.element)
+                accordance.owner = data.element.owner;
 
-            gs.combine(GeometryLayer.Process, GeometryState.None, {
-                name: data?.accordance.name
-            });
+            if (data?.accordance) {
+                gs.combine(GeometryLayer.Process, GeometryState.None, {
+                    name: data.accordance.name
+                });
+            }
         }
     }
 
