@@ -30,6 +30,28 @@ function exportToPng(svg) {
     image.src = vectorURL;
 }
 
+function exportProcessesToCSV(units) {
+    let table = '';
+
+    for (let unit of units) {
+        if (unit.type === Unit.Type.Process && !unit?.isSystem) {
+            const json = Process.toJSON(unit._accordance);
+
+            let row = '';
+            for (let prop in json) {
+                if (typeof json[prop] === 'string')
+                    row += `\"${json[prop]}\",`;
+                else
+                    row += `${json[prop]},`;
+            }
+
+            table += row.slice(0, row.length-1) + '\n';
+        }
+    }
+
+    return table;
+}
+
 function openIdf(callback) {
     const input = document.createElement('input');
 
