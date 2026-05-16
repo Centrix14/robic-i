@@ -303,10 +303,12 @@ class Palette {
             };
         }
         if (this._state.process) {
-            data.processObjective = this.process.objective.value;
-            data.processOwner = this.process.owner.value;
-            data.processEnvironment = this.process.environment.value;
-            data.processPov = this.process.pov.value;
+            data.process = {
+                objective: this.process.objective.value,
+                owner: this.process.owner.value,
+                environment: this.process.environment.value,
+                pov: this.process.pov.value,
+            };
         }
         if (this._state.element) {
             data.elementOwner = this.element.owner.value;

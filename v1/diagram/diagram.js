@@ -403,10 +403,10 @@ class Unit {
         }
 
         if (this.type === Unit.Type.Process) {
-            accordance.objective = data.processObjective;
-            accordance.owner = data.processOwner;
-            accordance.environment = data.processEnvironment;
-            accordance.pov = data.processPov;
+            accordance.objective = data.process.objective;
+            accordance.owner = data.process.owner;
+            accordance.environment = data.process.environment;
+            accordance.pov = data.process.pov;
 
             gs.combine(GeometryLayer.Process, GeometryState.None, {
                 name: data?.accordance.name
