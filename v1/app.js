@@ -990,6 +990,9 @@ class Application {
         const units = this.diagram.graph.nodes(NodeFields.Data);
 
         const tab = window.open();
+        if (!tab)
+            return;
+
         buildDiagramTree(units, tab.document);
 
         const doc = tab.document;
