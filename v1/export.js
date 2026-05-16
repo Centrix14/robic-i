@@ -206,14 +206,29 @@ function buildDiagramTree(units, doc) {
                 deviationDetails.open = '';
 
                 const deviationSummary = doc.createElement('summary');
-                deviationSummary.textContent = deviationJSON.name;
 
                 const deviationProps = doc.createElement('ul');
 
                 buildDeviationTree(deviationJSON, doc, deviationProps);
 
-                if (unit.type === Unit.Type.Process)
+                if (unit.type === Unit.Type.Process) {
+                    deviationSummary.appendChild(
+                        makeDeviationBadge(Unit.Type.Process, doc)
+                    );
+                    deviationSummary.appendChild(
+                        makeSummaryTitle(deviationJSON.name, doc)
+                    );
+
                     buildRiskTree(deviation, doc, deviationProps);
+                }
+                else if (unit.type === Unit.Type.Element) {
+                    deviationSummary.appendChild(
+                        makeDeviationBadge(Unit.Type.Process, doc)
+                    );
+                    deviationSummary.appendChild(
+                        makeSummaryTitle(deviationJSON.name, doc)
+                    );
+                }
 
                 deviationDetails.appendChild(deviationProps);
                 deviationDetails.appendChild(deviationSummary);
