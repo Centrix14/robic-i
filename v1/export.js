@@ -123,9 +123,17 @@ function buildRiskTree(risk, doc, root) {
     ]);
 }
 
+function makeSummaryTitle(text, doc) {
+    const title = doc.createElement('span');
+
+    title.className = 'summary-title';
+    title.textContent = text;
+
+    return title;
+}
+
 function makeAccordanceBadge(type, accordance, doc) {
     const badge = doc.createElement('span');
-
     badge.className = 'accordance-badge';
 
     if (type === Unit.Type.Process) {
