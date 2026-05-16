@@ -167,6 +167,43 @@ function appendDiagramHeading(text, doc) {
     doc.body.appendChild(heading);
 }
 
+function appendDiagramCredentials(diagram, doc) {
+    const table = doc.createElement('table');
+    table.className = 'credentials-table';
+
+    const rows = {
+        author: doc.createElement('tr'),
+        changed: doc.createElement('tr'),
+    };
+
+    const cols = {
+        author: {
+            name: doc.createElement('td'),
+            value: doc.createElement('td'),
+        },
+
+        changed: {
+            name: doc.createElement('td'),
+            value: doc.createElement('td'),
+        },
+    };
+
+    cols.author.name.textContent = 'Автор';
+    cols.author.value.textContent = diagram.author;
+    cols.changed.name.textContent = 'Ревизия от';
+    cols.changed.value.textContent = diagram.changed;
+
+    rows.author.appendChild(cols.author.name);
+    rows.author.appendChild(cols.author.value);
+    rows.changed.appendChild(cols.changed.name);
+    rows.changed.appendChild(cols.changed.value);
+
+    table.appendChild(rows.author);
+    table.appendChild(rows.changed);
+
+    doc.body.appendChild(table);
+}
+
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
     root.className = 'tree';
