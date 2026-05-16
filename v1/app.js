@@ -251,6 +251,13 @@ class Palette {
                 this.accordance.note.value = dto.accordance.note;
                 this.accordance.activity.checked = dto.accordance.activity;
             }
+
+            if (dto?.deviation) {
+                this.deviation.name.value = dto.deviation.name;
+                this.deviation.note.value = dto.deviation.note;
+                this.deviation.cause.value = dto.deviation.cause;
+                this.deviation.activity.checked = dto.deviation.activity;
+            }
         }
         if (this._state.process) {
             if (dto?.process) {
@@ -258,6 +265,16 @@ class Palette {
                 this.process.owner.value = dto.process.owner;
                 this.process.environment.value = dto.process.environment;
                 this.process.pov.value = dto.process.pov;
+            }
+
+            if (dto?.risk) {
+                this.risk.character.value = dto.risk.character;
+                this.risk.LCStep.value = dto.risk.LCStep;
+                this.risk.outrunning.value = dto.risk.outrunning;
+                this.risk.profit.value = dto.risk.profit;
+                this.risk.score.value = dto.risk.score;
+                this.risk.probability.value = dto.risk.probability;
+                this.risk.error.value = dto.risk.error;
             }
         }
         else if (this._state.element) {
