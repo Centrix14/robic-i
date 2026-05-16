@@ -245,21 +245,19 @@ class Palette {
             this.diagram.changed.value = dto.diagram.changed;
         }
 
+        if (this._state.process || this._state.element) {
+            this.accordance.name.value = dto.accordance.name;
+            this.accordance.note.value = dto.accordance.note;
+            this.accordance.activity.checked = dto.accordance.activity;
+        }
         if (this._state.process) {
-            this.accordance.name.value = dto.name;
-            this.accordance.note.value = dto.note;
-            this.accordance.activity.checked = dto.activity;
-
-            this.process.objective.value = dto.processObjective;
-            this.process.owner.value = dto.processOwner;
-            this.process.environment.value = dto.processEnvironment;
-            this.process.pov.value = dto.processPov;
+            this.process.objective.value = dto.process.objective;
+            this.process.owner.value = dto.process.owner;
+            this.process.environment.value = dto.process.environment;
+            this.process.pov.value = dto.process.pov;
         }
         else if (this._state.element) {
-            this.accordance.name.value = dto.name;
-            this.accordance.note.value = dto.note;
-            this.accordance.activity.checked = dto.activity;
-            this.element.owner.value = dto.elementOwner;
+            this.element.owner.value = dto.element.owner;
         }
     }
 

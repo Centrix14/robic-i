@@ -368,27 +368,29 @@ class Unit {
     }
 
     getData() {
-        const accordance = this._accordance;
-
-        const common = {
-            name: accordance.name,
-            note: accordance.note,
-            activity: accordance.activity,
+        const accordance = {
+            name: this._accordance.name,
+            note: this._accordance.note,
+            activity: this._accordance.activity,
         };
 
         if (this.type === Unit.Type.Process) {
             return {
-                ...common,
-                processObjective: accordance.objective,
-                processOwner: accordance.owner,
-                processEnvironment: accordance.environment,
-                processPov: accordance.pov,
+                accordance,
+                process: {
+                    objective: this._accordance.objective,
+                    owner: this._accordance.owner,
+                    environment: this._accordance.environment,
+                    pov: this._accordance.pov,
+                },
             };
         }
         else if (this.type === Unit.Type.Element) {
             return {
-                ...common,
-                elementOwner: accordance.owner,
+                accordance,
+                element: {
+                    owner: this._accordance.owner,
+                },
             };
         }
     }
