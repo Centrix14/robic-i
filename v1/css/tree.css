@@ -24,3 +24,14 @@ html {
     margin-left: calc(var(--radius) - var(--spacing));
     padding-left: 0;
 }
+
+.tree .accordance-badge,
+.tree .deviation-badge {
+    color: darkblue;
+    outline: solid darkblue 1px;
+
+    font-size: small;
+
+    user-select: none;
+    margin-right: 0.5%;
+}
