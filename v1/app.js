@@ -985,6 +985,13 @@ class Application {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveString(exportRisksToCSV(units), 'text/csv', 'risk.csv');
     }
+
+    buildDiagramTree() {
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+
+        const tab = window.open();
+        buildDiagramTree(units, tab.document);
+    }
 }
 
 function isEmpty(value) {
@@ -1014,6 +1021,7 @@ app.setEvents({
         ['#exportProcessCSVBtn', app, app.exportProcessCSV],
         ['#exportDeviationCSVBtn', app, app.exportDeviationCSV],
         ['#exportRiskCSVBtn', app, app.exportRisksCSV],
+        ['#buildDiagramTree', app, app.buildDiagramTree],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
