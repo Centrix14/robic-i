@@ -123,6 +123,21 @@ function buildRiskTree(risk, doc, root) {
     ]);
 }
 
+function makeAccordanceBadge(type, accordance, doc) {
+    const badge = doc.createElement('span');
+
+    badge.className = 'accordance-badge';
+
+    if (type === Unit.Type.Process) {
+        badge.textContent = 'процесс';
+        return badge;
+    }
+    else (type === Unit.Type.Element) {
+        badge.textContent = 'элемент';
+        return badge;
+    }
+}
+
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
     root.className = 'tree';
@@ -147,8 +162,9 @@ function buildDiagramTree(units, doc) {
 
             buildAccordanceTree(accordanceJSON, doc, accordanceProps);
 
-            if (unit.type === Unit.Type.Process)
+            if (unit.type === Unit.Type.Process) {
                 buildProcessTree(accordance, doc, accordanceProps);
+            }
             else if (unit.type === Unit.Type.Element)
                 buildElementTree(accordance, doc, accordanceProps);
 
