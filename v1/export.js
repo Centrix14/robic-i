@@ -56,6 +56,19 @@ function exportDeviationsToCSV(units) {
     return table;
 }
 
+function exportRisksToCSV(units) {
+    let table = 'name,note,cause,activity,character,LCStep,outrunning,profit,probability,score,error\n';
+
+    for (let unit of units) {
+        if (!unit?.isSystem) {
+            const j = Risk.toJSON(unit._deviation);
+            table += `${j.name},${j.note},${j.cause},${j.activity},${j.character},${j.LCStep},${j.outrunning},${j.profit},${j.probability},${j.score},${j.error}\n`;
+        }
+    }
+
+    return table;
+}
+
 function openIdf(callback) {
     const input = document.createElement('input');
 
