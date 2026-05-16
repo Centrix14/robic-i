@@ -229,8 +229,7 @@ class Palette {
             this.tabs.accordance.body.hidden = false;
             this.tabs.deviation.body.hidden = true;
 
-            if (!this.state.process && !this.state.element)
-                this.state = {};
+            this.state = {};
             break;
 
         case 'palette-deviationTab-radio':
@@ -704,6 +703,8 @@ class Application {
                         buttons: true,
                         process: true,
                         element: false,
+                        deviation: true,
+                        risk: true,
                     };
                     this.palette.data = unit.getData();
                 }
@@ -712,14 +713,12 @@ class Application {
                         buttons: true,
                         process: false,
                         element: true,
+                        deviation: true
                     };
                     this.palette.data = unit.getData();
                 }
                 else {
                     this.palette.state = {
-                        buttons: false,
-                        process: false,
-                        element: false,
                     };
                 }
             }
