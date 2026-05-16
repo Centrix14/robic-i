@@ -769,13 +769,12 @@ class Application {
                     this.palette.data = unit.getData();
                 }
                 else {
-                    this.palette.state = {
-                    };
+                    this.palette.state = {};
                 }
             }
             else {
                 diagram.clearSelection();
-                this.palette.state = Palette.State.None;
+                this.palette.state = {};
             }
 
             console.log(`Select ${cursor.x} ${cursor.y}`);
