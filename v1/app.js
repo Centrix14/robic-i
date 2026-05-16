@@ -980,6 +980,11 @@ class Application {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveString(exportDeviationsToCSV(units), 'text/csv', 'deviation.csv');
     }
+
+    exportRisksCSV() {
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        saveString(exportRisksToCSV(units), 'text/csv', 'risk.csv');
+    }
 }
 
 function isEmpty(value) {
@@ -1008,6 +1013,7 @@ app.setEvents({
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
         ['#exportProcessCSVBtn', app, app.exportProcessCSV],
         ['#exportDeviationCSVBtn', app, app.exportDeviationCSV],
+        ['#exportRiskCSVBtn', app, app.exportRisksCSV],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
