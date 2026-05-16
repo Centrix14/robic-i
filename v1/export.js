@@ -87,19 +87,12 @@ function buildAccordanceTree(json, doc, root) {
 
 function buildProcessTree(process, doc, root) {
     const json = Process.toJSON(process);
-    const map = [
+    appendProps(doc, root, [
         ['objective', json.objective],
         ['owner', json.owner],
         ['environment', json.environment],
         ['pov', json.pov],
-    ];
-
-    for (let [prop, val] of map) {
-        const entry = doc.createElement('li');
-        entry.textContent = `${prop}: ${val}`;
-
-        root.appendChild(entry);
-    }
+    ]);
 }
 
 function buildElementTree(element, doc, root) {
