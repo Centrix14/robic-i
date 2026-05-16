@@ -970,6 +970,11 @@ class Application {
         const contents = JSON.stringify(Diagram.toJSON(this.diagram));
         saveString(contents, 'application/json', 'diagram.idf');
     }
+
+    exportProcessCSV() {
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        saveString(exportProcessesToCSV(units));
+    }
 }
 
 function isEmpty(value) {
@@ -994,6 +999,7 @@ app.setEvents({
         ['#newFileBtn', app, app.newFile],
         ['#openFileBtn', app, app.open],
         ['#saveFileBtn', app, app.save],
+
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
     ],
 
