@@ -973,7 +973,7 @@ class Application {
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(exportProcessesToCSV(units));
+        saveString(exportProcessesToCSV(units), 'text/csv', 'table.csv');
     }
 }
 
@@ -1001,6 +1001,7 @@ app.setEvents({
         ['#saveFileBtn', app, app.save],
 
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
+        ['#exportProcessCSVBtn', app, app.exportProcessCSV],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
