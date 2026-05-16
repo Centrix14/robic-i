@@ -1,0 +1,17 @@
+/* source: https://xhtml.ru/2022/html/tree-views/ */
+
+.tree {
+    --spacing : 1.5rem;
+    --radius  : 10px;
+}
+
+.tree li {
+    display: block;
+    position: relative;
+    padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+.tree ul {
+    margin-left: calc(var(--radius) - var(--spacing));
+    padding-left: 0;
+}
