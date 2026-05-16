@@ -100,6 +100,20 @@ function buildProcessTree(process, doc, root) {
     }
 }
 
+function buildElementTree(element, doc, root) {
+    const json = Element.toJSON(element);
+    const map = [
+        ['owner', json.owner],
+    ];
+
+    for (let [prop, val] of map) {
+        const entry = doc.createElement('li');
+        entry.textContent = `${prop}: ${val}`;
+
+        root.appendChild(entry);
+    }
+}
+
 function buildDiagramTree(units, doc) {
     const root = doc.createElement('ul');
 
@@ -120,6 +134,8 @@ function buildDiagramTree(units, doc) {
 
             if (unit.type === Unit.Type.Process)
                 buildProcessTree(accordance, doc, properties);
+            else if (unit.type === Unit.Type.Element)
+                buildElementTree(accordance, doc, properties);
 
             title.appendChild(properties);
             root.appendChild(title);
