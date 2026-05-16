@@ -189,7 +189,8 @@ class Palette {
             this.tabs.accordance.body.hidden = false;
             this.tabs.deviation.body.hidden = true;
 
-            this.state = {};
+            if (!this.state.process && !this.state.element)
+                this.state = {};
             break;
 
         case 'palette-deviationTab-radio':
