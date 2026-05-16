@@ -1,7 +1,8 @@
 const Defaults = {
     diagram: {
         supprocess: {
-            corner: 40,
+            show: false,
+            corner: 20,
         },
     },
 
