@@ -69,7 +69,18 @@ function exportRisksToCSV(units) {
     return table;
 }
 
-function buildAccordanceTree(accordance, doc, root) {
+function buildAccordanceTree(json, doc, root) {
+    const map = [
+        ['note', json.note],
+        ['activity', json.activity],
+    ];
+
+    for (let [prop, val] of map) {
+        const entry = doc.createElement('li');
+        entry.textContent = `${prop}: ${val}`;
+
+        root.appendChild(entry);
+    }
 }
 
 function buildProcessTree(process, doc, root) {
@@ -104,6 +115,9 @@ function buildDiagramTree(units, doc) {
             title.textContent = accordanceJSON.name;
 
             const properties = doc.createElement('ul');
+
+            buildAccordanceTree(accordanceJSON, doc, properties);
+
             if (unit.type === Unit.Type.Process)
                 buildProcessTree(accordance, doc, properties);
 
