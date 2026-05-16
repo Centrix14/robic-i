@@ -320,7 +320,37 @@ class Palette {
     }
 
     _applyDeviation() {
-        console.log('dev apply');
+        let data = {};
+
+        if (this._state.deviation) {
+            data.deviation = {
+                name: this.deviation.name.value,
+                note: this.deviation.note.value,
+                cause: this.deviation.cause.value,
+                activity: this.deviation.activity.checked,
+            };
+        }
+
+        if (this._state.propertyDeviation) {
+            data.propertyDeviation = {
+                actualValue: this.propertyDeviation.actualValue.value,
+                scale: this.propertyDeviation.scale.value,
+            };
+        }
+
+        if (this._state.risk) {
+            data.risk = {
+                character: this.risk.character.value,
+                LCStep: this.risk.LCStep.value,
+                outrunning: this.risk.outrunning.value,
+                profit: this.risk.profit.value,
+                score: this.risk.score.value,
+                probability: this.risk.probability.value,
+                error: this.risk.error.value,
+            };
+        }
+
+        this._app.applyToSelection(data);
     }
 
     applyCb(event) {
