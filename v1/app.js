@@ -917,7 +917,7 @@ class Application {
     dropUnit() {
         const id = this.diagram.dropSelection();
 
-        this.palette.state = Palette.State.None;
+        this.palette.state = {};
 
         const group = canvas.querySelector(`g[id="${id}"]`);
         canvas.removeChild(group);
