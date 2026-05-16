@@ -193,8 +193,16 @@ function buildDiagramTree(units, doc) {
 
                 buildProcessTree(accordance, doc, accordanceProps);
             }
-            else if (unit.type === Unit.Type.Element)
+            else if (unit.type === Unit.Type.Element) {
+                accordanceSummary.appendChild(makeAccordanceBadge(
+                    Unit.Type.Element, doc,
+                ));
+                accordanceSummary.appendChild(makeSummaryTitle(
+                    accordanceJSON.name, doc,
+                ))
+
                 buildElementTree(accordance, doc, accordanceProps);
+            }
 
             const deviation = unit._deviation,
                   deviationJSON = Deviation.toJSON(deviation);
@@ -223,7 +231,7 @@ function buildDiagramTree(units, doc) {
                 }
                 else if (unit.type === Unit.Type.Element) {
                     deviationSummary.appendChild(
-                        makeDeviationBadge(Unit.Type.Process, doc)
+                        makeDeviationBadge(Unit.Type.Element, doc)
                     );
                     deviationSummary.appendChild(
                         makeSummaryTitle(deviationJSON.name, doc)
