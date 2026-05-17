@@ -178,28 +178,6 @@ body {
     height: 97%;
 }
 
-svg #name, svg #designation {
-    user-select: none;
-}
-
-textarea {
-    font-family: sans;
-    font-size: 10pt;
-}
-
-svg .htmltext-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 100%;
-    overflow: scroll;
-}
-
-svg .htmltext-p {
-    text-align: center;
-}
-
 /* Palette */
 
 .palette {
@@ -229,6 +207,11 @@ svg .htmltext-p {
 }
 .palette-h2:before {
     content: "\00A7";
+}
+
+.palette textarea {
+    font-family: sans;
+    font-size: 10pt;
 }
 
 .palette-input-label {

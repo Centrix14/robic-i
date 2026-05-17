@@ -137,6 +137,25 @@
 
     <div class="panel canvas-container">
       <svg class="canvas">
+        <style>
+          #name, #designation {
+              user-select: none;
+          }
+
+          .htmltext-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              height: 100%;
+              overflow: scroll;
+          }
+
+          .htmltext-p {
+              text-align: center;
+          }
+        </style>
+
         <defs>
           <marker
             id="element-arrow-marker"
