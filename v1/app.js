@@ -29,7 +29,21 @@ const SVG = {
     createPolyline: () => SVG.createTag('polyline'),
 
     createRect: () => SVG.createTag('rect'),
+
     createText: () => SVG.createTag('text'),
+    createHTMLText: () => {
+        const p = document.createElement('p');
+
+        const div = document.createElementNS(
+            'http://www.w3.org/1999/xhtml', 'div'
+        );
+        div.appendChild(p);
+
+        const object = SVG.createTag('foreignObject');
+        object.appendChild(div);
+
+        return object;
+    },
 
     applyTo: function(element, definition) {
         for (let prop in definition) {
