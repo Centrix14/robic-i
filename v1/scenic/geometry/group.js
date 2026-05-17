@@ -221,11 +221,8 @@ class NamedRectGroup extends Group {
             operator.createRect()
         ]);
         store.set(NamedRectGroup.Member.Name, [
-            new Text(labels.name,
-                     new Point((size.width / 2) + spawn.x,
-                               (size.height / 2) + spawn.y)
-                    ),
-            operator.createText()
+            new Text(labels.name, new Point(spawn.x, spawn.y)),
+            operator.createHTMLText()
         ]);
         store.set(ElementRectGroup.Member.Designation, [
             new Text(labels.designation,
