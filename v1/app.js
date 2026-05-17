@@ -962,8 +962,12 @@ class Application {
     open() {
         function drawDiagram(unit) {
             let state = GeometryState.Main;
-            if (unit.isSystem)
-                state = GeometryState.Hidden;
+            if (unit.isSystem) {
+                state =
+                    Defaults.diagram.supprocess.show
+                    ? GeometryState.Main
+                    : GeometryState.Hidden;
+            }
 
             const element = unit._accordanceGS.combine(
                 GeometryLayer.Process,
