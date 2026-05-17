@@ -332,11 +332,14 @@ class NamedRectGroup extends Group {
 
         const nameJSON = Text.toJSON(name[0]);
         nameJSON.start = new Point(
-            (newSize.width / 2) + shapeJSON.start.x,
-            (newSize.height / 2) + shapeJSON.start.y
+            shapeJSON.start.x,
+            shapeJSON.start.y
         );
         Text.applyJSON(nameJSON, name[0]);
-        operator.applyTo(name[1], name[0].publish());
+        operator.applyTo(name[1], {
+            ...name[0].publish(),
+            ...shape[0].publish(),
+        });
 
         const designationJSON = Text.toJSON(designation[0]);
         designationJSON.start = new Point(
