@@ -973,8 +973,17 @@ class Application {
             SVG.appendChild(canvas, element);
         }
 
+        function clearDiagram() {
+            const groups = canvas.querySelectorAll('g');
+
+            for (let group of groups) {
+                canvas.removeChild(group);
+            }
+        }
+
         const self = this;
 
+        clearDiagram();
         openIdf((text) => {
             const json = JSON.parse(text);
             this.diagram = Diagram.fromJSON(json, SVG);
