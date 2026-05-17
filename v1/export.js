@@ -71,8 +71,17 @@ function exportRisksToCSV(units) {
 
 function appendProps(doc, target, props) {
     for (let [prop, val] of props) {
+        const propLabel = doc.createElement('span');
+        propLabel.className = 'property-label';
+        propLabel.textContent = prop;
+
+        const propVal = doc.createElement('span');
+        propVal.className = 'property-value';
+        propVal.textContent = val;
+
         const entry = doc.createElement('li');
-        entry.textContent = `${prop}: ${val}`;
+        entry.appendChild(propLabel);
+        entry.appendChild(propVal);
 
         target.appendChild(entry);
     }
@@ -195,10 +204,12 @@ function appendDiagramCredentials(diagram, doc) {
         elm.appendChild(tag);
     }
 
+    const changedDate = new Date(diagram.changed);
+
     content(cols.author.name, 'Автор');
     content(cols.author.value, diagram.author);
     content(cols.changed.name, 'Ревизия от');
-    content(cols.changed.value, diagram.changed);
+    content(cols.changed.value, changedDate.toLocaleString());
 
     rows.author.appendChild(cols.author.name);
     rows.author.appendChild(cols.author.value);
