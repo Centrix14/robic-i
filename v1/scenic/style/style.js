@@ -36,6 +36,7 @@ class Style {
             const definition = stylesheet[key];
 
             let element;
+
             switch (key) {
             case 'stroke':
                 element = new Stroke(definition);
@@ -54,6 +55,7 @@ class Style {
                 break;
             case 'visibility':
                 element = new Visibility(definition);
+                break;
             default:
                 return new Fail();
             }
