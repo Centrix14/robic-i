@@ -187,6 +187,21 @@ textarea {
     font-size: 10pt;
 }
 
+svg .htmltext-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: antiquewhite;
+
+    height: 100%;
+    overflow: scroll;
+}
+
+svg .htmltext-p {
+    text-align: center;
+}
+
 /* Palette */
 
 .palette {
