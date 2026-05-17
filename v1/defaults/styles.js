@@ -11,13 +11,13 @@ const Styles = {
 
     PGS: {
         RectMain: {
-            fill: {},
-            stroke: {}
+            fill: { color: 'floralwhite' },
+            stroke: { color: 'darkgray', width: '1px' }
         },
 
         RectSelected: {
-            fill: {},
-            stroke: { color: 'blue' }
+            fill: { color: 'floralwhite' },
+            stroke: { color: 'black', width: '1px' }
         },
 
         NameMain: {
@@ -41,13 +41,13 @@ const Styles = {
 
     EGS: {
         RectMain: {
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'black', opacity: '1' }
+            fill: { color: 'floralwhite' },
+            stroke: { color: 'darkgray', width: '1px' }
         },
 
         RectSelected: {
-            fill: { color: 'none', opacity: '0' },
-            stroke: { color: 'blue', opacity: '1' }
+            fill: { color: 'floralwhite' },
+            stroke: { color: 'black', width: '1px' }
         },
 
         ArrowMain: {
