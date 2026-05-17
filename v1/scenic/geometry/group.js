@@ -233,7 +233,7 @@ class NamedRectGroup extends Group {
         ]);
 
         for (let [id, [figure, element]] of store) {
-            if (figure instanceof Text) {
+            if (element.tagName === 'foreignObject') {
                 operator.applyTo(element, {
                     id,
                     ...figure.publish(),
