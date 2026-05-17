@@ -136,7 +136,7 @@ class Visibility extends StyleElement {
 
         const Value = Visibility.Value;
 
-        switch (definition?.visibility) {
+        switch (definition?.value) {
         case Value.Hidden:
             this._visibility = 'hidden';
             this._pointer = 'none';
@@ -146,6 +146,7 @@ class Visibility extends StyleElement {
             this._pointer = 'none';
             break;
         case Value.Visible:
+        default:
             this._visibility = 'visible';
             this._pointer = 'auto';
             break;
