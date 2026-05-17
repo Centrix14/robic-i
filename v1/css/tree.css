@@ -48,3 +48,10 @@ html {
     user-select: none;
     margin-right: 0.5%;
 }
+
+.tree .property-label {
+    color: dimgray;
+
+    user-select: none;
+    margin-right: 1%;
+}
