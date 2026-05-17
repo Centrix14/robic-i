@@ -226,7 +226,7 @@ function buildDiagramTree(units, doc) {
             const accordanceEntry = doc.createElement('li');
 
             const accordanceDetails = doc.createElement('details');
-            accordanceDetails.open = '';
+            accordanceDetails.open = 'true';
 
             const accordanceSummary = doc.createElement('summary');
 
@@ -262,7 +262,7 @@ function buildDiagramTree(units, doc) {
                 const deviationEntry = doc.createElement('li');
 
                 const deviationDetails = doc.createElement('details');
-                deviationDetails.open = '';
+                deviationDetails.open = 'true';
 
                 const deviationSummary = doc.createElement('summary');
 
