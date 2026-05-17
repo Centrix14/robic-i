@@ -52,6 +52,8 @@ class Style {
             case 'marker':
                 element = new Marker(definition);
                 break;
+            case 'visibility':
+                element = new Visibility(definition);
             default:
                 return new Fail();
             }
