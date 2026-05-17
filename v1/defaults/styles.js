@@ -1,12 +1,11 @@
 const Styles = {
     Common: {
         LabelHidden: {
-            fill: { opacity: '0' }
+            visibility: { value: Visibility.Value.Hidden },
         },
 
         ShapeHidden: {
-            fill: { opacity: '0' },
-            stroke: { opacity: '0' }
+            visibility: { value: Visibility.Value.Hidden },
         }
     },
 
@@ -84,11 +83,12 @@ const Styles = {
 
     EALGS: {
         LineMain: {
-            stroke: { color: 'black', opacity: '1', dasharray: '4' }
+            stroke: { color: 'black', opacity: '1', dasharray: '4' },
+            visibility: { value: Visibility.Value.Visible },
         },
 
         LineHidden: {
-            stroke: { color: 'black', opacity: '0', dasharray: '4' }
+            visibility: { value: Visibility.Value.Hidden },
         }
     }
 }
