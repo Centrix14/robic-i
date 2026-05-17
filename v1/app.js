@@ -987,10 +987,11 @@ class Application {
 
         const self = this;
 
-        clearDiagram();
         openIdf((text) => {
             const json = JSON.parse(text);
             this.diagram = Diagram.fromJSON(json, SVG);
+
+            clearDiagram();
 
             const nodes = this.diagram.graph.nodes(NodeFields.Data);
             nodes.forEach(drawDiagram);
