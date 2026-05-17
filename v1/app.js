@@ -33,10 +33,12 @@ const SVG = {
     createText: () => SVG.createTag('text'),
     createHTMLText: () => {
         const p = document.createElement('p');
+        p.className = 'htmltext-p';
 
         const div = document.createElementNS(
             'http://www.w3.org/1999/xhtml', 'div'
         );
+        div.className = 'htmltext-container';
         div.appendChild(p);
 
         const object = SVG.createTag('foreignObject');
@@ -45,9 +47,15 @@ const SVG = {
         return object;
     },
 
+    _applyHTMLTextValue(element, value) {
+        element.firstElementChild.firstElementChild.textContent = value;
+    },
+
     applyTo: function(element, definition) {
         for (let prop in definition) {
-            if (element.tagName === 'text' && prop === 'value')
+            if (element.tagName === 'foreignObject' && prop === 'value')
+                SVG._applyHTMLTextValue(element, definition[prop]);
+            else if (element.tagName === 'text' && prop === 'value')
                 element.textContent = definition[prop];
             else
                 element.setAttribute(prop, definition[prop]);
