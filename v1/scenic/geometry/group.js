@@ -233,7 +233,16 @@ class NamedRectGroup extends Group {
         ]);
 
         for (let [id, [figure, element]] of store) {
-            operator.applyTo(element, { id, ...figure.publish() });
+            if (figure instanceof Text) {
+                operator.applyTo(element, {
+                    id,
+                    ...figure.publish(),
+                    ...size,
+                });
+            }
+            else
+                operator.applyTo(element, { id, ...figure.publish() });
+
             operator.appendChild(group, element);
         }
 
