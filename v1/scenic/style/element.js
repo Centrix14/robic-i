@@ -123,3 +123,37 @@ class Marker extends StyleElement {
         target.setAttribute('marker-end', this._end);
     }
 }
+
+class Visibility extends StyleElement {
+    static Value = {
+        Hidden: 'hidden',
+        Disabled: 'disabled',
+        Visible: 'visible',
+    }
+
+    constructor(definition) {
+        super();
+
+        const Value = Visibility.Value;
+
+        switch (definition?.visibility) {
+        case Value.Hidden:
+            this._visibility = 'hidden';
+            this._pointer = 'none';
+            break;
+        case Value.Disabled:
+            this._visibility = 'visible';
+            this._pointer = 'none';
+            break;
+        case Value.Visible:
+            this._visibility = 'visible';
+            this._pointer = 'auto';
+            break;
+        }
+    }
+
+    useOn(target) {
+        target.setAttribute('visibility', this._visibility);
+        target.setAttribute('pointer-events', this._pointer);
+    }
+}
