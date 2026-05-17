@@ -651,7 +651,11 @@ class Diagram {
     shift(id, dX, dY) {
         const graph = this._graph;
 
-        const gs = graph.getNode(id)._accordanceGS;
+        const unit = graph.getNode(id);
+        if (unit.isSystem)
+            return;
+
+        const gs = unit._accordanceGS;
         if (gs instanceof ElementGeometrySet)
             return;
 
