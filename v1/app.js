@@ -551,7 +551,7 @@ class ButtonHandler extends EventHandler {
                 end: new Point(0,0)
             });
 
-            console.log(`Element src = ${this._start.x} ${this._start.y}`);
+            console.log(`Element src = ${this._start.x} ${this._start.y}, side = ${this._start.side}`);
         }
         else if (this.state === ButtonHandler.State.ElementSrcSet) {
             if (event.type === 'mouseup') { // second process selected
@@ -595,17 +595,17 @@ class ButtonHandler extends EventHandler {
                 graph.connect(processId.start, elementId, {
                     direction: ConnectDirections.Both,
                     data: {
-                        role: 'start'
+                        position: 'start'
                     }
                 });
                 graph.connect(elementId, processId.end, {
                     direction: ConnectDirections.Both,
                     data: {
-                        role: 'end'
+                        position: 'end'
                     }
                 });
 
-                console.log(`Element dst = ${this._end.x} ${this._end.y}`);
+                console.log(`Element dst = ${this._end.x} ${this._end.y}, side = ${this._end.side}`);
             }
             else { // searching second process
                 this._end = SVG.translateToPoint(event.x, event.y);
@@ -1074,8 +1074,10 @@ app.setEvents({
         ['#exportRiskCSVBtn', app, app.exportRisksCSV],
         ['#buildDiagramTree', app, app.buildDiagramTree],
 
-        ['#openAboutDialogBtn', null, ()=>document.querySelector('#about-dialog').showModal()],
-        ['#closeAboutDialogBtn', null, ()=>document.querySelector('#about-dialog').close()],
+        ['#openAboutDialogBtn', null,
+         ()=>document.querySelector('#about-dialog').showModal()],
+        ['#closeAboutDialogBtn', null,
+         ()=>document.querySelector('#about-dialog').close()],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
