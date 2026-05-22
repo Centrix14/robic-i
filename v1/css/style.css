@@ -263,3 +263,36 @@ body {
 .palette-notebook > .palette-tab-radio:checked + label {
     border-bottom: solid black 1px;
 }
+
+/* Dialog */
+
+dialog {
+    border: none;
+    border-radius: 10px;
+}
+
+.dialog-header {
+    align-content: center;
+}
+
+.dialog-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dialog-close-btn {
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+
+    background-color: aquamarine;
+}
+.dialog-close-btn:hover {
+    background-color: antiquewhite;
+}
