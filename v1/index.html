@@ -59,7 +59,7 @@
         <button class="menu-dropdown-button">Помощь</button>
         <div class="menu-dropdown-container">
           <p class="menu-dropdown-item">Справка</p>
-          <p class="menu-dropdown-item">О программе</p>
+          <p class="menu-dropdown-item" id="openAboutDialogBtn">О программе</p>
         </div>
       </div>
 
@@ -614,6 +614,20 @@
         </div>
       </div>
     </div>
+
+    <dialog id="about-dialog">
+      <div class="dialog-header">
+        <p class="dialog-title">О программе</p>
+      </div>
+
+      <div class="dialog-body">
+        <p>Исток v1.3 Май 2026 @ Zv0</p>
+      </div>
+
+      <div class="dialog-footer">
+        <button class="dialog-close-btn" id="closeAboutDialogBtn">Ок</button>
+      </div>
+    </dialog>
 
     <script src="scenic/style/element.js"></script>
 
