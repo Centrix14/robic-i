@@ -36,7 +36,7 @@ function exportProcessesToCSV(units) {
     for (let unit of units) {
         if (unit.type === Unit.Type.Process && !unit?.isSystem) {
             const j = Process.toJSON(unit._accordance);
-            table += `${j.name},${j.note},${j.activity},${j.objective},${j.owner},${j.environment},${j.pov}\n`;
+            table += `\"${j.name}\",\"${j.note}\",\"${j.activity}\",\"${j.objective}\",\"${j.owner}\",\"${j.environment}\",\"${j.pov}\"\n`;
         }
     }
 
@@ -49,7 +49,7 @@ function exportDeviationsToCSV(units) {
     for (let unit of units) {
         if (!unit?.isSystem) {
             const j = Deviation.toJSON(unit._deviation);
-            table += `${j.name},${j.note},${j.cause},${j.activity}\n`;
+            table += `\"${j.name}\",\"${j.note}\",\"${j.cause}\",\"${j.activity}\"\n`;
         }
     }
 
@@ -62,7 +62,7 @@ function exportRisksToCSV(units) {
     for (let unit of units) {
         if (!unit?.isSystem) {
             const j = Risk.toJSON(unit._deviation);
-            table += `${j.name},${j.note},${j.cause},${j.activity},${j.character},${j.LCStep},${j.outrunning},${j.profit},${j.probability},${j.score},${j.error}\n`;
+            table += `\"${j.name}\",\"${j.note}\",\"${j.cause}\",\"${j.activity}\",\"${j.character}\",\"${j.LCStep}\",\"${j.outrunning}\",\"${j.profit}\",\"${j.probability}\",\"${j.score}\",\"${j.error}\"\n`;
         }
     }
 
