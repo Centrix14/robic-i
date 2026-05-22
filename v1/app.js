@@ -595,13 +595,15 @@ class ButtonHandler extends EventHandler {
                 graph.connect(processId.start, elementId, {
                     direction: ConnectDirections.Both,
                     data: {
-                        position: 'start'
+                        position: 'start',
+                        role: Element.getRoleBySide(coords.start.side),
                     }
                 });
                 graph.connect(elementId, processId.end, {
                     direction: ConnectDirections.Both,
                     data: {
-                        position: 'end'
+                        position: 'end',
+                        role: Element.getRoleBySide(coords.end.side),
                     }
                 });
 
