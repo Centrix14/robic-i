@@ -1,4 +1,11 @@
 class Spatia {
+    const RectSide = {
+        Up: 'up',
+        Right: 'right',
+        Down: 'down',
+        Left: 'left',
+    }
+
     constructor(backlash=5, precision=0.0001) {
         this._backlash = backlash;
         this._precision = precision;
