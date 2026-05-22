@@ -62,6 +62,13 @@ class Process extends Accordance {
 }
 
 class Element extends Accordance {
+    static Role = {
+        Input: 'input',
+        Output: 'output',
+        Doer: 'doer',
+        Mean: 'mean',
+    }
+
     static toJSON(obj) {
         return {
             ...super.toJSON(obj),
@@ -78,6 +85,19 @@ class Element extends Accordance {
         const obj = new Element();
         Element.applyJSON(json, obj);
         return obj;
+    }
+
+    static getRoleBySide(side) {
+        const Side = Spatia.RectSide, Role = Element.Role;
+
+        const map = new Map([
+            [Side.Up, Role.Doer],
+            [Side.Right, Role.Output],
+            [Side.Down, Role.Mean],
+            [Side.Left, Role.Input],
+        ]);
+
+        return map.get(side);
     }
 
     constructor(name, note) {
