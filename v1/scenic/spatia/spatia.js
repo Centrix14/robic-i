@@ -1,5 +1,5 @@
 class Spatia {
-    const RectSide = {
+    static RectSide = {
         Up: 'up',
         Right: 'right',
         Down: 'down',
@@ -162,6 +162,8 @@ class Spatia {
     }
 
     determineNearestRectSide(rect, cursor) {
+        const side = Spatia.RectSide;
+
         if (this.isInRect(rect, cursor)) {
             const make = (x1, y1, x2, y2) => (
                 new StraightLine(new Point(x1, y1), new Point(x2, y2))
@@ -171,23 +173,27 @@ class Spatia {
                 {
                     line: make(rect.start.x, rect.start.y,
                                rect.start.x + rect.width, rect.start.y),
+                    side: side.Up,
                     d: 0
                 },
                 {
                     line: make(rect.start.x, rect.start.y,
                                rect.start.x, rect.start.y + rect.height),
+                    side: side.Left,
                     d: 0,
                 },
                 {
                     line: make(rect.start.x, rect.start.y + rect.height,
                                rect.start.x + rect.width,
                                rect.start.y + rect.height),
+                    side: side.Down,
                     d: 0
                 },
                 {
                     line: make(rect.start.x + rect.width, rect.start.y,
                                rect.start.x + rect.width,
                                rect.start.y + rect.height),
+                    side: side.Right,
                     d: 0
                 }
             ];
@@ -218,12 +224,16 @@ class Spatia {
             return null;
 
         const start = nearest.line.start, end = nearest.line.end;
+        let point;
         if (start.x === end.x) {
-            return new Point(start.x, cursor.y);
+            point = new Point(start.x, cursor.y);
         }
         else {
-            return new Point(cursor.x, start.y);
+            point = new Point(cursor.x, start.y);
         }
+
+        point.side = nearest.side;
+        return point;
     }
 
     serialize() {
