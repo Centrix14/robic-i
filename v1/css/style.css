@@ -15,10 +15,12 @@
     --canvas-border: #ced4da;
 
     --status-bar-fg: #717d8e;
+
+    --font-family: sans-serif;
 }
 
 html {
-    font-family: system-ui;
+    font-family: var(--font-family);
 }
 
 /* Common styles and page layout */
@@ -78,6 +80,7 @@ body {
 
 .menu-dropdown-button {
     font-size: 16px;
+    font-family: var(--font-family);
     
     background-color: var(--bg);
     
@@ -142,6 +145,8 @@ body {
 }
 
 .panel-button {
+    font-family: var(--font-family);
+
     background-color: var(--touchable);
     border: none;
 }
@@ -151,7 +156,6 @@ body {
 .panel-button:active {
     background-color: var(--touchable-active);
 }
-
 .panel-button:disabled {
     background-color: var(--empty);
 
@@ -189,6 +193,8 @@ body {
 }
 
 .palette-button {
+    font-family: var(--font-family);
+
     padding: 2%;
 }
 
@@ -224,6 +230,8 @@ body {
 }
 
 .link-button {
+    font-family: var(--font-family);
+
     color: var(--existance);
     background-color: var(--bg);
     
