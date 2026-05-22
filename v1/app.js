@@ -1073,6 +1073,9 @@ app.setEvents({
         ['#exportDeviationCSVBtn', app, app.exportDeviationCSV],
         ['#exportRiskCSVBtn', app, app.exportRisksCSV],
         ['#buildDiagramTree', app, app.buildDiagramTree],
+
+        ['#openAboutDialogBtn', null, ()=>document.querySelector('#about-dialog').showModal()],
+        ['#closeAboutDialogBtn', null, ()=>document.querySelector('#about-dialog').close()],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
