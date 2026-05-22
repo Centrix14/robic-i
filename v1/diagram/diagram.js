@@ -665,16 +665,17 @@ class Diagram {
         for (let adjacentId of adjacents) {
             const connection = graph.getAdjacencyData(id, adjacentId);
 
-            if (connection?.role === 'start' || connection?.role === 'end') {
+            if (connection?.position === 'start'
+                || connection?.position === 'end') {
                 const adjacentGS = graph.getNode(adjacentId)._accordanceGS;
 
-                if (connection?.role === 'start') {
+                if (connection?.position === 'start') {
                     adjacentGS.shift(dX, dY, {
                         start: true,
                         end: false
                     });
                 }
-                else if (connection?.role === 'end') {
+                else if (connection?.position === 'end') {
                     adjacentGS.shift(dX, dY, {
                         start: false,
                         end: true
