@@ -1009,6 +1009,21 @@ class Application {
         saveString(contents, 'application/json', 'diagram.idf');
     }
 
+    exportPNG() {
+        const exporter = new PNGExport({ scale: 1 });
+
+        exporter.make(canvas, (blob) => {
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'diagram.png';
+            a.click();
+
+            URL.revokeObjectURL(url);
+        });
+    }
+
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveString(exportProcessesToCSV(units), 'text/csv', 'process.csv');
@@ -1085,7 +1100,7 @@ app.setEvents({
         ['#openFileBtn', app, app.open],
         ['#saveFileBtn', app, app.save],
 
-        ['#exportPngBtn', null, ()=>exportToPng(canvas)],
+        ['#exportPngBtn', app, app.exportPNG],
         ['#exportProcessBtn', app, app.exportProcessCSV],
         ['#exportDeviationBtn', app, app.exportDeviationCSV],
         ['#exportRiskBtn', app, app.exportRisksCSV],
