@@ -1,7 +1,10 @@
 class ElementExport {
     constructor(settings) {
         this._settings = settings;
+        this.clear();
+    }
 
+    clear() {
         this._inputs = [];
         this._outputs = [];
         this._doers = [];
