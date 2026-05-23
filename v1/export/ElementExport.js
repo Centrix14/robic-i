@@ -76,5 +76,18 @@ class ElementExport {
     make(graph) {
         this.clear();
         this._fill(graph);
+
+        let table = '';
+
+        if (this._settings.inputs)
+            table += ElementExport.toCSV(this._inputs);
+        if (this._settings.outputs)
+            table += ElementExport.toCSV(this._outputs);
+        if (this._settings.doers)
+            table += ElementExport.toCSV(this._doers);
+        if (this._settings.means)
+            table += ElementExport.toCSV(this._means);
+
+        return table;
     }
 }
