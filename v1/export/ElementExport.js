@@ -34,7 +34,7 @@ class ElementExport {
         }
     }
 
-    make(graph) {
+    _fill(graph) {
         const nodes = graph.nodes(NodeFields.All);
 
         for (let [id, node] of nodes) {
@@ -52,5 +52,10 @@ class ElementExport {
                 this._addEntry(adjacent, node, connection.role);
             }
         }
+    }
+
+    make(graph) {
+        this.clear();
+        this._fill(graph);
     }
 }
