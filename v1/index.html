@@ -41,6 +41,7 @@
         <div class="menu-dropdown-container">
           <p class="menu-dropdown-item" id="exportPngBtn">Изображение</p>
           <p class="menu-dropdown-item" id="exportProcessCSVBtn">Процессы</p>
+          <p class="menu-dropdown-item" id="exportElementCSVBtn">Элементы</p>
           <p class="menu-dropdown-item" id="exportDeviationCSVBtn">Отклонения</p>
           <p class="menu-dropdown-item" id="exportRiskCSVBtn">Риск</p>
           <p class="menu-dropdown-item" id="buildDiagramTree">Структура</p>
@@ -626,6 +627,36 @@
 
       <div class="dialog-footer">
         <button class="dialog-close-btn" id="closeAboutDialogBtn">Ок</button>
+      </div>
+    </dialog>
+
+    <dialog id="element-export-dialog">
+      <div class="dialog-header">
+        <p class="dialog-title">Выгрузка элементов</p>
+      </div>
+
+      <div class="dialog-body">
+        <label for="export-inputs-checkbox">Входы</label>
+        <input class="dialog-input" id="export-inputs-checkbox" type="checkbox">
+
+        <label for="export-outputs-checkbox">Выходы</label>
+        <input class="dialog-input" id="export-outputs-checkbox" type="checkbox">
+
+        <label for="export-doers-checkbox">Исполнители</label>
+        <input class="dialog-input" id="export-doers-checkbox" type="checkbox">
+
+        <label for="export-means-checkbox">Средства</label>
+        <input class="dialog-input" id="export-means-checkbox" type="checkbox">
+      </div>
+
+      <div class="dialog-footer">
+        <button class="dialog-close-btn" id="closeElementExportDialogBtn">
+          Отмена
+        </button>
+
+        <button class="dialog-action-btn" id="makeElementExportBtn">
+          Сформировать
+        </button>
       </div>
     </dialog>
 
