@@ -1,23 +1,4 @@
 class ElementExport {
-    static toCSV(table) {
-        let csvTable = '';
-
-        for (let row of table) {
-            let csvRow = '';
-
-            for (let column of row) {
-                if (typeof column === 'string')
-                    csvRow += `\"${column}\",`;
-                else
-                    csvRow += `${column},`;
-            }
-
-            csvTable += csvRow.slice(0, csvRow.length-1) + '\n';
-        }
-
-        return csvTable;
-    }
-
     constructor(settings) {
         this._settings = settings;
         this.clear();
@@ -80,13 +61,13 @@ class ElementExport {
         let table = '';
 
         if (this._settings.inputs)
-            table += ElementExport.toCSV(this._inputs);
+            table += CSVPort.toCSV(this._inputs);
         if (this._settings.outputs)
-            table += ElementExport.toCSV(this._outputs);
+            table += CSVPort.toCSV(this._outputs);
         if (this._settings.doers)
-            table += ElementExport.toCSV(this._doers);
+            table += CSVPort.toCSV(this._doers);
         if (this._settings.means)
-            table += ElementExport.toCSV(this._means);
+            table += CSVPort.toCSV(this._means);
 
         return table;
     }
