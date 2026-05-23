@@ -309,3 +309,8 @@ dialog {
 
     background-color: ghostwhite;
 }
+
+#element-export-dialog-table {
+    padding: 10%;
+    border-spacing: 5px;
+}
