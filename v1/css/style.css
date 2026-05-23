@@ -285,7 +285,9 @@ dialog {
     justify-content: flex-end;
 }
 
-.dialog-close-btn {
+.dialog-action-btn {
+    margin: 1%;
+
     padding: 5px;
     outline: none;
     border: none;
@@ -293,6 +295,17 @@ dialog {
 
     background-color: aquamarine;
 }
-.dialog-close-btn:hover {
+.dialog-action-btn:hover {
     background-color: antiquewhite;
+}
+
+.dialog-close-btn {
+    margin: 1%;
+
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+
+    background-color: ghostwhite;
 }
