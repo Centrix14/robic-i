@@ -1045,6 +1045,21 @@ class Application {
 
         buildDiagramTree(units, tab.document);
     }
+
+    exportElementCSV(event) {
+        const settings = {
+            inputs: document.querySelector('#export-inputs-checkbox').checked,
+            outputs: document.querySelector('#export-outputs-checkbox').checked,
+            doers: document.querySelector('#export-doers-checkbox').checked,
+            means: document.querySelector('#export-means-checkbox').checked,
+        };
+
+        const exporter = new ElementExport(settings);
+        const table = exporter.make(this.diagram.graph);
+        saveString(table, 'text/plain', 'elements.csv');
+
+        document.querySelector('#element-export-dialog').close();
+    }
 }
 
 function isEmpty(value) {
@@ -1083,7 +1098,7 @@ app.setEvents({
 
         ['#exportElementCSVBtn', null,
          ()=>document.querySelector('#element-export-dialog').showModal()],
-
+        ['#makeElementExportBtn', app, app.exportElementCSV],
         ['#closeElementExportDialogBtn', null,
          ()=>document.querySelector('#element-export-dialog').close()],
     ],
