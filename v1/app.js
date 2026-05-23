@@ -1056,7 +1056,7 @@ class Application {
 
         const exporter = new ElementExport(settings);
         const table = exporter.make(this.diagram.graph);
-        saveString(table, 'text/plain', 'elements.csv');
+        saveString(table, 'text/csv', 'elements.csv');
 
         document.querySelector('#element-export-dialog').close();
     }
