@@ -1024,7 +1024,7 @@ class Application {
         saveString(exportRisksToCSV(units), 'text/csv', 'risk.csv');
     }
 
-    buildDiagramTree() {
+    exportStructure() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
 
         const tab = window.open();
@@ -1089,7 +1089,7 @@ app.setEvents({
         ['#exportProcessBtn', app, app.exportProcessCSV],
         ['#exportDeviationBtn', app, app.exportDeviationCSV],
         ['#exportRiskBtn', app, app.exportRisksCSV],
-        ['#exportStructureBtn', app, app.buildDiagramTree],
+        ['#exportStructureBtn', app, app.exportStructure],
 
         ['#openAboutDialogBtn', null,
          ()=>document.querySelector('#about-dialog').showModal()],
