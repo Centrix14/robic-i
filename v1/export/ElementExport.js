@@ -58,7 +58,7 @@ class ElementExport {
         this.clear();
         this._fill(graph);
 
-        let table = '';
+        let table = 'process,element,role';
 
         if (this._settings.inputs)
             table += CSVPort.toCSV(this._inputs);
