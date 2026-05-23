@@ -1086,17 +1086,17 @@ app.setEvents({
         ['#saveFileBtn', app, app.save],
 
         ['#exportPngBtn', null, ()=>exportToPng(canvas)],
-        ['#exportProcessCSVBtn', app, app.exportProcessCSV],
-        ['#exportDeviationCSVBtn', app, app.exportDeviationCSV],
-        ['#exportRiskCSVBtn', app, app.exportRisksCSV],
-        ['#buildDiagramTree', app, app.buildDiagramTree],
+        ['#exportProcessBtn', app, app.exportProcessCSV],
+        ['#exportDeviationBtn', app, app.exportDeviationCSV],
+        ['#exportRiskBtn', app, app.exportRisksCSV],
+        ['#exportStructureBtn', app, app.buildDiagramTree],
 
         ['#openAboutDialogBtn', null,
          ()=>document.querySelector('#about-dialog').showModal()],
         ['#closeAboutDialogBtn', null,
          ()=>document.querySelector('#about-dialog').close()],
 
-        ['#exportElementCSVBtn', null,
+        ['#exportElementBtn', null,
          ()=>document.querySelector('#element-export-dialog').showModal()],
         ['#makeElementExportBtn', app, app.exportElementCSV],
         ['#closeElementExportDialogBtn', null,
