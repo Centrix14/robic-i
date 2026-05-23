@@ -1080,6 +1080,12 @@ app.setEvents({
          ()=>document.querySelector('#about-dialog').showModal()],
         ['#closeAboutDialogBtn', null,
          ()=>document.querySelector('#about-dialog').close()],
+
+        ['#exportElementCSVBtn', null,
+         ()=>document.querySelector('#element-export-dialog').showModal()],
+
+        ['#closeElementExportDialogBtn', null,
+         ()=>document.querySelector('#element-export-dialog').close()],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
