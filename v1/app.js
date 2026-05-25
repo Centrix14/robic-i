@@ -70,8 +70,12 @@ class RiskRegistryDialog {
         this.dialog = elm('#risk-registry-dialog');
 
         this.template = {
-            current: elm('#risk-registry-current-template'),
-            novel: elm('#risk-registry-new-template'),
+            name: '',
+            data: null,
+            ui: {
+                current: elm('#risk-registry-current-template'),
+                novel: elm('#risk-registry-new-template'),
+            },
         };
 
         this.buttons = {
@@ -82,6 +86,12 @@ class RiskRegistryDialog {
     }
 
     show() {
+        let name = this.template.name;
+        if (name === '') {
+            name = 'Не задан';
+        }
+
+        this.template.ui.current.textContent = name;
         this.dialog.showModal();
     }
 
