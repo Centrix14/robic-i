@@ -144,11 +144,24 @@ class RiskRegistryDialog {
         }
 
         const diagramJSON = Diagram.toJSON(diagram);
+
+        let name = diagramJSON.name, author = diagramJSON.author, changed;
+
+        if (name === '')
+            name = 'Не задано';
+        if (author === '')
+            author = 'Не задан';
+
+        if (diagramJSON.changed === null)
+            changed = 'Не задана';
+        else
+            changed = diagramJSON.changed.toLocaleString();
+
         return {
             'диаграмма': {
-                'имя': diagramJSON.name,
-                'автор': diagramJSON.author,
-                'редакция': diagramJSON.changed,
+                'имя': name,
+                'автор': author,
+                'редакция': changed,
             },
             'риск': table,
         };
