@@ -1037,6 +1037,21 @@ class Application {
         saveString(this.csv.exportProcess(units), 'text/csv', 'process.csv');
     }
 
+    exportElementCSV(event) {
+        const roles = {
+            inputs: document.querySelector('#export-inputs-checkbox').checked,
+            outputs: document.querySelector('#export-outputs-checkbox').checked,
+            doers: document.querySelector('#export-doers-checkbox').checked,
+            means: document.querySelector('#export-means-checkbox').checked,
+        };
+
+        const exporter = new ElementExport();
+        saveString(exporter.make(this.diagram.graph, roles),
+                   'text/csv', 'elements.csv');
+
+        document.querySelector('#element-export-dialog').close();
+    }
+
     exportDeviationCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveString(this.csv.exportDeviation(units),
@@ -1068,21 +1083,6 @@ class Application {
         appendDiagramCredentials(diagramJSON, doc);
 
         buildDiagramTree(units, tab.document);
-    }
-
-    exportElementCSV(event) {
-        const settings = {
-            inputs: document.querySelector('#export-inputs-checkbox').checked,
-            outputs: document.querySelector('#export-outputs-checkbox').checked,
-            doers: document.querySelector('#export-doers-checkbox').checked,
-            means: document.querySelector('#export-means-checkbox').checked,
-        };
-
-        const exporter = new ElementExport(settings);
-        const table = exporter.make(this.diagram.graph);
-        saveString(table, 'text/csv', 'elements.csv');
-
-        document.querySelector('#element-export-dialog').close();
     }
 }
 
