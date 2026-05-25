@@ -10,6 +10,52 @@ class HTMLExportStructure {
         return heading;
     }
 
+    makeDiagramCredentials(diagram, doc) {
+        const table = doc.createElement('table');
+        table.className = 'credentials-table';
+
+        const rows = {
+            author: doc.createElement('tr'),
+            changed: doc.createElement('tr'),
+        };
+
+        const cols = {
+            author: {
+                name: doc.createElement('td'),
+                value: doc.createElement('td'),
+            },
+
+            changed: {
+                name: doc.createElement('td'),
+                value: doc.createElement('td'),
+            },
+        };
+
+        function setContent(elm, text) {
+            const tag = doc.createElement('span');
+            tag.className = 'credentials-table-data';
+            tag.textContent = text;
+            elm.appendChild(tag);
+        }
+
+        const changedDate = new Date(diagram.changed);
+
+        setContent(cols.author.name, 'Автор');
+        setContent(cols.author.value, diagram.author);
+        setContent(cols.changed.name, 'Ревизия от');
+        setContent(cols.changed.value, changedDate.toLocaleString());
+
+        rows.author.appendChild(cols.author.name);
+        rows.author.appendChild(cols.author.value);
+        rows.changed.appendChild(cols.changed.name);
+        rows.changed.appendChild(cols.changed.value);
+
+        table.appendChild(rows.author);
+        table.appendChild(rows.changed);
+
+        return table;
+    }
+
     buildTree(units, doc) {
         const root = doc.createElement('ul');
         root.className = 'tree';
@@ -205,51 +251,6 @@ function makeDeviationBadge(type, doc) {
     }
 }
 
-function appendDiagramCredentials(diagram, doc) {
-    const table = doc.createElement('table');
-    table.className = 'credentials-table';
-
-    const rows = {
-        author: doc.createElement('tr'),
-        changed: doc.createElement('tr'),
-    };
-
-    const cols = {
-        author: {
-            name: doc.createElement('td'),
-            value: doc.createElement('td'),
-        },
-
-        changed: {
-            name: doc.createElement('td'),
-            value: doc.createElement('td'),
-        },
-    };
-
-    function content(elm, text) {
-        const tag = doc.createElement('span');
-        tag.className = 'credentials-table-data';
-        tag.textContent = text;
-        elm.appendChild(tag);
-    }
-
-    const changedDate = new Date(diagram.changed);
-
-    content(cols.author.name, 'Автор');
-    content(cols.author.value, diagram.author);
-    content(cols.changed.name, 'Ревизия от');
-    content(cols.changed.value, changedDate.toLocaleString());
-
-    rows.author.appendChild(cols.author.name);
-    rows.author.appendChild(cols.author.value);
-    rows.changed.appendChild(cols.changed.name);
-    rows.changed.appendChild(cols.changed.value);
-
-    table.appendChild(rows.author);
-    table.appendChild(rows.changed);
-
-    doc.body.appendChild(table);
-}
 
 
 function openIdf(callback) {
