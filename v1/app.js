@@ -1080,6 +1080,8 @@ class Application {
         const exporter = new HTMLExportStructure();
 
         const heading = exporter.makeDiagramHeading(json.name, doc);
+        doc.body.appendChild(heading);
+
         appendDiagramCredentials(json, doc);
 
         const units = this.diagram.graph.nodes(NodeFields.Data);
