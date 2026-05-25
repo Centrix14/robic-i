@@ -130,10 +130,10 @@ class RiskRegistryDialog {
 
             table.push({
                 'код': `Р${id}`,
-                'активный': json.activity,
+                'активный': represent(json.activity),
                 'имя': json.name,
                 'причина': json.cause,
-                'характер': json.character,
+                'характер': represent(json.character),
                 'этапЖЦ': json.LCStep,
                 'опережение': json.outrunning,
                 'прибыль': json.profit,
