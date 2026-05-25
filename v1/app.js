@@ -1040,7 +1040,9 @@ class Application {
 
     exportRisksCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(exportRisksToCSV(units), 'text/csv', 'risk.csv');
+
+        const exporter = new CSVExport();
+        saveString(exporter.exportRisk(units), 'text/csv', 'risk.csv');
     }
 
     exportStructure() {
