@@ -159,6 +159,21 @@ function setContent(doc, elm, text) {
     elm.appendChild(tag);
 }
 
+function represent(value) {
+    const replacers = new Map([
+        [true, 'Да'],
+        [false, 'Нет'],
+        ['possibility', 'Возможность'],
+        ['treat', 'Угроза'],
+        ['noValue', 'Отсутствует'],
+    ]);
+
+    if (replacers.has(value))
+        return replacers.get(value);
+
+    return value;
+}
+
 function appendProps(doc, target, props) {
     for (let [prop, val] of props) {
         const propLabel = doc.createElement('span');
@@ -167,7 +182,7 @@ function appendProps(doc, target, props) {
 
         const propVal = doc.createElement('span');
         propVal.className = 'property-value';
-        propVal.textContent = val;
+        propVal.textContent = represent(val);
 
         const entry = doc.createElement('li');
         entry.appendChild(propLabel);
