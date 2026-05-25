@@ -66,8 +66,8 @@ const SVG = {
 }
 
 class RiskRegistryDialog {
-    constructor(diagram) {
-        this.diagram = diagram;
+    constructor(app) {
+        this.app = app;
 
         this.dialog = elm('#risk-registry-dialog');
 
@@ -143,7 +143,13 @@ class RiskRegistryDialog {
             });
         }
 
+        const diagramJSON = Diagram.toJSON(diagram);
         return {
+            'диаграмма': {
+                'имя': diagramJSON.name,
+                'автор': diagramJSON.author,
+                'редакция': diagramJSON.changed,
+            },
             'риск': table,
         };
     }
@@ -154,18 +160,17 @@ class RiskRegistryDialog {
 
         let report;
         try {
-            const data = this._collectData(this.diagram);
+            const data = this._collectData(this.app.diagram);
 
             report = await createReport({
                 template: this.template.data,
                 cmdDelimiter: ['{', '}'],
-                data: {
-                },
+                data,
             });
         }
         catch (error) {
             if (error instanceof CommandExecutionError) {
-                console.log('Unfulfilled fields.');
+                console.log(`Unfulfilled fields -- ${error.command}`);
                 return;
             }
             else
@@ -880,7 +885,7 @@ class Application {
 
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
-        this.riskRegistry = new RiskRegistryDialog(this.diagram);
+        this.riskRegistry = new RiskRegistryDialog(this);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
