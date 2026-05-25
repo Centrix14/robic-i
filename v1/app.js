@@ -1045,7 +1045,7 @@ class Application {
             means: document.querySelector('#export-means-checkbox').checked,
         };
 
-        const exporter = new ElementExport();
+        const exporter = new CSVExportElement();
         saveString(exporter.make(this.diagram.graph, roles),
                    'text/csv', 'elements.csv');
 
