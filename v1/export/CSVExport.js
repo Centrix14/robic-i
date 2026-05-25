@@ -1,4 +1,21 @@
 class CSVExport {
+    exportAccordance(units) {
+        let table = [[
+            'name', 'note', 'activity',
+        ]];
+
+        for (let unit of units) {
+            if (!unit?.isSystem) {
+                const json = Accordance.toJSON(unit._accordance);
+                table.push([
+                    json.name, json.note, json.activity,
+                ]);
+            }
+        }
+
+        return CSVPort.toCSV(table);
+    }
+
     exportProcess(units) {
         let table = [[
             'name', 'note', 'activity',
