@@ -769,6 +769,8 @@ class Application {
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
         this.palette = new Palette(this);
+
+        this.csv = new CSVExport();
     }
 
     startEvent(handler, event) {
@@ -1026,23 +1028,18 @@ class Application {
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-
-        const exporter = new CSVExport();
-        saveString(exporter.exportProcess(units), 'text/csv', 'process.csv');
+        saveString(this.csv.exportProcess(units), 'text/csv', 'process.csv');
     }
 
     exportDeviationCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-
-        const exporter = new CSVExport();
-        saveString(exporter.exportDeviation(units), 'text/csv', 'deviation.csv');
+        saveString(this.csv.exportDeviation(units),
+                   'text/csv', 'deviation.csv');
     }
 
     exportRisksCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-
-        const exporter = new CSVExport();
-        saveString(exporter.exportRisk(units), 'text/csv', 'risk.csv');
+        saveString(this.csv.exportRisk(units), 'text/csv', 'risk.csv');
     }
 
     exportStructure() {
