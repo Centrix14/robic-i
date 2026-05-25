@@ -66,7 +66,9 @@ const SVG = {
 }
 
 class RiskRegistryDialog {
-    constructor() {
+    constructor(diagram) {
+        this.diagram = diagram;
+
         this.dialog = elm('#risk-registry-dialog');
 
         this.template = {
@@ -809,10 +811,10 @@ class Application {
 
         this.canvas = new Canvas(canvas);
         this.palette = new Palette(this);
-        this.riskRegistry = new RiskRegistryDialog();
 
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
+        this.riskRegistry = new RiskRegistryDialog(this.diagram);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
