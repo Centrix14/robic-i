@@ -655,13 +655,6 @@ class Diagram {
         if (isPresent(this._selected)) {
             const id = this._selected;
 
-            const unit = this._graph.getNode(id);
-            if (unit.type === Unit.Type.Process)
-                this._index.process.user--;
-            else if (unit.type === Unit.Type.Element)
-                this._index.element--;
-            this._index.total--;
-
             this.clearSelection();
             this._graph.dropNode(id);
             return id;
