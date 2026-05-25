@@ -949,16 +949,6 @@ class Application {
         canvas.removeChild(group);
     }
 
-    setEvents(definition) {
-        for (let event in definition) {
-            for (let [selector, scope, func] of definition[event]) {
-                document
-                    .querySelector(selector)
-                    .addEventListener(event, (e)=>func.call(scope, e));
-            }
-        }
-    }
-
     newFile() {
         window.location.reload();
     }
@@ -1091,13 +1081,9 @@ class Application {
     }
 }
 
-function isEmpty(value) {
-    return value === null || value === undefined;
-}
-
 const app = new Application();
 
-app.setEvents({
+setEvents({
     'click': [
         ['#cursorBtn', app.buttons, app.buttons.cursorClick],
 
