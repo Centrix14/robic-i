@@ -1,7 +1,11 @@
 class HTMLExportStructure {
     makeDiagramHeading(text, doc) {
+        let actualText = text;
+        if (actualText === '')
+            actualText = 'Безымянная';
+
         const heading = doc.createElement('h1');
-        heading.textContent = text;
+        heading.textContent = actualText;
 
         return heading;
     }
