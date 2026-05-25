@@ -86,6 +86,7 @@ class RiskRegistryDialog {
             create: elm('#createRiskRegistryBtn'),
         };
         this.buttons.close.onclick = () => this.close();
+        this.buttons.create.onclick = () => (this.create(), this.close());
     }
 
     show() {
@@ -111,6 +112,34 @@ class RiskRegistryDialog {
 
         this.template.name = file.name;
         this.template.ui.current.textContent = file.name;
+    }
+
+    async create() {
+        if (!this.template.data)
+            return;
+
+        let report;
+        try {
+            report = await createReport({
+                template: this.template.data,
+                cmdDelimiter: ['{', '}'],
+                data: {
+                },
+            });
+        }
+        catch (error) {
+            if (error instanceof CommandExecutionError) {
+                console.log('Unfulfilled fields.');
+                return;
+            }
+            else
+                throw error;
+        }
+
+        const blob = new Blob([report], {
+            type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        });
+        const url = URL.createObjectURL(blob);
     }
 }
 
