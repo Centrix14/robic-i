@@ -17,4 +17,24 @@ class CSVExport {
 
         return CSVPort.toCSV(table);
     }
+
+    exportDeviation(units) {
+        let table = [[
+            'name', 'note', 'cause', 'activity',
+        ]];
+
+        for (let unit of units) {
+            if (!unit?.isSystem) {
+                const json = Deviation.toJSON(unit._deviation);
+                if (json.name === '')
+                    continue;
+
+                table.push([
+                    json.name, json.note, json.cause, json.activity,
+                ]);
+            }
+        }
+
+        return CSVPort.toCSV(table);
+    }
 }
