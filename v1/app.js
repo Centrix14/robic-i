@@ -117,6 +117,7 @@ class RiskRegistryDialog {
     _collectData(diagram) {
         let table = [];
 
+        let id = 0;
         const units = diagram.graph.nodes(NodeFields.Data);
         for (let unit of units) {
             if (unit?.isSystem || unit.type !== Unit.Type.Process)
@@ -128,7 +129,7 @@ class RiskRegistryDialog {
                 continue;
 
             table.push({
-                'код': '!!!',
+                'код': `Р${id}`,
                 'активный': json.activity,
                 'имя': json.name,
                 'причина': json.cause,
@@ -141,6 +142,8 @@ class RiskRegistryDialog {
                 'ошибка': json.error,
                 'заметка': json.note,
             });
+
+            id++;
         }
 
         const diagramJSON = Diagram.toJSON(diagram);
