@@ -46,7 +46,7 @@ class CSVExport {
         ]];
 
         for (let unit of units) {
-            if (!unit?.isSystem) {
+            if (unit.type === Unit.Type.Process && !unit?.isSystem) {
                 const json = Risk.toJSON(unit._deviation);
                 if (json.name === '')
                     continue;
