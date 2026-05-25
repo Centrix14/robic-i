@@ -1064,8 +1064,6 @@ class Application {
     }
 
     exportStructure() {
-        const units = this.diagram.graph.nodes(NodeFields.Data);
-
         const tab = window.open();
         if (!tab)
             return;
@@ -1078,11 +1076,16 @@ class Application {
 
         doc.head.appendChild(link);
 
+        const exporter = new HTMLExportStructure();
+
         const diagramJSON = Diagram.toJSON(this.diagram);
         appendDiagramHeading(diagramJSON.name, doc);
         appendDiagramCredentials(diagramJSON, doc);
 
-        buildDiagramTree(units, tab.document);
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        const tree = exporter.buildTree(units, tab.document);
+
+        doc.body.appendChild(tree);
     }
 }
 
