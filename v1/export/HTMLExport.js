@@ -1,3 +1,99 @@
+class HTMLExportStructure {
+    buildTree(units, doc) {
+        const root = doc.createElement('ul');
+        root.className = 'tree';
+
+        for (let unit of units) {
+            if (unit.isSystem)
+                continue;
+            
+            const accordance = unit._accordance;
+
+            const accordanceJSON = Accordance.toJSON(accordance);
+            if (accordanceJSON.name !== '') {
+                const accordanceEntry = doc.createElement('li');
+
+                const accordanceDetails = doc.createElement('details');
+                accordanceDetails.open = 'true';
+
+                const accordanceSummary = doc.createElement('summary');
+
+                const accordanceProps = doc.createElement('ul');
+
+                buildAccordanceTree(accordanceJSON, doc, accordanceProps);
+
+                if (unit.type === Unit.Type.Process) {
+                    accordanceSummary.appendChild(makeAccordanceBadge(
+                        Unit.Type.Process, doc,
+                    ));
+                    accordanceSummary.appendChild(makeSummaryTitle(
+                        accordanceJSON.name, doc,
+                    ))
+
+                    buildProcessTree(accordance, doc, accordanceProps);
+                }
+                else if (unit.type === Unit.Type.Element) {
+                    accordanceSummary.appendChild(makeAccordanceBadge(
+                        Unit.Type.Element, doc,
+                    ));
+                    accordanceSummary.appendChild(makeSummaryTitle(
+                        accordanceJSON.name, doc,
+                    ))
+
+                    buildElementTree(accordance, doc, accordanceProps);
+                }
+
+                const deviation = unit._deviation,
+                      deviationJSON = Deviation.toJSON(deviation);
+
+                if (deviationJSON.name !== '') {
+                    const deviationEntry = doc.createElement('li');
+
+                    const deviationDetails = doc.createElement('details');
+                    deviationDetails.open = 'true';
+
+                    const deviationSummary = doc.createElement('summary');
+
+                    const deviationProps = doc.createElement('ul');
+
+                    buildDeviationTree(deviationJSON, doc, deviationProps);
+
+                    if (unit.type === Unit.Type.Process) {
+                        deviationSummary.appendChild(
+                            makeDeviationBadge(Unit.Type.Process, doc)
+                        );
+                        deviationSummary.appendChild(
+                            makeSummaryTitle(deviationJSON.name, doc)
+                        );
+
+                        buildRiskTree(deviation, doc, deviationProps);
+                    }
+                    else if (unit.type === Unit.Type.Element) {
+                        deviationSummary.appendChild(
+                            makeDeviationBadge(Unit.Type.Element, doc)
+                        );
+                        deviationSummary.appendChild(
+                            makeSummaryTitle(deviationJSON.name, doc)
+                        );
+                    }
+
+                    deviationDetails.appendChild(deviationProps);
+                    deviationDetails.appendChild(deviationSummary);
+                    deviationEntry.appendChild(deviationDetails);
+                    accordanceProps.appendChild(deviationEntry);
+                }
+
+                accordanceDetails.appendChild(accordanceProps);
+                accordanceDetails.appendChild(accordanceSummary);
+                accordanceEntry.appendChild(accordanceDetails);
+                root.appendChild(accordanceEntry);
+            }
+        }
+
+        return root;
+    }
+}
+
 function appendProps(doc, target, props) {
     for (let [prop, val] of props) {
         const propLabel = doc.createElement('span');
@@ -151,99 +247,6 @@ function appendDiagramCredentials(diagram, doc) {
     doc.body.appendChild(table);
 }
 
-function buildDiagramTree(units, doc) {
-    const root = doc.createElement('ul');
-    root.className = 'tree';
-
-    for (let unit of units) {
-        if (unit.isSystem)
-            continue;
-        
-        const accordance = unit._accordance;
-
-        const accordanceJSON = Accordance.toJSON(accordance);
-        if (accordanceJSON.name !== '') {
-            const accordanceEntry = doc.createElement('li');
-
-            const accordanceDetails = doc.createElement('details');
-            accordanceDetails.open = 'true';
-
-            const accordanceSummary = doc.createElement('summary');
-
-            const accordanceProps = doc.createElement('ul');
-
-            buildAccordanceTree(accordanceJSON, doc, accordanceProps);
-
-            if (unit.type === Unit.Type.Process) {
-                accordanceSummary.appendChild(makeAccordanceBadge(
-                    Unit.Type.Process, doc,
-                ));
-                accordanceSummary.appendChild(makeSummaryTitle(
-                    accordanceJSON.name, doc,
-                ))
-
-                buildProcessTree(accordance, doc, accordanceProps);
-            }
-            else if (unit.type === Unit.Type.Element) {
-                accordanceSummary.appendChild(makeAccordanceBadge(
-                    Unit.Type.Element, doc,
-                ));
-                accordanceSummary.appendChild(makeSummaryTitle(
-                    accordanceJSON.name, doc,
-                ))
-
-                buildElementTree(accordance, doc, accordanceProps);
-            }
-
-            const deviation = unit._deviation,
-                  deviationJSON = Deviation.toJSON(deviation);
-
-            if (deviationJSON.name !== '') {
-                const deviationEntry = doc.createElement('li');
-
-                const deviationDetails = doc.createElement('details');
-                deviationDetails.open = 'true';
-
-                const deviationSummary = doc.createElement('summary');
-
-                const deviationProps = doc.createElement('ul');
-
-                buildDeviationTree(deviationJSON, doc, deviationProps);
-
-                if (unit.type === Unit.Type.Process) {
-                    deviationSummary.appendChild(
-                        makeDeviationBadge(Unit.Type.Process, doc)
-                    );
-                    deviationSummary.appendChild(
-                        makeSummaryTitle(deviationJSON.name, doc)
-                    );
-
-                    buildRiskTree(deviation, doc, deviationProps);
-                }
-                else if (unit.type === Unit.Type.Element) {
-                    deviationSummary.appendChild(
-                        makeDeviationBadge(Unit.Type.Element, doc)
-                    );
-                    deviationSummary.appendChild(
-                        makeSummaryTitle(deviationJSON.name, doc)
-                    );
-                }
-
-                deviationDetails.appendChild(deviationProps);
-                deviationDetails.appendChild(deviationSummary);
-                deviationEntry.appendChild(deviationDetails);
-                accordanceProps.appendChild(deviationEntry);
-            }
-
-            accordanceDetails.appendChild(accordanceProps);
-            accordanceDetails.appendChild(accordanceSummary);
-            accordanceEntry.appendChild(accordanceDetails);
-            root.appendChild(accordanceEntry);
-        }
-    }
-
-    doc.body.appendChild(root);
-}
 
 function openIdf(callback) {
     const input = document.createElement('input');
