@@ -1,4 +1,11 @@
 class HTMLExportStructure {
+    makeDiagramHeading(text, doc) {
+        const heading = doc.createElement('h1');
+        heading.textContent = text;
+
+        return heading;
+    }
+
     buildTree(units, doc) {
         const root = doc.createElement('ul');
         root.className = 'tree';
@@ -192,13 +199,6 @@ function makeDeviationBadge(type, doc) {
         badge.textContent = 'отклонение';
         return badge;
     }
-}
-
-function appendDiagramHeading(text, doc) {
-    const heading = doc.createElement('h1');
-    heading.textContent = text;
-
-    doc.body.appendChild(heading);
 }
 
 function appendDiagramCredentials(diagram, doc) {
