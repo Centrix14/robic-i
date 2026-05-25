@@ -31,13 +31,6 @@ class HTMLExportStructure {
             },
         };
 
-        function setContent(elm, text) {
-            const tag = doc.createElement('span');
-            tag.className = 'credentials-table-data';
-            tag.textContent = text;
-            elm.appendChild(tag);
-        }
-
         const changedDate = new Date(diagram.changed);
 
         setContent(cols.author.name, 'Автор');
@@ -151,6 +144,13 @@ class HTMLExportStructure {
     }
 }
 
+function setContent(elm, text) {
+    const tag = doc.createElement('span');
+    tag.className = 'credentials-table-data';
+    tag.textContent = text;
+    elm.appendChild(tag);
+}
+
 function appendProps(doc, target, props) {
     for (let [prop, val] of props) {
         const propLabel = doc.createElement('span');
@@ -250,8 +250,6 @@ function makeDeviationBadge(type, doc) {
         return badge;
     }
 }
-
-
 
 function openIdf(callback) {
     const input = document.createElement('input');
