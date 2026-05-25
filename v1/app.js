@@ -778,12 +778,14 @@ class Application {
         this.state = Application.State.Idle;
 
         this.canvas = new Canvas(canvas);
+        this.palette = new Palette(this);
+        this.riskRegistry = new RiskRegistryDialog();
+
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
-        this.palette = new Palette(this);
 
         this.csv = new CSVExport();
     }
