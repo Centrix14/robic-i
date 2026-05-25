@@ -193,7 +193,7 @@ class RiskRegistryDialog {
                 throw error;
         }
 
-        saveString(
+        saveData(
             report,
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'registry.docx'
@@ -1134,7 +1134,7 @@ class Application {
 
     save() {
         const contents = JSON.stringify(Diagram.toJSON(this.diagram));
-        saveString(contents, 'application/json', 'diagram.idf');
+        saveData(contents, 'application/json', 'diagram.idf');
     }
 
     exportPNG() {
@@ -1154,13 +1154,13 @@ class Application {
 
     exportAccordanceCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(this.csv.exportAccordance(units),
+        saveData(this.csv.exportAccordance(units),
                    'text/csv', 'accordance.csv');
     }
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(this.csv.exportProcess(units), 'text/csv', 'process.csv');
+        saveData(this.csv.exportProcess(units), 'text/csv', 'process.csv');
     }
 
     exportElementCSV(event) {
@@ -1172,7 +1172,7 @@ class Application {
         };
 
         const exporter = new CSVExportElement();
-        saveString(exporter.make(this.diagram.graph, roles),
+        saveData(exporter.make(this.diagram.graph, roles),
                    'text/csv', 'elements.csv');
 
         document.querySelector('#element-export-dialog').close();
@@ -1180,13 +1180,13 @@ class Application {
 
     exportDeviationCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(this.csv.exportDeviation(units),
+        saveData(this.csv.exportDeviation(units),
                    'text/csv', 'deviation.csv');
     }
 
     exportRisksCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(this.csv.exportRisk(units), 'text/csv', 'risk.csv');
+        saveData(this.csv.exportRisk(units), 'text/csv', 'risk.csv');
     }
 
     exportStructure() {

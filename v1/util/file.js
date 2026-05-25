@@ -16,8 +16,12 @@ function openIdf(callback) {
     input.click();
 }
 
-function saveString(contents, type, name) {
+function saveData(contents, type, name) {
     const blob = new Blob([contents], { type });
+    saveBlob(blob, name);
+}
+
+function saveBlob(blob, name) {
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
