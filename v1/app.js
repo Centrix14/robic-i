@@ -155,7 +155,7 @@ class RiskRegistryDialog {
         if (author === '')
             author = 'Не задан';
 
-        if (diagramJSON.changed === null)
+        if (diagramJSON.changed === null || diagramJSON.changed === '')
             changed = 'Не задана';
         else
             changed = diagramJSON.changed.toLocaleString();
