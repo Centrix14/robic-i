@@ -78,7 +78,15 @@ class RiskRegistryDialog {
             close: elm('#closeRiskRegistryDialogBtn'),
             create: elm('#createRiskRegistryBtn'),
         };
-        this.buttons.close.onclick = () => this.dialog.close();
+        this.buttons.close.onclick = () => this.close();
+    }
+
+    show() {
+        this.dialog.showModal();
+    }
+
+    close() {
+        this.dialog.close();
     }
 }
 
@@ -1135,6 +1143,8 @@ setEvents({
         ['#makeElementExportBtn', app, app.exportElementCSV],
         ['#closeElementExportDialogBtn', null,
          ()=>document.querySelector('#element-export-dialog').close()],
+
+        ['#riskRegistryBtn', app.riskRegistry, app.riskRegistry.show],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
