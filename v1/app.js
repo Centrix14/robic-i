@@ -114,12 +114,48 @@ class RiskRegistryDialog {
         this.template.ui.current.textContent = file.name;
     }
 
+    _collectData(diagram) {
+        let table = [];
+
+        const units = diagram.graph.nodes(NodeFields.Data);
+        for (let unit of units) {
+            if (unit?.isSystem || unit.type !== Unit.Type.Process)
+                continue;
+
+            const risk = unit._deviation;
+            const json = Risk.toJSON(risk);
+            if (json.name === '')
+                continue;
+
+            table.push({
+                'код': '!!!',
+                'активный': json.activity,
+                'имя': json.name,
+                'причина': json.cause,
+                'характер': json.character,
+                'этапЖЦ': json.LCStep,
+                'опережение': json.outrunning,
+                'прибыль': json.profit,
+                'оценка': json.score,
+                'вероятность': json.probability,
+                'ошибка': json.error,
+                'заметка': json.note,
+            });
+        }
+
+        return {
+            'риск': table,
+        };
+    }
+
     async create() {
         if (!this.template.data)
             return;
 
         let report;
         try {
+            const data = this._collectData(this.diagram);
+
             report = await createReport({
                 template: this.template.data,
                 cmdDelimiter: ['{', '}'],
