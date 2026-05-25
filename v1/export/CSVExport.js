@@ -37,4 +37,28 @@ class CSVExport {
 
         return CSVPort.toCSV(table);
     }
+
+    exportRisk(units) {
+        let table = [[
+            'name', 'note', 'cause', 'activity',
+            'character', 'LCStep', 'outrunning', 'profit',
+            'probability', 'score', 'error',
+        ]];
+
+        for (let unit of units) {
+            if (!unit?.isSystem) {
+                const json = Risk.toJSON(unit._deviation);
+                if (json.name === '')
+                    continue;
+
+                table.push([
+                    json.name, json.note, json.cause, json.activity,
+                    json.character, json.LCStep, json.outrunning, json.profit,
+                    json.probability, json.score, json.error,
+                ]);
+            }
+        }
+
+        return CSVPort.toCSV(table);
+    }
 }
