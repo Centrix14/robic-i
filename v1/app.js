@@ -65,6 +65,23 @@ const SVG = {
     appendChild: (parent, child) => parent.appendChild(child)
 }
 
+class RiskRegistryDialog {
+    constructor() {
+        this.dialog = elm('#risk-registry-dialog');
+
+        this.template = {
+            current: elm('#risk-registry-current-template'),
+            novel: elm('#risk-registry-new-template'),
+        };
+
+        this.buttons = {
+            close: elm('#closeRiskRegistryDialogBtn'),
+            create: elm('#createRiskRegistryBtn'),
+        };
+        this.buttons.close.onclick = () => this.dialog.close();
+    }
+}
+
 class Palette {
     static Tab = {
         Diagram: 'palette-diagramTab-radio',
