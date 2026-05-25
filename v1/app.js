@@ -77,6 +77,7 @@ class RiskRegistryDialog {
                 novel: elm('#risk-registry-new-template'),
             },
         };
+        this.template.ui.novel.onchange = (e) => this.uploadTemplate(e);
 
         this.buttons = {
             close: elm('#closeRiskRegistryDialogBtn'),
@@ -97,6 +98,17 @@ class RiskRegistryDialog {
 
     close() {
         this.dialog.close();
+    }
+
+    uploadTemplate(event) {
+        const reader = new FileReader();
+        reader.onload = () => this.template.data = reader.result;
+
+        const file = event.target.files[0];
+        reader.readAsArrayBuffer(file);
+
+        this.template.name = file.name;
+        this.template.ui.current.textContent = file.name;
     }
 }
 
