@@ -33,10 +33,10 @@ class HTMLExportStructure {
 
         const changedDate = new Date(diagram.changed);
 
-        setContent(cols.author.name, 'Автор');
-        setContent(cols.author.value, diagram.author);
-        setContent(cols.changed.name, 'Ревизия от');
-        setContent(cols.changed.value, changedDate.toLocaleString());
+        setContent(doc, cols.author.name, 'Автор');
+        setContent(doc, cols.author.value, diagram.author);
+        setContent(doc, cols.changed.name, 'Ревизия от');
+        setContent(doc, cols.changed.value, changedDate.toLocaleString());
 
         rows.author.appendChild(cols.author.name);
         rows.author.appendChild(cols.author.value);
@@ -144,7 +144,7 @@ class HTMLExportStructure {
     }
 }
 
-function setContent(elm, text) {
+function setContent(doc, elm, text) {
     const tag = doc.createElement('span');
     tag.className = 'credentials-table-data';
     tag.textContent = text;

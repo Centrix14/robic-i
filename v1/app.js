@@ -1073,7 +1073,6 @@ class Application {
         const link = doc.createElement('link');
         link.rel = 'stylesheet';
         link.href = 'css/tree.css';
-
         doc.head.appendChild(link);
 
         const exporter = new HTMLExportStructure();
