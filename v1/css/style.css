@@ -310,7 +310,7 @@ dialog {
     background-color: ghostwhite;
 }
 
-#element-export-dialog-table {
+.dialog-body-table {
     padding: 10%;
     border-spacing: 5px;
 }
