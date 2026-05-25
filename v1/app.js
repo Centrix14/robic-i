@@ -1033,7 +1033,9 @@ class Application {
 
     exportDeviationCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(exportDeviationsToCSV(units), 'text/csv', 'deviation.csv');
+
+        const exporter = new CSVExport();
+        saveString(exporter.exportDeviation(units), 'text/csv', 'deviation.csv');
     }
 
     exportRisksCSV() {
