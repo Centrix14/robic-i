@@ -31,12 +31,20 @@ class HTMLExportStructure {
             },
         };
 
-        const changedDate = new Date(diagram.changed);
+        let author = diagram.author;
+        if (diagram.author === '')
+            author = 'Не установлен';
+
+        let changedDate = 'Не установлена';
+        if (diagram.changed) {
+            const date = new Date(diagram.changed);
+            changedDate = date.toLocaleString();
+        }
 
         setContent(doc, cols.author.name, 'Автор');
-        setContent(doc, cols.author.value, diagram.author);
+        setContent(doc, cols.author.value, author);
         setContent(doc, cols.changed.name, 'Ревизия от');
-        setContent(doc, cols.changed.value, changedDate.toLocaleString());
+        setContent(doc, cols.changed.value, changedDate);
 
         rows.author.appendChild(cols.author.name);
         rows.author.appendChild(cols.author.value);
