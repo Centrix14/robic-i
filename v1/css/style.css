@@ -311,6 +311,6 @@ dialog {
 }
 
 .dialog-body-table {
-    padding: 10%;
+    padding-bottom: 5%;
     border-spacing: 5px;
 }
