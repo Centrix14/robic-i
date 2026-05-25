@@ -1026,7 +1026,9 @@ class Application {
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveString(exportProcessesToCSV(units), 'text/csv', 'process.csv');
+
+        const exporter = new CSVExport();
+        saveString(exporter.exportProcess(units), 'text/csv', 'process.csv');
     }
 
     exportDeviationCSV() {
