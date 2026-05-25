@@ -713,6 +713,16 @@
       </div>
     </dialog>
 
+    <script type="module">
+      import {
+          createReport,
+          CommandExecutionError
+      } from 'https://unpkg.com/docx-templates/lib/browser.js';
+
+      window.createReport = createReport;
+      window.CommandExecutionError = CommandExecutionError;
+    </script>
+
     <script src="scenic/style/element.js"></script>
     <script src="scenic/style/style.js"></script>
 
