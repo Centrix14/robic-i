@@ -1,10 +1,5 @@
 class ElementExport {
-    constructor(settings) {
-        this._settings = settings;
-        this.clear();
-    }
-
-    clear() {
+    constructor() {
         this._inputs = [];
         this._outputs = [];
         this._doers = [];
@@ -54,21 +49,19 @@ class ElementExport {
         }
     }
 
-    make(graph) {
-        this.clear();
+    make(graph, roles) {
         this._fill(graph);
 
-        let table = 'process,element,role';
+        let table = [['process', 'element', 'role']];
+        if (roles.inputs)
+            table.push(...this._inputs);
+        if (roles.outputs)
+            table.push(...this._outputs);
+        if (roles.doers)
+            table.push(...this._doers);
+        if (roles.means)
+            table.push(...this._means);
 
-        if (this._settings.inputs)
-            table += CSVPort.toCSV(this._inputs);
-        if (this._settings.outputs)
-            table += CSVPort.toCSV(this._outputs);
-        if (this._settings.doers)
-            table += CSVPort.toCSV(this._doers);
-        if (this._settings.means)
-            table += CSVPort.toCSV(this._means);
-
-        return table;
+        return CSVPort.toCSV(table);
     }
 }
