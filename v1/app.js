@@ -73,8 +73,6 @@ class Palette {
     }
 
     constructor(app) {
-        function elm(selector) { return document.querySelector(selector); }
-
         this._app = app;
 
         this.diagram = {
