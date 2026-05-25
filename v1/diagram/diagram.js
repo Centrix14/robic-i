@@ -652,7 +652,7 @@ class Diagram {
     }
 
     dropSelection() {
-        if (this._selected !== null && this._selected !== undefined) {
+        if (isPresent(this._selected)) {
             const id = this._selected;
 
             const unit = this._graph.getNode(id);
