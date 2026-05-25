@@ -1026,6 +1026,12 @@ class Application {
         });
     }
 
+    exportAccordanceCSV() {
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        saveString(this.csv.exportAccordance(units),
+                   'text/csv', 'accordance.csv');
+    }
+
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveString(this.csv.exportProcess(units), 'text/csv', 'process.csv');
@@ -1104,6 +1110,8 @@ app.setEvents({
         ['#saveFileBtn', app, app.save],
 
         ['#exportPngBtn', app, app.exportPNG],
+
+        ['#exportAccordanceBtn', app, app.exportAccordanceCSV],
         ['#exportProcessBtn', app, app.exportProcessCSV],
         ['#exportDeviationBtn', app, app.exportDeviationCSV],
         ['#exportRiskBtn', app, app.exportRisksCSV],
