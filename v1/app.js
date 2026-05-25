@@ -1076,17 +1076,18 @@ class Application {
 
         doc.head.appendChild(link);
 
-        const json = Diagram.toJSON(this.diagram);
         const exporter = new HTMLExportStructure();
+
+        const units = this.diagram.graph.nodes(NodeFields.Data);
+        const json = Diagram.toJSON(this.diagram);
 
         const heading = exporter.makeDiagramHeading(json.name, doc);
         doc.body.appendChild(heading);
 
-        appendDiagramCredentials(json, doc);
+        const credentials = exporter.makeDiagramCredentials(json, doc);
+        doc.body.appendChild(credentials);
 
-        const units = this.diagram.graph.nodes(NodeFields.Data);
         const tree = exporter.buildTree(units, tab.document);
-
         doc.body.appendChild(tree);
     }
 }
