@@ -136,10 +136,11 @@ class RiskRegistryDialog {
                 throw error;
         }
 
-        const blob = new Blob([report], {
-            type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        });
-        const url = URL.createObjectURL(blob);
+        saveString(
+            report,
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'registry.docx'
+        );
     }
 }
 
