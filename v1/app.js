@@ -774,7 +774,6 @@ class Application {
         this.state = Application.State.Idle;
 
         this.canvas = new Canvas(canvas);
-        this.palette = new Palette(this);
 
         this.dialog = {
             about: new AboutDialog(),
@@ -785,6 +784,11 @@ class Application {
 
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
+
+        this.palette = new Palette(this);
+        this.palette.data = {
+            diagram: Diagram.toJSON(this.diagram),
+        };
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
