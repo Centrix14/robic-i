@@ -114,85 +114,14 @@ class RiskRegistryDialog {
         this.template.ui.current.textContent = file.name;
     }
 
-    _collectData(diagram) {
-        let table = [];
-
-        let id = 0;
-        const units = diagram.graph.nodes(NodeFields.Data);
-        for (let unit of units) {
-            if (unit?.isSystem || unit.type !== Unit.Type.Process)
-                continue;
-
-            const risk = unit._deviation;
-            const json = Risk.toJSON(risk);
-            if (json.name === '')
-                continue;
-
-            table.push({
-                'код': `Р${id}`,
-                'активный': represent(json.activity),
-                'имя': json.name,
-                'причина': json.cause,
-                'характер': represent(json.character),
-                'этапЖЦ': json.LCStep,
-                'опережение': json.outrunning,
-                'прибыль': json.profit,
-                'оценка': json.score,
-                'вероятность': json.probability,
-                'ошибка': json.error,
-                'заметка': json.note,
-            });
-
-            id++;
-        }
-
-        const diagramJSON = Diagram.toJSON(diagram);
-
-        let name = diagramJSON.name, author = diagramJSON.author, changed;
-
-        if (name === '')
-            name = 'Не задано';
-        if (author === '')
-            author = 'Не задан';
-
-        if (diagramJSON.changed === null || diagramJSON.changed === '')
-            changed = 'Не задана';
-        else
-            changed = diagramJSON.changed.toLocaleString();
-
-        return {
-            'диаграмма': {
-                'имя': name,
-                'автор': author,
-                'редакция': changed,
-            },
-            'риск': table,
-        };
-    }
-
     async create() {
         if (!this.template.data)
             return;
 
-        let report;
-        try {
-            const data = this._collectData(this.app.diagram);
+        const registry = new RiskRegistry();
+        registry.fill(this.app.diagram);
 
-            report = await createReport({
-                template: this.template.data,
-                cmdDelimiter: ['{', '}'],
-                data,
-            });
-        }
-        catch (error) {
-            if (error instanceof CommandExecutionError) {
-                console.log(`Unfulfilled fields -- ${error.command}`);
-                return;
-            }
-            else
-                throw error;
-        }
-
+        const report = await registry.print(this.template.data);
         saveData(
             report,
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
