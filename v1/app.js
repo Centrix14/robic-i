@@ -241,6 +241,11 @@ class ElementExportDialog {
 class AboutDialog {
     constructor() {
         this.dialog = elm('#about-dialog');
+
+        this.buttons = {
+            ok: elm('#closeAboutDialogBtn'),
+        };
+        this.buttons.ok.onclick = () => this.close();
     }
 
     show() {
