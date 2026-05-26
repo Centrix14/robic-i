@@ -893,9 +893,11 @@ class Application {
         this.canvas = new Canvas(canvas);
         this.palette = new Palette(this);
 
+        this.riskRegistry = new RiskRegistryDialog(this);
+        this.processRegistry = new ProcessRegistryDialog(this);
+
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
-        this.riskRegistry = new RiskRegistryDialog(this);
 
         this.buttons = new ButtonHandler(this);
         this.mouse = new MouseHandler(this);
@@ -1250,6 +1252,8 @@ setEvents({
          ()=>document.querySelector('#element-export-dialog').close()],
 
         ['#riskRegistryBtn', app.riskRegistry, app.riskRegistry.show],
+
+        ['#processRegistryBtn', app.processRegistry, app.processRegistry.show],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
