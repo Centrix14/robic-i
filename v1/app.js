@@ -921,6 +921,7 @@ class Application {
         this.canvas = new Canvas(canvas);
         this.palette = new Palette(this);
 
+        this.elementExport = new ElementExportDialog(this);
         this.riskRegistry = new RiskRegistryDialog(this);
         this.processRegistry = new ProcessRegistryDialog(this);
 
@@ -1273,8 +1274,7 @@ setEvents({
         ['#closeAboutDialogBtn', null,
          ()=>document.querySelector('#about-dialog').close()],
 
-        ['#exportElementBtn', null,
-         ()=>document.querySelector('#element-export-dialog').showModal()],
+        ['#exportElementBtn', app.elementExport, app.elementExport.show],
         ['#makeElementExportBtn', app, app.exportElementCSV],
         ['#closeElementExportDialogBtn', null,
          ()=>document.querySelector('#element-export-dialog').close()],
