@@ -1,7 +1,7 @@
 const canvas = document.querySelector('.canvas');
 
 const statusBar = {
-    colors: {
+    color: {
         info: '#717d8e',
         error: '#ff3737',
     },
@@ -11,7 +11,12 @@ const statusBar = {
     talk: (text) => {
         statusBar.element.innerText = text;
         statusBar.element.style.color = statusBar.color.info;
-    }
+    },
+
+    scold: (text) => {
+        statusBar.element.innerText = '❌ ' + text;
+        statusBar.element.style.color = statusBar.color.error;
+    },
 }
 
 const SVG = {
