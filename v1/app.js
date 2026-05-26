@@ -195,6 +195,34 @@ class ProcessRegistryDialog {
     }
 }
 
+class ElementExportDialog {
+    constructor(app) {
+        this.app = app;
+
+        this.dialog = elm('#element-export-dialog');
+        this.setting = {
+            inputs: elm('#export-inputs-checkbox'),
+            outputs: elm('#export-outputs-checkbox'),
+            doers: elm('#export-doers-checkbox'),
+            means: elm('#export-means-checkbox'),
+        };
+
+        this.buttons = {
+            close: elm('#closeElementExportDialogBtn'),
+            create: elm('#makeElementExportBtn'),
+        };
+        this.buttons.close.onclick = () => this.close();
+    }
+
+    show() {
+        this.dialog.showModal();
+    }
+
+    close() {
+        this.dialog.close();
+    }
+}
+
 class Palette {
     static Tab = {
         Diagram: 'palette-diagramTab-radio',
