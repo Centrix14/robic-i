@@ -763,10 +763,12 @@ class Application {
         this.canvas = new Canvas(canvas);
         this.palette = new Palette(this);
 
-        this.about = new AboutDialog();
-        this.elementExport = new ElementExportDialog(this);
-        this.riskRegistry = new RiskRegistryDialog(this);
-        this.processRegistry = new ProcessRegistryDialog(this);
+        this.dialog = {
+            about: new AboutDialog(),
+            elementExport: new ElementExportDialog(this),
+            riskRegistry: new RiskRegistryDialog(this),
+            processRegistry: new ProcessRegistryDialog(this),
+        };
 
         this.diagram = new Diagram();
         this.diagram.init(SVG, this.canvas, Defaults.diagram);
@@ -1097,12 +1099,15 @@ setEvents({
         ['#exportRiskBtn', app, app.exportRisksCSV],
         ['#exportStructureBtn', app, app.exportStructure],
 
-        ['#openAboutDialogBtn', app.about, app.about.show],
+        ['#openAboutDialogBtn', app.dialog.about, app.dialog.about.show],
 
-        ['#exportElementBtn', app.elementExport, app.elementExport.show],
+        ['#exportElementBtn', app.dialog.elementExport,
+         app.dialog.elementExport.show],
 
-        ['#riskRegistryBtn', app.riskRegistry, app.riskRegistry.show],
-        ['#processRegistryBtn', app.processRegistry, app.processRegistry.show],
+        ['#riskRegistryBtn', app.dialog.riskRegistry,
+         app.dialog.riskRegistry.show],
+        ['#processRegistryBtn', app.dialog.processRegistry,
+         app.dialog.processRegistry.show],
     ],
 
     'mousedown': [['.canvas', app.mouse, app.mouse.down]],
