@@ -713,6 +713,40 @@
       </div>
     </dialog>
 
+    <dialog id="process-registry-dialog">
+      <div class="dialog-header">
+        <p class="dialog-title">Реестр процессов</p>
+      </div>
+
+      <div class="dialog-body">
+        <table class="dialog-body-table">
+          <tr>
+            <td>Текущий шаблон:</td>
+            <td id="process-registry-current-template"></td>
+          </tr>
+
+          <tr>
+            <td>Новый шаблон:</td>
+            <td>
+              <input id="process-registry-new-template"
+                     type="file"
+                     multiple="false">
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="dialog-footer">
+        <button class="dialog-close-btn" id="closeProcessRegistryDialogBtn">
+          Отмена
+        </button>
+
+        <button class="dialog-action-btn" id="createProcessRegistryBtn">
+          Сформировать
+        </button>
+      </div>
+    </dialog>
+
     <script type="module">
       import {
           createReport,
