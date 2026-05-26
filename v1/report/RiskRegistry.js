@@ -46,8 +46,10 @@ class RiskRegistry {
 
         if (diagramJSON.changed === null || diagramJSON.changed === '')
             changed = 'Не задана';
-        else
-            changed = diagramJSON.changed.toLocaleString();
+        else {
+            const date = new Date(diagramJSON.changed);
+            changed = date.toLocaleString();
+        }
 
         this.data = {
             'диаграмма': {
