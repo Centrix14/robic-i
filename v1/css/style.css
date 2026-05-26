@@ -314,3 +314,22 @@ dialog {
     padding-bottom: 5%;
     border-spacing: 5px;
 }
+
+/* About dialog */
+
+.about-dialog-pane {
+    display: inline-block;
+}
+
+#about-dialog-logo {
+    margin-right: 0.5vw;
+}
+
+#about-dialog-logo > img {
+    width: 128px;
+    height: 128px;
+}
+
+#about-dialog-info > table {
+    border-spacing: 10px;
+}
