@@ -74,7 +74,7 @@ class RiskRegistry {
         }
         catch (error) {
             if (error instanceof CommandExecutionError) {
-                console.log(`Unfulfilled fields -- ${error.command}`);
+                statusBar.scold(`Ошибка в заполнителе ${error.command}`);
                 return;
             }
             else
