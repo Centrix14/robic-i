@@ -212,6 +212,7 @@ class ElementExportDialog {
             create: elm('#makeElementExportBtn'),
         };
         this.buttons.close.onclick = () => this.close();
+        this.buttons.create.onclick = () => (this.create(), this.close());
     }
 
     show() {
@@ -220,6 +221,20 @@ class ElementExportDialog {
 
     close() {
         this.dialog.close();
+    }
+
+    create() {
+        const roles = {
+            inputs: this.setting.inputs.checked,
+            outputs: this.setting.outputs.checked,
+            doers: this.setting.doers.checked,
+            means: this.setting.means.checked,
+        };
+
+        const graph = this.app.diagram.graph;
+        const exporter = new CSVExportElement();
+        saveData(exporter.make(graph, roles),
+                 MIME.csv, 'elements.csv');
     }
 }
 
@@ -1186,21 +1201,6 @@ class Application {
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveData(this.csv.exportProcess(units), MIME.csv, 'process.csv');
-    }
-
-    exportElementCSV(event) {
-        const roles = {
-            inputs: document.querySelector('#export-inputs-checkbox').checked,
-            outputs: document.querySelector('#export-outputs-checkbox').checked,
-            doers: document.querySelector('#export-doers-checkbox').checked,
-            means: document.querySelector('#export-means-checkbox').checked,
-        };
-
-        const exporter = new CSVExportElement();
-        saveData(exporter.make(this.diagram.graph, roles),
-                 MIME.csv, 'elements.csv');
-
-        document.querySelector('#element-export-dialog').close();
     }
 
     exportDeviationCSV() {
