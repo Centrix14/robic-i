@@ -1275,12 +1275,8 @@ setEvents({
          ()=>document.querySelector('#about-dialog').close()],
 
         ['#exportElementBtn', app.elementExport, app.elementExport.show],
-        ['#makeElementExportBtn', app, app.exportElementCSV],
-        ['#closeElementExportDialogBtn', null,
-         ()=>document.querySelector('#element-export-dialog').close()],
 
         ['#riskRegistryBtn', app.riskRegistry, app.riskRegistry.show],
-
         ['#processRegistryBtn', app.processRegistry, app.processRegistry.show],
     ],
 
