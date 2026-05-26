@@ -951,7 +951,7 @@ class Application {
     applyToDiagram(data) {
         this.diagram._name = data.name;
         this.diagram._author = data.author;
-        this.diagram._changed = data.changed;
+        this.diagram._changed = (data.changed === '') ? null : data.changed;
     }
 
     applyToSelection(data) {
