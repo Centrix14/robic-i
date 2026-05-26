@@ -55,10 +55,11 @@ class ProcessRegistryDialog {
         registry.fill(this.app.diagram);
 
         const report = await registry.print(this.template.data);
-        saveData(
-            report,
-            MIME.docx,
-            'registry.docx'
-        );
+        if (report)
+            saveData(
+                report,
+                MIME.docx,
+                'registry.docx'
+            );
     }
 }
