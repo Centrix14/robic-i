@@ -183,7 +183,7 @@ class ProcessRegistryDialog {
         if (!this.template.data)
             return;
 
-        const registry = new RiskRegistry();
+        const registry = new ProcessRegistry();
         registry.fill(this.app.diagram);
 
         const report = await registry.print(this.template.data);
