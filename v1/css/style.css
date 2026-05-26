@@ -71,7 +71,6 @@ body {
 
 .menu-status-bar > p {
     font-size: 14px;
-    color: var(--status-bar-fg);
 }
 
 .menu-dropdown {
