@@ -21,7 +21,7 @@ class ProcessRegistry {
 
             table.push({
                 'код': `П${id.outer}`,
-                'активный': json.activity,
+                'активный': represent(json.activity),
                 'имя': json.name,
                 'цель': json.objective,
                 'владелец': json.owner,
