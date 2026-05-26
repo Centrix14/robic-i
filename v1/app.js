@@ -1,9 +1,17 @@
 const canvas = document.querySelector('.canvas');
 
 const statusBar = {
+    colors: {
+        info: '#717d8e',
+        error: '#ff3737',
+    },
+
     element: document.querySelector('.menu-status-bar > p'),
 
-    print: (text) => statusBar.element.innerText = text
+    talk: (text) => {
+        statusBar.element.innerText = text;
+        statusBar.element.style.color = statusBar.color.info;
+    }
 }
 
 const SVG = {
