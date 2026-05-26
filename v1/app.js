@@ -124,7 +124,7 @@ class RiskRegistryDialog {
         const report = await registry.print(this.template.data);
         saveData(
             report,
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            MIME.docx,
             'registry.docx'
         );
     }
@@ -189,7 +189,7 @@ class ProcessRegistryDialog {
         const report = await registry.print(this.template.data);
         saveData(
             report,
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            MIME.docx,
             'registry.docx'
         );
     }
@@ -1130,7 +1130,7 @@ class Application {
 
     save() {
         const contents = JSON.stringify(Diagram.toJSON(this.diagram));
-        saveData(contents, 'application/json', 'diagram.idf');
+        saveData(contents, MIME.json, 'diagram.idf');
     }
 
     exportPNG() {
@@ -1151,12 +1151,12 @@ class Application {
     exportAccordanceCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveData(this.csv.exportAccordance(units),
-                   'text/csv', 'accordance.csv');
+                 MIME.csv, 'accordance.csv');
     }
 
     exportProcessCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveData(this.csv.exportProcess(units), 'text/csv', 'process.csv');
+        saveData(this.csv.exportProcess(units), MIME.csv, 'process.csv');
     }
 
     exportElementCSV(event) {
@@ -1169,7 +1169,7 @@ class Application {
 
         const exporter = new CSVExportElement();
         saveData(exporter.make(this.diagram.graph, roles),
-                   'text/csv', 'elements.csv');
+                 MIME.csv, 'elements.csv');
 
         document.querySelector('#element-export-dialog').close();
     }
@@ -1177,12 +1177,12 @@ class Application {
     exportDeviationCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
         saveData(this.csv.exportDeviation(units),
-                   'text/csv', 'deviation.csv');
+                 MIME.csv, 'deviation.csv');
     }
 
     exportRisksCSV() {
         const units = this.diagram.graph.nodes(NodeFields.Data);
-        saveData(this.csv.exportRisk(units), 'text/csv', 'risk.csv');
+        saveData(this.csv.exportRisk(units), MIME.csv, 'risk.csv');
     }
 
     exportStructure() {
