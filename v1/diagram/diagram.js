@@ -557,7 +557,7 @@ class Diagram {
 
         this._name = '';
         this._author = '';
-        this._changed = null;
+        this._changed = wellDate(new Date());
     }
 
     init(operator, canv, defaults) {
