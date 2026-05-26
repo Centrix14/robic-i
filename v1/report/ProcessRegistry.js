@@ -55,4 +55,25 @@ class ProcessRegistry {
 
         return this.data;
     }
+
+    async print(template) {
+        let report;
+        try {
+            report = await createReport({
+                template,
+                cmdDelimiter: ['{', '}'],
+                data: this.data,
+            });
+        }
+        catch (error) {
+            if (error instanceof CommandExecutionError) {
+                console.log(`Unfulfilled fields -- ${error.command}`);
+                return;
+            }
+            else
+                throw error;
+        }
+
+        return report;
+    }
 }
