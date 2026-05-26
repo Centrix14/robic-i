@@ -238,6 +238,20 @@ class ElementExportDialog {
     }
 }
 
+class AboutDialog {
+    constructor() {
+        this.dialog = elm('#about-dialog');
+    }
+
+    show() {
+        this.dialog.showModal();
+    }
+
+    close() {
+        this.dialog.close();
+    }
+}
+
 class Palette {
     static Tab = {
         Diagram: 'palette-diagramTab-radio',
