@@ -16,8 +16,11 @@ class ProcessRegistry {
             if (json.name === '')
                 continue;
 
+            const gs = unit._accordanceGS;
+            const id = gs._geometry.get(ProcessGeometrySet.Geometry.Rect)._id;
+
             table.push({
-                'код': '!!!',
+                'код': `П${id.outer}`,
                 'активный': json.activity,
                 'имя': json.name,
                 'цель': json.objective,
