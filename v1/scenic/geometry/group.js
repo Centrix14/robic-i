@@ -152,6 +152,16 @@ class AngleLine extends Group {
 
         return {points};
     }
+
+    shift(dX, dY, flags) {
+        const f = flags ?? {start: true, end: true};
+
+        if (f.start)
+            this._start.shift(dX, dY);
+        if (f.end)
+            this._end.shift(dX, dY);
+        this._calcRibs();
+    }
 }
 
 class HorizontalStepline extends Group {
