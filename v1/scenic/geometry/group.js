@@ -482,6 +482,20 @@ class BLine extends Group {
                 + `${vl.end.x},${vl.end.y}`;
         };
     }
+
+    isTouching(cursor, spatia) {
+        const Rib = BLine.Rib;
+
+        const hu = this._store.get(Rib.HorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft);
+
+        return hu.isTouching(cursor, spatia)
+            || vr.isTouching(cursor, spatia)
+            || hd.isTouching(cursor, spatia)
+            || vl.isTouching(cursor, spatia);
+    }
 }
 
 class NamedRectGroup extends Group {
