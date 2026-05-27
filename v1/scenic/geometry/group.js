@@ -332,9 +332,9 @@ class VerticalStepline extends Group {
     _calcRibs() {
         const Rib = VerticalStepline.Rib;
 
-        const left = this._store.get(Rib.Up),
+        const left = this._store.get(Rib.Left),
               middle = this._store.get(Rib.Middle),
-              right = this._store.get(Rib.Down);
+              right = this._store.get(Rib.Right);
 
         const [x1, y1] = [this.start.x, this.start.y],
               [x2, y2] = [this.end.x, this.end.y];
@@ -369,9 +369,9 @@ class VerticalStepline extends Group {
     publish() {
         const Rib = VerticalStepline.Rib;
 
-        const left = this._store.get(Rib.Up),
+        const left = this._store.get(Rib.Left),
               middle = this._store.get(Rib.Middle),
-              right = this._store.get(Rib.Down);
+              right = this._store.get(Rib.Right);
 
         return {
             points: `${left.start.x},${left.start.y} `
@@ -384,9 +384,9 @@ class VerticalStepline extends Group {
     isTouching(cursor, spatia) {
         const Rib = VerticalStepline.Rib;
 
-        const left = this._store.get(Rib.Up),
+        const left = this._store.get(Rib.Left),
               middle = this._store.get(Rib.Middle),
-              right = this._store.get(Rib.Down);
+              right = this._store.get(Rib.Right);
 
         return left.isTouching(cursor, spatia)
             || middle.isTouching(cursor, spatia)
@@ -626,14 +626,14 @@ class ElementArrowGroup extends Group {
 
         return {
             id: obj._id,
-            shape: AngleLine.toJSON(store.get(Member.Shape)[0]),
+            shape: VerticalStepline.toJSON(store.get(Member.Shape)[0]),
             name: Text.toJSON(store.get(Member.Name)[0]),
             designation: Text.toJSON(store.get(Member.Designation)[0]),
         };
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = AngleLine.fromJSON(json.shape),
+        const shape = VerticalStepline.fromJSON(json.shape),
               name = Text.fromJSON(json.name),
               designation = Text.fromJSON(json.designation);
 
@@ -667,7 +667,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new AngleLine(start, end),
+        const stepline = new VerticalStepline(start, end),
               center = stepline.center;
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
