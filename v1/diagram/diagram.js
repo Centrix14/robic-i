@@ -669,8 +669,11 @@ class Diagram {
             return;
 
         const gs = unit._accordanceGS;
-        if (gs instanceof ElementGeometrySet)
+        if (gs instanceof ElementGeometrySet) {
+//            gs.shift(0, dY, {start: true});
+//            gs.shift(dX, 0, {end: true});
             return;
+        }
 
         gs.shift(dX, dY);
 
