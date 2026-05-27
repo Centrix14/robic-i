@@ -512,6 +512,134 @@ class BLine extends Group {
     }
 }
 
+class ULine extends Group {
+    static Rib = {
+        RightHorizontalUp: 'rhu',
+        VerticalRight: 'vr',
+        HorizontalDown: 'hd',
+        VerticalLeft: 'vl',
+        LeftHorizontalUp: 'lhu',
+    }
+
+    constructor(start, end, rightCorner, leftCorner) {
+        super();
+
+        this._store = new Map([
+            [ULine.Rib.RightHorizontalUp, new StraightLine()],
+            [ULine.Rib.VerticalRight, new StraightLine()],
+            [ULine.Rib.HorizontalDown, new StraightLine()],
+            [ULine.Rib.VerticalLeft, new StraightLine()],
+            [ULine.Rib.LeftHorizontalUp, new StraightLine()],
+        ]);
+
+        this._start = start ?? new Point(0,0);
+        this._end = end ?? new Point(0,0);
+        this._rightCorner = rightCorner ?? new Point(0,0);
+        this._leftCorner = leftCorner ?? new Point(0,0);
+
+        this._calcRibs();
+    }
+
+    _calcRibs() {
+        const Rib = ULine.Rib;
+
+        const rhu = this._store.get(Rib.RightHorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft),
+              lhu = this._store.get(Rib.LeftHorizontalUp);
+
+        const [x1, y1] = [this.start.x, this.start.y],
+              [x2, y2] = [this.end.x, this.end.y],
+              [xrc, yrc] = [this.rightCorner.x, this.rightCorner.y],
+              [xlc, ylc] = [this.leftCorner.x, this.leftCorner.y];
+
+        rhu.start = this.start;
+        [rhu.end.x, rhu.end.y] = [xrc, y1];
+
+        [vr.start.x, vr.start.y] = [xrc, y1];
+        vr.end = this.rightCorner;
+
+        hd.start = this.rightCorner;
+        hd.end = this.leftCorner;
+
+        vl.start = this.leftCorner;
+        [vl.end.x, vl.end.y] = [xlc, y2];
+
+        [lhu.start.x, lhu.start.y] = [xlc, y2];
+        lhu.end = this.end;
+    }
+
+    get start() { return this._start; }
+    get end() { return this._end; }
+    get rightCorner() { return this._rightCorner; }
+    get leftCorner() { return this._leftCorner; }
+
+    get center() {
+        const hd = this._store.get(ULine.Rib.HorizontalDown);
+        const d = hd.start.sub(hd.end);
+
+        return new Point(
+            hd.end.x + d.x / 2,
+            hd.start.y,
+        );
+    }
+
+    publish() {
+        const Rib = ULine.Rib;
+
+        const rhu = this._store.get(Rib.RightHorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft),
+              lhu = this._store.get(Rib.LeftHorizontalUp);
+
+        return {
+            points: `${rhu.start.x},${rhu.start.y} `
+                + `${vr.start.x},${vr.start.y} `
+                + `${hd.start.x},${hd.start.y} `
+                + `${vl.start.x},${vl.start.y} `
+                + `${lhu.start.x},${lhu.start.y} `
+                + `${lhu.end.x},${lhu.end.y}`
+        };
+    }
+
+    isTouching(cursor, spatia) {
+        const Rib = BLine.Rib;
+
+        const rhu = this._store.get(Rib.RightHorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft),
+              lhu = this._store.get(Rib.LeftHorizontalUp);
+
+        return rhu.isTouching(cursor, spatia)
+            || vr.isTouching(cursor, spatia)
+            || hd.isTouching(cursor, spatia)
+            || vl.isTouching(cursor, spatia)
+            || lhu.isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY, flags) {
+        const f = flags ?? {
+            start: true,
+            end: true,
+            rightCorner: true,
+            leftCorner: true,
+        };
+
+        if (f.start)
+            this._start.shift(dX, dY);
+        if (f.end)
+            this._end.shift(dX, dY);
+        if (f.rightCorner)
+            this._rightCorner.shift(dX, dY);
+        if (f.leftCorner)
+            this._leftCorner.shift(dX, dY);
+        this._calcRibs();
+    }
+}
+
 class NamedRectGroup extends Group {
     static Member = {
         Shape: 'shape',
