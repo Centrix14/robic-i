@@ -670,8 +670,7 @@ class Diagram {
 
         const gs = unit._accordanceGS;
         if (gs instanceof ElementGeometrySet) {
-//            gs.shift(0, dY, {start: true});
-//            gs.shift(dX, 0, {end: true});
+            gs.shift(dX, dY, {corner: true});
             return;
         }
 
@@ -687,14 +686,18 @@ class Diagram {
 
                 if (connection?.position === 'start') {
                     adjacentGS.shift(dX, dY, {
-                        start: true,
-                        end: false
+                        edge: {
+                            start: true,
+                            end: false
+                        }
                     });
                 }
                 else if (connection?.position === 'end') {
                     adjacentGS.shift(dX, dY, {
-                        start: false,
-                        end: true
+                        edge: {
+                            start: false,
+                            end: true
+                        }
                     });
                 }
             }
