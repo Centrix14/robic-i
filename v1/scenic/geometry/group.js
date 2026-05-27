@@ -51,6 +51,28 @@ class AngleLine extends Group {
         Y: 'y',
     }
 
+    static toJSON(obj) {
+        return {
+            start: Point.toJSON(obj._start),
+            end: Point.toJSON(obj._end),
+            variant: this._variant,
+        };
+    }
+
+    static applyJSON(json, obj) {
+        Point.applyJSON(json.start, obj._start);
+        Point.applyJSON(json.end, obj._end);
+        this._variant = json.variant;
+
+        obj._calcRibs();
+    }
+
+    static fromJSON(json) {
+        const obj = new AngleLine();
+        AngleLine.applyJSON(json, obj);
+        return obj;
+    }
+
     constructor(start, end, variant) {
         super();
 
