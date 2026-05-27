@@ -153,6 +153,14 @@ class AngleLine extends Group {
         return {points};
     }
 
+    isTouching(cursor, spatia) {
+        const horizontal = this._store.get(AngleLine.Rib.Horizontal),
+              vertical = this._store.get(AngleLine.Rib.Vertical);
+
+        return horizontal.isTouching(cursor, spatia)
+            || vertical.isTouching(cursor, spatia);
+    }
+
     shift(dX, dY, flags) {
         const f = flags ?? {start: true, end: true};
 
