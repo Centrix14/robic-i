@@ -1,8 +1,8 @@
-describe('NaiveVerticalStepline', function(){
+describe('HorizontalStepline', function(){
 
-    describe('NaiveVerticalStepline.constructor', function(){
+    describe('HorizontalStepline.constructor', function(){
         it('NSLV.constructor1 - handles point as regular stepline', function(){
-            const line = new NaiveVerticalStepline(new Point(10, 10),
+            const line = new HorizontalStepline(new Point(10, 10),
                                             new Point(10, 10));
             const obj = line.publish();
             assert.equal('10,10 10,10 10,10 10,10', obj.points,
@@ -11,7 +11,7 @@ describe('NaiveVerticalStepline', function(){
 
         it('NSLV.constructor2 - handles straight line as resular stepline',
            function(){
-               const line = new NaiveVerticalStepline(new Point(10, 10),
+               const line = new HorizontalStepline(new Point(10, 10),
                                                new Point(50, 10));
                const obj = line.publish();
                assert.equal('10,10 30,10 30,10 50,10', obj.points,
@@ -19,7 +19,7 @@ describe('NaiveVerticalStepline', function(){
            });
 
         it('NSLV.constructor3 - makes regular stepline', function(){
-            const line = new NaiveVerticalStepline(new Point(10, 10),
+            const line = new HorizontalStepline(new Point(10, 10),
                                             new Point(50, 50));
             const obj = line.publish();
             assert.equal('10,10 30,10 30,50 50,50', obj.points,
@@ -27,7 +27,7 @@ describe('NaiveVerticalStepline', function(){
         });
 
         it('NSLV.constructor4 - makes stepline in IV quadrant', function(){
-            const line = new NaiveVerticalStepline(new Point(10, 10),
+            const line = new HorizontalStepline(new Point(10, 10),
                                             new Point(50, -30));
             const obj = line.publish();
             assert.equal('10,10 30,10 30,-30 50,-30', obj.points,
@@ -36,7 +36,7 @@ describe('NaiveVerticalStepline', function(){
 
         it('NSLV.constructor5 - makes stepline in reversed direction',
            function(){
-               const line = new NaiveVerticalStepline(new Point(50, 50),
+               const line = new HorizontalStepline(new Point(50, 50),
                                                       new Point(10, 10));
                const obj = line.publish();
                assert.equal('50,50 30,50 30,10 10,10', obj.points,
@@ -45,9 +45,9 @@ describe('NaiveVerticalStepline', function(){
 
     });
 
-    describe('NaiveVerticalStepline.isTouching', function(){
+    describe('HorizontalStepline.isTouching', function(){
         const s = new Spatia(5);
-        const l = new NaiveVerticalStepline(new Point(0,0),
+        const l = new HorizontalStepline(new Point(0,0),
                                             new Point(50,50));
 
         it('NSLV.isTouching1 - detects touch at vertices', function(){

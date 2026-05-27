@@ -204,12 +204,12 @@ m2=0..*</panel_attributes>
       <w>385</w>
       <h>189</h>
     </coordinates>
-    <panel_attributes>NaiveVerticalStepline
+    <panel_attributes>HorizontalStepline
 --
 -start: Point
 -end: Point
 --
-NaiveVerticalStepline(start:Point, end:Point)
+HorizontalStepline(start:Point, end:Point)
 
 &lt;&lt;get&gt;&gt; start()
 &lt;&lt;get&gt;&gt; end()

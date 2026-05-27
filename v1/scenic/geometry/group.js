@@ -40,7 +40,7 @@ class Group {
     }
 }
 
-class NaiveVerticalStepline extends Group {
+class HorizontalStepline extends Group {
     static Rib = {
         Up: 'up',
         Middle: 'middle',
@@ -61,8 +61,8 @@ class NaiveVerticalStepline extends Group {
     }
 
     static fromJSON(json) {
-        const obj = new NaiveVerticalStepline();
-        NaiveVerticalStepline.applyJSON(json, obj);
+        const obj = new HorizontalStepline();
+        HorizontalStepline.applyJSON(json, obj);
         return obj;
     }
 
@@ -70,9 +70,9 @@ class NaiveVerticalStepline extends Group {
         super();
 
         this._store = new Map([
-            [NaiveVerticalStepline.Rib.Up, new StraightLine()],
-            [NaiveVerticalStepline.Rib.Middle, new StraightLine()],
-            [NaiveVerticalStepline.Rib.Down, new StraightLine()]
+            [HorizontalStepline.Rib.Up, new StraightLine()],
+            [HorizontalStepline.Rib.Middle, new StraightLine()],
+            [HorizontalStepline.Rib.Down, new StraightLine()]
         ]);
 
         this._start = start ?? new Point(0,0);
@@ -82,7 +82,7 @@ class NaiveVerticalStepline extends Group {
     }
 
     _calcRibs() {
-        const Rib = NaiveVerticalStepline.Rib;
+        const Rib = HorizontalStepline.Rib;
 
         const up = this._store.get(Rib.Up),
               middle = this._store.get(Rib.Middle),
@@ -119,7 +119,7 @@ class NaiveVerticalStepline extends Group {
     drop() { return new Result(); }
 
     publish() {
-        const Rib = NaiveVerticalStepline.Rib;
+        const Rib = HorizontalStepline.Rib;
 
         const up = this._store.get(Rib.Up),
               middle = this._store.get(Rib.Middle),
@@ -134,7 +134,7 @@ class NaiveVerticalStepline extends Group {
     }
 
     isTouching(cursor, spatia) {
-        const Rib = NaiveVerticalStepline.Rib;
+        const Rib = HorizontalStepline.Rib;
 
         const up = this._store.get(Rib.Up),
               middle = this._store.get(Rib.Middle),
@@ -378,14 +378,14 @@ class ElementArrowGroup extends Group {
 
         return {
             id: obj._id,
-            shape: NaiveVerticalStepline.toJSON(store.get(Member.Shape)[0]),
+            shape: HorizontalStepline.toJSON(store.get(Member.Shape)[0]),
             name: Text.toJSON(store.get(Member.Name)[0]),
             designation: Text.toJSON(store.get(Member.Designation)[0]),
         };
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = NaiveVerticalStepline.fromJSON(json.shape),
+        const shape = HorizontalStepline.fromJSON(json.shape),
               name = Text.fromJSON(json.name),
               designation = Text.fromJSON(json.designation);
 
@@ -417,7 +417,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new NaiveVerticalStepline(start, end),
+        const stepline = new HorizontalStepline(start, end),
               center = stepline.getCenter();
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
