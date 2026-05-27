@@ -40,6 +40,58 @@ class Group {
     }
 }
 
+class AngleLine extends Group {
+    static Rib = {
+        Horizontal: 'horizontal',
+        Vertical: 'vertical',
+    }
+
+    static Variant = {
+        X: 'x',
+        Y: 'y',
+    }
+
+    constructor(start, end, variant) {
+        this._store = new Map([
+            [AngleLine.Rib.Horizontal, new StraightLine()],
+            [AngleLine.Rib.Vertical, new StraightLine()],
+        ]);
+
+        this._start = start ?? new Point(0,0);
+        this._end = end ?? new Point(0,0);
+        this._variant = variant ?? AngleLine.Variant.X;
+
+        this._calcRibs();
+    }
+
+    _calcRibs() {
+        const Rib = AngleLine.Rib, Variant = AngleLine.Variant;
+
+        const horizontal = this._store.get(Rib.Horizontal),
+              vertical = this._store.get(Rib.Vertical);
+
+        const [x1, y1] = [this._start.x, this._start.y],
+              [x2, y2] = [this._end.x, this._end.y];
+
+        switch (this._variant) {
+        case Variant.X:
+            [horizontal.start.x, horizontal.start.y] = [x1, y1];
+            [horizontal.end.x, horizontal.end.y] = [x2, y1];
+
+            [vertical.start.x, vertical.start.y] = [x2, y1];
+            [vertical.end.x, vertical.end.y] = [x2, y2];
+            break;
+        case Variant.Y:
+            [horizontal.start.x, horizontal.start.y] = [x1, y1];
+            [horizontal.end.x, horizontal.end.y] = [x1, y2];
+
+            [vertical.start.x, vertical.start.y] = [x1, y2];
+            [vertical.end.x, vertical.end.y] = [x2, y2];
+            break;
+        }
+    }
+}
+
 class HorizontalStepline extends Group {
     static Rib = {
         Up: 'up',
