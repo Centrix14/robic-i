@@ -90,6 +90,28 @@ class AngleLine extends Group {
             break;
         }
     }
+
+    get start() { return this._start; }
+    get end() { return this._end; }
+
+    get center() {
+        const [x1, y1] = [this._start.x, this._start.y],
+              [x2, y2] = [this._end.x, this._end.y];
+
+        switch (this._variant) {
+        case Variant.X:
+            return new Point(
+                x2, y1
+            );
+        case Variant.Y:
+            return new Point(
+                x1, y2
+            );
+        }
+    }
+
+    add() { return new Result(); }
+    drop() { return new Result(); }
 }
 
 class HorizontalStepline extends Group {
