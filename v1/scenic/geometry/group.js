@@ -132,7 +132,7 @@ class AngleLine extends Group {
     add() { return new Result(); }
     drop() { return new Result(); }
 
-    toPolyline() {
+    publish() {
         const horizontal = this._store.get(AngleLine.Rib.Horizontal),
               vertical = this._store.get(AngleLine.Rib.Vertical);
 
@@ -510,26 +510,28 @@ class ElementArrowGroup extends Group {
 
         return {
             id: obj._id,
-            shape: HorizontalStepline.toJSON(store.get(Member.Shape)[0]),
+            shape: AngleLine.toJSON(store.get(Member.Shape)[0]),
             name: Text.toJSON(store.get(Member.Name)[0]),
             designation: Text.toJSON(store.get(Member.Designation)[0]),
         };
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = HorizontalStepline.fromJSON(json.shape),
+        const shape = AngleLine.fromJSON(json.shape),
               name = Text.fromJSON(json.name),
               designation = Text.fromJSON(json.designation);
 
-        obj.init(json.id, operator,
-                 {
-                     start: shape._start,
-                     end: shape._end,
-                 },
-                 {
-                     name: name.value,
-                     designation: designation.value
-                 });
+        obj.init(
+            json.id, operator,
+            {
+                start: shape._start,
+                end: shape._end,
+            },
+            {
+                name: name.value,
+                designation: designation.value
+            }
+        );
     }
 
     static fromJSON(json, operator) {
@@ -549,7 +551,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new HorizontalStepline(start, end),
+        const stepline = new AngleLine(start, end),
               center = stepline.getCenter();
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
