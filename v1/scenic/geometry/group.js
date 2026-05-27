@@ -114,11 +114,21 @@ class AngleLine extends Group {
         const horizontal = this._store.get(AngleLine.Rib.Horizontal),
               vertical = this._store.get(AngleLine.Rib.Vertical);
 
-        return {
-            points: `${horizontal.start.x},${horizontal.start.y} `
+        let points;
+        switch (this._variant) {
+        case AngleLine.Variant.X:
+            points = `${horizontal.start.x},${horizontal.start.y} `
                 + `${horizontal.end.x},${horizontal.end.y} `
-                + `${vertical.end.x},${vertical.end.y}`
-        };
+                + `${vertical.end.x},${vertical.end.y}`;
+            break;
+        case AngleLine.Variant.Y:
+            points = `${vertical.start.x},${vertical.start.y} `
+                + `${vertical.end.x},${vertical.end.y} `
+                + `${horizontal.end.x},${horizontal.end.y}`;
+            break;
+        }
+
+        return {points};
     }
 }
 
