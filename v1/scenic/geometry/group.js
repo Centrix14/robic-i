@@ -465,6 +465,23 @@ class BLine extends Group {
             hd.y,
         );
     }
+
+    publish() {
+        const Rib = BLine.Rib;
+
+        const hu = this._store.get(Rib.HorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft);
+
+        return {
+            points: `${hu.start.x},${hu.start.y} `
+                + `${vr.start.x},${vr.start.y} `
+                + `${hd.start.x},${hd.start.y} `
+                + `${vl.start.x},${vl.start.y} `
+                + `${vl.end.x},${vl.end.y}`;
+        };
+    }
 }
 
 class NamedRectGroup extends Group {
