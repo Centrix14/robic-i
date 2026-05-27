@@ -605,7 +605,7 @@ class ULine extends Group {
     }
 
     isTouching(cursor, spatia) {
-        const Rib = BLine.Rib;
+        const Rib = ULine.Rib;
 
         const rhu = this._store.get(Rib.RightHorizontalUp),
               vr = this._store.get(Rib.VerticalRight),
@@ -862,14 +862,14 @@ class ElementArrowGroup extends Group {
 
         return {
             id: obj._id,
-            shape: BLine.toJSON(store.get(Member.Shape)[0]),
+            shape: ULine.toJSON(store.get(Member.Shape)[0]),
             name: Text.toJSON(store.get(Member.Name)[0]),
             designation: Text.toJSON(store.get(Member.Designation)[0]),
         };
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = BLine.fromJSON(json.shape),
+        const shape = ULine.fromJSON(json.shape),
               name = Text.fromJSON(json.name),
               designation = Text.fromJSON(json.designation);
 
@@ -903,7 +903,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new BLine(start, end, new Point(start.x + 50, start.y + 50)),
+        const stepline = new ULine(start, end, new Point(start.x + 50, start.y + 50), new Point(end.x - 50, end.y + 50)),
               center = stepline.center;
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
