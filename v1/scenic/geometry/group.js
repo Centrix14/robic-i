@@ -52,6 +52,8 @@ class AngleLine extends Group {
     }
 
     constructor(start, end, variant) {
+        super();
+
         this._store = new Map([
             [AngleLine.Rib.Horizontal, new StraightLine()],
             [AngleLine.Rib.Vertical, new StraightLine()],
@@ -83,11 +85,11 @@ class AngleLine extends Group {
               [x2, y2] = [this._end.x, this._end.y];
 
         switch (this._variant) {
-        case Variant.X:
+        case AngleLine.Variant.X:
             return new Point(
                 x2, y1
             );
-        case Variant.Y:
+        case AngleLine.Variant.Y:
             return new Point(
                 x1, y2
             );
@@ -96,6 +98,17 @@ class AngleLine extends Group {
 
     add() { return new Result(); }
     drop() { return new Result(); }
+
+    toPolyline() {
+        const horizontal = this._store.get(AngleLine.Rib.Horizontal),
+              vertical = this._store.get(AngleLine.Rib.Vertical);
+
+        return {
+            points: `${horizontal.start.x},${horizontal.start.y} `
+                + `${horizontal.end.x},${horizontal.end.y} `
+                + `${vertical.end.x},${vertical.end.y}`
+        };
+    }
 }
 
 class HorizontalStepline extends Group {
