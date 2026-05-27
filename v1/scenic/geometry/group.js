@@ -496,6 +496,18 @@ class BLine extends Group {
             || hd.isTouching(cursor, spatia)
             || vl.isTouching(cursor, spatia);
     }
+
+    shift(dX, dY, flags) {
+        const f = flags ?? {start: true, end: true, corner: true};
+
+        if (f.start)
+            this._start.shift(dX, dY);
+        if (f.end)
+            this._end.shift(dX, dY);
+        if (f.corner)
+            this._corner.shift(dX, dY);
+        this._calcRibs();
+    }
 }
 
 class NamedRectGroup extends Group {
