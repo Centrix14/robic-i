@@ -237,7 +237,7 @@ class HorizontalStepline extends Group {
     get start() { return this._start; }
     get end() { return this._end; }
 
-    getCenter() {
+    get center() {
         const [x1, y1] = [this._start.x, this._start.y],
               [x2, y2] = [this._end.x, this._end.y];
 
@@ -552,7 +552,7 @@ class ElementArrowGroup extends Group {
 
         const start = coords.start, end = coords.end;
         const stepline = new AngleLine(start, end),
-              center = stepline.getCenter();
+              center = stepline.center;
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
 
@@ -633,7 +633,7 @@ class ElementArrowGroup extends Group {
         shape[0].shift(dX, dY, flags);
         operator.applyTo(shape[1], shape[0].publish());
 
-        const center = shape[0].getCenter();
+        const center = shape[0].center;
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
 
