@@ -404,6 +404,61 @@ class VerticalStepline extends Group {
     }
 }
 
+class BLine extends Group {
+    static Rib = {
+        VerticalLeft: 'vl',
+        VerticalRight: 'vr',
+        HorizontalUp: 'hu',
+        HorizontalDown: 'hd',
+    }
+
+    constructor(start, end, corner) {
+        super();
+
+        this._store = new Map([
+            [BLine.Rib.HorizontalUp, new StraightLine()],
+            [BLine.Rib.VerticalRight, new StraightLine()],
+            [BLine.Rib.HorizontalDown, new StraightLine()],
+            [BLine.Rib.VerticalLeft, new StraightLine()],
+        ]);
+
+        this._start = start ?? new Point(0,0);
+        this._end = end ?? new Point(0,0);
+        this._corner = corner ?? new Point(0,0);
+
+        this._calcRibs();
+    }
+
+    _calcRibs() {
+        const Rib = BLine.Rib;
+
+        const hu = this._store.get(Rib.HorizontalUp),
+              vr = this._store.get(Rib.VerticalRight),
+              hd = this._store.get(Rib.HorizontalDown),
+              vl = this._store.get(Rib.VerticalLeft);
+
+        const [x1, y1] = [this.start.x, this.start.y],
+              [x2, y2] = [this.end.x, this.end.y],
+              [xc, yc] = [this.corner.x, this.corner.y];
+
+        hu.start = this.start;
+        [hu.end.x, hu.end.y] = [xc, y1];
+
+        [vr.start.x, vr.start.y] = [xc, y1];
+        vr.end = this.corner;
+
+        hd.start = this.corner;
+        [hd.end.x, hd.end.y] = [x2, yc];
+
+        [vl.start.x, vl.start.y] = [x2, yc];
+        vl.end = this.end;
+    }
+
+    get start() { return this._start; }
+    get end() { return this._end; }
+    get corner() { return this._corner; }
+}
+
 class NamedRectGroup extends Group {
     static Member = {
         Shape: 'shape',
