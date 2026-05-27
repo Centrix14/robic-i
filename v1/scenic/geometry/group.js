@@ -162,12 +162,18 @@ class AngleLine extends Group {
     }
 
     shift(dX, dY, flags) {
-        const f = flags ?? {start: true, end: true};
+        const f = flags ?? {corner: null, edge: {start: true, end: true}};
 
-        if (f.start)
-            this._start.shift(dX, dY);
-        if (f.end)
-            this._end.shift(dX, dY);
+        if (f.corner) {
+            this._start.shift(0, dY);
+            this._end.shift(dX, 0);
+        }
+        if (f.edge) {
+            if (f.edge.start)
+                this._start.shift(dX, dY);
+            if (f.edge.end)
+                this._end.shift(dX, dY);
+        }
         this._calcRibs();
     }
 }
