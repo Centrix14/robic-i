@@ -288,6 +288,122 @@ class HorizontalStepline extends Group {
     }
 }
 
+class VerticalStepline extends Group {
+    static Rib = {
+        Left: 'left',
+        Middle: 'middle',
+        Right: 'right',
+    }
+
+    static toJSON(obj) {
+        return {
+            start: Point.toJSON(obj._start),
+            end: Point.toJSON(obj._end),
+        };
+    }
+
+    static applyJSON(json, obj) {
+        Point.applyJSON(json.start, obj._start);
+        Point.applyJSON(json.end, obj._end);
+        obj._calcRibs();
+    }
+
+    static fromJSON(json) {
+        const obj = new VerticalStepline();
+        VerticalStepline.applyJSON(json, obj);
+        return obj;
+    }
+
+    constructor(start, end) {
+        super();
+
+        this._store = new Map([
+            [VerticalStepline.Rib.Left, new StraightLine()],
+            [VerticalStepline.Rib.Middle, new StraightLine()],
+            [VerticalStepline.Rib.Right, new StraightLine()]
+        ]);
+
+        this._start = start ?? new Point(0,0);
+        this._end = end ?? new Point(0,0);
+
+        this._calcRibs();
+    }
+
+    _calcRibs() {
+        const Rib = VerticalStepline.Rib;
+
+        const left = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              right = this._store.get(Rib.Down);
+
+        const [x1, y1] = [this.start.x, this.start.y],
+              [x2, y2] = [this.end.x, this.end.y];
+        const dx = x2 - x1, dy = y2 - y1, l = dy / 2;
+
+        [left.start.x, left.start.y] = [x1, y1];
+        [left.end.x, left.end.y] = [x1, y1 + l];
+
+        [middle.start.x, middle.start.y] = [x1, y1 + l];
+        [middle.end.x, middle.end.y] = [x1 + dx, y1 + l];
+
+        [right.start.x, right.start.y] = [x1 + dx, y1 + l];
+        [right.end.x, right.end.y] = [x2, y2];
+    }
+
+    get start() { return this._start; }
+    get end() { return this._end; }
+
+    get center() {
+        const [x1, y1] = [this._start.x, this._start.y],
+              [x2, y2] = [this._end.x, this._end.y];
+
+        return new Point(
+            x1 + (x2 - x1) / 2,
+            y1 + (y2 - y1) / 2
+        );
+    }
+
+    add() { return new Result(); }
+    drop() { return new Result(); }
+
+    publish() {
+        const Rib = VerticalStepline.Rib;
+
+        const left = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              right = this._store.get(Rib.Down);
+
+        return {
+            points: `${left.start.x},${left.start.y} `
+                + `${middle.start.x},${middle.start.y} `
+                + `${right.start.x},${right.start.y} `
+                + `${right.end.x},${right.end.y}`
+        };
+    }
+
+    isTouching(cursor, spatia) {
+        const Rib = VerticalStepline.Rib;
+
+        const left = this._store.get(Rib.Up),
+              middle = this._store.get(Rib.Middle),
+              right = this._store.get(Rib.Down);
+
+        return left.isTouching(cursor, spatia)
+            || middle.isTouching(cursor, spatia)
+            || right.isTouching(cursor, spatia);
+    }
+
+    shift(dX, dY, flags) {
+        const f = flags ?? {start: true, end: true};
+
+        if (f.start)
+            this._start.shift(dX, dY);
+        if (f.end)
+            this._end.shift(dX, dY);
+        this._calcRibs();
+    }
+}
+
 class NamedRectGroup extends Group {
     static Member = {
         Shape: 'shape',
