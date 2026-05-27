@@ -457,6 +457,14 @@ class BLine extends Group {
     get start() { return this._start; }
     get end() { return this._end; }
     get corner() { return this._corner; }
+
+    get center() {
+        const hd = this._store.get(BLine.Rib.HorizontalDown);
+        return new Point(
+            hd.x / 2,
+            hd.y,
+        );
+    }
 }
 
 class NamedRectGroup extends Group {
