@@ -460,9 +460,11 @@ class BLine extends Group {
 
     get center() {
         const hd = this._store.get(BLine.Rib.HorizontalDown);
+        const d = hd.start.sub(hd.end);
+
         return new Point(
-            hd.x / 2,
-            hd.y,
+            hd.end.x + d.x / 2,
+            hd.start.y,
         );
     }
 
@@ -479,7 +481,7 @@ class BLine extends Group {
                 + `${vr.start.x},${vr.start.y} `
                 + `${hd.start.x},${hd.start.y} `
                 + `${vl.start.x},${vl.start.y} `
-                + `${vl.end.x},${vl.end.y}`;
+                + `${vl.end.x},${vl.end.y}`
         };
     }
 
@@ -732,14 +734,14 @@ class ElementArrowGroup extends Group {
 
         return {
             id: obj._id,
-            shape: VerticalStepline.toJSON(store.get(Member.Shape)[0]),
+            shape: BLine.toJSON(store.get(Member.Shape)[0]),
             name: Text.toJSON(store.get(Member.Name)[0]),
             designation: Text.toJSON(store.get(Member.Designation)[0]),
         };
     }
 
     static applyJSON(json, obj, operator) {
-        const shape = VerticalStepline.fromJSON(json.shape),
+        const shape = BLine.fromJSON(json.shape),
               name = Text.fromJSON(json.name),
               designation = Text.fromJSON(json.designation);
 
@@ -773,7 +775,7 @@ class ElementArrowGroup extends Group {
         const group = super.init(id, operator);
 
         const start = coords.start, end = coords.end;
-        const stepline = new VerticalStepline(start, end),
+        const stepline = new BLine(start, end, new Point(start.x + 50, start.y + 50)),
               center = stepline.center;
         const nameOffset = Defaults.element.arrow.name.offset,
               designationOffset = Defaults.element.arrow.designation.offset;
